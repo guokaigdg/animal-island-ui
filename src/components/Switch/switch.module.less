@@ -1,0 +1,106 @@
+.switch {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  min-width: 44px;
+  height: 22px;
+  padding: 0;
+  background: var(--animail-text-color-disabled);
+  border: none;
+  border-radius: 100px;
+  cursor: pointer;
+  transition: background var(--animail-motion-duration-base) var(--animail-motion-ease);
+  outline: none;
+
+  &:focus-visible {
+    outline: 2px solid var(--animail-primary-color);
+    outline-offset: 2px;
+  }
+}
+
+.switch-checked {
+  background: var(--animail-primary-color);
+}
+
+.switch-disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.switch-small {
+  min-width: 28px;
+  height: 16px;
+
+  .handle {
+    width: 12px;
+    height: 12px;
+  }
+
+  &.switch-checked .handle {
+    left: calc(100% - 14px);
+  }
+}
+
+// ---------- Handle ----------
+.handle {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 18px;
+  height: 18px;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: left var(--animail-motion-duration-base) var(--animail-motion-ease);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.switch-checked .handle {
+  left: calc(100% - 20px);
+}
+
+// ---------- Inner Text ----------
+.inner {
+  display: block;
+  padding: 0 8px 0 24px;
+  font-size: var(--animail-font-size-sm);
+  color: #fff;
+  white-space: nowrap;
+  line-height: 1;
+}
+
+.switch-checked .inner {
+  padding: 0 24px 0 8px;
+}
+
+.switch-small .inner {
+  padding: 0 6px 0 18px;
+  font-size: 10px;
+}
+
+.switch-small.switch-checked .inner {
+  padding: 0 18px 0 6px;
+}
+
+// ---------- Loading Spinner ----------
+.switch-loading {
+  pointer-events: none;
+}
+
+.spinner {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border: 1.5px solid var(--animail-primary-color);
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: animail-spin 0.6s linear infinite;
+}
+
+@keyframes animail-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

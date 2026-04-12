@@ -1,0 +1,55 @@
+{
+    "name": "animail-crossing-ui",
+    "version": "0.1.0",
+    "description": "A modern React component library with theme support",
+    "type": "module",
+    "main": "dist/cjs/index.cjs",
+    "module": "dist/es/index.js",
+    "types": "dist/types/index.d.ts",
+    "exports": {
+        ".": {
+            "types": "./dist/types/index.d.ts",
+            "import": "./dist/es/index.js",
+            "require": "./dist/cjs/index.cjs"
+        },
+        "./dist/index.css": "./dist/index.css"
+    },
+    "files": [
+        "dist"
+    ],
+    "sideEffects": [
+        "**/*.css"
+    ],
+    "scripts": {
+        "dev": "vite",
+        "build": "vite build && tsc --project tsconfig.build.json --emitDeclarationOnly",
+        "build:storybook": "storybook build",
+        "prepublishOnly": "npm run build"
+    },
+    "peerDependencies": {
+        "react": ">=17.0.0",
+        "react-dom": ">=17.0.0"
+    },
+    "devDependencies": {
+        "@types/node": "^25.5.2",
+        "@types/react": "^18.3.18",
+        "@types/react-dom": "^18.3.5",
+        "@vitejs/plugin-react": "^4.3.4",
+        "glob": "^11.0.1",
+        "less": "^4.2.1",
+        "react": "^18.3.1",
+        "react-dom": "^18.3.1",
+        "typescript": "^5.7.3",
+        "vite": "^6.0.7",
+        "vite-plugin-dts": "^4.3.0",
+        "vite-plugin-svgr": "^5.2.0"
+    },
+    "keywords": [
+        "react",
+        "component-library",
+        "ui",
+        "typescript",
+        "theme"
+    ],
+    "license": "MIT"
+}

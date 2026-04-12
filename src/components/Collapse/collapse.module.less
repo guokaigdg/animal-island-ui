@@ -1,0 +1,149 @@
+// ============================================
+// Collapse Styles - a cozy island-style UI Theme
+// ============================================
+
+.faqCard {
+    position: relative;
+    background: var(--animail-bg-color);
+    border-radius: var(--animail-border-radius-base);
+    border: var(--animail-border-width) solid var(--animail-border-color);
+    overflow: hidden;
+    transition: border-color var(--animail-motion-duration-base) var(--animail-motion-ease);
+    margin-bottom: var(--animail-spacing-md);
+
+
+
+    &.expanded {
+        background: linear-gradient(
+            135deg,
+            var(--animail-bg-color) 0%,
+            var(--animail-bg-color-secondary) 100%
+        );
+    }
+
+    &.disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
+}
+
+.questionHeader {
+    display: flex;
+    align-items: center;
+    gap: var(--animail-spacing-md);
+    width: 100%;
+    padding: var(--animail-spacing-lg) var(--animail-spacing-xl);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+
+    &:disabled {
+        cursor: not-allowed;
+    }
+}
+
+.questionIcon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    background: var(--animail-primary-color);
+    color: #fff;
+    border-radius: 50%;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1;
+    flex-shrink: 0;
+    transition: background-color var(--animail-motion-duration-base) var(--animail-motion-ease),
+                transform var(--animail-motion-duration-base) var(--animail-motion-ease);
+    box-shadow: 0 2px 4px rgba(25, 200, 185, 0.3);
+
+    .expanded & {
+        background: var(--animail-primary-color-active);
+        transform: rotate(180deg);
+    }
+}
+
+.questionText {
+    flex: 1;
+    font-size: var(--animail-font-size-lg);
+    font-weight: 600;
+    color: var(--animail-text-color);
+    line-height: 1.4;
+}
+
+.leafDecoration {
+    color: var(--animail-primary-color);
+    opacity: 0.5;
+    transition: opacity var(--animail-motion-duration-base) var(--animail-motion-ease),
+                transform var(--animail-motion-duration-base) var(--animail-motion-ease);
+
+    .expanded & {
+        opacity: 1;
+        transform: rotate(45deg);
+    }
+}
+
+.answerWrapper {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: grid-template-rows;
+
+    .expanded & {
+        grid-template-rows: 1fr;
+    }
+}
+
+.answerContent {
+    overflow: hidden;
+    padding: 0 var(--animail-spacing-xl);
+    color: var(--animail-text-color-secondary);
+    font-size: var(--animail-font-size-base);
+    line-height: 1.7;
+    transition: padding var(--animail-motion-duration-base) var(--animail-motion-ease);
+
+    .expanded & {
+        padding-bottom: var(--animail-spacing-xl);
+    }
+
+    a {
+        color: var(--animail-primary-color);
+        text-decoration: none;
+        font-weight: 500;
+        transition: color var(--animail-motion-duration-fast) var(--animail-motion-ease);
+
+        &:hover {
+            color: var(--animail-primary-color-hover);
+            text-decoration: underline;
+        }
+    }
+
+    p {
+        margin: 0 0 var(--animail-spacing-sm) 0;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    ul {
+        margin: var(--animail-spacing-sm) 0;
+        padding-left: var(--animail-spacing-xl);
+    }
+
+    li {
+        margin-bottom: var(--animail-spacing-xs);
+    }
+}
+
+// ============================================
+// Collapse Group Container
+// ============================================
+.faqCardGroup {
+    display: flex;
+    flex-direction: column;
+    gap: var(--animail-spacing-sm);
+}
