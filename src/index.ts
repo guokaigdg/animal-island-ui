@@ -17,7 +17,7 @@ export { Modal } from './components/Modal';
 export type { ModalProps } from './components/Modal';
 
 export { Card } from './components/Card';
-export type { CardProps, CardType } from './components/Card';
+export type { CardProps, CardType, CardColor } from './components/Card';
 
 export { Collapse } from './components/Collapse';
 export type { CollapseProps } from './components/Collapse';

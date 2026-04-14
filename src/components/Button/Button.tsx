@@ -1,11 +1,14 @@
-import React from "react";
-import styles from "./button.module.less";
+import React from 'react';
+import styles from './button.module.less';
 
-export type ButtonType = "primary" | "default" | "dashed" | "text" | "link";
-export type ButtonSize = "small" | "middle" | "large";
-export type ButtonHTMLType = "submit" | "reset" | "button";
+export type ButtonType = 'primary' | 'default' | 'dashed' | 'text' | 'link';
+export type ButtonSize = 'small' | 'middle' | 'large';
+export type ButtonHTMLType = 'submit' | 'reset' | 'button';
 
-export interface ButtonProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "type"> {
+export interface ButtonProps extends Omit<
+    React.ButtonHTMLAttributes<HTMLButtonElement>,
+    'type'
+> {
     /** 按钮类型 */
     type?: ButtonType;
     /** 按钮尺寸 */
@@ -28,15 +31,15 @@ export interface ButtonProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonE
 }
 
 export const Button: React.FC<ButtonProps> = ({
-    type = "default",
-    size = "middle",
+    type = 'default',
+    size = 'middle',
     danger = false,
     ghost = false,
     block = false,
     loading = false,
     disabled = false,
     icon,
-    htmlType = "button",
+    htmlType = 'button',
     children,
     className,
     ...rest
@@ -45,21 +48,28 @@ export const Button: React.FC<ButtonProps> = ({
         styles.btn,
         styles[`btn-${type}`],
         styles[`btn-${size}`],
-        danger && styles["btn-danger"],
-        ghost && styles["btn-ghost"],
-        block && styles["btn-block"],
-        loading && styles["btn-loading"],
-        className
+        danger && styles['btn-danger'],
+        ghost && styles['btn-ghost'],
+        block && styles['btn-block'],
+        loading && styles['btn-loading'],
+        className,
     ]
         .filter(Boolean)
-        .join(" ");
+        .join(' ');
 
     return (
-        <button type={htmlType} className={classNames} disabled={disabled || loading} {...rest}>
-            {icon && !loading && <span className={styles["btn-icon"]}>{icon}</span>}
+        <button
+            type={htmlType}
+            className={classNames}
+            disabled={disabled || loading}
+            {...rest}
+        >
+            {icon && !loading && (
+                <span className={styles['btn-icon']}>{icon}</span>
+            )}
             {children && <span>{children}</span>}
         </button>
     );
 };
 
-Button.displayName = "Button";
+Button.displayName = 'Button';

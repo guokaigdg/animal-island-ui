@@ -1,7 +1,7 @@
-import React, { useState, useCallback } from "react";
-import styles from "./switch.module.less";
+import React, { useState, useCallback } from 'react';
+import styles from './switch.module.less';
 
-export type SwitchSize = "small" | "default";
+export type SwitchSize = 'small' | 'default';
 
 export interface SwitchProps {
     /** 是否选中（受控） */
@@ -26,13 +26,13 @@ export interface SwitchProps {
 export const Switch: React.FC<SwitchProps> = ({
     checked,
     defaultChecked = false,
-    size = "default",
+    size = 'default',
     disabled = false,
     loading = false,
     checkedChildren,
     unCheckedChildren,
     onChange,
-    className
+    className,
 }) => {
     const [innerChecked, setInnerChecked] = useState(defaultChecked);
     const isControlled = checked !== undefined;
@@ -48,13 +48,13 @@ export const Switch: React.FC<SwitchProps> = ({
     const cls = [
         styles.switch,
         styles[`switch-${size}`],
-        isChecked && styles["switch-checked"],
-        disabled && styles["switch-disabled"],
-        loading && styles["switch-loading"],
-        className
+        isChecked && styles['switch-checked'],
+        disabled && styles['switch-disabled'],
+        loading && styles['switch-loading'],
+        className,
     ]
         .filter(Boolean)
-        .join(" ");
+        .join(' ');
 
     return (
         <button
@@ -65,10 +65,14 @@ export const Switch: React.FC<SwitchProps> = ({
             onClick={handleClick}
             disabled={disabled}
         >
-            <span className={styles.handle}>{loading && <span className={styles.spinner} />}</span>
-            <span className={styles.inner}>{isChecked ? checkedChildren : unCheckedChildren}</span>
+            <span className={styles.handle}>
+                {loading && <span className={styles.spinner} />}
+            </span>
+            <span className={styles.inner}>
+                {isChecked ? checkedChildren : unCheckedChildren}
+            </span>
         </button>
     );
 };
 
-Switch.displayName = "Switch";
+Switch.displayName = 'Switch';

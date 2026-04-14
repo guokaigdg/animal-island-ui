@@ -1,5 +1,5 @@
-import React from "react";
-import styles from "./divider.module.less";
+import React from 'react';
+import styles from './divider.module.less';
 
 export interface DividerProps {
     /** 自定义类名 */
@@ -9,9 +9,8 @@ export interface DividerProps {
 }
 
 export const Divider: React.FC<DividerProps> = ({ className, style }) => {
-    const cls = [styles.divider, className].filter(Boolean).join(" ");
-
+    const cls = [styles.divider, className].filter(Boolean).join(' ');
     return <div className={cls} style={style} />;
 };
 
-Divider.displayName = "Divider";
+Divider.displayName = 'Divider';

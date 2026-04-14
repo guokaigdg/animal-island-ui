@@ -10,7 +10,11 @@ export interface CursorProps {
     style?: React.CSSProperties;
 }
 
-export const Cursor: React.FC<CursorProps> = ({ children, className, style }) => (
+export const Cursor: React.FC<CursorProps> = ({
+    children,
+    className,
+    style,
+}) => (
     <div className={`${styles.cursor} ${className || ''}`} style={style}>
         {children}
     </div>

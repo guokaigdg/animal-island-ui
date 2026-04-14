@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import styles from "./collapse.module.less";
+import React, { useState } from 'react';
+import styles from './collapse.module.less';
 
 export interface CollapseProps {
     /** 问题标题 */
@@ -22,7 +22,7 @@ export const Collapse: React.FC<CollapseProps> = ({
     defaultExpanded = false,
     disabled = false,
     className,
-    style
+    style,
 }) => {
     const [expanded, setExpanded] = useState(defaultExpanded);
 
@@ -36,10 +36,10 @@ export const Collapse: React.FC<CollapseProps> = ({
         styles.faqCard,
         expanded && styles.expanded,
         disabled && styles.disabled,
-        className
+        className,
     ]
         .filter(Boolean)
-        .join(" ");
+        .join(' ');
 
     return (
         <div className={cls} style={style}>
@@ -50,7 +50,7 @@ export const Collapse: React.FC<CollapseProps> = ({
                 aria-expanded={expanded}
             >
                 <span className={styles.questionIcon}>
-                    {expanded ? "−" : "+"}
+                    {expanded ? '−' : '+'}
                 </span>
                 <span className={styles.questionText}>{question}</span>
                 <span className={styles.leafDecoration}>
@@ -69,4 +69,4 @@ export const Collapse: React.FC<CollapseProps> = ({
     );
 };
 
-Collapse.displayName = "Collapse";
+Collapse.displayName = 'Collapse';

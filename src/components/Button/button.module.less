@@ -3,22 +3,22 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: var(--animail-spacing-sm);
-    font-family: var(--animail-font-family);
+    gap: var(--animal-spacing-sm);
+    font-family: var(--animal-font-family);
     font-weight: 600;
     white-space: nowrap;
     cursor: pointer;
-    border: var(--animail-border-width) solid transparent;
+    border: var(--animal-border-width) solid transparent;
     border-radius: 50px;
-    transition: all var(--animail-motion-duration-base) var(--animail-motion-ease);
+    transition: all var(--animal-motion-duration-base) var(--animal-motion-ease);
     user-select: none;
     outline: none;
     line-height: 1;
     letter-spacing: 0.02em;
-    box-shadow: var(--animail-shadow-sm);
+    box-shadow: var(--animal-shadow-sm);
 
     &:focus-visible {
-        outline: 2px solid var(--animail-primary-color);
+        outline: 2px solid var(--animal-primary-color);
         outline-offset: 2px;
     }
 
@@ -31,43 +31,43 @@
 
 // ---------- Size ----------
 .btn-small {
-    height: var(--animail-height-sm);
-    padding: 0 var(--animail-spacing-lg);
-    font-size: var(--animail-font-size-sm);
-    border-radius: var(--animail-border-radius-sm);
+    height: var(--animal-height-sm);
+    padding: 0 var(--animal-spacing-lg);
+    font-size: var(--animal-font-size-sm);
+    border-radius: var(--animal-border-radius-sm);
 }
 
 .btn-middle {
     height: 45px;
     padding: 0 20px;
-    font-size: var(--animail-font-size-base);
+    font-size: var(--animal-font-size-base);
 }
 
 .btn-large {
-    height: var(--animail-height-lg);
+    height: var(--animal-height-lg);
     padding: 0 32px;
-    font-size: var(--animail-font-size-lg);
-    border-radius: var(--animail-border-radius-lg);
+    font-size: var(--animal-font-size-lg);
+    border-radius: var(--animal-border-radius-lg);
 }
 
 // ---------- Type: default ----------
 .btn-default {
-    color: var(--animail-text-color);
-    background: var(--animail-bg-color);
-    border-color: var(--animail-border-color);
+    color: var(--animal-text-color);
+    background: var(--animal-bg-color);
+    border-color: var(--animal-border-color);
 
     &:hover:not(:disabled) {
-        color: var(--animail-primary-color);
-        border-color: var(--animail-primary-color);
-        box-shadow: var(--animail-shadow-base);
+        color: var(--animal-primary-color);
+        border-color: var(--animal-primary-color);
+        box-shadow: var(--animal-shadow-base);
         transform: translateY(-1px);
     }
 
     &:active:not(:disabled) {
-        color: var(--animail-primary-color-active);
-        border-color: var(--animail-primary-color-active);
+        color: var(--animal-primary-color-active);
+        border-color: var(--animal-primary-color-active);
         transform: translateY(0);
-        box-shadow: var(--animail-shadow-sm);
+        box-shadow: var(--animal-shadow-sm);
     }
 }
 
@@ -95,33 +95,33 @@
 
 // ---------- Type: dashed ----------
 .btn-dashed {
-    color: var(--animail-text-color);
-    background: var(--animail-bg-color);
-    border-color: var(--animail-border-color);
+    color: var(--animal-text-color);
+    background: var(--animal-bg-color);
+    border-color: var(--animal-border-color);
     border-style: dashed;
 
     &:hover:not(:disabled) {
-        color: var(--animail-primary-color);
-        border-color: var(--animail-primary-color);
+        color: var(--animal-primary-color);
+        border-color: var(--animal-primary-color);
         transform: translateY(-1px);
     }
 
     &:active:not(:disabled) {
-        color: var(--animail-primary-color-active);
-        border-color: var(--animail-primary-color-active);
+        color: var(--animal-primary-color-active);
+        border-color: var(--animal-primary-color-active);
         transform: translateY(0);
     }
 }
 
 // ---------- Type: text ----------
 .btn-text {
-    color: var(--animail-text-color);
+    color: var(--animal-text-color);
     background: transparent;
     border-color: transparent;
     box-shadow: none;
 
     &:hover:not(:disabled) {
-        background: var(--animail-bg-color-secondary);
+        background: var(--animal-bg-color-secondary);
     }
 
     &:active:not(:disabled) {
@@ -131,67 +131,68 @@
 
 // ---------- Type: link ----------
 .btn-link {
-    color: var(--animail-primary-color);
+    color: var(--animal-primary-color);
     background: transparent;
     border-color: transparent;
     box-shadow: none;
 
     &:hover:not(:disabled) {
-        color: var(--animail-primary-color-hover);
+        color: var(--animal-primary-color-hover);
         opacity: 0.85;
     }
 
     &:active:not(:disabled) {
-        color: var(--animail-primary-color-active);
+        color: var(--animal-primary-color-active);
     }
 }
 
 // ---------- Danger ----------
 .btn-danger {
     &.btn-primary {
-        background: var(--animail-error-color);
-        border-color: var(--animail-error-color);
-        box-shadow: 0 5px 0 0 var(--animail-error-color-active);
+        color: #fff;
+        background: var(--animal-error-color);
+        border-color: var(--animal-error-color);
+        box-shadow: 0 5px 0 0 var(--animal-error-color-active);
 
         &:hover:not(:disabled) {
-            background: var(--animail-error-color-hover);
-            border-color: var(--animail-error-color-hover);
-            box-shadow: 0 6px 0 0 var(--animail-error-color-active);
+            background: var(--animal-error-color-hover);
+            border-color: var(--animal-error-color-hover);
+            box-shadow: 0 6px 0 0 var(--animal-error-color-active);
         }
 
         &:active:not(:disabled) {
-            background: var(--animail-error-color-active);
-            border-color: var(--animail-error-color-active);
-            box-shadow: 0 1px 0 0 var(--animail-error-color-active);
+            background: var(--animal-error-color-active);
+            border-color: var(--animal-error-color-active);
+            box-shadow: 0 1px 0 0 var(--animal-error-color-active);
         }
     }
 
     &.btn-default,
     &.btn-dashed {
-        color: var(--animail-error-color);
-        border-color: var(--animail-error-color);
+        color: #fff;
+        border-color: var(--animal-error-color);
 
         &:hover:not(:disabled) {
-            color: var(--animail-error-color-hover);
-            border-color: var(--animail-error-color-hover);
+            color: #fff;
+            border-color: var(--animal-error-color-hover);
         }
 
         &:active:not(:disabled) {
-            color: var(--animail-error-color-active);
-            border-color: var(--animail-error-color-active);
+            color: #fff;
+            border-color: var(--animal-error-color-active);
         }
     }
 
     &.btn-text,
     &.btn-link {
-        color: var(--animail-error-color);
+        color: #fff;
 
         &:hover:not(:disabled) {
-            color: var(--animail-error-color-hover);
+            color: #fff;
         }
 
         &:active:not(:disabled) {
-            color: var(--animail-error-color-active);
+            color: #fff;
         }
     }
 }
@@ -202,13 +203,13 @@
     box-shadow: none;
 
     &.btn-primary {
-        color: var(--animail-primary-color);
+        color: var(--animal-primary-color);
         background: transparent;
         box-shadow: none;
 
         &:hover:not(:disabled) {
-            color: var(--animail-primary-color-hover);
-            border-color: var(--animail-primary-color-hover);
+            color: var(--animal-primary-color-hover);
+            border-color: var(--animal-primary-color-hover);
             background: rgba(25, 200, 185, 0.08);
         }
     }
@@ -224,31 +225,15 @@
 .btn-loading {
     cursor: default;
     pointer-events: none;
-    background-image: linear-gradient(
-        145deg,
-        transparent 5%,
-        var(--animail-primary-color-active) 5% 10%,
-        transparent 10% 15%,
-        var(--animail-primary-color-active) 15% 20%,
-        transparent 20% 25%,
-        var(--animail-primary-color-active) 25% 30%,
-        transparent 30% 35%,
-        var(--animail-primary-color-active) 35% 40%,
-        transparent 40% 45%,
-        var(--animail-primary-color-active) 45% 50%,
-        transparent 50% 55%,
-        var(--animail-primary-color-active) 55% 60%,
-        transparent 60% 65%,
-        var(--animail-primary-color-active) 65% 70%,
-        transparent 70% 75%,
-        var(--animail-primary-color-active) 75% 80%,
-        transparent 80% 85%,
-        var(--animail-primary-color-active) 85% 90%,
-        transparent 90% 95%,
-        var(--animail-primary-color-active) 95% 100%
+    background-image: repeating-linear-gradient(
+        -45deg,
+        transparent,
+        transparent 8px,
+        var(--animal-primary-color-active) 8px,
+        var(--animal-primary-color-active) 16px
     );
-    background-size: 400px 100%;
-    animation: animail-btn-loading 6s linear infinite;
+    background-size: 45.25px 100%;
+    animation: animal-btn-loading 0.9s linear infinite;
 }
 
 .btn-icon {
@@ -256,11 +241,11 @@
     align-items: center;
 }
 
-@keyframes animail-btn-loading {
+@keyframes animal-btn-loading {
     0% {
         background-position: 0 0;
     }
     100% {
-        background-position: 400px 0;
+        background-position: 45.25px 0;
     }
 }

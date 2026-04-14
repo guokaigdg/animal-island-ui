@@ -1,16 +1,16 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import App from "./App";
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import App from './App';
 
-document.body.style.margin = "0";
+document.body.style.margin = '0';
 
-const fontLink = document.createElement("link");
-fontLink.rel = "stylesheet";
+const fontLink = document.createElement('link');
+fontLink.rel = 'stylesheet';
 fontLink.href =
-    "https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&family=Zen+Maru+Gothic:wght@400;500;700&display=swap";
+    'https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&family=Zen+Maru+Gothic:wght@400;500;700&display=swap';
 document.head.appendChild(fontLink);
 
-const globalStyle = document.createElement("style");
+const globalStyle = document.createElement('style');
 globalStyle.textContent = `
   *::-webkit-scrollbar { display: none; }
   * { scrollbar-width: none; font-family: Nunito, 'Zen Maru Gothic', -apple-system, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif !important; color: #794f27; }
@@ -19,15 +19,15 @@ document.head.appendChild(globalStyle);
 
 // 生成圆角 favicon
 const faviconImg = new Image();
-faviconImg.crossOrigin = "anonymous";
-faviconImg.src = new URL("./img/animail.ico", import.meta.url).href;
+faviconImg.crossOrigin = 'anonymous';
+faviconImg.src = new URL('./img/animal.ico', import.meta.url).href;
 faviconImg.onload = () => {
     const size = 64;
     const radius = 14;
-    const canvas = document.createElement("canvas");
+    const canvas = document.createElement('canvas');
     canvas.width = size;
     canvas.height = size;
-    const ctx = canvas.getContext("2d")!;
+    const ctx = canvas.getContext('2d')!;
     ctx.beginPath();
     ctx.moveTo(radius, 0);
     ctx.arcTo(size, 0, size, size, radius);
@@ -37,13 +37,15 @@ faviconImg.onload = () => {
     ctx.closePath();
     ctx.clip();
     ctx.drawImage(faviconImg, 0, 0, size, size);
-    const link = document.querySelector<HTMLLinkElement>('link[rel="icon"]') || document.createElement("link");
-    link.rel = "icon";
-    link.href = canvas.toDataURL("image/png");
+    const link =
+        document.querySelector<HTMLLinkElement>('link[rel="icon"]') ||
+        document.createElement('link');
+    link.rel = 'icon';
+    link.href = canvas.toDataURL('image/png');
     document.head.appendChild(link);
 };
 
-ReactDOM.createRoot(document.getElementById("root")!).render(
+ReactDOM.createRoot(document.getElementById('root')!).render(
     <React.StrictMode>
         <App />
     </React.StrictMode>

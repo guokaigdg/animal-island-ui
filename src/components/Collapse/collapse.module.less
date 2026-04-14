@@ -4,20 +4,19 @@
 
 .faqCard {
     position: relative;
-    background: var(--animail-bg-color);
-    border-radius: var(--animail-border-radius-base);
-    border: var(--animail-border-width) solid var(--animail-border-color);
+    background: var(--animal-bg-color);
+    border-radius: var(--animal-border-radius-base);
+    border: var(--animal-border-width) solid var(--animal-border-color);
     overflow: hidden;
-    transition: border-color var(--animail-motion-duration-base) var(--animail-motion-ease);
-    margin-bottom: var(--animail-spacing-md);
-
-
+    transition: border-color var(--animal-motion-duration-base)
+        var(--animal-motion-ease);
+    margin-bottom: var(--animal-spacing-md);
 
     &.expanded {
         background: linear-gradient(
             135deg,
-            var(--animail-bg-color) 0%,
-            var(--animail-bg-color-secondary) 100%
+            var(--animal-bg-color) 0%,
+            var(--animal-bg-color-secondary) 100%
         );
     }
 
@@ -30,9 +29,9 @@
 .questionHeader {
     display: flex;
     align-items: center;
-    gap: var(--animail-spacing-md);
+    gap: var(--animal-spacing-md);
     width: 100%;
-    padding: var(--animail-spacing-lg) var(--animail-spacing-xl);
+    padding: var(--animal-spacing-lg) var(--animal-spacing-xl);
     background: transparent;
     border: none;
     cursor: pointer;
@@ -49,36 +48,39 @@
     justify-content: center;
     width: 28px;
     height: 28px;
-    background: var(--animail-primary-color);
+    background: var(--animal-primary-color);
     color: #fff;
     border-radius: 50%;
     font-size: 18px;
     font-weight: 700;
     line-height: 1;
     flex-shrink: 0;
-    transition: background-color var(--animail-motion-duration-base) var(--animail-motion-ease),
-                transform var(--animail-motion-duration-base) var(--animail-motion-ease);
+    transition:
+        background-color var(--animal-motion-duration-base)
+            var(--animal-motion-ease),
+        transform var(--animal-motion-duration-base) var(--animal-motion-ease);
     box-shadow: 0 2px 4px rgba(25, 200, 185, 0.3);
 
     .expanded & {
-        background: var(--animail-primary-color-active);
+        background: var(--animal-primary-color-active);
         transform: rotate(180deg);
     }
 }
 
 .questionText {
     flex: 1;
-    font-size: var(--animail-font-size-lg);
+    font-size: var(--animal-font-size-lg);
     font-weight: 600;
-    color: var(--animail-text-color);
+    color: var(--animal-text-color);
     line-height: 1.4;
 }
 
 .leafDecoration {
-    color: var(--animail-primary-color);
+    color: var(--animal-primary-color);
     opacity: 0.5;
-    transition: opacity var(--animail-motion-duration-base) var(--animail-motion-ease),
-                transform var(--animail-motion-duration-base) var(--animail-motion-ease);
+    transition:
+        opacity var(--animal-motion-duration-base) var(--animal-motion-ease),
+        transform var(--animal-motion-duration-base) var(--animal-motion-ease);
 
     .expanded & {
         opacity: 1;
@@ -99,30 +101,32 @@
 
 .answerContent {
     overflow: hidden;
-    padding: 0 var(--animail-spacing-xl);
-    color: var(--animail-text-color-secondary);
-    font-size: var(--animail-font-size-base);
+    padding: 0 var(--animal-spacing-xl);
+    color: var(--animal-text-color-secondary);
+    font-size: var(--animal-font-size-base);
     line-height: 1.7;
-    transition: padding var(--animail-motion-duration-base) var(--animail-motion-ease);
+    transition: padding var(--animal-motion-duration-base)
+        var(--animal-motion-ease);
 
     .expanded & {
-        padding-bottom: var(--animail-spacing-xl);
+        padding-bottom: var(--animal-spacing-xl);
     }
 
     a {
-        color: var(--animail-primary-color);
+        color: var(--animal-primary-color);
         text-decoration: none;
         font-weight: 500;
-        transition: color var(--animail-motion-duration-fast) var(--animail-motion-ease);
+        transition: color var(--animal-motion-duration-fast)
+            var(--animal-motion-ease);
 
         &:hover {
-            color: var(--animail-primary-color-hover);
+            color: var(--animal-primary-color-hover);
             text-decoration: underline;
         }
     }
 
     p {
-        margin: 0 0 var(--animail-spacing-sm) 0;
+        margin: 0 0 var(--animal-spacing-sm) 0;
 
         &:last-child {
             margin-bottom: 0;
@@ -130,12 +134,12 @@
     }
 
     ul {
-        margin: var(--animail-spacing-sm) 0;
-        padding-left: var(--animail-spacing-xl);
+        margin: var(--animal-spacing-sm) 0;
+        padding-left: var(--animal-spacing-xl);
     }
 
     li {
-        margin-bottom: var(--animail-spacing-xs);
+        margin-bottom: var(--animal-spacing-xs);
     }
 }
 
@@ -145,5 +149,5 @@
 .faqCardGroup {
     display: flex;
     flex-direction: column;
-    gap: var(--animail-spacing-sm);
+    gap: var(--animal-spacing-sm);
 }
