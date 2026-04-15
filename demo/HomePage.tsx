@@ -100,6 +100,9 @@ const S = {
         fontSize: 72,
         lineHeight: 1,
         marginBottom: 16,
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
     } as React.CSSProperties,
     heroTitle: {
         fontFamily: "'FOT-Seurat Pro', 'M PLUS Rounded 1c', sans-serif",
@@ -244,22 +247,22 @@ const S = {
 // ============================================
 const features = [
     {
-        icon: '🎨',
+        icon: 'nook1.svg',
         title: '动森风格',
         desc: 'SVG 有机形状裁切，3D 按压按钮，还原 Animal Crossing 游戏 UI 质感',
     },
     {
-        icon: '🧩',
+        icon: 'AppIcons.svg',
         title: '8 个组件',
         desc: 'Button / Input / Switch / Modal / Card / Collapse / Cursor / Divider',
     },
     {
-        icon: '🎭',
+        icon: 'Property-Camera.svg',
         title: '主题定制',
         desc: '40+ CSS 自定义属性，运行时换肤无需重新构建',
     },
     {
-        icon: '📦',
+        icon: 'Property-Recipes.svg',
         title: '开箱即用',
         desc: 'ESM + CJS 双格式输出，TypeScript 类型声明完整',
     },
@@ -295,7 +298,13 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => (
     <div style={S.page}>
         {/* Hero */}
         <div style={S.hero}>
-            <div style={S.heroLogo}>🌲</div>
+            <img
+                src={
+                    new URL('./img/animal_icon.svg', import.meta.url).href
+                }
+                style={{ width: 172, height: 172 }}
+                alt="logo"
+            />
             <h1 style={S.heroTitle}>
                 Animal Crossing UI
                 <span style={S.heroVersion}>v0.1.0</span>
@@ -322,7 +331,16 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => (
             <div style={S.features}>
                 {features.map((f) => (
                     <Card key={f.title} style={S.featureCard}>
-                        <div style={S.featureIcon}>{f.icon}</div>
+                        <img
+                            src={
+                                new URL(
+                                    `./img/nook-phone/${f.icon}`,
+                                    import.meta.url
+                                ).href
+                            }
+                            style={{ width: 42, height: 42 }}
+                            alt={f.title}
+                        />
                         <div style={S.featureTitle}>{f.title}</div>
                         <div style={S.featureDesc}>{f.desc}</div>
                     </Card>
@@ -383,39 +401,6 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => (
             <CodeBlock
                 code={`/* 覆盖主题变量 */\n:root {\n        --animal-primary-color: #19c8b9;\n        --animal-text-color: #827157;\n        --animal-font-family: 'M PLUS Rounded 1c', sans-serif;\n        --animal-border-radius-base: 18px;\n        /* ... 40+ 设计令牌 */\n}`}
             />
-            <div
-                style={{
-                    marginTop: 20,
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: 12,
-                    justifyContent: 'center',
-                }}
-            >
-                <span style={{ fontSize: 13, color: '#7c5734' }}>
-                    试试切换：
-                </span>
-                <Switch
-                    defaultChecked
-                    checkedChildren="春"
-                    unCheckedChildren="冬"
-                />
-            </div>
-            <div
-                style={{ marginTop: 16, maxWidth: 480, margin: '16px auto 0' }}
-            >
-                <Collapse
-                    question="如何查看所有可用变量?"
-                    answer={
-                        <span style={{ fontSize: 13 }}>
-                            请参考 <code>src/styles/variables.less</code> 和{' '}
-                            <code>src/styles/themes/default.less</code>
-                            ，所有 Less 变量均映射为 <code>--animal-*</code> CSS
-                            自定义属性。
-                        </span>
-                    }
-                />
-            </div>
         </div>
 
         {/* Footer */}
@@ -442,7 +427,7 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => (
                     首页
                 </span>
             </div>
-            <div>MIT License · React 18 + TypeScript + Vite 7</div>
+            <div>MIT License · React + TypeScript + Vite</div>
         </div>
     </div>
 );

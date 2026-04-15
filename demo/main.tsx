@@ -13,9 +13,16 @@ document.head.appendChild(fontLink);
 const globalStyle = document.createElement('style');
 globalStyle.textContent = `
   *::-webkit-scrollbar { display: none; }
-  * { scrollbar-width: none; font-family: Nunito, 'Zen Maru Gothic', -apple-system, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif !important; color: #794f27; }
+  * { scrollbar-width: none; font-family: Nunito, 'Zen Maru Gothic', -apple-system, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif !important; }
 `;
 document.head.appendChild(globalStyle);
+
+// 添加全局光标样式
+const cursorStyle = document.createElement('style');
+cursorStyle.textContent = `
+  * { cursor: url('./cursor-icon.png') 4 0, auto; }
+`;
+document.head.appendChild(cursorStyle);
 
 // 生成圆角 favicon
 const faviconImg = new Image();

@@ -50,7 +50,6 @@ const S = {
         height: '100vh',
         fontFamily: "'Inter', 'Roboto', system-ui, sans-serif",
         background: `url(${new URL('./img/content_bg_pc.jpg', import.meta.url).href}) center fixed`,
-        color: '#794f27',
     } as React.CSSProperties,
     sidebar: {
         width: 220,
@@ -67,7 +66,8 @@ const S = {
         fontSize: 15,
         color: '#725d42',
         letterSpacing: -0.3,
-        cursor: 'pointer',
+        display: 'flex',
+        alignItems: 'center',
     } as React.CSSProperties,
     menuList: {
         flex: 1,
@@ -91,7 +91,7 @@ const S = {
             borderRadius: 12,
             borderRight: 'none',
             transition: 'all 0.15s',
-            cursor: 'pointer',
+            // cursor: 'pointer',
         }) as React.CSSProperties,
     main: {
         flex: 1,
@@ -132,7 +132,17 @@ const App: React.FC = () => {
                             style={S.sidebarHeader}
                             onClick={() => navigate('/')}
                         >
-                            🌲 集合啦！動物森友會
+                            <img
+                                src={
+                                    new URL(
+                                        './img/nook-phone/nook1.svg',
+                                        import.meta.url
+                                    ).href
+                                }
+                                style={{ width: 24, height: 24, marginRight: 8 }}
+                                alt="nook"
+                            />
+                            集合啦！動物森友會
                         </div>
                         <nav style={S.menuList}>
                             {MENU_ITEMS.map((item) => {
