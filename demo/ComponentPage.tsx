@@ -80,7 +80,7 @@ const S = {
         tabSize: 4,
     } as React.CSSProperties,
     codeLabel: {
-        fontSize: 12,
+        fontSize: 14,
         fontWeight: 600,
         color: '#e7e4e0',
         marginBottom: 0,
@@ -165,7 +165,7 @@ const highlightJSX = (code: string): React.ReactNode[] => {
 };
 
 const CodeBlock: React.FC<{ code: string }> = ({ code }) => (
-    <div style={{ marginTop: 16 }}>
+    <div style={{ marginTop: 36 }}>
         <div style={S.codeLabel}>使用示例</div>
         <pre
             style={{
@@ -828,6 +828,7 @@ const CardDemo: React.FC = () => (
                     display: 'grid',
                     gridTemplateColumns: 'repeat(4, 1fr)',
                     gap: 16,
+                    marginBottom: 24,
                 }}
             >
                 {(
@@ -885,7 +886,7 @@ const CardDemo: React.FC = () => (
                         type="title" + color="app-blue"
                     </div>
                 </Card>
-                <Card type="title" color="app-green" style={{ width: 240 }}>
+                <Card type="title" color="app-green" style={{ width: 250 }}>
                     <div
                         style={{
                             fontWeight: 700,
