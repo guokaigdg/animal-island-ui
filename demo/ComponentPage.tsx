@@ -639,7 +639,7 @@ const ButtonDemo: React.FC = () => (
             </div>
         </div>
         <CodeBlock
-            code={`import { Button } from 'island-themed-ui';
+            code={`import { Button } from 'animal-island-ui';
 
 const App = () => {
         return (
@@ -702,7 +702,7 @@ const InputDemo: React.FC = () => {
                 </div>
             </div>
             <CodeBlock
-                code={`import { Input } from 'island-themed-ui';
+                code={`import { Input } from 'animal-island-ui';
 
 const App = () => {
         const [val, setVal] = useState('');
@@ -764,7 +764,7 @@ const SwitchDemo: React.FC = () => {
                 </div>
             </div>
             <CodeBlock
-                code={`import { Switch } from 'island-themed-ui';
+                code={`import { Switch } from 'animal-island-ui';
 
 const App = () => {
         const [checked, setChecked] = useState(false);
@@ -918,7 +918,7 @@ const CardDemo: React.FC = () => (
         </div>
 
         <CodeBlock
-            code={`import { Card } from 'island-themed-ui';
+            code={`import { Card } from 'animal-island-ui';
 
 const App = () => (
         <div>
@@ -990,7 +990,7 @@ const CollapseDemo: React.FC = () => (
             </div>
         </div>
         <CodeBlock
-            code={`import { Collapse } from 'island-themed-ui';
+            code={`import { Collapse } from 'animal-island-ui';
 
 const App = () => (
         <div>
@@ -1011,14 +1011,14 @@ const CursorDemo: React.FC = () => (
         </div>
         <p style={{ fontSize: 13, color: '#8a7b66' }}>
             Cursor 组件通过 CSS cursor
-            属性将子元素的鼠标光标替换为治愈海岛风格手指图标，当前 Demo 全局已应用。
+            属性将子元素的鼠标光标替换为自定义手指图标，当前 Demo 全局已应用。
         </p>
         <CodeBlock
-            code={`import { Cursor } from 'island-themed-ui';
+            code={`import { Cursor } from 'animal-island-ui';
 
 const App = () => (
         <Cursor>
-                <div>鼠标移入此区域将显示治愈海岛风格光标</div>
+                <div>鼠标移入此区域将显示自定义光标</div>
         </Cursor>
 );`}
         />
@@ -1095,7 +1095,7 @@ const ModalDemo: React.FC = () => {
                 </p>
             </Modal>
             <CodeBlock
-                code={`import { Button, Modal } from 'island-themed-ui';
+                code={`import { Button, Modal } from 'animal-island-ui';
 
 const App = () => {
         const [open, setOpen] = useState(false);
@@ -1138,7 +1138,7 @@ const DividerDemo: React.FC = () => (
         <Divider />
         <p>下方内容</p>
         <CodeBlock
-            code={`import { Divider } from 'island-themed-ui';
+            code={`import { Divider } from 'animal-island-ui';
 
 const App = () => (
         <div>
@@ -1178,7 +1178,7 @@ export const PAGE_INFO: Record<string, { title: string; desc: string }> = {
     },
     cursor: {
         title: 'Cursor 光标',
-        desc: '光标组件 — 治愈海岛风格手指光标，支持自定义尺寸、点击动画',
+        desc: '光标组件 — 自定义手指光标，支持自定义尺寸、点击动画',
     },
     modal: {
         title: 'Modal 弹窗',
@@ -1186,7 +1186,7 @@ export const PAGE_INFO: Record<string, { title: string; desc: string }> = {
     },
     'divider-comp': {
         title: 'Divider 分割线',
-        desc: '分割线组件 — 使用治愈海岛风格装饰分割线图片',
+        desc: '分割线组件 — 装饰性分割线',
     },
 };
 

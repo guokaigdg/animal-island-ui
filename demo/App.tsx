@@ -142,7 +142,7 @@ const App: React.FC = () => {
                                 style={{ width: 24, height: 24, marginRight: 8 }}
                                 alt="island"
                             />
-                            集合啦！療癒系海島
+                           集合啦！Animal
                         </div>
                         <nav style={S.menuList}>
                             {MENU_ITEMS.map((item) => {

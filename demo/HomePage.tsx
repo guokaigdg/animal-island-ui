@@ -248,8 +248,8 @@ const S = {
 const features = [
     {
         icon: 'island1.svg',
-        title: '治愈海岛风格',
-        desc: 'SVG 有机形状裁切，3D 按压按钮，还原 a cozy island-style UI 游戏 UI 质感',
+        title: 'Animal风格',
+        desc: 'SVG 有机形状裁切，3D 按压按钮，温暖质朴的自然 UI 质感',
     },
     {
         icon: 'AppIcons.svg',
@@ -283,7 +283,7 @@ const components = [
     { key: 'modal', name: 'Modal', desc: 'SVG 有机形状弹窗、ESC 关闭' },
     { key: 'card', name: 'Card', desc: '默认/标题两种卡片风格' },
     { key: 'collapse', name: 'Collapse', desc: 'FAQ 折叠面板、平滑展开动画' },
-    { key: 'cursor', name: 'Cursor', desc: '治愈海岛风格手指光标' },
+    { key: 'cursor', name: 'Cursor', desc: '自定义手指光标' },
     { key: 'divider-comp', name: 'Divider', desc: '装饰性水平分割线' },
 ];
 
@@ -306,12 +306,12 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => (
                 alt="logo"
             />
             <h1 style={S.heroTitle}>
-                a cozy island-style UI UI
+                Animal Island UI
                 <span style={S.heroVersion}>v0.1.0</span>
             </h1>
             <p style={S.heroSubtitle}>
-                a cozy island-style UI 风格的 React 组件库，基于 TypeScript + Vite 构建
-                <br />让 Web 应用充满治愈海岛的温暖质感
+                Animal风格的 React 组件库，基于 TypeScript + Vite 构建
+                <br />让 Web 应用充满温暖质感
             </p>
             <div style={S.heroActions}>
                 <Button
@@ -327,7 +327,7 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => (
         {/* Features */}
         <div style={S.section}>
             <div style={S.sectionTitle}>特性</div>
-            <div style={S.sectionDesc}>为什么选择 island-themed-ui</div>
+            <div style={S.sectionDesc}>为什么选择 animal-island-ui</div>
             <div style={S.features}>
                 {features.map((f) => (
                     <Card key={f.title} style={S.featureCard}>
@@ -375,7 +375,7 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => (
             <div style={S.sectionTitle}>安装</div>
             <div style={S.sectionDesc}>一行命令即可安装</div>
             <CodeBlock
-                code={`// 使用 npm 安装\nnpm install island-themed-ui`}
+                code={`// 使用 npm 安装\nnpm install animal-island-ui`}
             />
         </div>
 
@@ -386,7 +386,7 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => (
             <div style={S.sectionTitle}>快速上手</div>
             <div style={S.sectionDesc}>引入组件即可使用，样式自动加载</div>
             <CodeBlock
-                code={`// 1. 引入组件\nimport { Button, Modal, Switch } from 'island-themed-ui';\n\nfunction App() {\n        return <Button type="primary">开始</Button>;\n}`}
+                code={`// 1. 引入组件\nimport { Button, Modal, Switch } from 'animal-island-ui';\n\nfunction App() {\n        return <Button type="primary">开始</Button>;\n}`}
             />
         </div>
 
@@ -416,7 +416,7 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => (
                     style={S.footerLink}
                     onClick={() =>
                         window.open(
-                            'https://github.com/guokaigdg/island-themed-ui',
+                            'https://github.com/guokaigdg/animal-island-ui',
                             '_blank'
                         )
                     }

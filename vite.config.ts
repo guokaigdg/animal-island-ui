@@ -16,7 +16,7 @@ export default defineConfig({
     },
     css: {
         modules: {
-            // 生成类名格式：animail-[组件名]__[类名]
+            // 生成类名格式：animal-[类名]-[hash]
             generateScopedName: 'animal-[local]-[hash:base64:5]',
             localsConvention: 'camelCase',
         },

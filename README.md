@@ -1,4 +1,4 @@
-# animal-ui
+# animal-island-ui
 
 一款风格参考《治愈系海岛》的 React UI 组件库，仅用于学习与技术交流。
 
@@ -11,7 +11,7 @@
 ## 安装
 
 ```bash
-npm install animal-ui
+npm install animal-island-ui
 ```
 
 
@@ -19,7 +19,7 @@ npm install animal-ui
 ## 快速上手
 
 ```tsx
-import { Button, Card, Switch } from 'animal-ui';
+import { Button, Card, Switch } from 'animal-island-ui';
 
 function App() {
     return (
@@ -38,6 +38,28 @@ function App() {
 }
 ```
 
+## 本地开发
+
+```bash
+# 克隆仓库
+git clone https://github.com/guokaigdg/animal-island-ui.git
+cd animal-island-ui
+
+# 安装依赖
+npm install
+
+# 启动 Demo 开发服务器
+npm run dev
+
+# 构建组件库
+npm run build
+
+# 构建 Demo 站点
+npm run build:demo
+```
+
+
+
 ## 注意事项
 
 - 本项目仅用于个人学习、研究与非商业展示，禁止任何形式的商业使用、二次售卖或盈利行为。
@@ -54,3 +76,9 @@ function App() {
 ## 联系方式
 
 如有问题或版权相关沟通，请通过 Issue 或邮件联系。
+
+## License
+
+MIT
+For learning purposes only.
+本项目基于 MIT 开源协议发布，仅限学习使用，作者不对因使用本库导致的任何法律问题或损失承担责任。
