@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Card, Divider, Button, Switch, Collapse } from '../src';
 
 // ============================================
@@ -76,6 +76,54 @@ const CodeBlock: React.FC<{ code: string }> = ({ code }) => (
     <pre style={S.codeBox}>{highlightCode(code)}</pre>
 );
 
+const FeatureCard: React.FC<{ feature: typeof features[0] }> = ({ feature }) => {
+    const [hovered, setHovered] = useState(false);
+    return (
+        <Card
+            style={{
+                ...S.featureCard,
+                transform: hovered ? 'translateY(-4px)' : 'none',
+                boxShadow: hovered
+                    ? '0 8px 24px rgba(114, 93, 66, 0.15)'
+                    : 'none',
+                transition: 'all 0.3s ease',
+            }}
+            onMouseEnter={() => setHovered(true)}
+            onMouseLeave={() => setHovered(false)}
+        >
+            <img
+                src={
+                    new URL(
+                        `./img/island-phone/${feature.icon}`,
+                        import.meta.url
+                    ).href
+                }
+                style={{
+                    width: 42,
+                    height: 42,
+                    transform: hovered
+                        ? 'scale(1.1) rotate(-4deg)'
+                        : 'scale(1) rotate(0deg)',
+                    transition: 'transform 0.3s ease',
+                    animation: hovered ? 'iconBounce 0.4s ease forwards' : 'none',
+                }}
+                alt={feature.title}
+            />
+            <style>
+                {`
+                    @keyframes iconBounce {
+                        0% { transform: scale(1) rotate(0deg); }
+                        50% { transform: scale(1.2) rotate(-5deg); }
+                        100% { transform: scale(1.1) rotate(-4deg); }
+                    }
+                `}
+            </style>
+            <div style={S.featureTitle}>{feature.title}</div>
+            <div style={S.featureDesc}>{feature.desc}</div>
+        </Card>
+    );
+};
+
 // ============================================
 // Styles
 // ============================================
@@ -105,7 +153,7 @@ const S = {
         alignItems: 'center',
     } as React.CSSProperties,
     heroTitle: {
-        fontFamily: "'FOT-Seurat Pro', 'M PLUS Rounded 1c', sans-serif",
+        fontFamily: "Nunito, 'Zen Maru Gothic', -apple-system, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif",
         fontSize: 50,
         fontWeight: 700,
         color: '#FFF9E6',
@@ -144,7 +192,7 @@ const S = {
         margin: '0 auto',
     } as React.CSSProperties,
     sectionTitle: {
-        fontFamily: "'FOT-Seurat Pro', 'M PLUS Rounded 1c', sans-serif",
+        fontFamily: "Nunito, 'Zen Maru Gothic', -apple-system, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif",
         fontSize: 24,
         fontWeight: 700,
         color: '#725d42',
@@ -210,7 +258,7 @@ const S = {
         padding: '20px 28px',
         background: '#2b2118',
         border: '1px solid #3d3028',
-        borderRadius: 12,
+        borderRadius: 20,
         fontFamily: "'SF Mono', 'Fira Code', Consolas, monospace",
         fontSize: 13,
         fontWeight: 600,
@@ -219,6 +267,7 @@ const S = {
         lineHeight: 1.8,
         whiteSpace: 'pre' as const,
         overflow: 'auto' as const,
+        tabSize: 4,
     } as React.CSSProperties,
 
     // Footer
@@ -252,9 +301,9 @@ const features = [
         desc: 'SVG 有机形状裁切，3D 按压按钮，温暖质朴的自然 UI 质感',
     },
     {
-        icon: 'AppIcons.svg',
-        title: '8 个组件',
-        desc: 'Button / Input / Switch / Modal / Card / Collapse / Cursor / Divider',
+        icon: 'Property-Shopping.svg',
+        title: '10 个组件',
+        desc: 'Button / Input / Switch / Modal / Card / Collapse / Cursor / Divider / Time / Phone',
     },
     {
         icon: 'Property-Camera.svg',
@@ -285,6 +334,8 @@ const components = [
     { key: 'collapse', name: 'Collapse', desc: 'FAQ 折叠面板、平滑展开动画' },
     { key: 'cursor', name: 'Cursor', desc: '自定义手指光标' },
     { key: 'divider-comp', name: 'Divider', desc: '装饰性水平分割线' },
+    { key: 'time', name: 'Time', desc: '可爱风格时间显示' },
+    { key: 'phone', name: 'Phone', desc: 'Phone 模拟器' },
 ];
 
 // ============================================
@@ -330,20 +381,7 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => (
             <div style={S.sectionDesc}>为什么选择 animal-island-ui</div>
             <div style={S.features}>
                 {features.map((f) => (
-                    <Card key={f.title} style={S.featureCard}>
-                        <img
-                            src={
-                                new URL(
-                                    `./img/island-phone/${f.icon}`,
-                                    import.meta.url
-                                ).href
-                            }
-                            style={{ width: 42, height: 42 }}
-                            alt={f.title}
-                        />
-                        <div style={S.featureTitle}>{f.title}</div>
-                        <div style={S.featureDesc}>{f.desc}</div>
-                    </Card>
+                    <FeatureCard key={f.title} feature={f} />
                 ))}
             </div>
         </div>
@@ -386,7 +424,7 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => (
             <div style={S.sectionTitle}>快速上手</div>
             <div style={S.sectionDesc}>引入组件即可使用，样式自动加载</div>
             <CodeBlock
-                code={`// 1. 引入组件\nimport { Button, Modal, Switch } from 'animal-island-ui';\n\nfunction App() {\n        return <Button type="primary">开始</Button>;\n}`}
+                code={`// 1. 引入组件\nimport { Button, Modal, Switch } from 'animal-island-ui';\n\nfunction App() {\n    return <Button type="primary">开始</Button>;\n}`}
             />
         </div>
 
@@ -399,7 +437,7 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => (
                 通过覆盖 CSS 自定义属性实现运行时换肤，无需重新构建
             </div>
             <CodeBlock
-                code={`/* 覆盖主题变量 */\n:root {\n        --animal-primary-color: #19c8b9;\n        --animal-text-color: #827157;\n        --animal-font-family: 'M PLUS Rounded 1c', sans-serif;\n        --animal-border-radius-base: 18px;\n        /* ... 40+ 设计令牌 */\n}`}
+                code={`/* 覆盖主题变量 */\n:root {\n    --animal-primary-color: #19c8b9;\n    --animal-text-color: #827157;\n    --animal-font-family: 'M PLUS Rounded 1c', sans-serif;\n    --animal-border-radius-base: 18px;\n    /* ... 40+ 设计令牌 */\n}`}
             />
         </div>
 

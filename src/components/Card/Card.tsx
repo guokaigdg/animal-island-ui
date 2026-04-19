@@ -18,19 +18,13 @@ export type CardColor =
     | 'brown'
     | 'warm-peach-pink';
 
-export interface CardProps {
+export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
     /** 卡片类型 */
     type?: CardType;
     /** 背景颜色类型 */
     color?: CardColor;
     /** 自定义内容 */
     children?: React.ReactNode;
-    /** 自定义类名 */
-    className?: string;
-    /** 自定义样式 */
-    style?: React.CSSProperties;
-    /** 点击事件 */
-    onClick?: React.MouseEventHandler<HTMLDivElement>;
 }
 
 export const Card: React.FC<CardProps> = ({
@@ -39,7 +33,7 @@ export const Card: React.FC<CardProps> = ({
     children,
     className,
     style,
-    onClick,
+    ...rest
 }) => {
     const cls = [
         styles.card,
@@ -51,7 +45,11 @@ export const Card: React.FC<CardProps> = ({
         .join(' ');
 
     return (
-        <div className={cls} style={style} onClick={onClick}>
+        <div
+            className={cls}
+            style={style}
+            {...rest}
+        >
             {children}
         </div>
     );

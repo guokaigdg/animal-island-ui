@@ -19,7 +19,7 @@ npm install animal-island-ui
 ## 快速上手
 
 ```tsx
-import { Button, Card, Switch } from 'animal-island-ui';
+import { Button, Card, Switch, Time, Phone } from 'animal-island-ui';
 
 function App() {
     return (
@@ -33,6 +33,8 @@ function App() {
                 checkedChildren="开"
                 unCheckedChildren="关"
             />
+            <Time />
+            <Phone />
         </div>
     );
 }

@@ -81,7 +81,7 @@ export const sectionTitleStyle: React.CSSProperties = {
 export const tagStyle: React.CSSProperties = {
     fontSize: 10,
     padding: '2px 8px',
-    borderRadius: 10,
+    borderRadius: 20,
     background: '#f0e8d8',
     color: '#a08060',
     fontWeight: 500,
@@ -99,7 +99,7 @@ export const codeBlockStyle: React.CSSProperties = {
     padding: '20px 24px',
     background: '#2b2118',
     border: '1px solid #3d3028',
-    borderRadius: 10,
+    borderRadius: 20,
     fontSize: 14,
     lineHeight: 1.7,
     fontFamily: "'SF Mono', 'Fira Code', 'Cascadia Code', Consolas, monospace",
@@ -127,7 +127,7 @@ export const ApiTable: React.FC<{ rows: ApiRow[] }> = ({ rows }) => (
         <div
             style={{
                 background: '#2b2118',
-                borderRadius: '0 10px 10px 10px',
+                borderRadius: '0 20px 20px 20px',
                 overflow: 'hidden',
             }}
         >
@@ -182,7 +182,7 @@ export const CodeBlock: React.FC<{ code: string }> = ({ code }) => (
             style={{
                 ...codeBlockStyle,
                 marginTop: 0,
-                borderRadius: '0 10px 10px 10px',
+                borderRadius: '0 20px 20px 20px',
             }}
         >
             {highlightJSX(code)}

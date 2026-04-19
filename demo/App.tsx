@@ -72,7 +72,7 @@ const S = {
     layout: {
         display: 'flex',
         height: '100vh',
-        fontFamily: "'Inter', 'Roboto', system-ui, sans-serif",
+        fontFamily: "Nunito, 'Zen Maru Gothic', -apple-system, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif",
         background: `url(${new URL('./img/content_bg_pc.jpg', import.meta.url).href}) center fixed`,
     } as React.CSSProperties,
     sidebar: {
@@ -105,7 +105,7 @@ const S = {
             margin: '1px 4px',
             height: 40,
             padding: '0 16px',
-            fontFamily: "'FOT-Seurat Pro'",
+            fontFamily: "Nunito, 'Zen Maru Gothic', -apple-system, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif",
             fontStyle: 'normal',
             fontWeight: 600,
             fontSize: 14,

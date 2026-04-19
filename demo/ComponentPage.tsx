@@ -70,7 +70,7 @@ const S = {
         padding: '20px 24px',
         background: '#2b2118',
         border: '1px solid #3d3028',
-        borderRadius: 10,
+        borderRadius: 20,
         fontSize: 14,
         lineHeight: 1.7,
         fontFamily:
@@ -173,7 +173,7 @@ const CodeBlock: React.FC<{ code: string }> = ({ code }) => (
             style={{
                 ...S.codeBlock,
                 marginTop: 0,
-                borderRadius: '0 10px 10px 10px',
+                borderRadius: '0 20px 20px 20px',
             }}
         >
             {highlightJSX(code)}
@@ -198,7 +198,7 @@ const ApiTable: React.FC<{ rows: ApiRow[] }> = ({ rows }) => (
         <div
             style={{
                 overflow: 'auto',
-                borderRadius: '0 10px 10px 10px',
+                borderRadius: '0 20px 20px 20px',
                 border: '1px solid #3d3028',
             }}
         >
@@ -491,17 +491,10 @@ const CARD_API: ApiRow[] = [
         type: 'ReactNode',
         defaultVal: '-',
     },
-    { prop: 'className', desc: '自定义类名', type: 'string', defaultVal: '-' },
     {
-        prop: 'style',
-        desc: '自定义样式',
-        type: 'CSSProperties',
-        defaultVal: '-',
-    },
-    {
-        prop: 'onClick',
-        desc: '点击事件',
-        type: 'MouseEventHandler<HTMLDivElement>',
+        prop: '...',
+        desc: '继承 React.HTMLAttributes',
+        type: 'HTMLDivElement',
         defaultVal: '-',
     },
 ];
