@@ -26,19 +26,43 @@ const useHash = () => {
     return { hash, navigate };
 };
 
+interface MenuItemChild {
+    key: string;
+    label: string;
+}
+
+interface MenuItem {
+    key: string;
+    label: string;
+    children?: MenuItemChild[];
+}
+
 // ============================================
 // Menu config
 // ============================================
-const MENU_ITEMS = [
-    { key: 'cat-basic', label: '── 基础组件 ──' },
-    { key: 'button', label: 'Button 按钮' },
-    { key: 'input', label: 'Input 输入框' },
-    { key: 'switch', label: 'Switch 开关' },
-    { key: 'card', label: 'Card 卡片' },
-    { key: 'collapse', label: 'Collapse 折叠面板' },
-    { key: 'cursor', label: 'Cursor 光标' },
-    { key: 'modal', label: 'Modal 弹窗' },
-    { key: 'divider-comp', label: 'Divider 分割线' },
+const MENU_ITEMS: MenuItem[] = [
+    {
+        key: 'cat-basic',
+        label: '── 基础组件 ──',
+        children: [
+            { key: 'button', label: 'Button 按钮' },
+            { key: 'input', label: 'Input 输入框' },
+            { key: 'switch', label: 'Switch 开关' },
+            { key: 'card', label: 'Card 卡片' },
+            { key: 'collapse', label: 'Collapse 折叠面板' },
+            { key: 'cursor', label: 'Cursor 光标' },
+            { key: 'modal', label: 'Modal 弹窗' },
+            { key: 'divider-comp', label: 'Divider 分割线' },
+        ],
+    },
+    {
+        key: 'cat-complex',
+        label: '── 复杂组件 ──',
+        children: [
+            { key: 'time', label: 'Time 时间' },
+            { key: 'phone', label: 'Phone 手机' },
+        ],
+    },
 ];
 
 // ============================================
@@ -146,19 +170,59 @@ const App: React.FC = () => {
                         </div>
                         <nav style={S.menuList}>
                             {MENU_ITEMS.map((item) => {
-                                if (item.key.startsWith('cat-')) {
+                                if (item.children) {
                                     return (
-                                        <div
-                                            key={item.key}
-                                            style={{
-                                                padding: '12px 16px 4px',
-                                                fontSize: 11,
-                                                color: '#a0936e',
-                                                fontWeight: 600,
-                                                letterSpacing: 0.5,
-                                            }}
-                                        >
-                                            {item.label}
+                                        <div key={item.key}>
+                                            <div
+                                                style={{
+                                                    padding: '12px 16px 4px',
+                                                    fontSize: 11,
+                                                    color: '#a0936e',
+                                                    fontWeight: 600,
+                                                    letterSpacing: 0.5,
+                                                }}
+                                            >
+                                                {item.label}
+                                            </div>
+                                            {item.children.map((child) => (
+                                                <div
+                                                    key={child.key}
+                                                    style={S.menuItem(
+                                                        activeKey === child.key
+                                                    )}
+                                                    onClick={() =>
+                                                        navigate(`/${child.key}`)
+                                                    }
+                                                    onMouseEnter={(e) => {
+                                                        if (
+                                                            activeKey !==
+                                                            child.key
+                                                        )
+                                                            e.currentTarget.style.background =
+                                                                '#d6dff0';
+                                                    }}
+                                                    onMouseLeave={(e) => {
+                                                        if (
+                                                            activeKey !==
+                                                            child.key
+                                                        )
+                                                            e.currentTarget.style.background =
+                                                                'transparent';
+                                                    }}
+                                                >
+                                                    <span
+                                                        style={{
+                                                            color:
+                                                                activeKey ===
+                                                                child.key
+                                                                    ? '#fff'
+                                                                    : '#8a7b66',
+                                                        }}
+                                                    >
+                                                        {child.label}
+                                                    </span>
+                                                </div>
+                                            ))}
                                         </div>
                                     );
                                 }

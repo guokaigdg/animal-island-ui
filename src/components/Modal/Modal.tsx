@@ -1,6 +1,7 @@
 import React, { useEffect, useCallback } from 'react';
 import { createPortal } from 'react-dom';
 import { Button } from '../Button';
+import { Cursor } from '../Cursor';
 import styles from './modal.module.less';
 
 // Inline SVG clip-path — same organic blob shape as Dialog
@@ -88,41 +89,34 @@ export const Modal: React.FC<ModalProps> = ({
     );
 
     const modalContent = (
-        <div className={styles.mask} onClick={handleMaskClick}>
-            <div
-                className={[styles.modal, className].filter(Boolean).join(' ')}
-                style={{ width }}
-                onClick={handleContentClick}
-                role="dialog"
-                aria-modal="true"
-            >
-                <ClipDef />
-                <div className={styles.modalClipped}>
-                    {(title || closable) && (
-                        <div className={styles.header}>
-                            {title && (
-                                <div className={styles.title}>{title}</div>
-                            )}
-                            {closable && (
-                                <button
-                                    className={styles.close}
-                                    onClick={onClose}
-                                    aria-label="Close"
-                                >
-                                    ×
-                                </button>
-                            )}
-                        </div>
-                    )}
-                    <div className={styles.body}>{children}</div>
-                    {footer !== null && (
-                        <div className={styles.footer}>
-                            {footer === undefined ? defaultFooter : footer}
-                        </div>
-                    )}
+        <Cursor>
+            <div className={styles.mask} onClick={handleMaskClick}>
+                <div
+                    className={[styles.modal, className].filter(Boolean).join(' ')}
+                    style={{ width }}
+                    onClick={handleContentClick}
+                    role="dialog"
+                    aria-modal="true"
+                >
+                    <ClipDef />
+                    <div className={styles.modalClipped}>
+                        {(title || closable) && (
+                            <div className={styles.header}>
+                                {title && (
+                                    <div className={styles.title}>{title}</div>
+                                )}
+                            </div>
+                        )}
+                        <div className={styles.body}>{children}</div>
+                        {footer !== null && (
+                            <div className={styles.footer}>
+                                {footer === undefined ? defaultFooter : footer}
+                            </div>
+                        )}
+                    </div>
                 </div>
             </div>
-        </div>
+        </Cursor>
     );
 
     return createPortal(modalContent, document.body);

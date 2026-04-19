@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Button, Input, Switch, Modal, Card, Collapse, Divider } from '../src';
+import TimeDemo from './components/Time';
+import PhoneDemo from './components/Phone';
 
 // ============================================
 // Styles
@@ -642,21 +644,20 @@ const ButtonDemo: React.FC = () => (
             code={`import { Button } from 'animal-island-ui';
 
 const App = () => {
-        return (
-                <div>
-                        <Button type="primary">Primary</Button>
-                        <Button>Default</Button>
-                        <Button type="dashed">Dashed</Button>
-                        <Button type="primary" danger>Danger</Button>
-                        <Button type="primary" ghost>Ghost</Button>
-                        <Button type="primary" loading>Loading</Button>
-                        <Button type="primary" size="large">Large</Button>
-                        <Button type="primary" icon={<span>🔍</span>}>搜索</Button>
-                        <Button type="primary" block>Block</Button>
-                </div>
-        );
-};`}
-        />
+    return (
+        <div>
+            <Button type="primary">Primary</Button>
+            <Button>Default</Button>
+            <Button type="dashed">Dashed</Button>
+            <Button type="primary" danger>Danger</Button>
+            <Button type="primary" ghost>Ghost</Button>
+            <Button type="primary" loading>Loading</Button>
+            <Button type="primary" size="large">Large</Button>
+            <Button type="primary" icon={<span>🔍</span>}>搜索</Button>
+            <Button type="primary" block>Block</Button>
+        </div>
+    );
+};`} />
         <ApiTable rows={BUTTON_API} />
     </div>
 );
@@ -705,20 +706,19 @@ const InputDemo: React.FC = () => {
                 code={`import { Input } from 'animal-island-ui';
 
 const App = () => {
-        const [val, setVal] = useState('');
-        return (
-                <div>
-                        <Input placeholder="Basic input" />
-                        <Input placeholder="With clear" allowClear value={val} onChange={e => setVal(e.target.value)} />
-                        <Input placeholder="Prefix" prefix="🔍" suffix="⏎" />
-                        <Input placeholder="Small" size="small" />
-                        <Input placeholder="Large" size="large" />
-                        <Input placeholder="Error" status="error" />
-                        <Input placeholder="Warning" status="warning" />
-                </div>
-        );
-};`}
-            />
+    const [val, setVal] = useState('');
+    return (
+        <div>
+            <Input placeholder="Basic input" />
+            <Input placeholder="With clear" allowClear value={val} onChange={e => setVal(e.target.value)} />
+            <Input placeholder="Prefix" prefix="🔍" suffix="⏎" />
+            <Input placeholder="Small" size="small" />
+            <Input placeholder="Large" size="large" />
+            <Input placeholder="Error" status="error" />
+            <Input placeholder="Warning" status="warning" />
+        </div>
+    );
+};`} />
             <ApiTable rows={INPUT_API} />
         </div>
     );
@@ -767,16 +767,15 @@ const SwitchDemo: React.FC = () => {
                 code={`import { Switch } from 'animal-island-ui';
 
 const App = () => {
-        const [checked, setChecked] = useState(false);
-        return (
-                <div>
-                        <Switch checked={checked} onChange={setChecked} />
-                        <Switch defaultChecked checkedChildren="开" unCheckedChildren="关" />
-                        <Switch size="small" defaultChecked />
-                </div>
-        );
-};`}
-            />
+    const [checked, setChecked] = useState(false);
+    return (
+        <div>
+            <Switch checked={checked} onChange={setChecked} />
+            <Switch defaultChecked checkedChildren="开" unCheckedChildren="关" />
+            <Switch size="small" defaultChecked />
+        </div>
+    );
+};`} />
             <ApiTable rows={SWITCH_API} />
         </div>
     );
@@ -798,8 +797,8 @@ const CardDemo: React.FC = () => (
                 </Card>
                 <Card style={{ width: 560 }}>
                     <p style={{ margin: 0, fontSize: 13 }}>
-                        在a game company 3DS《a cozy island-style UI: New Leaf》和《Animal
-                        Crossing: Happy Home Designer》中製作的「我的設計」QR
+                        在a game company 3DS《Animal Island: New Leaf》和《Animal
+                        Island: Happy Home Designer》中製作的「我的設計」QR
                         Code，以智慧型裝置讀取就能通過狸端機入口站下載至《集合啦！療癒系海島》。
                     </p>
                 </Card>
@@ -811,8 +810,8 @@ const CardDemo: React.FC = () => (
                 </Card>
                 <Card type="title" style={{ width: 360 }}>
                     <p style={{ margin: 0, fontSize: 13 }}>
-                        欢迎来到无人岛！在a game company 3DS《a cozy island-style UI: New
-                        Leaf》和《a cozy island-style UI: Happy Home
+                        欢迎来到无人岛！在a game company 3DS《Animal Island: New
+                        Leaf》和《Animal Island: Happy Home
                         Designer》中製作的「我的設計」QR
                         Code，以智慧型裝置讀取就能通過狸端機入口站下載至《集合啦！療癒系海島》。
                     </p>
@@ -921,32 +920,31 @@ const CardDemo: React.FC = () => (
             code={`import { Card } from 'animal-island-ui';
 
 const App = () => (
-        <div>
-                {/* 基础卡片 */}
-                <Card style={{ width: 260 }}>
-                        <p>基础卡片</p>
-                </Card>
+    <div>
+        {/* 基础卡片 */}
+        <Card style={{ width: 260 }}>
+            基础卡片
+        </Card>
 
-                {/* 标题卡片 */}
-                <Card type="title" style={{ width: 260 }}>
-                        <p>标题卡片</p>
-                </Card>
+        {/* 标题卡片 */}
+        <Card type="title" style={{ width: 260 }}>
+            标题卡片
+        </Card>
 
-                {/* 颜色变体 */}
-                <Card color="app-blue">
-                        <p>蓝色卡片</p>
-                </Card>
-                <Card color="warm-peach-pink">
-                        <p>暖桃粉卡片</p>
-                </Card>
+        {/* 颜色变体 */}
+        <Card color="app-blue">
+            蓝色卡片
+        </Card>
+        <Card color="warm-peach-pink">
+            暖桃粉卡片
+        </Card>
 
-                {/* 颜色 + 标题 组合 */}
-                <Card type="title" color="purple">
-                        <p>紫色标题卡片</p>
-                </Card>
-        </div>
-);`}
-        />
+        {/* 颜色 + 标题 组合 */}
+        <Card type="title" color="purple">
+            紫色标题卡片
+        </Card>
+    </div>
+);`} />
         <ApiTable rows={CARD_API} />
     </div>
 );
@@ -993,13 +991,12 @@ const CollapseDemo: React.FC = () => (
             code={`import { Collapse } from 'animal-island-ui';
 
 const App = () => (
-        <div>
-                <Collapse question="问题" answer={<p>回答内容</p>} />
-                <Collapse question="默认展开" answer={<p>答案</p>} defaultExpanded />
-                <Collapse question="禁用" answer={<p>答案</p>} disabled />
-        </div>
-);`}
-        />
+    <div>
+        <Collapse question="问题" answer={<p>回答内容</p>} />
+        <Collapse question="默认展开" answer={<p>答案</p>} defaultExpanded />
+        <Collapse question="禁用" answer={<p>答案</p>} disabled />
+    </div>
+);`} />
         <ApiTable rows={COLLAPSE_API} />
     </div>
 );
@@ -1017,11 +1014,10 @@ const CursorDemo: React.FC = () => (
             code={`import { Cursor } from 'animal-island-ui';
 
 const App = () => (
-        <Cursor>
-                <div>鼠标移入此区域将显示自定义光标</div>
-        </Cursor>
-);`}
-        />
+    <Cursor>
+        <div>鼠标移入此区域将显示自定义光标</div>
+    </Cursor>
+);`} />
         <ApiTable rows={CURSOR_API} />
     </div>
 );
@@ -1098,32 +1094,31 @@ const ModalDemo: React.FC = () => {
                 code={`import { Button, Modal } from 'animal-island-ui';
 
 const App = () => {
-        const [open, setOpen] = useState(false);
-        return (
-                <div>
-                        <Button type="primary" onClick={() => setOpen(true)}>打开 Modal</Button>
-                        <Modal open={open} onClose={() => setOpen(false)} onOk={() => setOpen(false)}>
-                                <p>Modal 内容</p>
-                        </Modal>
+    const [open, setOpen] = useState(false);
+    return (
+        <div>
+            <Button type="primary" onClick={() => setOpen(true)}>打开 Modal</Button>
+            <Modal open={open} onClose={() => setOpen(false)} onOk={() => setOpen(false)}>
+                Modal 内容
+            </Modal>
 
-                        {/* 带标题 */}
-                        <Modal open={open} title="标题" onClose={() => setOpen(false)}>
-                                <p>内容</p>
-                        </Modal>
+            {/* 带标题 */}
+            <Modal open={open} title="标题" onClose={() => setOpen(false)}>
+                内容
+            </Modal>
 
-                        {/* 自定义 Footer */}
-                        <Modal open={open} title="确认" footer={<Button>自定义按钮</Button>}>
-                                <p>内容</p>
-                        </Modal>
+            {/* 自定义 Footer */}
+            <Modal open={open} title="确认" footer={<Button>自定义按钮</Button>}>
+                内容
+            </Modal>
 
-                        {/* 无 Footer */}
-                        <Modal open={open} footer={null}>
-                                <p>无底部按钮</p>
-                        </Modal>
-                </div>
-        );
-};`}
-            />
+            {/* 无 Footer */}
+            <Modal open={open} footer={null}>
+                无底部按钮
+            </Modal>
+        </div>
+    );
+};`} />
             <ApiTable rows={MODAL_API} />
         </div>
     );
@@ -1141,13 +1136,12 @@ const DividerDemo: React.FC = () => (
             code={`import { Divider } from 'animal-island-ui';
 
 const App = () => (
-        <div>
-                <p>上方内容</p>
-                <Divider />
-                <p>下方内容</p>
-        </div>
-);`}
-        />
+    <div>
+        <p>上方内容</p>
+        <Divider />
+        <p>下方内容</p>
+    </div>
+);`} />
         <ApiTable rows={DIVIDER_API} />
     </div>
 );
@@ -1180,6 +1174,14 @@ export const PAGE_INFO: Record<string, { title: string; desc: string }> = {
         title: 'Cursor 光标',
         desc: '光标组件 — 自定义手指光标，支持自定义尺寸、点击动画',
     },
+    time: {
+        title: 'Time 时间',
+        desc: '经典 HUD 风格的时间显示组件，实时更新时间',
+    },
+    phone: {
+        title: 'Phone 手机',
+        desc: '治愈海岛风格手机界面，包含对话框和背包功能',
+    },
     modal: {
         title: 'Modal 弹窗',
         desc: '模态弹窗组件 — SVG 有机形状裁切、支持标题、关闭按钮、自定义 Footer、ESC / 遮罩关闭',
@@ -1197,6 +1199,8 @@ const PAGES: Record<string, React.FC> = {
     card: CardDemo,
     collapse: CollapseDemo,
     cursor: CursorDemo,
+    time: TimeDemo,
+    phone: PhoneDemo,
     modal: ModalDemo,
     'divider-comp': DividerDemo,
 };

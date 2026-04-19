@@ -21,13 +21,22 @@ declare module '*.jpg' {
 }
 
 declare module '*.svg' {
-    const src: string;
+    const content: string;
     const ReactComponent: React.FC<React.SVGProps<SVGSVGElement>>;
-    export { src, ReactComponent };
+    export { ReactComponent };
+    export default content;
+}
+
+declare module '*.svg?url' {
+    const src: string;
     export default src;
 }
 
-// vite-plugin-svgr 的 ?react 后缀导入
+declare module '*.svg?raw' {
+    const content: string;
+    export default content;
+}
+
 declare module '*.svg?react' {
     const Component: React.FC<React.SVGProps<SVGSVGElement>>;
     export default Component;
