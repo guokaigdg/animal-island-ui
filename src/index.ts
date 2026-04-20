@@ -1,6 +1,20 @@
 // 全局样式
 import './styles/index.less';
 
+// 字体
+import '@fontsource/nunito';
+import '@fontsource/nunito/500.css';
+import '@fontsource/nunito/700.css';
+import '@fontsource/nunito/900.css';
+import '@fontsource/zen-maru-gothic';
+import '@fontsource/zen-maru-gothic/500.css';
+import '@fontsource/zen-maru-gothic/700.css';
+import '@fontsource/zen-maru-gothic/900.css';
+import '@fontsource/m-plus-rounded-1c';
+import '@fontsource/m-plus-rounded-1c/500.css';
+import '@fontsource/m-plus-rounded-1c/700.css';
+import '@fontsource/m-plus-rounded-1c/900.css';
+
 // ============================================
 // 基础 UI 组件
 // ============================================

@@ -4,12 +4,6 @@ import App from './App';
 
 document.body.style.margin = '0';
 
-const fontLink = document.createElement('link');
-fontLink.rel = 'stylesheet';
-fontLink.href =
-    'https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&family=Zen+Maru+Gothic:wght@400;500;700&display=swap';
-document.head.appendChild(fontLink);
-
 const globalStyle = document.createElement('style');
 globalStyle.textContent = `
   *::-webkit-scrollbar { display: none; }

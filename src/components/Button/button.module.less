@@ -225,15 +225,19 @@
 .btn-loading {
     cursor: default;
     pointer-events: none;
+    box-shadow: none;
+    background: #0ec4b6;
+    border: 4px solid #4de2da;
+    color: #fff;
     background-image: repeating-linear-gradient(
         -45deg,
-        transparent,
-        transparent 8px,
-        var(--animal-primary-color-active) 8px,
-        var(--animal-primary-color-active) 16px
+        #0ec4b6,
+        #0ec4b6 10px,
+        #01b0a7 10px,
+        #01b0a7 20px
     );
-    background-size: 45.25px 100%;
-    animation: animal-btn-loading 0.9s linear infinite;
+    background-size: 28.28px 28.28px;
+    animation: animal-btn-loading 1s linear infinite;
 }
 
 .btn-icon {
@@ -246,6 +250,6 @@
         background-position: 0 0;
     }
     100% {
-        background-position: 45.25px 0;
+        background-position: -28.28px 0;
     }
 }

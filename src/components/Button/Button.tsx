@@ -61,7 +61,7 @@ export const Button: React.FC<ButtonProps> = ({
         <button
             type={htmlType}
             className={classNames}
-            disabled={disabled || loading}
+            disabled={disabled}
             {...rest}
         >
             {icon && !loading && (

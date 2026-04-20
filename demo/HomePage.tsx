@@ -461,9 +461,6 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => (
                 >
                     GitHub
                 </span>
-                <span style={S.footerLink} onClick={() => onNavigate?.('/')}>
-                    首页
-                </span>
             </div>
             <div>MIT License · React + TypeScript + Vite</div>
         </div>

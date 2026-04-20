@@ -547,6 +547,12 @@ const CURSOR_API: ApiRow[] = [
 ];
 
 const DIVIDER_API: ApiRow[] = [
+    {
+        prop: 'type',
+        desc: '分隔线类型',
+        type: `'line-brown' | 'line-teal' | 'line-white' | 'line-yellow' | 'wave-yellow'`,
+        defaultVal: "'line-brown'",
+    },
     { prop: 'className', desc: '自定义类名', type: 'string', defaultVal: '-' },
     {
         prop: 'style',
@@ -562,7 +568,7 @@ const DIVIDER_API: ApiRow[] = [
 const ButtonDemo: React.FC = () => (
     <div style={S.section}>
         <div style={S.sectionTitle}>
-            Button <span style={S.tag}>5 types</span>
+            Button <span style={S.tag}>6 types</span>
         </div>
         <div style={S.demoBody}>
             <div style={S.label}>type 按钮类型</div>
@@ -642,6 +648,8 @@ const App = () => {
             <Button type="primary">Primary</Button>
             <Button>Default</Button>
             <Button type="dashed">Dashed</Button>
+            <Button type="text">Text</Button>
+            <Button type="link">Link</Button>
             <Button type="primary" danger>Danger</Button>
             <Button type="primary" ghost>Ghost</Button>
             <Button type="primary" loading>Loading</Button>
@@ -1120,19 +1128,30 @@ const App = () => {
 const DividerDemo: React.FC = () => (
     <div style={S.section}>
         <div style={S.sectionTitle}>
-            Divider <span style={S.tag}>分割线</span>
+            Divider <span style={S.tag}>5 types</span>
         </div>
-        <p>默认分割线</p>
-        <Divider />
-        <p>下方内容</p>
+        <p>line-brown</p>
+        <Divider type="line-brown" />
+        <p>line-teal</p>
+        <Divider type="line-teal" />
+        <p>line-white</p>
+        <div style={{ background: '#333', padding: 10 }}>
+            <Divider type="line-white" />
+        </div>
+        <p>line-yellow</p>
+        <Divider type="line-yellow" />
+        <p>wave-yellow</p>
+        <Divider type="wave-yellow" />
         <CodeBlock
             code={`import { Divider } from 'animal-island-ui';
 
 const App = () => (
     <div>
-        <p>上方内容</p>
-        <Divider />
-        <p>下方内容</p>
+        <Divider type="line-brown" />
+        <Divider type="line-teal" />
+        <Divider type="line-white" />
+        <Divider type="line-yellow" />
+        <Divider type="wave-yellow" />
     </div>
 );`} />
         <ApiTable rows={DIVIDER_API} />
