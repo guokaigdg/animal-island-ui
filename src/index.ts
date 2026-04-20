@@ -33,6 +33,9 @@ export type { ModalProps } from './components/Modal';
 export { Card } from './components/Card';
 export type { CardProps, CardType, CardColor } from './components/Card';
 
+export { Footer } from './components/Footer';
+export type { FooterProps, FooterType } from './components/Footer';
+
 export { Collapse } from './components/Collapse';
 export type { CollapseProps } from './components/Collapse';
 

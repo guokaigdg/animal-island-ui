@@ -302,8 +302,8 @@ const features = [
     },
     {
         icon: 'Property-Shopping.svg',
-        title: '10 个组件',
-        desc: 'Button / Input / Switch / Modal / Card / Collapse / Cursor / Divider / Time / Phone',
+        title: '11 个组件',
+        desc: 'Button / Input / Switch / Modal / Card / Collapse / Cursor / Divider / Time / Phone / Footer',
     },
     {
         icon: 'Property-Camera.svg',
@@ -358,7 +358,7 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => (
             />
             <h1 style={S.heroTitle}>
                 Animal Island UI
-                <span style={S.heroVersion}>v0.1.0</span>
+                <span style={S.heroVersion}>v0.4.0</span>
             </h1>
             <p style={S.heroSubtitle}>
                 Animal风格的 React 组件库，基于 TypeScript + Vite 构建

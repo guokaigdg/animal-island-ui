@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Button, Input, Switch, Modal, Card, Collapse, Divider } from '../src';
 import TimeDemo from './components/Time';
 import PhoneDemo from './components/Phone';
+import FooterDemo from './components/Footer';
 
 // ============================================
 // Styles
@@ -1194,6 +1195,10 @@ export const PAGE_INFO: Record<string, { title: string; desc: string }> = {
         title: 'Phone 手机',
         desc: '治愈海岛风格手机界面，包含对话框和背包功能',
     },
+    footer: {
+        title: 'Footer 底部装饰',
+        desc: '页面底部装饰图片，支持树和海两种类型',
+    },
     modal: {
         title: 'Modal 弹窗',
         desc: '模态弹窗组件 — SVG 有机形状裁切、支持标题、关闭按钮、自定义 Footer、ESC / 遮罩关闭',
@@ -1213,6 +1218,7 @@ const PAGES: Record<string, React.FC> = {
     cursor: CursorDemo,
     time: TimeDemo,
     phone: PhoneDemo,
+    footer: FooterDemo,
     modal: ModalDemo,
     'divider-comp': DividerDemo,
 };
