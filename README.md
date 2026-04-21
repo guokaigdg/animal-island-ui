@@ -1,7 +1,11 @@
-# animal-island-ui
+# 🏝 Animal-Island-UI
 
-<img src="demo/img/readme-home.png" alt="animal-island-ui" style="border-radius: 20px;" />
+<img src="docs/img/readme-home.png" alt="animal-island-ui" style="border-radius: 12px; width: 65%; display: block; margin: 0 auto;" />
 
+<br>
+<p align="center">
+    简体中文 | <a href="./docs/README.en.md">English</a>
+</p>
 一款风格参考《动物森友会》的 React UI 组件库，仅用于学习与技术交流。
 
 ## 介绍
@@ -48,6 +52,7 @@ function App() {
 }
 ```
 
+
 ## 本地开发
 
 ```bash
@@ -69,6 +74,18 @@ npm run build:demo
 ```
 
 
+## 案例
+
+<div style="display: flex; gap: 20px; flex-wrap: wrap; justify-content: flex-start;">
+  <div style="flex: 1; min-width: 300px; max-width: 30%;">
+    <h4><a href="https://github.com/yunxinz/ac-site-template">ac-site-template</a>（动森主题个人网站模板）</h4>
+    <img src="docs/img/ac-site-template.JPG" alt="ac-site-template" style="border-radius: 8px; width: 100%; display: block; margin-top: 10px;" />
+  </div>
+  <div style="flex: 1; min-width: 300px; max-width: 30%;">
+    <h4><a href="https://github.com/xiaochong/hi-kid">HiKid</a>（儿童教育练习英语口语和听力）</h4>
+    <img src="docs/img/hi-kid.JPG" alt="HiKid" style="border-radius: 8px; width: 100%; display: block; margin-top: 10px;" />
+  </div>
+</div>
 
 ## 注意事项
 
@@ -90,5 +107,4 @@ npm run build:demo
 ## License
 
 MIT
-For learning purposes only.
 本项目基于 MIT 开源协议发布，仅限学习使用，作者不对因使用本库导致的任何法律问题或损失承担责任。
