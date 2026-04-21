@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Card, Divider, Button, Switch, Collapse } from '../src';
+import { useIsMobile } from './tools';
 
 // ============================================
 // Syntax highlighting
@@ -345,22 +346,24 @@ interface HomePageProps {
     onNavigate?: (path: string) => void;
 }
 
-const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => (
+const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
+    const isMobile = useIsMobile();
+    return (
     <div style={S.page}>
         {/* Hero */}
-        <div style={S.hero}>
+        <div style={{ ...S.hero, padding: isMobile ? '48px 20px 32px' : '60px 40px 40px', minHeight: isMobile ? '70vh' : '80vh' }}>
             <img
                 src={
                     new URL('./img/animal_icon.svg', import.meta.url).href
                 }
-                style={{ width: 172, height: 172 }}
+                style={{ width: isMobile ? 100 : 172, height: isMobile ? 100 : 172 }}
                 alt="logo"
             />
-            <h1 style={S.heroTitle}>
+            <h1 style={{ ...S.heroTitle, fontSize: isMobile ? 28 : 50 }}>
                 Animal Island UI
                 <span style={S.heroVersion}>v0.4.0</span>
             </h1>
-            <p style={S.heroSubtitle}>
+            <p style={{ ...S.heroSubtitle, fontSize: isMobile ? 14 : 17 }}>
                 Animal风格的 React 组件库，基于 TypeScript + Vite 构建
                 <br />让 Web 应用充满温暖质感
             </p>
@@ -376,7 +379,7 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => (
         </div>
 
         {/* Features */}
-        <div style={S.section}>
+        <div style={{ ...S.section, padding: isMobile ? '32px 16px' : '48px 40px' }}>
             <div style={S.sectionTitle}>特性</div>
             <div style={S.sectionDesc}>为什么选择 animal-island-ui</div>
             <div style={S.features}>
@@ -386,10 +389,10 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => (
             </div>
         </div>
 
-        <Divider style={{ width: 800, margin: '0 auto' }} />
+        <Divider style={{ width: isMobile ? '90%' : 800, margin: '0 auto' }} />
 
         {/* Components */}
-        <div style={S.section}>
+        <div style={{ ...S.section, padding: isMobile ? '32px 16px' : '48px 40px' }}>
             <div style={S.sectionTitle}>组件一览</div>
             <div style={S.sectionDesc}>点击卡片查看详细文档和在线演示</div>
             <div style={S.compGrid}>
@@ -406,10 +409,10 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => (
             </div>
         </div>
 
-        <Divider style={{ width: 800, margin: '0 auto' }} />
+        <Divider style={{ width: isMobile ? '90%' : 800, margin: '0 auto' }} />
 
         {/* Install */}
-        <div style={S.section}>
+        <div style={{ ...S.section, padding: isMobile ? '32px 16px' : '48px 40px' }}>
             <div style={S.sectionTitle}>安装</div>
             <div style={S.sectionDesc}>一行命令即可安装</div>
             <CodeBlock
@@ -417,10 +420,10 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => (
             />
         </div>
 
-        <Divider style={{ width: 800, margin: '0 auto' }} />
+        <Divider style={{ width: isMobile ? '90%' : 800, margin: '0 auto' }} />
 
         {/* Quick Start */}
-        <div style={S.section}>
+        <div style={{ ...S.section, padding: isMobile ? '32px 16px' : '48px 40px' }}>
             <div style={S.sectionTitle}>快速上手</div>
             <div style={S.sectionDesc}>引入组件即可使用，样式自动加载</div>
             <CodeBlock
@@ -428,10 +431,10 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => (
             />
         </div>
 
-        <Divider style={{ width: 800, margin: '0 auto' }} />
+        <Divider style={{ width: isMobile ? '90%' : 800, margin: '0 auto' }} />
 
         {/* Theme */}
-        <div style={S.section}>
+        <div style={{ ...S.section, padding: isMobile ? '32px 16px' : '48px 40px' }}>
             <div style={S.sectionTitle}>主题定制</div>
             <div style={S.sectionDesc}>
                 通过覆盖 CSS 自定义属性实现运行时换肤，无需重新构建
@@ -442,7 +445,7 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => (
         </div>
 
         {/* Footer */}
-        <div style={S.footer}>
+        <div style={{ ...S.footer, padding: isMobile ? '24px 16px' : '32px 40px' }}>
             <div style={S.footerLinks}>
                 <span
                     style={S.footerLink}
@@ -466,5 +469,6 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => (
         </div>
     </div>
 );
+}
 
 export default HomePage;

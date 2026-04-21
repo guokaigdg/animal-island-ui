@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './cursor.module.less';
+import './cursor.css';
 
 export interface CursorProps {
     /** 子元素 */
@@ -10,14 +10,15 @@ export interface CursorProps {
     style?: React.CSSProperties;
 }
 
-export const Cursor: React.FC<CursorProps> = ({
-    children,
-    className,
-    style,
-}) => (
-    <div className={`${styles.cursor} ${className || ''}`} style={style}>
-        {children}
-    </div>
-);
+export const Cursor: React.FC<CursorProps> = ({ children, className, style }) => {
+    return (
+        <div
+            className={`animal-cursor${className ? ` ${className}` : ''}`}
+            style={style}
+        >
+            {children}
+        </div>
+    );
+};
 
 Cursor.displayName = 'Cursor';
