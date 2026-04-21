@@ -797,7 +797,7 @@ const CardDemo: React.FC = () => (
                 <Card>
                     <p style={{ margin: 0, fontSize: 13 }}>基础卡片</p>
                 </Card>
-                <Card style={{ width: 560 }}>
+                <Card style={{ maxWidth: 560, width: '100%' }}>
                     <p style={{ margin: 0, fontSize: 13 }}>
                         在Nintendo 3DS《Animal Island: New Leaf》和《Animal
                         Island: Happy Home Designer》中製作的「我的設計」QR
@@ -810,7 +810,7 @@ const CardDemo: React.FC = () => (
                 <Card type="title">
                     <p style={{ margin: 0, fontSize: 13 }}>Title标题卡片</p>
                 </Card>
-                <Card type="title" style={{ width: 360 }}>
+                <Card type="title" style={{ maxWidth: 360, width: '100%' }}>
                     <p style={{ margin: 0, fontSize: 13 }}>
                         欢迎来到无人岛！在Nintendo 3DS《Animal Island: New
                         Leaf》和《Animal Island: Happy Home
@@ -827,7 +827,7 @@ const CardDemo: React.FC = () => (
             <div
                 style={{
                     display: 'grid',
-                    gridTemplateColumns: 'repeat(4, 1fr)',
+                    gridTemplateColumns: 'repeat(auto-fill, minmax(140px, 1fr))',
                     gap: 16,
                     marginBottom: 24,
                 }}
