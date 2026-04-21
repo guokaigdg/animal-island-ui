@@ -33,7 +33,8 @@
         "dev": "vite",
         "build": "vite build && tsc --project tsconfig.build.json --emitDeclarationOnly",
         "build:demo": "vite build --config vite.config.demo.ts",
-        "prepublishOnly": "npm run build"
+        "prepublishOnly": "npm run build",
+        "deploy": "gh-pages -d demo-dist"
     },
     "peerDependencies": {
         "react": ">=17.0.0",
@@ -47,6 +48,7 @@
         "@types/react": "^18.3.18",
         "@types/react-dom": "^18.3.5",
         "@vitejs/plugin-react": "^5.2.0",
+        "gh-pages": "^6.3.0",
         "glob": "^11.0.1",
         "less": "^4.2.1",
         "react": "^18.3.1",

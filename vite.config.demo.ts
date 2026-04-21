@@ -7,6 +7,7 @@ import { fileURLToPath } from 'url';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
+    base: '/animal-island-ui/',
     plugins: [react(), svgr()],
     resolve: {
         alias: {

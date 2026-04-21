@@ -1,5 +1,7 @@
 # animal-island-ui
 
+![animal-island-ui](demo/img/readme-home.png)
+
 一款风格参考《治愈系海岛》的 React UI 组件库，仅用于学习与技术交流。
 
 ## 介绍
@@ -7,6 +9,12 @@
 本项目是基于 React + TypeScript 实现的轻量 UI 组件库，设计风格灵感来源于任天堂《治愈系海岛风格》游戏界面，用于个人前端技术练习与组件化开发学习。
 
 所有视觉元素、布局、图标、动画均为独立设计实现，未直接使用任何任天堂官方美术素材、代码或资源文件。
+
+
+## 预览
+
+- 在线预览 (PC 端) [animal-island-ui-pc](https://guokaigdg.github.io/animal-island-ui/#/)
+- 在线预览（移动端）[animal-island-ui-mobile](https://guokaigdg.github.io/animal-island-ui/#/)
 
 ## 安装
 
