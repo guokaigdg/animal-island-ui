@@ -1,8 +1,9 @@
 # 🏝 Animal-Island-UI
 
-<img src="docs/img/readme-home.png" alt="animal-island-ui" style="border-radius: 12px; width: 65%; display: block; margin: 0 auto;" />
+<div align="center">
+    <img src="docs/img/readme-home.png" alt="animal-island-ui" style="border-radius: 12px; width: 65%; display: block; margin: 0 auto;" />
+</div>
 
-<br>
 <p align="center">
     简体中文 | <a href="./docs/README.en.md">English</a>
 </p>
@@ -76,16 +77,11 @@ npm run build:demo
 
 ## 案例
 
-<div style="display: flex; gap: 20px; flex-wrap: wrap; justify-content: flex-start;">
-  <div style="flex: 1; min-width: 300px; max-width: 30%;">
-    <h4><a href="https://github.com/yunxinz/ac-site-template">ac-site-template</a>（治愈海岛主题个人网站模板）</h4>
-    <img src="docs/img/ac-site-template.JPG" alt="ac-site-template" style="border-radius: 8px; width: 100%; display: block; margin-top: 10px;" />
-  </div>
-  <div style="flex: 1; min-width: 300px; max-width: 30%;">
-    <h4><a href="https://github.com/xiaochong/hi-kid">HiKid</a>（儿童教育练习英语口语和听力）</h4>
-    <img src="docs/img/hi-kid.JPG" alt="HiKid" style="border-radius: 8px; width: 100%; display: block; margin-top: 10px;" />
-  </div>
-</div>
+|<a href="https://github.com/yunxinz/ac-site-template">ac-site-template</a>（治愈海岛主题个人网站模板）  |  <a href="https://github.com/xiaochong/hi-kid">HiKid</a>（儿童教育练习英语口语和听力） | 
+| --- | --- | 
+|  <img src="docs/img/ac-site-template.JPG" alt="ac-site-template" style="border-radius: 8px; width: 90%; display: block; margin: 0 auto;" /> | <img src="docs/img/hi-kid.JPG" alt="HiKid" style="border-radius: 8px; width: 83%; display: block; margin: 0 auto;" />| 
+
+
 
 ## 注意事项
 
