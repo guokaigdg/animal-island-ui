@@ -1,6 +1,6 @@
 # animal-island-ui
 
-![animal-island-ui](demo/img/readme-home.png)
+<img src="demo/img/readme-home.png" alt="animal-island-ui" style="border-radius: 20px;" />
 
 一款风格参考《治愈系海岛》的 React UI 组件库，仅用于学习与技术交流。
 
