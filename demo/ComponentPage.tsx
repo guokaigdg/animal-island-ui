@@ -15,19 +15,19 @@ const S = {
         color: '#794f27',
     } as React.CSSProperties,
     pageDesc: {
-        fontSize: 13,
+        fontSize: 14,
         color: '#794f27',
-        marginBottom: 25,
+        marginBottom: 20,
     } as React.CSSProperties,
     section: {
         marginBottom: 36,
-        padding: 24,
+        padding: 25,
         background: '#fff',
         borderRadius: 12,
         border: '1px solid #e8e2d6',
     } as React.CSSProperties,
     sectionTitle: {
-        fontSize: 15,
+        fontSize: 17,
         fontWeight: 600,
         marginBottom: 16,
         color: '#725d42',
@@ -55,7 +55,7 @@ const S = {
         gap: 12,
     } as React.CSSProperties,
     label: {
-        fontSize: 11,
+        fontSize: 12,
         color: '#a0936e',
         marginBottom: 4,
         fontWeight: 500,
@@ -65,6 +65,7 @@ const S = {
         background: '#faf8f2',
         borderRadius: 8,
         border: '1px dashed #e0d8c8',
+        fontWeight: 500,
     } as React.CSSProperties,
     codeBlock: {
         marginTop: 16,
@@ -1347,7 +1348,7 @@ const ComponentPage: React.FC<ComponentPageProps> = ({ activeKey }) => {
                     fontSize: 24,
                     fontWeight: 700,
                     color: '#794f27',
-                    marginBottom: 8,
+                    marginBottom: 12,
                     lineHeight: 1.4,
                 }}
             >

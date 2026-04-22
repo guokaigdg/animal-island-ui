@@ -79,7 +79,7 @@ npm run build:demo
 
 |<a href="https://github.com/yunxinz/ac-site-template">ac-site-template</a>（治愈海岛主题个人网站模板）  |  <a href="https://github.com/xiaochong/hi-kid">HiKid</a>（儿童教育练习英语口语和听力） | 
 | --- | --- | 
-|  <img src="docs/img/ac-site-template.JPG" alt="ac-site-template" style="border-radius: 8px; width: 90%; display: block; margin: 0 auto;" /> | <img src="docs/img/hi-kid.JPG" alt="HiKid" style="border-radius: 8px; width: 83%; display: block; margin: 0 auto;" />| 
+|  <img src="docs/img/ac-site-template.png" alt="ac-site-template" style="border-radius: 8px; width: 90%; display: block; margin: 0 auto;" /> | <img src="docs/img/hi-kid.png" alt="HiKid" style="border-radius: 8px; width: 90%; display: block; margin: 0 auto;" />| 
 
 
 

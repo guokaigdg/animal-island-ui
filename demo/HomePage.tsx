@@ -155,8 +155,8 @@ const S = {
     } as React.CSSProperties,
     heroTitle: {
         fontFamily: "Nunito, 'Zen Maru Gothic', -apple-system, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif",
-        fontSize: 50,
-        fontWeight: 700,
+        fontSize: 55,
+        fontWeight: 800,
         color: '#FFF9E6',
         textShadow: '0px 4px 1px rgba(0, 0, 0, 0.4)',
         margin: '0 0 12px',
@@ -228,6 +228,11 @@ const S = {
         fontSize: 13,
         color: '#7c5734',
         lineHeight: 1.6,
+        display: '-webkit-box' as const,
+        WebkitLineClamp: 3,
+        WebkitBoxOrient: 'vertical' as const,
+        overflow: 'hidden',
+        textOverflow: 'ellipsis' as const,
     } as React.CSSProperties,
 
     // Component grid
@@ -364,9 +369,9 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                 style={{ width: isMobile ? 100 : 172, height: isMobile ? 100 : 172 }}
                 alt="logo"
             />
-            <h1 style={{ ...S.heroTitle, fontSize: isMobile ? 28 : 50 }}>
+            <h1 style={{ ...S.heroTitle, fontSize: isMobile ? 28 : 55 }}>
                 Animal Island UI
-                <span style={S.heroVersion}>v0.4.0</span>
+                <span style={S.heroVersion}>v1.0.0</span>
             </h1>
             <p style={{ ...S.heroSubtitle, fontSize: isMobile ? 14 : 17 }}>
                 Animal风格的 React 组件库，基于 TypeScript + Vite 构建
