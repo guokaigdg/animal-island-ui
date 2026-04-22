@@ -303,8 +303,8 @@ const features = [
     },
     {
         icon: 'Property-Shopping.svg',
-        title: '11 个组件',
-        desc: 'Button / Input / Switch / Modal / Card / Collapse / Cursor / Divider / Time / Phone / Footer',
+        title: '12 个组件',
+        desc: 'Button / Input / Switch / Modal / Typewriter / Card / Collapse / Cursor / Divider / Time / Phone / Footer',
     },
     {
         icon: 'Property-Camera.svg',
@@ -331,6 +331,11 @@ const components = [
         desc: '受控/非受控、自定义文案、加载状态',
     },
     { key: 'modal', name: 'Modal', desc: 'SVG 有机形状弹窗、ESC 关闭' },
+    {
+        key: 'typewriter',
+        name: 'Typewriter',
+        desc: '逐字打字机效果，支持多行与富内容',
+    },
     { key: 'card', name: 'Card', desc: '默认/标题两种卡片风格' },
     { key: 'collapse', name: 'Collapse', desc: 'FAQ 折叠面板、平滑展开动画' },
     { key: 'cursor', name: 'Cursor', desc: '自定义手指光标' },
@@ -351,7 +356,7 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
     return (
     <div style={S.page}>
         {/* Hero */}
-        <div style={{ ...S.hero, padding: isMobile ? '48px 20px 32px' : '60px 40px 40px', minHeight: isMobile ? '70vh' : '80vh' }}>
+        <div style={{ ...S.hero, padding: isMobile ? '48px 20px 32px' : '60px 40px 40px', minHeight: isMobile ? '70vh' : '75vh' }}>
             <img
                 src={
                     new URL('./img/animal_icon.svg', import.meta.url).href

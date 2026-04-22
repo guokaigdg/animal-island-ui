@@ -50,3 +50,6 @@ export type { PhoneProps } from './components/Phone';
 
 export { Divider } from './components/Divider';
 export type { DividerProps } from './components/Divider';
+
+export { Typewriter } from './components/Typewriter';
+export type { TypewriterProps } from './components/Typewriter';

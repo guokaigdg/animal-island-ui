@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Input, Switch, Modal, Card, Collapse, Divider } from '../src';
+import { Button, Input, Switch, Modal, Card, Collapse, Divider, Typewriter } from '../src';
 import TimeDemo from './components/Time';
 import PhoneDemo from './components/Phone';
 import FooterDemo from './components/Footer';
@@ -17,7 +17,7 @@ const S = {
     pageDesc: {
         fontSize: 13,
         color: '#794f27',
-        marginBottom: 32,
+        marginBottom: 25,
     } as React.CSSProperties,
     section: {
         marginBottom: 36,
@@ -1057,7 +1057,7 @@ const ModalDemo: React.FC = () => {
                 onOk={() => setModalOpen(false)}
             >
                 <span>钓到石头了!</span>
-                <span>竟然连这种都能钓起来......</span>
+                <span>竟然连这种都能钓起来...</span>
             </Modal>
             <Modal
                 open={titleModalOpen}
@@ -1125,6 +1125,105 @@ const App = () => {
         </div>
     );
 };
+
+const TypewriterDemo: React.FC = () => {
+    const [replayKey, setReplayKey] = useState(0);
+    return (
+        <div style={S.section}>
+            <div style={S.sectionTitle}>
+                Typewriter <span style={S.tag}>打字机</span>
+            </div>
+            <div style={S.demoBody}>
+                <div>
+                    <div style={S.label}>基础用法</div>
+                    <div style={S.demoBox}>
+                        <Typewriter trigger={replayKey}>
+                            你好，欢迎来到动物岛！今天的天气真不错呢～
+                        </Typewriter>
+                    </div>
+                </div>
+
+                <div>
+                    <div style={S.label}>保留多行与富内容 (速度 40ms)</div>
+                    <div style={S.demoBox}>
+                        <Typewriter speed={40} trigger={replayKey}>
+                            <div>第一行：钓到石头了！</div>
+                            <div>第二行：竟然连这种都能钓起来...</div>
+                            <div style={{ color: '#d98324', fontWeight: 700 }}>
+                                第三行：继续加油吧！
+                            </div>
+                        </Typewriter>
+                    </div>
+                </div>
+
+                <div style={S.row}>
+                    <Button
+                        type="primary"
+                        onClick={() => setReplayKey((k) => k + 1)}
+                    >
+                        重新播放
+                    </Button>
+                </div>
+            </div>
+            <CodeBlock
+                code={`import { Typewriter } from 'animal-island-ui';
+
+const App = () => {
+    const [key, setKey] = useState(0);
+    return (
+        <>
+            <Typewriter trigger={key}>
+                你好，欢迎来到动物岛！
+            </Typewriter>
+
+            {/* 支持多行与内联样式 */}
+            <Typewriter speed={40} trigger={key}>
+                <div>第一行</div>
+                <div style={{ color: 'orange' }}>第二行</div>
+            </Typewriter>
+
+            <button onClick={() => setKey(k => k + 1)}>重新播放</button>
+        </>
+    );
+};`}
+            />
+            <ApiTable rows={TYPEWRITER_API} />
+        </div>
+    );
+};
+
+const TYPEWRITER_API: ApiRow[] = [
+    {
+        prop: 'children',
+        desc: '需要逐字显示的内容，支持 ReactNode',
+        type: 'ReactNode',
+        defaultVal: '-',
+    },
+    {
+        prop: 'speed',
+        desc: '每字间隔 (ms)',
+        type: 'number',
+        defaultVal: '90',
+    },
+    {
+        prop: 'trigger',
+        desc: '值变化时重新播放',
+        type: 'unknown',
+        defaultVal: '-',
+    },
+    {
+        prop: 'autoPlay',
+        desc: '是否自动从头开始播放',
+        type: 'boolean',
+        defaultVal: 'true',
+    },
+    {
+        prop: 'onDone',
+        desc: '播放完成回调',
+        type: '() => void',
+        defaultVal: '-',
+    },
+];
 
 const DividerDemo: React.FC = () => (
     <div style={S.section}>
@@ -1203,6 +1302,10 @@ export const PAGE_INFO: Record<string, { title: string; desc: string }> = {
         title: 'Modal 弹窗',
         desc: '模态弹窗组件 — SVG 有机形状裁切、支持标题、关闭按钮、自定义 Footer、ESC / 遮罩关闭',
     },
+    typewriter: {
+        title: 'Typewriter 打字机',
+        desc: '打字机组件 — 按字符逐个显示文本，支持多行与 ReactNode 富内容，不改变原有样式',
+    },
     'divider-comp': {
         title: 'Divider 分割线',
         desc: '分割线组件 — 装饰性分割线',
@@ -1220,6 +1323,7 @@ const PAGES: Record<string, React.FC> = {
     phone: PhoneDemo,
     footer: FooterDemo,
     modal: ModalDemo,
+    typewriter: TypewriterDemo,
     'divider-comp': DividerDemo,
 };
 
@@ -1238,15 +1342,22 @@ const ComponentPage: React.FC<ComponentPageProps> = ({ activeKey }) => {
 
     return (
         <>
-            <Card
-                type="title"
-                style={{ marginBottom: 8, width: 'fit-content' }}
+            <div
+                style={{
+                    fontSize: 24,
+                    fontWeight: 700,
+                    color: '#794f27',
+                    marginBottom: 8,
+                    lineHeight: 1.4,
+                }}
             >
-                <span style={{ fontSize: 24, fontWeight: 700 }}>
-                    {info.title}
-                </span>
-            </Card>
-            <div style={S.pageDesc}>{info.desc}</div>
+                {info.title}
+            </div>
+            <div style={{ ...S.pageDesc, minHeight: 40 }}>
+                <Typewriter key={activeKey} trigger={activeKey} speed={30}>
+                    {info.desc}
+                </Typewriter>
+            </div>
             <Page />
         </>
     );

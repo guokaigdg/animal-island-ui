@@ -1,7 +1,8 @@
-import React, { useEffect, useCallback } from 'react';
+import React, { useEffect, useCallback, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { Button } from '../Button';
 import { Cursor } from '../Cursor';
+import { Typewriter } from '../Typewriter';
 import styles from './modal.module.less';
 
 // Inline SVG clip-path — same organic blob shape as Dialog
@@ -33,6 +34,10 @@ export interface ModalProps {
     /** 自定义内容 */
     children?: React.ReactNode;
     className?: string;
+    /** 打字机每字间隔 (ms), 默认 80 */
+    typeSpeed?: number;
+    /** 是否启用打字机效果, 默认 true */
+    typewriter?: boolean;
 }
 
 export const Modal: React.FC<ModalProps> = ({
@@ -46,7 +51,15 @@ export const Modal: React.FC<ModalProps> = ({
     onOk,
     children,
     className,
+    typeSpeed = 80,
+    typewriter = true,
 }) => {
+    // 每次 open 变为 true 时重启打字机
+    const [playKey, setPlayKey] = useState(0);
+    useEffect(() => {
+        if (open) setPlayKey((k) => k + 1);
+    }, [open]);
+
     // ESC 关闭
     useEffect(() => {
         if (!open) return;
@@ -107,7 +120,15 @@ export const Modal: React.FC<ModalProps> = ({
                                 )}
                             </div>
                         )}
-                        <div className={styles.body}>{children}</div>
+                        <div className={styles.body}>
+                            {typewriter ? (
+                                <Typewriter speed={typeSpeed} trigger={playKey}>
+                                    {children}
+                                </Typewriter>
+                            ) : (
+                                children
+                            )}
+                        </div>
                         {footer !== null && (
                             <div className={styles.footer}>
                                 {footer === undefined ? defaultFooter : footer}

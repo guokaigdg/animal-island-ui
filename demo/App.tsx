@@ -53,6 +53,7 @@ const MENU_ITEMS: MenuItem[] = [
             { key: 'collapse', label: 'Collapse 折叠面板' },
             { key: 'cursor', label: 'Cursor 光标' },
             { key: 'modal', label: 'Modal 弹窗' },
+            { key: 'typewriter', label: 'Typewriter 打字机' },
             { key: 'divider-comp', label: 'Divider 分割线' },
             { key: 'footer', label: 'Footer 页脚' },
         ],
