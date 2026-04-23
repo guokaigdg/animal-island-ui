@@ -1,19 +1,27 @@
 // 全局样式
 import './styles/index.less';
 
-// 字体
-import '@fontsource/nunito';
-import '@fontsource/nunito/500.css';
-import '@fontsource/nunito/700.css';
-import '@fontsource/nunito/900.css';
-import '@fontsource/zen-maru-gothic';
-import '@fontsource/zen-maru-gothic/500.css';
-import '@fontsource/zen-maru-gothic/700.css';
-import '@fontsource/zen-maru-gothic/900.css';
-import '@fontsource/m-plus-rounded-1c';
-import '@fontsource/m-plus-rounded-1c/500.css';
-import '@fontsource/m-plus-rounded-1c/700.css';
-import '@fontsource/m-plus-rounded-1c/900.css';
+
+// Nunito（latin subset only）
+import '@fontsource/nunito/latin-500.css';
+import '@fontsource/nunito/latin-700.css';
+import '@fontsource/nunito/latin-900.css';
+
+// Zen Maru Gothic（latin + japanese subset，japanese 覆盖假名 + JIS 汉字）
+import '@fontsource/zen-maru-gothic/latin-500.css';
+import '@fontsource/zen-maru-gothic/latin-700.css';
+import '@fontsource/zen-maru-gothic/latin-900.css';
+import '@fontsource/zen-maru-gothic/japanese-500.css';
+import '@fontsource/zen-maru-gothic/japanese-700.css';
+import '@fontsource/zen-maru-gothic/japanese-900.css';
+
+// M PLUS Rounded 1c（latin + japanese subset）
+import '@fontsource/m-plus-rounded-1c/latin-500.css';
+import '@fontsource/m-plus-rounded-1c/latin-700.css';
+import '@fontsource/m-plus-rounded-1c/latin-900.css';
+import '@fontsource/m-plus-rounded-1c/japanese-500.css';
+import '@fontsource/m-plus-rounded-1c/japanese-700.css';
+import '@fontsource/m-plus-rounded-1c/japanese-900.css';
 
 // ============================================
 // 基础 UI 组件

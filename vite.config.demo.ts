@@ -28,5 +28,14 @@ export default defineConfig({
     },
     build: {
         outDir: 'demo-dist',
+        rollupOptions: {
+            output: {
+                manualChunks: {
+                    vendor: ['react', 'react-dom'],
+                },
+            },
+        },
+       assetsInlineLimit: 4096,
     },
 });
+

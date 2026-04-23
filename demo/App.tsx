@@ -1,9 +1,12 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, Suspense, lazy } from 'react';
 import { Cursor } from '../src';
 import '../src/styles/index.less';
 import HomePage from './HomePage';
-import ComponentPage, { PAGE_INFO } from './ComponentPage';
+import { PAGE_INFO } from './pageInfo';
 import { useIsMobile } from './tools';
+
+// Lazy-load ComponentPage so homepage does not pull in every demo on initial load
+const ComponentPage = lazy(() => import('./ComponentPage'));
 
 // ============================================
 // Simple hash router
@@ -245,7 +248,7 @@ const App: React.FC = () => {
                 <div
                     style={{
                         ...S.layout,
-                        background: `url(${new URL('./img/home_bg.svg', import.meta.url).href}) center/cover no-repeat, #7DC395`,
+                        background: `url(${new URL('./img/home_bg.webp', import.meta.url).href}) center/cover no-repeat, #7DC395`,
                         justifyContent: 'center',
                     }}
                 >
@@ -365,7 +368,9 @@ const App: React.FC = () => {
                             paddingTop: isMobile ? 68 : 32,
                         }}
                     >
-                        <ComponentPage activeKey={activeKey} />
+                        <Suspense fallback={null}>
+                            <ComponentPage activeKey={activeKey} />
+                        </Suspense>
                     </main>
 
                     {!isMobile && (
@@ -373,6 +378,9 @@ const App: React.FC = () => {
                             src={
                                 new URL('./img/guide-bg-line.webp', import.meta.url).href
                             }
+                            alt=""
+                            loading="lazy"
+                            decoding="async"
                             style={{
                                 position: 'fixed',
                                 left: 220,

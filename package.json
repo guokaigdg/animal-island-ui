@@ -1,6 +1,6 @@
 {
     "name": "animal-island-ui",
-    "version": "1.0.0",
+    "version": "0.6.0",
     "description": "for learning purpose only, A nature-inspired React component library — Button, Input, Switch, Modal, Card, Collapse, Cursor, Divider",
     "type": "module",
     "main": "dist/cjs/index.cjs",
@@ -11,7 +11,9 @@
             "types": "./dist/types/index.d.ts",
             "import": "./dist/es/index.js",
             "require": "./dist/cjs/index.cjs"
-        }
+        },
+        "./style": "./dist/index.css",
+        "./dist/index.css": "./dist/index.css"
     },
     "files": [
         "dist"
@@ -44,6 +46,7 @@
         "@fontsource/m-plus-rounded-1c": "^5.2.10",
         "@fontsource/nunito": "^5.2.7",
         "@fontsource/zen-maru-gothic": "^5.2.8",
+        "@laynezh/vite-plugin-lib-assets": "^2.1.3",
         "@types/node": "^25.5.2",
         "@types/react": "^18.3.18",
         "@types/react-dom": "^18.3.5",
@@ -55,7 +58,6 @@
         "react-dom": "^18.3.1",
         "typescript": "^5.7.3",
         "vite": "^7.3.2",
-        "vite-plugin-css-injected-by-js": "^4.0.1",
         "vite-plugin-dts": "^4.5.4",
         "vite-plugin-svgr": "^5.2.0"
     },

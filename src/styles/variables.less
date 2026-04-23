@@ -34,15 +34,16 @@
 @bg-color-disabled: #f0ece2;
 
 // ---------- Typography ----------
-// @font-family:
-//     'M PLUS Rounded 1c',
-//     'Noto Sans JP',
-//     -apple-system,
-//     BlinkMacSystemFont,
-//     'Segoe UI',
-//     Roboto,
-//     sans-serif;
-@font-family: Nunito, 'Zen Maru Gothic', 'M PLUS Rounded 1c', -apple-system, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei',
+// 字体栈策略：
+//   1. Nunito                  - 拉丁字符主字体（已打入库）
+//   2. Zen Maru Gothic          - 日文 + 部分汉字圆体（已打入库）
+//   3. M PLUS Rounded 1c        - 日文圆体备选（已打入库）
+//   4. Smiley Sans              - 中文最接近圆体的开源字体（消费方按需加载）
+//   5. HarmonyOS Sans SC/MiSans - 现代微圆中文字体（消费方按需加载）
+//   6. PingFang SC / YaHei      - 系统兜底中文字体（非圆体）
+@font-family: Nunito, 'Zen Maru Gothic', 'M PLUS Rounded 1c',
+    'Smiley Sans', 'HarmonyOS Sans SC', 'MiSans',
+    -apple-system, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei',
     sans-serif !important;
 @font-size-sm: 12px;
 @font-size-base: 14px;

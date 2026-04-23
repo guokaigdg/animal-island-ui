@@ -364,10 +364,12 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
         <div style={{ ...S.hero, padding: isMobile ? '48px 20px 32px' : '60px 40px 40px', minHeight: isMobile ? '70vh' : '75vh' }}>
             <img
                 src={
-                    new URL('./img/animal_icon.svg', import.meta.url).href
+                    new URL('./img/animal_icon.webp', import.meta.url).href
                 }
-                style={{ width: isMobile ? 100 : 172, height: isMobile ? 100 : 172 }}
+                style={{ width: isMobile ? 100 : 170, height: isMobile ? 58 : 100, marginBottom: 50 }}
                 alt="logo"
+                decoding="async"
+                fetchPriority="high"
             />
             <h1 style={{ ...S.heroTitle, fontSize: isMobile ? 28 : 55 }}>
                 Animal Island UI
