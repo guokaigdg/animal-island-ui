@@ -31,8 +31,12 @@ npm install animal-island-ui
 
 ## Quick Start
 
+
+> ⚠️ **Important**: Please make sure to import the styles with `import 'animal-island-ui/style'`, otherwise the components will have no styles!
+
 ```tsx
 import { Button, Card, Switch, Time, Phone } from 'animal-island-ui';
+import 'animal-island-ui/style';
 
 function App() {
     return (

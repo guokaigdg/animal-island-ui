@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Card, Divider, Button, Switch, Collapse } from '../src';
+import { Card, Divider, Button, Switch, Collapse, Typewriter } from '../src';
 import { useIsMobile } from './tools';
 
 // ============================================
@@ -375,10 +375,12 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                 Animal Island UI
                 <span style={S.heroVersion}>v1.0.0</span>
             </h1>
-            <p style={{ ...S.heroSubtitle, fontSize: isMobile ? 14 : 17 }}>
-                Animal风格的 React 组件库，基于 TypeScript + Vite 构建
-                <br />让 Web 应用充满温暖质感
-            </p>
+            <Typewriter speed={90}>
+                <p style={{ ...S.heroSubtitle, fontSize: isMobile ? 14 : 17 }}>
+                    Animal风格的 React 组件库，基于 TypeScript + Vite 构建
+                    <br />让 Web 应用充满温暖质感
+                </p>
+            </Typewriter>
             <div style={S.heroActions}>
                 <Button
                     type="primary"

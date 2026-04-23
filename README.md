@@ -31,8 +31,11 @@ npm install animal-island-ui
 
 ## 快速上手
 
+> ⚠️ **重要**: 请务必导入样式文件 `import 'animal-island-ui/style'`，否则组件将没有样式与字体!
+
 ```tsx
 import { Button, Card, Switch, Time, Phone } from 'animal-island-ui';
+import 'animal-island-ui/style';
 
 function App() {
     return (
