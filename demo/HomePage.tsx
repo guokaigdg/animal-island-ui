@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Card, Divider, Button, Switch, Collapse, Typewriter } from '../src';
+import { Card, Divider, Button, Switch, Collapse, Typewriter, Icon } from '../src';
 import { useIsMobile } from './tools';
 
 // ============================================
@@ -287,7 +287,7 @@ const S = {
     footerLinks: {
         display: 'flex',
         justifyContent: 'center',
-        gap: 24,
+        gap: 20,
         marginBottom: 12,
     } as React.CSSProperties,
     footerLink: {
@@ -308,8 +308,8 @@ const features = [
     },
     {
         icon: 'Property-Shopping.svg',
-        title: '12 个组件',
-        desc: 'Button / Input / Switch / Modal / Typewriter / Card / Collapse / Cursor / Divider / Time / Phone / Footer',
+        title: '13 个组件',
+        desc: 'Button / Input / Switch / Modal / Typewriter / Card / Collapse / Cursor / Divider / Time / Phone / Footer / Icon',
     },
     {
         icon: 'Property-Camera.svg',
@@ -456,6 +456,27 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
             <CodeBlock
                 code={`/* 覆盖主题变量 */\n:root {\n    --animal-primary-color: #19c8b9;\n    --animal-text-color: #827157;\n    --animal-font-family: 'M PLUS Rounded 1c', sans-serif;\n    --animal-border-radius-base: 18px;\n    /* ... 40+ 设计令牌 */\n}`}
             />
+        </div>
+
+        {/* Icon */}
+        <div style={{ ...S.section, padding: isMobile ? '32px 16px' : '48px 40px' }}>
+            <div style={S.sectionTitle}>图标组件</div>
+            <div style={S.sectionDesc}>可爱的治愈海岛风格图标集</div>
+            <div style={{ display: 'flex', gap: 20, marginTop: 24, justifyContent: 'center', flexWrap: 'wrap' }}>
+                <Icon name="icon-miles" size={64} />
+                <Icon name="icon-camera" size={64} />
+                <Icon name="icon-chat" size={64} /> 
+                <Icon name="icon-design" size={64} />
+                <Icon name="icon-map" size={64} />
+            </div>
+            <div style={{ marginTop: 24 }}>
+                <CodeBlock
+                    code={`import { Icon } from 'animal-island-ui';
+
+<Icon name="icon-miles" size={64} />
+<Icon name="icon-camera" size={48} />`}
+                />
+            </div>
         </div>
 
         {/* Footer */}

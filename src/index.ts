@@ -61,3 +61,6 @@ export type { DividerProps } from './components/Divider';
 
 export { Typewriter } from './components/Typewriter';
 export type { TypewriterProps } from './components/Typewriter';
+
+export { Icon, ICON_LIST } from './components/Icon';
+export type { IconProps, IconName } from './components/Icon';

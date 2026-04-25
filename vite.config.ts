@@ -1,6 +1,5 @@
 import { defineConfig, type Plugin } from 'vite';
 import react from '@vitejs/plugin-react';
-import svgr from 'vite-plugin-svgr';
 import libAssetsPlugin from '@laynezh/vite-plugin-lib-assets';
 import { resolve, dirname } from 'path';
 import { fileURLToPath } from 'url';
@@ -41,9 +40,8 @@ function stripWoffFallbackPlugin(): Plugin {
 export default defineConfig({
     plugins: [
         react(),
-        svgr(),
         stripWoffFallbackPlugin(),
-        // lib 模式下 Vite 会强制内联所有资源，本插件绕过该限制，把字体等作为独立文件输出
+        // lib 模式下 Vite 会强制内联所有资源，本插件绕过该限制，把字体/图片等作为独立文件输出
         libAssetsPlugin({
             outputPath: 'files',
             name: '[name].[contenthash:8].[ext]',

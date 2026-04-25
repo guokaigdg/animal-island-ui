@@ -58,6 +58,7 @@ const MENU_ITEMS: MenuItem[] = [
             { key: 'modal', label: 'Modal 弹窗' },
             { key: 'typewriter', label: 'Typewriter 打字机' },
             { key: 'divider-comp', label: 'Divider 分割线' },
+            { key: 'icon', label: 'Icon 图标' },
             { key: 'footer', label: 'Footer 页脚' },
         ],
     },

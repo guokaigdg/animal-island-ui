@@ -178,6 +178,53 @@ brown #9a835a / warm-peach-pink #e18c6f
 - Cursor: custom game-style finger pointer PNG
 - Backgrounds: nature illustrations (leaf texture sidebar, island scene homepage)
 
+=== ISLANDPHONE DEVICE (decorative widget) ===
+Phone shell:   width 527px, height 788px, background #F8F4E8,
+               border-radius 136px (almost capsule), overflow hidden
+Home screen:   padding-top 40px, background #F8F4E8,
+               background-size 100% 200%, animation grasswave 8s ease-in-out infinite
+               (@keyframes grasswave { 0%,100% { background-position: 0% 0%; } 50% { background-position: 0% 100%; } })
+Top bar:       wifi icon (79×29) ← time 32px/800/letter-spacing 2px color #DDDBCC → location icon (36×36)
+Colon blink:   animation blink 1s steps(1) infinite (0–50% opacity 1, 51–100% opacity 0)
+Welcome text:  48px / 800 / color #725C4E / letter-spacing 2px / margin-top 20px
+Apps grid:     grid-template-columns: repeat(3, 1fr); gap 32px; padding 8px
+App tile:      123×123px, border-radius 45px, flex center
+App icon:      background-size 70% auto (iconApp only: 100% auto)
+Hover bounce:  @keyframes iconBounce (0% scale 1 rotate 0, 50% scale 1.2 rotate -5deg, 100% scale 1.1 rotate -4deg), 0.3s ease-in-out forwards
+Badge dot:     28×28 circle, top 0 left 0, background #FF544A, border 5px solid #F8F4E8
+Page indicator: page svg 65×32, margin-top 74px
+App palette:   camera #B77DEE, app #889DF0 (with offset), encyclopedia #F7CD67, diy #E59266,
+               shopping #F8A6B2, variant #82D5BB, design #8AC68A, map #FC736D, chat #D1DA49
+
+=== FOOTER DECORATION ===
+<Footer type="sea" />   width 100%, height 80px, background url(footer-sea.svg) center/contain no-repeat
+                        (SVG viewBox 0 0 1440 186, coral #EC7175 / ocean #327A93 / #98D2E3 / #008077)
+<Footer type="tree" />  width 100%, height 60px, background url(footer-tree.webp) bottom center/cover
+
+=== DIVIDER DECORATION ===
+5 types — all width 100%, height 12px, background center/contain no-repeat:
+  line-brown  (default, SVG viewBox 0 0 297 14, fill #D8D0C3)
+  line-teal   (SVG)
+  line-white  (PNG)
+  line-yellow (SVG)
+  wave-yellow (SVG)
+
+=== CURSOR WRAPPER ===
+<Cursor>{children}</Cursor> — applies ".animal-cursor, .animal-cursor * { cursor: url(cursor-icon.png) 4 0, auto !important; }"
+Hotspot coordinates: (4, 0). Uses !important to override all child cursors.
+
+=== TYPEWRITER (no markup wrapper) ===
+Props: children (ReactNode), speed=90ms, trigger (any unknown; change to restart),
+       autoPlay=true, onDone?: () => void
+Behavior: recursively truncates ReactNode tree by character count while preserving
+          element structure, className, and inline styles. Returns a plain fragment
+          (NO extra wrapping div/span) so it has ZERO layout impact.
+
+=== COMPONENT INVENTORY (12 exports from src/index.ts) ===
+Interactive: Button, Input, Switch, Modal, Collapse
+Containers:  Card (13 IslandPhone colors)
+Decorative:  Time, Phone, Footer, Divider, Cursor, Typewriter
+
 === FORBIDDEN PATTERNS ===
 ✗ Sharp right-angle (0px radius) on any interactive element
 ✗ Pure black #000 or #111 text — always use warm brown tones
@@ -245,4 +292,12 @@ Interface details:
 | 过渡 | `0.25s cubic-bezier(0.4,0,0.2,1)` | 通用动画 |
 | Loading stripe | `28.28px` step, `-45deg`, `#0ec4b6/#01b0a7` | 按钮 loading |
 | 侧边栏宽度 | `220px` | Desktop sidebar |
+| Phone 外壳 | `527 × 788px`，`border-radius: 136px` | IslandPhone 容器 |
+| Phone app tile | `123 × 123px`，`border-radius: 45px` | 3×3 网格 |
+| Phone 新消息点 | 28px 红圆 `#FF544A` + 5px 奶油描边 `#F8F4E8` | badge |
+| Footer sea | `height: 80px`，SVG `contain` | 海浪底部 |
+| Footer tree | `height: 60px`，webp `cover bottom` | 森林底部 |
+| Divider | `height: 12px`，5 种背景图 | 装饰分割线 |
+| Cursor | `cursor: url(...) 4 0, auto !important` | 游戏手指光标 |
+| Typewriter 默认速度 | `90ms/字` | 按字符打印，无包裹元素 |
 | Google Fonts URL | `fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Zen+Maru+Gothic:wght@400;500;700&family=M+PLUS+Rounded+1c:wght@400;500;700&display=swap` | 在线加载 |

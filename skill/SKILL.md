@@ -18,8 +18,29 @@ animal-island-ui 是一套受《治愈系海岛风格》启发的 React + TypeSc
 
 - 源码：`src/components/<ComponentName>/`
 - Demo 站：`demo/`
-- 构建：Vite (library mode) + `vite.config.ts`
+- 构建：Vite (library mode) + `vite.config.ts`（库）/ `vite.config.demo.ts`（Demo）
 - 样式系统：Less Modules + `src/styles/variables.less` 设计 token
+
+### 全量组件清单（12 个）
+
+从 `src/index.ts` 导出：
+
+| 组件 | 职责 | 交互 | 装饰 / 纯展示 |
+|---|---|---|---|
+| `Button` | 按钮，5 种类型 × 3 种尺寸 | ✓ | |
+| `Input` | 输入框，3 种尺寸 + clear/prefix/suffix | ✓ | |
+| `Switch` | 开关，默认/小号 | ✓ | |
+| `Modal` | SVG blob 裁切弹窗 | ✓ | |
+| `Card` | 容器，`default`/`title`，13 种 IslandPhone 配色 | | ✓ |
+| `Collapse` | 手风琴（CSS Grid，无 JS 过渡） | ✓ | |
+| `Time` | HUD 实时时钟 | | ✓ |
+| `Phone` | IslandPhone 3×3 应用网格 | | ✓ |
+| `Footer` | 底部装饰图（`sea`/`tree`） | | ✓ |
+| `Divider` | 装饰分割线，5 种风格 | | ✓ |
+| `Cursor` | 游戏手指光标包裹器 | | ✓ |
+| `Typewriter` | 打字机效果，保留 ReactNode 结构 | | ✓ |
+
+类型导出：`ButtonProps/ButtonType/ButtonSize`、`InputProps/InputSize`、`SwitchProps/SwitchSize`、`ModalProps`、`CardProps/CardType/CardColor`、`FooterProps/FooterType`、`CollapseProps`、`CursorProps`、`TimeProps`、`PhoneProps`、`DividerProps`、`TypewriterProps`。
 
 ---
 
@@ -567,7 +588,7 @@ border-color: rgba(255, 204, 0, 1);
 ```css
 /* 容器 */
 display: flex; align-items: center;
-gap: 24px;
+gap: 20px;
 padding: 16px 36px;
 background: linear-gradient(180deg, #fff 0%, #f8f8f0 100%);
 border: 3px solid #d4cfc3;
@@ -606,6 +627,196 @@ padding: 12px 20px; gap: 12px;
 .acMonthday → font-size: 16px;
 .acTime / .acColon → font-size: 32px;
 ```
+
+---
+
+### Phone（IslandPhone）
+
+**外壳（固定尺寸，不响应式）：**
+```css
+.phone {
+  width: 527px; height: 788px;
+  background: #F8F4E8;           /* 奶油米 */
+  border-radius: 136px;           /* 超大圆角，近似胶囊 */
+  overflow: hidden;
+}
+.homeScreen {
+  height: 100%;
+  padding-top: 40px;
+  background: #F8F4E8;
+  background-size: 100% 200%;
+  animation: grasswave 8s ease-in-out infinite;
+  display: flex; flex-direction: column; align-items: center;
+}
+@keyframes grasswave {
+  0%, 100% { background-position: 0% 0%; }
+  50%      { background-position: 0% 100%; }
+}
+```
+
+**顶部时间栏：**
+```css
+.dateDisplay        { padding: 0 70px 31px 70px; text-align: center; }
+.dateDisplayHeader  { display:flex; justify-content:space-between; align-items:center;
+                      font-size: 32px; font-weight: 800; letter-spacing: 2px; color: #DDDBCC; }
+.blink              { font-size: 32px; font-weight: 800; color: #DDDBCC;
+                      animation: blink 1s steps(1) infinite; vertical-align: text-bottom; }
+@keyframes blink    { 0%,50% { opacity: 1; } 51%,100% { opacity: 0; } }
+.dayText            { font-size: 48px; font-weight: 800; color: #725C4E;
+                      letter-spacing: 2px; height: 56px; margin-top: 20px; }
+```
+
+**3×3 应用网格：**
+```css
+.appsGrid   { display: grid; grid-template-columns: repeat(3, 1fr);
+              gap: 32px; padding: 8px; flex: 1;
+              align-content: center; justify-content: center; }
+.appItem    { width: 123px; height: 123px;
+              border-radius: 45px;        /* 圆角正方形 */
+              position: relative;
+              display: flex; justify-content: center; align-items: center; }
+.appItem:hover .appIcon { animation: iconBounce 0.3s ease-in-out forwards; }
+.appIcon    { width: 100%; height: 100%;
+              background-repeat: no-repeat; background-position: center;
+              background-size: 70% auto; }
+.appItemOffset { overflow: hidden; }
+.appIconOffset { transform: translateY(10px); }
+
+@keyframes iconBounce {
+  0%   { transform: scale(1) rotate(0deg); }
+  50%  { transform: scale(1.2) rotate(-5deg); }
+  100% { transform: scale(1.1) rotate(-4deg); }
+}
+```
+
+**应用数据结构（`src/components/Phone/Phone.tsx`）：**
+
+| id | iconClass | 背景色 | offset | hasNewMessage |
+|---|---|---|---|---|
+| camera       | iconCamera       | `#B77DEE` |  | ✓ |
+| app          | iconApp          | `#889DF0` | ✓ |  |
+| encyclopedia | iconEncyclopedia | `#F7CD67` |  |  |
+| diy          | iconDiy          | `#E59266` |  |  |
+| shopping     | iconDesign       | `#F8A6B2` |  |  |
+| variant      | iconMap          | `#82D5BB` |  | ✓ |
+| design       | iconVariant      | `#8AC68A` |  |  |
+| map          | iconHelicopter   | `#FC736D` |  |  |
+| chat         | iconChat         | `#D1DA49` |  |  |
+
+每个 iconClass 都绑定一个 `background-image: url('./img/icon-*.svg')`，`iconApp` 特殊使用 `background-size: 100% auto`（其他是 `70% auto`）。可用图标资源：`icon-miles/camera/chat/encyclopedia/design/diy/helicopter/map/shopping/variant.svg`，以及状态图标 `wifi.svg` / `location.svg` / `page.svg`。
+
+**小红点（新消息）：**
+```css
+.badge {
+  position: absolute; top: 0; left: 0;
+  width: 28px; height: 28px; border-radius: 50%;
+  background: #FF544A;
+  border: 5px solid #F8F4E8;       /* 奶油米描边，形成游戏风徽章 */
+}
+```
+
+**底部状态图标：**
+```css
+.iconWifi     { width: 79px; height: 29px;  background: url('./img/wifi.svg') center/contain no-repeat; }
+.iconLocation { width: 36px; height: 36px;  background: url('./img/location.svg') center/contain no-repeat; }
+.iconPage     { width: 65px; height: 32px;  background: url('./img/page.svg') center/contain no-repeat; }
+.pageIndicator{ display: flex; justify-content: center; align-items: center;
+                margin-top: 74px; }
+```
+
+**行为：** 内部 `useEffect + setInterval(1000)` 更新时间，`12 小时制 + AM/PM + 零填充分钟`，冒号闪烁 1s 一个周期。组件无业务回调，纯展示。
+
+---
+
+### Footer
+
+```tsx
+<Footer type="sea" />   // 默认：海浪
+<Footer type="tree" />  // 森林树
+```
+
+```less
+.footer       { width: 100%; height: 80px;
+                background: url('./img/footer-sea.svg') center/contain no-repeat; }
+.tree         { background-image: url('./img/footer-tree.webp');
+                height: 60px;
+                background-size: cover;
+                background-position: bottom center; }
+```
+
+- `sea`：SVG 海浪插画，`viewBox="0 0 1440 186"`，多色（珊瑚 `#EC7175`、海蓝 `#327A93`、浅蓝 `#98D2E3`、深青 `#008077` 等）。
+- `tree`：webp 森林剪影，置于页面最底部。
+
+---
+
+### Divider
+
+```tsx
+<Divider type="line-brown" />  // 默认
+<Divider type="line-teal" />
+<Divider type="line-white" />
+<Divider type="line-yellow" />
+<Divider type="wave-yellow" />
+```
+
+```less
+.divider { width: 100%; height: 12px;
+           background: url('./img/divider-line-brown.svg') center/contain no-repeat; }
+.line-teal   { background-image: url('./img/divider-line-teal.svg'); }
+.line-white  { background-image: url('./img/divider-line-white.png'); }
+.line-yellow { background-image: url('./img/divider-line-yellow.svg'); }
+.wave-yellow { background-image: url('./img/wave-yellow.svg'); }
+```
+
+默认 SVG 色值参考：`#D8D0C3`（米褐），`viewBox="0 0 297 14"`。
+
+---
+
+### Cursor
+
+```tsx
+<Cursor>
+  <App />   {/* 此范围内所有元素变为游戏手指光标 */}
+</Cursor>
+```
+
+样式文件为 **普通 CSS**（非 module）：
+```css
+.animal-cursor,
+.animal-cursor * {
+  cursor: url('./cursor-icon.png') 4 0, auto !important;
+}
+```
+
+- `cursor-icon.png` 热点坐标 `(4, 0)`
+- 使用 `!important` 覆盖默认光标；`className` 直接挂在根 `<div>` 上，类名固定为 `animal-cursor`
+
+---
+
+### Typewriter
+
+```tsx
+<Typewriter speed={90} trigger={openCount} autoPlay onDone={() => ...}>
+  <p>第一行 <strong>加粗</strong></p>
+  <p>第二行</p>
+</Typewriter>
+```
+
+Props：
+
+| name | type | default | 说明 |
+|---|---|---|---|
+| `children` | `ReactNode` | — | 要逐字打出的内容，**保留原有元素结构 / 换行 / 样式** |
+| `speed` | `number (ms)` | `90` | 每字间隔 |
+| `trigger` | `unknown` | — | 值变化即重新播放（通常传递弹窗 open 次数或递增 key） |
+| `autoPlay` | `boolean` | `true` | `false` 直接全量显示 |
+| `onDone` | `() => void` | — | 播放完成回调 |
+
+**实现要点：**
+- `countText(node)`：递归统计 ReactNode 的纯文本长度
+- `renderTruncated(node, state)`：按剩余字符数递归裁剪，`React.cloneElement` 保留原节点与样式
+- `useEffect` 依赖 `[total, speed, trigger, autoPlay]`，内部 `setInterval` 按步递增 `count`
+- **无样式文件**，不包裹任何额外 DOM（返回 `<>...</>`），对布局零影响
 
 ---
 
@@ -965,7 +1176,27 @@ export default function MyComponentDemo() {
 }
 ```
 
-并在 `demo/ComponentPage.tsx` 中注册路由。
+并在 `demo/ComponentPage.tsx` 中注册路由，同时把 `title / desc` 写入 `demo/pageInfo.ts`：
+
+```ts
+// demo/pageInfo.ts — 供 App 静态导入的轻量元信息
+export const PAGE_INFO: Record<string, { title: string; desc: string }> = {
+  button:        { title: 'Button 按钮',       desc: '...' },
+  input:         { title: 'Input 输入框',      desc: '...' },
+  switch:        { title: 'Switch 开关',       desc: '...' },
+  card:          { title: 'Card 卡片',         desc: '...' },
+  collapse:      { title: 'Collapse 折叠面板', desc: '...' },
+  cursor:        { title: 'Cursor 光标',       desc: '...' },
+  time:          { title: 'Time 时间',         desc: '...' },
+  phone:         { title: 'Phone 手机',        desc: '...' },
+  footer:        { title: 'Footer 底部装饰',   desc: '...' },
+  modal:         { title: 'Modal 弹窗',        desc: '...' },
+  typewriter:    { title: 'Typewriter 打字机', desc: '...' },
+  'divider-comp':{ title: 'Divider 分割线',    desc: '...' },
+}
+```
+
+新增组件务必追加对应条目，否则 Demo 侧栏不会展示。
 
 ---
 
@@ -985,3 +1216,4 @@ export default function MyComponentDemo() {
 - [ ] 组件从 `src/index.ts` 导出
 - [ ] Demo 页创建于 `demo/components/`
 - [ ] Demo 在 `demo/ComponentPage.tsx` 中注册
+- [ ] `demo/pageInfo.ts` 追加 `{ title, desc }` 元信息

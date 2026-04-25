@@ -48,4 +48,8 @@ export const PAGE_INFO: Record<string, { title: string; desc: string }> = {
         title: 'Divider 分割线',
         desc: '分割线组件 — 装饰性分割线',
     },
+    icon: {
+        title: 'Icon 图标',
+        desc: '图标组件 — 治愈海岛风格图标集，包含 10 个可爱图标，支持自定义尺寸',
+    },
 };

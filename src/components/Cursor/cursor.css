@@ -1,4 +1,4 @@
 .animal-cursor,
 .animal-cursor * {
-    cursor: url('./cursor-icon.png') 4 0, auto !important;
+    cursor: url('../../assets/img/cursor/cursor-icon.png') 4 0, auto !important;
 }

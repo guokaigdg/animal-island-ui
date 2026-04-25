@@ -21,10 +21,8 @@ declare module '*.jpg' {
 }
 
 declare module '*.svg' {
-    const content: string;
-    const ReactComponent: React.FC<React.SVGProps<SVGSVGElement>>;
-    export { ReactComponent };
-    export default content;
+    const src: string;
+    export default src;
 }
 
 declare module '*.svg?url' {
@@ -35,9 +33,4 @@ declare module '*.svg?url' {
 declare module '*.svg?raw' {
     const content: string;
     export default content;
-}
-
-declare module '*.svg?react' {
-    const Component: React.FC<React.SVGProps<SVGSVGElement>>;
-    export default Component;
 }

@@ -79,9 +79,8 @@ export const sectionStyle: React.CSSProperties = {
 };
 
 export const sectionTitleStyle: React.CSSProperties = {
-    fontSize: 15,
+    fontSize: 18,
     fontWeight: 600,
-    marginBottom: 16,
     color: '#725d42',
     display: 'flex',
     alignItems: 'center',
@@ -97,10 +96,23 @@ export const tagStyle: React.CSSProperties = {
     fontWeight: 500,
 };
 
+export const labelStyle: React.CSSProperties = {
+    fontSize: 14,
+    color: '#a0936e',
+    marginTop: 20,
+    marginBottom: 20,
+    fontWeight: 500,
+};
+
+export const textStyle: React.CSSProperties = {
+    fontSize: 13,
+    color: '#8a7b66',
+    margin: 0,
+};
+
 export const demoBodyStyle: React.CSSProperties = {
     display: 'flex',
     flexDirection: 'column',
-    gap: 24,
     alignItems: 'flex-start',
 };
 

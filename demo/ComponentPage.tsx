@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { Button, Input, Switch, Modal, Card, Collapse, Divider, Typewriter } from '../src';
+import { labelStyle } from './tools';
 import TimeDemo from './components/Time';
 import PhoneDemo from './components/Phone';
 import FooterDemo from './components/Footer';
+import IconDemo from './components/Icon/IconDemo';
 
 // ============================================
 // Styles
@@ -27,9 +29,8 @@ const S = {
         border: '1px solid #e8e2d6',
     } as React.CSSProperties,
     sectionTitle: {
-        fontSize: 17,
+        fontSize: 18,
         fontWeight: 600,
-        marginBottom: 16,
         color: '#725d42',
         display: 'flex',
         alignItems: 'center',
@@ -53,12 +54,6 @@ const S = {
         display: 'flex',
         flexDirection: 'column',
         gap: 12,
-    } as React.CSSProperties,
-    label: {
-        fontSize: 12,
-        color: '#a0936e',
-        marginBottom: 4,
-        fontWeight: 500,
     } as React.CSSProperties,
     demoBox: {
         padding: 16,
@@ -93,11 +88,10 @@ const S = {
         borderRadius: '10px 10px 0 0',
         display: 'inline-block',
     } as React.CSSProperties,
-    // 统一 Demo 分组容器：纵向排列 + 统一间距（修改此处即可全局生效）
+    // 统一 Demo 分组容器：纵向排列（间距由 labelStyle 的 marginTop/marginBottom 控制）
     demoBody: {
         display: 'flex',
         flexDirection: 'column',
-        gap: 24,
     } as React.CSSProperties,
 };
 
@@ -573,7 +567,7 @@ const ButtonDemo: React.FC = () => (
             Button <span style={S.tag}>6 types</span>
         </div>
         <div style={S.demoBody}>
-            <div style={S.label}>type 按钮类型</div>
+            <div style={labelStyle}>type 按钮类型</div>
             <div style={S.row}>
                 <Button type="primary">Primary</Button>
                 <Button>Default</Button>
@@ -581,7 +575,7 @@ const ButtonDemo: React.FC = () => (
                 <Button type="text">Text</Button>
                 <Button type="link">Link</Button>
             </div>
-            <div style={S.label}>danger / ghost / loading / disabled 状态</div>
+            <div style={labelStyle}>danger / ghost / loading / disabled 状态</div>
             <div style={S.row}>
                 <Button type="primary" danger>
                     Danger
@@ -596,7 +590,7 @@ const ButtonDemo: React.FC = () => (
                     Disabled
                 </Button>
             </div>
-            <div style={S.label}>size 尺寸</div>
+            <div style={labelStyle}>size 尺寸</div>
             <div style={S.row}>
                 <Button type="primary" size="small">
                     Small
@@ -608,7 +602,7 @@ const ButtonDemo: React.FC = () => (
                     Large
                 </Button>
             </div>
-            <div style={S.label}>icon 图标按钮</div>
+            <div style={labelStyle}>icon 图标按钮</div>
             <div style={S.row}>
                 <Button type="primary" icon={<span>🔍</span>}>
                     搜索
@@ -618,13 +612,13 @@ const ButtonDemo: React.FC = () => (
                     新增
                 </Button>
             </div>
-            <div style={S.label}>block 块级按钮</div>
+            <div style={labelStyle}>block 块级按钮</div>
             <div style={{ maxWidth: 360 }}>
                 <Button type="primary" block>
                     Block Button
                 </Button>
             </div>
-            <div style={S.label}>danger 组合</div>
+            <div style={labelStyle}>danger 组合</div>
             <div style={S.row}>
                 <Button type="primary" danger>
                     Primary Danger
@@ -673,7 +667,7 @@ const InputDemo: React.FC = () => {
                 Input <span style={S.tag}>3 sizes</span>
             </div>
             <div style={S.demoBody}>
-                <div style={S.label}>基础用法</div>
+                <div style={labelStyle}>基础用法</div>
                 <div style={{ ...(S.col as any), maxWidth: 360, gap: 12 }}>
                     <Input placeholder="Basic input" />
                     <Input
@@ -689,18 +683,18 @@ const InputDemo: React.FC = () => {
                         suffix="⏎"
                     />
                 </div>
-                <div style={S.label}>size 尺寸</div>
+                <div style={labelStyle}>size 尺寸</div>
                 <div style={{ ...(S.col as any), maxWidth: 360, gap: 12 }}>
                     <Input placeholder="Small" size="small" />
                     <Input placeholder="Middle (default)" size="middle" />
                     <Input placeholder="Large" size="large" />
                 </div>
-                <div style={S.label}>status 校验状态</div>
+                <div style={labelStyle}>status 校验状态</div>
                 <div style={{ ...(S.col as any), maxWidth: 360, gap: 12 }}>
                     <Input placeholder="Error status" status="error" />
                     <Input placeholder="Warning status" status="warning" />
                 </div>
-                <div style={S.label}>disabled 禁用</div>
+                <div style={labelStyle}>disabled 禁用</div>
                 <div style={{ ...(S.col as any), maxWidth: 360, gap: 12 }}>
                     <Input placeholder="Disabled" disabled />
                 </div>
@@ -735,7 +729,7 @@ const SwitchDemo: React.FC = () => {
                 Switch <span style={S.tag}>2 sizes</span>
             </div>
             <div style={S.demoBody}>
-                <div style={S.label}>基础用法</div>
+                <div style={labelStyle}>基础用法</div>
                 <div style={{ display: 'flex', gap: 16, alignItems: 'center' }}>
                     <Switch
                         checked={switchChecked}
@@ -745,7 +739,7 @@ const SwitchDemo: React.FC = () => {
                         {switchChecked ? 'ON' : 'OFF'}
                     </span>
                 </div>
-                <div style={S.label}>
+                <div style={labelStyle}>
                     checkedChildren / unCheckedChildren 自定义文案
                 </div>
                 <div style={{ display: 'flex', gap: 16, alignItems: 'center' }}>
@@ -755,12 +749,12 @@ const SwitchDemo: React.FC = () => {
                         unCheckedChildren="关"
                     />
                 </div>
-                <div style={S.label}>size 尺寸</div>
+                <div style={labelStyle}>size 尺寸</div>
                 <div style={{ display: 'flex', gap: 16, alignItems: 'center' }}>
                     <Switch defaultChecked />
                     <Switch size="small" defaultChecked />
                 </div>
-                <div style={S.label}>disabled / loading 状态</div>
+                <div style={labelStyle}>disabled / loading 状态</div>
                 <div style={{ display: 'flex', gap: 16, alignItems: 'center' }}>
                     <Switch disabled />
                     <Switch loading defaultChecked />
@@ -793,26 +787,26 @@ const CardDemo: React.FC = () => (
 
         {/* ---- type ---- */}
         <div style={S.demoBody}>
-            <div style={S.label}>type="default"</div>
+            <div style={labelStyle}>type="default"</div>
             <div style={S.row}>
                 <Card>
-                    <p style={{ margin: 0, fontSize: 13 }}>基础卡片</p>
+                    <p>基础卡片</p>
                 </Card>
                 <Card style={{ maxWidth: 560, width: '100%' }}>
-                    <p style={{ margin: 0, fontSize: 13 }}>
+                    <p>
                         在a game company 3DS《Animal Island: New Leaf》和《Animal
                         Island: Happy Home Designer》中製作的「我的設計」QR
                         Code，以智慧型裝置讀取就能通過狸端機入口站下載至《集合啦！療癒系海島》。
                     </p>
                 </Card>
             </div>
-            <div style={S.label}>type="title"</div>
+            <div style={labelStyle}>type="title"</div>
             <div style={S.row}>
                 <Card type="title">
-                    <p style={{ margin: 0, fontSize: 13 }}>Title标题卡片</p>
+                    <p>Title标题卡片</p>
                 </Card>
                 <Card type="title" style={{ maxWidth: 360, width: '100%' }}>
-                    <p style={{ margin: 0, fontSize: 13 }}>
+                    <p>
                         欢迎来到无人岛！在a game company 3DS《Animal Island: New
                         Leaf》和《Animal Island: Happy Home
                         Designer》中製作的「我的設計」QR
@@ -824,7 +818,7 @@ const CardDemo: React.FC = () => (
 
         {/* ---- color variants ---- */}
         <div style={S.demoBody}>
-            <div style={S.label}>color — IslandPhone 颜色</div>
+            <div style={labelStyle}>color — IslandPhone 颜色</div>
             <div
                 style={{
                     display: 'grid',
@@ -872,7 +866,7 @@ const CardDemo: React.FC = () => (
 
         {/* ---- color + title ---- */}
         <div style={S.demoBody}>
-            <div style={S.label}>color + type="title"</div>
+            <div style={labelStyle}>color + type="title"</div>
             <div style={S.row}>
                 <Card type="title" color="app-blue" style={{ width: 240 }}>
                     <div
@@ -958,7 +952,7 @@ const CollapseDemo: React.FC = () => (
             Collapse <span style={S.tag}>FAQ</span>
         </div>
         <div style={S.demoBody}>
-            <div style={S.label}>基础用法</div>
+            <div style={labelStyle}>基础用法</div>
             <div style={{ maxWidth: 720 }}>
                 <Collapse
                     question="1個島嶼可以登錄多少名用戶?"
@@ -973,7 +967,7 @@ const CollapseDemo: React.FC = () => (
                     }
                 />
             </div>
-            <div style={S.label}>defaultExpanded 默认展开</div>
+            <div style={labelStyle}>defaultExpanded 默认展开</div>
             <div style={{ maxWidth: 720 }}>
                 <Collapse
                     question="这个问题默认展开"
@@ -981,7 +975,7 @@ const CollapseDemo: React.FC = () => (
                     defaultExpanded
                 />
             </div>
-            <div style={S.label}>disabled 禁用状态</div>
+            <div style={labelStyle}>disabled 禁用状态</div>
             <div style={{ maxWidth: 720 }}>
                 <Collapse
                     question="这个问题已被禁用（无法展开）"
@@ -1009,7 +1003,7 @@ const CursorDemo: React.FC = () => (
         <div style={S.sectionTitle}>
             Cursor <span style={S.tag}>光标</span>
         </div>
-        <p style={{ fontSize: 13, color: '#8a7b66' }}>
+        <p style={labelStyle}>
             Cursor 组件通过 CSS cursor
             属性将子元素的鼠标光标替换为自定义手指图标，当前 Demo 全局已应用。
         </p>
@@ -1035,7 +1029,7 @@ const ModalDemo: React.FC = () => {
                 Modal <span style={S.tag}>弹窗</span>
             </div>
             <div style={S.demoBody}>
-                <div style={S.label}>基础弹窗</div>
+                <div style={labelStyle}>基础弹窗</div>
                 <div style={S.row}>
                     <Button type="primary" onClick={() => setModalOpen(true)}>
                         基础 Modal
@@ -1066,7 +1060,7 @@ const ModalDemo: React.FC = () => {
                 onClose={() => setTitleModalOpen(false)}
                 onOk={() => setTitleModalOpen(false)}
             >
-                <p style={{ margin: 0 }}>
+                <p>
                     是否将这条鱼捐赠给博物馆？傅达会非常高兴的！
                 </p>
             </Modal>
@@ -1089,7 +1083,7 @@ const ModalDemo: React.FC = () => {
                     </>
                 }
             >
-                <p style={{ margin: 0 }}>
+                <p>
                     确定要让这位居民搬走吗？这个操作不可撤销。
                 </p>
             </Modal>
@@ -1136,7 +1130,7 @@ const TypewriterDemo: React.FC = () => {
             </div>
             <div style={S.demoBody}>
                 <div>
-                    <div style={S.label}>基础用法</div>
+                    <div style={labelStyle}>基础用法</div>
                     <div style={S.demoBox}>
                         <Typewriter trigger={replayKey}>
                             你好，欢迎来到动物岛！今天的天气真不错呢～
@@ -1145,7 +1139,7 @@ const TypewriterDemo: React.FC = () => {
                 </div>
 
                 <div>
-                    <div style={S.label}>保留多行与富内容 (速度 40ms)</div>
+                    <div style={labelStyle}>保留多行与富内容 (速度 40ms)</div>
                     <div style={S.demoBox}>
                         <Typewriter speed={40} trigger={replayKey}>
                             <div>第一行：钓到石头了！</div>
@@ -1231,17 +1225,17 @@ const DividerDemo: React.FC = () => (
         <div style={S.sectionTitle}>
             Divider <span style={S.tag}>5 types</span>
         </div>
-        <p>line-brown</p>
+        <div style={labelStyle}>line-brown</div>
         <Divider type="line-brown" />
-        <p>line-teal</p>
+        <div style={labelStyle}>line-teal</div>
         <Divider type="line-teal" />
-        <p>line-white</p>
+        <div style={labelStyle}>line-white</div>
         <div style={{ background: '#333', padding: 10 }}>
             <Divider type="line-white" />
         </div>
-        <p>line-yellow</p>
+        <div style={labelStyle}>line-yellow</div>
         <Divider type="line-yellow" />
-        <p>wave-yellow</p>
+        <div style={labelStyle}>wave-yellow</div>
         <Divider type="wave-yellow" />
         <CodeBlock
             code={`import { Divider } from 'animal-island-ui';
@@ -1311,6 +1305,10 @@ export const PAGE_INFO: Record<string, { title: string; desc: string }> = {
         title: 'Divider 分割线',
         desc: '分割线组件 — 装饰性分割线',
     },
+    icon: {
+        title: 'Icon 图标',
+        desc: '图标组件 — 治愈海岛风格图标集，包含 10 个可爱图标，支持自定义尺寸',
+    },
 };
 
 const PAGES: Record<string, React.FC> = {
@@ -1326,6 +1324,7 @@ const PAGES: Record<string, React.FC> = {
     modal: ModalDemo,
     typewriter: TypewriterDemo,
     'divider-comp': DividerDemo,
+    icon: IconDemo,
 };
 
 // ============================================
