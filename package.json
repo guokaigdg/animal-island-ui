@@ -45,9 +45,10 @@
         "react-dom": ">=17.0.0"
     },
     "dependencies": {
-        "@fontsource/nunito": "^5.2.7",
         "@fontsource/noto-sans-sc": "^5.2.9",
-        "@fontsource/zen-maru-gothic": "^5.2.8"
+        "@fontsource/nunito": "^5.2.7",
+        "@fontsource/zen-maru-gothic": "^5.2.8",
+        "vite-plugin-svgr": "^5.2.0"
     },
     "devDependencies": {
         "@laynezh/vite-plugin-lib-assets": "^2.1.3",
