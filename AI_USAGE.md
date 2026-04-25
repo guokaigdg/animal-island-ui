@@ -13,7 +13,7 @@ npm install animal-island-ui
 ```ts
 // app entry (main.tsx / _app.tsx / App.tsx)
 import 'animal-island-ui/style';          // MUST import BEFORE any component usage
-// Fonts (Nunito / Zen Maru Gothic / M PLUS Rounded 1c) are auto-bundled via @fontsource.
+// Fonts (Nunito / Noto Sans SC / Zen Maru Gothic) are auto-bundled via @fontsource.
 ```
 
 ```ts

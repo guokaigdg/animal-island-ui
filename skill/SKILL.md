@@ -132,19 +132,19 @@ animal-island-ui 是一套受《治愈系海岛风格》启发的 React + TypeSc
 或在 CSS / Less 入口文件顶部：
 
 ```css
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Zen+Maru+Gothic:wght@400;500;700&family=M+PLUS+Rounded+1c:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;700&family=Zen+Maru+Gothic:wght@400;500;700&display=swap');
 ```
 
 ```css
-font-family: Nunito, 'Zen Maru Gothic', 'M PLUS Rounded 1c',
+font-family: Nunito, 'Noto Sans SC', 'Zen Maru Gothic',
   -apple-system, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
 ```
 
 | 字体 | 用途 | Google Fonts key |
 |---|---|---|
-| **Nunito** | 主字体，所有 UI 文字 | `family=Nunito` |
-| **Zen Maru Gothic** | 日文/中文圆体备选 | `family=Zen+Maru+Gothic` |
-| **M PLUS Rounded 1c** | 中文圆体兜底 | `family=M+PLUS+Rounded+1c` |
+| **Nunito** | 主字体，拉丁字符 | `family=Nunito` |
+| **Noto Sans SC** | 中文字体，简体覆盖 | `family=Noto+Sans+SC` |
+| **Zen Maru Gothic** | 日文字体 | `family=Zen+Maru+Gothic` |
 
 字重分级：
 - 正文内容：**500**
@@ -984,7 +984,7 @@ color: #e8d5bc; line-height: 1.8;
 ```css
 :root {
   /* 字体 */
-  --animal-font: Nunito, 'Zen Maru Gothic', 'M PLUS Rounded 1c',
+  --animal-font: Nunito, 'Noto Sans SC', 'Zen Maru Gothic',
     -apple-system, 'PingFang SC', 'Hiragino Sans GB', sans-serif;
 
   /* 主色 */
@@ -1202,7 +1202,7 @@ export const PAGE_INFO: Record<string, { title: string; desc: string }> = {
 
 ## 9. 新增组件 Checklist
 
-- [ ] Google Fonts 已在 `index.html` 或样式入口引入（Nunito + Zen Maru Gothic + M PLUS Rounded 1c）
+- [ ] Google Fonts 已在 `index.html` 或样式入口引入（Nunito + Noto Sans SC + Zen Maru Gothic）
 - [ ] Props interface 从组件文件导出
 - [ ] 所有 props 有 JSDoc 注释（中文 OK）
 - [ ] 有状态组件同时支持受控（`value`）和非受控（`defaultValue`）模式

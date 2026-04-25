@@ -7,9 +7,9 @@ Design a UI in the style of "animal-island-ui" — an a cozy island-style UI-ins
 Reproduce every detail below as precisely as possible.
 
 === FONTS (REQUIRED — load from Google Fonts if not installed) ===
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Zen+Maru+Gothic:wght@400;500;700&family=M+PLUS+Rounded+1c:wght@400;500;700&display=swap')
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;700&family=Zen+Maru+Gothic:wght@400;500;700&display=swap');
 
-font-family: Nunito, 'Zen Maru Gothic', 'M PLUS Rounded 1c', -apple-system, 'PingFang SC', sans-serif;
+font-family: Nunito, 'Noto Sans SC', 'Zen Maru Gothic', -apple-system, 'PingFang SC', sans-serif;
 
 Font weights:
 - Body text:           500
@@ -286,7 +286,7 @@ Interface details:
 | 按钮高度（中） | `45px` | middle size |
 | pill 圆角 | `50px` | 按钮、输入框 |
 | 有机圆角 | `40px 35px 45px 38px / 38px 45px 35px 40px` | title Card |
-| 字体 | `Nunito, 'Zen Maru Gothic', 'M PLUS Rounded 1c'` | Google Fonts 加载 |
+| 字体 | `Nunito, 'Noto Sans SC', 'Zen Maru Gothic'` | Google Fonts 加载 |
 | 按钮字重 | `600` | 按钮文字 |
 | 时间数字字重 | `900` | Time 组件 |
 | 过渡 | `0.25s cubic-bezier(0.4,0,0.2,1)` | 通用动画 |
@@ -300,4 +300,4 @@ Interface details:
 | Divider | `height: 12px`，5 种背景图 | 装饰分割线 |
 | Cursor | `cursor: url(...) 4 0, auto !important` | 游戏手指光标 |
 | Typewriter 默认速度 | `90ms/字` | 按字符打印，无包裹元素 |
-| Google Fonts URL | `fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Zen+Maru+Gothic:wght@400;500;700&family=M+PLUS+Rounded+1c:wght@400;500;700&display=swap` | 在线加载 |
+| Google Fonts URL | `fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Zen+Maru+Gothic:wght@400;500;700&display=swap` | 在线加载 |

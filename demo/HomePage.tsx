@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Card, Divider, Button, Switch, Collapse, Typewriter, Icon } from '../src';
+import { Card, Divider, Button, Switch, Collapse, Typewriter } from '../src';
 import { useIsMobile } from './tools';
 
 // ============================================
@@ -362,7 +362,7 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
     <div style={S.page}>
         {/* Hero */}
         <div style={{ ...S.hero, padding: isMobile ? '48px 20px 32px' : '60px 40px 40px', minHeight: isMobile ? '70vh' : '75vh' }}>
-            <img
+            {/* <img
                 src={
                     new URL('./img/animal_icon.webp', import.meta.url).href
                 }
@@ -370,7 +370,7 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                 alt="logo"
                 decoding="async"
                 fetchPriority="high"
-            />
+            /> */}
             <h1 style={{ ...S.heroTitle, fontSize: isMobile ? 28 : 55 }}>
                 Animal Island UI
                 <span style={S.heroVersion}>v1.0.0</span>
@@ -454,29 +454,8 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                 通过覆盖 CSS 自定义属性实现运行时换肤，无需重新构建
             </div>
             <CodeBlock
-                code={`/* 覆盖主题变量 */\n:root {\n    --animal-primary-color: #19c8b9;\n    --animal-text-color: #827157;\n    --animal-font-family: 'M PLUS Rounded 1c', sans-serif;\n    --animal-border-radius-base: 18px;\n    /* ... 40+ 设计令牌 */\n}`}
+                code={`/* 覆盖主题变量 */\n:root {\n    --animal-primary-color: #19c8b9;\n    --animal-text-color: #827157;\n    --animal-font-family: 'Noto Sans SC', sans-serif;\n    --animal-border-radius-base: 18px;\n    /* ... 40+ 设计令牌 */\n}`}
             />
-        </div>
-
-        {/* Icon */}
-        <div style={{ ...S.section, padding: isMobile ? '32px 16px' : '48px 40px' }}>
-            <div style={S.sectionTitle}>图标组件</div>
-            <div style={S.sectionDesc}>可爱的治愈海岛风格图标集</div>
-            <div style={{ display: 'flex', gap: 20, marginTop: 24, justifyContent: 'center', flexWrap: 'wrap' }}>
-                <Icon name="icon-miles" size={64} />
-                <Icon name="icon-camera" size={64} />
-                <Icon name="icon-chat" size={64} /> 
-                <Icon name="icon-design" size={64} />
-                <Icon name="icon-map" size={64} />
-            </div>
-            <div style={{ marginTop: 24 }}>
-                <CodeBlock
-                    code={`import { Icon } from 'animal-island-ui';
-
-<Icon name="icon-miles" size={64} />
-<Icon name="icon-camera" size={48} />`}
-                />
-            </div>
         </div>
 
         {/* Footer */}
