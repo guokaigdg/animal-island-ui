@@ -67,6 +67,7 @@ const IconDemo: React.FC = () => (
             border: '1px solid #e8e2d6',
             borderRadius: 12,
             overflow: 'hidden',
+            padding: '5px 16px',
         }}>
             {ICON_LIST.map((icon, index) => (
                 <div
@@ -75,8 +76,8 @@ const IconDemo: React.FC = () => (
                         display: 'flex',
                         alignItems: 'center',
                         gap: 20,
-                        padding: '12px 16px',
-                        borderBottom: index < ICON_LIST.length - 1 ? '1px solid #f0e8d8' : 'none',
+                        padding: '12px 5px',
+                        borderBottom: index < ICON_LIST.length - 1 ? '1px dashed #f0e8d8' : 'none',
                         background: '#fff',
                     }}
                 >

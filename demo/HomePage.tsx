@@ -141,9 +141,27 @@ const S = {
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        minHeight: '80vh',
+        minHeight: '100vh',
         padding: '60px 40px 40px',
-        textAlign: 'center' as const,
+    } as React.CSSProperties,
+    heroContent: {
+        display: 'grid',
+        gridTemplateColumns: '1fr 1fr',
+        gap: 64,
+        alignItems: 'center',
+        maxWidth: 880,
+        width: '100%',
+    } as React.CSSProperties,
+    heroContentMobile: {
+        display: 'grid',
+        gridTemplateColumns: '1fr',
+        gap: 32,
+        alignItems: 'center',
+        maxWidth: 880,
+        width: '100%',
+    } as React.CSSProperties,
+    heroText: {
+        textAlign: 'left' as const,
     } as React.CSSProperties,
     heroLogo: {
         fontSize: 72,
@@ -157,6 +175,7 @@ const S = {
         fontFamily: "Nunito, 'Zen Maru Gothic', -apple-system, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif",
         fontSize: 55,
         fontWeight: 800,
+        lineHeight: 1.1,
         color: '#FFF9E6',
         textShadow: '0px 4px 1px rgba(0, 0, 0, 0.4)',
         margin: '0 0 12px',
@@ -361,34 +380,54 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
     return (
     <div style={S.page}>
         {/* Hero */}
-        <div style={{ ...S.hero, padding: isMobile ? '48px 20px 32px' : '60px 40px 40px', minHeight: isMobile ? '70vh' : '75vh' }}>
-            {/* <img
-                src={
-                    new URL('./img/animal_icon.webp', import.meta.url).href
-                }
-                style={{ width: isMobile ? 100 : 170, height: isMobile ? 58 : 100, marginBottom: 50 }}
-                alt="logo"
-                decoding="async"
-                fetchPriority="high"
-            /> */}
-            <h1 style={{ ...S.heroTitle, fontSize: isMobile ? 28 : 55 }}>
-                Animal Island UI
-                <span style={S.heroVersion}>v1.0.0</span>
-            </h1>
-            <Typewriter speed={90}>
-                <p style={{ ...S.heroSubtitle, fontSize: isMobile ? 14 : 17 }}>
-                    Animal风格的 React 组件库，基于 TypeScript + Vite 构建
-                    <br />让 Web 应用充满温暖质感
-                </p>
-            </Typewriter>
-            <div style={S.heroActions}>
-                <Button
-                    type="primary"
-                    size="large"
-                    onClick={() => onNavigate?.('/button')}
-                >
-                    开始使用 →
-                </Button>
+        <div style={{ ...S.hero }}>
+            <div style={isMobile ? S.heroContentMobile : S.heroContent}>
+                {isMobile && (
+                    <div style={{ textAlign: 'center' }}>
+                        <img
+                            src={
+                                new URL('./img/animal_icon.webp', import.meta.url).href
+                            }
+                            style={{ width: 120, height: 70 }}
+                            alt="logo"
+                            decoding="async"
+                            fetchPriority="high"
+                        />
+                    </div>
+                )}
+                <div style={isMobile ? { textAlign: 'center' as const } : S.heroText}>
+                    <h1 style={{ ...S.heroTitle, fontSize: isMobile ? 35 : 55 }}>
+                        {isMobile ? 'Animal Island UI' : <>Animal <br /> Island UI</>}
+                        <span style={S.heroVersion}>v1.0.0</span>
+                    </h1>
+                    <Typewriter speed={60}>
+                        <p style={{ ...S.heroSubtitle, fontSize: isMobile ? 14 : 17 }}>
+                            Animal风格的 React 组件库，基于 TypeScript + Vite 构建，让 Web 应用充满温暖质感
+                        </p>
+                    </Typewriter>
+                    <div style={{ ...S.heroActions, justifyContent: isMobile ? 'center' : 'flex-start' }}>
+                        <Button
+                            type="primary"
+                            size="large"
+                            onClick={() => onNavigate?.('/button')}
+                        >
+                            开始使用 →
+                        </Button>
+                    </div>
+                </div>
+                {!isMobile && (
+                    <div style={{ textAlign: 'center' }}>
+                        <img
+                            src={
+                                new URL('./img/animal_icon.webp', import.meta.url).href
+                            }
+                            style={{ width: 240, height: 140 }}
+                            alt="logo"
+                            decoding="async"
+                            fetchPriority="high"
+                        />
+                    </div>
+                )}
             </div>
         </div>
 
@@ -441,7 +480,7 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
             <div style={S.sectionTitle}>快速上手</div>
             <div style={S.sectionDesc}>引入组件即可使用，样式自动加载</div>
             <CodeBlock
-                code={`// 1. 引入组件\nimport { Button, Modal, Switch } from 'animal-island-ui';\n\nfunction App() {\n    return <Button type="primary">开始</Button>;\n}`}
+                code={`// 1. 引入组件\nimport { Button, Modal, Switch } from 'animal-island-ui';\nimport 'animal-island-ui/style';\n\nfunction App() {\n    return <Button>开始</Button>;\n}`}
             />
         </div>
 

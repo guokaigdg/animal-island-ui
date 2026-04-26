@@ -52,4 +52,8 @@ export const PAGE_INFO: Record<string, { title: string; desc: string }> = {
         title: 'Icon 图标',
         desc: '图标组件 — 治愈海岛风格图标集，包含 10 个可爱图标，支持自定义尺寸',
     },
+    select: {
+        title: 'Select 选择器',
+        desc: '下拉选择器组件 — 支持自定义选项列表，高亮当前选中项',
+    },
 };

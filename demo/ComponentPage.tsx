@@ -61,6 +61,7 @@ const S = {
         borderRadius: 8,
         border: '1px dashed #e0d8c8',
         fontWeight: 500,
+        marginBottom: 20,
     } as React.CSSProperties,
     codeBlock: {
         marginTop: 16,
@@ -1177,7 +1178,7 @@ const App = () => {
                 <div style={{ color: 'orange' }}>第二行</div>
             </Typewriter>
 
-            <button onClick={() => setKey(k => k + 1)}>重新播放</button>
+            <button onClick={() => setKey(k => k + 1)} style={{ marginBottom: 20 }}>重新播放</button>
         </>
     );
 };`}
@@ -1254,6 +1255,79 @@ const App = () => (
 );
 
 // ============================================
+// SelectDemo
+// ============================================
+import { Select } from '../src';
+import type { SelectOption } from '../src';
+
+const SELECT_API = [
+    { prop: 'options', desc: '选项列表', type: 'SelectOption[]', defaultVal: '-', required: true },
+    { prop: 'value', desc: '当前选中值', type: 'string', defaultVal: '-', required: true },
+    { prop: 'onChange', desc: '选中变化回调', type: '(key: string) => void', defaultVal: '-', required: true },
+    { prop: 'placeholder', desc: '占位文本', type: 'string', defaultVal: '请选择' },
+    { prop: 'disabled', desc: '禁用状态', type: 'boolean', defaultVal: 'false' },
+];
+
+const SelectDemo: React.FC = () => {
+    const [value1, setValue1] = useState('fish1');
+    const [value2, setValue2] = useState('');
+    const [value3, setValue3] = useState('fish2');
+    const options: SelectOption[] = [
+        { key: 'fish1', label: '鲈鱼' },
+        { key: 'fish2', label: '鲷鱼' },
+        { key: 'fish3', label: '河童' },
+        { key: 'fish4', label: '龙睛鱼' },
+        { key: 'fish5', label: '神仙鱼' },
+    ];
+
+    return (
+        <div style={S.section}>
+            <div style={S.sectionTitle}>
+                Select <span style={S.tag}>基础用法</span>
+            </div>
+            <div style={labelStyle}>默认状态</div>
+            <div style={S.demoBox}>
+                <Select options={options} value={value1} onChange={setValue1} />
+            </div>
+            <div style={{ marginTop: 16, fontSize: 13, color: '#a08060' }}>
+                当前选中: <span style={{ color: '#19c8b9', fontWeight: 600 }}>{options.find(o => o.key === value1)?.label}</span>
+            </div>
+            <div style={labelStyle}>自定义占位文本</div>
+            <div style={S.demoBox}>
+                <Select
+                    options={options}
+                    value={value2}
+                    onChange={setValue2}
+                    placeholder="请选择鱼类"
+                />
+            </div>
+            <div style={labelStyle}>禁用状态</div>
+            <div style={S.demoBox}>
+                <Select
+                    options={options}
+                    value={value3}
+                    onChange={setValue3}
+                    disabled
+                />
+            </div>
+            <CodeBlock
+                code={`import { Select } from 'animal-island-ui';
+
+const options = [
+    { key: 'option1', label: '选项一' },
+    { key: 'option2', label: '选项二' },
+];
+
+const App = () => {
+    const [value, setValue] = useState('option1');
+    return <Select options={options} value={value} onChange={setValue} />;
+};`} />
+            <ApiTable rows={SELECT_API} />
+        </div>
+    );
+};
+
+// ============================================
 // Page info & mapping
 // ============================================
 export const PAGE_INFO: Record<string, { title: string; desc: string }> = {
@@ -1309,6 +1383,10 @@ export const PAGE_INFO: Record<string, { title: string; desc: string }> = {
         title: 'Icon 图标',
         desc: '图标组件 — 治愈海岛风格图标集，包含 10 个可爱图标，支持自定义尺寸',
     },
+    select: {
+        title: 'Select 选择器',
+        desc: '下拉选择器组件 — 支持自定义选项列表，高亮当前选中项',
+    },
 };
 
 const PAGES: Record<string, React.FC> = {
@@ -1325,6 +1403,7 @@ const PAGES: Record<string, React.FC> = {
     typewriter: TypewriterDemo,
     'divider-comp': DividerDemo,
     icon: IconDemo,
+    select: SelectDemo,
 };
 
 // ============================================

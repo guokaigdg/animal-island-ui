@@ -1,6 +1,21 @@
 import React, { useState, useEffect, useCallback, Suspense, lazy } from 'react';
 import { Cursor } from '../src';
 import '../src/styles/index.less';
+import '@fontsource/nunito/latin-500.css';
+import '@fontsource/nunito/latin-700.css';
+import '@fontsource/nunito/latin-900.css';
+import '@fontsource/noto-sans-sc/latin-400.css';
+import '@fontsource/noto-sans-sc/latin-500.css';
+import '@fontsource/noto-sans-sc/latin-700.css';
+import '@fontsource/noto-sans-sc/chinese-simplified-400.css';
+import '@fontsource/noto-sans-sc/chinese-simplified-500.css';
+import '@fontsource/noto-sans-sc/chinese-simplified-700.css';
+import '@fontsource/zen-maru-gothic/latin-500.css';
+import '@fontsource/zen-maru-gothic/latin-700.css';
+import '@fontsource/zen-maru-gothic/latin-900.css';
+import '@fontsource/zen-maru-gothic/japanese-500.css';
+import '@fontsource/zen-maru-gothic/japanese-700.css';
+import '@fontsource/zen-maru-gothic/japanese-900.css';
 import HomePage from './HomePage';
 import { PAGE_INFO } from './pageInfo';
 import { useIsMobile } from './tools';
@@ -59,6 +74,7 @@ const MENU_ITEMS: MenuItem[] = [
             { key: 'typewriter', label: 'Typewriter 打字机' },
             { key: 'divider-comp', label: 'Divider 分割线' },
             { key: 'icon', label: 'Icon 图标' },
+            { key: 'select', label: 'Select 选择器' },
             { key: 'footer', label: 'Footer 页脚' },
         ],
     },
