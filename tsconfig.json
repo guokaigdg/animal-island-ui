@@ -11,11 +11,11 @@
         "forceConsistentCasingInFileNames": true,
         "resolveJsonModule": true,
         "isolatedModules": true,
-        "declaration": false,
         "baseUrl": ".",
         "paths": {
             "@/*": ["src/*"]
         }
     },
-    "include": ["src"]
+    "include": ["src", "demo"],
+    "exclude": ["node_modules", "dist", "demo-dist"]
 }
