@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './card.module.less';
 
-export type CardType = 'default' | 'title';
+export type CardType = 'default' | 'title' | 'dashed';
 
 export type CardColor =
     | 'default'
@@ -38,6 +38,7 @@ export const Card: React.FC<CardProps> = ({
     const cls = [
         styles.card,
         type === 'title' && styles['card-title'],
+        type === 'dashed' && styles['card-dashed'],
         color !== 'default' && styles[`card-${color}`],
         className,
     ]

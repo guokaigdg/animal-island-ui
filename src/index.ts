@@ -64,3 +64,6 @@ export type { TypewriterProps } from './components/Typewriter';
 
 export { Icon, ICON_LIST } from './components/Icon';
 export type { IconProps, IconName } from './components/Icon';
+
+export { Select } from './components/Select';
+export type { SelectProps, SelectOption } from './components/Select';

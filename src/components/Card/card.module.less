@@ -8,12 +8,11 @@
     padding: 16px 24px;
     color: #725d42;
     font-weight: 500;
-    box-shadow: 0 4px 10px rgba(107, 92, 67, 0.42);
     transition: all 0.3s ease;
     cursor: pointer;
 
     &:hover {
-        transform: translateY(-4px);
+        transform: translateY(-2px);
     }
 }
 
@@ -23,6 +22,19 @@
     border-radius: 40px 35px 45px 38px / 38px 45px 35px 40px;
     padding: 12px 32px;
     font-weight: 600;
+}
+
+// ---------- Type: dashed ----------
+.card-dashed {
+    background: transparent;
+    border: 2px dashed #e8dcc8;
+    box-shadow: none;
+    background: rgb(250, 248, 242);
+
+    &:hover {
+        transform: none;
+        border-color: #d4c4a8;
+    }
 }
 
 // ============================================

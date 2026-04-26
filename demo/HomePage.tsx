@@ -396,7 +396,7 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                     </div>
                 )}
                 <div style={isMobile ? { textAlign: 'center' as const } : S.heroText}>
-                    <h1 style={{ ...S.heroTitle, fontSize: isMobile ? 35 : 55 }}>
+                    <h1 style={{ ...S.heroTitle, fontSize: isMobile ? 37 : 60 }}>
                         {isMobile ? 'Animal Island UI' : <>Animal <br /> Island UI</>}
                         <span style={S.heroVersion}>v1.0.0</span>
                     </h1>

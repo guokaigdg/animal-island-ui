@@ -58,7 +58,7 @@ const S = {
     demoBox: {
         padding: 16,
         background: '#faf8f2',
-        borderRadius: 8,
+        borderRadius: 18,
         border: '1px dashed #e0d8c8',
         fontWeight: 500,
         marginBottom: 20,
@@ -473,7 +473,7 @@ const CARD_API: ApiRow[] = [
     {
         prop: 'type',
         desc: '卡片类型',
-        type: `'default' | 'title'`,
+        type: `'default' | 'title' | 'dashed'`,
         defaultVal: "'default'",
     },
     {
@@ -782,7 +782,7 @@ const App = () => {
 const CardDemo: React.FC = () => (
     <div style={S.section}>
         <div style={S.sectionTitle}>
-            Card <span style={S.tag}>2 types</span>{' '}
+            Card <span style={S.tag}>3 types</span>{' '}
             <span style={S.tag}>13 colors</span>
         </div>
 
@@ -812,6 +812,17 @@ const CardDemo: React.FC = () => (
                         Leaf》和《Animal Island: Happy Home
                         Designer》中製作的「我的設計」QR
                         Code，以智慧型裝置讀取就能通過狸端機入口站下載至《集合啦！療癒系海島》。
+                    </p>
+                </Card>
+            </div>
+            <div style={labelStyle}>type="dashed"</div>
+            <div style={S.row}>
+                <Card type="dashed">
+                    <p>虚线边框卡片</p>
+                </Card>
+                <Card type="dashed" style={{ maxWidth: 360, width: '100%' }}>
+                    <p>
+                        欢迎来到无人岛！虚线边框适合用于轻量提示或次要信息展示。
                     </p>
                 </Card>
             </div>

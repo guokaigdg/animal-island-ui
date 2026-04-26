@@ -1,7 +1,7 @@
 # 🏝 Animal-Island-UI
 
 <div align="center">
-    <img src="img/readme-home.png" alt="animal-island-ui" style="border-radius: 12px; width: 65%; display: block; margin: 0 auto;" />
+    <img src="img/readme-home.png" alt="animal-island-ui" style="border-radius: 12px; width: 40%; display: block; margin: 0 auto;" />
 </div>
 
 <p align="center">
