@@ -147,7 +147,7 @@ const S = {
     heroContent: {
         display: 'grid',
         gridTemplateColumns: '1fr 1fr',
-        gap: 64,
+        gap: 150,
         alignItems: 'center',
         maxWidth: 880,
         width: '100%',
@@ -327,8 +327,8 @@ const features = [
     },
     {
         icon: 'Property-Shopping.svg',
-        title: '13 个组件',
-        desc: 'Button / Input / Switch / Modal / Typewriter / Card / Collapse / Cursor / Divider / Time / Phone / Footer / Icon',
+        title: '14 个组件',
+        desc: 'Button / Input / Switch / Modal / Typewriter / Card / Collapse / Cursor / Divider / Icon / Select / Footer / Time / Phone',
     },
     {
         icon: 'Property-Camera.svg',
@@ -364,6 +364,9 @@ const components = [
     { key: 'collapse', name: 'Collapse', desc: 'FAQ 折叠面板、平滑展开动画' },
     { key: 'cursor', name: 'Cursor', desc: '自定义手指光标' },
     { key: 'divider-comp', name: 'Divider', desc: '装饰性水平分割线' },
+    { key: 'icon', name: 'Icon', desc: 'SVG 图标库' },
+    { key: 'select', name: 'Select', desc: '下拉选择器，支持搜索' },
+    { key: 'footer', name: 'Footer', desc: '页脚组件' },
     { key: 'time', name: 'Time', desc: '可爱风格时间显示' },
     { key: 'phone', name: 'Phone', desc: 'Phone 模拟器' },
 ];
@@ -386,9 +389,9 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                     <div style={{ textAlign: 'center' }}>
                         <img
                             src={
-                                new URL('./img/animal_icon.webp', import.meta.url).href
+                                new URL('./img/animal_icon.png', import.meta.url).href
                             }
-                            style={{ width: 120, height: 70 }}
+                            style={{ width: 180, height: 112 }}
                             alt="logo"
                             decoding="async"
                             fetchPriority="high"
@@ -419,9 +422,9 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                     <div style={{ textAlign: 'center' }}>
                         <img
                             src={
-                                new URL('./img/animal_icon.webp', import.meta.url).href
+                                new URL('./img/animal_icon.png', import.meta.url).href
                             }
-                            style={{ width: 240, height: 140 }}
+                            style={{ width: 320, height: 200 }}
                             alt="logo"
                             decoding="async"
                             fetchPriority="high"

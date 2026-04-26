@@ -106,6 +106,10 @@ const S = {
         flexDirection: 'column',
         overflow: 'hidden',
     } as React.CSSProperties,
+    homeBg: {
+        background: `url(${new URL('./img/home_bg.webp', import.meta.url).href}) 0 0 / auto repeat, #7DC395`,
+        animation: 'bgScroll 80s linear infinite',
+    } as React.CSSProperties,
     sidebarHeader: {
         padding: '20px 16px 12px',
         borderBottom: '1px solid #e8e2d6',
@@ -260,12 +264,18 @@ const App: React.FC = () => {
 
     return (
         <Cursor>
+            <style>{`
+                @keyframes bgScroll {
+                    0% { background-position: 100% 0%; }
+                    100% { background-position: 0% 100%; }
+                }
+            `}</style>
             {isHomePage ? (
                 /* Home page — full screen, no sidebar */
                 <div
                     style={{
                         ...S.layout,
-                        background: `url(${new URL('./img/home_bg.webp', import.meta.url).href}) center/cover no-repeat, #7DC395`,
+                        ...S.homeBg,
                         justifyContent: 'center',
                     }}
                 >
