@@ -1280,15 +1280,15 @@ const SELECT_API = [
 ];
 
 const SelectDemo: React.FC = () => {
-    const [value1, setValue1] = useState('fish1');
+    const [value1, setValue1] = useState('flower1');
     const [value2, setValue2] = useState('');
-    const [value3, setValue3] = useState('fish2');
+    const [value3, setValue3] = useState('flower2');
     const options: SelectOption[] = [
-        { key: 'fish1', label: '鲈鱼' },
-        { key: 'fish2', label: '鲷鱼' },
-        { key: 'fish3', label: '河童' },
-        { key: 'fish4', label: '龙睛鱼' },
-        { key: 'fish5', label: '神仙鱼' },
+        { key: 'flower1', label: '樱花' },
+        { key: 'flower2', label: '玫瑰' },
+        { key: 'flower3', label: '向日葵' },
+        { key: 'flower4', label: '薰衣草' },
+        { key: 'flower5', label: '郁金香' },
     ];
 
     return (
@@ -1304,12 +1304,18 @@ const SelectDemo: React.FC = () => {
                 当前选中: <span style={{ color: '#19c8b9', fontWeight: 600 }}>{options.find(o => o.key === value1)?.label}</span>
             </div>
             <div style={labelStyle}>自定义占位文本</div>
-            <div style={S.demoBox}>
+            <div style={{ display: 'flex', gap: 16, alignItems: 'center', justifyContent: 'space-between', padding: 16, background: 'rgb(250, 248, 242)', border: '1px dashed rgb(224, 216, 200)', borderRadius: 18 }}>
                 <Select
                     options={options}
                     value={value2}
                     onChange={setValue2}
-                    placeholder="请选择鱼类"
+                    placeholder="请选择花朵"
+                />
+                <Select
+                    options={options}
+                    value={value1}
+                    onChange={setValue1}
+                    placeholder="请选择"
                 />
             </div>
             <div style={labelStyle}>禁用状态</div>
@@ -1320,6 +1326,10 @@ const SelectDemo: React.FC = () => {
                     onChange={setValue3}
                     disabled
                 />
+            </div>
+            <div style={labelStyle}>弹出位置测试（滚动页面查看位置变化）</div>
+            <div style={{ ...S.demoBox, marginTop: 400, marginBottom: 400 }}>
+                <Select options={options} value={value1} onChange={setValue1} />
             </div>
             <CodeBlock
                 code={`import { Select } from 'animal-island-ui';

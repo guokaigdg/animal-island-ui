@@ -25,14 +25,19 @@ export const Select: React.FC<SelectProps> = ({
     const [hoveredKey, setHoveredKey] = useState<string | null>(null);
     const [dropdownStyle, setDropdownStyle] = useState<React.CSSProperties>({});
     const [mounted, setMounted] = useState(false);
+    const [closing, setClosing] = useState(false);
     const wrapperRef = useRef<HTMLDivElement>(null);
     const currentLabel = options.find((o) => o.key === value)?.label || placeholder;
 
     useEffect(() => {
         const handleClickOutside = (e: MouseEvent) => {
             if (wrapperRef.current && !wrapperRef.current.contains(e.target as Node)) {
-                setOpen(false);
-                setMounted(false);
+                setClosing(true);
+                setTimeout(() => {
+                    setOpen(false);
+                    setClosing(false);
+                    setMounted(false);
+                }, 150);
             }
         };
         if (open) {
@@ -97,8 +102,12 @@ export const Select: React.FC<SelectProps> = ({
 
     const handleSelect = (key: string) => {
         onChange(key);
-        setOpen(false);
-        setMounted(false);
+        setClosing(true);
+        setTimeout(() => {
+            setOpen(false);
+            setClosing(false);
+            setMounted(false);
+        }, 150);
     };
 
     return (
@@ -109,6 +118,7 @@ export const Select: React.FC<SelectProps> = ({
             <div
                 className={`${styles.trigger} ${open ? styles.open : ''}`}
                 onClick={() => !disabled && setOpen(!open)}
+                onMouseDown={(e) => e.preventDefault()}
             >
                 <span className={value ? styles.value : styles.placeholder}>
                     {currentLabel}
@@ -120,7 +130,7 @@ export const Select: React.FC<SelectProps> = ({
                 </span>
             </div>
             {open && mounted && (
-                <div className={styles.dropdown} style={dropdownStyle}>
+                <div className={`${styles.dropdown} ${closing ? styles.closing : ''}`} style={dropdownStyle}>
                     {options.map((option) => (
                         <div
                             key={option.key}

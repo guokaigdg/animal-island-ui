@@ -3,19 +3,20 @@
     display: inline-block;
     min-width: 140px;
     font-family: 'Nunito', 'Noto Sans SC', sans-serif;
+    user-select: none;
+    -webkit-user-select: none;
 }
 
 .trigger {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 8px 12px;
+    padding: 8px 13px;
     background: #fff;
     border: 2px solid #e8dcc8;
     border-radius: 12px;
     cursor: pointer;
     transition: all 0.2s ease;
-    gap: 8px;
 }
 
 .trigger:hover {
@@ -52,12 +53,27 @@
 }
 
 .dropdown {
-    min-width: 160px;
     background: #FFEEA0;
     border-radius: 28px;
     overflow: visible;
     padding: 12px 0px;
     z-index: 100;
+    opacity: 0;
+    animation: dropdownFadeIn 0.2s ease forwards;
+}
+
+@keyframes dropdownFadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.dropdown.closing {
+    animation: dropdownFadeOut 0.15s ease forwards;
+}
+
+@keyframes dropdownFadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
 }
 
 .dropdownLeft {
@@ -70,23 +86,25 @@
 .option {
     display: flex;
     align-items: center;
-    gap: 8px;
-    padding: 10px 12px;
+    justify-content: center;
+    padding: 10px 30px 10px 14px;
     font-size: 14px;
+    font-weight: 500;
     color: #725d42;
     cursor: pointer;
     position: relative;
+    white-space: nowrap;
 }
 
 .option.active {
     position: relative;
     z-index: 1;
-    font-weight: 600;
+    font-weight: 700;
 }
 
 .option.hovered {
     position: relative;
-    font-weight: 600;
+    font-weight: 700;
 }
 
 .option.hovered::before {
