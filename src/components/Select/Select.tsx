@@ -24,6 +24,7 @@ export const Select: React.FC<SelectProps> = ({
     const [open, setOpen] = useState(false);
     const [hoveredKey, setHoveredKey] = useState<string | null>(null);
     const [dropdownStyle, setDropdownStyle] = useState<React.CSSProperties>({});
+    const [mounted, setMounted] = useState(false);
     const wrapperRef = useRef<HTMLDivElement>(null);
     const currentLabel = options.find((o) => o.key === value)?.label || placeholder;
 
@@ -31,6 +32,7 @@ export const Select: React.FC<SelectProps> = ({
         const handleClickOutside = (e: MouseEvent) => {
             if (wrapperRef.current && !wrapperRef.current.contains(e.target as Node)) {
                 setOpen(false);
+                setMounted(false);
             }
         };
         if (open) {
@@ -85,12 +87,18 @@ export const Select: React.FC<SelectProps> = ({
             }
 
             setDropdownStyle(newStyle);
+            requestAnimationFrame(() => {
+                setMounted(true);
+            });
+        } else if (!open) {
+            setMounted(false);
         }
     }, [open, options.length]);
 
     const handleSelect = (key: string) => {
         onChange(key);
         setOpen(false);
+        setMounted(false);
     };
 
     return (
@@ -111,7 +119,7 @@ export const Select: React.FC<SelectProps> = ({
                     </svg>
                 </span>
             </div>
-            {open && (
+            {open && mounted && (
                 <div className={styles.dropdown} style={dropdownStyle}>
                     {options.map((option) => (
                         <div
