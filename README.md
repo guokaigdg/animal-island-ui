@@ -1,13 +1,25 @@
 # 🏝 Animal-Island-UI
 
+
 <div align="center">
-    <img src="docs/img/readme-home.png" alt="animal-island-ui" style="border-radius: 12px; width: 40%; display: block; margin: 0 auto;" />
+    <img src="docs/img/readme-home.png" alt="animal-island-ui" style="border-radius: 12px; width: 40%; display: block; margin: 0 auto;" />    
+</div>
+<div align="center">
+一款参考《治愈系海岛》风格的 React UI 组件库
+</div>
+<br/>
+<div align="center">
+    <a href="https://github.com/guokaigdg/animal-island-ui/stargazers"><img src="https://img.shields.io/github/stars/guokaigdg/animal-island-ui?style=flat-square" alt="Stars"></a>
+    <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square" alt="License"></a>
+    <a href="LICENSE"><img src="https://img.shields.io/npm/dm/animal-island-ui.svg?style=flat-square" alt=""></a>
+    <a href="https://github.com/guokaigdg/animal-island-ui/releases"><img src="https://img.shields.io/github/v/tag/guokaigdg/animal-island-ui?label=version&style=flat-square" alt="Version"></a>
 </div>
 
+<br/>
 <p align="center">
     简体中文 | <a href="./docs/README.en.md">English</a>
 </p>
-一款风格参考《治愈系海岛》的 React UI 组件库，仅用于学习与技术交流。
+
 
 ## 介绍
 
@@ -34,7 +46,7 @@ npm install animal-island-ui
 > ⚠️ **重要**: 请务必导入样式文件 `import 'animal-island-ui/style'`，否则组件将没有样式与字体!
 
 ```tsx
-import { Button, Card, Switch, Time, Phone } from 'animal-island-ui';
+import { Button, Card } from 'animal-island-ui';
 import 'animal-island-ui/style';
 
 function App() {
@@ -42,19 +54,22 @@ function App() {
         <div>
             <Button type="primary">开始冒险</Button>
             <Card color="app-blue">
-                <p>欢迎来到无人岛！</p>
+                欢迎来到无人岛！
             </Card>
-            <Switch
-                defaultChecked
-                checkedChildren="开"
-                unCheckedChildren="关"
-            />
-            <Time />
-            <Phone />
         </div>
     );
 }
 ```
+
+## 文档
+面向不同场景的完整参考：
+
+| 文档 | 用途 |
+|---|---|
+| [`AI_USAGE.md`](./AI_USAGE.md) | 面向 AI 代码助手的使用手册，逐字收录全部组件 props、类型与默认值，附 17 条硬性规则与可复制样板，杜绝臆造 API。 |
+| [`DESIGN_PROMPT.md`](./DESIGN_PROMPT.md) | 一键复刻提示词，适配 v0 / Figma AI / Midjourney / DALL-E，含色板、字体、尺寸表、Modal clip-path 与禁用清单。 |
+| [`skill/SKILL.md`](./skill/SKILL.md) | 像素级样式规范 Skill，覆盖设计 token、全部组件精确 CSS、Demo 布局数值、CSS 变量模板与新组件开发 Checklist。 |
+| [`CONTRIBUTING.md`](./CONTRIBUTING.md) | 贡献指南 |
 
 
 ## 本地开发
