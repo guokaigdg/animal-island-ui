@@ -21,7 +21,7 @@ animal-island-ui 是一套受《治愈系海岛风格》启发的 React + TypeSc
 - 构建：Vite (library mode) + `vite.config.ts`（库）/ `vite.config.demo.ts`（Demo）
 - 样式系统：Less Modules + `src/styles/variables.less` 设计 token
 
-### 全量组件清单（12 个）
+### 全量组件清单（15 个）
 
 从 `src/index.ts` 导出：
 
@@ -33,14 +33,17 @@ animal-island-ui 是一套受《治愈系海岛风格》启发的 React + TypeSc
 | `Modal` | SVG blob 裁切弹窗 | ✓ | |
 | `Card` | 容器，`default`/`title`，13 种 IslandPhone 配色 | | ✓ |
 | `Collapse` | 手风琴（CSS Grid，无 JS 过渡） | ✓ | |
+| `Select` | 下拉选择器，支持搜索 | ✓ | |
+| `Icon` | SVG 图标库 | | ✓ |
 | `Time` | HUD 实时时钟 | | ✓ |
 | `Phone` | IslandPhone 3×3 应用网格 | | ✓ |
 | `Footer` | 底部装饰图（`sea`/`tree`） | | ✓ |
 | `Divider` | 装饰分割线，5 种风格 | | ✓ |
 | `Cursor` | 游戏手指光标包裹器 | | ✓ |
 | `Typewriter` | 打字机效果，保留 ReactNode 结构 | | ✓ |
+| `Tabs` | 标签页切换，平滑动画 | ✓ | |
 
-类型导出：`ButtonProps/ButtonType/ButtonSize`、`InputProps/InputSize`、`SwitchProps/SwitchSize`、`ModalProps`、`CardProps/CardType/CardColor`、`FooterProps/FooterType`、`CollapseProps`、`CursorProps`、`TimeProps`、`PhoneProps`、`DividerProps`、`TypewriterProps`。
+类型导出：`ButtonProps/ButtonType/ButtonSize`、`InputProps/InputSize`、`SwitchProps/SwitchSize`、`ModalProps`、`CardProps/CardType/CardColor`、`FooterProps/FooterType`、`CollapseProps`、`CursorProps`、`TimeProps`、`PhoneProps`、`DividerProps`、`TypewriterProps`、`SelectProps`、`IconProps`、`TabsProps/TabItem`。
 
 ---
 
@@ -488,6 +491,92 @@ transition: grid-template-rows 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 padding: 0 24px;
 font-size: 14px; line-height: 1.7;
 /* 展开后 padding-bottom */ 24px;
+```
+
+---
+
+### Tabs
+
+```css
+/* 外层容器 */
+.tabs {
+    background: rgb(247, 243, 223);
+    border-radius: 20px;
+    border: 2px solid #9f927d;
+    overflow: hidden;
+}
+
+/* 标签列表 */
+.tabList {
+    display: flex;
+    gap: 4px;
+    padding: 12px;
+    background: rgba(255, 255, 255, 0.6);
+    border-bottom: 2px solid #c4b89e;
+}
+
+/* 标签项 */
+.tabItem {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    background: transparent;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    color: #8a7b66;
+    transition: all 0.2s ease;
+}
+/* hover */
+.tabItem:hover {
+    background: rgba(25, 200, 185, 0.1);
+    color: #725d42;
+}
+/* 激活状态 */
+.tabItem.active {
+    background: rgba(25, 200, 185, 0.15);
+    color: #19c8b9;
+    font-weight: 600;
+    box-shadow: 0 3px 0 0 #d4c9b4;
+}
+
+/* 标签图标 */
+.tabIcon {
+    font-size: 10px;
+}
+/* 激活时图标放大 */
+.tabItem.active .tabIcon {
+    transform: scale(1.2);
+}
+
+/* 叶子装饰动画 */
+.tabLeaf {
+    position: absolute;
+    right: -6px;
+    top: -3px;
+    font-size: 12px;
+    animation: leafWiggle 2s ease-in-out infinite;
+}
+
+@keyframes leafWiggle {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(-10deg); }
+    75% { transform: rotate(10deg); }
+}
+
+/* 内容区 */
+.tabContent {
+    padding: 24px;
+    animation: fadeIn 0.25s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(4px); }
+    to { opacity: 1; transform: translateY(0); }
+}
 ```
 
 ---
