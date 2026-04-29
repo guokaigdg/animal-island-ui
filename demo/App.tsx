@@ -75,6 +75,7 @@ const MENU_ITEMS: MenuItem[] = [
             { key: 'divider-comp', label: 'Divider 分割线' },
             { key: 'icon', label: 'Icon 图标' },
             { key: 'select', label: 'Select 选择器' },
+            { key: 'tabs', label: 'Tabs 标签页' },
             { key: 'footer', label: 'Footer 页脚' },
         ],
     },

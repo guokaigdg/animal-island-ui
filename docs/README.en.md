@@ -1,13 +1,25 @@
 # 🏝 Animal-Island-UI
 
+
 <div align="center">
-    <img src="img/readme-home.png" alt="animal-island-ui" style="border-radius: 12px; width: 40%; display: block; margin: 0 auto;" />
+    <img src="img/readme-home.png" alt="animal-island-ui" style="border-radius: 12px; width: 40%; display: block; margin: 0 auto;" />    
+</div>
+<div align="center">
+    A React UI component library inspired by a cozy island-style UI
+</div>
+<br/>
+<div align="center">
+    <a href="https://github.com/guokaigdg/animal-island-ui/stargazers"><img src="https://img.shields.io/github/stars/guokaigdg/animal-island-ui?style=flat-square" alt="Stars"></a>
+    <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square" alt="License"></a>
+    <a href="LICENSE"><img src="https://img.shields.io/npm/dm/animal-island-ui.svg?style=flat-square" alt=""></a>
+    <a href="https://github.com/guokaigdg/animal-island-ui/releases"><img src="https://img.shields.io/github/v/tag/guokaigdg/animal-island-ui?label=version&style=flat-square" alt="Version"></a>
 </div>
 
+<br/>
 <p align="center">
     <a href="../README.md">中文</a> | English
 </p>
-A React UI component library inspired by "a cozy island-style UI", for learning and technical exchange only.
+
 
 ## Introduction
 
@@ -31,11 +43,10 @@ npm install animal-island-ui
 
 ## Quick Start
 
-
-> ⚠️ **Important**: Please make sure to import the styles with `import 'animal-island-ui/style'`, otherwise the components will have no styles!
+> ⚠️ **Important**: Please make sure to import the styles with `import 'animal-island-ui/style'`, otherwise the components will have no styles or fonts!
 
 ```tsx
-import { Button, Card, Switch, Time, Phone } from 'animal-island-ui';
+import { Button, Card } from 'animal-island-ui';
 import 'animal-island-ui/style';
 
 function App() {
@@ -43,27 +54,23 @@ function App() {
         <div>
             <Button type="primary">Start Adventure</Button>
             <Card color="app-blue">
-                <p>Welcome to the deserted island!</p>
+                Welcome to the deserted island!
             </Card>
-            <Switch
-                defaultChecked
-                checkedChildren="On"
-                unCheckedChildren="Off"
-            />
-            <Time />
-            <Phone />
         </div>
     );
 }
 ```
 
-## Usage Cases
+## Documentation
 
-|<a href="https://github.com/yunxinz/ac-site-template">ac-site-template</a>（治愈海岛主题个人网站模板）  |  <a href="https://github.com/xiaochong/hi-kid">HiKid</a>（儿童教育练习英语口语和听力） | 
-| --- | --- | 
-|  <img src="img/ac-site-template.png" alt="ac-site-template" style="border-radius: 8px; width: 90%; display: block; margin: 0 auto;" /> | <img src="img/hi-kid.png" alt="HiKid" style="border-radius: 8px; width: 90%; display: block; margin: 0 auto;" />| 
+Complete reference for different scenarios:
 
-
+| Document | Purpose |
+|---|---|
+| [`AI_USAGE.md`](../AI_USAGE.md) | AI code assistant handbook - all component props, types and defaults word-for-word, 17 hard rules and copy-paste boilerplate, no invented APIs. |
+| [`DESIGN_PROMPT.md`](../DESIGN_PROMPT.md) | One-click reproduction prompts for v0 / Figma AI / Midjourney / DALL-E, including color palette, fonts, size tables, Modal clip-path and prohibition list. |
+| [`skill/SKILL.md`](../skill/SKILL.md) | Pixel-perfect style specification Skill - design tokens, all component CSS, Demo layout values, CSS variable templates and new component development checklist. |
+| [`CONTRIBUTING.md`](../CONTRIBUTING.md) | Contributing Guide |
 
 
 ## Local Development
@@ -85,6 +92,13 @@ npm run build
 # Build Demo site
 npm run build:demo
 ```
+
+
+## Usage Cases
+
+|<a href="https://github.com/yunxinz/ac-site-template">ac-site-template</a> (a cozy island-style UI themed personal website template)  |  <a href="https://github.com/xiaochong/hi-kid">HiKid</a> (English learning app for children) | 
+| --- | --- | 
+|  <img src="img/ac-site-template.png" alt="ac-site-template" style="border-radius: 8px; width: 90%; display: block; margin: 0 auto;" /> | <img src="img/hi-kid.png" alt="HiKid" style="border-radius: 8px; width: 90%; display: block; margin: 0 auto;" />| 
 
 
 

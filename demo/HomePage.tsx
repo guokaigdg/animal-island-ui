@@ -327,8 +327,8 @@ const features = [
     },
     {
         icon: 'Property-Shopping.svg',
-        title: '14 个组件',
-        desc: 'Button / Input / Switch / Modal / Typewriter / Card / Collapse / Cursor / Divider / Icon / Select / Footer / Time / Phone',
+        title: '13 个组件',
+        desc: 'Button / Input / Switch / Modal / Typewriter / Card / Collapse / Cursor / Divider / Time / Phone / Footer / Icon',
     },
     {
         icon: 'Property-Camera.svg',

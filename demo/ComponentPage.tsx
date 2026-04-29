@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { Button, Input, Switch, Modal, Card, Collapse, Divider, Typewriter } from '../src';
+import { Button, Input, Switch, Modal, Card, Collapse, Divider, Typewriter, Tabs } from '../src';
 import { labelStyle } from './tools';
 import TimeDemo from './components/Time';
 import PhoneDemo from './components/Phone';
 import FooterDemo from './components/Footer';
 import IconDemo from './components/Icon/IconDemo';
+import type { TabItem } from '../src';
 
 // ============================================
 // Styles
@@ -57,9 +58,7 @@ const S = {
     } as React.CSSProperties,
     demoBox: {
         padding: 16,
-        background: '#faf8f2',
         borderRadius: 18,
-        border: '1px dashed #e0d8c8',
         fontWeight: 500,
         marginBottom: 20,
     } as React.CSSProperties,
@@ -1280,15 +1279,30 @@ const SELECT_API = [
 ];
 
 const SelectDemo: React.FC = () => {
-    const [value1, setValue1] = useState('flower1');
+    const [value1, setValue1] = useState('fish1');
     const [value2, setValue2] = useState('');
     const [value3, setValue3] = useState('flower2');
-    const options: SelectOption[] = [
+    const [value4, setValue4] = useState('');
+    const fishOptions: SelectOption[] = [
+        { key: 'fish1', label: '鲈鱼' },
+        { key: 'fish2', label: '鲷鱼' },
+        { key: 'fish3', label: '草鱼' },
+        { key: 'fish4', label: '龙睛鱼' },
+        { key: 'fish5', label: '神仙鱼' },
+    ];
+    const flowerOptions: SelectOption[] = [
         { key: 'flower1', label: '樱花' },
         { key: 'flower2', label: '玫瑰' },
         { key: 'flower3', label: '向日葵' },
         { key: 'flower4', label: '薰衣草' },
         { key: 'flower5', label: '郁金香' },
+    ];
+    const fruitOptions: SelectOption[] = [
+        { key: 'fruit1', label: '草莓' },
+        { key: 'fruit2', label: '蓝莓' },
+        { key: 'fruit3', label: '桃子' },
+        { key: 'fruit4', label: '樱桃' },
+        { key: 'fruit5', label: '猕猴桃' },
     ];
 
     return (
@@ -1298,38 +1312,34 @@ const SelectDemo: React.FC = () => {
             </div>
             <div style={labelStyle}>默认状态</div>
             <div style={S.demoBox}>
-                <Select options={options} value={value1} onChange={setValue1} />
+                <Select options={fishOptions} value={value1} onChange={setValue1} />
             </div>
             <div style={{ marginTop: 16, fontSize: 13, color: '#a08060' }}>
-                当前选中: <span style={{ color: '#19c8b9', fontWeight: 600 }}>{options.find(o => o.key === value1)?.label}</span>
+                当前选中: <span style={{ color: '#19c8b9', fontWeight: 600 }}>{fishOptions.find(o => o.key === value1)?.label}</span>
             </div>
             <div style={labelStyle}>自定义占位文本</div>
             <div style={{ display: 'flex', gap: 16, alignItems: 'center', justifyContent: 'space-between', padding: 16, background: 'rgb(250, 248, 242)', border: '1px dashed rgb(224, 216, 200)', borderRadius: 18 }}>
                 <Select
-                    options={options}
+                    options={flowerOptions}
                     value={value2}
                     onChange={setValue2}
                     placeholder="请选择花朵"
                 />
                 <Select
-                    options={options}
-                    value={value1}
-                    onChange={setValue1}
-                    placeholder="请选择"
+                    options={fruitOptions}
+                    value={value4}
+                    onChange={setValue4}
+                    placeholder="请选择水果"
                 />
             </div>
             <div style={labelStyle}>禁用状态</div>
             <div style={S.demoBox}>
                 <Select
-                    options={options}
+                    options={flowerOptions}
                     value={value3}
                     onChange={setValue3}
                     disabled
                 />
-            </div>
-            <div style={labelStyle}>弹出位置测试（滚动页面查看位置变化）</div>
-            <div style={{ ...S.demoBox, marginTop: 400, marginBottom: 400 }}>
-                <Select options={options} value={value1} onChange={setValue1} />
             </div>
             <CodeBlock
                 code={`import { Select } from 'animal-island-ui';
@@ -1344,6 +1354,95 @@ const App = () => {
     return <Select options={options} value={value} onChange={setValue} />;
 };`} />
             <ApiTable rows={SELECT_API} />
+        </div>
+    );
+};
+
+// ============================================
+// TabsDemo
+// ============================================
+const TABS_API = [
+    { prop: 'items', desc: '标签页配置列表', type: 'TabItem[]', defaultVal: '-', required: true },
+    { prop: 'defaultActiveKey', desc: '默认激活的标签', type: 'string', defaultVal: '第一个标签' },
+    { prop: 'activeKey', desc: '受控模式当前激活标签', type: 'string', defaultVal: '-' },
+    { prop: 'onChange', desc: '标签切换回调', type: '(key: string) => void', defaultVal: '-' },
+];
+
+const TabsDemo: React.FC = () => {
+    const [activeKey, setActiveKey] = useState('tab1');
+    const items: TabItem[] = [
+        {
+            key: 'tab1',
+            label: '岛屿概况',
+            children: (
+                <div>
+                    <p style={{ marginBottom: 12 }}>
+                        这里是一座无人岛，环境优美，气候宜人。
+                    </p>
+                    <p>可以钓鱼、捉虫、种植各种植物。</p>
+                </div>
+            ),
+        },
+        {
+            key: 'tab2',
+            label: '商店',
+            children: (
+                <div>
+                    <p style={{ marginBottom: 12 }}>狸然超市营业中！</p>
+                    <p>各种商品应有尽有，价格实惠。</p>
+                </div>
+            ),
+        },
+        {
+            key: 'tab3',
+            label: '服务台',
+            children: (
+                <div>
+                    <p style={{ marginBottom: 12 }}>欢迎来到服务台！</p>
+                    <p>可以办理各种服务业务。</p>
+                </div>
+            ),
+        },
+    ];
+
+    return (
+        <div style={S.section}>
+            <div style={S.sectionTitle}>
+                Tabs <span style={S.tag}>基础用法</span>
+            </div>
+            <div style={labelStyle}>非受控模式</div>
+            <div style={S.demoBox}>
+                <Tabs
+                    items={[
+                        { key: 'a', label: '鱼类', children: <p>鲈鱼、鲷鱼、河童...</p> },
+                        { key: 'b', label: '昆虫', children: <p>蝴蝶、瓢虫、蜻蜓...</p> },
+                        { key: 'c', label: '海洋生物', children: <p>海星、珊瑚、小丑鱼...</p> },
+                    ]}
+                    defaultActiveKey="a"
+                />
+            </div>
+            <div style={labelStyle}>受控模式</div>
+            <div style={S.demoBox}>
+                <Tabs items={items} activeKey={activeKey} onChange={setActiveKey} />
+            </div>
+            <div style={{ marginTop: 16, fontSize: 13, color: '#a08060' }}>
+                当前选中: <span style={{ color: '#19c8b9', fontWeight: 600 }}>{items.find(i => i.key === activeKey)?.label}</span>
+            </div>
+            <CodeBlock
+                code={`import { Tabs } from 'animal-island-ui';
+
+const items = [
+    { key: 'tab1', label: '标签一', children: <p>内容一</p> },
+    { key: 'tab2', label: '标签二', children: <p>内容二</p> },
+];
+
+// 非受控模式
+<Tabs items={items} defaultActiveKey="tab1" />
+
+// 受控模式
+const [activeKey, setActiveKey] = useState('tab1');
+<Tabs items={items} activeKey={activeKey} onChange={setActiveKey} />`} />
+            <ApiTable rows={TABS_API} />
         </div>
     );
 };
@@ -1408,6 +1507,10 @@ export const PAGE_INFO: Record<string, { title: string; desc: string }> = {
         title: 'Select 选择器',
         desc: '下拉选择器组件 — 支持自定义选项列表，高亮当前选中项',
     },
+    tabs: {
+        title: 'Tabs 标签页',
+        desc: '标签页组件 — 支持受控/非受控模式切换',
+    },
 };
 
 const PAGES: Record<string, React.FC> = {
@@ -1425,6 +1528,7 @@ const PAGES: Record<string, React.FC> = {
     'divider-comp': DividerDemo,
     icon: IconDemo,
     select: SelectDemo,
+    tabs: TabsDemo,
 };
 
 // ============================================
