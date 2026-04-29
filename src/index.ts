@@ -67,3 +67,6 @@ export type { IconProps, IconName } from './components/Icon';
 
 export { Select } from './components/Select';
 export type { SelectProps, SelectOption } from './components/Select';
+
+export { Tabs } from './components/Tabs';
+export type { TabsProps, TabItem } from './components/Tabs';

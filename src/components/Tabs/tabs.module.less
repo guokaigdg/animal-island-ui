@@ -1,0 +1,111 @@
+.tabs {
+    background: @bg-color;
+    border-radius: @border-radius-lg;
+    border: @border-width solid @border-color-light;
+    overflow: hidden;
+}
+
+.tabList {
+    display: flex;
+    gap: @spacing-xs;
+    padding: @spacing-lg;
+    background: rgba(255, 255, 255, 0.6);
+    border-bottom: 2px solid @border-color-light;
+}
+
+.tabItem {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: @spacing-sm;
+    padding: @spacing-sm @spacing-lg;
+    background: transparent;
+    border: none;
+    border-radius: @border-radius-lg;
+    cursor: pointer;
+    font-family: @font-family;
+    font-size: @font-size-base;
+    font-weight: 500;
+    color: @text-color;
+    transition: all @motion-duration-base @motion-ease;
+
+    &:hover {
+        background: rgba(25, 200, 185, 0.1);
+        color: @text-color;
+    }
+
+    &.active {
+        background: #50B9AB;
+        color: #EEE9CA;
+        font-weight: 600;
+        border-radius: @border-radius-lg;
+        box-shadow: 0 3px 0 0 @shadow-color-light;
+    }
+}
+
+.tabIcon {
+    font-size: 10px;
+    transition: transform @motion-duration-base @motion-ease;
+
+    .active & {
+        transform: scale(1.2);
+    }
+}
+
+.tabLabel {
+    position: relative;
+    color: inherit;
+
+    .active & {
+        color: #EEE9CA;
+    }
+}
+
+.tabLeaf {
+    position: absolute;
+    right: -8px;
+    top: -4px;
+    font-size: 12px;
+    animation: leafWiggle 2s ease-in-out infinite;
+}
+
+@keyframes leafWiggle {
+
+    0%,
+    100% {
+        transform: rotate(0deg);
+    }
+
+    25% {
+        transform: rotate(-10deg);
+    }
+
+    75% {
+        transform: rotate(10deg);
+    }
+}
+
+.tabContent {
+    min-height: 60px;
+    padding: @spacing-xl;
+    animation: fadeIn 0.25s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(4px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.tabContentInner {
+    min-height: 40px;
+    color: var(--animal-text-color-secondary);
+    font-size: var(--animal-font-size-base);
+    line-height: var(--animal-line-height-base);
+}
