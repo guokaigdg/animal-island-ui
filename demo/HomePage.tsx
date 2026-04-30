@@ -394,7 +394,6 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                             style={{ width: 180, height: 112 }}
                             alt="logo"
                             decoding="async"
-                            fetchPriority="high"
                         />
                     </div>
                 )}
@@ -427,7 +426,6 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                             style={{ width: 320, height: 200 }}
                             alt="logo"
                             decoding="async"
-                            fetchPriority="high"
                         />
                     </div>
                 )}

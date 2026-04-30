@@ -1,40 +1,7 @@
 import React, { useState } from 'react';
 import { Tabs } from '../../../src';
 import type { TabItem } from '../../../src';
-import { labelStyle, ApiTable, CodeBlock } from '../../tools';
-
-const S = {
-    section: {
-        marginBottom: 36,
-        padding: 25,
-        background: '#fff',
-        borderRadius: 12,
-        border: '1px solid #e8e2d6',
-    } as React.CSSProperties,
-    sectionTitle: {
-        fontSize: 18,
-        fontWeight: 600,
-        color: '#725d42',
-        display: 'flex',
-        alignItems: 'center',
-        gap: 8,
-    } as React.CSSProperties,
-    tag: {
-        fontSize: 10,
-        padding: '2px 8px',
-        borderRadius: 10,
-        background: '#f0e8d8',
-        color: '#a08060',
-        fontWeight: 500,
-    } as React.CSSProperties,
-    demoBox: {
-        marginTop: 12,
-        padding: 16,
-        background: '#faf8f3',
-        borderRadius: 12,
-        border: '1px solid #e8e2d6',
-    } as React.CSSProperties,
-};
+import { labelStyle, ApiTable, CodeBlock, sectionStyle, sectionTitleStyle, tagStyle, demoBoxStyle } from '../../tools';
 
 const TABS_API = [
     { prop: 'items', desc: '标签页配置列表', type: 'TabItem[]', defaultVal: '-', required: true },
@@ -79,14 +46,14 @@ const TabsDemo: React.FC = () => {
     ];
 
     return (
-        <div style={S.section}>
-            <div style={S.sectionTitle}>Tabs <span style={S.tag}>基础用法</span></div>
+        <div style={sectionStyle}>
+            <div style={sectionTitleStyle}>Tabs <span style={tagStyle}>基础用法</span></div>
             <div style={labelStyle}>非受控模式</div>
-            <div style={S.demoBox}>
+            <div style={demoBoxStyle}>
                 <Tabs items={[{ key: 'a', label: '鱼类', children: <p>鲈鱼、鲷鱼、河童...</p> }, { key: 'b', label: '昆虫', children: <p>蝴蝶、瓢虫、蜻蜓...</p> }, { key: 'c', label: '海洋生物', children: <p>海星、珊瑚、小丑鱼...</p> }]} defaultActiveKey="a" />
             </div>
             <div style={labelStyle}>受控模式</div>
-            <div style={S.demoBox}>
+            <div style={demoBoxStyle}>
                 <Tabs items={items} activeKey={activeKey} onChange={setActiveKey} />
             </div>
             <div style={{ marginTop: 16, fontSize: 13, color: '#a08060' }}>当前选中: <span style={{ color: '#19c8b9', fontWeight: 600 }}>{items.find(i => i.key === activeKey)?.label}</span></div>

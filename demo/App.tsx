@@ -75,6 +75,7 @@ const MENU_ITEMS: MenuItem[] = [
             { key: 'divider-comp', label: 'Divider 分割线' },
             { key: 'icon', label: 'Icon 图标' },
             { key: 'select', label: 'Select 选择器' },
+            { key: 'checkbox', label: 'Checkbox 多选框' },
             { key: 'tabs', label: 'Tabs 标签页' },
             { key: 'footer', label: 'Footer 页脚' },
         ],
@@ -95,7 +96,8 @@ const MENU_ITEMS: MenuItem[] = [
 const S = {
     layout: {
         display: 'flex',
-        height: '100vh',
+        height: '100dvh',
+        overflow: 'hidden',
         fontFamily: "Nunito, 'Noto Sans SC', 'Zen Maru Gothic', -apple-system, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif",
         background: `url(${new URL('./img/content_bg_pc.jpg', import.meta.url).href}) center fixed`,
     } as React.CSSProperties,
@@ -240,6 +242,7 @@ const App: React.FC = () => {
     const { hash, navigate } = useHash();
     const isMobile = useIsMobile();
     const [drawerOpen, setDrawerOpen] = useState(false);
+    const mainRef = React.useRef<HTMLElement>(null);
 
     const activeKey =
         hash.startsWith('/') && hash.length > 1 ? hash.slice(1) : 'home';
@@ -250,9 +253,10 @@ const App: React.FC = () => {
         if (!isMobile) setDrawerOpen(false);
     }, [isMobile]);
 
-    // Close drawer when route changes
+    // Close drawer when route changes + scroll main to top
     useEffect(() => {
         setDrawerOpen(false);
+        mainRef.current?.scrollTo({ top: 0 });
     }, [activeKey]);
 
     const handleNavigate = useCallback(
@@ -388,6 +392,7 @@ const App: React.FC = () => {
                     )}
 
                     <main
+                        ref={mainRef}
                         style={{
                             ...S.main,
                             position: 'relative',

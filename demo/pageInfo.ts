@@ -56,4 +56,8 @@ export const PAGE_INFO: Record<string, { title: string; desc: string }> = {
         title: 'Select 选择器',
         desc: '下拉选择器组件 — 支持自定义选项列表，高亮当前选中项',
     },
+    checkbox: {
+        title: 'Checkbox 多选框',
+        desc: '多选框组件 — 支持受控/非受控、水平/垂直排列、三种尺寸、禁用单项或全部禁用',
+    },
 };

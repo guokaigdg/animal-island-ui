@@ -1,6 +1,16 @@
 import React, { useState } from 'react';
 import { Button, Input, Switch, Modal, Card, Collapse, Divider, Typewriter, Tabs } from '../src';
-import { labelStyle } from './tools';
+import {
+    labelStyle,
+    sectionStyle,
+    sectionTitleStyle,
+    tagStyle,
+    demoBodyStyle,
+    ApiTable,
+    ApiRow,
+    CodeBlock,
+    demoDashedBoxStyle,
+} from './tools';
 import TimeDemo from './components/Time';
 import PhoneDemo from './components/Phone';
 import FooterDemo from './components/Footer';
@@ -11,39 +21,10 @@ import type { TabItem } from '../src';
 // Styles
 // ============================================
 const S = {
-    pageTitle: {
-        fontSize: 24,
-        fontWeight: 700,
-        marginBottom: 8,
-        color: '#794f27',
-    } as React.CSSProperties,
     pageDesc: {
         fontSize: 14,
         color: '#794f27',
         marginBottom: 20,
-    } as React.CSSProperties,
-    section: {
-        marginBottom: 36,
-        padding: 25,
-        background: '#fff',
-        borderRadius: 12,
-        border: '1px solid #e8e2d6',
-    } as React.CSSProperties,
-    sectionTitle: {
-        fontSize: 18,
-        fontWeight: 600,
-        color: '#725d42',
-        display: 'flex',
-        alignItems: 'center',
-        gap: 8,
-    } as React.CSSProperties,
-    tag: {
-        fontSize: 10,
-        padding: '2px 8px',
-        borderRadius: 10,
-        background: '#f0e8d8',
-        color: '#a08060',
-        fontWeight: 500,
     } as React.CSSProperties,
     row: {
         display: 'flex',
@@ -62,239 +43,7 @@ const S = {
         fontWeight: 500,
         marginBottom: 20,
     } as React.CSSProperties,
-    codeBlock: {
-        marginTop: 16,
-        padding: '20px 24px',
-        background: '#2b2118',
-        border: '1px solid #3d3028',
-        borderRadius: 20,
-        fontSize: 14,
-        lineHeight: 1.7,
-        fontFamily:
-            "'SF Mono', 'Fira Code', 'Cascadia Code', Consolas, monospace",
-        fontWeight: 600,
-        color: '#e8d5bc',
-        whiteSpace: 'pre',
-        overflow: 'auto',
-        tabSize: 4,
-    } as React.CSSProperties,
-    codeLabel: {
-        fontSize: 14,
-        fontWeight: 600,
-        color: '#e7e4e0',
-        marginBottom: 0,
-        padding: '6px 12px',
-        background: '#3d3028',
-        borderRadius: '10px 10px 0 0',
-        display: 'inline-block',
-    } as React.CSSProperties,
-    // 统一 Demo 分组容器：纵向排列（间距由 labelStyle 的 marginTop/marginBottom 控制）
-    demoBody: {
-        display: 'flex',
-        flexDirection: 'column',
-    } as React.CSSProperties,
 };
-
-// ============================================
-// Code block helper — syntax highlighting
-// ============================================
-const highlightJSX = (code: string): React.ReactNode[] => {
-    const tokens: { pattern: RegExp; style: React.CSSProperties }[] = [
-        {
-            pattern: /(\/\/.*$|\/\*[\s\S]*?\*\/)/gm,
-            style: { color: '#6b5e50', fontStyle: 'italic', fontWeight: 400 },
-        },
-        {
-            pattern: /("(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*'|`(?:[^`\\]|\\.)*`)/g,
-            style: { color: '#a8d4a0' },
-        },
-        { pattern: /(<\/?[\w.]+|\/?>)/g, style: { color: '#f0a870' } },
-        {
-            pattern:
-                /\b(import|from|const|let|var|function|return|export|default|useState|true|false|null|undefined)\b/g,
-            style: { color: '#d4a0e0' },
-        },
-        { pattern: /\s([a-zA-Z][\w-]*)(?==)/g, style: { color: '#e8c87a' } },
-        { pattern: /(\{|\})/g, style: { color: '#d4b896' } },
-        { pattern: /(=>)/g, style: { color: '#d4a0e0' } },
-    ];
-
-    const parts: React.ReactNode[] = [];
-    const lines = code.trim().split('\n');
-    lines.forEach((line, li) => {
-        type Seg = { start: number; end: number; style: React.CSSProperties };
-        const segs: Seg[] = [];
-        for (const t of tokens) {
-            const re = new RegExp(t.pattern.source, t.pattern.flags);
-            let m: RegExpExecArray | null;
-            while ((m = re.exec(line)) !== null) {
-                const s =
-                    m.index + (m[0] !== m[1] && m[1] ? m[0].indexOf(m[1]) : 0);
-                const text = m[1] || m[0];
-                segs.push({ start: s, end: s + text.length, style: t.style });
-            }
-        }
-        segs.sort((a, b) => a.start - b.start);
-        const merged: Seg[] = [];
-        for (const s of segs) {
-            if (
-                merged.length === 0 ||
-                s.start >= merged[merged.length - 1].end
-            ) {
-                merged.push(s);
-            }
-        }
-        let idx = 0;
-        for (const seg of merged) {
-            if (seg.start > idx) {
-                parts.push(line.slice(idx, seg.start));
-            }
-            parts.push(
-                <span key={`${li}-${seg.start}`} style={seg.style}>
-                    {line.slice(seg.start, seg.end)}
-                </span>
-            );
-            idx = seg.end;
-        }
-        if (idx < line.length) parts.push(line.slice(idx));
-        if (li < lines.length - 1) parts.push('\n');
-    });
-    return parts;
-};
-
-const CodeBlock: React.FC<{ code: string }> = ({ code }) => (
-    <div style={{ marginTop: 36 }}>
-        <div style={S.codeLabel}>使用示例</div>
-        <pre
-            style={{
-                ...S.codeBlock,
-                marginTop: 0,
-                borderRadius: '0 20px 20px 20px',
-            }}
-        >
-            {highlightJSX(code)}
-        </pre>
-    </div>
-);
-
-// ============================================
-// API Table
-// ============================================
-interface ApiRow {
-    prop: string;
-    desc: string;
-    type: string;
-    defaultVal?: string;
-    required?: boolean;
-}
-
-const ApiTable: React.FC<{ rows: ApiRow[] }> = ({ rows }) => (
-    <div style={{ marginTop: 24 }}>
-        <div style={S.codeLabel}>API</div>
-        <div
-            style={{
-                overflow: 'auto',
-                borderRadius: '0 20px 20px 20px',
-                border: '1px solid #3d3028',
-            }}
-        >
-            <table
-                style={{
-                    width: '100%',
-                    borderCollapse: 'collapse',
-                    fontSize: 13,
-                    background: '#2b2118',
-                }}
-            >
-                <thead>
-                    <tr style={{ borderBottom: '1px solid #3d3028' }}>
-                        {['属性', '说明', '类型', '默认值'].map((h) => (
-                            <th
-                                key={h}
-                                style={{
-                                    padding: '10px 16px',
-                                    textAlign: 'left',
-                                    fontWeight: 600,
-                                    color: '#e7e4e0',
-                                    background: '#352a20',
-                                    whiteSpace: 'nowrap',
-                                }}
-                            >
-                                {h}
-                            </th>
-                        ))}
-                    </tr>
-                </thead>
-                <tbody>
-                    {rows.map((r, i) => (
-                        <tr
-                            key={r.prop}
-                            style={{
-                                borderBottom:
-                                    i < rows.length - 1
-                                        ? '1px solid #3d3028'
-                                        : 'none',
-                            }}
-                        >
-                            <td
-                                style={{
-                                    padding: '8px 16px',
-                                    color: '#f0a870',
-                                    fontFamily:
-                                        "'SF Mono', 'Fira Code', Consolas, monospace",
-                                    fontWeight: 600,
-                                    whiteSpace: 'nowrap',
-                                }}
-                            >
-                                {r.prop}
-                                {r.required && (
-                                    <span
-                                        style={{
-                                            color: '#e06060',
-                                            marginLeft: 2,
-                                        }}
-                                    >
-                                        *
-                                    </span>
-                                )}
-                            </td>
-                            <td
-                                style={{
-                                    padding: '8px 16px',
-                                    color: '#d4b896',
-                                }}
-                            >
-                                {r.desc}
-                            </td>
-                            <td
-                                style={{
-                                    padding: '8px 16px',
-                                    color: '#a8d4a0',
-                                    fontFamily:
-                                        "'SF Mono', 'Fira Code', Consolas, monospace",
-                                    fontSize: 12,
-                                }}
-                            >
-                                {r.type}
-                            </td>
-                            <td
-                                style={{
-                                    padding: '8px 16px',
-                                    color: '#8ab8e0',
-                                    fontFamily:
-                                        "'SF Mono', 'Fira Code', Consolas, monospace",
-                                    fontSize: 12,
-                                }}
-                            >
-                                {r.defaultVal ?? '-'}
-                            </td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
-        </div>
-    </div>
-);
 
 // ============================================
 // API data
@@ -562,11 +311,11 @@ const DIVIDER_API: ApiRow[] = [
 // Demo sections
 // ============================================
 const ButtonDemo: React.FC = () => (
-    <div style={S.section}>
-        <div style={S.sectionTitle}>
-            Button <span style={S.tag}>6 types</span>
+    <div style={sectionStyle}>
+        <div style={sectionTitleStyle}>
+            Button <span style={tagStyle}>6 types</span>
         </div>
-        <div style={S.demoBody}>
+        <div style={demoBodyStyle}>
             <div style={labelStyle}>type 按钮类型</div>
             <div style={S.row}>
                 <Button type="primary">Primary</Button>
@@ -654,7 +403,8 @@ const App = () => {
             <Button type="primary" block>Block</Button>
         </div>
     );
-};`} />
+};`}
+        />
         <ApiTable rows={BUTTON_API} />
     </div>
 );
@@ -662,11 +412,11 @@ const App = () => {
 const InputDemo: React.FC = () => {
     const [inputValue, setInputValue] = useState('');
     return (
-        <div style={S.section}>
-            <div style={S.sectionTitle}>
-                Input <span style={S.tag}>3 sizes</span>
+        <div style={sectionStyle}>
+            <div style={sectionTitleStyle}>
+                Input <span style={tagStyle}>3 sizes</span>
             </div>
-            <div style={S.demoBody}>
+            <div style={demoBodyStyle}>
                 <div style={labelStyle}>基础用法</div>
                 <div style={{ ...(S.col as any), maxWidth: 360, gap: 12 }}>
                     <Input placeholder="Basic input" />
@@ -677,11 +427,7 @@ const InputDemo: React.FC = () => {
                         onChange={(e) => setInputValue(e.target.value)}
                         onClear={() => setInputValue('')}
                     />
-                    <Input
-                        placeholder="Prefix & Suffix"
-                        prefix="🔍"
-                        suffix="⏎"
-                    />
+                    <Input placeholder="Prefix & Suffix" prefix="🔍" suffix="⏎" />
                 </div>
                 <div style={labelStyle}>size 尺寸</div>
                 <div style={{ ...(S.col as any), maxWidth: 360, gap: 12 }}>
@@ -715,7 +461,8 @@ const App = () => {
             <Input placeholder="Warning" status="warning" />
         </div>
     );
-};`} />
+};`}
+            />
             <ApiTable rows={INPUT_API} />
         </div>
     );
@@ -724,30 +471,19 @@ const App = () => {
 const SwitchDemo: React.FC = () => {
     const [switchChecked, setSwitchChecked] = useState(false);
     return (
-        <div style={S.section}>
-            <div style={S.sectionTitle}>
-                Switch <span style={S.tag}>2 sizes</span>
+        <div style={sectionStyle}>
+            <div style={sectionTitleStyle}>
+                Switch <span style={tagStyle}>2 sizes</span>
             </div>
-            <div style={S.demoBody}>
+            <div style={demoBodyStyle}>
                 <div style={labelStyle}>基础用法</div>
                 <div style={{ display: 'flex', gap: 16, alignItems: 'center' }}>
-                    <Switch
-                        checked={switchChecked}
-                        onChange={setSwitchChecked}
-                    />
-                    <span style={{ fontSize: 13 }}>
-                        {switchChecked ? 'ON' : 'OFF'}
-                    </span>
+                    <Switch checked={switchChecked} onChange={setSwitchChecked} />
+                    <span style={{ fontSize: 13 }}>{switchChecked ? 'ON' : 'OFF'}</span>
                 </div>
-                <div style={labelStyle}>
-                    checkedChildren / unCheckedChildren 自定义文案
-                </div>
+                <div style={labelStyle}>checkedChildren / unCheckedChildren 自定义文案</div>
                 <div style={{ display: 'flex', gap: 16, alignItems: 'center' }}>
-                    <Switch
-                        defaultChecked
-                        checkedChildren="开"
-                        unCheckedChildren="关"
-                    />
+                    <Switch defaultChecked checkedChildren="开" unCheckedChildren="关" />
                 </div>
                 <div style={labelStyle}>size 尺寸</div>
                 <div style={{ display: 'flex', gap: 16, alignItems: 'center' }}>
@@ -772,21 +508,21 @@ const App = () => {
             <Switch size="small" defaultChecked />
         </div>
     );
-};`} />
+};`}
+            />
             <ApiTable rows={SWITCH_API} />
         </div>
     );
 };
 
 const CardDemo: React.FC = () => (
-    <div style={S.section}>
-        <div style={S.sectionTitle}>
-            Card <span style={S.tag}>3 types</span>{' '}
-            <span style={S.tag}>13 colors</span>
+    <div style={sectionStyle}>
+        <div style={sectionTitleStyle}>
+            Card <span style={tagStyle}>3 types</span> <span style={tagStyle}>13 colors</span>
         </div>
 
         {/* ---- type ---- */}
-        <div style={S.demoBody}>
+        <div style={demoBodyStyle}>
             <div style={labelStyle}>type="default"</div>
             <div style={S.row}>
                 <Card>
@@ -794,8 +530,8 @@ const CardDemo: React.FC = () => (
                 </Card>
                 <Card style={{ maxWidth: 560, width: '100%' }}>
                     <p>
-                        在a game company 3DS《Animal Island: New Leaf》和《Animal
-                        Island: Happy Home Designer》中製作的「我的設計」QR
+                        在a game company 3DS《Animal Island: New Leaf》和《Animal Island: Happy Home
+                        Designer》中製作的「我的設計」QR
                         Code，以智慧型裝置讀取就能通過狸端機入口站下載至《集合啦！療癒系海島》。
                     </p>
                 </Card>
@@ -807,8 +543,7 @@ const CardDemo: React.FC = () => (
                 </Card>
                 <Card type="title" style={{ maxWidth: 360, width: '100%' }}>
                     <p>
-                        欢迎来到无人岛！在a game company 3DS《Animal Island: New
-                        Leaf》和《Animal Island: Happy Home
+                        欢迎来到无人岛！在a game company 3DS《Animal Island: New Leaf》和《Animal Island: Happy Home
                         Designer》中製作的「我的設計」QR
                         Code，以智慧型裝置讀取就能通過狸端機入口站下載至《集合啦！療癒系海島》。
                     </p>
@@ -820,15 +555,13 @@ const CardDemo: React.FC = () => (
                     <p>虚线边框卡片</p>
                 </Card>
                 <Card type="dashed" style={{ maxWidth: 360, width: '100%' }}>
-                    <p>
-                        欢迎来到无人岛！虚线边框适合用于轻量提示或次要信息展示。
-                    </p>
+                    <p>欢迎来到无人岛！虚线边框适合用于轻量提示或次要信息展示。</p>
                 </Card>
             </div>
         </div>
 
         {/* ---- color variants ---- */}
-        <div style={S.demoBody}>
+        <div style={demoBodyStyle}>
             <div style={labelStyle}>color — IslandPhone 颜色</div>
             <div
                 style={{
@@ -855,11 +588,7 @@ const CardDemo: React.FC = () => (
                         ['warm-peach-pink', 'Warm Peach Pink', '暖桃粉'],
                     ] as const
                 ).map(([color, en, cn]) => (
-                    <Card
-                        key={color}
-                        color={color as any}
-                        style={{ padding: '16px 20px' }}
-                    >
+                    <Card key={color} color={color as any} style={{ padding: '16px 20px' }}>
                         <div
                             style={{
                                 fontWeight: 700,
@@ -876,7 +605,7 @@ const CardDemo: React.FC = () => (
         </div>
 
         {/* ---- color + title ---- */}
-        <div style={S.demoBody}>
+        <div style={demoBodyStyle}>
             <div style={labelStyle}>color + type="title"</div>
             <div style={S.row}>
                 <Card type="title" color="app-blue" style={{ width: 240 }}>
@@ -889,9 +618,7 @@ const CardDemo: React.FC = () => (
                     >
                         蓝色标题卡片
                     </div>
-                    <div style={{ fontSize: 12, opacity: 0.85 }}>
-                        type="title" + color="app-blue"
-                    </div>
+                    <div style={{ fontSize: 12, opacity: 0.85 }}>type="title" + color="app-blue"</div>
                 </Card>
                 <Card type="title" color="app-green" style={{ width: 250 }}>
                     <div
@@ -903,9 +630,7 @@ const CardDemo: React.FC = () => (
                     >
                         绿色标题卡片
                     </div>
-                    <div style={{ fontSize: 12, opacity: 0.85 }}>
-                        type="title" + color="app-green"
-                    </div>
+                    <div style={{ fontSize: 12, opacity: 0.85 }}>type="title" + color="app-green"</div>
                 </Card>
                 <Card type="title" color="purple" style={{ width: 240 }}>
                     <div
@@ -917,9 +642,7 @@ const CardDemo: React.FC = () => (
                     >
                         紫色标题卡片
                     </div>
-                    <div style={{ fontSize: 12, opacity: 0.85 }}>
-                        type="title" + color="purple"
-                    </div>
+                    <div style={{ fontSize: 12, opacity: 0.85 }}>type="title" + color="purple"</div>
                 </Card>
             </div>
         </div>
@@ -952,30 +675,24 @@ const App = () => (
             紫色标题卡片
         </Card>
     </div>
-);`} />
+);`}
+        />
         <ApiTable rows={CARD_API} />
     </div>
 );
 
 const CollapseDemo: React.FC = () => (
-    <div style={S.section}>
-        <div style={S.sectionTitle}>
-            Collapse <span style={S.tag}>FAQ</span>
+    <div style={sectionStyle}>
+        <div style={sectionTitleStyle}>
+            Collapse <span style={tagStyle}>FAQ</span>
         </div>
-        <div style={S.demoBody}>
+        <div style={demoBodyStyle}>
             <div style={labelStyle}>基础用法</div>
             <div style={{ maxWidth: 720 }}>
-                <Collapse
-                    question="1個島嶼可以登錄多少名用戶?"
-                    answer={<p>1座島嶼最多可以容納8位居民（用戶）。</p>}
-                />
+                <Collapse question="1個島嶼可以登錄多少名用戶?" answer={<p>1座島嶼最多可以容納8位居民（用戶）。</p>} />
                 <Collapse
                     question="可以多少人一起玩?"
-                    answer={
-                        <p>
-                            同住1個島的居民可以最多4人一起遊玩。透過通訊最多8人一起遊玩。
-                        </p>
-                    }
+                    answer={<p>同住1個島的居民可以最多4人一起遊玩。透過通訊最多8人一起遊玩。</p>}
                 />
             </div>
             <div style={labelStyle}>defaultExpanded 默认展开</div>
@@ -988,11 +705,7 @@ const CollapseDemo: React.FC = () => (
             </div>
             <div style={labelStyle}>disabled 禁用状态</div>
             <div style={{ maxWidth: 720 }}>
-                <Collapse
-                    question="这个问题已被禁用（无法展开）"
-                    answer={<p>这段文字不应该被看到。</p>}
-                    disabled
-                />
+                <Collapse question="这个问题已被禁用（无法展开）" answer={<p>这段文字不应该被看到。</p>} disabled />
             </div>
         </div>
         <CodeBlock
@@ -1004,19 +717,19 @@ const App = () => (
         <Collapse question="默认展开" answer={<p>答案</p>} defaultExpanded />
         <Collapse question="禁用" answer={<p>答案</p>} disabled />
     </div>
-);`} />
+);`}
+        />
         <ApiTable rows={COLLAPSE_API} />
     </div>
 );
 
 const CursorDemo: React.FC = () => (
-    <div style={S.section}>
-        <div style={S.sectionTitle}>
-            Cursor <span style={S.tag}>光标</span>
+    <div style={sectionStyle}>
+        <div style={sectionTitleStyle}>
+            Cursor <span style={tagStyle}>光标</span>
         </div>
         <p style={labelStyle}>
-            Cursor 组件通过 CSS cursor
-            属性将子元素的鼠标光标替换为自定义手指图标，当前 Demo 全局已应用。
+            Cursor 组件通过 CSS cursor 属性将子元素的鼠标光标替换为自定义手指图标，当前 Demo 全局已应用。
         </p>
         <CodeBlock
             code={`import { Cursor } from 'animal-island-ui';
@@ -1025,7 +738,8 @@ const App = () => (
     <Cursor>
         <div>鼠标移入此区域将显示自定义光标</div>
     </Cursor>
-);`} />
+);`}
+        />
         <ApiTable rows={CURSOR_API} />
     </div>
 );
@@ -1035,23 +749,18 @@ const ModalDemo: React.FC = () => {
     const [titleModalOpen, setTitleModalOpen] = useState(false);
     const [customFooterOpen, setCustomFooterOpen] = useState(false);
     return (
-        <div style={S.section}>
-            <div style={S.sectionTitle}>
-                Modal <span style={S.tag}>弹窗</span>
+        <div style={sectionStyle}>
+            <div style={sectionTitleStyle}>
+                Modal <span style={tagStyle}>弹窗</span>
             </div>
-            <div style={S.demoBody}>
+            <div style={demoBodyStyle}>
                 <div style={labelStyle}>基础弹窗</div>
                 <div style={S.row}>
                     <Button type="primary" onClick={() => setModalOpen(true)}>
                         基础 Modal
                     </Button>
-                    <Button onClick={() => setTitleModalOpen(true)}>
-                        带标题 Modal
-                    </Button>
-                    <Button
-                        type="dashed"
-                        onClick={() => setCustomFooterOpen(true)}
-                    >
+                    <Button onClick={() => setTitleModalOpen(true)}>带标题 Modal</Button>
+                    <Button type="dashed" onClick={() => setCustomFooterOpen(true)}>
                         自定义 Footer
                     </Button>
                 </div>
@@ -1071,9 +780,7 @@ const ModalDemo: React.FC = () => {
                 onClose={() => setTitleModalOpen(false)}
                 onOk={() => setTitleModalOpen(false)}
             >
-                <p>
-                    是否将这条鱼捐赠给博物馆？傅达会非常高兴的！
-                </p>
+                <p>是否将这条鱼捐赠给博物馆？傅达会非常高兴的！</p>
             </Modal>
             <Modal
                 open={customFooterOpen}
@@ -1081,22 +788,14 @@ const ModalDemo: React.FC = () => {
                 onClose={() => setCustomFooterOpen(false)}
                 footer={
                     <>
-                        <Button onClick={() => setCustomFooterOpen(false)}>
-                            再想想
-                        </Button>
-                        <Button
-                            type="primary"
-                            danger
-                            onClick={() => setCustomFooterOpen(false)}
-                        >
+                        <Button onClick={() => setCustomFooterOpen(false)}>再想想</Button>
+                        <Button type="primary" danger onClick={() => setCustomFooterOpen(false)}>
                             确认搬家
                         </Button>
                     </>
                 }
             >
-                <p>
-                    确定要让这位居民搬走吗？这个操作不可撤销。
-                </p>
+                <p>确定要让这位居民搬走吗？这个操作不可撤销。</p>
             </Modal>
             <CodeBlock
                 code={`import { Button, Modal } from 'animal-island-ui';
@@ -1126,7 +825,8 @@ const App = () => {
             </Modal>
         </div>
     );
-};`} />
+};`}
+            />
             <ApiTable rows={MODAL_API} />
         </div>
     );
@@ -1135,38 +835,39 @@ const App = () => {
 const TypewriterDemo: React.FC = () => {
     const [replayKey, setReplayKey] = useState(0);
     return (
-        <div style={S.section}>
-            <div style={S.sectionTitle}>
-                Typewriter <span style={S.tag}>打字机</span>
+        <div style={sectionStyle}>
+            <div style={sectionTitleStyle}>
+                Typewriter <span style={tagStyle}>打字机</span>
             </div>
-            <div style={S.demoBody}>
+            <div style={demoBodyStyle}>
                 <div>
                     <div style={labelStyle}>基础用法</div>
-                    <div style={S.demoBox}>
-                        <Typewriter trigger={replayKey}>
-                            你好，欢迎来到动物岛！今天的天气真不错呢～
-                        </Typewriter>
+                    <div style={{ ...demoDashedBoxStyle, marginBottom: 20 }}>
+                        <Typewriter trigger={replayKey}>你好，欢迎来到动物岛！今天的天气真不错呢～</Typewriter>
                     </div>
                 </div>
 
                 <div>
                     <div style={labelStyle}>保留多行与富内容 (速度 40ms)</div>
-                    <div style={S.demoBox}>
+                    <div
+                        style={{
+                            ...demoDashedBoxStyle,
+                            flexDirection: 'column',
+                            alignItems: 'flex-start',
+                            marginBottom: 20,
+                            gap: 8,
+                        }}
+                    >
                         <Typewriter speed={40} trigger={replayKey}>
                             <div>第一行：钓到石头了！</div>
                             <div>第二行：竟然连这种都能钓起来...</div>
-                            <div style={{ color: '#d98324', fontWeight: 700 }}>
-                                第三行：继续加油吧！
-                            </div>
+                            <div style={{ color: '#d98324', fontWeight: 700 }}>第三行：继续加油吧！</div>
                         </Typewriter>
                     </div>
                 </div>
 
                 <div style={S.row}>
-                    <Button
-                        type="primary"
-                        onClick={() => setReplayKey((k) => k + 1)}
-                    >
+                    <Button type="primary" onClick={() => setReplayKey((k) => k + 1)}>
                         重新播放
                     </Button>
                 </div>
@@ -1232,9 +933,9 @@ const TYPEWRITER_API: ApiRow[] = [
 ];
 
 const DividerDemo: React.FC = () => (
-    <div style={S.section}>
-        <div style={S.sectionTitle}>
-            Divider <span style={S.tag}>5 types</span>
+    <div style={sectionStyle}>
+        <div style={sectionTitleStyle}>
+            Divider <span style={tagStyle}>5 types</span>
         </div>
         <div style={labelStyle}>line-brown</div>
         <Divider type="line-brown" />
@@ -1259,7 +960,8 @@ const App = () => (
         <Divider type="line-yellow" />
         <Divider type="wave-yellow" />
     </div>
-);`} />
+);`}
+        />
         <ApiTable rows={DIVIDER_API} />
     </div>
 );
@@ -1306,40 +1008,28 @@ const SelectDemo: React.FC = () => {
     ];
 
     return (
-        <div style={S.section}>
-            <div style={S.sectionTitle}>
-                Select <span style={S.tag}>基础用法</span>
+        <div style={sectionStyle}>
+            <div style={sectionTitleStyle}>
+                Select <span style={tagStyle}>基础用法</span>
             </div>
             <div style={labelStyle}>默认状态</div>
+            <div style={{ marginBottom: 8, fontSize: 13, color: '#a08060' }}>
+                当前选中:{' '}
+                <span style={{ color: '#19c8b9', fontWeight: 600 }}>
+                    {fishOptions.find((o) => o.key === value1)?.label}
+                </span>
+            </div>
             <div style={S.demoBox}>
                 <Select options={fishOptions} value={value1} onChange={setValue1} />
             </div>
-            <div style={{ marginTop: 16, fontSize: 13, color: '#a08060' }}>
-                当前选中: <span style={{ color: '#19c8b9', fontWeight: 600 }}>{fishOptions.find(o => o.key === value1)?.label}</span>
-            </div>
             <div style={labelStyle}>自定义占位文本</div>
-            <div style={{ display: 'flex', gap: 16, alignItems: 'center', justifyContent: 'space-between', padding: 16, background: 'rgb(250, 248, 242)', border: '1px dashed rgb(224, 216, 200)', borderRadius: 18 }}>
-                <Select
-                    options={flowerOptions}
-                    value={value2}
-                    onChange={setValue2}
-                    placeholder="请选择花朵"
-                />
-                <Select
-                    options={fruitOptions}
-                    value={value4}
-                    onChange={setValue4}
-                    placeholder="请选择水果"
-                />
+            <div style={demoDashedBoxStyle}>
+                <Select options={flowerOptions} value={value2} onChange={setValue2} placeholder="请选择花朵" />
+                <Select options={fruitOptions} value={value4} onChange={setValue4} placeholder="请选择水果" />
             </div>
             <div style={labelStyle}>禁用状态</div>
             <div style={S.demoBox}>
-                <Select
-                    options={flowerOptions}
-                    value={value3}
-                    onChange={setValue3}
-                    disabled
-                />
+                <Select options={flowerOptions} value={value3} onChange={setValue3} disabled />
             </div>
             <CodeBlock
                 code={`import { Select } from 'animal-island-ui';
@@ -1352,7 +1042,8 @@ const options = [
 const App = () => {
     const [value, setValue] = useState('option1');
     return <Select options={options} value={value} onChange={setValue} />;
-};`} />
+};`}
+            />
             <ApiTable rows={SELECT_API} />
         </div>
     );
@@ -1376,9 +1067,7 @@ const TabsDemo: React.FC = () => {
             label: '岛屿概况',
             children: (
                 <div>
-                    <p style={{ marginBottom: 12 }}>
-                        这里是一座无人岛，环境优美，气候宜人。
-                    </p>
+                    <p style={{ marginBottom: 12 }}>这里是一座无人岛，环境优美，气候宜人。</p>
                     <p>可以钓鱼、捉虫、种植各种植物。</p>
                 </div>
             ),
@@ -1406,12 +1095,12 @@ const TabsDemo: React.FC = () => {
     ];
 
     return (
-        <div style={S.section}>
-            <div style={S.sectionTitle}>
-                Tabs <span style={S.tag}>基础用法</span>
+        <div style={sectionStyle}>
+            <div style={sectionTitleStyle}>
+                Tabs <span style={tagStyle}>基础用法</span>
             </div>
             <div style={labelStyle}>非受控模式</div>
-            <div style={S.demoBox}>
+            <div style={{ ...S.demoBox, padding: 0 }}>
                 <Tabs
                     items={[
                         { key: 'a', label: '鱼类', children: <p>鲈鱼、鲷鱼、河童...</p> },
@@ -1422,11 +1111,14 @@ const TabsDemo: React.FC = () => {
                 />
             </div>
             <div style={labelStyle}>受控模式</div>
-            <div style={S.demoBox}>
+            <div style={{ ...S.demoBox, padding: 0 }}>
                 <Tabs items={items} activeKey={activeKey} onChange={setActiveKey} />
             </div>
             <div style={{ marginTop: 16, fontSize: 13, color: '#a08060' }}>
-                当前选中: <span style={{ color: '#19c8b9', fontWeight: 600 }}>{items.find(i => i.key === activeKey)?.label}</span>
+                当前选中:{' '}
+                <span style={{ color: '#19c8b9', fontWeight: 600 }}>
+                    {items.find((i) => i.key === activeKey)?.label}
+                </span>
             </div>
             <CodeBlock
                 code={`import { Tabs } from 'animal-island-ui';
@@ -1441,11 +1133,14 @@ const items = [
 
 // 受控模式
 const [activeKey, setActiveKey] = useState('tab1');
-<Tabs items={items} activeKey={activeKey} onChange={setActiveKey} />`} />
+<Tabs items={items} activeKey={activeKey} onChange={setActiveKey} />`}
+            />
             <ApiTable rows={TABS_API} />
         </div>
     );
 };
+
+import CheckboxDemo from './components/Checkbox';
 
 // ============================================
 // Page info & mapping
@@ -1511,6 +1206,10 @@ export const PAGE_INFO: Record<string, { title: string; desc: string }> = {
         title: 'Tabs 标签页',
         desc: '标签页组件 — 支持受控/非受控模式切换',
     },
+    checkbox: {
+        title: 'Checkbox 多选框',
+        desc: '多选框组件 — 支持受控/非受控、水平/垂直排列、三种尺寸、禁用单项或全部禁用',
+    },
 };
 
 const PAGES: Record<string, React.FC> = {
@@ -1529,6 +1228,7 @@ const PAGES: Record<string, React.FC> = {
     icon: IconDemo,
     select: SelectDemo,
     tabs: TabsDemo,
+    checkbox: CheckboxDemo,
 };
 
 // ============================================

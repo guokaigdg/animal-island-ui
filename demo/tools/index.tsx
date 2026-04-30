@@ -113,7 +113,25 @@ export const textStyle: React.CSSProperties = {
 export const demoBodyStyle: React.CSSProperties = {
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'flex-start',
+};
+
+export const demoBoxStyle: React.CSSProperties = {
+    marginTop: 12,
+    padding: 16,
+    background: '#faf8f3',
+    borderRadius: 12,
+    border: '1px solid #e8e2d6',
+};
+
+export const demoDashedBoxStyle: React.CSSProperties = {
+    display: 'flex',
+    gap: 16,
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    padding: 16,
+    background: 'rgb(250, 248, 242)',
+    border: '1px dashed rgb(224, 216, 200)',
+    borderRadius: 18,
 };
 
 export const codeBlockStyle: React.CSSProperties = {
