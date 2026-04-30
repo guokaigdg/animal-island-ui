@@ -1,0 +1,175 @@
+// ============================================
+// Checkbox — Animal Island Style
+// ============================================
+@import '../../styles/variables.less';
+
+.checkboxGroup {
+    display: flex;
+    flex-wrap: wrap;
+    gap: @spacing-md;
+    font-family: @font-family;
+}
+
+.horizontal {
+    flex-direction: row;
+}
+
+.vertical {
+    flex-direction: column;
+    gap: @spacing-sm;
+}
+
+// ---------- Item ----------
+.checkboxItem {
+    display: inline-flex;
+    align-items: center;
+    gap: @spacing-sm;
+    cursor: pointer;
+    user-select: none;
+    transition: all @motion-duration-base @motion-ease;
+
+    &:hover:not(.disabled) .box {
+        border-color: @primary-color;
+        transform: translateY(-1px);
+    }
+
+    &:hover:not(.disabled) .label {
+        color: @text-color;
+    }
+}
+
+// ---------- Size: small ----------
+.small {
+    .box {
+        width: 18px;
+        height: 18px;
+        border-radius: @border-radius-sm - 4;
+        border-width: 2px;
+    }
+
+    .checkmark {
+        font-size: 11px;
+    }
+
+    .label {
+        font-size: @font-size-sm;
+    }
+}
+
+// ---------- Size: middle (default) ----------
+.middle {
+    .box {
+        width: 22px;
+        height: 22px;
+        border-radius: @border-radius-sm - 2;
+        border-width: 2.5px;
+    }
+
+    .checkmark {
+        font-size: 13px;
+    }
+
+    .label {
+        font-size: @font-size-base;
+    }
+}
+
+// ---------- Size: large ----------
+.large {
+    .box {
+        width: 28px;
+        height: 28px;
+        border-radius: @border-radius-sm;
+        border-width: 3px;
+    }
+
+    .checkmark {
+        font-size: 16px;
+    }
+
+    .label {
+        font-size: @font-size-lg;
+    }
+}
+
+// ---------- Box ----------
+.box {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    background: rgb(247, 243, 223);
+    border: 2.5px solid #c4b89e;
+    border-radius: 8px;
+    transition: all @motion-duration-base @motion-ease;
+    outline: none;
+
+    &:focus-visible {
+        outline: 2px solid @focus-yellow;
+        outline-offset: 2px;
+    }
+}
+
+// ---------- Checked ----------
+.checked {
+    .box {
+        background: @primary-color;
+        border-color: @primary-color-active;
+    }
+
+    &:hover:not(.disabled) .box {
+        background: @primary-color-hover;
+        border-color: @primary-color;
+    }
+}
+
+// ---------- Checkmark ----------
+.checkmark {
+    color: #fff;
+    font-weight: 700;
+    line-height: 1;
+    animation: animal-checkbox-pop @motion-duration-fast @motion-ease;
+}
+
+@keyframes animal-checkbox-pop {
+    0% {
+        transform: scale(0.4);
+        opacity: 0;
+    }
+    60% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+// ---------- Label ----------
+.label {
+    color: #725d42;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    transition: color @motion-duration-fast;
+}
+
+// ---------- Disabled ----------
+.disabled {
+    cursor: not-allowed;
+    opacity: 0.55;
+
+    .box {
+        background: #f0ece2;
+        border-color: #d4c9b4;
+        transform: none !important;
+    }
+
+    .label {
+        color: #c4b89e;
+    }
+}
+
+.groupDisabled .checkboxItem {
+    cursor: not-allowed;
+}

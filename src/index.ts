@@ -70,3 +70,6 @@ export type { SelectProps, SelectOption } from './components/Select';
 
 export { Tabs } from './components/Tabs';
 export type { TabsProps, TabItem } from './components/Tabs';
+
+export { Checkbox } from './components/Checkbox';
+export type { CheckboxProps, CheckboxOption, CheckboxSize } from './components/Checkbox';

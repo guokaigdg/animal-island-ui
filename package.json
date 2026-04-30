@@ -47,7 +47,8 @@
     "dependencies": {
         "@fontsource/noto-sans-sc": "^5.2.9",
         "@fontsource/nunito": "^5.2.7",
-        "@fontsource/zen-maru-gothic": "^5.2.8"
+        "@fontsource/zen-maru-gothic": "^5.2.8",
+        "classnames": "^2.5.1"
     },
     "devDependencies": {
         "@laynezh/vite-plugin-lib-assets": "^2.1.3",
