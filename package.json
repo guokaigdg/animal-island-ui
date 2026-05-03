@@ -1,6 +1,6 @@
 {
     "name": "animal-island-ui",
-    "version": "0.7.4",
+    "version": "0.7.5",
     "description": "for learning purpose only, A nature-inspired React component library — Button, Input, Switch, Modal, Card, Collapse, Cursor, Divider",
     "type": "module",
     "main": "dist/cjs/index.cjs",
@@ -38,7 +38,7 @@
         "build": "vite build && tsc --project tsconfig.build.json --emitDeclarationOnly",
         "build:demo": "vite build --config vite.config.demo.ts",
         "prepublishOnly": "npm run build",
-        "deploy": "gh-pages -d demo-dist"
+        "deploy": "npm run build:demo && gh-pages -d demo-dist"
     },
     "peerDependencies": {
         "react": ">=17.0.0",

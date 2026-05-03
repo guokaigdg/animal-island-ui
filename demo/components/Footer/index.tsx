@@ -19,14 +19,21 @@ const FooterDemo: React.FC = () => (
             <FooterComponent type="tree" />
         </div>
         <CodeBlock
-            code={`import { Footer } from 'animal-island-ui';
+            code={`import React from 'react';
+import { Footer } from 'animal-island-ui';
 
-const App = () => (
-    <>
-        <Footer type="sea" />
-        <Footer type="tree" />
-    </>
-);`}
+const App = () => {
+    return (
+        <div>
+            {/* sea 类型（默认） */}
+            <Footer type="sea" />
+            {/* tree 类型 */}
+            <Footer type="tree" />
+        </div>
+    );
+};
+
+export default App;`}
         />
         <ApiTable rows={FOOTER_API} />
     </div>

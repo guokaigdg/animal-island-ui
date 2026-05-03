@@ -57,19 +57,27 @@ const TabsDemo: React.FC = () => {
                 <Tabs items={items} activeKey={activeKey} onChange={setActiveKey} />
             </div>
             <div style={{ marginTop: 16, fontSize: 13, color: '#a08060' }}>当前选中: <span style={{ color: '#19c8b9', fontWeight: 600 }}>{items.find(i => i.key === activeKey)?.label}</span></div>
-            <CodeBlock code={`import { Tabs } from 'animal-island-ui';
+            <CodeBlock code={`import React, { useState } from 'react';
+import { Tabs } from 'animal-island-ui';
 
-const items = [
-    { key: 'tab1', label: '标签一', children: <p>内容一</p> },
-    { key: 'tab2', label: '标签二', children: <p>内容二</p> },
-];
+const App = () => {
+    return (
+        <div>
+            {/* 非受控模式 */}
+            <Tabs
+                items={[
+                    { key: 'tab1', label: '标签一', children: <p>内容一</p> },
+                    { key: 'tab2', label: '标签二', children: <p>内容二</p> },
+                ]}
+                defaultActiveKey="tab1"
+            />
+            {/* 受控模式 */}
+            <Tabs items={items} activeKey={activeKey} onChange={setActiveKey} />
+        </div>
+    );
+};
 
-// 非受控模式
-<Tabs items={items} defaultActiveKey="tab1" />
-
-// 受控模式
-const [activeKey, setActiveKey] = useState('tab1');
-<Tabs items={items} activeKey={activeKey} onChange={setActiveKey} />`} />
+export default App;`} />
             <ApiTable rows={TABS_API} />
         </div>
     );

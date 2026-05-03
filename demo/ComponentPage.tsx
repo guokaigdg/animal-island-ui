@@ -94,6 +94,7 @@ const BUTTON_API: ApiRow[] = [
         defaultVal: "'button'",
     },
     { prop: 'children', desc: '按钮内容', type: 'ReactNode', defaultVal: '-' },
+    { prop: 'className', desc: '自定义类名', type: 'string', defaultVal: '-' },
     {
         prop: '...',
         desc: '继承 React.ButtonHTMLAttributes',
@@ -177,6 +178,7 @@ const SWITCH_API: ApiRow[] = [
         type: '(checked: boolean) => void',
         defaultVal: '-',
     },
+    { prop: 'className', desc: '自定义类名', type: 'string', defaultVal: '-' },
 ];
 
 const MODAL_API: ApiRow[] = [
@@ -196,12 +198,6 @@ const MODAL_API: ApiRow[] = [
         defaultVal: 'true',
     },
     {
-        prop: 'closable',
-        desc: '是否显示关闭按钮',
-        type: 'boolean',
-        defaultVal: 'true',
-    },
-    {
         prop: 'footer',
         desc: '底部按钮区域，传 null 则不显示',
         type: 'ReactNode | null',
@@ -214,6 +210,24 @@ const MODAL_API: ApiRow[] = [
         desc: '自定义内容',
         type: 'ReactNode',
         defaultVal: '-',
+    },
+    {
+        prop: 'className',
+        desc: '自定义类名',
+        type: 'string',
+        defaultVal: '-',
+    },
+    {
+        prop: 'typeSpeed',
+        desc: '打字机每字间隔 (ms)',
+        type: 'number',
+        defaultVal: '80',
+    },
+    {
+        prop: 'typewriter',
+        desc: '是否启用打字机效果',
+        type: 'boolean',
+        defaultVal: 'true',
     },
 ];
 
@@ -385,25 +399,39 @@ const ButtonDemo: React.FC = () => (
             </div>
         </div>
         <CodeBlock
-            code={`import { Button } from 'animal-island-ui';
+            code={`import React from 'react';
+import { Button } from 'animal-island-ui';
 
 const App = () => {
     return (
         <div>
+            {/* Primary */}
             <Button type="primary">Primary</Button>
+            {/* Default */}
             <Button>Default</Button>
+            {/* Dashed */}
             <Button type="dashed">Dashed</Button>
+            {/* Text */}
             <Button type="text">Text</Button>
+            {/* Link */}
             <Button type="link">Link</Button>
+            {/* Danger */}
             <Button type="primary" danger>Danger</Button>
+            {/* Ghost */}
             <Button type="primary" ghost>Ghost</Button>
+            {/* Loading */}
             <Button type="primary" loading>Loading</Button>
+            {/* Large */}
             <Button type="primary" size="large">Large</Button>
+            {/* Icon */}
             <Button type="primary" icon={<span>🔍</span>}>搜索</Button>
+            {/* Block */}
             <Button type="primary" block>Block</Button>
         </div>
     );
-};`}
+};
+
+export default App;`}
         />
         <ApiTable rows={BUTTON_API} />
     </div>
@@ -446,22 +474,32 @@ const InputDemo: React.FC = () => {
                 </div>
             </div>
             <CodeBlock
-                code={`import { Input } from 'animal-island-ui';
+                code={`import React, { useState } from 'react';
+import { Input } from 'animal-island-ui';
 
 const App = () => {
     const [val, setVal] = useState('');
     return (
         <div>
+            {/* 基础输入框 */}
             <Input placeholder="Basic input" />
+            {/* 带清除按钮 */}
             <Input placeholder="With clear" allowClear value={val} onChange={e => setVal(e.target.value)} />
+            {/* 前后缀 */}
             <Input placeholder="Prefix" prefix="🔍" suffix="⏎" />
+            {/* 小尺寸 */}
             <Input placeholder="Small" size="small" />
+            {/* 大尺寸 */}
             <Input placeholder="Large" size="large" />
+            {/* 错误状态 */}
             <Input placeholder="Error" status="error" />
+            {/* 警告状态 */}
             <Input placeholder="Warning" status="warning" />
         </div>
     );
-};`}
+};
+
+export default App;`}
             />
             <ApiTable rows={INPUT_API} />
         </div>
@@ -497,18 +535,24 @@ const SwitchDemo: React.FC = () => {
                 </div>
             </div>
             <CodeBlock
-                code={`import { Switch } from 'animal-island-ui';
+                code={`import React, { useState } from 'react';
+import { Switch } from 'animal-island-ui';
 
 const App = () => {
     const [checked, setChecked] = useState(false);
     return (
         <div>
+            {/* 受控模式 */}
             <Switch checked={checked} onChange={setChecked} />
+            {/* 自定义文案 */}
             <Switch defaultChecked checkedChildren="开" unCheckedChildren="关" />
+            {/* 小尺寸 */}
             <Switch size="small" defaultChecked />
         </div>
     );
-};`}
+};
+
+export default App;`}
             />
             <ApiTable rows={SWITCH_API} />
         </div>
@@ -648,34 +692,39 @@ const CardDemo: React.FC = () => (
         </div>
 
         <CodeBlock
-            code={`import { Card } from 'animal-island-ui';
+            code={`import React from 'react';
+import { Card } from 'animal-island-ui';
 
-const App = () => (
-    <div>
-        {/* 基础卡片 */}
-        <Card style={{ width: 260 }}>
-            基础卡片
-        </Card>
+const App = () => {
+    return (
+        <div>
+            {/* 基础卡片 */}
+            <Card style={{ width: 260 }}>
+                基础卡片
+            </Card>
 
-        {/* 标题卡片 */}
-        <Card type="title" style={{ width: 260 }}>
-            标题卡片
-        </Card>
+            {/* 标题卡片 */}
+            <Card type="title" style={{ width: 260 }}>
+                标题卡片
+            </Card>
 
-        {/* 颜色变体 */}
-        <Card color="app-blue">
-            蓝色卡片
-        </Card>
-        <Card color="warm-peach-pink">
-            暖桃粉卡片
-        </Card>
+            {/* 颜色变体 */}
+            <Card color="app-blue">
+                蓝色卡片
+            </Card>
+            <Card color="warm-peach-pink">
+                暖桃粉卡片
+            </Card>
 
-        {/* 颜色 + 标题 组合 */}
-        <Card type="title" color="purple">
-            紫色标题卡片
-        </Card>
-    </div>
-);`}
+            {/* 颜色 + 标题 组合 */}
+            <Card type="title" color="purple">
+                紫色标题卡片
+            </Card>
+        </div>
+    );
+};
+
+export default App;`}
         />
         <ApiTable rows={CARD_API} />
     </div>
@@ -709,15 +758,23 @@ const CollapseDemo: React.FC = () => (
             </div>
         </div>
         <CodeBlock
-            code={`import { Collapse } from 'animal-island-ui';
+            code={`import React from 'react';
+import { Collapse } from 'animal-island-ui';
 
-const App = () => (
-    <div>
-        <Collapse question="问题" answer={<p>回答内容</p>} />
-        <Collapse question="默认展开" answer={<p>答案</p>} defaultExpanded />
-        <Collapse question="禁用" answer={<p>答案</p>} disabled />
-    </div>
-);`}
+const App = () => {
+    return (
+        <div>
+            {/* 基础用法 */}
+            <Collapse question="问题" answer={<p>回答内容</p>} />
+            {/* 默认展开 */}
+            <Collapse question="默认展开" answer={<p>答案</p>} defaultExpanded />
+            {/* 禁用状态 */}
+            <Collapse question="禁用" answer={<p>答案</p>} disabled />
+        </div>
+    );
+};
+
+export default App;`}
         />
         <ApiTable rows={COLLAPSE_API} />
     </div>
@@ -732,13 +789,21 @@ const CursorDemo: React.FC = () => (
             Cursor 组件通过 CSS cursor 属性将子元素的鼠标光标替换为自定义手指图标，当前 Demo 全局已应用。
         </p>
         <CodeBlock
-            code={`import { Cursor } from 'animal-island-ui';
+            code={`import React from 'react';
+import { Cursor } from 'animal-island-ui';
 
-const App = () => (
-    <Cursor>
-        <div>鼠标移入此区域将显示自定义光标</div>
-    </Cursor>
-);`}
+const App = () => {
+    return (
+        <div>
+            {/* 光标组件 */}
+            <Cursor>
+                <div>鼠标移入此区域将显示自定义光标</div>
+            </Cursor>
+        </div>
+    );
+};
+
+export default App;`}
         />
         <ApiTable rows={CURSOR_API} />
     </div>
@@ -748,6 +813,7 @@ const ModalDemo: React.FC = () => {
     const [modalOpen, setModalOpen] = useState(false);
     const [titleModalOpen, setTitleModalOpen] = useState(false);
     const [customFooterOpen, setCustomFooterOpen] = useState(false);
+    const [noTypewriterOpen, setNoTypewriterOpen] = useState(false);
     return (
         <div style={sectionStyle}>
             <div style={sectionTitleStyle}>
@@ -764,15 +830,22 @@ const ModalDemo: React.FC = () => {
                         自定义 Footer
                     </Button>
                 </div>
+                <div style={labelStyle}>关闭打字机效果</div>
+                <div style={S.row}>
+                    <Button type="primary" onClick={() => setNoTypewriterOpen(true)}>
+                        关闭打字机效果
+                    </Button>
+                </div>
             </div>
             <Modal
                 open={modalOpen}
-                closable={false}
                 onClose={() => setModalOpen(false)}
                 onOk={() => setModalOpen(false)}
             >
-                <span>钓到石头了!</span>
-                <span>竟然连这种都能钓起来...</span>
+                <div style={{ textAlign: 'center', width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8 }}>
+                    <span>钓到石头了!</span>
+                    <span>竟然连这种都能钓起来...</span>
+                </div>
             </Modal>
             <Modal
                 open={titleModalOpen}
@@ -780,7 +853,7 @@ const ModalDemo: React.FC = () => {
                 onClose={() => setTitleModalOpen(false)}
                 onOk={() => setTitleModalOpen(false)}
             >
-                <p>是否将这条鱼捐赠给博物馆？傅达会非常高兴的！</p>
+                是否愿意将这条鱼捐赠给博物馆呢？傅达会好好照顾它的！这可是博物馆的新展品哦~
             </Modal>
             <Modal
                 open={customFooterOpen}
@@ -795,10 +868,20 @@ const ModalDemo: React.FC = () => {
                     </>
                 }
             >
-                <p>确定要让这位居民搬走吗？这个操作不可撤销。</p>
+                确定要让这位居民搬走吗？这个操作不可撤销。
+            </Modal>
+            <Modal
+                open={noTypewriterOpen}
+                title="天气预报"
+                onClose={() => setNoTypewriterOpen(false)}
+                onOk={() => setNoTypewriterOpen(false)}
+                typewriter={false}
+            >
+                明天天气晴朗，气温 20-28°C，适合外出活动！
             </Modal>
             <CodeBlock
-                code={`import { Button, Modal } from 'animal-island-ui';
+                code={`import React, { useState } from 'react';
+import { Button, Modal } from 'animal-island-ui';
 
 const App = () => {
     const [open, setOpen] = useState(false);
@@ -823,9 +906,16 @@ const App = () => {
             <Modal open={open} footer={null}>
                 无底部按钮
             </Modal>
+
+            {/* 关闭打字机效果 */}
+            <Modal open={open} typewriter={false}>
+                直接显示全部内容
+            </Modal>
         </div>
     );
-};`}
+};
+
+export default App;`}
             />
             <ApiTable rows={MODAL_API} />
         </div>
@@ -873,7 +963,8 @@ const TypewriterDemo: React.FC = () => {
                 </div>
             </div>
             <CodeBlock
-                code={`import { Typewriter } from 'animal-island-ui';
+                code={`import React, { useState } from 'react';
+import { Typewriter } from 'animal-island-ui';
 
 const App = () => {
     const [key, setKey] = useState(0);
@@ -892,7 +983,9 @@ const App = () => {
             <button onClick={() => setKey(k => k + 1)} style={{ marginBottom: 20 }}>重新播放</button>
         </>
     );
-};`}
+};
+
+export default App;`}
             />
             <ApiTable rows={TYPEWRITER_API} />
         </div>
@@ -950,17 +1043,27 @@ const DividerDemo: React.FC = () => (
         <div style={labelStyle}>wave-yellow</div>
         <Divider type="wave-yellow" />
         <CodeBlock
-            code={`import { Divider } from 'animal-island-ui';
+            code={`import React from 'react';
+import { Divider } from 'animal-island-ui';
 
-const App = () => (
-    <div>
-        <Divider type="line-brown" />
-        <Divider type="line-teal" />
-        <Divider type="line-white" />
-        <Divider type="line-yellow" />
-        <Divider type="wave-yellow" />
-    </div>
-);`}
+const App = () => {
+    return (
+        <div>
+            {/* line-brown */}
+            <Divider type="line-brown" />
+            {/* line-teal */}
+            <Divider type="line-teal" />
+            {/* line-white */}
+            <Divider type="line-white" />
+            {/* line-yellow */}
+            <Divider type="line-yellow" />
+            {/* wave-yellow */}
+            <Divider type="wave-yellow" />
+        </div>
+    );
+};
+
+export default App;`}
         />
         <ApiTable rows={DIVIDER_API} />
     </div>
@@ -1032,7 +1135,8 @@ const SelectDemo: React.FC = () => {
                 <Select options={flowerOptions} value={value3} onChange={setValue3} disabled />
             </div>
             <CodeBlock
-                code={`import { Select } from 'animal-island-ui';
+                code={`import React, { useState } from 'react';
+import { Select } from 'animal-island-ui';
 
 const options = [
     { key: 'option1', label: '选项一' },
@@ -1041,8 +1145,19 @@ const options = [
 
 const App = () => {
     const [value, setValue] = useState('option1');
-    return <Select options={options} value={value} onChange={setValue} />;
-};`}
+    return (
+        <div>
+            {/* 受控模式 */}
+            <Select options={options} value={value} onChange={setValue} />
+            {/* 占位文本 */}
+            <Select options={options} placeholder="请选择" />
+            {/* 禁用状态 */}
+            <Select options={options} disabled />
+        </div>
+    );
+};
+
+export default App;`}
             />
             <ApiTable rows={SELECT_API} />
         </div>
@@ -1057,6 +1172,9 @@ const TABS_API = [
     { prop: 'defaultActiveKey', desc: '默认激活的标签', type: 'string', defaultVal: '第一个标签' },
     { prop: 'activeKey', desc: '受控模式当前激活标签', type: 'string', defaultVal: '-' },
     { prop: 'onChange', desc: '标签切换回调', type: '(key: string) => void', defaultVal: '-' },
+    { prop: 'className', desc: '自定义类名', type: 'string', defaultVal: '-' },
+    { prop: 'style', desc: '自定义样式', type: 'CSSProperties', defaultVal: '-' },
+    { prop: 'leafAnimation', desc: '是否开启叶子动画', type: 'boolean', defaultVal: 'true' },
 ];
 
 const TabsDemo: React.FC = () => {
@@ -1112,7 +1230,7 @@ const TabsDemo: React.FC = () => {
             </div>
             <div style={labelStyle}>受控模式</div>
             <div style={{ ...S.demoBox, padding: 0 }}>
-                <Tabs items={items} activeKey={activeKey} onChange={setActiveKey} />
+                <Tabs items={items} activeKey={activeKey} onChange={setActiveKey} leafAnimation={false} />
             </div>
             <div style={{ marginTop: 16, fontSize: 13, color: '#a08060' }}>
                 当前选中:{' '}
@@ -1121,19 +1239,29 @@ const TabsDemo: React.FC = () => {
                 </span>
             </div>
             <CodeBlock
-                code={`import { Tabs } from 'animal-island-ui';
+                code={`import React, { useState } from 'react';
+import { Tabs } from 'animal-island-ui';
 
 const items = [
-    { key: 'tab1', label: '标签一', children: <p>内容一</p> },
-    { key: 'tab2', label: '标签二', children: <p>内容二</p> },
+    { key: 'tab1', label: '岛屿概况', children: <p>内容一</p> },
+    { key: 'tab2', label: '商店', children: <p>内容二</p> },
+    { key: 'tab3', label: '服务台', children: <p>内容三</p> },
 ];
 
-// 非受控模式
-<Tabs items={items} defaultActiveKey="tab1" />
+const App = () => {
+    return (
+        <div>
+            {/* 非受控模式 */}
+            <Tabs items={items} defaultActiveKey="tab1" />
+            {/* 受控模式 */}
+            <Tabs items={items} activeKey={activeKey} onChange={setActiveKey} leafAnimation={false} />
+            {/* 关闭叶子动画 */}
+            <Tabs items={items} leafAnimation={false} />
+        </div>
+    );
+};
 
-// 受控模式
-const [activeKey, setActiveKey] = useState('tab1');
-<Tabs items={items} activeKey={activeKey} onChange={setActiveKey} />`}
+export default App;`}
             />
             <ApiTable rows={TABS_API} />
         </div>

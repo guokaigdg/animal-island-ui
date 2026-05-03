@@ -91,23 +91,29 @@ const CheckboxDemo: React.FC = () => {
             </div>
 
             <CodeBlock
-                code={`import { Checkbox } from 'animal-island-ui';
+                code={`import React, { useState } from 'react';
+import { Checkbox } from 'animal-island-ui';
 
 const options = [
     { label: '🌊 海滩', value: 'beach' },
     { label: '🌳 森林', value: 'forest' },
-    { label: '🌸 花园', value: 'garden', disabled: true },
+    { label: '🌸 花园', value: 'garden' },
 ];
 
-// 非受控
-<Checkbox options={options} defaultValue={['beach']} />
+const App = () => {
+    return (
+        <div>
+            {/* 非受控 */}
+            <Checkbox options={options} defaultValue={['beach']} />
+            {/* 受控 */}
+            <Checkbox options={options} value={values} onChange={setValues} />
+            {/* 垂直排列 */}
+            <Checkbox options={options} direction="vertical" />
+        </div>
+    );
+};
 
-// 受控
-const [values, setValues] = useState(['beach']);
-<Checkbox options={options} value={values} onChange={setValues} />
-
-// 垂直排列
-<Checkbox options={options} direction="vertical" />`}
+export default App;`}
             />
             <ApiTable rows={CHECKBOX_API} />
         </div>

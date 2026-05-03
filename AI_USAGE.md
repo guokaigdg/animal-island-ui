@@ -151,7 +151,6 @@ interface ModalProps {
   title?: React.ReactNode;
   width?: number | string;             // default 520
   maskClosable?: boolean;              // default true
-  closable?: boolean;                  // default true
   footer?: React.ReactNode | null;     // null = hide footer
   onClose?: () => void;
   onOk?: () => void;

@@ -97,15 +97,21 @@ const IconDemo: React.FC = () => (
             ))}
         </div>
         <CodeBlock
-            code={`import { Icon } from 'animal-island-ui';
+            code={`import React from 'react';
+import { Icon } from 'animal-island-ui';
 
-const App = () => (
-    <div>
-        <Icon name="icon-miles" size={32} />
-        <Icon name="icon-camera" size={48} />
-        <Icon name="icon-chat" size={32} bounce />
-    </div>
-);`}
+const App = () => {
+    return (
+        <div>
+            {/* 基础用法 */}
+            <Icon name="icon-miles" size={32} />
+            {/* 弹跳动画 */}
+            <Icon name="icon-camera" size={48} bounce />
+        </div>
+    );
+};
+
+export default App;`}
         />
         <ApiTable rows={ICON_API} />
     </div>
