@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styles from './tabs.module.less';
+import leafIcon from '../../assets/img/icons/icon-leaf.png';
 
 export interface TabItem {
     key: string;
@@ -14,6 +15,7 @@ export interface TabsProps {
     onChange?: (key: string) => void;
     className?: string;
     style?: React.CSSProperties;
+    leafAnimation?: boolean;
 }
 
 export const Tabs: React.FC<TabsProps> = ({
@@ -23,6 +25,7 @@ export const Tabs: React.FC<TabsProps> = ({
     onChange,
     className,
     style,
+    leafAnimation = true,
 }) => {
     const [internalActiveKey, setInternalActiveKey] = useState(
         defaultActiveKey || items[0]?.key
@@ -56,7 +59,7 @@ export const Tabs: React.FC<TabsProps> = ({
                                 {isActive ? '●' : '○'}
                             </span>
                             <span className={styles.tabLabel}>{item.label}</span>
-                            {isActive && <span className={styles.tabLeaf}>🍃</span>}
+                            {isActive && <img src={leafIcon} alt="" className={`${styles.tabLeaf} ${leafAnimation ? '' : styles.tabLeafStatic}`} />}
                         </button>
                     );
                 })}
