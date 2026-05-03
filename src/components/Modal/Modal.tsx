@@ -23,8 +23,6 @@ export interface ModalProps {
     width?: number | string;
     /** 点击遮罩关闭 */
     maskClosable?: boolean;
-    /** 是否显示关闭按钮 */
-    closable?: boolean;
     /** 底部按钮区域 */
     footer?: React.ReactNode | null;
     /** 关闭回调 */
@@ -45,7 +43,6 @@ export const Modal: React.FC<ModalProps> = ({
     title,
     width = 520,
     maskClosable = true,
-    closable = true,
     footer,
     onClose,
     onOk,
@@ -113,7 +110,7 @@ export const Modal: React.FC<ModalProps> = ({
                 >
                     <ClipDef />
                     <div className={styles.modalClipped}>
-                        {(title || closable) && (
+                        {title && (
                             <div className={styles.header}>
                                 {title && (
                                     <div className={styles.title}>{title}</div>
