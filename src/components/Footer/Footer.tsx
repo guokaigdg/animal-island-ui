@@ -13,7 +13,7 @@ export interface FooterProps {
 }
 
 export const Footer: React.FC<FooterProps> = ({
-    type = 'sea',
+    type = 'tree',
     className,
     style,
 }) => {

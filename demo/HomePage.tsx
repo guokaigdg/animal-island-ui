@@ -327,8 +327,8 @@ const features = [
     },
     {
         icon: 'Property-Shopping.svg',
-        title: '13 个组件',
-        desc: 'Button / Input / Switch / Modal / Typewriter / Card / Collapse / Cursor / Divider / Time / Phone / Footer / Icon',
+        title: '19 个组件',
+        desc: 'Button / Input / Switch / Modal / Typewriter / Card / Collapse / Cursor / Divider / Time / Phone / Footer / Icon / Checkbox / Select / Tabs / CodeBlock 等',
     },
     {
         icon: 'Property-Camera.svg',
@@ -354,6 +354,13 @@ const components = [
         name: 'Switch',
         desc: '受控/非受控、自定义文案、加载状态',
     },
+    { key: 'checkbox', name: 'Checkbox', desc: '多选框组件，支持水平/垂直排列' },
+    {
+        key: 'select',
+        name: 'Select',
+        desc: '下拉选择器，支持搜索和禁用',
+    },
+    { key: 'tabs', name: 'Tabs', desc: '标签页组件，支持受控/非受控模式' },
     { key: 'modal', name: 'Modal', desc: 'SVG 有机形状弹窗、ESC 关闭' },
     {
         key: 'typewriter',
@@ -362,13 +369,13 @@ const components = [
     },
     { key: 'card', name: 'Card', desc: '默认/标题两种卡片风格' },
     { key: 'collapse', name: 'Collapse', desc: 'FAQ 折叠面板、平滑展开动画' },
-    { key: 'cursor', name: 'Cursor', desc: '自定义手指光标' },
+    { key: 'cursor', name: 'Cursor', desc: '自定义手指光标，支持多种尺寸' },
     { key: 'divider-comp', name: 'Divider', desc: '装饰性水平分割线' },
     { key: 'icon', name: 'Icon', desc: 'SVG 图标库' },
-    { key: 'select', name: 'Select', desc: '下拉选择器，支持搜索' },
     { key: 'footer', name: 'Footer', desc: '页脚组件' },
     { key: 'time', name: 'Time', desc: '可爱风格时间显示' },
     { key: 'phone', name: 'Phone', desc: 'Phone 模拟器' },
+    { key: 'codeblock', name: 'CodeBlock', desc: '代码语法高亮组件' },
 ];
 
 // ============================================
@@ -400,7 +407,7 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                 <div style={isMobile ? { textAlign: 'center' as const } : S.heroText}>
                     <h1 style={{ ...S.heroTitle, fontSize: isMobile ? 37 : 60 }}>
                         {isMobile ? 'Animal Island UI' : <>Animal <br /> Island UI</>}
-                        <span style={S.heroVersion}>v1.0.0</span>
+                        <span style={S.heroVersion}>v0.7.6</span>
                     </h1>
                     <Typewriter speed={60}>
                         <p style={{ ...S.heroSubtitle, fontSize: isMobile ? 14 : 17 }}>

@@ -73,3 +73,6 @@ export type { TabsProps, TabItem } from './components/Tabs';
 
 export { Checkbox } from './components/Checkbox';
 export type { CheckboxProps, CheckboxOption, CheckboxSize } from './components/Checkbox';
+
+export { CodeBlock } from './components/CodeBlock';
+export type { CodeBlockProps } from './components/CodeBlock';

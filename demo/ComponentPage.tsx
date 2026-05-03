@@ -1269,6 +1269,7 @@ export default App;`}
 };
 
 import CheckboxDemo from './components/Checkbox';
+import CodeBlockDemo from './components/CodeBlock';
 
 // ============================================
 // Page info & mapping
@@ -1338,6 +1339,10 @@ export const PAGE_INFO: Record<string, { title: string; desc: string }> = {
         title: 'Checkbox 多选框',
         desc: '多选框组件 — 支持受控/非受控、水平/垂直排列、三种尺寸、禁用单项或全部禁用',
     },
+    codeblock: {
+        title: 'CodeBlock 代码高亮',
+        desc: '代码高亮组件 — 语法高亮显示，支持自定义样式和类名',
+    },
 };
 
 const PAGES: Record<string, React.FC> = {
@@ -1357,6 +1362,7 @@ const PAGES: Record<string, React.FC> = {
     select: SelectDemo,
     tabs: TabsDemo,
     checkbox: CheckboxDemo,
+    codeblock: CodeBlockDemo,
 };
 
 // ============================================

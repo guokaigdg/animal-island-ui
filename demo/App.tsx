@@ -78,6 +78,7 @@ const MENU_ITEMS: MenuItem[] = [
             { key: 'checkbox', label: 'Checkbox 多选框' },
             { key: 'tabs', label: 'Tabs 标签页' },
             { key: 'footer', label: 'Footer 页脚' },
+            { key: 'codeblock', label: 'CodeBlock 代码高亮' },
         ],
     },
     {
