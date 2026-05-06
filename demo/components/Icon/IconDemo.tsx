@@ -56,7 +56,7 @@ const IconDemo: React.FC = () => (
             <Icon name="icon-miles" size={32} />
             <Icon name="icon-miles" size={48} />
         </div>
-        <div style={labelStyle}>bounce 弹跳动画</div>
+        <div style={labelStyle}>bounce 弹跳动画（鼠标悬停查看效果）</div>
         <div style={{ display: 'flex', gap: 20, alignItems: 'center' }}>
             <Icon name="icon-miles" size={32} bounce />
             <Icon name="icon-camera" size={32} bounce />

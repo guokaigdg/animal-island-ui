@@ -100,7 +100,7 @@ const S = {
         height: '100dvh',
         overflow: 'hidden',
         fontFamily: "Nunito, 'Noto Sans SC', 'Zen Maru Gothic', -apple-system, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif",
-        background: `url(${new URL('./img/content_bg_pc.jpg', import.meta.url).href}) center fixed`,
+        background: `url(${new URL('./img/content_bg_pc.jpg', import.meta.url).href}) center / auto repeat`,
     } as React.CSSProperties,
     sidebar: {
         width: 220,

@@ -14,7 +14,7 @@ export const PAGE_INFO: Record<string, { title: string; desc: string }> = {
     },
     card: {
         title: 'Card 卡片',
-        desc: '卡片容器组件 — 支持 default / title 两种类型，12 种 IslandPhone 背景颜色',
+        desc: '卡片容器组件 — 支持 default / title 两种类型，13 种背景颜色',
     },
     collapse: {
         title: 'Collapse 折叠面板',
