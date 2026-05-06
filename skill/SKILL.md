@@ -11,6 +11,11 @@ description: >
 
 # Animal Island UI 设计风格指南
 
+> **三文档分工**（生成代码 / 调样式时按需查阅，避免互相翻查）：
+> - `AI_USAGE.md` — API 手册：每个组件的 props、类型、默认值、合法取值、禁用用法。**写代码优先查这里**。
+> - `skill/SKILL.md`（本文档）— 像素级样式：设计 token、每组件精确 CSS（hex/px/keyframe）、Demo 布局、新组件开发模板。**要自己实现/扩展样式时查这里**。
+> - `DESIGN_PROMPT.md` — 给外部工具（v0 / Figma AI / Midjourney / DALL-E）的提示词包，含 clip-path、色板速查、禁用清单。**只在喂别的 AI 时用**。
+
 ## 概述
 
 animal-island-ui 是一套受《治愈系海岛风格》启发的 React + TypeScript UI 组件库。
@@ -21,7 +26,7 @@ animal-island-ui 是一套受《治愈系海岛风格》启发的 React + TypeSc
 - 构建：Vite (library mode) + `vite.config.ts`（库）/ `vite.config.demo.ts`（Demo）
 - 样式系统：Less Modules + `src/styles/variables.less` 设计 token
 
-### 全量组件清单（15 个）
+### 全量组件清单（17 个）
 
 从 `src/index.ts` 导出：
 
@@ -33,17 +38,19 @@ animal-island-ui 是一套受《治愈系海岛风格》启发的 React + TypeSc
 | `Modal` | SVG blob 裁切弹窗 | ✓ | |
 | `Card` | 容器，`default`/`title`，13 种 IslandPhone 配色 | | ✓ |
 | `Collapse` | 手风琴（CSS Grid，无 JS 过渡） | ✓ | |
-| `Select` | 下拉选择器，支持搜索 | ✓ | |
-| `Icon` | SVG 图标库 | | ✓ |
+| `Select` | 下拉选择器（受控） | ✓ | |
+| `Checkbox` | 多选框组，水平/垂直，3 种尺寸 | ✓ | |
+| `Icon` | SVG 图标库（10 个） | | ✓ |
 | `Time` | HUD 实时时钟 | | ✓ |
 | `Phone` | IslandPhone 3×3 应用网格 | | ✓ |
 | `Footer` | 底部装饰图（`sea`/`tree`） | | ✓ |
 | `Divider` | 装饰分割线，5 种风格 | | ✓ |
 | `Cursor` | 游戏手指光标包裹器 | | ✓ |
 | `Typewriter` | 打字机效果，保留 ReactNode 结构 | | ✓ |
-| `Tabs` | 标签页切换，平滑动画 | ✓ | |
+| `Tabs` | 标签页切换，叶子摆动动画可选 | ✓ | |
+| `CodeBlock` | JSX/TS 语法高亮代码块 | | ✓ |
 
-类型导出：`ButtonProps/ButtonType/ButtonSize`、`InputProps/InputSize`、`SwitchProps/SwitchSize`、`ModalProps`、`CardProps/CardType/CardColor`、`FooterProps/FooterType`、`CollapseProps`、`CursorProps`、`TimeProps`、`PhoneProps`、`DividerProps`、`TypewriterProps`、`SelectProps`、`IconProps`、`TabsProps/TabItem`。
+类型导出：`ButtonProps/ButtonType/ButtonSize`、`InputProps/InputSize`、`SwitchProps/SwitchSize`、`ModalProps`、`CardProps/CardType/CardColor`、`FooterProps/FooterType`、`CollapseProps`、`CursorProps`、`TimeProps`、`PhoneProps`、`DividerProps`、`TypewriterProps`、`SelectProps/SelectOption`、`IconProps/IconName`、`TabsProps/TabItem`、`CheckboxProps/CheckboxOption/CheckboxSize`、`CodeBlockProps`。运行时值：`ICON_LIST`。
 
 ---
 
@@ -560,6 +567,7 @@ font-size: 14px; line-height: 1.7;
     font-size: 12px;
     animation: leafWiggle 2s ease-in-out infinite;
 }
+/* leafAnimation={false} 时追加 tabLeafStatic 类去除 animation */
 
 @keyframes leafWiggle {
     0%, 100% { transform: rotate(0deg); }
@@ -820,8 +828,8 @@ padding: 12px 20px; gap: 12px;
 ### Footer
 
 ```tsx
-<Footer type="sea" />   // 默认：海浪
-<Footer type="tree" />  // 森林树
+<Footer />              // 默认：森林（tree，高 60px）
+<Footer type="sea" />   // 海浪（高 80px）
 ```
 
 ```less
@@ -906,6 +914,130 @@ Props：
 - `renderTruncated(node, state)`：按剩余字符数递归裁剪，`React.cloneElement` 保留原节点与样式
 - `useEffect` 依赖 `[total, speed, trigger, autoPlay]`，内部 `setInterval` 按步递增 `count`
 - **无样式文件**，不包裹任何额外 DOM（返回 `<>...</>`），对布局零影响
+
+---
+
+### Checkbox
+
+Props：
+
+| name | type | default | 说明 |
+|---|---|---|---|
+| `options` | `CheckboxOption[]` | — | **必填**；每项 `{ label, value, disabled? }` |
+| `value` | `Array<string \| number>` | — | 受控选中值 |
+| `defaultValue` | `Array<string \| number>` | `[]` | 非受控默认值 |
+| `size` | `'small' \| 'middle' \| 'large'` | `'middle'` | 尺寸 |
+| `disabled` | `boolean` | `false` | 禁用全部项 |
+| `direction` | `'horizontal' \| 'vertical'` | `'horizontal'` | 排列方向 |
+| `onChange` | `(values) => void` | — | 选中值变化 |
+
+**尺寸表（box 方框）：**
+
+| 属性 | small | middle | large |
+|---|---|---|---|
+| 宽高 | 18×18px | **22×22px** | 28×28px |
+| border-width | 2px | 2.5px | 3px |
+| 标签 font-size | 12px | 14px | 16px |
+| 对勾 font-size | 11px | 13px | 16px |
+
+**精确样式：**
+```css
+/* group */
+display: flex; flex-wrap: wrap;
+gap: 12px;                                 /* horizontal */
+/* vertical */ flex-direction: column; gap: 8px;
+
+/* item */
+display: inline-flex; align-items: center;
+gap: 8px;
+cursor: pointer;
+transition: all 0.25s cubic-bezier(0.4,0,0.2,1);
+
+/* box（未选）*/
+background: rgb(247, 243, 223);
+border: 2.5px solid #c4b89e;
+border-radius: 8px;
+display: inline-flex; align-items: center; justify-content: center;
+
+/* box hover */
+border-color: #19c8b9;
+transform: translateY(-1px);
+
+/* box focus-visible */
+outline: 2px solid #ffcc00; outline-offset: 2px;
+
+/* 选中 */
+background: #19c8b9;
+border-color: #11a89b;
+/* 选中 hover */ background: #3dd4c6; border-color: #19c8b9;
+
+/* 对勾 ✓ */
+color: #fff; font-weight: 700; line-height: 1;
+animation: animal-checkbox-pop 0.15s cubic-bezier(0.4,0,0.2,1);
+
+@keyframes animal-checkbox-pop {
+  0%   { transform: scale(0.4); opacity: 0; }
+  60%  { transform: scale(1.2); }
+  100% { transform: scale(1);   opacity: 1; }
+}
+
+/* label */
+color: #725d42; font-weight: 500;
+letter-spacing: 0.01em;
+/* item hover */ label color: #794f27;
+
+/* 禁用（单项或整组）*/
+cursor: not-allowed;
+opacity: 0.55;
+/* box */ background: #f0ece2; border-color: #d4c9b4; transform: none !important;
+/* label */ color: #c4b89e;
+```
+
+---
+
+### CodeBlock
+
+Props：
+
+| name | type | default | 说明 |
+|---|---|---|---|
+| `code` | `string` | — | **必填**；原始源码字符串，内部自动按 JSX/TS 分词高亮 |
+| `style` | `CSSProperties` | — | 会合并覆盖默认深色主题 |
+| `className` | `string` | — | 自定义类名 |
+
+**默认主题（写死在组件，不走 Less）：**
+
+```css
+padding: 20px 24px;
+background: #2b2118;
+border: 1px solid #3d3028;
+border-radius: 20px;
+font-size: 14px;
+line-height: 1.7;
+font-family: 'SF Mono','Fira Code','Cascadia Code',Consolas,monospace;
+font-weight: 600;
+color: #e8d5bc;
+white-space: pre;
+overflow: auto;
+tab-size: 4;
+```
+
+**Token 调色板（`COLORS` 常量）：**
+
+| token | 颜色 | 覆盖 |
+|---|---|---|
+| comment  | `#6b5e50` | `/* */`、`//` |
+| string   | `#a8d4a0` | 反引号 / 单双引号、数字 |
+| keyword  | `#d4a0e0` | `import/export/const/return/async/...`、`true/false/null/undefined` |
+| react    | `#e06c75` | `React/useState/useEffect/FC/ReactNode/CSSProperties/...` |
+| component| `#80c0e0` | 大写驼峰标识符（JSX 组件名、类型名） |
+| func     | `#61afef` | 小写标识符后跟 `(` |
+| prop     | `#e8c87a` | 标识符后跟 `=`（JSX props / 赋值） |
+| jsx      | `#f0a870` | `<Tag`、`</Tag`、`/>` |
+| operator | `#d4b896` | `{}[]();,` 和 `+-*/=<>&|^~?:` 等 |
+| default  | `#e8d5bc` | 其余文本 |
+
+> 不支持 `language` prop；非 JS/TS 代码（Python/Shell/SQL）会按通用规则着色，显示可能不准确。不带 copy 按钮、行号或折行。
 
 ---
 
@@ -1153,9 +1285,15 @@ src/components/MyComponent/
 
 `src/index.ts` 追加：
 ```ts
+// 方式 A：组件用 default export
 export { default as MyComponent } from './components/MyComponent'
 export type { MyComponentProps } from './components/MyComponent/MyComponent'
+
+// 方式 B：组件用 named export（如 Checkbox / CodeBlock / Select / Icon / Tabs 当前采用）
+export { MyComponent } from './components/MyComponent'
+export type { MyComponentProps } from './components/MyComponent'
 ```
+> 仓库内两种风格并存；新增组件选一种即可，只要 `src/index.ts` 能成功 re-export。
 
 Less 模板（直接使用设计 token）：
 
@@ -1270,18 +1408,22 @@ export default function MyComponentDemo() {
 ```ts
 // demo/pageInfo.ts — 供 App 静态导入的轻量元信息
 export const PAGE_INFO: Record<string, { title: string; desc: string }> = {
-  button:        { title: 'Button 按钮',       desc: '...' },
-  input:         { title: 'Input 输入框',      desc: '...' },
-  switch:        { title: 'Switch 开关',       desc: '...' },
-  card:          { title: 'Card 卡片',         desc: '...' },
-  collapse:      { title: 'Collapse 折叠面板', desc: '...' },
-  cursor:        { title: 'Cursor 光标',       desc: '...' },
-  time:          { title: 'Time 时间',         desc: '...' },
-  phone:         { title: 'Phone 手机',        desc: '...' },
-  footer:        { title: 'Footer 底部装饰',   desc: '...' },
-  modal:         { title: 'Modal 弹窗',        desc: '...' },
-  typewriter:    { title: 'Typewriter 打字机', desc: '...' },
-  'divider-comp':{ title: 'Divider 分割线',    desc: '...' },
+  button:         { title: 'Button 按钮',       desc: '...' },
+  input:          { title: 'Input 输入框',      desc: '...' },
+  switch:         { title: 'Switch 开关',       desc: '...' },
+  card:           { title: 'Card 卡片',         desc: '...' },
+  collapse:       { title: 'Collapse 折叠面板', desc: '...' },
+  cursor:         { title: 'Cursor 光标',       desc: '...' },
+  time:           { title: 'Time 时间',         desc: '...' },
+  phone:          { title: 'Phone 手机',        desc: '...' },
+  footer:         { title: 'Footer 底部装饰',   desc: '...' },
+  modal:          { title: 'Modal 弹窗',        desc: '...' },
+  typewriter:     { title: 'Typewriter 打字机', desc: '...' },
+  'divider-comp': { title: 'Divider 分割线',    desc: '...' },
+  icon:           { title: 'Icon 图标',         desc: '...' },
+  select:         { title: 'Select 选择器',     desc: '...' },
+  checkbox:       { title: 'Checkbox 多选框',   desc: '...' },
+  codeblock:      { title: 'CodeBlock 代码高亮', desc: '...' },
 }
 ```
 
