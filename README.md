@@ -66,7 +66,7 @@ function App() {
 
 | 文档 | 用途 |
 |---|---|
-| [`AI_USAGE.md`](./AI_USAGE.md) | 面向 AI 代码助手的使用手册，逐字收录全部组件 props、类型与默认值，附 17 条硬性规则与可复制样板，杜绝臆造 API。 |
+| [`AI_USAGE.md`](./AI_USAGE.md) | 面向 AI 代码助手的使用手册，逐字收录全部组件 props、类型与默认值，附 19 条硬性规则与可复制样板，杜绝臆造 API。 |
 | [`DESIGN_PROMPT.md`](./DESIGN_PROMPT.md) | 一键复刻提示词，适配 v0 / Figma AI / Midjourney / DALL-E，含色板、字体、尺寸表、Modal clip-path 与禁用清单。 |
 | [`skill/SKILL.md`](./skill/SKILL.md) | 像素级样式规范 Skill，覆盖设计 token、全部组件精确 CSS、Demo 布局数值、CSS 变量模板与新组件开发 Checklist。 |
 | [`CONTRIBUTING.md`](./CONTRIBUTING.md) | 贡献指南 |

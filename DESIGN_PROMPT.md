@@ -46,7 +46,7 @@ Game-special:
   Focus yellow:        #ffcc00 (darker: #e0b800) — input focus highlight, NOT blue
   Sidebar selected bg: #B7C6E5
   Sidebar hover bg:    #d6dff0
-  Modal confirm btn:   background #ffcc00, color #725d42
+  Modal confirm btn (custom footer): background #ffcc00, color #725d42
 
 Borders:
   Standard:       2px solid #9f927d
@@ -69,7 +69,8 @@ Modals:                    SVG blob clip-path (see path below)
 Sidebar menu items:        border-radius: 12px
 Collapse panel outer:      border-radius: 18px
 Version badge:             border-radius: 10px
-Code block:                border-radius: 20px
+Code block:                border-radius: 20px  (dark #2b2118, border #3d3028)
+Checkbox box:              border-radius: 8px   (22px square, middle size)
 Minimum anywhere:          12px — NO sharp right-angle interactive elements
 
 === MODAL SVG BLOB CLIP-PATH (exact path) ===
@@ -163,7 +164,8 @@ Menu items: height 40px, padding-left 26px, font-size 14px, font-weight 600
   inactive: color #8a7b66 | hover: background #d6dff0 | active: background #B7C6E5, color #fff
   border-radius: 12px, margin: 1px 5px, transition: all 0.15s
 
-=== ISLANDPHONE CARD PALETTE (13 colors) ===
+=== ISLANDPHONE CARD PALETTE (13 colors, incl. default) ===
+default rgb(247,243,223) (#725d42 text) /
 app-pink #f8a6b2 / purple #b77dee / app-blue #889df0 / app-yellow #f7cd67 (#725d42 text) /
 app-orange #e59266 / app-teal #82d5bb / app-green #8ac68a / app-red #fc736d /
 lime-green #d1da49 (#3d5a1a text) / yellow-green #ecdf52 (#725d42 text) /
@@ -199,7 +201,7 @@ App palette:   camera #B77DEE, app #889DF0 (with offset), encyclopedia #F7CD67, 
 === FOOTER DECORATION ===
 <Footer type="sea" />   width 100%, height 80px, background url(footer-sea.svg) center/contain no-repeat
                         (SVG viewBox 0 0 1440 186, coral #EC7175 / ocean #327A93 / #98D2E3 / #008077)
-<Footer type="tree" />  width 100%, height 60px, background url(footer-tree.webp) bottom center/cover
+<Footer type="tree" />  (default) width 100%, height 60px, background url(footer-tree.webp) bottom center/cover
 
 === DIVIDER DECORATION ===
 5 types — all width 100%, height 12px, background center/contain no-repeat:
@@ -220,10 +222,37 @@ Behavior: recursively truncates ReactNode tree by character count while preservi
           element structure, className, and inline styles. Returns a plain fragment
           (NO extra wrapping div/span) so it has ZERO layout impact.
 
-=== COMPONENT INVENTORY (12 exports from src/index.ts) ===
-Interactive: Button, Input, Switch, Modal, Collapse
+=== COMPONENT INVENTORY (17 exports from src/index.ts) ===
+Interactive: Button, Input, Switch, Modal, Collapse, Select, Tabs, Checkbox
 Containers:  Card (13 IslandPhone colors)
-Decorative:  Time, Phone, Footer, Divider, Cursor, Typewriter
+Decorative:  Time, Phone, Footer, Divider, Cursor, Typewriter, Icon, CodeBlock
+
+=== CHECKBOX (sizes small 18 / middle 22 / large 28 px) ===
+Unchecked box:  background rgb(247,243,223); border 2.5px solid #c4b89e; border-radius 8px
+Hover box:      border-color #19c8b9; transform translateY(-1px)
+Checked box:    background #19c8b9; border-color #11a89b
+Checkmark ✓:    color #fff, font-weight 700, pop animation 0.15s
+Label:          color #725d42 (hover #794f27), font-weight 500, letter-spacing 0.01em
+Focus ring:     outline 2px solid #ffcc00; outline-offset 2px
+Disabled:       opacity 0.55, box bg #f0ece2, border #d4c9b4, label #c4b89e, cursor not-allowed
+Group layout:   horizontal flex gap 12px / vertical flex-direction column gap 8px
+Per-option label font-size by size: small 12px / middle 14px / large 16px
+
+=== CODE BLOCK (dark theme, JSX/TS only) ===
+Container: padding 20px 24px; background #2b2118; border 1px solid #3d3028;
+           border-radius 20px; font-size 14px; line-height 1.7; tab-size 4;
+           font-family 'SF Mono','Fira Code','Cascadia Code',Consolas,monospace; font-weight 600;
+           white-space pre; overflow auto; color (default) #e8d5bc
+Token colors:
+  comment   #6b5e50 (/* */, //)
+  string    #a8d4a0 (quoted strings, numeric literals)
+  keyword   #d4a0e0 (import/export/const/return/true/false/null/async/await/type/interface...)
+  react     #e06c75 (React, useState, useEffect, FC, ReactNode, CSSProperties...)
+  component #80c0e0 (PascalCase identifiers — JSX tags / type names)
+  func      #61afef (lowercase identifier followed by `(`)
+  prop      #e8c87a (identifier followed by `=`)
+  jsx       #f0a870 (`<Tag`, `</Tag`, `/>`)
+  operator  #d4b896 (`{}[]();,` and arithmetic / comparison / logical operators)
 
 === FORBIDDEN PATTERNS ===
 ✗ Sharp right-angle (0px radius) on any interactive element

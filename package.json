@@ -1,7 +1,7 @@
 {
     "name": "animal-island-ui",
     "version": "0.7.7",
-    "description": "for learning purpose only, A nature-inspired React component library — Button, Input, Switch, Modal, Card, Collapse, Cursor, Divider",
+    "description": "for learning purpose only, A nature-inspired React component library",
     "type": "module",
     "main": "dist/cjs/index.cjs",
     "module": "dist/es/index.js",
