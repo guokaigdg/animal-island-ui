@@ -80,6 +80,11 @@ const CheckboxDemo: React.FC = () => {
                 <Checkbox options={islandOptions} defaultValue={['forest']} size="small" />
             </div>
 
+            <div style={labelStyle}>中尺寸（默认）</div>
+            <div style={demoBoxStyle}>
+                <Checkbox options={islandOptions} defaultValue={['beach']} size="middle" />
+            </div>
+
             <div style={labelStyle}>大尺寸</div>
             <div style={demoBoxStyle}>
                 <Checkbox options={islandOptions.slice(0, 3)} defaultValue={['beach']} size="large" />

@@ -15,6 +15,9 @@ import TimeDemo from './components/Time';
 import PhoneDemo from './components/Phone';
 import FooterDemo from './components/Footer';
 import IconDemo from './components/Icon/IconDemo';
+import TabsDemo from './components/Tabs';
+import CheckboxDemo from './components/Checkbox';
+import CodeBlockDemo from './components/CodeBlock';
 import type { TabItem } from '../src';
 
 // ============================================
@@ -123,6 +126,12 @@ const INPUT_API: ApiRow[] = [
         desc: '校验状态',
         type: `'error' | 'warning'`,
         defaultVal: '-',
+    },
+    {
+        prop: 'shadow',
+        desc: '是否显示阴影',
+        type: 'boolean',
+        defaultVal: 'false',
     },
     {
         prop: 'onChange',
@@ -445,6 +454,11 @@ const InputDemo: React.FC = () => {
                 Input <span style={tagStyle}>3 sizes</span>
             </div>
             <div style={demoBodyStyle}>
+                <div style={labelStyle}>shadow 阴影控制</div>
+                <div style={{ ...(S.col as any), maxWidth: 360, gap: 12 }}>
+                    <Input placeholder="No shadow (default)" />
+                    <Input placeholder="With shadow" shadow={true} />
+                </div>
                 <div style={labelStyle}>基础用法</div>
                 <div style={{ ...(S.col as any), maxWidth: 360, gap: 12 }}>
                     <Input placeholder="Basic input" />
@@ -495,6 +509,8 @@ const App = () => {
             <Input placeholder="Error" status="error" />
             {/* 警告状态 */}
             <Input placeholder="Warning" status="warning" />
+            {/* 有阴影 */}
+            <Input placeholder="With shadow" shadow={true} />
         </div>
     );
 };
@@ -843,7 +859,7 @@ const ModalDemo: React.FC = () => {
                 onOk={() => setModalOpen(false)}
             >
                 <div style={{ textAlign: 'center', width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8 }}>
-                    <span>钓到石头了!</span>
+                    <span>钓到<span style={{ color: '#FD9303' }}>石头</span>了!</span>
                     <span>竟然连这种都能钓起来...</span>
                 </div>
             </Modal>
@@ -951,7 +967,7 @@ const TypewriterDemo: React.FC = () => {
                         <Typewriter speed={40} trigger={replayKey}>
                             <div>第一行：钓到石头了！</div>
                             <div>第二行：竟然连这种都能钓起来...</div>
-                            <div style={{ color: '#d98324', fontWeight: 700 }}>第三行：继续加油吧！</div>
+                            <div style={{ color: '#FD9303', fontWeight: 700 }}>第三行：继续加油吧！</div>
                         </Typewriter>
                     </div>
                 </div>
@@ -1163,113 +1179,6 @@ export default App;`}
         </div>
     );
 };
-
-// ============================================
-// TabsDemo
-// ============================================
-const TABS_API = [
-    { prop: 'items', desc: '标签页配置列表', type: 'TabItem[]', defaultVal: '-', required: true },
-    { prop: 'defaultActiveKey', desc: '默认激活的标签', type: 'string', defaultVal: '第一个标签' },
-    { prop: 'activeKey', desc: '受控模式当前激活标签', type: 'string', defaultVal: '-' },
-    { prop: 'onChange', desc: '标签切换回调', type: '(key: string) => void', defaultVal: '-' },
-    { prop: 'className', desc: '自定义类名', type: 'string', defaultVal: '-' },
-    { prop: 'style', desc: '自定义样式', type: 'CSSProperties', defaultVal: '-' },
-    { prop: 'leafAnimation', desc: '是否开启叶子动画', type: 'boolean', defaultVal: 'true' },
-];
-
-const TabsDemo: React.FC = () => {
-    const [activeKey, setActiveKey] = useState('tab1');
-    const items: TabItem[] = [
-        {
-            key: 'tab1',
-            label: '岛屿概况',
-            children: (
-                <div>
-                    <p style={{ marginBottom: 12 }}>这里是一座无人岛，环境优美，气候宜人。</p>
-                    <p>可以钓鱼、捉虫、种植各种植物。</p>
-                </div>
-            ),
-        },
-        {
-            key: 'tab2',
-            label: '商店',
-            children: (
-                <div>
-                    <p style={{ marginBottom: 12 }}>狸然超市营业中！</p>
-                    <p>各种商品应有尽有，价格实惠。</p>
-                </div>
-            ),
-        },
-        {
-            key: 'tab3',
-            label: '服务台',
-            children: (
-                <div>
-                    <p style={{ marginBottom: 12 }}>欢迎来到服务台！</p>
-                    <p>可以办理各种服务业务。</p>
-                </div>
-            ),
-        },
-    ];
-
-    return (
-        <div style={sectionStyle}>
-            <div style={sectionTitleStyle}>
-                Tabs <span style={tagStyle}>基础用法</span>
-            </div>
-            <div style={labelStyle}>非受控模式</div>
-            <div style={{ ...S.demoBox, padding: 0 }}>
-                <Tabs
-                    items={[
-                        { key: 'a', label: '鱼类', children: <p>鲈鱼、鲷鱼、河童...</p> },
-                        { key: 'b', label: '昆虫', children: <p>蝴蝶、瓢虫、蜻蜓...</p> },
-                        { key: 'c', label: '海洋生物', children: <p>海星、珊瑚、小丑鱼...</p> },
-                    ]}
-                    defaultActiveKey="a"
-                />
-            </div>
-            <div style={labelStyle}>受控模式</div>
-            <div style={{ ...S.demoBox, padding: 0 }}>
-                <Tabs items={items} activeKey={activeKey} onChange={setActiveKey} leafAnimation={false} />
-            </div>
-            <div style={{ marginTop: 16, fontSize: 13, color: '#a08060' }}>
-                当前选中:{' '}
-                <span style={{ color: '#19c8b9', fontWeight: 600 }}>
-                    {items.find((i) => i.key === activeKey)?.label}
-                </span>
-            </div>
-            <CodeBlock
-                code={`import React, { useState } from 'react';
-import { Tabs } from 'animal-island-ui';
-
-const items = [
-    { key: 'tab1', label: '岛屿概况', children: <p>内容一</p> },
-    { key: 'tab2', label: '商店', children: <p>内容二</p> },
-    { key: 'tab3', label: '服务台', children: <p>内容三</p> },
-];
-
-const App = () => {
-    return (
-        <div>
-            {/* 非受控模式 */}
-            <Tabs items={items} defaultActiveKey="tab1" />
-            {/* 受控模式 */}
-            <Tabs items={items} activeKey={activeKey} onChange={setActiveKey} leafAnimation={false} />
-            {/* 关闭叶子动画 */}
-            <Tabs items={items} leafAnimation={false} />
-        </div>
-    );
-};
-
-export default App;`}
-            />
-            <ApiTable rows={TABS_API} />
-        </div>
-    );
-};
-
-import CheckboxDemo from './components/Checkbox';
-import CodeBlockDemo from './components/CodeBlock';
 
 // ============================================
 // Page info & mapping
