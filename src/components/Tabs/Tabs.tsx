@@ -16,6 +16,7 @@ export interface TabsProps {
     className?: string;
     style?: React.CSSProperties;
     leafAnimation?: boolean;
+    shadow?: boolean;
 }
 
 export const Tabs: React.FC<TabsProps> = ({
@@ -26,6 +27,7 @@ export const Tabs: React.FC<TabsProps> = ({
     className,
     style,
     leafAnimation = true,
+    shadow = true,
 }) => {
     const [internalActiveKey, setInternalActiveKey] = useState(
         defaultActiveKey || items[0]?.key
@@ -52,7 +54,7 @@ export const Tabs: React.FC<TabsProps> = ({
                     return (
                         <button
                             key={item.key}
-                            className={`${styles.tabItem} ${isActive ? styles.active : ''}`}
+                            className={`${styles.tabItem} ${isActive ? styles.active : ''} ${isActive && shadow ? styles['active-shadow'] : ''}`}
                             onClick={() => handleTabClick(item.key)}
                         >
                             <span className={styles.tabIcon}>

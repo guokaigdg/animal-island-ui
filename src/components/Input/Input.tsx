@@ -17,6 +17,8 @@ export interface InputProps extends Omit<
     allowClear?: boolean;
     /** 错误状态 */
     status?: 'error' | 'warning';
+    /** 是否显示阴影 */
+    shadow?: boolean;
     /** 值变化回调 */
     onChange?: React.ChangeEventHandler<HTMLInputElement>;
     /** 清除回调 */
@@ -29,6 +31,7 @@ export const Input: React.FC<InputProps> = ({
     suffix,
     allowClear = false,
     status,
+    shadow = false,
     disabled = false,
     className,
     value,
@@ -68,6 +71,7 @@ export const Input: React.FC<InputProps> = ({
         styles[`wrapper-${size}`],
         status && styles[`wrapper-${status}`],
         disabled && styles['wrapper-disabled'],
+        !shadow && styles['wrapper-no-shadow'],
         className,
     ]
         .filter(Boolean)

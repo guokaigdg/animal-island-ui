@@ -27,15 +27,6 @@
     cursor: pointer;
     user-select: none;
     transition: all @motion-duration-base @motion-ease;
-
-    &:hover:not(.disabled) .box {
-        border-color: @primary-color;
-        transform: translateY(-1px);
-    }
-
-    &:hover:not(.disabled) .label {
-        color: @text-color;
-    }
 }
 
 // ---------- Size: small ----------
@@ -48,7 +39,8 @@
     }
 
     .checkmark {
-        font-size: 11px;
+        width: 10px;
+        height: 10px;
     }
 
     .label {
@@ -62,11 +54,12 @@
         width: 22px;
         height: 22px;
         border-radius: @border-radius-sm - 2;
-        border-width: 2.5px;
+        border-width: 2px;
     }
 
     .checkmark {
-        font-size: 13px;
+        width: 12px;
+        height: 12px;
     }
 
     .label {
@@ -80,7 +73,7 @@
         width: 28px;
         height: 28px;
         border-radius: @border-radius-sm;
-        border-width: 3px;
+        border-width: 2px;
     }
 
     .checkmark {
@@ -100,7 +93,7 @@
     justify-content: center;
     flex-shrink: 0;
     background: rgb(247, 243, 223);
-    border: 2.5px solid #c4b89e;
+    border: 2px solid #c4b89e;
     border-radius: 8px;
     transition: all @motion-duration-base @motion-ease;
     outline: none;
@@ -117,17 +110,14 @@
         background: @primary-color;
         border-color: @primary-color-active;
     }
-
-    &:hover:not(.disabled) .box {
-        background: @primary-color-hover;
-        border-color: @primary-color;
-    }
 }
 
 // ---------- Checkmark ----------
 .checkmark {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     color: #fff;
-    font-weight: 700;
     line-height: 1;
     animation: animal-checkbox-pop @motion-duration-fast @motion-ease;
 }

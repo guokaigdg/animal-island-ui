@@ -32,13 +32,24 @@
     }
 }
 
+.wrapper-no-shadow {
+    box-shadow: none;
+
+    &:hover:not(.wrapper-disabled) {
+        box-shadow: none;
+    }
+}
+
 // ---------- Size ----------
 .wrapper-small {
     height: var(--animal-height-sm);
     padding: 0 14px;
     font-size: var(--animal-font-size-sm);
     border-radius: 40px;
-    box-shadow: 0 2px 0 0 #d4c9b4;
+
+    &:not(.wrapper-no-shadow) {
+        box-shadow: 0 2px 0 0 #d4c9b4;
+    }
 }
 
 .wrapper-middle {
@@ -53,7 +64,10 @@
     font-size: var(--animal-font-size-lg);
     border-width: 3px;
     border-radius: 50px;
-    box-shadow: 0 4px 0 0 #d4c9b4;
+
+    &:not(.wrapper-no-shadow) {
+        box-shadow: 0 4px 0 0 #d4c9b4;
+    }
 }
 
 // ---------- Status ----------
