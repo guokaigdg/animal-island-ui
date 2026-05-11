@@ -103,6 +103,8 @@ npm run build:demo
 |<a href="https://github.com/yunxinz/ac-site-template">ac-site-template</a> (a cozy island-style UI themed personal website template)  |  <a href="https://github.com/xiaochong/hi-kid">HiKid</a> (English learning app for children) | 
 | --- | --- | 
 |  <img src="img/ac-site-template.png" alt="ac-site-template" style="border-radius: 8px; width: 90%; display: block; margin: 0 auto;" /> | <img src="img/hi-kid.png" alt="HiKid" style="border-radius: 8px; width: 90%; display: block; margin: 0 auto;" />| 
+|<a href="https://github.com/guokaigdg/animal-island-blog">animal-island-blog</a>（animal-island blog）  |   |
+|  <img src="img/case-animal-blog.png" alt="ac-site-template" style="border-radius: 8px; width: 90%; display: block; margin: 0 auto;" /> | | 
 
 
 
