@@ -76,3 +76,6 @@ export type { CheckboxProps, CheckboxOption, CheckboxSize } from './components/C
 
 export { CodeBlock } from './components/CodeBlock';
 export type { CodeBlockProps } from './components/CodeBlock';
+
+export { Loading } from './components/Loading';
+export type { LoadingProps } from './components/Loading';

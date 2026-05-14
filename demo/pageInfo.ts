@@ -64,4 +64,8 @@ export const PAGE_INFO: Record<string, { title: string; desc: string }> = {
         title: 'CodeBlock 代码高亮',
         desc: '代码高亮组件 — 语法高亮显示，支持自定义样式和类名',
     },
+    loading: {
+        title: 'Loading 加载',
+        desc: '治愈海岛风格小岛 Loading 动画组件，支持自定义样式和类名',
+    },
 };

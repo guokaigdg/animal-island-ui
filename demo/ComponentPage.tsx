@@ -18,6 +18,7 @@ import IconDemo from './components/Icon/IconDemo';
 import TabsDemo from './components/Tabs';
 import CheckboxDemo from './components/Checkbox';
 import CodeBlockDemo from './components/CodeBlock';
+import LoadingDemo from './components/Loading/LoadingDemo';
 import type { TabItem } from '../src';
 
 // ============================================
@@ -1252,6 +1253,10 @@ export const PAGE_INFO: Record<string, { title: string; desc: string }> = {
         title: 'CodeBlock 代码高亮',
         desc: '代码高亮组件 — 语法高亮显示，支持自定义样式和类名',
     },
+    loading: {
+        title: 'Loading 加载',
+        desc: '治愈海岛风格小岛 Loading 动画组件，支持自定义样式和类名',
+    },
 };
 
 const PAGES: Record<string, React.FC> = {
@@ -1272,6 +1277,7 @@ const PAGES: Record<string, React.FC> = {
     tabs: TabsDemo,
     checkbox: CheckboxDemo,
     codeblock: CodeBlockDemo,
+    loading: LoadingDemo,
 };
 
 // ============================================
