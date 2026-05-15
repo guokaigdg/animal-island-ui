@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card, Divider, Button, Switch, Collapse, Typewriter } from '../src';
 import { useIsMobile } from './tools';
 
@@ -132,7 +132,8 @@ const S = {
     page: {
         width: '100%',
         minHeight: '100vh',
-        overflowY: 'auto' as const,
+        overflowY: 'auto',
+        overflowX: 'hidden',
     } as React.CSSProperties,
 
     // Hero
@@ -143,6 +144,7 @@ const S = {
         justifyContent: 'center',
         minHeight: '100vh',
         padding: '60px 40px 40px',
+        position: 'relative',
     } as React.CSSProperties,
     heroContent: {
         display: 'grid',
@@ -327,8 +329,8 @@ const features = [
     },
     {
         icon: 'Property-Shopping.svg',
-        title: '19 个组件',
-        desc: 'Button / Input / Switch / Modal / Typewriter / Card / Collapse / Cursor / Divider / Time / Phone / Footer / Icon / Checkbox / Select / Tabs / CodeBlock 等',
+        title: '18 个组件',
+        desc: 'Button / Input / Switch / Modal / Typewriter / Card / Collapse / Cursor / Divider / Time / Phone / Footer / Icon / Checkbox / Select / Tabs / CodeBlock / Loading 等',
     },
     {
         icon: 'Property-Camera.svg',
@@ -376,6 +378,7 @@ const components = [
     { key: 'time', name: 'Time', desc: '可爱风格时间显示' },
     { key: 'phone', name: 'Phone', desc: 'Phone 模拟器' },
     { key: 'codeblock', name: 'CodeBlock', desc: '代码语法高亮组件' },
+    { key: 'loading', name: 'Loading', desc: '治愈海岛风格小岛加载动画' },
 ];
 
 // ============================================
@@ -387,8 +390,21 @@ interface HomePageProps {
 
 const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
     const isMobile = useIsMobile();
+    const [showScrollHint, setShowScrollHint] = useState(true);
+    const pageRef = React.useRef<HTMLDivElement>(null);
+
+    const handleScroll = () => {
+        if (pageRef.current) {
+            if (pageRef.current.scrollTop > 70) {
+                setShowScrollHint(false);
+            } else {
+                setShowScrollHint(true);
+            }
+        }
+    };
+
     return (
-    <div style={S.page}>
+    <div ref={pageRef} style={{ ...S.page, overflow: 'auto' }} onScroll={handleScroll}>
         {/* Hero */}
         <div style={{ ...S.hero }}>
             <div style={isMobile ? S.heroContentMobile : S.heroContent}>
@@ -407,7 +423,7 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                 <div style={isMobile ? { textAlign: 'center' as const } : S.heroText}>
                     <h1 style={{ ...S.heroTitle, fontSize: isMobile ? 37 : 60 }}>
                         {isMobile ? 'Animal Island UI' : <>Animal <br /> Island UI</>}
-                        <span style={S.heroVersion}>v0.7.6</span>
+                        <span style={S.heroVersion}>v0.8.1</span>
                     </h1>
                     <Typewriter speed={60}>
                         <p style={{ ...S.heroSubtitle, fontSize: isMobile ? 14 : 17 }}>
@@ -438,6 +454,33 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                 )}
             </div>
         </div>
+
+        <div style={{
+            position: 'absolute',
+            bottom: 40,
+            left: '50%',
+            transform: 'translateX(-50%)',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            gap: 4,
+            cursor: 'pointer',
+            animation: showScrollHint ? 'bounce 2s ease-in-out infinite' : 'none',
+            opacity: showScrollHint ? 1 : 0,
+            transition: 'opacity 0.3s ease',
+            pointerEvents: showScrollHint ? 'auto' : 'none'
+        }}>
+            <span style={{ color: '#FFF9E6', fontSize: 12, textShadow: '0 1px 2px rgba(0,0,0,0.3)' }}>向下滑动</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                <path d="M12 5v14M5 12l7 7 7-7" stroke="#FFF9E6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+        </div>
+        <style>{`
+            @keyframes bounce {
+                0%, 100% { transform: translateX(-50%) translateY(0); opacity: 1; }
+                50% { transform: translateX(-50%) translateY(-8px); opacity: 0.7; }
+            }
+        `}</style>
 
         {/* Features */}
         <div style={{ ...S.section, padding: isMobile ? '32px 16px' : '48px 40px' }}>

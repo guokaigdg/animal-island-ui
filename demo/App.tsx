@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback, Suspense, lazy } from 'react';
-import { Cursor } from '../src';
+import { Cursor, Loading } from '../src';
 import '../src/styles/index.less';
 import '@fontsource/nunito/latin-500.css';
 import '@fontsource/nunito/latin-700.css';
@@ -244,6 +244,8 @@ const App: React.FC = () => {
     const { hash, navigate } = useHash();
     const isMobile = useIsMobile();
     const [drawerOpen, setDrawerOpen] = useState(false);
+    const [loadingActive, setLoadingActive] = useState(false);
+    const [loadingMounted, setLoadingMounted] = useState(false);
     const mainRef = React.useRef<HTMLElement>(null);
 
     const activeKey =
@@ -269,6 +271,19 @@ const App: React.FC = () => {
         [navigate]
     );
 
+    // 首页跳转到组件页时显示 2s Loading 覆盖层
+    const handleHomeNavigate = useCallback(
+        (path: string) => {
+            setLoadingMounted(true);
+            setLoadingActive(true);
+            navigate(path);
+            // 2s 后开始关闭，再多留 1.5s 给关闭扩散动画后卸载
+            window.setTimeout(() => setLoadingActive(false), 2000);
+            window.setTimeout(() => setLoadingMounted(false), 3500);
+        },
+        [navigate]
+    );
+
     return (
         <Cursor>
             <style>{`
@@ -286,7 +301,7 @@ const App: React.FC = () => {
                         justifyContent: 'center',
                     }}
                 >
-                    <HomePage onNavigate={navigate} />
+                    <HomePage onNavigate={handleHomeNavigate} />
                 </div>
             ) : (
                 /* Component page — with sidebar */
@@ -427,6 +442,19 @@ const App: React.FC = () => {
                             }}
                         />
                     )}
+                </div>
+            )}
+            {/* 首页跳转组件页的过场 Loading，全屏覆盖 */}
+            {loadingMounted && (
+                <div
+                    style={{
+                        position: 'fixed',
+                        inset: 0,
+                        zIndex: 9999,
+                        pointerEvents: loadingActive ? 'auto' : 'none',
+                    }}
+                >
+                    <Loading active={loadingActive} />
                 </div>
             )}
         </Cursor>
