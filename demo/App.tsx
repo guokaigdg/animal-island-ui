@@ -80,6 +80,7 @@ const MENU_ITEMS: MenuItem[] = [
             { key: 'footer', label: 'Footer 页脚' },
             { key: 'codeblock', label: 'CodeBlock 代码高亮' },
             { key: 'loading', label: 'Loading 加载' },
+            { key: 'table', label: 'Table 表格' },
         ],
     },
     {

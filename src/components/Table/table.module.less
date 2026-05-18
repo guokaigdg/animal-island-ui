@@ -1,0 +1,216 @@
+.wrapper {
+    position: relative;
+    width: 100%;
+    background: rgb(247, 243, 223);
+    border-radius: 20px;
+    padding: 6px;
+    box-sizing: border-box;
+}
+
+.scrollable {
+    overflow-x: auto;
+    overflow-y: auto;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: 'Nunito', 'Noto Sans SC', 'Zen Maru Gothic', -apple-system, 'PingFang SC', sans-serif;
+}
+
+.thead {
+    background: rgb(247, 243, 223);
+}
+
+.headerRow {
+    position: relative;
+
+    &::after {
+        content: '';
+        position: absolute;
+        left: 20px;
+        right: 20px;
+        bottom: 0;
+        height: 1px;
+        background: repeating-linear-gradient(
+            90deg,
+            rgb(240, 232, 216) 0,
+            rgb(240, 232, 216) 6px,
+            transparent 6px,
+            transparent 12px
+        );
+        transition: opacity 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+}
+
+.headerCell {
+    padding: 16px 20px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #725d42;
+    text-align: left;
+    white-space: nowrap;
+    letter-spacing: 0.02em;
+    background: transparent;
+}
+
+.tbody {
+    background: rgb(247, 243, 223);
+}
+
+.row {
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+
+    &::after {
+        content: '';
+        position: absolute;
+        left: 20px;
+        right: 20px;
+        bottom: 0;
+        height: 1px;
+        background: repeating-linear-gradient(
+            90deg,
+            rgb(240, 232, 216) 0,
+            rgb(240, 232, 216) 6px,
+            transparent 6px,
+            transparent 12px
+        );
+    }
+
+    &:hover {
+        transform: scale(1.01);
+        background-image: repeating-linear-gradient(
+            -45deg,
+            rgba(25, 200, 185, 0.6),
+            rgba(25, 200, 185, 0.6) 10px,
+            rgba(14, 196, 182, 0.6) 10px,
+            rgba(14, 196, 182, 0.6) 20px
+        );
+        background-size: 28.28px 28.28px;
+        clip-path: inset(0 0 0 0 round 30px);
+
+        &::after {
+            opacity: 0;
+        }
+
+        .cell {
+            color: #3d2e1e;
+        }
+    }
+
+    &:last-child {
+        &::after {
+            display: none;
+        }
+    }
+}
+
+.striped {
+    background: rgba(248, 248, 240, 0.6);
+
+    &:hover {
+        transform: scale(1.01);
+        background-image: repeating-linear-gradient(
+            -45deg,
+            rgba(25, 200, 185, 0.65),
+            rgba(25, 200, 185, 0.65) 10px,
+            rgba(14, 196, 182, 0.65) 10px,
+            rgba(14, 196, 182, 0.65) 20px
+        );
+        background-size: 28.28px 28.28px;
+        clip-path: inset(0 0 0 0 round 30px);
+
+        &::after {
+            opacity: 0;
+        }
+
+        .cell {
+            color: #3d2e1e;
+        }
+    }
+}
+
+.cell {
+    padding: 14px 20px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #725d42;
+    line-height: 1.6;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.emptyCell {
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.emptyContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    color: #9f927d;
+    font-size: 14px;
+
+    svg {
+        opacity: 0.5;
+    }
+}
+
+.emptyIcon {
+    color: #9f927d;
+    opacity: 0.5;
+}
+
+.loading {
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+.loadingOverlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(247, 243, 223, 0.8);
+    backdrop-filter: blur(2px);
+}
+
+.loadingSpinner {
+    color: #19c8b9;
+    animation: spin 1s linear infinite;
+
+    svg {
+        display: block;
+    }
+
+    circle {
+        animation: dash 1.5s ease-in-out infinite;
+    }
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes dash {
+    0% {
+        stroke-dasharray: 1, 150;
+        stroke-dashoffset: 0;
+    }
+    50% {
+        stroke-dasharray: 90, 150;
+        stroke-dashoffset: -35;
+    }
+    100% {
+        stroke-dasharray: 90, 150;
+        stroke-dashoffset: -124;
+    }
+}

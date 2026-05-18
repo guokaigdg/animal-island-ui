@@ -79,3 +79,6 @@ export type { CodeBlockProps } from './components/CodeBlock';
 
 export { Loading } from './components/Loading';
 export type { LoadingProps } from './components/Loading';
+
+export { Table } from './components/Table';
+export type { TableProps, TableColumn } from './components/Table';

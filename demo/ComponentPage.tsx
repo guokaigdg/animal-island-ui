@@ -19,6 +19,7 @@ import TabsDemo from './components/Tabs';
 import CheckboxDemo from './components/Checkbox';
 import CodeBlockDemo from './components/CodeBlock';
 import LoadingDemo from './components/Loading/LoadingDemo';
+import TableDemo from './components/Table/TableDemo';
 import type { TabItem } from '../src';
 
 // ============================================
@@ -1257,6 +1258,10 @@ export const PAGE_INFO: Record<string, { title: string; desc: string }> = {
         title: 'Loading 加载',
         desc: '治愈海岛风格小岛 Loading 动画组件，支持自定义样式和类名',
     },
+    table: {
+        title: 'Table 表格',
+        desc: '数据表格组件，支持斑马纹、边框、加载状态等常用功能',
+    },
 };
 
 const PAGES: Record<string, React.FC> = {
@@ -1278,6 +1283,7 @@ const PAGES: Record<string, React.FC> = {
     checkbox: CheckboxDemo,
     codeblock: CodeBlockDemo,
     loading: LoadingDemo,
+    table: TableDemo,
 };
 
 // ============================================
