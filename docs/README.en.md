@@ -21,7 +21,7 @@
 
 <br/>
 <p align="center">
-    <a href="../README.md">中文</a> | English
+    <a href="../README.md">简体中文</a> | English
 </p>
 
 
@@ -31,6 +31,9 @@ This project is a lightweight UI component library built with React + TypeScript
 
 All visual elements, layouts, icons, and animations are independently designed and implemented, without directly using any official a game company art materials, code, or resource files.
 
+## 🎉 Vue Version
+
+- [animal-island-ui](https://github.com/guokaigdg/animal-island-ui)
 
 ## Preview
 
@@ -71,7 +74,7 @@ Complete reference for different scenarios:
 
 | Document | Purpose |
 |---|---|
-| [`AI_USAGE.md`](../AI_USAGE.md) | AI code assistant handbook - all component props, types and defaults word-for-word, 17 hard rules and copy-paste boilerplate, no invented APIs. |
+| [`AI_USAGE.md`](../AI_USAGE.md) | AI code assistant handbook - all component props, types and defaults word-for-word, 19 hard rules and copy-paste boilerplate, no invented APIs. |
 | [`DESIGN_PROMPT.md`](../DESIGN_PROMPT.md) | One-click reproduction prompts for v0 / Figma AI / Midjourney / DALL-E, including color palette, fonts, size tables, Modal clip-path and prohibition list. |
 | [`skill/SKILL.md`](../skill/SKILL.md) | Pixel-perfect style specification Skill - design tokens, all component CSS, Demo layout values, CSS variable templates and new component development checklist. |
 | [`CONTRIBUTING.md`](../CONTRIBUTING.md) | Contributing Guide |
@@ -100,11 +103,11 @@ npm run build:demo
 
 ## Usage Cases
 
-|<a href="https://github.com/yunxinz/ac-site-template">ac-site-template</a> (a cozy island-style UI themed personal website template)  |  <a href="https://github.com/xiaochong/hi-kid">HiKid</a> (English learning app for children) | 
-| --- | --- | 
-|  <img src="img/ac-site-template.png" alt="ac-site-template" style="border-radius: 8px; width: 90%; display: block; margin: 0 auto;" /> | <img src="img/hi-kid.png" alt="HiKid" style="border-radius: 8px; width: 90%; display: block; margin: 0 auto;" />| 
-|<a href="https://github.com/guokaigdg/animal-island-blog">animal-island-blog</a>（animal-island blog）  |   |
-|  <img src="img/case-animal-blog.png" alt="ac-site-template" style="border-radius: 8px; width: 90%; display: block; margin: 0 auto;" /> | | 
+| <a href="https://github.com/yunxinz/ac-site-template">ac-site-template</a> (a cozy island-style UI themed personal website template) | <a href="https://github.com/xiaochong/hi-kid">HiKid</a> (English learning app for children) |
+| --- | --- |
+| <img src="img/ac-site-template.png" alt="ac-site-template" style="border-radius: 8px; width: 90%; display: block; margin: 0 auto;" /> | <img src="img/hi-kid.png" alt="HiKid" style="border-radius: 8px; width: 90%; display: block; margin: 0 auto;" /> |
+| <a href="https://github.com/guokaigdg/animal-island-blog">animal-island-blog</a> (a cozy island-style UI style blog) | <a href="https://github.com/liuyuhong0324/AnimalIslandUI">AnimalIslandUI</a> (a cozy island-style UI style Android UI library) |
+| <img src="img/case-animal-blog.png" alt="ac-site-template" style="border-radius: 8px; width: 100%; display: block; margin: 0 auto;" /> | <img src="img/android-ui.png" alt="ac-site-template" style="border-radius: 8px; width: 90%; display: block; margin: 0 auto;" /> |
 
 
 
@@ -128,5 +131,4 @@ For any questions or copyright-related communications, please contact via Issue 
 ## License
 
 MIT
-For learning purposes only.
 This project is released under the MIT open-source license, for learning use only. The author is not responsible for any legal issues or losses caused by the use of this library.

@@ -1,6 +1,5 @@
 # 🏝 Animal-Island-UI
 
-
 <div align="center">
     <img src="docs/img/readme-home.png" alt="animal-island-ui" style="border-radius: 12px; width: 40%; display: block; margin: 0 auto;" />    
 </div>
@@ -29,6 +28,9 @@
 
 所有视觉元素、布局、图标、动画均为独立设计实现，未直接使用任何任天堂官方美术素材、代码或资源文件。
 
+## 🎉 vue 版本
+
+- [animal-island-ui](https://github.com/guokaigdg/animal-island-ui)
 
 ## 预览
 
@@ -40,8 +42,6 @@
 ```bash
 npm install animal-island-ui
 ```
-
-
 
 ## 快速上手
 
@@ -55,24 +55,22 @@ function App() {
     return (
         <div>
             <Button type="primary">开始冒险</Button>
-            <Card color="app-blue">
-                欢迎来到无人岛！
-            </Card>
+            <Card color="app-blue">欢迎来到无人岛！</Card>
         </div>
     );
 }
 ```
 
 ## 文档
+
 面向不同场景的完整参考：
 
-| 文档 | 用途 |
-|---|---|
-| [`AI_USAGE.md`](./AI_USAGE.md) | 面向 AI 代码助手的使用手册，逐字收录全部组件 props、类型与默认值，附 19 条硬性规则与可复制样板，杜绝臆造 API。 |
-| [`DESIGN_PROMPT.md`](./DESIGN_PROMPT.md) | 一键复刻提示词，适配 v0 / Figma AI / Midjourney / DALL-E，含色板、字体、尺寸表、Modal clip-path 与禁用清单。 |
-| [`skill/SKILL.md`](./skill/SKILL.md) | 像素级样式规范 Skill，覆盖设计 token、全部组件精确 CSS、Demo 布局数值、CSS 变量模板与新组件开发 Checklist。 |
-| [`CONTRIBUTING.md`](./CONTRIBUTING.md) | 贡献指南 |
-
+| 文档                                     | 用途                                                                                                           |
+| ---------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| [`AI_USAGE.md`](./AI_USAGE.md)           | 面向 AI 代码助手的使用手册，逐字收录全部组件 props、类型与默认值，附 19 条硬性规则与可复制样板，杜绝臆造 API。 |
+| [`DESIGN_PROMPT.md`](./DESIGN_PROMPT.md) | 一键复刻提示词，适配 v0 / Figma AI / Midjourney / DALL-E，含色板、字体、尺寸表、Modal clip-path 与禁用清单。   |
+| [`skill/SKILL.md`](./skill/SKILL.md)     | 像素级样式规范 Skill，覆盖设计 token、全部组件精确 CSS、Demo 布局数值、CSS 变量模板与新组件开发 Checklist。    |
+| [`CONTRIBUTING.md`](./CONTRIBUTING.md)   | 贡献指南                                                                                                       |
 
 ## 本地开发
 
@@ -94,16 +92,13 @@ npm run build
 npm run build:demo
 ```
 
-
 ## 案例
 
-|<a href="https://github.com/yunxinz/ac-site-template">ac-site-template</a>（治愈海岛主题个人网站模板）  |  <a href="https://github.com/xiaochong/hi-kid">HiKid</a>（儿童教育练习英语口语和听力） |
-| --- | --- |
-|  <img src="docs/img/ac-site-template.png" alt="ac-site-template" style="border-radius: 8px; width: 90%; display: block; margin: 0 auto;" /> | <img src="docs/img/hi-kid.png" alt="HiKid" style="border-radius: 8px; width: 90%; display: block; margin: 0 auto;" />| 
-|<a href="https://github.com/guokaigdg/animal-island-blog">animal-island-blog</a>（治愈海岛风格博客）  |   |
-|  <img src="docs/img/case-animal-blog.png" alt="ac-site-template" style="border-radius: 8px; width: 90%; display: block; margin: 0 auto;" /> | | 
-
-
+| <a href="https://github.com/yunxinz/ac-site-template">ac-site-template</a>（治愈海岛主题个人网站模板）                                          | <a href="https://github.com/xiaochong/hi-kid">HiKid</a>（儿童教育练习英语口语和听力）                                                |
+| ------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| <img src="docs/img/ac-site-template.png" alt="ac-site-template" style="border-radius: 8px; width: 90%; display: block; margin: 0 auto;" />  | <img src="docs/img/hi-kid.png" alt="HiKid" style="border-radius: 8px; width: 90%; display: block; margin: 0 auto;" />                |
+| <a href="https://github.com/guokaigdg/animal-island-blog">animal-island-blog</a>（治愈海岛风格博客）                                            | <a href="https://github.com/liuyuhong0324/AnimalIslandUI">AnimalIslandUI</a>（一款治愈海岛风格的安卓UI库）                               |
+| <img src="docs/img/case-animal-blog.png" alt="ac-site-template" style="border-radius: 8px; width: 100%; display: block; margin: 0 auto;" /> | <img src="docs/img/android-ui.png" alt="ac-site-template" style="border-radius: 8px; width: 90%; display: block; margin: 0 auto;" /> |
 
 ## 注意事项
 

@@ -14,7 +14,8 @@
 
 .table {
     width: 100%;
-    border-collapse: collapse;
+    border-collapse: separate;
+    border-spacing: 0;
     font-family: 'Nunito', 'Noto Sans SC', 'Zen Maru Gothic', -apple-system, 'PingFang SC', sans-serif;
 }
 
@@ -79,7 +80,6 @@
     }
 
     &:hover {
-        transform: scale(1.01);
         background-image: repeating-linear-gradient(
             -45deg,
             rgba(25, 200, 185, 0.6),
@@ -110,7 +110,6 @@
     background: rgba(248, 248, 240, 0.6);
 
     &:hover {
-        transform: scale(1.01);
         background-image: repeating-linear-gradient(
             -45deg,
             rgba(25, 200, 185, 0.65),
