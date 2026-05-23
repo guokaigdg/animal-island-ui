@@ -1,4 +1,56 @@
-.animal-cursor,
-.animal-cursor * {
-    cursor: url('../../assets/img/cursor/cursor-icon.png') 4 0, auto !important;
+/* ============ force 模式（默认）：全覆盖所有后代 ============ */
+.animal-cursor--force,
+.animal-cursor--force * {
+    cursor: url('../../assets/img/cursor/cursor-icon.png') 4 0, default !important;
+}
+
+/* ============ scoped 模式：保留交互语义 ============
+   注意：当 scoped Cursor 嵌套在 force Cursor 内部时，
+   外层 .animal-cursor--force * 会用 !important 穿透覆盖；
+   下面规则使用双类 + !important 以胜过祖先 force 规则。 */
+
+/* 容器自身：使用自定义光标（双类提升特异性 (0,2,0) > 祖先 (0,1,1)） */
+.animal-cursor.animal-cursor--scoped {
+    cursor: url('../../assets/img/cursor/cursor-icon.png') 4 0, default !important;
+}
+
+/* scoped 内的普通后代：恢复为浏览器默认（避免被祖先 force 强制成自定义光标） */
+.animal-cursor--scoped *,
+.animal-cursor.animal-cursor--scoped * {
+    cursor: auto !important;
+}
+
+/* 交互元素显式恢复 pointer */
+.animal-cursor--scoped a[href],
+.animal-cursor--scoped button,
+.animal-cursor--scoped [role='button'],
+.animal-cursor--scoped [role='link'],
+.animal-cursor--scoped label[for],
+.animal-cursor--scoped select,
+.animal-cursor--scoped summary,
+.animal-cursor--scoped input[type='button'],
+.animal-cursor--scoped input[type='submit'],
+.animal-cursor--scoped input[type='reset'],
+.animal-cursor--scoped input[type='checkbox'],
+.animal-cursor--scoped input[type='radio'],
+.animal-cursor--scoped [data-cursor='pointer'] {
+    cursor: pointer !important;
+}
+
+/* 文本输入控件保留 text */
+.animal-cursor--scoped input[type='text'],
+.animal-cursor--scoped input[type='search'],
+.animal-cursor--scoped input[type='email'],
+.animal-cursor--scoped input[type='password'],
+.animal-cursor--scoped input[type='number'],
+.animal-cursor--scoped input[type='tel'],
+.animal-cursor--scoped input[type='url'],
+.animal-cursor--scoped textarea {
+    cursor: text !important;
+}
+
+/* 禁用态优先 */
+.animal-cursor--scoped [disabled],
+.animal-cursor--scoped [aria-disabled='true'] {
+    cursor: not-allowed !important;
 }
