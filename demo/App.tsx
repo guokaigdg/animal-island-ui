@@ -48,6 +48,7 @@ const useHash = () => {
 interface MenuItemChild {
     key: string;
     label: string;
+    isNew?: boolean;
 }
 
 interface MenuItem {
@@ -79,8 +80,8 @@ const MENU_ITEMS: MenuItem[] = [
             { key: 'tabs', label: 'Tabs 标签页' },
             { key: 'footer', label: 'Footer 页脚' },
             { key: 'codeblock', label: 'CodeBlock 代码高亮' },
-            { key: 'loading', label: 'Loading 加载' },
-            { key: 'table', label: 'Table 表格' },
+            { key: 'loading', label: 'Loading 加载', isNew: true },
+            { key: 'table', label: 'Table 表格', isNew: true },
         ],
     },
     {
@@ -89,6 +90,7 @@ const MENU_ITEMS: MenuItem[] = [
         children: [
             { key: 'time', label: 'Time 时间' },
             { key: 'phone', label: 'Phone 手机' },
+            { key: 'wedding-invitation', label: 'Wedding 婚礼请柬', isNew: true },
         ],
     },
 ];
@@ -135,9 +137,11 @@ const S = {
         ({
             display: 'flex',
             alignItems: 'center',
+            justifyContent: 'space-between',
+            gap: 8,
             margin: '1px 5px',
             height: 40,
-            padding: '0 16px',
+            padding: '0 12px',
             fontFamily: "Nunito, 'Noto Sans SC', 'Zen Maru Gothic', -apple-system, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif",
             fontStyle: 'normal',
             fontWeight: 600,
@@ -148,6 +152,24 @@ const S = {
             borderRadius: 12,
             borderRight: 'none',
             transition: 'all 0.15s',
+        }) as React.CSSProperties,
+    menuBadge: (active: boolean) =>
+        ({
+            flexShrink: 0,
+            padding: '1px 7px',
+            fontSize: 9,
+            fontWeight: 800,
+            letterSpacing: 0.6,
+            color: active ? '#fc736d' : '#fff',
+            background: active
+                ? '#fff'
+                : 'linear-gradient(135deg, #fc736d, #f7825a)',
+            borderRadius: 8,
+            lineHeight: '14px',
+            boxShadow: active
+                ? '0 1px 0 rgba(114, 93, 66, 0.15)'
+                : '0 1px 0 rgba(114, 93, 66, 0.25)',
+            animation: 'menuBadgePulse 1.8s ease-in-out infinite',
         }) as React.CSSProperties,
     main: {
         flex: 1,
@@ -209,6 +231,11 @@ const SidebarContent: React.FC<{
                                     >
                                         {child.label}
                                     </span>
+                                    {child.isNew && (
+                                        <span style={S.menuBadge(activeKey === child.key)}>
+                                            NEW
+                                        </span>
+                                    )}
                                 </div>
                             ))}
                         </div>
@@ -291,6 +318,10 @@ const App: React.FC = () => {
                 @keyframes bgScroll {
                     0% { background-position: 100% 0%; }
                     100% { background-position: 0% 100%; }
+                }
+                @keyframes menuBadgePulse {
+                    0%, 100% { transform: scale(1); }
+                    50% { transform: scale(1.08); }
                 }
             `}</style>
             {isHomePage ? (

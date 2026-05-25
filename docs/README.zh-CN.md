@@ -126,7 +126,7 @@ npm run build:demo
   <td align="center" width="33%">
     <br/>
     <img src="img/KidsMathQuest.png" alt="KidsMathQuest" style="border-radius: 8px; width: 90%; display: block; margin: 8px auto 0;" />
-    <br/><a href="https://github.com/guokaigdg/KidsMathQuest">KidsMathQuest</a><br/><sub>小学生练习加减乘除</sub>
+    <br/><a href="https://github.com/bk4ice/KidsMathQuest">KidsMathQuest</a><br/><sub>小学生练习加减乘除</sub>
   </td>
 </tr>
 <tr valign="top">

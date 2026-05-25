@@ -68,4 +68,8 @@ export const PAGE_INFO: Record<string, { title: string; desc: string }> = {
         title: 'Loading 加载',
         desc: '治愈海岛风格小岛 Loading 动画组件，支持自定义样式和类名',
     },
+    'wedding-invitation': {
+        title: 'InvitationCard 婚礼请柬',
+        desc: '治愈海岛风格婚礼请柬，叶子边角 + 飘散花瓣 + 心跳爱心 + 吉祥物头像',
+    },
 };

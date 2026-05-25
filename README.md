@@ -134,7 +134,7 @@ npm run build:demo
   <td align="center" width="33%">
     <br/>
     <img src="docs/img/KidsMathQuest.png" alt="KidsMathQuest" style="border-radius: 8px; width: 90%; display: block; margin: 8px auto 0;" />
-    <br/><a href="https://github.com/guokaigdg/KidsMathQuest">KidsMathQuest</a><br/><sub>Math practice for elementary school</sub>
+    <br/><a href="https://github.com/bk4ice/KidsMathQuest">KidsMathQuest</a><br/><sub>Math practice for elementary school</sub>
   </td>
 </tr>
 <tr valign="top">

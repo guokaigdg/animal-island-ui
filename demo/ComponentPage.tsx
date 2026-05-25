@@ -20,6 +20,7 @@ import CheckboxDemo from './components/Checkbox';
 import CodeBlockDemo from './components/CodeBlock';
 import LoadingDemo from './components/Loading/LoadingDemo';
 import TableDemo from './components/Table/TableDemo';
+import InvitationCardDemo from './components/InvitationCard/InvitationCardDemo';
 import type { TabItem } from '../src';
 
 // ============================================
@@ -1324,6 +1325,10 @@ export const PAGE_INFO: Record<string, { title: string; desc: string }> = {
         title: 'Table 表格',
         desc: '数据表格组件，支持斑马纹、边框、加载状态等常用功能',
     },
+    'wedding-invitation': {
+        title: 'InvitationCard 婚礼请柬',
+        desc: '治愈海岛风格婚礼请柬组件 — 内置叶子边角、飘散花瓣、心跳爱心、吉祥物头像，所有装饰均为内联 SVG，无需外部素材',
+    },
 };
 
 const PAGES: Record<string, React.FC> = {
@@ -1346,6 +1351,7 @@ const PAGES: Record<string, React.FC> = {
     codeblock: CodeBlockDemo,
     loading: LoadingDemo,
     table: TableDemo,
+    'wedding-invitation': InvitationCardDemo,
 };
 
 // ============================================

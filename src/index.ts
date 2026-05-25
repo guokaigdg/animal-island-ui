@@ -82,3 +82,10 @@ export type { LoadingProps } from './components/Loading';
 
 export { Table } from './components/Table';
 export type { TableProps, TableColumn } from './components/Table';
+
+export { InvitationCard, InvitationCardExportButton } from './components/InvitationCard';
+export type {
+    InvitationCardProps,
+    InvitationCardRef,
+    InvitationCardExportButtonProps,
+} from './components/InvitationCard';

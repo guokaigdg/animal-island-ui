@@ -1,6 +1,6 @@
 {
     "name": "animal-island-ui",
-    "version": "0.9.3",
+    "version": "0.9.4",
     "description": "for learning purpose only, A nature-inspired React component library",
     "type": "module",
     "main": "dist/cjs/index.cjs",
@@ -48,7 +48,8 @@
         "@fontsource/noto-sans-sc": "^5.2.9",
         "@fontsource/nunito": "^5.2.7",
         "@fontsource/zen-maru-gothic": "^5.2.8",
-        "classnames": "^2.5.1"
+        "classnames": "^2.5.1",
+        "modern-screenshot": "^4.6.0"
     },
     "devDependencies": {
         "@laynezh/vite-plugin-lib-assets": "^2.1.3",
