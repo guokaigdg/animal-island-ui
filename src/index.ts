@@ -74,6 +74,12 @@ export type { TabsProps, TabItem } from './components/Tabs';
 export { Checkbox } from './components/Checkbox';
 export type { CheckboxProps, CheckboxOption, CheckboxSize } from './components/Checkbox';
 
+export { Radio } from './components/Radio';
+export type { RadioProps, RadioOption, RadioSize } from './components/Radio';
+
+export { Tooltip } from './components/Tooltip';
+export type { TooltipProps, TooltipPlacement, TooltipTrigger, TooltipVariant } from './components/Tooltip';
+
 export { CodeBlock } from './components/CodeBlock';
 export type { CodeBlockProps } from './components/CodeBlock';
 

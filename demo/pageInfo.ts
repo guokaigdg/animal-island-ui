@@ -60,6 +60,14 @@ export const PAGE_INFO: Record<string, { title: string; desc: string }> = {
         title: 'Checkbox 多选框',
         desc: '多选框组件 — 支持受控/非受控、水平/垂直排列、三种尺寸、禁用单项或全部禁用',
     },
+    radio: {
+        title: 'Radio 单选框',
+        desc: '单选框组件 — 支持受控/非受控、水平/垂直排列、三种尺寸、禁用单项或全部禁用',
+    },
+    tooltip: {
+        title: 'Tooltip 气泡提示',
+        desc: '气泡提示组件 — 支持 12 个方向、hover/click/focus 三种触发，default/island 两种风格，bordered 边框可配置',
+    },
     codeblock: {
         title: 'CodeBlock 代码高亮',
         desc: '代码高亮组件 — 语法高亮显示，支持自定义样式和类名',

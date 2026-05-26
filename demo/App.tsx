@@ -77,6 +77,8 @@ const MENU_ITEMS: MenuItem[] = [
             { key: 'icon', label: 'Icon 图标' },
             { key: 'select', label: 'Select 选择器' },
             { key: 'checkbox', label: 'Checkbox 多选框' },
+            { key: 'radio', label: 'Radio 单选框', isNew: true },
+            { key: 'tooltip', label: 'Tooltip 气泡提示', isNew: true },
             { key: 'tabs', label: 'Tabs 标签页' },
             { key: 'footer', label: 'Footer 页脚' },
             { key: 'codeblock', label: 'CodeBlock 代码高亮' },

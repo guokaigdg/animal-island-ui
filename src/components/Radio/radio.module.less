@@ -1,0 +1,201 @@
+// ============================================
+// Radio — Animal Island Style (Enhanced)
+// ============================================
+@import '../../styles/variables.less';
+
+.radioGroup {
+    display: flex;
+    flex-wrap: wrap;
+    gap: @spacing-md;
+    font-family: @font-family;
+}
+
+.horizontal {
+    flex-direction: row;
+}
+
+.vertical {
+    flex-direction: column;
+    gap: @spacing-sm;
+}
+
+// ---------- Item ----------
+.radioItem {
+    display: inline-flex;
+    align-items: center;
+    gap: @spacing-sm;
+    cursor: pointer;
+    user-select: none;
+    transition: all @motion-duration-base @motion-ease;
+}
+
+// ---------- Size: small ----------
+.small {
+    .circle {
+        width: 18px;
+        height: 18px;
+        border-width: 2px;
+    }
+
+    .dot {
+        width: 8px;
+        height: 8px;
+    }
+
+    .label {
+        font-size: @font-size-sm;
+    }
+}
+
+// ---------- Size: middle (default) ----------
+.middle {
+    .circle {
+        width: 22px;
+        height: 22px;
+        border-width: 2.5px;
+    }
+
+    .dot {
+        width: 10px;
+        height: 10px;
+    }
+
+    .label {
+        font-size: @font-size-base;
+    }
+}
+
+// ---------- Size: large ----------
+.large {
+    .circle {
+        width: 28px;
+        height: 28px;
+        border-width: 3px;
+    }
+
+    .dot {
+        width: 14px;
+        height: 14px;
+    }
+
+    .label {
+        font-size: @font-size-lg;
+    }
+}
+
+// ---------- Circle ----------
+.circle {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    background: rgb(247, 243, 223);
+    border: 2.5px solid #c4b89e;
+    border-radius: 50%;
+    transition: all @motion-duration-base @motion-ease;
+    outline: none;
+
+    // focus-visible 黄色外框
+    &:focus-visible {
+        outline: 2px solid @focus-yellow;
+        outline-offset: 2px;
+    }
+}
+
+// ---------- Hover（未选中时）----------
+.radioItem:not(.disabled):not(.checked):hover {
+    .circle {
+        border-color: @primary-color;
+        transform: translateY(-1px);
+    }
+
+    .label {
+        color: #794f27;
+    }
+}
+
+// ---------- Hover（已选中时）----------
+.radioItem.checked:not(.disabled):hover {
+    .circle {
+        transform: scale(1.06);
+        box-shadow: 0 0 0 3px rgba(25, 200, 185, 0.12);
+    }
+}
+
+// ---------- Active（按下）----------
+.radioItem:not(.disabled):active {
+    .circle {
+        transform: translateY(1px) scale(0.96);
+    }
+}
+
+// ---------- Checked ----------
+.checked {
+    .circle {
+        background: @primary-color;
+        border-color: @primary-color-active;
+    }
+}
+
+// ---------- Dot（弹性 overshoot 动画）----------
+.dot {
+    display: block;
+    background: #fff;
+    border-radius: 50%;
+    animation: animal-radio-pop 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes animal-radio-pop {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+
+    60% {
+        transform: scale(1.35);
+    }
+
+    80% {
+        transform: scale(0.92);
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+// ---------- Label ----------
+.label {
+    color: #725d42;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    transition: color @motion-duration-fast;
+}
+
+.checked .label {
+    color: #794f27;
+    font-weight: 600;
+}
+
+// ---------- Disabled ----------
+.disabled {
+    cursor: not-allowed;
+    opacity: 0.55;
+
+    .circle {
+        background: #f0ece2;
+        border-color: #d4c9b4;
+        transform: none !important;
+        box-shadow: none !important;
+    }
+
+    .label {
+        color: #c4b89e;
+    }
+}
+
+.groupDisabled .radioItem {
+    cursor: not-allowed;
+}
