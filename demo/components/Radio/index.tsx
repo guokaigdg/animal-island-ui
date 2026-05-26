@@ -78,13 +78,19 @@ const RadioDemo: React.FC = () => {
                 />
             </div>
 
-            <div style={labelStyle}>三种尺寸对比</div>
+            <div style={labelStyle}>小尺寸</div>
             <div style={demoBoxStyle}>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-                    <Radio options={timeOptions} defaultValue="morning" size="small" />
-                    <Radio options={timeOptions} defaultValue="noon" size="middle" />
-                    <Radio options={timeOptions} defaultValue="night" size="large" />
-                </div>
+                <Radio options={timeOptions} defaultValue="morning" size="small" />
+            </div>
+
+            <div style={labelStyle}>中尺寸（默认）</div>
+            <div style={demoBoxStyle}>
+                <Radio options={timeOptions} defaultValue="noon" size="middle" />
+            </div>
+
+            <div style={labelStyle}>大尺寸</div>
+            <div style={demoBoxStyle}>
+                <Radio options={timeOptions} defaultValue="night" size="large" />
             </div>
 
             <div style={labelStyle}>3D 按键感 — 点击体验下压反馈</div>

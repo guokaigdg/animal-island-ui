@@ -34,12 +34,13 @@
     .circle {
         width: 18px;
         height: 18px;
+        border-radius: @border-radius-sm - 4;
         border-width: 2px;
     }
 
-    .dot {
-        width: 8px;
-        height: 8px;
+    .checkmark {
+        width: 10px;
+        height: 10px;
     }
 
     .label {
@@ -52,12 +53,13 @@
     .circle {
         width: 22px;
         height: 22px;
-        border-width: 2.5px;
+        border-radius: @border-radius-sm - 2;
+        border-width: 2px;
     }
 
-    .dot {
-        width: 10px;
-        height: 10px;
+    .checkmark {
+        width: 12px;
+        height: 12px;
     }
 
     .label {
@@ -70,12 +72,12 @@
     .circle {
         width: 28px;
         height: 28px;
-        border-width: 3px;
+        border-radius: @border-radius-sm;
+        border-width: 2px;
     }
 
-    .dot {
-        width: 14px;
-        height: 14px;
+    .checkmark {
+        font-size: 16px;
     }
 
     .label {
@@ -83,7 +85,7 @@
     }
 }
 
-// ---------- Circle ----------
+// ---------- Box ----------
 .circle {
     position: relative;
     display: inline-flex;
@@ -91,42 +93,14 @@
     justify-content: center;
     flex-shrink: 0;
     background: rgb(247, 243, 223);
-    border: 2.5px solid #c4b89e;
-    border-radius: 50%;
+    border: 2px solid #c4b89e;
+    border-radius: 8px;
     transition: all @motion-duration-base @motion-ease;
     outline: none;
 
-    // focus-visible 黄色外框
     &:focus-visible {
         outline: 2px solid @focus-yellow;
         outline-offset: 2px;
-    }
-}
-
-// ---------- Hover（未选中时）----------
-.radioItem:not(.disabled):not(.checked):hover {
-    .circle {
-        border-color: @primary-color;
-        transform: translateY(-1px);
-    }
-
-    .label {
-        color: #794f27;
-    }
-}
-
-// ---------- Hover（已选中时）----------
-.radioItem.checked:not(.disabled):hover {
-    .circle {
-        transform: scale(1.06);
-        box-shadow: 0 0 0 3px rgba(25, 200, 185, 0.12);
-    }
-}
-
-// ---------- Active（按下）----------
-.radioItem:not(.disabled):active {
-    .circle {
-        transform: translateY(1px) scale(0.96);
     }
 }
 
@@ -138,28 +112,24 @@
     }
 }
 
-// ---------- Dot（弹性 overshoot 动画）----------
-.dot {
-    display: block;
-    background: #fff;
-    border-radius: 50%;
-    animation: animal-radio-pop 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+// ---------- Checkmark ----------
+.checkmark {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    line-height: 1;
+    animation: animal-radio-pop @motion-duration-fast @motion-ease;
 }
 
 @keyframes animal-radio-pop {
     0% {
-        transform: scale(0);
+        transform: scale(0.4);
         opacity: 0;
     }
-
     60% {
-        transform: scale(1.35);
+        transform: scale(1.2);
     }
-
-    80% {
-        transform: scale(0.92);
-    }
-
     100% {
         transform: scale(1);
         opacity: 1;
@@ -176,7 +146,6 @@
 
 .checked .label {
     color: #794f27;
-    font-weight: 600;
 }
 
 // ---------- Disabled ----------
