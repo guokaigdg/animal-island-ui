@@ -1,0 +1,526 @@
+// ============================================
+// Tooltip — Animal Island Style
+// ============================================
+@import '../../styles/variables.less';
+
+@tooltip-bg: rgb(247, 243, 223);
+@tooltip-border: #c4b89e;
+@tooltip-gap: 10px;
+@tooltip-arrow-size: 8px;
+@island-arrow-size: 10px;
+
+.tooltipWrapper {
+    position: relative;
+    display: inline-flex;
+    vertical-align: middle;
+    font-family: @font-family;
+}
+
+.tooltip {
+    position: absolute;
+    z-index: 100;
+    box-sizing: border-box;
+    // 修复 CJK 文本在 absolute + left:50% 下 shrink-to-fit 塌缩为单字宽
+    width: max-content;
+    max-width: 240px;
+    padding: 6px 12px;
+    background: @tooltip-bg;
+    border-radius: @border-radius-sm;
+    box-shadow: @shadow-base;
+    color: #725d42;
+    font-size: @font-size-sm;
+    font-weight: 500;
+    line-height: 1.5;
+    letter-spacing: 0.01em;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity @motion-duration-base @motion-ease,
+        transform @motion-duration-base @motion-ease;
+
+    &.visible {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    &::after {
+        content: '';
+        position: absolute;
+        width: @tooltip-arrow-size;
+        height: @tooltip-arrow-size;
+        background: @tooltip-bg;
+        border-radius: 2px;
+    }
+}
+
+.content {
+    position: relative;
+    z-index: 1;
+    white-space: pre-line;
+    word-break: break-word;
+}
+
+// ---------- Border config ----------
+.tooltip:not(.island).bordered {
+    border: @border-width solid @tooltip-border;
+}
+
+.tooltip.borderless:not(.island)::after {
+    border: none !important;
+}
+
+// ---------- Island variant — 治愈海岛有机气泡 ----------
+.island {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+    max-width: 280px;
+
+    &::after {
+        display: none;
+    }
+}
+
+.islandBody {
+    position: relative;
+    width: max-content;
+    max-width: 280px;
+}
+
+.islandSvg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.islandContent {
+    position: relative;
+    z-index: 1;
+    padding: 12px 20px;
+
+    .content {
+        font-weight: 600;
+        line-height: 1.55;
+        text-align: center;
+    }
+}
+
+.island.bordered .islandBody {
+    padding: 2px;
+    filter: drop-shadow(0 4px 14px rgba(121, 79, 39, 0.14));
+}
+
+.island.bordered .islandContent {
+    background: transparent;
+}
+
+.island.borderless .islandContent {
+    background: @tooltip-bg;
+    filter: drop-shadow(0 4px 14px rgba(121, 79, 39, 0.14));
+}
+
+.tail {
+    position: absolute;
+    z-index: 2;
+    pointer-events: none;
+}
+
+// island 无边框：圆点指示
+.island.borderless .tail {
+    width: 14px;
+    height: 14px;
+    background: @tooltip-bg;
+    border-radius: 50%;
+}
+
+.island.borderless.top .tail {
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.island.borderless.top_start .tail {
+    bottom: -5px;
+    left: 20px;
+}
+
+.island.borderless.top_end .tail {
+    bottom: -5px;
+    right: 20px;
+}
+
+.island.borderless.bottom .tail {
+    top: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.island.borderless.bottom_start .tail {
+    top: -5px;
+    left: 20px;
+}
+
+.island.borderless.bottom_end .tail {
+    top: -5px;
+    right: 20px;
+}
+
+.island.borderless.left .tail {
+    right: -5px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.island.borderless.left_start .tail {
+    right: -5px;
+    top: 16px;
+}
+
+.island.borderless.left_end .tail {
+    right: -5px;
+    bottom: 16px;
+}
+
+.island.borderless.right .tail {
+    left: -5px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.island.borderless.right_start .tail {
+    left: -5px;
+    top: 16px;
+}
+
+.island.borderless.right_end .tail {
+    left: -5px;
+    bottom: 16px;
+}
+
+// island 有边框：菱形箭头（与 default 一致，方向更清晰）
+.island.bordered .tail {
+    width: @island-arrow-size;
+    height: @island-arrow-size;
+    background: @tooltip-bg;
+    border-radius: 2px;
+}
+
+.island.bordered.top .tail {
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%) rotate(45deg);
+    border-right: @border-width solid @tooltip-border;
+    border-bottom: @border-width solid @tooltip-border;
+}
+
+.island.bordered.top_start .tail {
+    bottom: -5px;
+    left: 20px;
+    transform: rotate(45deg);
+    border-right: @border-width solid @tooltip-border;
+    border-bottom: @border-width solid @tooltip-border;
+}
+
+.island.bordered.top_end .tail {
+    bottom: -5px;
+    right: 20px;
+    transform: rotate(45deg);
+    border-right: @border-width solid @tooltip-border;
+    border-bottom: @border-width solid @tooltip-border;
+}
+
+.island.bordered.bottom .tail {
+    top: -5px;
+    left: 50%;
+    transform: translateX(-50%) rotate(45deg);
+    border-top: @border-width solid @tooltip-border;
+    border-left: @border-width solid @tooltip-border;
+}
+
+.island.bordered.bottom_start .tail {
+    top: -5px;
+    left: 20px;
+    transform: rotate(45deg);
+    border-top: @border-width solid @tooltip-border;
+    border-left: @border-width solid @tooltip-border;
+}
+
+.island.bordered.bottom_end .tail {
+    top: -5px;
+    right: 20px;
+    transform: rotate(45deg);
+    border-top: @border-width solid @tooltip-border;
+    border-left: @border-width solid @tooltip-border;
+}
+
+.island.bordered.left .tail {
+    right: -5px;
+    top: 50%;
+    transform: translateY(-50%) rotate(45deg);
+    border-top: @border-width solid @tooltip-border;
+    border-right: @border-width solid @tooltip-border;
+}
+
+.island.bordered.left_start .tail {
+    right: -5px;
+    top: 16px;
+    transform: rotate(45deg);
+    border-top: @border-width solid @tooltip-border;
+    border-right: @border-width solid @tooltip-border;
+}
+
+.island.bordered.left_end .tail {
+    right: -5px;
+    bottom: 16px;
+    transform: rotate(45deg);
+    border-top: @border-width solid @tooltip-border;
+    border-right: @border-width solid @tooltip-border;
+}
+
+.island.bordered.right .tail {
+    left: -5px;
+    top: 50%;
+    transform: translateY(-50%) rotate(45deg);
+    border-bottom: @border-width solid @tooltip-border;
+    border-left: @border-width solid @tooltip-border;
+}
+
+.island.bordered.right_start .tail {
+    left: -5px;
+    top: 16px;
+    transform: rotate(45deg);
+    border-bottom: @border-width solid @tooltip-border;
+    border-left: @border-width solid @tooltip-border;
+}
+
+.island.bordered.right_end .tail {
+    left: -5px;
+    bottom: 16px;
+    transform: rotate(45deg);
+    border-bottom: @border-width solid @tooltip-border;
+    border-left: @border-width solid @tooltip-border;
+}
+
+// ---------- Top ----------
+.top {
+    bottom: calc(100% + @tooltip-gap);
+    left: 50%;
+    transform: translateX(-50%) translateY(4px);
+
+    &.visible {
+        transform: translateX(-50%) translateY(0);
+    }
+
+    &::after {
+        bottom: -5px;
+        left: 50%;
+        transform: translateX(-50%) rotate(45deg);
+        border-right: @border-width solid @tooltip-border;
+        border-bottom: @border-width solid @tooltip-border;
+    }
+}
+
+.top_start {
+    bottom: calc(100% + @tooltip-gap);
+    left: 0;
+    transform: translateY(4px);
+
+    &.visible {
+        transform: translateY(0);
+    }
+
+    &::after {
+        bottom: -5px;
+        left: 16px;
+        transform: rotate(45deg);
+        border-right: @border-width solid @tooltip-border;
+        border-bottom: @border-width solid @tooltip-border;
+    }
+}
+
+.top_end {
+    bottom: calc(100% + @tooltip-gap);
+    right: 0;
+    transform: translateY(4px);
+
+    &.visible {
+        transform: translateY(0);
+    }
+
+    &::after {
+        bottom: -5px;
+        right: 16px;
+        transform: rotate(45deg);
+        border-right: @border-width solid @tooltip-border;
+        border-bottom: @border-width solid @tooltip-border;
+    }
+}
+
+// ---------- Bottom ----------
+.bottom {
+    top: calc(100% + @tooltip-gap);
+    left: 50%;
+    transform: translateX(-50%) translateY(-4px);
+
+    &.visible {
+        transform: translateX(-50%) translateY(0);
+    }
+
+    &::after {
+        top: -5px;
+        left: 50%;
+        transform: translateX(-50%) rotate(45deg);
+        border-top: @border-width solid @tooltip-border;
+        border-left: @border-width solid @tooltip-border;
+    }
+}
+
+.bottom_start {
+    top: calc(100% + @tooltip-gap);
+    left: 0;
+    transform: translateY(-4px);
+
+    &.visible {
+        transform: translateY(0);
+    }
+
+    &::after {
+        top: -5px;
+        left: 16px;
+        transform: rotate(45deg);
+        border-top: @border-width solid @tooltip-border;
+        border-left: @border-width solid @tooltip-border;
+    }
+}
+
+.bottom_end {
+    top: calc(100% + @tooltip-gap);
+    right: 0;
+    transform: translateY(-4px);
+
+    &.visible {
+        transform: translateY(0);
+    }
+
+    &::after {
+        top: -5px;
+        right: 16px;
+        transform: rotate(45deg);
+        border-top: @border-width solid @tooltip-border;
+        border-left: @border-width solid @tooltip-border;
+    }
+}
+
+// ---------- Left ----------
+.left {
+    right: calc(100% + @tooltip-gap);
+    top: 50%;
+    transform: translateY(-50%) translateX(4px);
+
+    &.visible {
+        transform: translateY(-50%) translateX(0);
+    }
+
+    &::after {
+        right: -5px;
+        top: 50%;
+        transform: translateY(-50%) rotate(45deg);
+        border-top: @border-width solid @tooltip-border;
+        border-right: @border-width solid @tooltip-border;
+    }
+}
+
+.left_start {
+    right: calc(100% + @tooltip-gap);
+    top: 0;
+    transform: translateX(4px);
+
+    &.visible {
+        transform: translateX(0);
+    }
+
+    &::after {
+        right: -5px;
+        top: 12px;
+        transform: rotate(45deg);
+        border-top: @border-width solid @tooltip-border;
+        border-right: @border-width solid @tooltip-border;
+    }
+}
+
+.left_end {
+    right: calc(100% + @tooltip-gap);
+    bottom: 0;
+    transform: translateX(4px);
+
+    &.visible {
+        transform: translateX(0);
+    }
+
+    &::after {
+        right: -5px;
+        bottom: 12px;
+        transform: rotate(45deg);
+        border-top: @border-width solid @tooltip-border;
+        border-right: @border-width solid @tooltip-border;
+    }
+}
+
+// ---------- Right ----------
+.right {
+    left: calc(100% + @tooltip-gap);
+    top: 50%;
+    transform: translateY(-50%) translateX(-4px);
+
+    &.visible {
+        transform: translateY(-50%) translateX(0);
+    }
+
+    &::after {
+        left: -5px;
+        top: 50%;
+        transform: translateY(-50%) rotate(45deg);
+        border-bottom: @border-width solid @tooltip-border;
+        border-left: @border-width solid @tooltip-border;
+    }
+}
+
+.right_start {
+    left: calc(100% + @tooltip-gap);
+    top: 0;
+    transform: translateX(-4px);
+
+    &.visible {
+        transform: translateX(0);
+    }
+
+    &::after {
+        left: -5px;
+        top: 12px;
+        transform: rotate(45deg);
+        border-bottom: @border-width solid @tooltip-border;
+        border-left: @border-width solid @tooltip-border;
+    }
+}
+
+.right_end {
+    left: calc(100% + @tooltip-gap);
+    bottom: 0;
+    transform: translateX(-4px);
+
+    &.visible {
+        transform: translateX(0);
+    }
+
+    &::after {
+        left: -5px;
+        bottom: 12px;
+        transform: rotate(45deg);
+        border-bottom: @border-width solid @tooltip-border;
+        border-left: @border-width solid @tooltip-border;
+    }
+}
