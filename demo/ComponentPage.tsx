@@ -329,7 +329,7 @@ const DIVIDER_API: ApiRow[] = [
     {
         prop: 'type',
         desc: '分隔线类型',
-        type: `'line-brown' | 'line-teal' | 'line-white' | 'line-yellow' | 'wave-yellow'`,
+        type: `'line-brown' | 'line-teal' | 'line-white' | 'line-yellow' | 'wave-yellow' | 'dashed-brown' | 'dashed-teal' | 'dashed-white' | 'dashed-yellow'`,
         defaultVal: "'line-brown'",
     },
     { prop: 'className', desc: '自定义类名', type: 'string', defaultVal: '-' },
@@ -1111,7 +1111,7 @@ const TYPEWRITER_API: ApiRow[] = [
 const DividerDemo: React.FC = () => (
     <div style={sectionStyle}>
         <div style={sectionTitleStyle}>
-            Divider <span style={tagStyle}>5 types</span>
+            Divider <span style={tagStyle}>9 types</span>
         </div>
         <div style={labelStyle}>line-brown</div>
         <Divider type="line-brown" />
@@ -1125,6 +1125,16 @@ const DividerDemo: React.FC = () => (
         <Divider type="line-yellow" />
         <div style={labelStyle}>wave-yellow</div>
         <Divider type="wave-yellow" />
+        <div style={labelStyle}>dashed-brown</div>
+        <Divider type="dashed-brown" />
+        <div style={labelStyle}>dashed-teal</div>
+        <Divider type="dashed-teal" />
+        <div style={labelStyle}>dashed-white</div>
+        <div style={{ background: '#333', padding: 10 }}>
+            <Divider type="dashed-white" />
+        </div>
+        <div style={labelStyle}>dashed-yellow</div>
+        <Divider type="dashed-yellow" />
         <CodeBlock
             code={`import React from 'react';
 import { Divider } from 'animal-island-ui';
@@ -1132,16 +1142,18 @@ import { Divider } from 'animal-island-ui';
 const App = () => {
     return (
         <div>
-            {/* line-brown */}
+            {/* 实线 */}
             <Divider type="line-brown" />
-            {/* line-teal */}
             <Divider type="line-teal" />
-            {/* line-white */}
             <Divider type="line-white" />
-            {/* line-yellow */}
             <Divider type="line-yellow" />
-            {/* wave-yellow */}
+            {/* 波浪 */}
             <Divider type="wave-yellow" />
+            {/* 虚线 */}
+            <Divider type="dashed-brown" />
+            <Divider type="dashed-teal" />
+            <Divider type="dashed-white" />
+            <Divider type="dashed-yellow" />
         </div>
     );
 };

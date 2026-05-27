@@ -19,3 +19,31 @@
 .wave-yellow {
     background-image: url('../../assets/img/dividers/wave-yellow.svg');
 }
+
+// ---------- Dashed (CSS-only, no asset) ----------
+// 12px 节奏 + 6px dash + 6px gap，居中绘制 2px 粗细的破折线
+.dashed-brown,
+.dashed-teal,
+.dashed-white,
+.dashed-yellow {
+    background-image: none;
+    background-repeat: repeat-x;
+    background-position: center;
+    background-size: 12px 2px;
+}
+
+.dashed-brown {
+    background: linear-gradient(to right, #c4b89e 50%, transparent 50%) center / 12px 2px repeat-x;
+}
+
+.dashed-teal {
+    background: linear-gradient(to right, #19c8b9 50%, transparent 50%) center / 12px 2px repeat-x;
+}
+
+.dashed-white {
+    background: linear-gradient(to right, #ffffff 50%, transparent 50%) center / 12px 2px repeat-x;
+}
+
+.dashed-yellow {
+    background: linear-gradient(to right, #f5d04a 50%, transparent 50%) center / 12px 2px repeat-x;
+}

@@ -1,7 +1,16 @@
 import React from 'react';
 import styles from './divider.module.less';
 
-export type DividerType = 'line-brown' | 'line-teal' | 'line-white' | 'line-yellow' | 'wave-yellow';
+export type DividerType =
+    | 'line-brown'
+    | 'line-teal'
+    | 'line-white'
+    | 'line-yellow'
+    | 'wave-yellow'
+    | 'dashed-brown'
+    | 'dashed-teal'
+    | 'dashed-white'
+    | 'dashed-yellow';
 
 export interface DividerProps {
     /** 分隔线类型 */
