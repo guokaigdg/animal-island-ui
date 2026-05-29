@@ -80,6 +80,9 @@ export type { RadioProps, RadioOption, RadioSize } from './components/Radio';
 export { Tooltip } from './components/Tooltip';
 export type { TooltipProps, TooltipPlacement, TooltipTrigger, TooltipVariant } from './components/Tooltip';
 
+export { Title } from './components/Title';
+export type { TitleProps, TitleSize, TitleColor } from './components/Title';
+
 export { CodeBlock } from './components/CodeBlock';
 export type { CodeBlockProps } from './components/CodeBlock';
 
