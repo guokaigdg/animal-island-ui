@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Input, Switch, Modal, Card, Collapse, Divider, Typewriter, Tabs, Cursor } from '../src';
+import { Button, Input, Switch, Modal, Card, Collapse, Divider, Typewriter, Tabs, Cursor, Title, TitleColor } from '../src';
 import {
     labelStyle,
     sectionStyle,
@@ -19,6 +19,7 @@ import TabsDemo from './components/Tabs';
 import CheckboxDemo from './components/Checkbox';
 import RadioDemo from './components/Radio';
 import TooltipDemo from './components/Tooltip';
+import TitleDemo from './components/Title';
 import CodeBlockDemo from './components/CodeBlock';
 import LoadingDemo from './components/Loading/LoadingDemo';
 import TableDemo from './components/Table/TableDemo';
@@ -329,7 +330,7 @@ const DIVIDER_API: ApiRow[] = [
     {
         prop: 'type',
         desc: '分隔线类型',
-        type: `'line-brown' | 'line-teal' | 'line-white' | 'line-yellow' | 'wave-yellow' | 'dashed-brown' | 'dashed-teal' | 'dashed-white' | 'dashed-yellow'`,
+        type: `'line-brown' | 'line-teal' | 'line-white' | 'line-yellow' | 'wave-yellow'`,
         defaultVal: "'line-brown'",
     },
     { prop: 'className', desc: '自定义类名', type: 'string', defaultVal: '-' },
@@ -1111,7 +1112,7 @@ const TYPEWRITER_API: ApiRow[] = [
 const DividerDemo: React.FC = () => (
     <div style={sectionStyle}>
         <div style={sectionTitleStyle}>
-            Divider <span style={tagStyle}>9 types</span>
+            Divider <span style={tagStyle}>5 types</span>
         </div>
         <div style={labelStyle}>line-brown</div>
         <Divider type="line-brown" />
@@ -1125,16 +1126,6 @@ const DividerDemo: React.FC = () => (
         <Divider type="line-yellow" />
         <div style={labelStyle}>wave-yellow</div>
         <Divider type="wave-yellow" />
-        <div style={labelStyle}>dashed-brown</div>
-        <Divider type="dashed-brown" />
-        <div style={labelStyle}>dashed-teal</div>
-        <Divider type="dashed-teal" />
-        <div style={labelStyle}>dashed-white</div>
-        <div style={{ background: '#333', padding: 10 }}>
-            <Divider type="dashed-white" />
-        </div>
-        <div style={labelStyle}>dashed-yellow</div>
-        <Divider type="dashed-yellow" />
         <CodeBlock
             code={`import React from 'react';
 import { Divider } from 'animal-island-ui';
@@ -1142,18 +1133,16 @@ import { Divider } from 'animal-island-ui';
 const App = () => {
     return (
         <div>
-            {/* 实线 */}
+            {/* line-brown */}
             <Divider type="line-brown" />
+            {/* line-teal */}
             <Divider type="line-teal" />
+            {/* line-white */}
             <Divider type="line-white" />
+            {/* line-yellow */}
             <Divider type="line-yellow" />
-            {/* 波浪 */}
+            {/* wave-yellow */}
             <Divider type="wave-yellow" />
-            {/* 虚线 */}
-            <Divider type="dashed-brown" />
-            <Divider type="dashed-teal" />
-            <Divider type="dashed-white" />
-            <Divider type="dashed-yellow" />
         </div>
     );
 };
@@ -1335,6 +1324,10 @@ export const PAGE_INFO: Record<string, { title: string; desc: string }> = {
         title: 'Tooltip 气泡提示',
         desc: '气泡提示组件 — 支持 12 个方向、hover/click/focus 三种触发，default/island 两种风格，bordered 边框可配置',
     },
+    title: {
+        title: 'Title 标题',
+        desc: '装饰性标题组件 — cloud 云朵 / ribbon 飘带 两种风格，三种尺寸，适用于游戏化页面、活动 Banner 与场景分组',
+    },
     codeblock: {
         title: 'CodeBlock 代码高亮',
         desc: '代码高亮组件 — 语法高亮显示，支持自定义样式和类名',
@@ -1372,6 +1365,7 @@ const PAGES: Record<string, React.FC> = {
     checkbox: CheckboxDemo,
     radio: RadioDemo,
     tooltip: TooltipDemo,
+    title: TitleDemo,
     codeblock: CodeBlockDemo,
     loading: LoadingDemo,
     table: TableDemo,
@@ -1381,6 +1375,11 @@ const PAGES: Record<string, React.FC> = {
 // ============================================
 // ComponentPage
 // ============================================
+const TITLE_COLORS: TitleColor[] = [
+    'lime-green','default', 'app-pink', 'purple', 'app-blue', 'app-yellow', 'app-orange',
+    'app-red', 'yellow-green', 'brown', 'warm-peach-pink',
+];
+
 interface ComponentPageProps {
     activeKey: string;
 }
@@ -1389,21 +1388,18 @@ const ComponentPage: React.FC<ComponentPageProps> = ({ activeKey }) => {
     const Page = PAGES[activeKey];
     const info = PAGE_INFO[activeKey];
 
+    // 根据 activeKey 固定映射一种颜色，切换页面时变色但同一页面不随机抖动
+    const titleColor = TITLE_COLORS[
+        Math.abs(activeKey.split('').reduce((acc, c) => acc + c.charCodeAt(0), 0)) % TITLE_COLORS.length
+    ];
+
     if (!Page || !info) return null;
 
     return (
         <>
-            <div
-                style={{
-                    fontSize: 24,
-                    fontWeight: 700,
-                    color: '#794f27',
-                    marginBottom: 12,
-                    lineHeight: 1.4,
-                }}
-            >
+            <Title size="large" color={titleColor} style={{ marginBottom: 30, marginLeft: 18 }}>
                 {info.title}
-            </div>
+            </Title>
             <div style={{ ...S.pageDesc, minHeight: 40 }}>
                 <Typewriter key={activeKey} trigger={activeKey} speed={30}>
                     {info.desc}

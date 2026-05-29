@@ -68,6 +68,10 @@ export const PAGE_INFO: Record<string, { title: string; desc: string }> = {
         title: 'Tooltip 气泡提示',
         desc: '气泡提示组件 — 支持 12 个方向、hover/click/focus 三种触发，default/island 两种风格，bordered 边框可配置',
     },
+    title: {
+        title: 'Title 标题',
+        desc: '装饰性标题组件 — cloud 云朵 / ribbon 飘带 两种风格，三种尺寸，适用于游戏化页面、活动 Banner 与场景分组',
+    },
     codeblock: {
         title: 'CodeBlock 代码高亮',
         desc: '代码高亮组件 — 语法高亮显示，支持自定义样式和类名',
