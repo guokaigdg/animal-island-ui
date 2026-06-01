@@ -1,7 +1,7 @@
 {
     "name": "animal-island-ui",
-    "version": "0.9.4",
-    "description": "for learning purpose only, A nature-inspired React component library",
+    "version": "0.9.5",
+    "description": "A nature-inspired React component library",
     "type": "module",
     "main": "dist/cjs/index.cjs",
     "module": "dist/es/index.js",
@@ -47,7 +47,6 @@
     "dependencies": {
         "@fontsource/noto-sans-sc": "^5.2.9",
         "@fontsource/nunito": "^5.2.7",
-        "@fontsource/zen-maru-gothic": "^5.2.8",
         "classnames": "^2.5.1",
         "modern-screenshot": "^4.6.0"
     },
@@ -58,7 +57,6 @@
         "@types/react-dom": "^18.3.5",
         "@vitejs/plugin-react": "^5.2.0",
         "gh-pages": "^6.3.0",
-        "glob": "^11.0.1",
         "less": "^4.2.1",
         "react": "^18.3.1",
         "react-dom": "^18.3.1",
