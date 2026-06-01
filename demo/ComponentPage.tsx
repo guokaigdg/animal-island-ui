@@ -250,7 +250,7 @@ const CARD_API: ApiRow[] = [
     {
         prop: 'type',
         desc: '卡片类型',
-        type: `'default' | 'title' | 'dashed'`,
+        type: `'default' | 'dashed'`,
         defaultVal: "'default'",
     },
     {
@@ -258,6 +258,12 @@ const CARD_API: ApiRow[] = [
         desc: '背景颜色类型',
         type: `'default' | 'app-pink' | 'purple' | 'app-blue' | 'app-yellow' | 'app-orange' | 'app-teal' | 'app-green' | 'app-red' | 'lime-green' | 'yellow-green' | 'brown' | 'warm-peach-pink'`,
         defaultVal: "'default'",
+    },
+    {
+        prop: 'pattern',
+        desc: '背景花纹类型',
+        type: `'none' | 'default' | 'app-pink' | 'purple' | 'app-blue' | 'app-yellow' | 'app-orange' | 'app-teal' | 'app-green' | 'app-red' | 'lime-green' | 'yellow-green' | 'brown' | 'warm-peach-pink'`,
+        defaultVal: "'none'",
     },
     {
         prop: 'children',
@@ -590,7 +596,7 @@ export default App;`}
 const CardDemo: React.FC = () => (
     <div style={sectionStyle}>
         <div style={sectionTitleStyle}>
-            Card <span style={tagStyle}>3 types</span> <span style={tagStyle}>13 colors</span>
+            Card <span style={tagStyle}>2 types</span> <span style={tagStyle}>13 colors</span> <span style={tagStyle}>14 patterns</span>
         </div>
 
         {/* ---- type ---- */}
@@ -608,19 +614,6 @@ const CardDemo: React.FC = () => (
                     </p>
                 </Card>
             </div>
-            <div style={labelStyle}>type="title"</div>
-            <div style={S.row}>
-                <Card type="title">
-                    <p>Title标题卡片</p>
-                </Card>
-                <Card type="title" style={{ maxWidth: 360, width: '100%' }}>
-                    <p>
-                        欢迎来到无人岛！在a game company 3DS《Animal Island: New Leaf》和《Animal Island: Happy Home
-                        Designer》中製作的「我的設計」QR
-                        Code，以智慧型裝置讀取就能通過狸端機入口站下載至《集合啦！療癒系海島》。
-                    </p>
-                </Card>
-            </div>
             <div style={labelStyle}>type="dashed"</div>
             <div style={S.row}>
                 <Card type="dashed">
@@ -631,10 +624,68 @@ const CardDemo: React.FC = () => (
                 </Card>
             </div>
         </div>
+        {/* ---- pattern ---- */}
+        <div style={{...demoBodyStyle, gap: 24}}>
+            <div style={labelStyle}>pattern — 风格花纹</div>
+            <div style={S.row}>
+                <Card pattern="default" style={{ width: 170 }}>
+                    <div style={{ fontWeight: 700, fontSize: 14, marginBottom: 4 }}>default</div>
+                    <div style={{ fontSize: 12, opacity: 0.85 }}>默认奶油色</div>
+                </Card>
+                <Card pattern="app-pink" style={{ width: 170 }}>
+                    <div style={{ fontWeight: 700, fontSize: 14, marginBottom: 4 }}>app-pink</div>
+                    <div style={{ fontSize: 12, opacity: 0.85 }}>应用粉</div>
+                </Card>
+                <Card pattern="purple" style={{ width: 170 }}>
+                    <div style={{ fontWeight: 700, fontSize: 14, marginBottom: 4 }}>purple</div>
+                    <div style={{ fontSize: 12, opacity: 0.85 }}>紫色</div>
+                </Card>
+                <Card pattern="app-blue" style={{ width: 170 }}>
+                    <div style={{ fontWeight: 700, fontSize: 14, marginBottom: 4 }}>app-blue</div>
+                    <div style={{ fontSize: 12, opacity: 0.85 }}>应用蓝</div>
+                </Card>
+                <Card pattern="app-yellow" style={{ width: 170 }}>
+                    <div style={{ fontWeight: 700, fontSize: 14, marginBottom: 4 }}>app-yellow</div>
+                    <div style={{ fontSize: 12, opacity: 0.85 }}>应用黄</div>
+                </Card>
+                <Card pattern="app-orange" style={{ width: 170 }}>
+                    <div style={{ fontWeight: 700, fontSize: 14, marginBottom: 4 }}>app-orange</div>
+                    <div style={{ fontSize: 12, opacity: 0.85 }}>应用橙</div>
+                </Card>
+                <Card pattern="app-teal" style={{ width: 170 }}>
+                    <div style={{ fontWeight: 700, fontSize: 14, marginBottom: 4 }}>app-teal</div>
+                    <div style={{ fontSize: 12, opacity: 0.85 }}>应用青</div>
+                </Card>
+                <Card pattern="app-green" style={{ width: 170 }}>
+                    <div style={{ fontWeight: 700, fontSize: 14, marginBottom: 4 }}>app-green</div>
+                    <div style={{ fontSize: 12, opacity: 0.85 }}>应用绿</div>
+                </Card>
+                <Card pattern="app-red" style={{ width: 170 }}>
+                    <div style={{ fontWeight: 700, fontSize: 14, marginBottom: 4 }}>app-red</div>
+                    <div style={{ fontSize: 12, opacity: 0.85 }}>应用红</div>
+                </Card>
+                <Card pattern="lime-green" style={{ width: 170 }}>
+                    <div style={{ fontWeight: 700, fontSize: 14, marginBottom: 4 }}>lime-green</div>
+                    <div style={{ fontSize: 12, opacity: 0.85 }}>青柠绿</div>
+                </Card>
+                <Card pattern="yellow-green" style={{ width: 170 }}>
+                    <div style={{ fontWeight: 700, fontSize: 14, marginBottom: 4 }}>yellow-green</div>
+                    <div style={{ fontSize: 12, opacity: 0.85 }}>黄绿色</div>
+                </Card>
+                <Card pattern="brown" style={{ width: 170 }}>
+                    <div style={{ fontWeight: 700, fontSize: 14, marginBottom: 4 }}>brown</div>
+                    <div style={{ fontSize: 12, opacity: 0.85 }}>棕色</div>
+                </Card>
+                <Card pattern="warm-peach-pink" style={{ width: 170 }}>
+                    <div style={{ fontWeight: 700, fontSize: 14, marginBottom: 4 }}>warm-peach-pink</div>
+                    <div style={{ fontSize: 12, opacity: 0.85 }}>暖桃粉</div>
+                </Card>
+            </div>
+        </div>
 
         {/* ---- color variants ---- */}
         <div style={demoBodyStyle}>
-            <div style={labelStyle}>color — IslandPhone 颜色</div>
+            <div style={labelStyle}>color</div>
             <div
                 style={{
                     display: 'grid',
@@ -675,50 +726,6 @@ const CardDemo: React.FC = () => (
                 ))}
             </div>
         </div>
-
-        {/* ---- color + title ---- */}
-        <div style={demoBodyStyle}>
-            <div style={labelStyle}>color + type="title"</div>
-            <div style={S.row}>
-                <Card type="title" color="app-blue" style={{ width: 240 }}>
-                    <div
-                        style={{
-                            fontWeight: 700,
-                            fontSize: 15,
-                            marginBottom: 6,
-                        }}
-                    >
-                        蓝色标题卡片
-                    </div>
-                    <div style={{ fontSize: 12, opacity: 0.85 }}>type="title" + color="app-blue"</div>
-                </Card>
-                <Card type="title" color="app-green" style={{ width: 250 }}>
-                    <div
-                        style={{
-                            fontWeight: 700,
-                            fontSize: 15,
-                            marginBottom: 6,
-                        }}
-                    >
-                        绿色标题卡片
-                    </div>
-                    <div style={{ fontSize: 12, opacity: 0.85 }}>type="title" + color="app-green"</div>
-                </Card>
-                <Card type="title" color="purple" style={{ width: 240 }}>
-                    <div
-                        style={{
-                            fontWeight: 700,
-                            fontSize: 15,
-                            marginBottom: 6,
-                        }}
-                    >
-                        紫色标题卡片
-                    </div>
-                    <div style={{ fontSize: 12, opacity: 0.85 }}>type="title" + color="purple"</div>
-                </Card>
-            </div>
-        </div>
-
         <CodeBlock
             code={`import React from 'react';
 import { Card } from 'animal-island-ui';
@@ -731,9 +738,9 @@ const App = () => {
                 基础卡片
             </Card>
 
-            {/* 标题卡片 */}
-            <Card type="title" style={{ width: 260 }}>
-                标题卡片
+            {/* 虚线卡片 */}
+            <Card type="dashed" style={{ width: 260 }}>
+                虚线卡片
             </Card>
 
             {/* 颜色变体 */}
@@ -744,9 +751,9 @@ const App = () => {
                 暖桃粉卡片
             </Card>
 
-            {/* 颜色 + 标题 组合 */}
-            <Card type="title" color="purple">
-                紫色标题卡片
+            {/* 花纹 */}
+            <Card pattern="default">
+                默认花纹卡片
             </Card>
         </div>
     );
@@ -1112,20 +1119,30 @@ const TYPEWRITER_API: ApiRow[] = [
 const DividerDemo: React.FC = () => (
     <div style={sectionStyle}>
         <div style={sectionTitleStyle}>
-            Divider <span style={tagStyle}>5 types</span>
+            Divider <span style={tagStyle}>9 types</span>
         </div>
-        <div style={labelStyle}>line-brown</div>
+        <div style={labelStyle}>line-brown（实线棕色）</div>
         <Divider type="line-brown" />
-        <div style={labelStyle}>line-teal</div>
+        <div style={labelStyle}>line-teal（实线青色）</div>
         <Divider type="line-teal" />
-        <div style={labelStyle}>line-white</div>
+        <div style={labelStyle}>line-white（实线白色）</div>
         <div style={{ background: '#333', padding: 10 }}>
             <Divider type="line-white" />
         </div>
-        <div style={labelStyle}>line-yellow</div>
+        <div style={labelStyle}>line-yellow（实线黄色）</div>
         <Divider type="line-yellow" />
-        <div style={labelStyle}>wave-yellow</div>
+        <div style={labelStyle}>wave-yellow（波浪线黄色）</div>
         <Divider type="wave-yellow" />
+        <div style={labelStyle}>dashed-brown（虚线棕色）</div>
+        <Divider type="dashed-brown" />
+        <div style={labelStyle}>dashed-teal（虚线青色）</div>
+        <Divider type="dashed-teal" />
+        <div style={labelStyle}>dashed-white（虚线白色）</div>
+        <div style={{ background: '#333', padding: 10 }}>
+            <Divider type="dashed-white" />
+        </div>
+        <div style={labelStyle}>dashed-yellow（虚线黄色）</div>
+        <Divider type="dashed-yellow" />
         <CodeBlock
             code={`import React from 'react';
 import { Divider } from 'animal-island-ui';
@@ -1133,16 +1150,18 @@ import { Divider } from 'animal-island-ui';
 const App = () => {
     return (
         <div>
-            {/* line-brown */}
+            {/* 实线类型 */}
             <Divider type="line-brown" />
-            {/* line-teal */}
             <Divider type="line-teal" />
-            {/* line-white */}
             <Divider type="line-white" />
-            {/* line-yellow */}
             <Divider type="line-yellow" />
-            {/* wave-yellow */}
+            {/* 波浪线 */}
             <Divider type="wave-yellow" />
+            {/* 虚线类型 */}
+            <Divider type="dashed-brown" />
+            <Divider type="dashed-teal" />
+            <Divider type="dashed-white" />
+            <Divider type="dashed-yellow" />
         </div>
     );
 };
