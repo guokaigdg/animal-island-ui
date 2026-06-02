@@ -64,6 +64,18 @@ demo/                       # Demo 站点源码
 3. 全局变量通过 `@import variables.less` 自动注入，直接使用 `@primary-color` 等变量即可
 4. 在 `src/index.ts` 中导出组件及类型
 5. 在 `demo/` 中添加组件演示
+6. 同步更新文档（见下方「文档分工」）
+
+## 文档分工
+
+新增 / 修改组件时，按下表同步更新对应文件，避免文档漂移：
+
+| 文件 | 受众 | 维护要点 |
+| --- | --- | --- |
+| [`PROMPT.md`](./PROMPT.md) | 普通 AI 工具用户 | self-contained 一键提示词；新增组件需追加 `### 组件名` spec 段落 |
+| [`AI_USAGE.md`](./AI_USAGE.md) | AI 代码助手 | 组件 Props / 类型 / 默认值；新增组件需追加 API 表 |
+| [`DESIGN_PROMPT.md`](./DESIGN_PROMPT.md) | v0 / Figma AI / Midjourney / DALL·E | 视觉风格描述；颜色 / 尺寸 / 形状变化时同步 |
+| [`skill/SKILL.md`](./skill/SKILL.md) | 内部 Skill | 像素级 CSS 规范；与源码 `*.module.less` 100% 对齐 |
 
 ## 设计令牌
 
