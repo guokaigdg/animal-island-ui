@@ -111,6 +111,11 @@ npm run build:demo
 <tr valign="top">
   <td align="center" width="33%">
     <br/>
+    <img src="img/animal-island-new-tab.png" alt="animal-island-new-tab" style="border-radius: 8px; width: 90%; display: block; margin: 8px auto 0;" />
+    <br/><a href="https://ashleycry.github.io/AnimalIslandNewTab/">Animal Island New Tab</a><br/><sub>治愈海岛新标签页</sub>
+  </td>
+  <td align="center" width="33%">
+    <br/>
     <img src="img/ac-site-template.png" alt="ac-site-template" style="border-radius: 8px; width: 90%; display: block; margin: 8px auto 0;" />
     <br/><a href="https://github.com/yunxinz/ac-site-template">ac-site-template</a><br/><sub>治愈海岛主题个人网站模板</sub>
   </td>
@@ -118,11 +123,6 @@ npm run build:demo
     <br/>
     <img src="img/hi-kid.png" alt="HiKid" style="border-radius: 8px; width: 90%; display: block; margin: 8px auto 0;" />
     <br/><a href="https://github.com/xiaochong/hi-kid">HiKid</a><br/><sub>儿童教育练习英语口语和听力</sub>
-  </td>
-  <td align="center" width="33%">
-    <br/>
-    <img src="img/case-animal-blog.png" alt="animal-island-blog" style="border-radius: 8px; width: 90%; display: block; margin: 8px auto 0;" />
-    <br/><a href="https://github.com/guokaigdg/animal-island-blog">animal-island-blog</a><br/><sub>治愈海岛风格博客</sub>
   </td>
 </tr>
 <tr valign="top">
@@ -138,17 +138,20 @@ npm run build:demo
   </td>
   <td align="center" width="33%">
     <br/>
-    <img src="img/KidsMathQuest.png" alt="KidsMathQuest" style="border-radius: 8px; width: 90%; display: block; margin: 8px auto 0;" />
+    <img src="img/KidsMathQuest.jpeg" alt="KidsMathQuest" style="border-radius: 8px; width: 90%; display: block; margin: 8px auto 0;" />
     <br/><a href="https://github.com/bk4ice/KidsMathQuest">KidsMathQuest</a><br/><sub>小学生练习加减乘除</sub>
   </td>
 </tr>
 <tr valign="top">
   <td align="center" width="33%">
     <br/>
-    <img src="img/flutter-ui.png" alt="animal_island_flutter" style="border-radius: 8px; width: 90%; display: block; margin: 8px auto 0;" />
+    <img src="img/flutter-ui.jpeg" alt="animal_island_flutter" style="border-radius: 8px; width: 90%; display: block; margin: 8px auto 0;" />
     <br/><a href="https://github.com/ohmangocat/animal_island_flutter">animal_island_flutter</a><br/><sub>治愈海岛风格Flutter UI库</sub>
   </td>
   <td align="center" width="33%">
+    <br/>
+    <img src="img/case-animal-blog.png" alt="animal-island-blog" style="border-radius: 8px; width: 90%; display: block; margin: 8px auto 0;" />
+    <br/><a href="https://github.com/guokaigdg/animal-island-blog">animal-island-blog</a><br/><sub>治愈海岛风格博客</sub>
   </td>
   <td align="center" width="33%">
   </td>

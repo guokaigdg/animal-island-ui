@@ -119,6 +119,11 @@ npm run build:demo
 <tr valign="top">
   <td align="center" width="33%">
     <br/>
+    <img src="docs/img/animal-island-new-tab.png" alt="animal-island-new-tab" style="border-radius: 8px; width: 90%; display: block; margin: 8px auto 0;" />
+    <br/><a href="https://ashleycry.github.io/AnimalIslandNewTab/">Animal Island New Tab</a><br/><sub>a cozy island-style UI style new tab page</sub>
+  </td>
+  <td align="center" width="33%">
+    <br/>
     <img src="docs/img/ac-site-template.png" alt="ac-site-template" style="border-radius: 8px; width: 90%; display: block; margin: 8px auto 0;" />
     <br/><a href="https://github.com/yunxinz/ac-site-template">ac-site-template</a><br/><sub>a cozy island-style UI themed personal website template</sub>
   </td>
@@ -126,11 +131,6 @@ npm run build:demo
     <br/>
     <img src="docs/img/hi-kid.png" alt="HiKid" style="border-radius: 8px; width: 90%; display: block; margin: 8px auto 0;" />
     <br/><a href="https://github.com/xiaochong/hi-kid">HiKid</a><br/><sub>English learning app for children</sub>
-  </td>
-  <td align="center" width="33%">
-    <br/>
-    <img src="docs/img/case-animal-blog.png" alt="animal-island-blog" style="border-radius: 8px; width: 90%; display: block; margin: 8px auto 0;" />
-    <br/><a href="https://github.com/guokaigdg/animal-island-blog">animal-island-blog</a><br/><sub>a cozy island-style UI style blog</sub>
   </td>
 </tr>
 <tr valign="top">
@@ -146,17 +146,20 @@ npm run build:demo
   </td>
   <td align="center" width="33%">
     <br/>
-    <img src="docs/img/KidsMathQuest.png" alt="KidsMathQuest" style="border-radius: 8px; width: 90%; display: block; margin: 8px auto 0;" />
+    <img src="docs/img/KidsMathQuest.jpeg" alt="KidsMathQuest" style="border-radius: 8px; width: 90%; display: block; margin: 8px auto 0;" />
     <br/><a href="https://github.com/bk4ice/KidsMathQuest">KidsMathQuest</a><br/><sub>Math practice for elementary school</sub>
   </td>
 </tr>
 <tr valign="top">
   <td align="center" width="33%">
     <br/>
-    <img src="docs/img/flutter-ui.png" alt="animal_island_flutter" style="border-radius: 8px; width: 90%; display: block; margin: 8px auto 0;" />
+    <img src="docs/img/flutter-ui.jpeg" alt="animal_island_flutter" style="border-radius: 8px; width: 90%; display: block; margin: 8px auto 0;" />
     <br/><a href="https://github.com/ohmangocat/animal_island_flutter">animal_island_flutter</a><br/><sub>a cozy island-style UI style Flutter UI library</sub>
   </td>
   <td align="center" width="33%">
+    <br/>
+    <img src="docs/img/case-animal-blog.png" alt="animal-island-blog" style="border-radius: 8px; width: 90%; display: block; margin: 8px auto 0;" />
+    <br/><a href="https://github.com/guokaigdg/animal-island-blog">animal-island-blog</a><br/><sub>a cozy island-style UI style blog</sub>
   </td>
   <td align="center" width="33%">
   </td>
