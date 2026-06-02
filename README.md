@@ -40,6 +40,17 @@ All visual elements, layouts, icons, and animations are independently designed a
 - Online Preview (PC) [animal-island-ui-pc](https://guokaigdg.github.io/animal-island-ui/#/)
 - Online Preview (Mobile) [animal-island-ui-mobile](https://guokaigdg.github.io/animal-island-ui/#/)
 
+## 🚀 Use AI to Generate animal-island-ui Pages (No Coding Needed)
+
+Non-developer and don't want to write code yourself? Use [`PROMPT.md`](./PROMPT.md) — no npm, no build step.
+
+**4 steps:**
+
+1. Copy [`PROMPT.md`](./PROMPT.md) in full.
+2. Paste into any AI tool (Cursor / Claude / ChatGPT / Gemini / DeepSeek) and send.
+3. The AI asks what page you want — reply in one phrase (e.g. "personal blog", "product list", "FAQ").
+4. Save the `index.html` it returns and double-click to preview.
+
 ## Installation
 
 ```bash
@@ -74,8 +85,9 @@ Complete reference for different scenarios:
 
 | Document | Purpose |
 |---|---|
+| [`PROMPT.md`](./PROMPT.md) | 🚀 One-click prompt for non-developers — paste into Cursor / Claude / ChatGPT / v0 / Bolt / Lovable / Windsurf to generate animal-island-ui-styled React pages. |
 | [`AI_USAGE.md`](./AI_USAGE.md) | AI code assistant handbook - all component props, types and defaults word-for-word, 19 hard rules and copy-paste boilerplate, no invented APIs. |
-| [`DESIGN_PROMPT.md`](./DESIGN_PROMPT.md) | One-click reproduction prompts for v0 / Figma AI / Midjourney / DALL-E, including color palette, fonts, size tables, Modal clip-path and prohibition list. |
+| [`DESIGN_PROMPT.md`](./DESIGN_PROMPT.md) | Visual-style prompts for v0 / Figma AI / Midjourney / DALL-E, including color palette, fonts, size tables, Modal clip-path and prohibition list. |
 | [`skill/SKILL.md`](./skill/SKILL.md) | Pixel-perfect style specification Skill - design tokens, all component CSS, Demo layout values, CSS variable templates and new component development checklist. |
 | [`CONTRIBUTING.md`](./CONTRIBUTING.md) | Contributing Guide |
 
