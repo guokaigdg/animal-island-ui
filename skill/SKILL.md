@@ -19,14 +19,14 @@ description: >
 ## 概述
 
 animal-island-ui 是一套受《治愈系海岛风格》启发的 React + TypeScript UI 组件库。
-设计语言核心：**温暖大地色系 + 大圆角 pill 形 + 游戏按键立体感 + 柔和动效 + 有机不规则形状**。
+设计语言核心：**温暖大地色系 + 大圆角 pill 形 + 游戏按键立体感 + 柔和动效 + 几何 / 有机形状并存**（几何代表：Title 飘带的 swallowtail clip-path；有机代表：Modal 的 SVG blob、InvitationCard 的不规则虚线边框）。
 
 - 源码：`src/components/<ComponentName>/`
 - Demo 站：`demo/`
 - 构建：Vite (library mode) + `vite.config.ts`（库）/ `vite.config.demo.ts`（Demo）
 - 样式系统：Less Modules + `src/styles/variables.less` 设计 token
 
-### 全量组件清单（17 个）
+### 全量导出清单（24 个 named exports = 23 个组件 + 1 个伴生导出按钮）
 
 从 `src/index.ts` 导出：
 
@@ -36,10 +36,13 @@ animal-island-ui 是一套受《治愈系海岛风格》启发的 React + TypeSc
 | `Input` | 输入框，3 种尺寸 + clear/prefix/suffix | ✓ | |
 | `Switch` | 开关，默认/小号 | ✓ | |
 | `Modal` | SVG blob 裁切弹窗 | ✓ | |
-| `Card` | 容器，`default`/`title`，13 种 IslandPhone 配色 | | ✓ |
-| `Collapse` | 手风琴（CSS Grid，无 JS 过渡） | ✓ | |
+| `Card` | 容器，`default`/`dashed`，13 种 IslandPhone 实色 + 13 种 `pattern` 波点墙纸（CSS radial-gradient，非图片） | | ✓ |
+| `Title` | 章节标题，飘带横幅（swallowtail clip-path 燕尾 + 折角阴影 + 微透视正面），13 种配色（替代旧 `Card type="title"`） | | ✓ |
+| `Collapse` | 手风琴（动画用 CSS Grid 0fr↔1fr 实现，无 JS 动画） | ✓ | |
 | `Select` | 下拉选择器（受控） | ✓ | |
 | `Checkbox` | 多选框组，水平/垂直，3 种尺寸 | ✓ | |
+| `Radio` | 单选框组，3 种尺寸，键盘 roving tabindex | ✓ | |
+| `Tooltip` | 12 种 placement，`hover`/`focus`/`click` 触发，`default`/`island` 形态 | ✓ | |
 | `Icon` | SVG 图标库（10 个） | | ✓ |
 | `Time` | HUD 实时时钟 | | ✓ |
 | `Phone` | IslandPhone 3×3 应用网格 | | ✓ |
@@ -49,8 +52,11 @@ animal-island-ui 是一套受《治愈系海岛风格》启发的 React + TypeSc
 | `Typewriter` | 打字机效果，保留 ReactNode 结构 | | ✓ |
 | `Tabs` | 标签页切换，叶子摆动动画可选 | ✓ | |
 | `CodeBlock` | JSX/TS 语法高亮代码块 | | ✓ |
+| `Loading` | 全屏遮罩 + SVG spinner（mint `#19c8b9`，`stroke-dasharray` 动画） | | ✓ |
+| `Table` | 数据表格，固定列、空状态、loading | ✓ | |
+| `InvitationCard` | 婚礼邀请函（含 `InvitationCardExportButton` 导出 PNG —— 这是清单里**唯一非组件的伴生导出按钮**） | | ✓ |
 
-类型导出：`ButtonProps/ButtonType/ButtonSize`、`InputProps/InputSize`、`SwitchProps/SwitchSize`、`ModalProps`、`CardProps/CardType/CardColor`、`FooterProps/FooterType`、`CollapseProps`、`CursorProps`、`TimeProps`、`PhoneProps`、`DividerProps`、`TypewriterProps`、`SelectProps/SelectOption`、`IconProps/IconName`、`TabsProps/TabItem`、`CheckboxProps/CheckboxOption/CheckboxSize`、`CodeBlockProps`。运行时值：`ICON_LIST`。
+类型导出：`ButtonProps/ButtonType/ButtonSize`、`InputProps/InputSize`、`SwitchProps/SwitchSize`、`ModalProps`、`CardProps/CardType/CardColor`、`TitleProps/TitleSize/TitleColor`、`FooterProps/FooterType`、`CollapseProps`、`CursorProps`、`TimeProps`、`PhoneProps`、`DividerProps`、`TypewriterProps`、`SelectProps/SelectOption`、`IconProps/IconName`、`TabsProps/TabItem`、`CheckboxProps/CheckboxOption/CheckboxSize`、`RadioProps/RadioOption/RadioSize`、`TooltipProps/TooltipPlacement/TooltipTrigger/TooltipVariant`、`CodeBlockProps`、`LoadingProps`、`TableProps/TableColumn`、`InvitationCardProps/InvitationCardRef/InvitationCardExportButtonProps`。运行时值：`ICON_LIST`。
 
 ---
 
@@ -127,14 +133,14 @@ animal-island-ui 是一套受《治愈系海岛风格》启发的 React + TypeSc
 
 ### 字体
 
-项目使用三款 Google Fonts 圆体字，**必须**按以下方式引入，本地未安装时通过在线地址加载：
+项目使用两款 Google Fonts 圆体字，**必须**按以下方式引入，本地未安装时通过在线地址加载：
 
 ```html
 <!-- 在 index.html <head> 中引入 -->
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link
-  href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Zen+Maru+Gothic:wght@400;500;700&family=M+PLUS+Rounded+1c:wght@400;500;700&display=swap"
+  href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;700&display=swap"
   rel="stylesheet"
 />
 ```
@@ -142,11 +148,11 @@ animal-island-ui 是一套受《治愈系海岛风格》启发的 React + TypeSc
 或在 CSS / Less 入口文件顶部：
 
 ```css
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;700&family=Zen+Maru+Gothic:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;700&display=swap');
 ```
 
 ```css
-font-family: Nunito, 'Noto Sans SC', 'Zen Maru Gothic',
+font-family: Nunito, 'Noto Sans SC',
   -apple-system, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
 ```
 
@@ -154,7 +160,8 @@ font-family: Nunito, 'Noto Sans SC', 'Zen Maru Gothic',
 |---|---|---|
 | **Nunito** | 主字体，拉丁字符 | `family=Nunito` |
 | **Noto Sans SC** | 中文字体，简体覆盖 | `family=Noto+Sans+SC` |
-| **Zen Maru Gothic** | 日文字体 | `family=Zen+Maru+Gothic` |
+
+> 历史版本曾捆绑日文 `Zen Maru Gothic`，已于 v0.9.x 移除（项目无日文 UI 需求）。如需扩展日文字符，自行 `@import` 该字体并追加到 `font-family` 末尾即可。
 
 字重分级：
 - 正文内容：**500**
@@ -184,18 +191,25 @@ font-family: Nunito, 'Noto Sans SC', 'Zen Maru Gothic',
 /* 卡片/容器阴影（暖色调，非冷黑）*/
 box-shadow: 0 3px 10px 0 rgba(61, 52, 40, 0.10);   /* 基础 */
 box-shadow: 0 8px 24px 0 rgba(61, 52, 40, 0.14);   /* 较大 */
-box-shadow: 0 4px 10px rgba(107, 92, 67, 0.42);    /* Card */
+/* Card 默认无 box-shadow（依赖 border / pattern 营造层次，不靠悬浮阴影）*/
 
-/* 游戏按键立体阴影（最重要特征）*/
-box-shadow: 0 5px 0 0 #bdaea0;   /* 按钮默认 */
-box-shadow: 0 6px 0 0 #bdaea0;   /* 按钮 hover */
-box-shadow: 0 1px 0 0 #bdaea0;   /* 按钮 active */
-box-shadow: 0 3px 0 0 #d4c9b4;   /* 输入框 */
-box-shadow: 0 2px 0 0 #d4c9b4;   /* 小号输入框 */
-box-shadow: 0 4px 0 0 #d4c9b4;   /* 大号输入框 */
-box-shadow: 0 3px 0 0 #5a9e1e;   /* Switch 开启态 */
-box-shadow: 0 2px 0 0 #5a9e1e;   /* Switch 小号开启态 */
+/* 默认/虚线/文字/链接按钮阴影（柔和 elevation —— 非 3D 厚阴影）*/
+box-shadow: 0 2px 4px 0 rgba(61, 52, 40, 0.06);    /* btn-default 静止：--animal-shadow-sm */
+box-shadow: 0 3px 10px 0 rgba(61, 52, 40, 0.10);   /* btn-default hover：--animal-shadow-base */
+/* active 回落到 --animal-shadow-sm，translateY(0) */
+
+/* 游戏按键 3D 立体阴影（仅 primary / danger-primary 按钮；Input 仅 shadow={true} 时启用；Switch 仅 track inset 阴影，handle 无 box-shadow）*/
+box-shadow: 0 5px 0 0 #bdaea0;   /* primary 按钮默认 */
+box-shadow: 0 6px 0 0 #bdaea0;   /* primary 按钮 hover */
+box-shadow: 0 1px 0 0 #bdaea0;   /* primary 按钮 active */
+box-shadow: 0 5px 0 0 #c94444;   /* danger-primary 按钮默认（hover 6 / active 1） */
+box-shadow: 0 3px 0 0 #d4c9b4;   /* 输入框 shadow={true} 中号 */
+box-shadow: 0 2px 0 0 #d4c9b4;   /* 输入框 shadow={true} 小号 */
+box-shadow: 0 4px 0 0 #d4c9b4;   /* 输入框 shadow={true} 大号 */
+/* Switch 仅 track 有 inset 阴影：inset 0 2px 4px rgba(114,93,66,0.15) (OFF) / inset 0 2px 4px rgba(90,158,30,0.20) (ON)；handle 无 outer box-shadow */
 ```
+
+> **重要**：只有 primary 风格按钮（含 danger primary）才使用 `0 5px 0 0` 这种像素级 3D 厚阴影；`default` / `dashed` / `text` / `link` 用上面的柔和 elevation 阴影。把 3D 阴影套到所有按钮上会让界面变得过重过游戏化。
 
 ---
 
@@ -209,8 +223,8 @@ transition: grid-template-rows 0.3s cubic-bezier(0.4, 0, 0.2, 1);  /* 手风琴 
 
 /* Hover：上浮 */
 transform: translateY(-1px);   /* 按钮 / 输入框 */
-transform: translateY(-2px);   /* Switch handle */
-transform: translateY(-4px);   /* 卡片 */
+transform: translateY(-2px);   /* 卡片 */
+/* Switch handle: 始终 translateY(-50%) 垂直居中，无 hover 上浮 */
 
 /* Active：下压（游戏按键反馈）*/
 transform: translateY(2px);    /* 按钮 active */
@@ -244,7 +258,7 @@ transform: translateY(2px);    /* 按钮 active */
 | border-radius | 12px | **50px** | 24px |
 | border-width | 2px | 2px | 2px |
 
-**primary 按钮精确值：**
+**primary 按钮精确值（**仅 primary / danger-primary 用 3D 厚阴影**）：**
 ```css
 color: #794f27;
 background: #f8f8f0;
@@ -269,6 +283,25 @@ outline-offset: 2px;
 /* disabled */
 opacity: 0.5;
 ```
+
+**default / dashed / text / link 按钮（柔和 elevation）：**
+```css
+/* 静止 */
+box-shadow: var(--animal-shadow-sm);     /* 0 2px 4px 0 rgba(61,52,40,0.06) */
+
+/* hover */
+color: #19c8b9;
+border-color: #19c8b9;
+box-shadow: var(--animal-shadow-base);   /* 0 3px 10px 0 rgba(61,52,40,0.10) */
+transform: translateY(-1px);
+
+/* active */
+color: #11a89b;
+border-color: #11a89b;
+transform: translateY(0);
+box-shadow: var(--animal-shadow-sm);     /* 回落到静止态 */
+```
+> 不要把 primary 那套 `0 5px / 6px / 1px #bdaea0` 套到 default / dashed 上 —— 整体会显得过重过 cartoon。
 
 **loading 斜纹动画（精确值）：**
 ```css
@@ -299,6 +332,8 @@ box-shadow: 0 5px 0 0 #c94444;  /* error-active */
 
 ### Input
 
+> ⚠️ **`shadow` prop 默认 `false`**：默认无阴影，下表的 `box-shadow` 仅在 `<Input shadow />` 显式开启时生效。status (error/warning) 阴影与 focus 黄色光晕不受此 prop 控制。
+
 | 属性 | small | middle | large |
 |---|---|---|---|
 | height | 32px | 40px | 48px |
@@ -306,13 +341,13 @@ box-shadow: 0 5px 0 0 #c94444;  /* error-active */
 | font-size | 12px | 14px | 16px |
 | border-radius | 40px | 50px | 50px |
 | border-width | 2.5px | 2.5px | **3px** |
-| box-shadow | `0 2px 0 0 #d4c9b4` | `0 3px 0 0 #d4c9b4` | `0 4px 0 0 #d4c9b4` |
+| box-shadow（仅 `shadow={true}`） | `0 2px 0 0 #d4c9b4` | `0 3px 0 0 #d4c9b4` | `0 4px 0 0 #d4c9b4` |
 
 **精确颜色值：**
 ```css
 background: rgb(247, 243, 223);
 border: 2.5px solid #c4b89e;
-box-shadow: 0 3px 0 0 #d4c9b4;
+/* 默认无 box-shadow；shadow={true} 时按上表中号取 0 3px 0 0 #d4c9b4 */
 
 /* 文字 */
 color: #725d42;
@@ -380,12 +415,12 @@ box-shadow: inset 0 2px 4px rgba(114, 93, 66, 0.15);
 
 /* handle */
 width: 21px; height: 21px;
-top: 2px; left: 2px;
+top: 50%; left: 2px;
+transform: translateY(-50%);   /* 垂直居中 */
 background: rgb(247, 243, 223);
-border: 2px solid #c4b89e;
+border: 2.5px solid #bdaea0;
 border-radius: 50%;
-box-shadow: 0 3px 0 0 #bdaea0;
-transform: translateY(-2px);   /* 悬浮效果 */
+/* handle 无 outer box-shadow，仅靠 border 与 track inset 阴影分层 */
 
 /* 开启态 */
 background: #86d67a;
@@ -393,8 +428,7 @@ border-color: #6fba2c;
 box-shadow: inset 0 2px 4px rgba(90, 158, 30, 0.2);
 /* handle 开启后 left */
 left: calc(100% - 24px);
-border-color: #6fba2c;
-box-shadow: 0 3px 0 0 #5a9e1e;
+border-color: #5a9e1e;
 
 /* focus-visible */
 outline: 2px solid #ffcc00;
@@ -445,15 +479,83 @@ background: rgb(247, 243, 223);
 padding: 16px 24px;
 color: #725d42;
 font-weight: 500;
-box-shadow: 0 4px 10px rgba(107, 92, 67, 0.42);
+/* 默认 NO box-shadow（依赖 border / pattern 分层，不靠悬浮阴影）*/
 transition: all 0.3s ease;
-/* hover */ transform: translateY(-4px);
+/* hover */ transform: translateY(-2px);
 
-/* title 类型 */
-background: #fdfdf5;
-border-radius: 40px 35px 45px 38px / 38px 45px 35px 40px;
-padding: 12px 32px;
-font-weight: 600;
+/* dashed 类型 */
+border: 2px dashed #e8dcc8;
+background: rgb(250, 248, 242);
+box-shadow: none;
+
+/* pattern 叠加（pattern !== 'none' 时，纯 CSS 实现，**无 png/svg**） */
+/* 双层 radial-gradient 点阵 + 同色调 1.5px solid 边框 + pastel 浅底，
+   13 种命名（default / app-pink / purple / app-blue / app-yellow / app-orange /
+   app-teal / app-green / app-red / lime-green / yellow-green / brown / warm-peach-pink）
+   与 Card.color 同名，但呈现为浅底波点"墙纸"而非实色块。 */
+/* 例：pattern="app-pink" */
+background:
+  radial-gradient(circle, rgba(248,166,178,0.18) 1.5px, transparent 1.5px) 0 0/28px 28px,
+  radial-gradient(circle, rgba(255,200,210,0.12) 1px, transparent 1px) 7px 7px/14px 14px,
+  #fde4e8;
+border: 1.5px solid #f8a6b2;
+color: #a85565;
+/* 当 color 与 pattern 同时设置时，pattern 视觉上覆盖 color */
+```
+
+> 旧版 `Card type="title"` 在 v0.9.x 移除，章节标题请使用独立的 `<Title>` 组件（见下文）。
+
+---
+
+### Title（飘带 Ribbon 章节标题）
+
+替代旧 `Card type="title"`，渲染游戏风飘带横幅：燕尾两端 + 折角阴影 + 微透视正面主体。
+源码：`src/components/Title/title.module.less`。
+
+```css
+/* 默认（绿色配色，可被 .color-* 覆盖） */
+--rf: #27d039;   /* front 正面 */
+--rb: #20992a;   /* back  燕尾 */
+--rk: #115017;   /* fold  折角阴影 */
+--rt: #fff;      /* text  文字色 */
+
+font-family: Nunito, 'Noto Sans SC', sans-serif;
+font-weight: 800;             /* 外层 wrapper */
+/* .ribbonText 内层文字 font-weight 900；padding-top 0.11em CJK 光学居中 */
+
+/* 飘带主体 */
+display: inline-flex;
+height: 2em; padding: 0 1.6em;
+letter-spacing: 0.04em;
+filter: drop-shadow(0 0.08em 0.12em rgba(0, 0, 0, 0.05));
+
+/* 燕尾（左/右）—— clip-path 鱼尾形 */
+.ribbonBackLeft  { clip-path: polygon(100% 0%, 100% 100%, 0% 100%, 30% 50%, 0% 0%); }
+.ribbonBackRight { clip-path: polygon(0% 0%,   100% 0%, 70% 50%, 100% 100%, 0% 100%); }
+width: 1.7em; height: 1.7em; bottom: -0.4em;
+
+/* 折角阴影 —— CSS border 三角 */
+.ribbonFoldLeft  { border-width: 0 0.95em 0.45em 0; border-color: transparent var(--rk) transparent transparent; }
+.ribbonFoldRight { border-width: 0 0 0.45em 0.95em; border-color: transparent transparent transparent var(--rk); }
+
+/* 正面主体 */
+.ribbonFront { inset: 0 0.1em; border-radius: 0.2em; transform: perspective(11.5em) rotateX(3deg); }
+```
+
+尺寸（`SIZE_MAP` 通过 inline `font-size` 注入；所有内部 `em` 自动缩放）：
+
+| size   | font-size |
+|--------|-----------|
+| small  | 14px      |
+| middle | 20px      |
+| large  | 28px      |
+
+13 种颜色覆盖：在 wrapper 上叠加 `.color-app-pink` / `.color-purple` / `.color-app-blue` / `.color-app-yellow` / `.color-app-orange` / `.color-app-teal` / `.color-app-green` / `.color-app-red` / `.color-lime-green` / `.color-yellow-green` / `.color-brown` / `.color-warm-peach-pink` 之一；每个类同时覆盖 `--rf / --rb / --rk / --rt` 四个变量。详见 `title.module.less` 末尾的 13 行 `.color-*` 定义。
+
+例：
+```less
+.color-app-yellow    { --rf: #f7cd67; --rb: #d4a030; --rk: #8a6010; --rt: #725d42; }
+.color-purple        { --rf: #b77dee; --rb: #9050d0; --rk: #5a1a9a; --rt: #fff; }
 ```
 
 ---
@@ -542,12 +644,14 @@ font-size: 14px; line-height: 1.7;
     background: rgba(25, 200, 185, 0.1);
     color: #725d42;
 }
-/* 激活状态 */
+/* 激活状态 — 实心 teal 胶囊 + 奶油色字 */
 .tabItem.active {
-    background: rgba(25, 200, 185, 0.15);
-    color: #19c8b9;
+    background: #0CC0B5;
+    color: #FFF9E3;
     font-weight: 600;
-    box-shadow: 0 3px 0 0 #d4c9b4;
+}
+.tabItem.active-shadow {
+    box-shadow: 0 3px 0 0 #d4c9b4;   /* 仅 shadow opt-in 时启用 */
 }
 
 /* 标签图标 */
@@ -1041,6 +1145,270 @@ tab-size: 4;
 
 ---
 
+### Radio
+
+源码：`src/components/Radio/radio.module.less`。
+
+| 属性 | small | middle | large |
+|---|---|---|---|
+| 外盒尺寸 | 18×18px | 22×22px | 28×28px |
+| 圆角 | 12px | 14px | 16px（**重圆方形，非正圆**） |
+| 边框宽 | 2px | 2px | 2px |
+| 内勾尺寸 | 10×10px | 12×12px | 16px font-size |
+| label font-size | 12px | 14px | 16px |
+
+```css
+/* 默认（未选） */
+background: rgb(247, 243, 223);
+border: 2px solid #c4b89e;
+
+/* hover */
+border-color: #19c8b9;
+transform: translateY(-1px);
+
+/* checked */
+background: #19c8b9;        /* @primary-color */
+border-color: #11a89b;      /* @primary-color-active */
+/* 内白色勾 pop 动画 */
+@keyframes radio-pop {
+  0%   { transform: scale(0.4); opacity: 0; }
+  60%  { transform: scale(1.2); }
+  100% { transform: scale(1); opacity: 1; }
+}
+/* 时长 0.15s ease（@motion-duration-fast） */
+
+/* label */
+color: #725d42; font-weight: 500; letter-spacing: 0.01em;
+/* checked label */ color: #794f27;
+
+/* focus-visible */
+outline: 2px solid #f5c31c;   /* 注意：Radio 用 @focus-yellow=#f5c31c，而非 Checkbox/Input 的 #ffcc00 */
+outline-offset: 2px;
+
+/* disabled */
+opacity: 0.55; cursor: not-allowed;
+background: #f0ece2; border-color: #d4c9b4;
+/* label */ color: #c4b89e;
+
+/* group 布局 */
+/* horizontal */ display: flex; gap: 12px;
+/* vertical */   display: flex; flex-direction: column; gap: 8px;
+```
+
+---
+
+### Tooltip
+
+源码：`src/components/Tooltip/tooltip.module.less`。`default` 与 `island` 是两套**完全不同**的视觉，不要混淆。
+
+**default 变体（标准温色 bubble）：**
+
+```css
+background: rgb(247, 243, 223);   /* @tooltip-bg */
+border: 2px solid #c4b89e;         /* @tooltip-border */
+border-radius: 16px;               /* @border-radius-sm */
+padding: 6px 12px;
+max-width: 240px;
+
+font-size: 12px; font-weight: 500; line-height: 1.5; letter-spacing: 0.01em;
+color: #725d42;
+
+box-shadow: 0 3px 10px rgba(61, 52, 40, 0.10);   /* @shadow-base */
+z-index: 100;
+
+/* 距 trigger 间距 */ gap: 10px;
+/* 入场动画：translateY 4px → 0，平滑显隐 */
+
+/* 三角箭头 */
+size: 8px; border-radius: 2px;     /* 8px 菱形，圆角 2px —— 不是 6px */
+```
+
+**island 变体（透明有机气泡）：**
+
+```css
+background: transparent;           /* 容器透明，无 border 无 shadow */
+border: none;
+box-shadow: none;
+/* 注意：island **不是** Modal blob clip-path —— 它是 transparent 容器 + 内部内容自带气泡 */
+
+/* 内容区 */
+padding: 12px 20px;
+max-width: 280px;
+font-weight: 600; line-height: 1.55; text-align: center;
+
+/* 箭头：14px 圆点（borderless）或 10px 菱形（bordered） */
+.islandArrow {
+  width: 14px; height: 14px; border-radius: 50%;
+  filter: drop-shadow(0 4px 14px rgba(121, 79, 39, 0.14));
+}
+```
+
+placement 12 种：`top` / `top_start` / `top_end` / `bottom` / `bottom_start` / `bottom_end` / `left` / `left_start` / `left_end` / `right` / `right_start` / `right_end`。
+
+---
+
+### Loading（全屏遮罩）
+
+源码：`src/components/Loading/loading.module.less`。**项目无 GSAP / MotionPath**，全部用原生 CSS + SVG `stroke-dasharray` 实现。
+
+```css
+/* 容器 */
+position: absolute;       /* 不是 fixed —— 受最近的 positioned 父级约束 */
+inset: 0;
+background: black;        /* 不是 #f8f8f0 */
+overflow: hidden;
+
+/* 揭示遮罩（消失时 mask 半径渐变） */
+--mask-r: 0;
+mask: radial-gradient(circle at center, transparent var(--mask-r), black calc(var(--mask-r) + 1px));
+/* active=false 时把 --mask-r 过渡到大值，得到圆形渐隐效果 */
+
+/* SVG spinner */
+color: #19c8b9;           /* @primary-color mint teal */
+animation: spin 1s linear infinite;
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* 内圈 circle 的 dash 动画 */
+animation: dash 1.5s ease-in-out infinite;
+@keyframes dash {
+  0%   { stroke-dasharray: 1, 150;  stroke-dashoffset: 0;    }
+  50%  { stroke-dasharray: 90, 150; stroke-dashoffset: -35;  }
+  100% { stroke-dasharray: 90, 150; stroke-dashoffset: -124; }
+}
+```
+
+> 按钮 inline 的 loading 斜纹（`-45deg` mint 条纹 28.28px）属于 Button 组件，不要与 `<Loading>` 全屏遮罩混为一谈。
+
+---
+
+### Table
+
+源码：`src/components/Table/table.module.less`。**外壳无实线 border**；行分隔靠 `::after` 的 dashed 横线实现；hover 行是对角青色条纹。
+
+```css
+/* 外壳 wrapper */
+background: rgb(247, 243, 223);
+border-radius: 20px;
+padding: 6px;                /* 仅 6px 内边距，无 border */
+box-sizing: border-box;
+
+/* 表头 cell */
+padding: 16px 20px;
+font-size: 14px;
+font-weight: 700;
+color: #725d42;              /* 不是 #794f27 */
+letter-spacing: 0.02em;
+/* 表头底部分隔（::after dashed） */
+border-image: none;
+&::after {
+  content: '';
+  border-bottom: 1px dashed rgb(240, 232, 216);
+  /* dash pattern: 6px on / 6px off */
+}
+
+/* body cell */
+padding: 14px 20px;          /* 无固定行高 48px —— 由 padding 撑起 */
+font-size: 14px;
+font-weight: 500;
+color: #725d42;
+line-height: 1.6;
+/* 行底分隔线同样是 1px dashed (6/6) rgb(240,232,216) */
+
+/* striped 偶数行 */
+background: rgba(248, 248, 240, 0.6);   /* 不是 rgba(247,243,223,0.5) */
+
+/* row hover —— 对角青色条纹 + 内圆角剪切 */
+background: repeating-linear-gradient(
+  -45deg,
+  rgba(25, 200, 185, 0.6) 0 10px,
+  rgba(14, 196, 182, 0.6) 10px 20px
+);
+background-size: 28.28px 28.28px;
+clip-path: inset(0 0 0 0 round 30px);
+color: #3d2e1e;
+
+/* 空状态 */
+padding: 60px 20px;
+text-align: center;
+color: #9f927d;
+/* icon */ opacity: 0.5;
+
+/* loading 遮罩 */
+background: rgba(247, 243, 223, 0.8);
+backdrop-filter: blur(2px);
+/* spinner */ color: #19c8b9;
+```
+
+---
+
+### InvitationCard
+
+源码：`src/components/InvitationCard/weddingInvitation.module.less`。这是**特种卡**：信封外壳 + 底部可撕抽奖券 + 浮动叶子动画，整体用 `forwardRef` 暴露 `exportAsImage(filename?)`，导出走 `modern-screenshot`。
+
+```css
+/* 信封外壳 */
+max-width: 420px;             /* 不是 600px */
+padding: 56px 36px var(--lottery-h, 160px);   /* 顶/侧 56px+36px；底部预留抽奖券高度 */
+border-radius: 16px;
+
+/* 多层背景：径向渐变 + 图片，不是单色 #FAF6E8 */
+background:
+  radial-gradient(...)         /* 多层 spotlight */,
+  url(envelope-texture.png);
+
+/* 阴影通过 filter 实现（drop-shadow），便于配合不规则裁切 */
+filter: drop-shadow(0 10px 24px rgba(61, 52, 40, 0.18));
+/* 内描边 */
+box-shadow: inset 0 0 0 2px rgba(114, 93, 66, 0.12);
+
+/* 顶层细点纹理 */
+&::before {
+  background: radial-gradient(circle, ... 14px 14px);
+  opacity: 0.55;
+}
+
+/* 内虚线边框（有机不规则圆角） */
+&::after {
+  border: 1.5px dashed rgba(114, 93, 66, 0.35);
+  border-radius: 22px 20px 24px 22px / 20px 24px 22px 20px;
+}
+
+/* 底部抽奖券（160px 撕条）*/
+.lottery {
+  height: 160px;               /* --lottery-h */
+  padding: 38px 36px 18px;
+  background: rgb(247, 243, 223);
+  /* 1.6px 棕色点阵 10×5px */
+  background-image: radial-gradient(circle, rgba(114, 93, 66, 0.7) 1.6px, transparent 1.6px);
+  background-size: 10px 5px;
+  /* 撕痕阴影 */
+  box-shadow: inset 0 4px 6px -3px rgba(61, 52, 40, 0.18);
+  /* 圆形冲孔（信封与撕条接缝处） */
+  --notch: 14px;
+}
+
+/* 4 角叶子：drop-shadow + ±25° / ±115° rotation */
+.cornerLeaf { filter: drop-shadow(0 2px 3px rgba(61, 52, 40, 0.15)); }
+
+/* 浮动小装饰 */
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50%      { transform: translateY(-6px) rotate(8deg); }
+}
+animation: float 4.5s ease-in-out infinite;
+/* 多个装饰用错位 delay：0s / 0.6s / 1.2s / 0.3s / 1s */
+
+/* banner 分隔线 */
+.bannerLine {
+  width: 64px; height: 2px;
+  background: linear-gradient(to right, transparent, #725d42, transparent);
+}
+```
+
+> 导出 PNG 时 Chromium 不读 `document.fonts`，需要把 `@font-face` 作为 `<style>` 子节点塞进截图根节点 —— 见 `src/components/InvitationCard/InvitationCard.tsx` 中 `exportAsImage` 的 `embedFontStyles` 逻辑。
+
+---
+
 ## 3. Demo 布局精确规范
 
 这是 Demo 站（`demo/App.tsx`）的实际布局数值，用于还原完整页面效果：
@@ -1205,7 +1573,7 @@ color: #e8d5bc; line-height: 1.8;
 ```css
 :root {
   /* 字体 */
-  --animal-font: Nunito, 'Noto Sans SC', 'Zen Maru Gothic',
+  --animal-font: Nunito, 'Noto Sans SC',
     -apple-system, 'PingFang SC', 'Hiragino Sans GB', sans-serif;
 
   /* 主色 */
@@ -1266,7 +1634,7 @@ color: #e8d5bc; line-height: 1.8;
 
 1. **颜色**：大地棕色系文字 + 薄荷青绿主色 + 奶油米白背景，禁止纯黑 / 冷灰
 2. **圆角**：最小 12px；按钮、输入框必须 50px pill 形
-3. **立体感**：所有可点击元素加底部厚阴影 `0 Npx 0 0 [暗色]`，hover 上浮，active 下压
+3. **立体感**：3D 厚阴影（`0 Npx 0 0 [暗色]` + hover 上浮 / active 下压）**仅用于 primary 按钮 / danger-primary 按钮 / Input / Switch**；default / dashed / text / link 按钮用柔和 elevation 阴影（`0 2px 4px / 0 3px 10px rgba(61,52,40,...)`）即可
 4. **字体**：Nunito（Google Fonts）圆体，按钮/标题 weight 600+，从不使用细体
 5. **动效**：过渡 0.15~0.35s，缓动 `cubic-bezier(0.4, 0, 0.2, 1)`，平滑不生硬
 6. **焦点**：输入框用黄色 `#ffcc00`，按钮用青绿 `#19c8b9`，绝不用蓝色
@@ -1417,13 +1785,20 @@ export const PAGE_INFO: Record<string, { title: string; desc: string }> = {
   time:           { title: 'Time 时间',         desc: '...' },
   phone:          { title: 'Phone 手机',        desc: '...' },
   footer:         { title: 'Footer 底部装饰',   desc: '...' },
-  modal:          { title: 'Modal 弹窗',        desc: '...' },
-  typewriter:     { title: 'Typewriter 打字机', desc: '...' },
-  'divider-comp': { title: 'Divider 分割线',    desc: '...' },
-  icon:           { title: 'Icon 图标',         desc: '...' },
-  select:         { title: 'Select 选择器',     desc: '...' },
-  checkbox:       { title: 'Checkbox 多选框',   desc: '...' },
-  codeblock:      { title: 'CodeBlock 代码高亮', desc: '...' },
+  modal:               { title: 'Modal 弹窗',         desc: '...' },
+  typewriter:          { title: 'Typewriter 打字机',   desc: '...' },
+  'divider-comp':      { title: 'Divider 分割线',      desc: '...' },
+  icon:                { title: 'Icon 图标',           desc: '...' },
+  select:              { title: 'Select 选择器',       desc: '...' },
+  checkbox:            { title: 'Checkbox 多选框',     desc: '...' },
+  radio:               { title: 'Radio 单选框',        desc: '...' },
+  tooltip:             { title: 'Tooltip 文字提示',    desc: '...' },
+  tabs:                { title: 'Tabs 标签页',         desc: '...' },
+  title:               { title: 'Title 章节标题',      desc: '...' },
+  loading:             { title: 'Loading 加载',        desc: '...' },
+  table:               { title: 'Table 表格',          desc: '...' },
+  'wedding-invitation':{ title: 'InvitationCard 邀请函', desc: '...' },
+  codeblock:           { title: 'CodeBlock 代码高亮',  desc: '...' },
 }
 ```
 
@@ -1433,7 +1808,7 @@ export const PAGE_INFO: Record<string, { title: string; desc: string }> = {
 
 ## 9. 新增组件 Checklist
 
-- [ ] Google Fonts 已在 `index.html` 或样式入口引入（Nunito + Noto Sans SC + Zen Maru Gothic）
+- [ ] Google Fonts 已在 `index.html` 或样式入口引入（Nunito + Noto Sans SC）
 - [ ] Props interface 从组件文件导出
 - [ ] 所有 props 有 JSDoc 注释（中文 OK）
 - [ ] 有状态组件同时支持受控（`value`）和非受控（`defaultValue`）模式
