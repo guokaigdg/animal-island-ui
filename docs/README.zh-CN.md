@@ -154,6 +154,9 @@ npm run build:demo
     <br/><a href="https://github.com/guokaigdg/animal-island-blog">animal-island-blog</a><br/><sub>治愈海岛风格博客</sub>
   </td>
   <td align="center" width="33%">
+    <br/>
+    <img src="img/island-life-journal.png" alt="island-life-journal" style="border-radius: 8px; width: 90%; display: block; margin: 8px auto 0;" />
+    <br/><a href="https://github.com/TIUCSIB/animal-island-blog">Island Life Journal</a><br/><sub>小岛生活图片志</sub>
   </td>
 </tr>
 </table>
