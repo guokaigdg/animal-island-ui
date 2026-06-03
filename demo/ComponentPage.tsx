@@ -24,6 +24,7 @@ import CodeBlockDemo from './components/CodeBlock';
 import LoadingDemo from './components/Loading/LoadingDemo';
 import TableDemo from './components/Table/TableDemo';
 import InvitationCardDemo from './components/InvitationCard/InvitationCardDemo';
+import WalletDemo from './components/Wallet/WalletDemo';
 import type { TabItem } from '../src';
 
 // ============================================
@@ -1363,6 +1364,10 @@ export const PAGE_INFO: Record<string, { title: string; desc: string }> = {
         title: 'InvitationCard 婚礼请柬',
         desc: '治愈海岛风格婚礼请柬组件 — 内置叶子边角、飘散花瓣、心跳爱心、吉祥物头像，所有装饰均为内联 SVG，无需外部素材',
     },
+    wallet: {
+        title: 'Wallet 钱包',
+        desc: '治愈海岛风格金币展示 — 奶油描边的橄榄黄胶囊 + 上凸钱袋图标，支持千分位格式化、自定义图标与三种尺寸',
+    },
 };
 
 const PAGES: Record<string, React.FC> = {
@@ -1389,6 +1394,7 @@ const PAGES: Record<string, React.FC> = {
     loading: LoadingDemo,
     table: TableDemo,
     'wedding-invitation': InvitationCardDemo,
+    wallet: WalletDemo,
 };
 
 // ============================================

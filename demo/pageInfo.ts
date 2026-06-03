@@ -84,4 +84,8 @@ export const PAGE_INFO: Record<string, { title: string; desc: string }> = {
         title: 'InvitationCard 婚礼请柬',
         desc: '治愈海岛风格婚礼请柬，叶子边角 + 飘散花瓣 + 心跳爱心 + 吉祥物头像',
     },
+    wallet: {
+        title: 'Wallet 钱包',
+        desc: '治愈海岛风格金币展示 — 奶油描边胶囊 + 上凸钱袋图标，支持千分位、自定义图标与三种尺寸',
+    },
 };
