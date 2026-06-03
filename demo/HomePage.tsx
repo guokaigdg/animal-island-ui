@@ -427,7 +427,7 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                     </h1>
                     <Typewriter speed={60}>
                         <p style={{ ...S.heroSubtitle, fontSize: isMobile ? 14 : 17 }}>
-                            Animal风格的 React 组件库，基于 TypeScript + Vite 构建，让 Web 应用充满温暖质感
+                            Animal 风格的 React 组件库，基于 TypeScript + Vite 构建，让 Web 应用充满温暖质感
                         </p>
                     </Typewriter>
                     <div style={{ ...S.heroActions, justifyContent: isMobile ? 'center' : 'flex-start' }}>

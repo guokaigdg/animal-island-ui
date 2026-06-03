@@ -1,14 +1,19 @@
 import React from 'react';
-import { Icon, ICON_LIST } from '../../../src';
+import { Icon, ICON_LIST, ITEM_LIST, ITEM_COUNT } from '../../../src';
 import { ApiTable, ApiRow, sectionStyle, sectionTitleStyle, tagStyle, CodeBlock, labelStyle } from '../../tools';
 
 const ICON_API: ApiRow[] = [
     {
         prop: 'name',
-        desc: '图标名称',
+        desc: '图标名称（与 item 二选一）',
         type: 'IconName',
         defaultVal: '-',
-        required: true,
+    },
+    {
+        prop: 'item',
+        desc: '物品图标编号（与 name 二选一）',
+        type: 'number',
+        defaultVal: '-',
     },
     {
         prop: 'size',
@@ -68,6 +73,7 @@ const IconDemo: React.FC = () => (
             borderRadius: 12,
             overflow: 'hidden',
             padding: '5px 16px',
+            marginBottom: 20,
         }}>
             {ICON_LIST.map((icon, index) => (
                 <div
@@ -96,6 +102,63 @@ const IconDemo: React.FC = () => (
                 </div>
             ))}
         </div>
+        <div style={sectionTitleStyle}>
+            Items <span style={tagStyle}>{ITEM_COUNT} items</span>
+        </div>
+        <div style={labelStyle}>
+            {ITEM_COUNT} 个物品图标。通过 <code>item</code> 编号引用。
+        </div>
+        <div style={{ display: 'flex', gap: 12, alignItems: 'center', flexWrap: 'wrap' }}>
+            <Icon item={1} size={48} bounce />
+            <Icon item={5} size={48} bounce />
+            <Icon item={20} size={48} bounce />
+            <Icon item={100} size={48} bounce />
+            <Icon item={200} size={48} bounce />
+            <Icon item={300} size={48} bounce />
+            <Icon item={400} size={48} bounce />
+            <Icon item={ITEM_LIST[ITEM_LIST.length - 1]} size={48} bounce />
+        </div>
+        <div style={labelStyle}>全部 {ITEM_COUNT} 个物品</div>
+        <div
+            style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fill, minmax(72px, 1fr))',
+                gap: 8,
+                padding: 12,
+                background: '#fff',
+                border: '1px solid #e8e2d6',
+                borderRadius: 12,
+                maxHeight: 550,
+                overflowY: 'auto',
+            }}
+        >
+            {ITEM_LIST.map((id) => (
+                <div
+                    key={id}
+                    title={`item={${id}}`}
+                    style={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        gap: 4,
+                        padding: '10px 12px 4px 12px',
+                        background: '#faf6ec',
+                        borderRadius: 8,
+                    }}
+                >
+                    <Icon item={id} size={40} />
+                    <span
+                        style={{
+                            fontSize: 10,
+                            color: '#a0936e',
+                            fontFamily: "'SF Mono', 'Fira Code', Consolas, monospace",
+                        }}
+                    >
+                        {id}
+                    </span>
+                </div>
+            ))}
+        </div>
         <CodeBlock
             code={`import React from 'react';
 import { Icon } from 'animal-island-ui';
@@ -107,6 +170,8 @@ const App = () => {
             <Icon name="icon-miles" size={32} />
             {/* 弹跳动画 */}
             <Icon name="icon-camera" size={48} bounce />
+            {/* 物品图标（来自 figma Items 设计稿） */}
+            <Icon item={1} size={48} />
         </div>
     );
 };

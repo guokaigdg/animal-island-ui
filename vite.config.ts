@@ -1,10 +1,60 @@
 import { defineConfig, type Plugin } from 'vite';
 import react from '@vitejs/plugin-react';
 import libAssetsPlugin from '@laynezh/vite-plugin-lib-assets';
-import { resolve, dirname } from 'path';
+import { resolve, dirname, join } from 'path';
 import { fileURLToPath } from 'url';
+import { readdirSync, rmdirSync, statSync } from 'fs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
+
+/**
+ * libAssetsPlugin 会按源资源的相对路径在 dist 下创建目录树（如 dist/img/），
+ * 然后实际文件被重定向到 dist/files/，留下空目录。构建结束后递归清理之。
+ */
+function pruneEmptyDirsPlugin(targetDir: string): Plugin {
+    const prune = (dir: string): boolean => {
+        let entries: string[];
+        try {
+            entries = readdirSync(dir);
+        } catch {
+            return false;
+        }
+        let hasFile = false;
+        for (const entry of entries) {
+            const full = join(dir, entry);
+            const stat = statSync(full);
+            if (stat.isDirectory()) {
+                const childHasFile = prune(full);
+                if (childHasFile) hasFile = true;
+            } else {
+                hasFile = true;
+            }
+        }
+        if (!hasFile) {
+            try {
+                rmdirSync(dir);
+            } catch {
+                /* noop */
+            }
+        }
+        return hasFile;
+    };
+    return {
+        name: 'prune-empty-dirs',
+        closeBundle() {
+            const abs = resolve(__dirname, targetDir);
+            try {
+                const entries = readdirSync(abs);
+                for (const entry of entries) {
+                    const full = join(abs, entry);
+                    if (statSync(full).isDirectory()) prune(full);
+                }
+            } catch {
+                /* noop */
+            }
+        },
+    };
+}
 
 /**
  * 去掉 fontsource CSS 里的 woff 备份，只保留 woff2。
@@ -47,6 +97,7 @@ export default defineConfig({
             name: '[name].[contenthash:8].[ext]',
             limit: 0,
         }),
+        pruneEmptyDirsPlugin('dist'),
     ],
     resolve: {
         alias: {
