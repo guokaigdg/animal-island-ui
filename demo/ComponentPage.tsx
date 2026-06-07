@@ -245,6 +245,12 @@ const MODAL_API: ApiRow[] = [
         type: 'boolean',
         defaultVal: 'true',
     },
+    {
+        prop: 'maskStyle',
+        desc: '遮罩层自定义样式',
+        type: 'CSSProperties',
+        defaultVal: '-',
+    },
 ];
 
 const CARD_API: ApiRow[] = [
@@ -899,6 +905,7 @@ const ModalDemo: React.FC = () => {
     const [titleModalOpen, setTitleModalOpen] = useState(false);
     const [customFooterOpen, setCustomFooterOpen] = useState(false);
     const [noTypewriterOpen, setNoTypewriterOpen] = useState(false);
+    const [lightMaskOpen, setLightMaskOpen] = useState(false);
     return (
         <div style={sectionStyle}>
             <div style={sectionTitleStyle}>
@@ -919,6 +926,12 @@ const ModalDemo: React.FC = () => {
                 <div style={S.row}>
                     <Button type="primary" onClick={() => setNoTypewriterOpen(true)}>
                         关闭打字机效果
+                    </Button>
+                </div>
+                <div style={labelStyle}>自定义遮罩样式</div>
+                <div style={S.row}>
+                    <Button type="primary" onClick={() => setLightMaskOpen(true)}>
+                        浅色遮罩
                     </Button>
                 </div>
             </div>
@@ -971,6 +984,15 @@ const ModalDemo: React.FC = () => {
             >
                 明天天气晴朗，气温 20-28°C，适合外出活动！
             </Modal>
+            <Modal
+                open={lightMaskOpen}
+                title="浅色遮罩"
+                onClose={() => setLightMaskOpen(false)}
+                onOk={() => setLightMaskOpen(false)}
+                maskStyle={{ background: 'rgba(0, 0, 0, 0.08)' }}
+            >
+                这是一个浅色遮罩的弹窗，遮罩几乎透明。
+            </Modal>
             <CodeBlock
                 code={`import React, { useState } from 'react';
 import { Button, Modal } from 'animal-island-ui';
@@ -1002,6 +1024,11 @@ const App = () => {
             {/* 关闭打字机效果 */}
             <Modal open={open} typewriter={false}>
                 直接显示全部内容
+            </Modal>
+
+            {/* 自定义遮罩样式 */}
+            <Modal open={open} maskStyle={{ background: 'rgba(0, 0, 0, 0.08)' }}>
+                浅色遮罩
             </Modal>
         </div>
     );
@@ -1310,7 +1337,7 @@ export const PAGE_INFO: Record<string, { title: string; desc: string }> = {
     },
     modal: {
         title: 'Modal 弹窗',
-        desc: '模态弹窗组件 — SVG 有机形状裁切、支持标题、关闭按钮、自定义 Footer、ESC / 遮罩关闭',
+        desc: '模态弹窗组件 — SVG 有机形状裁切、支持标题、关闭按钮、自定义 Footer、ESC / 遮罩关闭、自定义遮罩样式',
     },
     typewriter: {
         title: 'Typewriter 打字机',
