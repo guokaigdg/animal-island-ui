@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useId } from 'react';
 import styles from './checkbox.module.less';
 import classNames from 'classnames';
 
@@ -48,6 +48,8 @@ export const Checkbox: React.FC<CheckboxProps> = ({
     const [innerValue, setInnerValue] = useState<Array<string | number>>(defaultValue);
     const isControlled = value !== undefined;
     const checkedValues = isControlled ? value! : innerValue;
+    const reactId = useId();
+    const idBase = `animal-cbx-${reactId.replace(/:/g, '')}`;
 
     const handleChange = useCallback(
         (optValue: string | number, optDisabled?: boolean) => {
@@ -63,6 +65,7 @@ export const Checkbox: React.FC<CheckboxProps> = ({
 
     return (
         <div
+            role="group"
             className={classNames(
                 styles.checkboxGroup,
                 styles[direction],
@@ -71,37 +74,30 @@ export const Checkbox: React.FC<CheckboxProps> = ({
             )}
             style={style}
         >
-            {options.map((opt) => {
+            {options.map((opt, idx) => {
                 const isChecked = checkedValues.includes(opt.value);
                 const isDisabled = disabled || opt.disabled;
+                const inputId = `${idBase}-${idx}`;
                 return (
                     <label
                         key={String(opt.value)}
-                        className={classNames(
-                            styles.checkboxItem,
-                            styles[size],
-                            {
-                                [styles.checked]: isChecked,
-                                [styles.disabled]: isDisabled,
-                            }
-                        )}
-                        onClick={() => handleChange(opt.value, opt.disabled)}
+                        className={classNames(styles.checkboxItem, styles[size], {
+                            [styles.checked]: isChecked,
+                            [styles.disabled]: isDisabled,
+                        })}
                     >
-                        <span className={styles.box} role="checkbox" aria-checked={isChecked} tabIndex={isDisabled ? -1 : 0}
-                            onKeyDown={(e) => {
-                                if (e.key === ' ' || e.key === 'Enter') {
-                                    e.preventDefault();
-                                    handleChange(opt.value, opt.disabled);
-                                }
-                            }}
-                        >
-                            {isChecked && (
-                                <span className={styles.checkmark}>
-                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M2 8L6 12L14 4" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
-                                </svg>
-                            </span>
-                            )}
+                        <span className={styles.cbx}>
+                            <input
+                                id={inputId}
+                                type="checkbox"
+                                checked={isChecked}
+                                disabled={isDisabled}
+                                onChange={() => handleChange(opt.value, opt.disabled)}
+                            />
+                            <span className={styles.splash} aria-hidden="true" />
+                            <svg className={styles.check} fill="none" viewBox="0 0 15 14" height={14} width={15}>
+                                <path d="M2 8.36364L6.23077 12L13 2" />
+                            </svg>
                         </span>
                         <span className={styles.label}>{opt.label}</span>
                     </label>
