@@ -36,6 +36,8 @@ export interface ModalProps {
     typeSpeed?: number;
     /** 是否启用打字机效果, 默认 true */
     typewriter?: boolean;
+    /** 遮罩层自定义样式 */
+    maskStyle?: React.CSSProperties;
 }
 
 export const Modal: React.FC<ModalProps> = ({
@@ -50,6 +52,7 @@ export const Modal: React.FC<ModalProps> = ({
     className,
     typeSpeed = 80,
     typewriter = true,
+    maskStyle,
 }) => {
     // 每次 open 变为 true 时重启打字机
     const [playKey, setPlayKey] = useState(0);
@@ -100,7 +103,7 @@ export const Modal: React.FC<ModalProps> = ({
 
     const modalContent = (
         <Cursor>
-            <div className={styles.mask} onClick={handleMaskClick}>
+            <div className={styles.mask} style={maskStyle} onClick={handleMaskClick}>
                 <div
                     className={[styles.modal, className].filter(Boolean).join(' ')}
                     style={{ width }}
