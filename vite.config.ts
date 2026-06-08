@@ -122,9 +122,13 @@ export default defineConfig({
         target: 'es2020',
         lib: {
             entry: resolve(__dirname, 'src/index.ts'),
+            // Vite 4.4+：lib 模式下 CSS 走内置 CSS 插件、不进 Rollup bundle，
+            // 用 cssFileName 一步把产物固定为 index.css，省去后置重命名插件
+            // （传裸名 'index'，Vite 会自动补 .css 扩展名）
+            cssFileName: 'index',
         },
         rollupOptions: {
-            external: ['react', 'react-dom', 'react/jsx-runtime', 'modern-screenshot'],
+            external: ['react', 'react-dom', 'react/jsx-runtime', 'modern-screenshot', 'classnames'],
             // 多输出：
             //  - ES：preserveModules 保持源码目录结构 → 消费者可按组件 tree-shake
             //  - CJS：单文件 bundle，兼容老式 require
@@ -137,10 +141,7 @@ export default defineConfig({
                     preserveModules: true,
                     preserveModulesRoot: 'src',
                     globals: { react: 'React', 'react-dom': 'ReactDOM' },
-                    assetFileNames: (assetInfo) => {
-                        if (assetInfo.name?.endsWith('.css')) return 'index.css';
-                        return assetInfo.name!;
-                    },
+                    assetFileNames: '[name][extname]',
                 },
                 {
                     format: 'cjs',
@@ -148,10 +149,7 @@ export default defineConfig({
                     entryFileNames: 'cjs/index.cjs',
                     inlineDynamicImports: true,
                     globals: { react: 'React', 'react-dom': 'ReactDOM' },
-                    assetFileNames: (assetInfo) => {
-                        if (assetInfo.name?.endsWith('.css')) return 'index.css';
-                        return assetInfo.name!;
-                    },
+                    assetFileNames: '[name][extname]',
                 },
             ],
         },
