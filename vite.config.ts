@@ -118,24 +118,42 @@ export default defineConfig({
         },
     },
     build: {
+        // 现代浏览器目标 —— Vite lib 默认 'modules'，显式声明可保留更多 ES2020+ 语法
+        target: 'es2020',
         lib: {
             entry: resolve(__dirname, 'src/index.ts'),
-            formats: ['es', 'cjs'],
-            fileName: (format) =>
-                `${format === 'es' ? 'es' : 'cjs'}/index.${format === 'es' ? 'js' : 'cjs'}`,
         },
         rollupOptions: {
-            external: ['react', 'react-dom', 'react/jsx-runtime'],
-            output: {
-                globals: {
-                    react: 'React',
-                    'react-dom': 'ReactDOM',
+            external: ['react', 'react-dom', 'react/jsx-runtime', 'modern-screenshot'],
+            // 多输出：
+            //  - ES：preserveModules 保持源码目录结构 → 消费者可按组件 tree-shake
+            //  - CJS：单文件 bundle，兼容老式 require
+            output: [
+                {
+                    format: 'es',
+                    dir: 'dist',
+                    entryFileNames: 'es/[name].js',
+                    chunkFileNames: 'es/[name].js',
+                    preserveModules: true,
+                    preserveModulesRoot: 'src',
+                    globals: { react: 'React', 'react-dom': 'ReactDOM' },
+                    assetFileNames: (assetInfo) => {
+                        if (assetInfo.name?.endsWith('.css')) return 'index.css';
+                        return assetInfo.name!;
+                    },
                 },
-                assetFileNames: (assetInfo) => {
-                    if (assetInfo.name?.endsWith('.css')) return 'index.css';
-                    return assetInfo.name!;
+                {
+                    format: 'cjs',
+                    dir: 'dist',
+                    entryFileNames: 'cjs/index.cjs',
+                    inlineDynamicImports: true,
+                    globals: { react: 'React', 'react-dom': 'ReactDOM' },
+                    assetFileNames: (assetInfo) => {
+                        if (assetInfo.name?.endsWith('.css')) return 'index.css';
+                        return assetInfo.name!;
+                    },
                 },
-            },
+            ],
         },
         cssCodeSplit: false,
     },
