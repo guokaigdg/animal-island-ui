@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Input, Switch, Modal, Card, Collapse, Divider, Typewriter, Tabs, Cursor, Title, TitleColor } from '../src';
+import { Button, Input, Switch, Modal, Card, Collapse, Divider, Typewriter, Cursor, Title, TitleColor } from '../src';
 import {
     labelStyle,
     sectionStyle,
@@ -244,6 +244,12 @@ const MODAL_API: ApiRow[] = [
         desc: '是否启用打字机效果',
         type: 'boolean',
         defaultVal: 'true',
+    },
+    {
+        prop: 'maskStyle',
+        desc: '遮罩层自定义样式',
+        type: 'CSSProperties',
+        defaultVal: '-',
     },
 ];
 
@@ -597,7 +603,8 @@ export default App;`}
 const CardDemo: React.FC = () => (
     <div style={sectionStyle}>
         <div style={sectionTitleStyle}>
-            Card <span style={tagStyle}>2 types</span> <span style={tagStyle}>13 colors</span> <span style={tagStyle}>14 patterns</span>
+            Card <span style={tagStyle}>2 types</span> <span style={tagStyle}>13 colors</span>{' '}
+            <span style={tagStyle}>14 patterns</span>
         </div>
 
         {/* ---- type ---- */}
@@ -626,7 +633,7 @@ const CardDemo: React.FC = () => (
             </div>
         </div>
         {/* ---- pattern ---- */}
-        <div style={{...demoBodyStyle, gap: 24}}>
+        <div style={{ ...demoBodyStyle, gap: 24 }}>
             <div style={labelStyle}>pattern — 风格花纹</div>
             <div style={S.row}>
                 <Card pattern="default" style={{ width: 170 }}>
@@ -899,6 +906,8 @@ const ModalDemo: React.FC = () => {
     const [titleModalOpen, setTitleModalOpen] = useState(false);
     const [customFooterOpen, setCustomFooterOpen] = useState(false);
     const [noTypewriterOpen, setNoTypewriterOpen] = useState(false);
+    const [lightMaskOpen, setLightMaskOpen] = useState(false);
+    const [darkMaskOpen, setDarkMaskOpen] = useState(false);
     return (
         <div style={sectionStyle}>
             <div style={sectionTitleStyle}>
@@ -919,6 +928,15 @@ const ModalDemo: React.FC = () => {
                 <div style={S.row}>
                     <Button type="primary" onClick={() => setNoTypewriterOpen(true)}>
                         关闭打字机效果
+                    </Button>
+                </div>
+                <div style={labelStyle}>自定义遮罩样式</div>
+                <div style={S.row}>
+                    <Button type="primary" onClick={() => setLightMaskOpen(true)}>
+                        浅色遮罩
+                    </Button>
+                    <Button type="primary" onClick={() => setDarkMaskOpen(true)}>
+                        深色遮罩
                     </Button>
                 </div>
             </div>
@@ -971,6 +989,24 @@ const ModalDemo: React.FC = () => {
             >
                 明天天气晴朗，气温 20-28°C，适合外出活动！
             </Modal>
+            <Modal
+                open={lightMaskOpen}
+                title="浅色遮罩"
+                onClose={() => setLightMaskOpen(false)}
+                onOk={() => setLightMaskOpen(false)}
+                maskStyle={{ background: 'rgba(0, 0, 0, 0.08)' }}
+            >
+                这是一个浅色遮罩的弹窗，遮罩几乎透明。
+            </Modal>
+            <Modal
+                open={darkMaskOpen}
+                title="深色遮罩"
+                onClose={() => setDarkMaskOpen(false)}
+                onOk={() => setDarkMaskOpen(false)}
+                maskStyle={{ background: 'rgba(0, 0, 0, 0.75)' }}
+            >
+                这是一个深色遮罩的弹窗，背景更暗、聚焦感更强。
+            </Modal>
             <CodeBlock
                 code={`import React, { useState } from 'react';
 import { Button, Modal } from 'animal-island-ui';
@@ -1002,6 +1038,11 @@ const App = () => {
             {/* 关闭打字机效果 */}
             <Modal open={open} typewriter={false}>
                 直接显示全部内容
+            </Modal>
+
+            {/* 自定义遮罩样式 */}
+            <Modal open={open} maskStyle={{ background: 'rgba(0, 0, 0, 0.08)' }}>
+                浅色遮罩
             </Modal>
         </div>
     );
@@ -1310,7 +1351,7 @@ export const PAGE_INFO: Record<string, { title: string; desc: string }> = {
     },
     modal: {
         title: 'Modal 弹窗',
-        desc: '模态弹窗组件 — SVG 有机形状裁切、支持标题、关闭按钮、自定义 Footer、ESC / 遮罩关闭',
+        desc: '模态弹窗组件 — SVG 有机形状裁切、支持标题、关闭按钮、自定义 Footer、ESC / 遮罩关闭、自定义遮罩样式',
     },
     typewriter: {
         title: 'Typewriter 打字机',
@@ -1401,8 +1442,17 @@ const PAGES: Record<string, React.FC> = {
 // ComponentPage
 // ============================================
 const TITLE_COLORS: TitleColor[] = [
-    'lime-green','default', 'app-pink', 'purple', 'app-blue', 'app-yellow', 'app-orange',
-    'app-red', 'yellow-green', 'brown', 'warm-peach-pink',
+    'lime-green',
+    'default',
+    'app-pink',
+    'purple',
+    'app-blue',
+    'app-yellow',
+    'app-orange',
+    'app-red',
+    'yellow-green',
+    'brown',
+    'warm-peach-pink',
 ];
 
 interface ComponentPageProps {
@@ -1414,9 +1464,8 @@ const ComponentPage: React.FC<ComponentPageProps> = ({ activeKey }) => {
     const info = PAGE_INFO[activeKey];
 
     // 根据 activeKey 固定映射一种颜色，切换页面时变色但同一页面不随机抖动
-    const titleColor = TITLE_COLORS[
-        Math.abs(activeKey.split('').reduce((acc, c) => acc + c.charCodeAt(0), 0)) % TITLE_COLORS.length
-    ];
+    const titleColor =
+        TITLE_COLORS[Math.abs(activeKey.split('').reduce((acc, c) => acc + c.charCodeAt(0), 0)) % TITLE_COLORS.length];
 
     if (!Page || !info) return null;
 
