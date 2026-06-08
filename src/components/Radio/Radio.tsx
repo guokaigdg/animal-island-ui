@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useRef, useMemo, useEffect } from 'react';
+import React, { useState, useCallback, useRef, useMemo, useEffect, useId } from 'react';
 import styles from './radio.module.less';
 import classNames from 'classnames';
 
@@ -49,18 +49,23 @@ export const Radio: React.FC<RadioProps> = ({
     const isControlled = value !== undefined;
     const checkedValue = isControlled ? value : innerValue;
 
-    const groupRef = useRef<HTMLDivElement>(null);
-
-    useEffect(() => {
-        const idx = options.findIndex((o) => o.value === checkedValue);
-        if (idx >= 0) setFocusedIndex(idx);
-    }, [checkedValue, options]);
+    const reactId = useId();
+    const idBase = `animal-radio-${reactId.replace(/:/g, '')}`;
+    const inputRefs = useRef<Array<HTMLInputElement | null>>([]);
 
     // 当前聚焦的索引（用于 roving tabindex）
     const [focusedIndex, setFocusedIndex] = useState<number>(() => {
         const idx = options.findIndex((o) => o.value === checkedValue);
         return idx >= 0 ? idx : 0;
     });
+
+    // 选中值变化时，把 roving 焦点同步到选中项
+    useEffect(() => {
+        const idx = options.findIndex((o) => o.value === checkedValue);
+        if (idx >= 0) setFocusedIndex(idx);
+        // 故意不依赖 options，避免父组件未 memo 时打断键盘导航
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [checkedValue]);
 
     // 获取所有可用（未禁用）选项的索引
     const enabledIndices = useMemo(() => {
@@ -70,7 +75,6 @@ export const Radio: React.FC<RadioProps> = ({
             .map(({ idx }) => idx);
     }, [options, disabled]);
 
-    // 找到当前可用项在 enabledIndices 中的位置
     const currentEnabledPos = useMemo(() => {
         return enabledIndices.indexOf(focusedIndex);
     }, [enabledIndices, focusedIndex]);
@@ -84,12 +88,10 @@ export const Radio: React.FC<RadioProps> = ({
         [disabled, isControlled, onChange]
     );
 
-    // 方向键导航：移动到下一个/上一个可用选项并选中
     const handleKeyDown = useCallback(
         (e: React.KeyboardEvent<HTMLDivElement>) => {
             if (enabledIndices.length === 0) return;
 
-            const isHorizontal = direction === 'horizontal';
             let nextPos = -1;
 
             switch (e.key) {
@@ -119,18 +121,14 @@ export const Radio: React.FC<RadioProps> = ({
                 const nextIdx = enabledIndices[nextPos];
                 setFocusedIndex(nextIdx);
                 handleChange(options[nextIdx].value, options[nextIdx].disabled);
-
-                // 聚焦到对应的 radio circle
-                const circles = groupRef.current?.querySelectorAll('[data-radio-circle]');
-                (circles?.[nextIdx] as HTMLElement)?.focus();
+                inputRefs.current[nextIdx]?.focus();
             }
         },
-        [direction, enabledIndices, currentEnabledPos, options, handleChange]
+        [enabledIndices, currentEnabledPos, options, handleChange]
     );
 
     return (
         <div
-            ref={groupRef}
             className={classNames(
                 styles.radioGroup,
                 styles[direction],
@@ -145,49 +143,36 @@ export const Radio: React.FC<RadioProps> = ({
                 const isChecked = checkedValue === opt.value;
                 const isDisabled = disabled || opt.disabled;
                 const isFocusable = idx === focusedIndex && !isDisabled;
+                const inputId = `${idBase}-${idx}`;
 
                 return (
                     <label
                         key={String(opt.value)}
-                        className={classNames(
-                            styles.radioItem,
-                            styles[size],
-                            {
-                                [styles.checked]: isChecked,
-                                [styles.disabled]: isDisabled,
-                            }
-                        )}
-                        onClick={() => {
-                            if (!isDisabled) {
-                                setFocusedIndex(idx);
-                                handleChange(opt.value, opt.disabled);
-                            }
-                        }}
+                        className={classNames(styles.radioItem, styles[size], {
+                            [styles.checked]: isChecked,
+                            [styles.disabled]: isDisabled,
+                        })}
                     >
-                        <span
-                            className={styles.circle}
-                            data-radio-circle
-                            role="radio"
-                            aria-checked={isChecked}
-                            aria-disabled={isDisabled || undefined}
-                            tabIndex={isFocusable ? 0 : -1}
-                            onFocus={() => {
-                                if (!isDisabled) setFocusedIndex(idx);
-                            }}
-                            onKeyDown={(e) => {
-                                if (e.key === ' ' || e.key === 'Enter') {
-                                    e.preventDefault();
-                                    handleChange(opt.value, opt.disabled);
-                                }
-                            }}
-                        >
-                            {isChecked && (
-                                <span className={styles.checkmark}>
-                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M2 8L6 12L14 4" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
-                                    </svg>
-                                </span>
-                            )}
+                        <span className={styles.cbx}>
+                            <input
+                                id={inputId}
+                                ref={(el) => {
+                                    inputRefs.current[idx] = el;
+                                }}
+                                type="radio"
+                                name={idBase}
+                                checked={isChecked}
+                                disabled={isDisabled}
+                                tabIndex={isFocusable ? 0 : -1}
+                                onChange={() => handleChange(opt.value, opt.disabled)}
+                                onFocus={() => {
+                                    if (!isDisabled) setFocusedIndex(idx);
+                                }}
+                            />
+                            <span className={styles.splash} aria-hidden="true" />
+                            <svg className={styles.check} fill="none" viewBox="0 0 15 14" height={14} width={15}>
+                                <path d="M2 8.36364L6.23077 12L13 2" />
+                            </svg>
                         </span>
                         <span className={styles.label}>{opt.label}</span>
                     </label>
