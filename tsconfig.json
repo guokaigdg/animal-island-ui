@@ -13,9 +13,19 @@
         "isolatedModules": true,
         "baseUrl": ".",
         "paths": {
-            "@/*": ["src/*"]
-        }
+            "@/*": ["./src/*"]
+        },
+        "types": ["node"]
     },
-    "include": ["src", "demo"],
-    "exclude": ["node_modules", "dist", "demo-dist"]
+    "include": ["src"],
+    "exclude": [
+        "node_modules",
+        "dist",
+        "demo-dist",
+        "coverage",
+        "src/**/*.test.ts",
+        "src/**/*.test.tsx",
+        "src/**/*.spec.ts",
+        "src/**/*.spec.tsx"
+    ]
 }

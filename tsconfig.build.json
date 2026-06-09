@@ -3,8 +3,19 @@
     "compilerOptions": {
         "emitDeclarationOnly": true,
         "declaration": true,
-        "declarationDir": "dist/types"
+        "declarationDir": "dist/types",
+        "types": ["node"]
     },
     "include": ["src"],
-    "exclude": ["src/**/*.test.tsx", "src/**/*.spec.tsx", "demo", "node_modules", "dist"]
+    "exclude": [
+        "src/**/*.test.ts",
+        "src/**/*.test.tsx",
+        "src/**/*.spec.ts",
+        "src/**/*.spec.tsx",
+        "test",
+        "vitest.config.ts",
+        "demo",
+        "node_modules",
+        "dist"
+    ]
 }

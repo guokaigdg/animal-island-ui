@@ -40,6 +40,8 @@ pnpm-debug.log*
 
 # Test
 coverage/
+# 例外：徽章元数据要 commit 给 shields.io 拉取
+!coverage/badges/
 
 # Misc
 *.bak
