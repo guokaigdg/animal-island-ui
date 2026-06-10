@@ -135,10 +135,12 @@
     width: 20px;
     height: 20px;
     margin-left: 4px;
+    padding: 0;
     color: #c4b89e;
     font-size: 13px;
     font-weight: 700;
     cursor: pointer;
+    border: none;
     border-radius: 50%;
     background: transparent;
     transition: all var(--animal-motion-duration-fast);
@@ -146,5 +148,10 @@
     &:hover {
         color: #725d42;
         background: rgba(114, 93, 66, 0.1);
+    }
+
+    &:focus-visible {
+        outline: 2px solid #725d42;
+        outline-offset: 1px;
     }
 }

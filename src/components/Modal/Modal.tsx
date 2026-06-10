@@ -1,9 +1,28 @@
-import React, { useEffect, useCallback, useState } from 'react';
+import React, { useEffect, useCallback, useState, useId, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { Button } from '../Button';
 import { Cursor } from '../Cursor';
 import { Typewriter } from '../Typewriter';
 import styles from './modal.module.less';
+
+const FOCUSABLE_SELECTOR = [
+    'a[href]',
+    'area[href]',
+    'button:not([disabled])',
+    'input:not([disabled]):not([type="hidden"])',
+    'select:not([disabled])',
+    'textarea:not([disabled])',
+    '[tabindex]:not([tabindex="-1"])',
+    'audio[controls]',
+    'video[controls]',
+    '[contenteditable]:not([contenteditable="false"])',
+].join(',');
+
+const getFocusable = (root: HTMLElement): HTMLElement[] => {
+    return Array.from(root.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR)).filter(
+        (el) => !el.hasAttribute('disabled') && el.getAttribute('aria-hidden') !== 'true',
+    );
+};
 
 // Inline SVG clip-path — same organic blob shape as Dialog
 const ClipDef: React.FC = () => (
@@ -60,11 +79,57 @@ export const Modal: React.FC<ModalProps> = ({
         if (open) setPlayKey((k) => k + 1);
     }, [open]);
 
-    // ESC 关闭
+    const dialogRef = useRef<HTMLDivElement>(null);
+    const previouslyFocusedRef = useRef<HTMLElement | null>(null);
+
+    // 打开时记录触发元素 + 把焦点送进对话框；关闭时归还焦点
+    useEffect(() => {
+        if (!open) return;
+        previouslyFocusedRef.current = (document.activeElement as HTMLElement) ?? null;
+        // 等下一个 microtask，让对话框节点已经挂载且 createPortal 完成
+        const id = window.setTimeout(() => {
+            const dialog = dialogRef.current;
+            if (!dialog) return;
+            const focusables = getFocusable(dialog);
+            (focusables[0] ?? dialog).focus();
+        }, 0);
+        return () => {
+            window.clearTimeout(id);
+            previouslyFocusedRef.current?.focus?.();
+        };
+    }, [open]);
+
+    // ESC 关闭 + Tab/Shift+Tab 焦点陷阱
     useEffect(() => {
         if (!open) return;
         const handler = (e: KeyboardEvent) => {
-            if (e.key === 'Escape') onClose?.();
+            if (e.key === 'Escape') {
+                onClose?.();
+                return;
+            }
+            if (e.key !== 'Tab') return;
+            const dialog = dialogRef.current;
+            if (!dialog) return;
+            const focusables = getFocusable(dialog);
+            if (focusables.length === 0) {
+                e.preventDefault();
+                dialog.focus();
+                return;
+            }
+            const first = focusables[0];
+            const last = focusables[focusables.length - 1];
+            const active = document.activeElement as HTMLElement | null;
+            if (e.shiftKey) {
+                if (active === first || !dialog.contains(active)) {
+                    e.preventDefault();
+                    last.focus();
+                }
+            } else {
+                if (active === last || !dialog.contains(active)) {
+                    e.preventDefault();
+                    first.focus();
+                }
+            }
         };
         document.addEventListener('keydown', handler);
         return () => document.removeEventListener('keydown', handler);
@@ -88,6 +153,10 @@ export const Modal: React.FC<ModalProps> = ({
         e.stopPropagation();
     }, []);
 
+    const idPrefix = `animal-modal-${useId().replace(/:/g, '')}`;
+    const titleId = `${idPrefix}-title`;
+    const bodyId = `${idPrefix}-body`;
+
     if (!open) return null;
 
     const defaultFooter = (
@@ -105,22 +174,26 @@ export const Modal: React.FC<ModalProps> = ({
         <Cursor>
             <div className={styles.mask} style={maskStyle} onClick={handleMaskClick}>
                 <div
+                    ref={dialogRef}
                     className={[styles.modal, className].filter(Boolean).join(' ')}
                     style={{ width }}
                     onClick={handleContentClick}
                     role="dialog"
                     aria-modal="true"
+                    aria-labelledby={title ? titleId : undefined}
+                    aria-describedby={bodyId}
+                    tabIndex={-1}
                 >
                     <ClipDef />
                     <div className={styles.modalClipped}>
                         {title && (
                             <div className={styles.header}>
                                 {title && (
-                                    <div className={styles.title}>{title}</div>
+                                    <div className={styles.title} id={titleId}>{title}</div>
                                 )}
                             </div>
                         )}
-                        <div className={styles.body}>
+                        <div className={styles.body} id={bodyId}>
                             {typewriter ? (
                                 <Typewriter speed={typeSpeed} trigger={playKey}>
                                     {children}

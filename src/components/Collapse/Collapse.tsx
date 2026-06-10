@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useId } from 'react';
 import styles from './collapse.module.less';
 
 export interface CollapseProps {
@@ -26,6 +26,10 @@ export const Collapse: React.FC<CollapseProps> = ({
 }) => {
     const [expanded, setExpanded] = useState(defaultExpanded);
 
+    const idPrefix = `animal-collapse-${useId().replace(/:/g, '')}`;
+    const headerId = `${idPrefix}-header`;
+    const panelId = `${idPrefix}-panel`;
+
     const handleClick = () => {
         if (!disabled) {
             setExpanded(!expanded);
@@ -44,16 +48,19 @@ export const Collapse: React.FC<CollapseProps> = ({
     return (
         <div className={cls} style={style}>
             <button
+                type="button"
+                id={headerId}
                 className={styles.questionHeader}
                 onClick={handleClick}
                 disabled={disabled}
                 aria-expanded={expanded}
+                aria-controls={panelId}
             >
-                <span className={styles.questionIcon}>
+                <span className={styles.questionIcon} aria-hidden>
                     {expanded ? '−' : '+'}
                 </span>
                 <span className={styles.questionText}>{question}</span>
-                <span className={styles.leafDecoration}>
+                <span className={styles.leafDecoration} aria-hidden>
                     <svg viewBox="0 0 24 24" width="20" height="20">
                         <path
                             fill="currentColor"
@@ -62,7 +69,12 @@ export const Collapse: React.FC<CollapseProps> = ({
                     </svg>
                 </span>
             </button>
-            <div className={styles.answerWrapper}>
+            <div
+                className={styles.answerWrapper}
+                id={panelId}
+                role="region"
+                aria-labelledby={headerId}
+            >
                 <div className={styles.answerContent}>{answer}</div>
             </div>
         </div>
@@ -70,3 +82,4 @@ export const Collapse: React.FC<CollapseProps> = ({
 };
 
 Collapse.displayName = 'Collapse';
+

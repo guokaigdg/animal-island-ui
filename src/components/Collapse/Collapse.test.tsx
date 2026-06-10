@@ -70,4 +70,15 @@ describe('Collapse', () => {
         await user.click(screen.getByTestId('ext'));
         expect(screen.getByRole('button', { name: /Q/ })).toHaveAttribute('aria-expanded', 'true');
     });
+
+    describe('a11y', () => {
+        it('header.aria-controls 与 panel.id 双向关联，panel 通过 region 暴露', () => {
+            render(<Collapse question="Q" answer="A" />);
+            const btn = screen.getByRole('button');
+            const panel = screen.getByRole('region');
+            expect(btn.getAttribute('aria-controls')).toBe(panel.id);
+            expect(panel.getAttribute('aria-labelledby')).toBe(btn.id);
+            expect(panel.id).toMatch(/^animal-collapse-/);
+        });
+    });
 });

@@ -1,6 +1,7 @@
 import { describe, it, expect, vi } from 'vitest';
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { useState } from 'react';
 import { Modal } from './Modal';
 
 describe('Modal', () => {
@@ -106,5 +107,110 @@ describe('Modal', () => {
             </Modal>,
         );
         expect(screen.getByRole('dialog')).toHaveStyle({ width: '400px' });
+    });
+
+    describe('a11y', () => {
+        it('aria-labelledby / aria-describedby 关联 title 与 body', () => {
+            render(
+                <Modal open title="嗨标题" typewriter={false}>
+                    <p>嗨内容</p>
+                </Modal>,
+            );
+            const dialog = screen.getByRole('dialog');
+            const labelledBy = dialog.getAttribute('aria-labelledby');
+            const describedBy = dialog.getAttribute('aria-describedby');
+            expect(labelledBy).toBeTruthy();
+            expect(describedBy).toBeTruthy();
+            expect(document.getElementById(labelledBy!)).toHaveTextContent('嗨标题');
+            expect(document.getElementById(describedBy!)).toHaveTextContent('嗨内容');
+        });
+
+        it('无 title 时 aria-labelledby 缺省', () => {
+            render(
+                <Modal open typewriter={false}>
+                    body
+                </Modal>,
+            );
+            expect(screen.getByRole('dialog')).not.toHaveAttribute('aria-labelledby');
+        });
+
+        it('打开时焦点送进对话框（落到第一个可聚焦元素）', async () => {
+            const Host = () => {
+                const [open, setOpen] = useState(false);
+                return (
+                    <>
+                        <button data-testid="trigger" onClick={() => setOpen(true)}>open</button>
+                        <Modal open={open} onClose={() => setOpen(false)} typewriter={false}>
+                            <button data-testid="inside">inside</button>
+                        </Modal>
+                    </>
+                );
+            };
+            const user = userEvent.setup();
+            render(<Host />);
+            await user.click(screen.getByTestId('trigger'));
+            // 等待 setTimeout(0) 把焦点搬进对话框
+            await waitFor(() => {
+                expect(screen.getByTestId('inside')).toHaveFocus();
+            });
+        });
+
+        it('关闭时焦点归还触发元素', async () => {
+            const Host = () => {
+                const [open, setOpen] = useState(false);
+                return (
+                    <>
+                        <button data-testid="trigger" onClick={() => setOpen(true)}>open</button>
+                        <Modal open={open} onClose={() => setOpen(false)} typewriter={false}>
+                            <button data-testid="inside">inside</button>
+                        </Modal>
+                    </>
+                );
+            };
+            const user = userEvent.setup();
+            render(<Host />);
+            const trigger = screen.getByTestId('trigger');
+            await user.click(trigger);
+            await waitFor(() => {
+                expect(screen.getByTestId('inside')).toHaveFocus();
+            });
+            await user.keyboard('{Escape}');
+            await waitFor(() => {
+                expect(trigger).toHaveFocus();
+            });
+        });
+
+        it('Tab 焦点陷阱：末尾元素 Tab 回到第一个', async () => {
+            const user = userEvent.setup();
+            render(
+                <Modal open typewriter={false} footer={null}>
+                    <button data-testid="b1">b1</button>
+                    <button data-testid="b2">b2</button>
+                </Modal>,
+            );
+            await waitFor(() => {
+                expect(screen.getByTestId('b1')).toHaveFocus();
+            });
+            await user.tab();
+            expect(screen.getByTestId('b2')).toHaveFocus();
+            await user.tab();
+            // 末尾再 Tab 应陷阱回首项
+            expect(screen.getByTestId('b1')).toHaveFocus();
+        });
+
+        it('Shift+Tab 焦点陷阱：首项 Shift+Tab 回到末尾', async () => {
+            const user = userEvent.setup();
+            render(
+                <Modal open typewriter={false} footer={null}>
+                    <button data-testid="b1">b1</button>
+                    <button data-testid="b2">b2</button>
+                </Modal>,
+            );
+            await waitFor(() => {
+                expect(screen.getByTestId('b1')).toHaveFocus();
+            });
+            await user.tab({ shift: true });
+            expect(screen.getByTestId('b2')).toHaveFocus();
+        });
     });
 });

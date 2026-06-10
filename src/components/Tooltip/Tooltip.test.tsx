@@ -92,4 +92,37 @@ describe('Tooltip', () => {
         await user.click(screen.getByText('btn'));
         expect(onClick).toHaveBeenCalledTimes(1);
     });
+
+    describe('a11y', () => {
+        it('显示时 trigger.aria-describedby 指向 tooltip.id', async () => {
+            const user = userEvent.setup();
+            render(
+                <Tooltip title="hi" trigger="click">
+                    <button>btn</button>
+                </Tooltip>,
+            );
+            const trigger = screen.getByText('btn');
+            const tip = screen.getByRole('tooltip', { hidden: true });
+            expect(trigger).not.toHaveAttribute('aria-describedby');
+            await user.click(trigger);
+            expect(trigger.getAttribute('aria-describedby')).toBe(tip.id);
+            expect(tip.id).toMatch(/^animal-tooltip-/);
+        });
+
+        it('隐藏时 trigger 不带 aria-describedby（保留子元素原值）', async () => {
+            const user = userEvent.setup();
+            render(
+                <Tooltip title="hi" trigger="click">
+                    <button aria-describedby="ext-help">btn</button>
+                </Tooltip>,
+            );
+            const trigger = screen.getByText('btn');
+            // 隐藏：仅保留外部值
+            expect(trigger.getAttribute('aria-describedby')).toBe('ext-help');
+            // 显示：拼接外部值与 tooltip id
+            await user.click(trigger);
+            const tip = screen.getByRole('tooltip', { hidden: true });
+            expect(trigger.getAttribute('aria-describedby')).toBe(`ext-help ${tip.id}`);
+        });
+    });
 });

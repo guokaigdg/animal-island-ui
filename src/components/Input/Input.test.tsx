@@ -98,5 +98,21 @@ describe('Input', () => {
             render(<Input allowClear />);
             expect(screen.queryByRole('button')).not.toBeInTheDocument();
         });
+
+        it('清除按钮支持键盘聚焦与 Enter 触发', async () => {
+            const onClear = vi.fn();
+            render(<Input allowClear defaultValue="abc" onClear={onClear} />);
+            const clear = screen.getByRole('button', { name: /清除/ });
+            // 原生 button：可被 Tab 键聚焦
+            clear.focus();
+            expect(clear).toHaveFocus();
+            await setup().keyboard('{Enter}');
+            expect(onClear).toHaveBeenCalled();
+        });
+
+        it('清除按钮自定义 clearAriaLabel', () => {
+            render(<Input allowClear defaultValue="abc" clearAriaLabel="Clear" />);
+            expect(screen.getByRole('button', { name: 'Clear' })).toBeInTheDocument();
+        });
     });
 });

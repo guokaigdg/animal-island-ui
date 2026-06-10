@@ -203,4 +203,83 @@ describe('Select', () => {
             expect(dropdown.style.transform).toBe('translateY(-50%)');
         });
     });
+
+    describe('a11y', () => {
+        const getTrigger = () =>
+            document.querySelector(`.${styles.trigger}`) as HTMLElement;
+
+        it('trigger 角色 = combobox + aria-haspopup/listbox + aria-expanded 同步', async () => {
+            const user = userEvent.setup();
+            render(<Host />);
+            const trigger = screen.getByRole('combobox');
+            expect(trigger).toHaveAttribute('aria-haspopup', 'listbox');
+            expect(trigger).toHaveAttribute('aria-expanded', 'false');
+            await user.click(trigger);
+            await flushRaf();
+            expect(trigger).toHaveAttribute('aria-expanded', 'true');
+            expect(screen.getByRole('listbox')).toBeInTheDocument();
+        });
+
+        it('option 节点带 role=option + aria-selected', async () => {
+            const user = userEvent.setup();
+            render(<Host initial="b" />);
+            await user.click(getTrigger());
+            await flushRaf();
+            const opts = screen.getAllByRole('option');
+            expect(opts).toHaveLength(3);
+            expect(opts[1]).toHaveAttribute('aria-selected', 'true');
+            expect(opts[0]).toHaveAttribute('aria-selected', 'false');
+        });
+
+        it('键盘：闭合时 Enter / Space / 方向键打开下拉', async () => {
+            const user = userEvent.setup();
+            render(<Host />);
+            const trigger = screen.getByRole('combobox');
+            trigger.focus();
+            await user.keyboard('{Enter}');
+            await flushRaf();
+            expect(trigger).toHaveAttribute('aria-expanded', 'true');
+        });
+
+        it('键盘：ArrowDown / Up 切换 activedescendant，Enter 选中并关闭', async () => {
+            const user = userEvent.setup();
+            const onChange = vi.fn();
+            render(<Host onChange={onChange} />);
+            const trigger = screen.getByRole('combobox');
+            trigger.focus();
+            await user.keyboard('{Enter}');
+            await flushRaf();
+            // 首次打开 activedescendant 落到首项
+            const optsOpen = screen.getAllByRole('option');
+            expect(trigger.getAttribute('aria-activedescendant')).toBe(optsOpen[0].id);
+            await user.keyboard('{ArrowDown}');
+            expect(trigger.getAttribute('aria-activedescendant')).toBe(optsOpen[1].id);
+            await user.keyboard('{ArrowUp}');
+            expect(trigger.getAttribute('aria-activedescendant')).toBe(optsOpen[0].id);
+            await user.keyboard('{Enter}');
+            expect(onChange).toHaveBeenCalledWith('a');
+            expect(trigger).toHaveAttribute('aria-expanded', 'false');
+        });
+
+        it('键盘：Escape 关闭下拉并把焦点交还 trigger', async () => {
+            const user = userEvent.setup();
+            render(<Host />);
+            const trigger = screen.getByRole('combobox');
+            await user.click(trigger);
+            await flushRaf();
+            await user.keyboard('{Escape}');
+            expect(trigger).toHaveAttribute('aria-expanded', 'false');
+            expect(trigger).toHaveFocus();
+        });
+
+        it('aria-label 透传到 trigger 与 listbox', async () => {
+            const user = userEvent.setup();
+            render(<Select options={options} value="" onChange={() => {}} aria-label="水果" />);
+            const trigger = screen.getByRole('combobox');
+            expect(trigger).toHaveAttribute('aria-label', '水果');
+            await user.click(trigger);
+            await flushRaf();
+            expect(screen.getByRole('listbox')).toHaveAttribute('aria-label', '水果');
+        });
+    });
 });

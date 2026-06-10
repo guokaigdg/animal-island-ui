@@ -85,7 +85,9 @@ export const Tooltip: React.FC<TooltipProps> = ({
 }) => {
     const [visible, setVisible] = useState(false);
     const timerRef = useRef<ReturnType<typeof setTimeout>>();
-    const clipId = `animal-tooltip-clip-${useId().replace(/:/g, '')}`;
+    const rawId = useId().replace(/:/g, '');
+    const clipId = `animal-tooltip-clip-${rawId}`;
+    const tooltipId = `animal-tooltip-${rawId}`;
 
     const show = useCallback(() => {
         clearTimeout(timerRef.current);
@@ -100,7 +102,15 @@ export const Tooltip: React.FC<TooltipProps> = ({
 
     const child = React.Children.only(children);
 
-    const triggerProps: Record<string, unknown> = {};
+    const triggerProps: Record<string, unknown> = {
+        // 让屏幕阅读器在 trigger 获取焦点 / hover 描述时能读出 tooltip 内容
+        // 仅在显示时生效，避免隐藏 tooltip 仍被读到
+        'aria-describedby': visible
+            ? [(child.props as { 'aria-describedby'?: string })['aria-describedby'], tooltipId]
+                  .filter(Boolean)
+                  .join(' ')
+            : (child.props as { 'aria-describedby'?: string })['aria-describedby'],
+    };
 
     if (trigger === 'hover') {
         triggerProps.onMouseEnter = (e: React.MouseEvent) => {
@@ -145,6 +155,7 @@ export const Tooltip: React.FC<TooltipProps> = ({
                     { [styles.visible]: visible }
                 )}
                 role="tooltip"
+                id={tooltipId}
                 aria-hidden={!visible}
                 onMouseEnter={trigger === 'hover' ? show : undefined}
                 onMouseLeave={trigger === 'hover' ? hide : undefined}

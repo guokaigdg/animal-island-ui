@@ -95,4 +95,34 @@ describe('Switch', () => {
             expect(getSwitch()).toHaveClass(styles['switch-loading']);
         });
     });
+
+    describe('a11y', () => {
+        it('Space 键 toggle', async () => {
+            const { user, onChange, getSwitch } = makeSetup();
+            getSwitch().focus();
+            await user.keyboard(' ');
+            expect(onChange).toHaveBeenLastCalledWith(true);
+            await user.keyboard(' ');
+            expect(onChange).toHaveBeenLastCalledWith(false);
+        });
+
+        it('Enter 键 toggle', async () => {
+            const { user, onChange, getSwitch } = makeSetup();
+            getSwitch().focus();
+            await user.keyboard('{Enter}');
+            expect(onChange).toHaveBeenLastCalledWith(true);
+        });
+
+        it('disabled / loading 时键盘不响应', async () => {
+            const { user, onChange, getSwitch } = makeSetup({ disabled: true });
+            getSwitch().focus();
+            await user.keyboard(' ');
+            expect(onChange).not.toHaveBeenCalled();
+        });
+
+        it('aria-label 透传', () => {
+            render(<Switch aria-label="深色模式" />);
+            expect(screen.getByRole('switch')).toHaveAttribute('aria-label', '深色模式');
+        });
+    });
 });

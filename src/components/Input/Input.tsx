@@ -23,6 +23,8 @@ export interface InputProps extends Omit<
     onChange?: React.ChangeEventHandler<HTMLInputElement>;
     /** 清除回调 */
     onClear?: () => void;
+    /** 清除按钮的无障碍标签，默认 "清除" */
+    clearAriaLabel?: string;
 }
 
 export const Input: React.FC<InputProps> = ({
@@ -38,6 +40,7 @@ export const Input: React.FC<InputProps> = ({
     defaultValue,
     onChange,
     onClear,
+    clearAriaLabel = '清除',
     ...rest
 }) => {
     const [innerValue, setInnerValue] = useState(defaultValue ?? '');
@@ -88,14 +91,14 @@ export const Input: React.FC<InputProps> = ({
                 {...rest}
             />
             {allowClear && currentValue && !disabled && (
-                <span
+                <button
+                    type="button"
                     className={styles.clear}
                     onClick={handleClear}
-                    role="button"
-                    tabIndex={-1}
+                    aria-label={clearAriaLabel}
                 >
                     ×
-                </span>
+                </button>
             )}
             {suffix && <span className={styles.suffix}>{suffix}</span>}
         </span>

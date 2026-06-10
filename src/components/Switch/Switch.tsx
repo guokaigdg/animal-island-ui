@@ -21,6 +21,10 @@ export interface SwitchProps {
     /** 变化回调 */
     onChange?: (checked: boolean) => void;
     className?: string;
+    /** 无障碍标签（无可见 label 时使用） */
+    'aria-label'?: string;
+    /** 关联外部可见 label 的 id */
+    'aria-labelledby'?: string;
 }
 
 export const Switch: React.FC<SwitchProps> = ({
@@ -33,6 +37,8 @@ export const Switch: React.FC<SwitchProps> = ({
     unCheckedChildren,
     onChange,
     className,
+    'aria-label': ariaLabel,
+    'aria-labelledby': ariaLabelledBy,
 }) => {
     const [innerChecked, setInnerChecked] = useState(defaultChecked);
     const isControlled = checked !== undefined;
@@ -44,6 +50,16 @@ export const Switch: React.FC<SwitchProps> = ({
         if (!isControlled) setInnerChecked(next);
         onChange?.(next);
     }, [disabled, loading, isChecked, isControlled, onChange]);
+
+    const handleKeyDown = useCallback(
+        (e: React.KeyboardEvent<HTMLButtonElement>) => {
+            if (e.key === ' ' || e.key === 'Enter') {
+                e.preventDefault();
+                handleClick();
+            }
+        },
+        [handleClick],
+    );
 
     const cls = [
         styles.switch,
@@ -61,8 +77,12 @@ export const Switch: React.FC<SwitchProps> = ({
             type="button"
             role="switch"
             aria-checked={isChecked}
+            aria-label={ariaLabel}
+            aria-labelledby={ariaLabelledBy}
+            aria-busy={loading || undefined}
             className={cls}
             onClick={handleClick}
+            onKeyDown={handleKeyDown}
             disabled={disabled}
         >
             <span className={styles.handle}>
