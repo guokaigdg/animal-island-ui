@@ -24,4 +24,16 @@ describe('Footer', () => {
         expect(root).toHaveClass('x');
         expect(root).toHaveStyle({ height: '50px' });
     });
+
+    it('seamless=true 添加 seamless 类', () => {
+        const { container } = render(<Footer seamless />);
+        const root = container.firstChild as HTMLElement;
+        expect(root).toHaveClass(styles.seamless);
+    });
+
+    it('seamless=false 不添加 seamless 类', () => {
+        const { container } = render(<Footer seamless={false} />);
+        const root = container.firstChild as HTMLElement;
+        expect(root).not.toHaveClass(styles.seamless);
+    });
 });

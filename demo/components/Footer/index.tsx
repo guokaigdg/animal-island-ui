@@ -10,7 +10,7 @@ const FooterDemo: React.FC = () => {
                 Footer <span style={tagStyle}>底部装饰</span>
             </div>
             <div style={labelStyle}>
-                Footer 组件 — 页面底部装饰图片，支持 sea（海）和 tree（树）两种类型。
+                Footer 组件 — 页面底部装饰图片，支持 sea（海）和 tree（树）两种类型，支持无缝拼接。
             </div>
             <div style={{ ...demoBodyStyle, padding: '40px 0' }}>
                 <div style={labelStyle}>tree 类型（默认）</div>
@@ -20,6 +20,13 @@ const FooterDemo: React.FC = () => {
                 <div style={labelStyle}>sea 类型</div>
                 <FooterComponent type="sea" />
             </div>
+            <div style={{ ...demoBodyStyle, padding: '40px 0' }}>
+                <div style={labelStyle}>seamless 无缝拼接</div>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
+                    <FooterComponent type="tree" seamless />
+                    <FooterComponent type="sea" seamless />
+                </div>
+            </div>
             <CodeBlock 
             code={`import React from 'react';
 import { Footer } from 'animal-island-ui';
@@ -28,6 +35,7 @@ const App = () => (
     <div>
         <Footer />
         <Footer type="sea" />
+        <Footer type="sea" seamless />
     </div>
 );`} 
 />
@@ -38,6 +46,7 @@ const App = () => (
 
 const FOOTER_API: ApiRow[] = [
     { prop: 'type', desc: 'Footer 类型', type: "'sea' | 'tree'", defaultVal: "'tree'" },
+    { prop: 'seamless', desc: '无缝拼接模式', type: 'boolean', defaultVal: 'false' },
     { prop: 'className', desc: '自定义类名', type: 'string', defaultVal: '-' },
     { prop: 'style', desc: '自定义样式', type: 'CSSProperties', defaultVal: '-' },
 ];
