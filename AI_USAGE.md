@@ -353,14 +353,16 @@ type FooterType = 'sea' | 'tree';
 
 interface FooterProps {
   type?: FooterType;          // default 'tree'
+  seamless?: boolean;         // default false
   className?: string;
   style?: React.CSSProperties;
 }
 ```
 
 ```tsx
-<Footer />              {/* forest silhouette, 60px tall — default */}
-<Footer type="sea" />   {/* ocean wave, 80px tall */}
+<Footer />                        {/* forest silhouette, 80px tall — default */}
+<Footer type="sea" />             {/* ocean wave */}
+<Footer type="sea" seamless />    {/* ocean wave with seamless horizontal tiling */}
 ```
 
 > `style` accepts layout properties only (margin / position). Don't try to recolor via `backgroundColor` — the asset is a fixed PNG/SVG.
