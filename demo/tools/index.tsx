@@ -94,9 +94,9 @@ const codeLabelStyle: React.CSSProperties = {
     display: 'inline-block',
 };
 
-export const ApiTable: React.FC<{ rows: ApiRow[] }> = ({ rows }) => (
+export const ApiTable: React.FC<{ rows: ApiRow[]; title?: string }> = ({ rows, title = 'API' }) => (
     <div style={{ marginTop: 24 }}>
-        <div style={codeLabelStyle}>API</div>
+        <div style={codeLabelStyle}>{title}</div>
         <div
             style={{
                 background: '#2b2118',

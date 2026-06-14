@@ -66,7 +66,7 @@ const MENU_ITEMS: MenuItem[] = [
             { key: 'modal', label: 'Modal 弹窗' },
             { key: 'typewriter', label: 'Typewriter 打字机' },
             { key: 'divider-comp', label: 'Divider 分割线' },
-            { key: 'icon', label: 'Icon 图标', isNew: true },
+            { key: 'icon', label: 'Icon 图标' },
             { key: 'select', label: 'Select 选择器' },
             { key: 'checkbox', label: 'Checkbox 多选框' },
             { key: 'radio', label: 'Radio 单选框' },
@@ -76,6 +76,7 @@ const MENU_ITEMS: MenuItem[] = [
             { key: 'codeblock', label: 'CodeBlock 代码高亮' },
             { key: 'loading', label: 'Loading 加载', isNew: true },
             { key: 'table', label: 'Table 表格' },
+            { key: 'form', label: 'Form 表单', isNew: true },
         ],
     },
     {

@@ -314,8 +314,8 @@ const features = [
     },
     {
         icon: 'Property-Shopping.svg',
-        title: '18 个组件',
-        desc: 'Button / Input / Switch / Modal / Typewriter / Card / Collapse / Cursor / Divider / Time / Phone / Footer / Icon / Checkbox / Select / Tabs / CodeBlock / Loading 等',
+        title: '24 个组件',
+        desc: 'Button / Input / Switch / Modal / Form / Table / Title / Tooltip / Typewriter / Card / Collapse / Cursor / Divider / Time / Phone / Footer / Icon / Checkbox / Select / Tabs / CodeBlock / Loading / Radio / InvitationCard',
     },
     {
         icon: 'Property-Camera.svg',
@@ -336,6 +336,11 @@ const components = [
         desc: '5 种类型、3 种尺寸、加载/危险/幽灵模式',
     },
     { key: 'input', name: 'Input', desc: '前后缀、一键清空、校验状态' },
+    {
+        key: 'form',
+        name: 'Form',
+        desc: '校验规则 / useForm 命令式 / 三种布局',
+    },
     {
         key: 'switch',
         name: 'Switch',
@@ -412,7 +417,7 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                                     Animal <br /> Island UI
                                 </>
                             )}
-                            <span style={S.heroVersion}>v0.8.1</span>
+                            <span style={S.heroVersion}>v1.0.0</span>
                         </h1>
                         <Typewriter speed={60}>
                             <p style={{ ...S.heroSubtitle, fontSize: isMobile ? 14 : 17 }}>
