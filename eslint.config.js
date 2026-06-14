@@ -70,5 +70,16 @@ export default tseslint.config(
             '@typescript-eslint/no-explicit-any': 'off',
             'no-console': 'off',
         },
+    },
+
+    // 演示站点 —— 不进 npm 产物，规则放宽以保持 demo 代码简洁
+    {
+        files: ['demo/**/*.{ts,tsx}'],
+        rules: {
+            'react-refresh/only-export-components': 'off',
+            '@typescript-eslint/no-explicit-any': 'off',
+            '@typescript-eslint/no-unused-vars': 'off',
+            'no-console': 'off',
+        },
     }
 );

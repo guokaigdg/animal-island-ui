@@ -26,7 +26,7 @@ describe('Modal', () => {
     it('点击遮罩触发 onClose（默认 maskClosable）', async () => {
         const user = userEvent.setup();
         const onClose = vi.fn();
-        const { container } = render(
+        const { container: _container } = render(
             <Modal open onClose={onClose} typewriter={false}>
                 content
             </Modal>

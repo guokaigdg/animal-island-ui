@@ -40,8 +40,9 @@ const urlCache = new Map<number, string>();
 /**
  * 解析 item 图标的 URL 字符串。命中缓存同步返回；未命中则异步加载并缓存。
  * 业务侧可在 hover / 滚动等时机预热，避开首次 render 的空白闪烁。
+ * 仅供本组件内部 useEffect 使用，无需导出
  */
-export async function resolveItemUrl(item: number): Promise<string | undefined> {
+async function resolveItemUrl(item: number): Promise<string | undefined> {
     const cached = urlCache.get(item);
     if (cached) return cached;
     const path = itemNumberToPath[item];
@@ -107,7 +108,7 @@ export const Icon: React.FC<IconProps> = ({ name, item, size = 24, className, st
     );
 };
 
-export const ICON_LIST: { name: IconName; label: string }[] = [
+export const ICON_LIST = [
     { name: 'icon-miles', label: 'IslandMiles' },
     { name: 'icon-camera', label: 'Camera' },
     { name: 'icon-chat', label: 'Chat' },
@@ -118,4 +119,4 @@ export const ICON_LIST: { name: IconName; label: string }[] = [
     { name: 'icon-map', label: 'Map' },
     { name: 'icon-shopping', label: 'Shopping' },
     { name: 'icon-variant', label: 'Variant' },
-];
+] as const satisfies ReadonlyArray<{ name: IconName; label: string }>;

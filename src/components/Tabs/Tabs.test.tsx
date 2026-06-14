@@ -1,7 +1,6 @@
 import { describe, it, expect, vi } from 'vitest';
-import { render, screen, within } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { useState } from 'react';
 import { Tabs, type TabItem } from './Tabs';
 import { setup } from '@test/utils';
 import { ControlledHost } from '@test/components';

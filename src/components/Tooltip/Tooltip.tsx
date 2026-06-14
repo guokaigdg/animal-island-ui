@@ -97,6 +97,15 @@ export const Tooltip: React.FC<TooltipProps> = ({
 
     const child = React.Children.only(children);
 
+    // 用结构化类型描述子元素可能带的鼠标 / 焦点 / 点击回调
+    const childProps = child.props as {
+        onMouseEnter?: React.MouseEventHandler;
+        onMouseLeave?: React.MouseEventHandler;
+        onFocus?: React.FocusEventHandler;
+        onBlur?: React.FocusEventHandler;
+        onClick?: React.MouseEventHandler;
+    };
+
     const triggerProps: Record<string, unknown> = {
         // 让屏幕阅读器在 trigger 获取焦点 / hover 描述时能读出 tooltip 内容
         // 仅在显示时生效，避免隐藏 tooltip 仍被读到
@@ -110,25 +119,25 @@ export const Tooltip: React.FC<TooltipProps> = ({
     if (trigger === 'hover') {
         triggerProps.onMouseEnter = (e: React.MouseEvent) => {
             show();
-            (child.props as any).onMouseEnter?.(e);
+            childProps.onMouseEnter?.(e);
         };
         triggerProps.onMouseLeave = (e: React.MouseEvent) => {
             hide();
-            (child.props as any).onMouseLeave?.(e);
+            childProps.onMouseLeave?.(e);
         };
     } else if (trigger === 'focus') {
         triggerProps.onFocus = (e: React.FocusEvent) => {
             show();
-            (child.props as any).onFocus?.(e);
+            childProps.onFocus?.(e);
         };
         triggerProps.onBlur = (e: React.FocusEvent) => {
             hide();
-            (child.props as any).onBlur?.(e);
+            childProps.onBlur?.(e);
         };
     } else if (trigger === 'click') {
         triggerProps.onClick = (e: React.MouseEvent) => {
             setVisible((v) => !v);
-            (child.props as any).onClick?.(e);
+            childProps.onClick?.(e);
         };
     }
 
