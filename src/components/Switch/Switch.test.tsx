@@ -2,7 +2,8 @@ import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { fireEvent } from '@testing-library/react';
 import { Switch, type SwitchProps } from './Switch';
-import { setup, ControlledHost } from '@test/utils';
+import { setup } from '@test/utils';
+import { ControlledHost } from '@test/components';
 import styles from './switch.module.less';
 
 const makeSetup = (props: Partial<SwitchProps> = {}) => {

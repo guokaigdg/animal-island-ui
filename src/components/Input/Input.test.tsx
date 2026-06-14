@@ -1,7 +1,8 @@
 import { describe, it, expect, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { Input, type InputProps } from './Input';
-import { setup, ControlledHost } from '@test/utils';
+import { setup } from '@test/utils';
+import { ControlledHost } from '@test/components';
 import styles from './input.module.less';
 
 const makeSetup = (props: Partial<InputProps> = {}) => {

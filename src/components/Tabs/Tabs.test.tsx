@@ -3,7 +3,8 @@ import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { useState } from 'react';
 import { Tabs, type TabItem } from './Tabs';
-import { setup, ControlledHost } from '@test/utils';
+import { setup } from '@test/utils';
+import { ControlledHost } from '@test/components';
 import styles from './tabs.module.less';
 
 const items: TabItem[] = [

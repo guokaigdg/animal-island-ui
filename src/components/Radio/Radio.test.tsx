@@ -1,7 +1,8 @@
 import { describe, it, expect, vi } from 'vitest';
 import { render, screen, within } from '@testing-library/react';
 import { Radio, type RadioOption, type RadioProps } from './Radio';
-import { setup, ControlledHost } from '@test/utils';
+import { setup } from '@test/utils';
+import { ControlledHost } from '@test/components';
 import styles from './radio.module.less';
 
 const baseOptions: RadioOption[] = [
