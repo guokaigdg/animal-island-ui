@@ -68,10 +68,7 @@ function stripWoffFallbackPlugin(): Plugin {
         transform(code, id) {
             if (!id.includes('@fontsource')) return null;
             if (!id.endsWith('.css') && !/\.css\?/.test(id)) return null;
-            const transformed = code.replace(
-                /,\s*url\([^)]+\.woff\)\s*format\(['"]woff['"]\)/g,
-                '',
-            );
+            const transformed = code.replace(/,\s*url\([^)]+\.woff\)\s*format\(['"]woff['"]\)/g, '');
             return transformed === code ? null : { code: transformed, map: null };
         },
         // libAssetsPlugin 会独立扫描源 CSS 并 emit 所有 url() 引用的文件（包括被我们剥掉的 woff），

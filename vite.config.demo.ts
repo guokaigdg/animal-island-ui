@@ -34,7 +34,6 @@ export default defineConfig({
                 },
             },
         },
-       assetsInlineLimit: 4096,
+        assetsInlineLimit: 4096,
     },
 });
-
