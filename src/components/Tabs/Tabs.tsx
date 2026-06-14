@@ -32,9 +32,7 @@ export const Tabs: React.FC<TabsProps> = ({
     shadow = true,
     'aria-label': ariaLabel,
 }) => {
-    const [internalActiveKey, setInternalActiveKey] = useState(
-        defaultActiveKey || items[0]?.key
-    );
+    const [internalActiveKey, setInternalActiveKey] = useState(defaultActiveKey || items[0]?.key);
 
     const currentActiveKey = activeKey !== undefined ? activeKey : internalActiveKey;
 
@@ -52,7 +50,7 @@ export const Tabs: React.FC<TabsProps> = ({
             }
             onChange?.(key);
         },
-        [activeKey, onChange],
+        [activeKey, onChange]
     );
 
     const focusTab = (key: string) => {
@@ -62,12 +60,7 @@ export const Tabs: React.FC<TabsProps> = ({
     const handleKeyDown = useCallback(
         (e: React.KeyboardEvent<HTMLDivElement>) => {
             const { key } = e;
-            if (
-                key !== 'ArrowRight' &&
-                key !== 'ArrowLeft' &&
-                key !== 'Home' &&
-                key !== 'End'
-            ) {
+            if (key !== 'ArrowRight' && key !== 'ArrowLeft' && key !== 'Home' && key !== 'End') {
                 return;
             }
             e.preventDefault();
@@ -82,7 +75,7 @@ export const Tabs: React.FC<TabsProps> = ({
             handleTabClick(nextKey);
             focusTab(nextKey);
         },
-        [items, currentActiveKey, handleTabClick],
+        [items, currentActiveKey, handleTabClick]
     );
 
     const activeItem = items.find((item) => item.key === currentActiveKey);
@@ -120,7 +113,13 @@ export const Tabs: React.FC<TabsProps> = ({
                                 {isActive ? '●' : '○'}
                             </span>
                             <span className={styles.tabLabel}>{item.label}</span>
-                            {isActive && <img src={leafIcon} alt="" className={`${styles.tabLeaf} ${leafAnimation ? '' : styles.tabLeafStatic}`} />}
+                            {isActive && (
+                                <img
+                                    src={leafIcon}
+                                    alt=""
+                                    className={`${styles.tabLeaf} ${leafAnimation ? '' : styles.tabLeafStatic}`}
+                                />
+                            )}
                         </button>
                     );
                 })}
@@ -132,13 +131,10 @@ export const Tabs: React.FC<TabsProps> = ({
                 aria-labelledby={activeItem ? tabId(activeItem.key) : undefined}
                 tabIndex={0}
             >
-                <div className={styles.tabContentInner}>
-                    {activeItem?.children}
-                </div>
+                <div className={styles.tabContentInner}>{activeItem?.children}</div>
             </div>
         </div>
     );
 };
 
 Tabs.displayName = 'Tabs';
-

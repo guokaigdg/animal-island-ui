@@ -31,9 +31,7 @@ describe('Switch', () => {
         });
 
         it('checkedChildren / unCheckedChildren 按状态显示', () => {
-            const { rerender } = render(
-                <Switch checked={false} checkedChildren="ON" unCheckedChildren="OFF" />,
-            );
+            const { rerender } = render(<Switch checked={false} checkedChildren="ON" unCheckedChildren="OFF" />);
             expect(screen.getByText('OFF')).toBeInTheDocument();
             rerender(<Switch checked checkedChildren="ON" unCheckedChildren="OFF" />);
             expect(screen.getByText('ON')).toBeInTheDocument();
@@ -70,7 +68,7 @@ describe('Switch', () => {
             render(
                 <ControlledHost<boolean, boolean> onChange={onChange}>
                     {({ value, onChange: set }) => <Switch checked={value} onChange={set} />}
-                </ControlledHost>,
+                </ControlledHost>
             );
             const sw = screen.getByRole('switch');
             await setup().click(sw);

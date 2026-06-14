@@ -36,8 +36,15 @@ const Host = ({
 
 const mockRect = (overrides: Partial<DOMRect>) => {
     vi.spyOn(HTMLElement.prototype, 'getBoundingClientRect').mockReturnValue({
-        top: 0, left: 0, right: 0, bottom: 0, width: 0, height: 0,
-        x: 0, y: 0, toJSON: () => ({}),
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        width: 0,
+        height: 0,
+        x: 0,
+        y: 0,
+        toJSON: () => ({}),
         ...overrides,
     } as DOMRect);
 };
@@ -113,7 +120,7 @@ describe('Select', () => {
             <div>
                 <Select options={options} value="" onChange={() => {}} />
                 <button data-testid="outside">outside</button>
-            </div>,
+            </div>
         );
         const trigger = document.querySelector(`.${styles.trigger}`) as HTMLElement;
         await user.click(trigger);
@@ -130,8 +137,8 @@ describe('Select', () => {
         await user.click(trigger);
         await flushRaf();
         const dropdownEl = document.querySelector(`.${styles.dropdown}`) as HTMLElement;
-        const banana = Array.from(dropdownEl.querySelectorAll(`.${styles.option}`)).find(
-            (el) => el.textContent?.includes('Banana'),
+        const banana = Array.from(dropdownEl.querySelectorAll(`.${styles.option}`)).find((el) =>
+            el.textContent?.includes('Banana')
         ) as HTMLElement;
         await user.hover(banana);
         expect(banana).toHaveClass(styles.hovered);
@@ -146,8 +153,8 @@ describe('Select', () => {
         await user.click(trigger);
         await flushRaf();
         const dropdownEl = document.querySelector(`.${styles.dropdown}`) as HTMLElement;
-        const banana = Array.from(dropdownEl.querySelectorAll(`.${styles.option}`)).find(
-            (el) => el.textContent?.includes('Banana'),
+        const banana = Array.from(dropdownEl.querySelectorAll(`.${styles.option}`)).find((el) =>
+            el.textContent?.includes('Banana')
         ) as HTMLElement;
         expect(banana).toHaveClass(styles.active);
         expect(banana.querySelector(`.${styles.pillBar}`)).toBeInTheDocument();
@@ -205,8 +212,7 @@ describe('Select', () => {
     });
 
     describe('a11y', () => {
-        const getTrigger = () =>
-            document.querySelector(`.${styles.trigger}`) as HTMLElement;
+        const getTrigger = () => document.querySelector(`.${styles.trigger}`) as HTMLElement;
 
         it('trigger 角色 = combobox + aria-haspopup/listbox + aria-expanded 同步', async () => {
             const user = userEvent.setup();

@@ -20,7 +20,7 @@ const FOCUSABLE_SELECTOR = [
 
 const getFocusable = (root: HTMLElement): HTMLElement[] => {
     return Array.from(root.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR)).filter(
-        (el) => !el.hasAttribute('disabled') && el.getAttribute('aria-hidden') !== 'true',
+        (el) => !el.hasAttribute('disabled') && el.getAttribute('aria-hidden') !== 'true'
     );
 };
 
@@ -189,7 +189,9 @@ export const Modal: React.FC<ModalProps> = ({
                         {title && (
                             <div className={styles.header}>
                                 {title && (
-                                    <div className={styles.title} id={titleId}>{title}</div>
+                                    <div className={styles.title} id={titleId}>
+                                        {title}
+                                    </div>
                                 )}
                             </div>
                         )}
@@ -203,9 +205,7 @@ export const Modal: React.FC<ModalProps> = ({
                             )}
                         </div>
                         {footer !== null && (
-                            <div className={styles.footer}>
-                                {footer === undefined ? defaultFooter : footer}
-                            </div>
+                            <div className={styles.footer}>{footer === undefined ? defaultFooter : footer}</div>
                         )}
                     </div>
                 </div>

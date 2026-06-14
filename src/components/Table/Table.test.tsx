@@ -58,9 +58,7 @@ describe('Table', () => {
     });
 
     it('rowKey 为函数时使用其返回值', () => {
-        const { container } = render(
-            <Table columns={anyColumns} dataSource={data} rowKey={(r) => `row-${r.name}`} />,
-        );
+        const { container } = render(<Table columns={anyColumns} dataSource={data} rowKey={(r) => `row-${r.name}`} />);
         // 没有显式 data 属性可断言；至少行数正确即可
         expect(container.querySelectorAll('tbody tr')).toHaveLength(2);
     });

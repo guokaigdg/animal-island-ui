@@ -97,10 +97,8 @@ describe('Radio', () => {
             const onChange = vi.fn();
             render(
                 <ControlledHost<string | number, string | number> onChange={onChange}>
-                    {({ value, onChange: set }) => (
-                        <Radio options={baseOptions} value={value} onChange={set} />
-                    )}
-                </ControlledHost>,
+                    {({ value, onChange: set }) => <Radio options={baseOptions} value={value} onChange={set} />}
+                </ControlledHost>
             );
             const inputs = screen.getAllByRole('radio') as HTMLInputElement[];
             await setup().click(inputs[1]);

@@ -37,11 +37,7 @@ interface RenderState {
 /**
  * 按剩余可显字符数裁剪 ReactNode，保留原有的元素结构 / 换行 / 样式。
  */
-const renderTruncated = (
-    node: React.ReactNode,
-    state: RenderState,
-    keyPrefix = 'tw'
-): React.ReactNode => {
+const renderTruncated = (node: React.ReactNode, state: RenderState, keyPrefix = 'tw'): React.ReactNode => {
     if (state.stopped) return null;
     if (node === null || node === undefined || typeof node === 'boolean') return null;
 
@@ -79,13 +75,7 @@ const renderTruncated = (
  * - 按字符逐个显示，保留原 children 的元素结构、换行和样式
  * - 不引入任何外层包裹元素，对布局 / 字号 / 颜色 / 字体均零影响
  */
-export const Typewriter: React.FC<TypewriterProps> = ({
-    children,
-    speed = 90,
-    trigger,
-    autoPlay = true,
-    onDone,
-}) => {
+export const Typewriter: React.FC<TypewriterProps> = ({ children, speed = 90, trigger, autoPlay = true, onDone }) => {
     const total = useMemo(() => countText(children), [children]);
     const [count, setCount] = useState(autoPlay ? 0 : total);
     const timerRef = useRef<number | null>(null);

@@ -8,8 +8,7 @@
     border-radius: var(--animal-border-radius-base);
     border: var(--animal-border-width) solid var(--animal-border-color);
     overflow: hidden;
-    transition: border-color var(--animal-motion-duration-base)
-        var(--animal-motion-ease);
+    transition: border-color var(--animal-motion-duration-base) var(--animal-motion-ease);
     margin-bottom: var(--animal-spacing-md);
 
     &.disabled {
@@ -48,8 +47,7 @@
     line-height: 1;
     flex-shrink: 0;
     transition:
-        background-color var(--animal-motion-duration-base)
-            var(--animal-motion-ease),
+        background-color var(--animal-motion-duration-base) var(--animal-motion-ease),
         transform var(--animal-motion-duration-base) var(--animal-motion-ease);
     box-shadow: 0 2px 4px rgba(25, 200, 185, 0.3);
 
@@ -97,8 +95,7 @@
     color: var(--animal-text-color-secondary);
     font-size: var(--animal-font-size-base);
     line-height: 1.7;
-    transition: padding var(--animal-motion-duration-base)
-        var(--animal-motion-ease);
+    transition: padding var(--animal-motion-duration-base) var(--animal-motion-ease);
 
     .expanded & {
         padding-bottom: var(--animal-spacing-xl);
@@ -108,8 +105,7 @@
         color: var(--animal-primary-color);
         text-decoration: none;
         font-weight: 500;
-        transition: color var(--animal-motion-duration-fast)
-            var(--animal-motion-ease);
+        transition: color var(--animal-motion-duration-fast) var(--animal-motion-ease);
 
         &:hover {
             color: var(--animal-primary-color-hover);

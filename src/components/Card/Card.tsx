@@ -18,12 +18,21 @@ export type CardColor =
     | 'brown'
     | 'warm-peach-pink';
 
-export type CardPattern = 
-    | 'none' 
+export type CardPattern =
+    | 'none'
     | 'default'
-    | 'app-pink' | 'purple' | 'app-blue' | 'app-yellow' | 'app-orange' 
-    | 'app-teal' | 'app-green' | 'app-red' | 'lime-green' 
-    | 'yellow-green' | 'brown' | 'warm-peach-pink';
+    | 'app-pink'
+    | 'purple'
+    | 'app-blue'
+    | 'app-yellow'
+    | 'app-orange'
+    | 'app-teal'
+    | 'app-green'
+    | 'app-red'
+    | 'lime-green'
+    | 'yellow-green'
+    | 'brown'
+    | 'warm-peach-pink';
 
 export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
     /** 卡片类型 */
@@ -56,11 +65,7 @@ export const Card: React.FC<CardProps> = ({
         .join(' ');
 
     return (
-        <div
-            className={cls}
-            style={style}
-            {...rest}
-        >
+        <div className={cls} style={style} {...rest}>
             {children}
         </div>
     );

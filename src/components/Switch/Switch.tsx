@@ -58,7 +58,7 @@ export const Switch: React.FC<SwitchProps> = ({
                 handleClick();
             }
         },
-        [handleClick],
+        [handleClick]
     );
 
     const cls = [
@@ -85,12 +85,8 @@ export const Switch: React.FC<SwitchProps> = ({
             onKeyDown={handleKeyDown}
             disabled={disabled}
         >
-            <span className={styles.handle}>
-                {loading && <span className={styles.spinner} />}
-            </span>
-            <span className={styles.inner}>
-                {isChecked ? checkedChildren : unCheckedChildren}
-            </span>
+            <span className={styles.handle}>{loading && <span className={styles.spinner} />}</span>
+            <span className={styles.inner}>{isChecked ? checkedChildren : unCheckedChildren}</span>
         </button>
     );
 };

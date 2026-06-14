@@ -16,10 +16,10 @@ export type IconName =
 // 懒加载器：调用时才发起 chunk 请求
 // —— 488 个 PNG 不再随 Icon.js 一同进 bundle
 // 用 Object.keys 同步拿到文件路径列表（不触发任何 import）
-const itemLoaders = import.meta.glob<string>(
-    '../../assets/img/icons/items/item-*.png',
-    { query: '?url', import: 'default' },
-);
+const itemLoaders = import.meta.glob<string>('../../assets/img/icons/items/item-*.png', {
+    query: '?url',
+    import: 'default',
+});
 const itemKeys = Object.keys(itemLoaders);
 
 const itemNumberToPath: Record<number, string> = {};
@@ -41,9 +41,7 @@ const urlCache = new Map<number, string>();
  * 解析 item 图标的 URL 字符串。命中缓存同步返回；未命中则异步加载并缓存。
  * 业务侧可在 hover / 滚动等时机预热，避开首次 render 的空白闪烁。
  */
-export async function resolveItemUrl(
-    item: number,
-): Promise<string | undefined> {
+export async function resolveItemUrl(item: number): Promise<string | undefined> {
     const cached = urlCache.get(item);
     if (cached) return cached;
     const path = itemNumberToPath[item];
@@ -66,18 +64,10 @@ export interface IconProps {
     bounce?: boolean;
 }
 
-export const Icon: React.FC<IconProps> = ({
-    name,
-    item,
-    size = 24,
-    className,
-    style,
-    bounce = false,
-    ...rest
-}) => {
+export const Icon: React.FC<IconProps> = ({ name, item, size = 24, className, style, bounce = false, ...rest }) => {
     // 同步读缓存：二次渲染时立即拿到 URL，零延迟
     const [itemUrl, setItemUrl] = useState<string | undefined>(() =>
-        typeof item === 'number' ? urlCache.get(item) : undefined,
+        typeof item === 'number' ? urlCache.get(item) : undefined
     );
 
     useEffect(() => {
@@ -99,12 +89,7 @@ export const Icon: React.FC<IconProps> = ({
         };
     }, [item]);
 
-    const cls = [
-        styles.icon,
-        name ? styles[name] : '',
-        bounce ? styles['icon-bounce'] : '',
-        className || '',
-    ]
+    const cls = [styles.icon, name ? styles[name] : '', bounce ? styles['icon-bounce'] : '', className || '']
         .filter(Boolean)
         .join(' ');
 

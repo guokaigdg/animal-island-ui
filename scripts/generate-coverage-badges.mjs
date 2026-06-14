@@ -31,22 +31,19 @@ const total = summary.total;
 // 统计源组件数：按 src/components/ 下含同名 .tsx 的目录数
 // （不依赖 coverage 数据 —— Icon 已被 coverage exclude，但仍是有测试的组件）
 import { readdirSync } from 'fs';
-const components = readdirSync(resolve(ROOT, 'src/components'))
-    .filter((d) => existsSync(resolve(ROOT, `src/components/${d}/${d}.tsx`)))
-    .length;
+const components = readdirSync(resolve(ROOT, 'src/components')).filter((d) =>
+    existsSync(resolve(ROOT, `src/components/${d}/${d}.tsx`))
+).length;
 
 // ---------- 2. 读 vitest JSON（可选用） ----------
 let tests = 0;
 if (existsSync(VITEST)) {
     const vr = JSON.parse(readFileSync(VITEST, 'utf8'));
     const real = vr.testResults.filter((t) => t.name.includes('/src/components/'));
-    tests = real.reduce(
-        (s, t) => s + t.assertionResults.filter((a) => a.status === 'passed').length,
-        0,
-    );
+    tests = real.reduce((s, t) => s + t.assertionResults.filter((a) => a.status === 'passed').length, 0);
     if (real.length !== components) {
         console.warn(
-            `[badges] vitest 报告 ${real.length} 个组件测试文件，但 coverage 统计到 ${components} 个组件 —— 以 components 为准`,
+            `[badges] vitest 报告 ${real.length} 个组件测试文件，但 coverage 统计到 ${components} 个组件 —— 以 components 为准`
         );
     }
 }
@@ -58,10 +55,15 @@ const badge = {
     label: 'coverage',
     message: `${total.lines.pct.toFixed(2)}%`,
     color:
-        total.lines.pct >= 90 ? 'brightgreen' :
-        total.lines.pct >= 80 ? 'green' :
-        total.lines.pct >= 70 ? 'yellow' :
-        total.lines.pct >= 60 ? 'orange' : 'red',
+        total.lines.pct >= 90
+            ? 'brightgreen'
+            : total.lines.pct >= 80
+              ? 'green'
+              : total.lines.pct >= 70
+                ? 'yellow'
+                : total.lines.pct >= 60
+                  ? 'orange'
+                  : 'red',
     statements: total.statements.pct.toFixed(2),
     branches: total.branches.pct.toFixed(2),
     functions: total.functions.pct.toFixed(2),

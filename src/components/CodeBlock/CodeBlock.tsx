@@ -52,11 +52,17 @@ const highlightJSX = (code: string): React.ReactNode[] => {
     addPattern(/<\/?[A-Z][\w.$]*/g, COLORS.jsx);
     addPattern(/<\/?[a-z][\w-]*/g, COLORS.jsx);
     addPattern(/\/?>/g, COLORS.jsx);
-    addPattern(/\b(React|useState|useEffect|useCallback|useMemo|useRef|useContext|useReducer|useLayoutEffect|useImperativeHandle|useDebugValue|createContext|createElement|cloneElement|Fragment|Suspense|lazy|memo|forwardRef|useId|FC|ReactNode|ReactElement|CSSProperties)\b/g, COLORS.react);
+    addPattern(
+        /\b(React|useState|useEffect|useCallback|useMemo|useRef|useContext|useReducer|useLayoutEffect|useImperativeHandle|useDebugValue|createContext|createElement|cloneElement|Fragment|Suspense|lazy|memo|forwardRef|useId|FC|ReactNode|ReactElement|CSSProperties)\b/g,
+        COLORS.react
+    );
     addPattern(/\b(true|false)\b/g, COLORS.keyword);
     addPattern(/\b(null|undefined|void|NaN|Infinity)\b/gi, COLORS.keyword);
     addPattern(/\b\d+\.?\d*\b/g, COLORS.number);
-    addPattern(/\b(import|from|as|export|default|const|let|var|function|return|if|else|for|while|switch|case|break|continue|try|catch|throw|finally|new|typeof|instanceof|async|await|type|interface)\b/gi, COLORS.keyword);
+    addPattern(
+        /\b(import|from|as|export|default|const|let|var|function|return|if|else|for|while|switch|case|break|continue|try|catch|throw|finally|new|typeof|instanceof|async|await|type|interface)\b/gi,
+        COLORS.keyword
+    );
     addPattern(/\b[A-Z][a-zA-Z0-9_$]*\b/g, COLORS.component);
     addPattern(/\b[a-z][a-zA-Z0-9_$]*\s*(?=\()/g, COLORS.func);
     addPattern(/\b[a-zA-Z_$][\w$]*\s*(?==)/g, COLORS.prop);
@@ -72,15 +78,27 @@ const highlightJSX = (code: string): React.ReactNode[] => {
         if (token.start < pos) continue;
 
         if (token.start > pos) {
-            result.push(<span key={`t${pos}`} style={{ color: COLORS.default }}>{code.slice(pos, token.start)}</span>);
+            result.push(
+                <span key={`t${pos}`} style={{ color: COLORS.default }}>
+                    {code.slice(pos, token.start)}
+                </span>
+            );
         }
 
-        result.push(<span key={`s${token.start}`} style={{ color: token.color }}>{code.slice(token.start, token.end)}</span>);
+        result.push(
+            <span key={`s${token.start}`} style={{ color: token.color }}>
+                {code.slice(token.start, token.end)}
+            </span>
+        );
         pos = token.end;
     }
 
     if (pos < code.length) {
-        result.push(<span key={`e${pos}`} style={{ color: COLORS.default }}>{code.slice(pos)}</span>);
+        result.push(
+            <span key={`e${pos}`} style={{ color: COLORS.default }}>
+                {code.slice(pos)}
+            </span>
+        );
     }
 
     return result;

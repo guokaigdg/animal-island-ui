@@ -7,7 +7,7 @@ describe('Cursor', () => {
         const { container, getByTestId } = render(
             <Cursor>
                 <span data-testid="child">child</span>
-            </Cursor>,
+            </Cursor>
         );
         const root = container.firstChild as HTMLElement;
         expect(root).toHaveClass('animal-cursor');
@@ -26,7 +26,9 @@ describe('Cursor', () => {
 
     it('应用 className 与 style', () => {
         const { container } = render(
-            <Cursor className="extra" style={{ padding: 4 }}>x</Cursor>,
+            <Cursor className="extra" style={{ padding: 4 }}>
+                x
+            </Cursor>
         );
         const root = container.firstChild as HTMLElement;
         expect(root).toHaveClass('extra');

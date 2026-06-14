@@ -3,10 +3,7 @@ import styles from './input.module.less';
 
 export type InputSize = 'small' | 'middle' | 'large';
 
-export interface InputProps extends Omit<
-    React.InputHTMLAttributes<HTMLInputElement>,
-    'size' | 'prefix'
-> {
+export interface InputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size' | 'prefix'> {
     /** 输入框尺寸 */
     size?: InputSize;
     /** 前缀图标 */
@@ -47,14 +44,13 @@ export const Input: React.FC<InputProps> = ({
     const isControlled = value !== undefined;
     const currentValue = isControlled ? value : innerValue;
 
-    const handleChange: React.ChangeEventHandler<HTMLInputElement> =
-        useCallback(
-            (e) => {
-                if (!isControlled) setInnerValue(e.target.value);
-                onChange?.(e);
-            },
-            [isControlled, onChange]
-        );
+    const handleChange: React.ChangeEventHandler<HTMLInputElement> = useCallback(
+        (e) => {
+            if (!isControlled) setInnerValue(e.target.value);
+            onChange?.(e);
+        },
+        [isControlled, onChange]
+    );
 
     const handleClear = useCallback(() => {
         if (!isControlled) setInnerValue('');
@@ -91,12 +87,7 @@ export const Input: React.FC<InputProps> = ({
                 {...rest}
             />
             {allowClear && currentValue && !disabled && (
-                <button
-                    type="button"
-                    className={styles.clear}
-                    onClick={handleClear}
-                    aria-label={clearAriaLabel}
-                >
+                <button type="button" className={styles.clear} onClick={handleClear} aria-label={clearAriaLabel}>
                     ×
                 </button>
             )}

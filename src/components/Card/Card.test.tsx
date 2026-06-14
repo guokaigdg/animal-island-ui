@@ -5,7 +5,11 @@ import styles from './card.module.less';
 
 describe('Card', () => {
     it('渲染 children', () => {
-        render(<Card><span data-testid="c">hi</span></Card>);
+        render(
+            <Card>
+                <span data-testid="c">hi</span>
+            </Card>
+        );
         expect(screen.getByTestId('c')).toBeInTheDocument();
     });
 
@@ -33,7 +37,9 @@ describe('Card', () => {
 
     it('透传原生 div 属性（onClick / className / style）', () => {
         const { container } = render(
-            <Card className="extra" style={{ marginTop: 5 }} data-testid="root">x</Card>,
+            <Card className="extra" style={{ marginTop: 5 }} data-testid="root">
+                x
+            </Card>
         );
         const root = container.firstChild as HTMLElement;
         expect(root).toHaveClass('extra');

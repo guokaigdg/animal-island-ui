@@ -37,12 +37,7 @@ const IslandClipDef: React.FC<{ id: string }> = ({ id }) => (
 
 /** SVG 沿有机路径 fill + stroke，边框贴合不规则轮廓 */
 const IslandShapeSvg: React.FC = () => (
-    <svg
-        className={styles.islandSvg}
-        viewBox="0 0 1 1"
-        preserveAspectRatio="none"
-        aria-hidden
-    >
+    <svg className={styles.islandSvg} viewBox="0 0 1 1" preserveAspectRatio="none" aria-hidden>
         <path
             d={ISLAND_CLIP_PATH}
             fill={ISLAND_BG}
@@ -141,10 +136,7 @@ export const Tooltip: React.FC<TooltipProps> = ({
     const isIsland = variant === 'island';
 
     return (
-        <div
-            className={classNames(styles.tooltipWrapper, className)}
-            style={style}
-        >
+        <div className={classNames(styles.tooltipWrapper, className)} style={style}>
             {React.cloneElement(child, triggerProps)}
             <div
                 className={classNames(
@@ -165,10 +157,7 @@ export const Tooltip: React.FC<TooltipProps> = ({
                         <div className={styles.islandBody}>
                             <IslandClipDef id={clipId} />
                             {bordered && <IslandShapeSvg />}
-                            <div
-                                className={styles.islandContent}
-                                style={{ clipPath: `url(#${clipId})` }}
-                            >
+                            <div className={styles.islandContent} style={{ clipPath: `url(#${clipId})` }}>
                                 <div className={styles.content}>{title}</div>
                             </div>
                         </div>

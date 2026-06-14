@@ -46,9 +46,7 @@ describe('Collapse', () => {
     });
 
     it('应用 className 与 style', () => {
-        const { container } = render(
-            <Collapse question="Q" answer="A" className="my-c" style={{ marginTop: 4 }} />,
-        );
+        const { container } = render(<Collapse question="Q" answer="A" className="my-c" style={{ marginTop: 4 }} />);
         const root = container.firstChild as HTMLElement;
         expect(root).toHaveClass('my-c');
         expect(root).toHaveStyle({ marginTop: '4px' });
@@ -61,7 +59,9 @@ describe('Collapse', () => {
             const [open, setOpen] = useState(false);
             return (
                 <div>
-                    <button data-testid="ext" onClick={() => setOpen((v) => !v)}>toggle</button>
+                    <button data-testid="ext" onClick={() => setOpen((v) => !v)}>
+                        toggle
+                    </button>
                     <Collapse key={String(open)} question="Q" answer="A" defaultExpanded={open} />
                 </div>
             );

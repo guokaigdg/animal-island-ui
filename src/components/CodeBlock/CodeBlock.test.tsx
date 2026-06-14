@@ -13,18 +13,14 @@ describe('CodeBlock', () => {
     });
 
     it('应用 className 与 style', () => {
-        const { container } = render(
-            <CodeBlock code="x" className="cb" style={{ borderRadius: 4 }} />,
-        );
+        const { container } = render(<CodeBlock code="x" className="cb" style={{ borderRadius: 4 }} />);
         const pre = container.querySelector('pre') as HTMLElement;
         expect(pre).toHaveClass('cb');
         expect(pre).toHaveStyle({ borderRadius: '4px' });
     });
 
     it('为代码片段产生多个高亮 span', () => {
-        const { container } = render(
-            <CodeBlock code="function foo() { return 1; }" />,
-        );
+        const { container } = render(<CodeBlock code="function foo() { return 1; }" />);
         const pre = container.querySelector('pre')!;
         expect(pre.querySelectorAll('span').length).toBeGreaterThan(0);
     });

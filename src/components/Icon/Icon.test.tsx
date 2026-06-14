@@ -29,9 +29,7 @@ describe('Icon', () => {
     });
 
     it('应用自定义 className 与 style', () => {
-        const { container } = render(
-            <Icon name="icon-camera" className="extra" style={{ opacity: 0.5 }} />,
-        );
+        const { container } = render(<Icon name="icon-camera" className="extra" style={{ opacity: 0.5 }} />);
         const root = container.firstChild as HTMLElement;
         expect(root).toHaveClass('extra');
         expect(root).toHaveStyle({ opacity: '0.5' });

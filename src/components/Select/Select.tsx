@@ -123,18 +123,14 @@ export const Select: React.FC<SelectProps> = ({
             setMounted(false);
             triggerRef.current?.focus();
         },
-        [onChange],
+        [onChange]
     );
 
     const moveActive = (delta: 1 | -1) => {
         if (!options.length) return;
         const idx = options.findIndex((o) => o.key === activeKey);
         const nextIdx =
-            idx < 0
-                ? delta === 1
-                    ? 0
-                    : options.length - 1
-                : (idx + delta + options.length) % options.length;
+            idx < 0 ? (delta === 1 ? 0 : options.length - 1) : (idx + delta + options.length) % options.length;
         setActiveKey(options[nextIdx].key);
     };
 
@@ -191,12 +187,16 @@ export const Select: React.FC<SelectProps> = ({
                 aria-labelledby={ariaLabelledBy}
                 tabIndex={disabled ? -1 : 0}
             >
-                <span className={value ? styles.value : styles.placeholder}>
-                    {currentLabel}
-                </span>
+                <span className={value ? styles.value : styles.placeholder}>{currentLabel}</span>
                 <span className={styles.arrow} aria-hidden>
                     <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                        <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                        <path
+                            d="M3 4.5L6 7.5L9 4.5"
+                            stroke="currentColor"
+                            strokeWidth="1.5"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                        />
                     </svg>
                 </span>
             </div>
@@ -238,4 +238,3 @@ export const Select: React.FC<SelectProps> = ({
 };
 
 Select.displayName = 'Select';
-

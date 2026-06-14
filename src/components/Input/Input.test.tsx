@@ -57,13 +57,8 @@ describe('Input', () => {
             const onChange = vi.fn();
             render(
                 <ControlledHost<string, string> initial="" onChange={onChange}>
-                    {({ value, onChange: set }) => (
-                        <Input
-                            value={value}
-                            onChange={(e) => set(e.target.value)}
-                        />
-                    )}
-                </ControlledHost>,
+                    {({ value, onChange: set }) => <Input value={value} onChange={(e) => set(e.target.value)} />}
+                </ControlledHost>
             );
             await setup().type(screen.getByRole('textbox'), 'x');
             expect(onChange).toHaveBeenLastCalledWith('x');
@@ -84,9 +79,7 @@ describe('Input', () => {
         it('allowClear 显示清除按钮，点击后清空并触发 onClear/onChange', async () => {
             const onClear = vi.fn();
             const onChange = vi.fn();
-            render(
-                <Input allowClear defaultValue="abc" onChange={onChange} onClear={onClear} />,
-            );
+            render(<Input allowClear defaultValue="abc" onChange={onChange} onClear={onClear} />);
             const clear = screen.getByRole('button');
             await setup().click(clear);
             expect(onClear).toHaveBeenCalled();

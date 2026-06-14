@@ -43,10 +43,8 @@ describe('Tabs', () => {
     it('受控时父级回写 → UI 切换', async () => {
         render(
             <ControlledHost<string, string> initial="a">
-                {({ value, onChange: set }) => (
-                    <Tabs items={items} activeKey={value} onChange={set} />
-                )}
-            </ControlledHost>,
+                {({ value, onChange: set }) => <Tabs items={items} activeKey={value} onChange={set} />}
+            </ControlledHost>
         );
         await setup().click(screen.getByText('Cherry'));
         expect(screen.getByTestId('pane-c')).toBeInTheDocument();

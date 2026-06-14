@@ -5,10 +5,7 @@ export type ButtonType = 'primary' | 'default' | 'dashed' | 'text' | 'link';
 export type ButtonSize = 'small' | 'middle' | 'large';
 export type ButtonHTMLType = 'submit' | 'reset' | 'button';
 
-export interface ButtonProps extends Omit<
-    React.ButtonHTMLAttributes<HTMLButtonElement>,
-    'type'
-> {
+export interface ButtonProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'type'> {
     /** 按钮类型 */
     type?: ButtonType;
     /** 按钮尺寸 */
@@ -58,15 +55,8 @@ export const Button: React.FC<ButtonProps> = ({
         .join(' ');
 
     return (
-        <button
-            type={htmlType}
-            className={classNames}
-            disabled={disabled}
-            {...rest}
-        >
-            {icon && !loading && (
-                <span className={styles['btn-icon']}>{icon}</span>
-            )}
+        <button type={htmlType} className={classNames} disabled={disabled} {...rest}>
+            {icon && !loading && <span className={styles['btn-icon']}>{icon}</span>}
             {children && <span>{children}</span>}
         </button>
     );

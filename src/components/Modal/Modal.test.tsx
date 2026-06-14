@@ -14,7 +14,7 @@ describe('Modal', () => {
         render(
             <Modal open title="标题" typewriter={false}>
                 <p data-testid="body">body content</p>
-            </Modal>,
+            </Modal>
         );
         const dialog = screen.getByRole('dialog');
         expect(dialog).toBeInTheDocument();
@@ -29,7 +29,7 @@ describe('Modal', () => {
         const { container } = render(
             <Modal open onClose={onClose} typewriter={false}>
                 content
-            </Modal>,
+            </Modal>
         );
         // mask 在 portal 里，不在 container；通过 dialog 父级找
         const dialog = screen.getByRole('dialog');
@@ -44,7 +44,7 @@ describe('Modal', () => {
         render(
             <Modal open maskClosable={false} onClose={onClose} typewriter={false}>
                 content
-            </Modal>,
+            </Modal>
         );
         const mask = screen.getByRole('dialog').parentElement!;
         await user.click(mask);
@@ -57,7 +57,7 @@ describe('Modal', () => {
         render(
             <Modal open onClose={onClose} typewriter={false}>
                 <p>inside</p>
-            </Modal>,
+            </Modal>
         );
         await user.click(screen.getByText('inside'));
         expect(onClose).not.toHaveBeenCalled();
@@ -69,7 +69,7 @@ describe('Modal', () => {
         render(
             <Modal open onClose={onClose} typewriter={false}>
                 content
-            </Modal>,
+            </Modal>
         );
         await user.keyboard('{Escape}');
         expect(onClose).toHaveBeenCalled();
@@ -82,7 +82,7 @@ describe('Modal', () => {
         render(
             <Modal open onClose={onClose} onOk={onOk} typewriter={false}>
                 body
-            </Modal>,
+            </Modal>
         );
         await user.click(screen.getByText('取消'));
         expect(onClose).toHaveBeenCalled();
@@ -94,7 +94,7 @@ describe('Modal', () => {
         render(
             <Modal open footer={null} typewriter={false}>
                 body
-            </Modal>,
+            </Modal>
         );
         expect(screen.queryByText('取消')).not.toBeInTheDocument();
         expect(screen.queryByText('确定')).not.toBeInTheDocument();
@@ -104,7 +104,7 @@ describe('Modal', () => {
         render(
             <Modal open width={400} typewriter={false}>
                 body
-            </Modal>,
+            </Modal>
         );
         expect(screen.getByRole('dialog')).toHaveStyle({ width: '400px' });
     });
@@ -114,7 +114,7 @@ describe('Modal', () => {
             render(
                 <Modal open title="嗨标题" typewriter={false}>
                     <p>嗨内容</p>
-                </Modal>,
+                </Modal>
             );
             const dialog = screen.getByRole('dialog');
             const labelledBy = dialog.getAttribute('aria-labelledby');
@@ -129,7 +129,7 @@ describe('Modal', () => {
             render(
                 <Modal open typewriter={false}>
                     body
-                </Modal>,
+                </Modal>
             );
             expect(screen.getByRole('dialog')).not.toHaveAttribute('aria-labelledby');
         });
@@ -139,7 +139,9 @@ describe('Modal', () => {
                 const [open, setOpen] = useState(false);
                 return (
                     <>
-                        <button data-testid="trigger" onClick={() => setOpen(true)}>open</button>
+                        <button data-testid="trigger" onClick={() => setOpen(true)}>
+                            open
+                        </button>
                         <Modal open={open} onClose={() => setOpen(false)} typewriter={false}>
                             <button data-testid="inside">inside</button>
                         </Modal>
@@ -160,7 +162,9 @@ describe('Modal', () => {
                 const [open, setOpen] = useState(false);
                 return (
                     <>
-                        <button data-testid="trigger" onClick={() => setOpen(true)}>open</button>
+                        <button data-testid="trigger" onClick={() => setOpen(true)}>
+                            open
+                        </button>
                         <Modal open={open} onClose={() => setOpen(false)} typewriter={false}>
                             <button data-testid="inside">inside</button>
                         </Modal>
@@ -186,7 +190,7 @@ describe('Modal', () => {
                 <Modal open typewriter={false} footer={null}>
                     <button data-testid="b1">b1</button>
                     <button data-testid="b2">b2</button>
-                </Modal>,
+                </Modal>
             );
             await waitFor(() => {
                 expect(screen.getByTestId('b1')).toHaveFocus();
@@ -204,7 +208,7 @@ describe('Modal', () => {
                 <Modal open typewriter={false} footer={null}>
                     <button data-testid="b1">b1</button>
                     <button data-testid="b2">b2</button>
-                </Modal>,
+                </Modal>
             );
             await waitFor(() => {
                 expect(screen.getByTestId('b1')).toHaveFocus();

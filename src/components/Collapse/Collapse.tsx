@@ -36,12 +36,7 @@ export const Collapse: React.FC<CollapseProps> = ({
         }
     };
 
-    const cls = [
-        styles.faqCard,
-        expanded && styles.expanded,
-        disabled && styles.disabled,
-        className,
-    ]
+    const cls = [styles.faqCard, expanded && styles.expanded, disabled && styles.disabled, className]
         .filter(Boolean)
         .join(' ');
 
@@ -69,12 +64,7 @@ export const Collapse: React.FC<CollapseProps> = ({
                     </svg>
                 </span>
             </button>
-            <div
-                className={styles.answerWrapper}
-                id={panelId}
-                role="region"
-                aria-labelledby={headerId}
-            >
+            <div className={styles.answerWrapper} id={panelId} role="region" aria-labelledby={headerId}>
                 <div className={styles.answerContent}>{answer}</div>
             </div>
         </div>
@@ -82,4 +72,3 @@ export const Collapse: React.FC<CollapseProps> = ({
 };
 
 Collapse.displayName = 'Collapse';
-

@@ -1,0 +1,20 @@
+# 构建产物
+dist/
+demo-dist/
+coverage/
+node_modules/
+
+# 第三方压缩库（含 is 目录下的所有）
+src/components/Loading/island/
+
+# 提示词 / 设计文档（嵌入 HTML 代码块，会触发 Prettier 缩进循环）
+PROMPT.md
+AI_USAGE.md
+DESIGN_PROMPT.md
+skill/SKILL.md
+
+# 其它无需格式化的产物
+*.min.js
+*.min.css
+*.min.d.ts
+package-lock.json

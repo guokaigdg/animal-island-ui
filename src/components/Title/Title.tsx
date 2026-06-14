@@ -44,10 +44,7 @@ const Ribbon: React.FC<{ children: React.ReactNode; fontSize: number; color?: Ti
     color,
 }) => (
     <span
-        className={classNames(
-            styles.ribbon,
-            color && color !== 'default' && styles[`color-${color}`],
-        )}
+        className={classNames(styles.ribbon, color && color !== 'default' && styles[`color-${color}`])}
         style={{ fontSize: `${fontSize}px` }}
     >
         <span className={classNames(styles.ribbonBack, styles.ribbonBackLeft)} aria-hidden />
@@ -59,16 +56,12 @@ const Ribbon: React.FC<{ children: React.ReactNode; fontSize: number; color?: Ti
     </span>
 );
 
-export const Title: React.FC<TitleProps> = ({
-    children,
-    size = 'middle',
-    color = 'default',
-    className,
-    style,
-}) => {
+export const Title: React.FC<TitleProps> = ({ children, size = 'middle', color = 'default', className, style }) => {
     return (
         <span className={classNames(styles.title, className)} style={style}>
-            <Ribbon fontSize={SIZE_MAP[size]} color={color}>{children}</Ribbon>
+            <Ribbon fontSize={SIZE_MAP[size]} color={color}>
+                {children}
+            </Ribbon>
         </span>
     );
 };

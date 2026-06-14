@@ -9,7 +9,7 @@ describe('Tooltip', () => {
         render(
             <Tooltip title="hi">
                 <button>btn</button>
-            </Tooltip>,
+            </Tooltip>
         );
         const tip = screen.getByRole('tooltip', { hidden: true });
         expect(tip).toHaveAttribute('aria-hidden', 'true');
@@ -21,7 +21,7 @@ describe('Tooltip', () => {
         render(
             <Tooltip title="hi" trigger="hover">
                 <button>btn</button>
-            </Tooltip>,
+            </Tooltip>
         );
         const trigger = screen.getByText('btn');
         const tip = screen.getByRole('tooltip', { hidden: true });
@@ -41,7 +41,7 @@ describe('Tooltip', () => {
         render(
             <Tooltip title="hi" trigger="focus">
                 <button>btn</button>
-            </Tooltip>,
+            </Tooltip>
         );
         await user.tab();
         const tip = screen.getByRole('tooltip', { hidden: true });
@@ -53,7 +53,7 @@ describe('Tooltip', () => {
         render(
             <Tooltip title="hi" trigger="click">
                 <button>btn</button>
-            </Tooltip>,
+            </Tooltip>
         );
         const trigger = screen.getByText('btn');
         const tip = screen.getByRole('tooltip', { hidden: true });
@@ -67,7 +67,7 @@ describe('Tooltip', () => {
         render(
             <Tooltip title="hi" placement="bottom-start">
                 <button>btn</button>
-            </Tooltip>,
+            </Tooltip>
         );
         expect(screen.getByRole('tooltip', { hidden: true })).toHaveClass(styles.bottom_start);
     });
@@ -76,7 +76,7 @@ describe('Tooltip', () => {
         render(
             <Tooltip title="hi" variant="island">
                 <button>btn</button>
-            </Tooltip>,
+            </Tooltip>
         );
         expect(screen.getByRole('tooltip', { hidden: true })).toHaveClass(styles.island);
     });
@@ -87,7 +87,7 @@ describe('Tooltip', () => {
         render(
             <Tooltip title="hi" trigger="click">
                 <button onClick={onClick}>btn</button>
-            </Tooltip>,
+            </Tooltip>
         );
         await user.click(screen.getByText('btn'));
         expect(onClick).toHaveBeenCalledTimes(1);
@@ -99,7 +99,7 @@ describe('Tooltip', () => {
             render(
                 <Tooltip title="hi" trigger="click">
                     <button>btn</button>
-                </Tooltip>,
+                </Tooltip>
             );
             const trigger = screen.getByText('btn');
             const tip = screen.getByRole('tooltip', { hidden: true });
@@ -114,7 +114,7 @@ describe('Tooltip', () => {
             render(
                 <Tooltip title="hi" trigger="click">
                     <button aria-describedby="ext-help">btn</button>
-                </Tooltip>,
+                </Tooltip>
             );
             const trigger = screen.getByText('btn');
             // 隐藏：仅保留外部值

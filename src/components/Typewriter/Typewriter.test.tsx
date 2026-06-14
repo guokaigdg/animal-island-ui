@@ -13,7 +13,7 @@ describe('Typewriter', () => {
         const { container } = render(
             <Typewriter speed={50} autoPlay>
                 ABCD
-            </Typewriter>,
+            </Typewriter>
         );
         // 初始 0 字符
         expect(container.textContent).toBe('');
@@ -34,7 +34,7 @@ describe('Typewriter', () => {
         render(
             <Typewriter speed={20} autoPlay onDone={onDone}>
                 AB
-            </Typewriter>,
+            </Typewriter>
         );
         act(() => {
             vi.advanceTimersByTime(200);
@@ -47,7 +47,7 @@ describe('Typewriter', () => {
         render(
             <Typewriter autoPlay={false}>
                 <strong data-testid="bold">Bold</strong>Tail
-            </Typewriter>,
+            </Typewriter>
         );
         expect(screen.getByTestId('bold')).toBeInTheDocument();
         expect(screen.getByTestId('bold')).toHaveTextContent('Bold');
@@ -58,7 +58,7 @@ describe('Typewriter', () => {
         const { rerender, container } = render(
             <Typewriter speed={20} trigger={1}>
                 AB
-            </Typewriter>,
+            </Typewriter>
         );
         act(() => {
             vi.advanceTimersByTime(200);
@@ -67,7 +67,7 @@ describe('Typewriter', () => {
         rerender(
             <Typewriter speed={20} trigger={2}>
                 AB
-            </Typewriter>,
+            </Typewriter>
         );
         // 触发变更后重置为 0
         expect(container.textContent).toBe('');

@@ -28,7 +28,11 @@ describe('Title', () => {
     });
 
     it('应用 className 与 style 到根 span', () => {
-        const { container } = render(<Title className="my-t" style={{ marginLeft: 4 }}>X</Title>);
+        const { container } = render(
+            <Title className="my-t" style={{ marginLeft: 4 }}>
+                X
+            </Title>
+        );
         const root = container.firstChild as HTMLElement;
         expect(root).toHaveClass('my-t');
         expect(root).toHaveStyle({ marginLeft: '4px' });

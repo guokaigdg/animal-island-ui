@@ -11,7 +11,11 @@ describe('Button', () => {
     });
 
     it('应用 type / size / 状态相关类', () => {
-        render(<Button type="primary" size="large" danger ghost block loading>OK</Button>);
+        render(
+            <Button type="primary" size="large" danger ghost block loading>
+                OK
+            </Button>
+        );
         const btn = screen.getByRole('button');
         expect(btn).toHaveClass(styles['btn-primary']);
         expect(btn).toHaveClass(styles['btn-large']);
@@ -31,7 +35,11 @@ describe('Button', () => {
     it('disabled 禁用且阻止点击回调', async () => {
         const user = userEvent.setup();
         const onClick = vi.fn();
-        render(<Button disabled onClick={onClick}>x</Button>);
+        render(
+            <Button disabled onClick={onClick}>
+                x
+            </Button>
+        );
         const btn = screen.getByRole('button');
         expect(btn).toBeDisabled();
         await user.click(btn);
@@ -49,7 +57,11 @@ describe('Button', () => {
     it('icon 在非 loading 时渲染，loading 时不渲染图标', () => {
         const { rerender } = render(<Button icon={<i data-testid="ic" />}>x</Button>);
         expect(screen.getByTestId('ic')).toBeInTheDocument();
-        rerender(<Button icon={<i data-testid="ic" />} loading>x</Button>);
+        rerender(
+            <Button icon={<i data-testid="ic" />} loading>
+                x
+            </Button>
+        );
         expect(screen.queryByTestId('ic')).not.toBeInTheDocument();
     });
 });

@@ -17,11 +17,9 @@ export interface CursorProps {
 }
 
 export const Cursor: React.FC<CursorProps> = ({ children, className, style, forceAll = true }) => {
-    const cls = [
-        'animal-cursor',
-        forceAll ? 'animal-cursor--force' : 'animal-cursor--scoped',
-        className,
-    ].filter(Boolean).join(' ');
+    const cls = ['animal-cursor', forceAll ? 'animal-cursor--force' : 'animal-cursor--scoped', className]
+        .filter(Boolean)
+        .join(' ');
     return (
         <div className={cls} style={style}>
             {children}
