@@ -10,7 +10,6 @@
 
 > 给普通用户使用的 self-contained 一键提示词已拆出到 [`PROMPT.md`](./PROMPT.md)，复制即用。本文件保留下方更细分的 v0 / Figma AI / Midjourney / DALL·E 风格描述。
 
-
 ## UI 工具提示词（适用于 v0 / Figma AI / Framer AI / Locofy）
 
 ```
@@ -448,53 +447,53 @@ Interface details:
 
 ## 关键数值速查表
 
-| Token | 精确值 | 用途 |
-|---|---|---|
-| 内容区背景 | `rgb(247, 243, 223)` | Modal、Card、Table、Tooltip 内容区 |
-| 主背景 | `#f8f8f0` | 按钮、通用背景 |
-| 正文文字 | `#725d42` | 组件内正文 |
-| Header 文字 | `#794f27` | 章节标题、checked label |
-| 主色调 | `#19c8b9` | 焦点环、Collapse 图标、Radio/Checkbox checked |
-| Switch ON 绿 | `#86d67a` | Switch 开启背景 |
-| 成功绿 | `#6fba2c` | 星期文字、成功状态 |
-| 按钮 3D 阴影 | `#bdaea0` | **仅 primary** `0 5px 0 0`（hover 6 / active 1） |
-| 默认按钮阴影 | `0 2px 4px 0 rgba(61,52,40,0.06)` | default / dashed / text / link 静止态 |
-| 默认按钮 hover | `0 3px 10px 0 rgba(61,52,40,0.10)` | 同上，hover 时 |
-| 输入框 3D 阴影 | `#d4c9b4` | 默认无阴影；`shadow={true}` 时 `0 3px 0 0 #d4c9b4` |
-| 焦点黄 | `#ffcc00` | Input / Switch / Checkbox focus |
-| Radio focus 黄 | `#f5c31c` | Radio focus（暖一档黄） |
-| Modal 确认按钮 | bg `#ffcc00`, color `#725d42` | 游戏黄主操作 |
-| 按钮高度（中） | `45px` | middle size |
-| pill 圆角 | `50px` | 按钮、输入框 |
-| Title 飘带 | swallowtail clip-path + fold 三角阴影 + 3deg X 透视 | `<Title>` 章节标题 |
-| Title 字号 | small 14 / middle 20 / large 28 px | em 缩放，含 padding-top 0.11em |
-| Title 13 色变量 | `--rf` 正面 / `--rb` 背面燕尾 / `--rk` 折角 / `--rt` 文字 | 13 套 IslandPhone 配色 |
-| Card 圆角 | `20px` | 默认卡片 |
-| Card pattern | 双层径向渐变点 (1.5px@28px + 1px@14px offset 7,7) | 13 色波点墙纸 |
-| Card pattern border | `1.5px solid` 同色调 | 配 pastel 浅底 |
-| Radio 圆角 | 12 / 14 / 16px | 高度圆化方形（非正圆） |
-| Radio 尺寸 | 18 / 22 / 28 px | small / middle / large |
-| Checkbox 圆角 | `8px` | 22px 中号 |
-| Tooltip 圆角 | `16px` | 标准气泡 |
-| Tooltip arrow | 8px 菱形 + radius 2px | 标准；island 变体为 14px 圆点 |
-| Table 圆角 | `20px` 外壳；hover 行 `inset(0 round 30px)` | 表格 |
-| Table 行分隔 | `1px dashed`（6px on / 6px off）`rgb(240,232,216)` | ::after 实现 |
-| Table hover 条纹 | `-45deg` teal `rgba(25,200,185,0.6)/rgba(14,196,182,0.6)` 28.28px | 对角条纹 |
-| 字体 | `Nunito, 'Noto Sans SC'` | Google Fonts 加载 |
-| 按钮字重 | `600` | 按钮文字 |
-| 时间数字字重 | `900` | Time 组件 |
-| Title 字重 | `900` | 飘带文字 |
-| 过渡 | `0.25s cubic-bezier(0.4,0,0.2,1)` | 通用动画 |
-| Loading stripe | `28.28px` step, `-45deg`, `#0ec4b6/#01b0a7` | 按钮 inline loading |
-| Loading 全屏 | mint `#19c8b9` SVG spinner，1s 旋转 + 1.5s dash | `<Loading>` 全屏遮罩 |
-| Phone 外壳 | `527 × 788px`，`border-radius: 136px` | IslandPhone 容器 |
-| Phone app tile | `123 × 123px`，`border-radius: 45px` | 3×3 网格 |
-| Phone 新消息点 | 28px 红圆 `#FF544A` + 5px 奶油描边 `#F8F4E8` | badge |
-| Footer sea | `height: 80px`，SVG `contain` | 海浪底部 |
-| Footer tree | `height: 60px`，webp `cover bottom` | 森林底部 |
-| Divider | `height: 12px`，5 种背景图 | 装饰分割线 |
-| Cursor | `cursor: url(...) 4 0, auto !important` | 游戏手指光标 |
-| Typewriter 默认速度 | `90ms/字` | 按字符打印，无包裹元素 |
-| InvitationCard 外壳 | max-width 420px；filter drop-shadow；inset 软边 | 信封式特种卡 |
-| InvitationCard 票根 | bottom 160px tear-off + 14px 圆形冲孔 + 撕痕 inset 阴影 | 抽奖券效果 |
-| Google Fonts URL | `fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;700&display=swap` | 在线加载 |
+| Token                  | 精确值                                                                                                                   | 用途                                               |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------- |
+| 内容区背景             | `rgb(247, 243, 223)`                                                                                                     | Modal、Card、Table、Tooltip 内容区                 |
+| 主背景                 | `#f8f8f0`                                                                                                                | 按钮、通用背景                                     |
+| 正文文字               | `#725d42`                                                                                                                | 组件内正文                                         |
+| Header 文字            | `#794f27`                                                                                                                | 章节标题、checked label                            |
+| 主色调                 | `#19c8b9`                                                                                                                | 焦点环、Collapse 图标、Radio/Checkbox checked      |
+| Switch ON 绿           | `#86d67a`                                                                                                                | Switch 开启背景                                    |
+| 成功绿                 | `#6fba2c`                                                                                                                | 星期文字、成功状态                                 |
+| 按钮 3D 阴影           | `#bdaea0`                                                                                                                | **仅 primary** `0 5px 0 0`（hover 6 / active 1）   |
+| 默认按钮阴影           | `0 2px 4px 0 rgba(61,52,40,0.06)`                                                                                        | default / dashed / text / link 静止态              |
+| 默认按钮 hover         | `0 3px 10px 0 rgba(61,52,40,0.10)`                                                                                       | 同上，hover 时                                     |
+| 输入框 3D 阴影         | `#d4c9b4`                                                                                                                | 默认无阴影；`shadow={true}` 时 `0 3px 0 0 #d4c9b4` |
+| 焦点黄                 | `#ffcc00`                                                                                                                | Input / Switch / Checkbox focus                    |
+| Radio focus 黄         | `#f5c31c`                                                                                                                | Radio focus（暖一档黄）                            |
+| Modal 确认按钮         | bg `#ffcc00`, color `#725d42`                                                                                            | 游戏黄主操作                                       |
+| 按钮高度（中）         | `45px`                                                                                                                   | middle size                                        |
+| pill 圆角              | `50px`                                                                                                                   | 按钮、输入框                                       |
+| Title 飘带             | swallowtail clip-path + fold 三角阴影 + 3deg X 透视                                                                      | `<Title>` 章节标题                                 |
+| Title 字号             | small 14 / middle 20 / large 28 px                                                                                       | em 缩放，含 padding-top 0.11em                     |
+| Title 13 色变量        | `--rf` 正面 / `--rb` 背面燕尾 / `--rk` 折角 / `--rt` 文字                                                                | 13 套 IslandPhone 配色                               |
+| Card 圆角              | `20px`                                                                                                                   | 默认卡片                                           |
+| Card pattern           | 双层径向渐变点 (1.5px@28px + 1px@14px offset 7,7)                                                                        | 13 色波点墙纸                                      |
+| Card pattern border    | `1.5px solid` 同色调                                                                                                     | 配 pastel 浅底                                     |
+| Radio 圆角             | 12 / 14 / 16px                                                                                                           | 高度圆化方形（非正圆）                             |
+| Radio 尺寸             | 18 / 22 / 28 px                                                                                                          | small / middle / large                             |
+| Checkbox 圆角          | `8px`                                                                                                                    | 22px 中号                                          |
+| Tooltip 圆角           | `16px`                                                                                                                   | 标准气泡                                           |
+| Tooltip arrow          | 8px 菱形 + radius 2px                                                                                                    | 标准；island 变体为 14px 圆点                      |
+| Table 圆角             | `20px` 外壳；hover 行 `inset(0 round 30px)`                                                                              | 表格                                               |
+| Table 行分隔           | `1px dashed`（6px on / 6px off）`rgb(240,232,216)`                                                                       | ::after 实现                                       |
+| Table hover 条纹       | `-45deg` teal `rgba(25,200,185,0.6)/rgba(14,196,182,0.6)` 28.28px                                                        | 对角条纹                                           |
+| 字体                   | `Nunito, 'Noto Sans SC'`                                                                                                 | Google Fonts 加载                                  |
+| 按钮字重               | `600`                                                                                                                    | 按钮文字                                           |
+| 时间数字字重           | `900`                                                                                                                    | Time 组件                                          |
+| Title 字重             | `900`                                                                                                                    | 飘带文字                                           |
+| 过渡                   | `0.25s cubic-bezier(0.4,0,0.2,1)`                                                                                        | 通用动画                                           |
+| Loading stripe         | `28.28px` step, `-45deg`, `#0ec4b6/#01b0a7`                                                                              | 按钮 inline loading                                |
+| Loading 全屏           | mint `#19c8b9` SVG spinner，1s 旋转 + 1.5s dash                                                                          | `<Loading>` 全屏遮罩                               |
+| Phone 外壳             | `527 × 788px`，`border-radius: 136px`                                                                                    | IslandPhone 容器                                     |
+| Phone app tile         | `123 × 123px`，`border-radius: 45px`                                                                                     | 3×3 网格                                           |
+| Phone 新消息点         | 28px 红圆 `#FF544A` + 5px 奶油描边 `#F8F4E8`                                                                             | badge                                              |
+| Footer sea             | `height: 80px`，SVG `contain`                                                                                            | 海浪底部                                           |
+| Footer tree            | `height: 60px`，webp `cover bottom`                                                                                      | 森林底部                                           |
+| Divider                | `height: 12px`，5 种背景图                                                                                               | 装饰分割线                                         |
+| Cursor                 | `cursor: url(...) 4 0, auto !important`                                                                                  | 游戏手指光标                                       |
+| Typewriter 默认速度    | `90ms/字`                                                                                                                | 按字符打印，无包裹元素                             |
+| InvitationCard 外壳 | max-width 420px；filter drop-shadow；inset 软边                                                                          | 信封式特种卡                                       |
+| InvitationCard 票根 | bottom 160px tear-off + 14px 圆形冲孔 + 撕痕 inset 阴影                                                                  | 抽奖券效果                                         |
+| Google Fonts URL       | `fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;700&display=swap` | 在线加载                                           |

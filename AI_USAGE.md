@@ -12,7 +12,7 @@ npm install animal-island-ui
 
 ```ts
 // app entry (main.tsx / _app.tsx / App.tsx)
-import 'animal-island-ui/style';          // MUST import BEFORE any component usage
+import 'animal-island-ui/style'; // MUST import BEFORE any component usage
 // Fonts (Nunito / Noto Sans SC) are auto-bundled via @fontsource.
 ```
 
@@ -32,41 +32,81 @@ All named exports from `animal-island-ui`:
 
 ```ts
 import {
-  Button, Input, Switch, Modal, Card, Title,
-  Collapse, Cursor, Time, Phone, Footer, Divider,
-  Typewriter, Tabs, Icon, Select, Checkbox, Radio,
-  Tooltip, Loading, Table, CodeBlock,
-  InvitationCard, InvitationCardExportButton,
+    Button,
+    Input,
+    Switch,
+    Modal,
+    Card,
+    Title,
+    Collapse,
+    Cursor,
+    Time,
+    Phone,
+    Footer,
+    Divider,
+    Typewriter,
+    Tabs,
+    Icon,
+    Select,
+    Checkbox,
+    Radio,
+    Tooltip,
+    Loading,
+    Table,
+    CodeBlock,
+    InvitationCard,
+    InvitationCardExportButton,
 } from 'animal-island-ui';
 
 // Runtime value export (icon catalogue — 10 entries)
 import { ICON_LIST } from 'animal-island-ui';
 
 import type {
-  ButtonProps, ButtonType, ButtonSize,
-  InputProps, InputSize,
-  SwitchProps, SwitchSize,
-  ModalProps,
-  CardProps, CardType, CardColor,
-  TitleProps, TitleSize, TitleColor,
-  CollapseProps,
-  CursorProps,
-  TimeProps,
-  PhoneProps,
-  FooterProps, FooterType,
-  DividerProps,
-  TypewriterProps,
-  TabsProps, TabItem,
-  IconProps, IconName,
-  SelectProps, SelectOption,
-  CheckboxProps, CheckboxOption, CheckboxSize,
-  RadioProps, RadioOption, RadioSize,
-  TooltipProps, TooltipPlacement, TooltipTrigger, TooltipVariant,
-  LoadingProps,
-  TableProps, TableColumn,
-  CodeBlockProps,
-  InvitationCardProps, InvitationCardRef,
-  InvitationCardExportButtonProps,
+    ButtonProps,
+    ButtonType,
+    ButtonSize,
+    InputProps,
+    InputSize,
+    SwitchProps,
+    SwitchSize,
+    ModalProps,
+    CardProps,
+    CardType,
+    CardColor,
+    TitleProps,
+    TitleSize,
+    TitleColor,
+    CollapseProps,
+    CursorProps,
+    TimeProps,
+    PhoneProps,
+    FooterProps,
+    FooterType,
+    DividerProps,
+    TypewriterProps,
+    TabsProps,
+    TabItem,
+    IconProps,
+    IconName,
+    SelectProps,
+    SelectOption,
+    CheckboxProps,
+    CheckboxOption,
+    CheckboxSize,
+    RadioProps,
+    RadioOption,
+    RadioSize,
+    TooltipProps,
+    TooltipPlacement,
+    TooltipTrigger,
+    TooltipVariant,
+    LoadingProps,
+    TableProps,
+    TableColumn,
+    CodeBlockProps,
+    InvitationCardProps,
+    InvitationCardRef,
+    InvitationCardExportButtonProps,
 } from 'animal-island-ui';
 ```
 
@@ -77,25 +117,26 @@ import type {
 ### 1.1 Button
 
 ```ts
-type ButtonType     = 'primary' | 'default' | 'dashed' | 'text' | 'link';
-type ButtonSize     = 'small' | 'middle' | 'large';
+type ButtonType = 'primary' | 'default' | 'dashed' | 'text' | 'link';
+type ButtonSize = 'small' | 'middle' | 'large';
 type ButtonHTMLType = 'submit' | 'reset' | 'button';
 
 interface ButtonProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'type'> {
-  type?: ButtonType;          // default 'default'
-  size?: ButtonSize;          // default 'middle'
-  danger?: boolean;           // default false
-  ghost?: boolean;            // default false
-  block?: boolean;            // default false
-  loading?: boolean;          // default false — renders diagonal-stripe animation
-  disabled?: boolean;         // default false
-  icon?: React.ReactNode;
-  htmlType?: ButtonHTMLType;  // default 'button'
-  children?: React.ReactNode;
+    type?: ButtonType; // default 'default'
+    size?: ButtonSize; // default 'middle'
+    danger?: boolean; // default false
+    ghost?: boolean; // default false
+    block?: boolean; // default false
+    loading?: boolean; // default false — renders diagonal-stripe animation
+    disabled?: boolean; // default false
+    icon?: React.ReactNode;
+    htmlType?: ButtonHTMLType; // default 'button'
+    children?: React.ReactNode;
 }
 ```
 
 Canonical usage:
+
 ```tsx
 <Button type="primary" onClick={save}>Save</Button>
 <Button type="primary" danger loading>Deleting…</Button>
@@ -111,14 +152,14 @@ Canonical usage:
 type InputSize = 'small' | 'middle' | 'large';
 
 interface InputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size' | 'prefix'> {
-  size?: InputSize;                  // default 'middle'
-  prefix?: React.ReactNode;
-  suffix?: React.ReactNode;
-  allowClear?: boolean;              // default false
-  status?: 'error' | 'warning';
-  shadow?: boolean;                  // default false — when true, render the 3D pixel-stack shadow
-  onChange?: React.ChangeEventHandler<HTMLInputElement>;
-  onClear?: () => void;
+    size?: InputSize; // default 'middle'
+    prefix?: React.ReactNode;
+    suffix?: React.ReactNode;
+    allowClear?: boolean; // default false
+    status?: 'error' | 'warning';
+    shadow?: boolean; // default false — when true, render the 3D pixel-stack shadow
+    onChange?: React.ChangeEventHandler<HTMLInputElement>;
+    onClear?: () => void;
 }
 ```
 
@@ -137,15 +178,15 @@ interface InputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, '
 type SwitchSize = 'small' | 'default';
 
 interface SwitchProps {
-  checked?: boolean;                  // controlled
-  defaultChecked?: boolean;           // default false
-  size?: SwitchSize;                  // default 'default'
-  disabled?: boolean;                 // default false
-  loading?: boolean;                  // default false
-  checkedChildren?: React.ReactNode;
-  unCheckedChildren?: React.ReactNode;
-  onChange?: (checked: boolean) => void;
-  className?: string;
+    checked?: boolean; // controlled
+    defaultChecked?: boolean; // default false
+    size?: SwitchSize; // default 'default'
+    disabled?: boolean; // default false
+    loading?: boolean; // default false
+    checkedChildren?: React.ReactNode;
+    unCheckedChildren?: React.ReactNode;
+    onChange?: (checked: boolean) => void;
+    className?: string;
 }
 ```
 
@@ -161,33 +202,37 @@ interface SwitchProps {
 
 ```ts
 interface ModalProps {
-  open: boolean;                       // REQUIRED
-  title?: React.ReactNode;             // heading text — NOT the <Title> component (see § 1.6)
-  width?: number | string;             // default 520
-  maskClosable?: boolean;              // default true
-  footer?: React.ReactNode | null;     // null = hide footer
-  onClose?: () => void;
-  onOk?: () => void;
-  children?: React.ReactNode;
-  className?: string;
-  typeSpeed?: number;                  // default 80 (ms/char for built-in typewriter)
-  typewriter?: boolean;                // default true — body plays typewriter on open
+    open: boolean; // REQUIRED
+    title?: React.ReactNode; // heading text — NOT the <Title> component (see § 1.6)
+    width?: number | string; // default 520
+    maskClosable?: boolean; // default true
+    footer?: React.ReactNode | null; // null = hide footer
+    onClose?: () => void;
+    onOk?: () => void;
+    children?: React.ReactNode;
+    className?: string;
+    typeSpeed?: number; // default 80 (ms/char for built-in typewriter)
+    typewriter?: boolean; // default true — body plays typewriter on open
 }
 ```
 
 ```tsx
 const [open, setOpen] = useState(false);
 <Modal
-  open={open}
-  title="Confirm"
-  onClose={() => setOpen(false)}
-  onOk={() => { submit(); setOpen(false); }}
+    open={open}
+    title="Confirm"
+    onClose={() => setOpen(false)}
+    onOk={() => {
+        submit();
+        setOpen(false);
+    }}
 >
-  Proceed to delete this island?
-</Modal>
+    Proceed to delete this island?
+</Modal>;
 ```
 
 Notes:
+
 - Modal already ships the required SVG blob `<clipPath id="animal-modal-clip">` internally.
 - To disable the typewriter animation for dynamic content: `typewriter={false}`.
 - Custom footer: pass `footer={<><Button>...</Button></>}` or `footer={null}` to hide.
@@ -198,35 +243,45 @@ Notes:
 ### 1.5 Card
 
 ```ts
-type CardType  = 'default' | 'dashed';
+type CardType = 'default' | 'dashed';
 
 type CardColor =
-  | 'default'          // rgb(247,243,223) / #725d42 text
-  | 'app-pink'         // #f8a6b2 / #fff
-  | 'purple'           // #b77dee / #fff
-  | 'app-blue'         // #889df0 / #fff
-  | 'app-yellow'       // #f7cd67 / #725d42
-  | 'app-orange'       // #e59266 / #fff
-  | 'app-teal'         // #82d5bb / #fff
-  | 'app-green'        // #8ac68a / #fff
-  | 'app-red'          // #fc736d / #fff
-  | 'lime-green'       // #d1da49 / #3d5a1a
-  | 'yellow-green'     // #ecdf52 / #725d42
-  | 'brown'            // #9a835a / #fff
-  | 'warm-peach-pink'; // #e18c6f / #fff
+    | 'default' // rgb(247,243,223) / #725d42 text
+    | 'app-pink' // #f8a6b2 / #fff
+    | 'purple' // #b77dee / #fff
+    | 'app-blue' // #889df0 / #fff
+    | 'app-yellow' // #f7cd67 / #725d42
+    | 'app-orange' // #e59266 / #fff
+    | 'app-teal' // #82d5bb / #fff
+    | 'app-green' // #8ac68a / #fff
+    | 'app-red' // #fc736d / #fff
+    | 'lime-green' // #d1da49 / #3d5a1a
+    | 'yellow-green' // #ecdf52 / #725d42
+    | 'brown' // #9a835a / #fff
+    | 'warm-peach-pink'; // #e18c6f / #fff
 
 // Decorative pattern overlay — 'none' or any of the 13 CardColor values.
 type CardPattern =
-  | 'none'
-  | 'default' | 'app-pink' | 'purple' | 'app-blue' | 'app-yellow'
-  | 'app-orange' | 'app-teal' | 'app-green' | 'app-red'
-  | 'lime-green' | 'yellow-green' | 'brown' | 'warm-peach-pink';
+    | 'none'
+    | 'default'
+    | 'app-pink'
+    | 'purple'
+    | 'app-blue'
+    | 'app-yellow'
+    | 'app-orange'
+    | 'app-teal'
+    | 'app-green'
+    | 'app-red'
+    | 'lime-green'
+    | 'yellow-green'
+    | 'brown'
+    | 'warm-peach-pink';
 
 interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
-  type?: CardType;        // default 'default'
-  color?: CardColor;      // default 'default'
-  pattern?: CardPattern;  // default 'none'
-  children?: React.ReactNode;
+    type?: CardType; // default 'default'
+    color?: CardColor; // default 'default'
+    pattern?: CardPattern; // default 'none'
+    children?: React.ReactNode;
 }
 ```
 
@@ -244,18 +299,28 @@ interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
 ### 1.6 Title
 
 ```ts
-type TitleSize  = 'small' | 'middle' | 'large';
+type TitleSize = 'small' | 'middle' | 'large';
 type TitleColor =
-  | 'default' | 'app-pink' | 'purple' | 'app-blue' | 'app-yellow'
-  | 'app-orange' | 'app-teal' | 'app-green' | 'app-red'
-  | 'lime-green' | 'yellow-green' | 'brown' | 'warm-peach-pink';
+    | 'default'
+    | 'app-pink'
+    | 'purple'
+    | 'app-blue'
+    | 'app-yellow'
+    | 'app-orange'
+    | 'app-teal'
+    | 'app-green'
+    | 'app-red'
+    | 'lime-green'
+    | 'yellow-green'
+    | 'brown'
+    | 'warm-peach-pink';
 
 interface TitleProps {
-  children: React.ReactNode;        // REQUIRED
-  size?: TitleSize;                 // default 'middle'
-  color?: TitleColor;               // default 'default'
-  className?: string;
-  style?: React.CSSProperties;
+    children: React.ReactNode; // REQUIRED
+    size?: TitleSize; // default 'middle'
+    color?: TitleColor; // default 'default'
+    className?: string;
+    style?: React.CSSProperties;
 }
 ```
 
@@ -274,12 +339,12 @@ interface TitleProps {
 
 ```ts
 interface CollapseProps {
-  question: React.ReactNode;   // REQUIRED — header
-  answer: React.ReactNode;     // REQUIRED — body
-  defaultExpanded?: boolean;   // default false
-  disabled?: boolean;          // default false
-  className?: string;
-  style?: React.CSSProperties;
+    question: React.ReactNode; // REQUIRED — header
+    answer: React.ReactNode; // REQUIRED — body
+    defaultExpanded?: boolean; // default false
+    disabled?: boolean; // default false
+    className?: string;
+    style?: React.CSSProperties;
 }
 ```
 
@@ -296,9 +361,9 @@ interface CollapseProps {
 
 ```ts
 interface CursorProps {
-  children?: React.ReactNode;
-  className?: string;
-  style?: React.CSSProperties;
+    children?: React.ReactNode;
+    className?: string;
+    style?: React.CSSProperties;
 }
 ```
 
@@ -306,7 +371,7 @@ Wrap the region where you want a game-style finger cursor:
 
 ```tsx
 <Cursor>
-  <App />
+    <App />
 </Cursor>
 ```
 
@@ -318,12 +383,12 @@ Wrap the region where you want a game-style finger cursor:
 
 ```ts
 interface TimeProps {
-  className?: string;
+    className?: string;
 }
 ```
 
 ```tsx
-<Time />   // auto-updates every second, shows weekday + date + clock
+<Time /> // auto-updates every second, shows weekday + date + clock
 ```
 
 > No configurable props beyond `className` — it is a self-contained HUD widget. No `format`, no `value`, no timezone — uses the browser's local clock.
@@ -334,7 +399,7 @@ interface TimeProps {
 
 ```ts
 interface PhoneProps {
-  className?: string;
+    className?: string;
 }
 ```
 
@@ -352,10 +417,10 @@ interface PhoneProps {
 type FooterType = 'sea' | 'tree';
 
 interface FooterProps {
-  type?: FooterType;          // default 'tree'
-  seamless?: boolean;         // default false
-  className?: string;
-  style?: React.CSSProperties;
+    type?: FooterType; // default 'tree'
+    seamless?: boolean; // default false
+    className?: string;
+    style?: React.CSSProperties;
 }
 ```
 
@@ -372,13 +437,21 @@ interface FooterProps {
 ### 1.12 Divider
 
 ```ts
-type DividerType = 'line-brown' | 'line-teal' | 'line-white' | 'line-yellow' | 'wave-yellow'
-                 | 'dashed-brown' | 'dashed-teal' | 'dashed-white' | 'dashed-yellow';
+type DividerType =
+    | 'line-brown'
+    | 'line-teal'
+    | 'line-white'
+    | 'line-yellow'
+    | 'wave-yellow'
+    | 'dashed-brown'
+    | 'dashed-teal'
+    | 'dashed-white'
+    | 'dashed-yellow';
 
 interface DividerProps {
-  type?: DividerType;         // default 'line-brown'
-  className?: string;
-  style?: React.CSSProperties;
+    type?: DividerType; // default 'line-brown'
+    className?: string;
+    style?: React.CSSProperties;
 }
 ```
 
@@ -395,11 +468,11 @@ interface DividerProps {
 
 ```ts
 interface TypewriterProps {
-  children?: React.ReactNode;   // ANY ReactNode — preserves element structure, classNames, inline styles
-  speed?: number;                // ms per char, default 90
-  trigger?: unknown;             // change this value to restart animation (e.g. modal openCount)
-  autoPlay?: boolean;            // default true (false = show full immediately)
-  onDone?: () => void;
+    children?: React.ReactNode; // ANY ReactNode — preserves element structure, classNames, inline styles
+    speed?: number; // ms per char, default 90
+    trigger?: unknown; // change this value to restart animation (e.g. modal openCount)
+    autoPlay?: boolean; // default true (false = show full immediately)
+    onDone?: () => void;
 }
 ```
 
@@ -421,39 +494,35 @@ interface TypewriterProps {
 
 ```ts
 interface TabItem {
-  key: string;
-  label: React.ReactNode;
-  children: React.ReactNode;
+    key: string;
+    label: React.ReactNode;
+    children: React.ReactNode;
 }
 
 interface TabsProps {
-  items: TabItem[];           // REQUIRED
-  defaultActiveKey?: string;  // default: first tab
-  activeKey?: string;         // controlled mode
-  onChange?: (key: string) => void;
-  className?: string;
-  style?: React.CSSProperties;
-  leafAnimation?: boolean;    // default true — active-tab leaf wiggle
+    items: TabItem[]; // REQUIRED
+    defaultActiveKey?: string; // default: first tab
+    activeKey?: string; // controlled mode
+    onChange?: (key: string) => void;
+    className?: string;
+    style?: React.CSSProperties;
+    leafAnimation?: boolean; // default true — active-tab leaf wiggle
 }
 ```
 
 ```tsx
 // Uncontrolled mode
 <Tabs
-  items={[
-    { key: 'tab1', label: '鱼类', children: <p>鲈鱼、鲷鱼...</p> },
-    { key: 'tab2', label: '昆虫', children: <p>蝴蝶、蜻蜓...</p> },
-  ]}
-  defaultActiveKey="tab1"
-/>
+    items={[
+        { key: 'tab1', label: '鱼类', children: <p>鲈鱼、鲷鱼...</p> },
+        { key: 'tab2', label: '昆虫', children: <p>蝴蝶、蜻蜓...</p> },
+    ]}
+    defaultActiveKey="tab1"
+/>;
 
 // Controlled mode
 const [activeKey, setActiveKey] = useState('tab1');
-<Tabs
-  items={items}
-  activeKey={activeKey}
-  onChange={setActiveKey}
-/>
+<Tabs items={items} activeKey={activeKey} onChange={setActiveKey} />;
 ```
 
 > Supports both controlled and uncontrolled modes. Smooth fade animation on tab switch.
@@ -466,16 +535,23 @@ const [activeKey, setActiveKey] = useState('tab1');
 
 ```ts
 type IconName =
-  | 'icon-miles' | 'icon-camera' | 'icon-chat' | 'icon-encyclopedia'
-  | 'icon-design' | 'icon-diy'    | 'icon-helicopter'
-  | 'icon-map'   | 'icon-shopping' | 'icon-variant';
+    | 'icon-miles'
+    | 'icon-camera'
+    | 'icon-chat'
+    | 'icon-encyclopedia'
+    | 'icon-design'
+    | 'icon-diy'
+    | 'icon-helicopter'
+    | 'icon-map'
+    | 'icon-shopping'
+    | 'icon-variant';
 
 interface IconProps {
-  name: IconName;                // REQUIRED — one of the 10 built-in SVG icons
-  size?: number | string;        // default 24 — applied to width & height
-  className?: string;
-  style?: React.CSSProperties;
-  bounce?: boolean;              // default false — adds hover bounce animation
+    name: IconName; // REQUIRED — one of the 10 built-in SVG icons
+    size?: number | string; // default 24 — applied to width & height
+    className?: string;
+    style?: React.CSSProperties;
+    bounce?: boolean; // default false — adds hover bounce animation
 }
 
 // Runtime catalogue for dynamic rendering / pickers (length = 10):
@@ -498,29 +574,30 @@ declare const ICON_LIST: { name: IconName; label: string }[];
 type SelectOption = { key: string; label: string };
 
 interface SelectProps {
-  options: SelectOption[];                 // REQUIRED
-  value: string;                           // REQUIRED — controlled-only
-  onChange: (key: string) => void;         // REQUIRED
-  placeholder?: string;                    // default '请选择'
-  disabled?: boolean;                      // default false
+    options: SelectOption[]; // REQUIRED
+    value: string; // REQUIRED — controlled-only
+    onChange: (key: string) => void; // REQUIRED
+    placeholder?: string; // default '请选择'
+    disabled?: boolean; // default false
 }
 ```
 
 ```tsx
 const [lang, setLang] = useState('zh');
 <Select
-  value={lang}
-  onChange={setLang}
-  options={[
-    { key: 'zh', label: '简体中文' },
-    { key: 'en', label: 'English' },
-    { key: 'ja', label: '日本語' },
-  ]}
-  placeholder="Choose language"
-/>
+    value={lang}
+    onChange={setLang}
+    options={[
+        { key: 'zh', label: '简体中文' },
+        { key: 'en', label: 'English' },
+        { key: 'ja', label: '日本語' },
+    ]}
+    placeholder="Choose language"
+/>;
 ```
 
 Notes:
+
 - **Controlled only.** `value` and `onChange` are required — there is no `defaultValue`.
 - Dropdown auto-flips (top/bottom, left/right) based on viewport space.
 - Click-outside to close is built-in.
@@ -535,21 +612,21 @@ Notes:
 type CheckboxSize = 'small' | 'middle' | 'large';
 
 interface CheckboxOption {
-  label: React.ReactNode;
-  value: string | number;
-  disabled?: boolean;         // disable this option only
+    label: React.ReactNode;
+    value: string | number;
+    disabled?: boolean; // disable this option only
 }
 
 interface CheckboxProps {
-  options: CheckboxOption[];                        // REQUIRED
-  value?: Array<string | number>;                   // controlled
-  defaultValue?: Array<string | number>;            // default []
-  size?: CheckboxSize;                              // default 'middle'
-  disabled?: boolean;                               // default false — disables all
-  direction?: 'horizontal' | 'vertical';            // default 'horizontal'
-  onChange?: (values: Array<string | number>) => void;
-  className?: string;
-  style?: React.CSSProperties;
+    options: CheckboxOption[]; // REQUIRED
+    value?: Array<string | number>; // controlled
+    defaultValue?: Array<string | number>; // default []
+    size?: CheckboxSize; // default 'middle'
+    disabled?: boolean; // default false — disables all
+    direction?: 'horizontal' | 'vertical'; // default 'horizontal'
+    onChange?: (values: Array<string | number>) => void;
+    className?: string;
+    style?: React.CSSProperties;
 }
 ```
 
@@ -594,35 +671,35 @@ const [values, setValues] = useState<Array<string | number>>([]);
 type RadioSize = 'small' | 'middle' | 'large';
 
 interface RadioOption {
-  label: React.ReactNode;
-  value: string | number;
-  disabled?: boolean;
+    label: React.ReactNode;
+    value: string | number;
+    disabled?: boolean;
 }
 
 interface RadioProps {
-  options: RadioOption[];                              // REQUIRED
-  value?: string | number;                             // controlled
-  defaultValue?: string | number;                      // uncontrolled
-  size?: RadioSize;                                    // default 'middle'
-  disabled?: boolean;                                  // default false — disables all
-  direction?: 'horizontal' | 'vertical';               // default 'horizontal'
-  onChange?: (value: string | number) => void;
-  className?: string;
-  style?: React.CSSProperties;
+    options: RadioOption[]; // REQUIRED
+    value?: string | number; // controlled
+    defaultValue?: string | number; // uncontrolled
+    size?: RadioSize; // default 'middle'
+    disabled?: boolean; // default false — disables all
+    direction?: 'horizontal' | 'vertical'; // default 'horizontal'
+    onChange?: (value: string | number) => void;
+    className?: string;
+    style?: React.CSSProperties;
 }
 ```
 
 ```tsx
 const [v, setV] = useState<string | number>('zh');
 <Radio
-  value={v}
-  onChange={setV}
-  options={[
-    { label: '中文', value: 'zh' },
-    { label: 'English', value: 'en' },
-    { label: '日本語', value: 'ja', disabled: true },
-  ]}
-/>
+    value={v}
+    onChange={setV}
+    options={[
+        { label: '中文', value: 'zh' },
+        { label: 'English', value: 'en' },
+        { label: '日本語', value: 'ja', disabled: true },
+    ]}
+/>;
 ```
 
 > Implements WAI-ARIA roving tabindex (Arrow / Home / End keyboard navigation). Single-select counterpart to `Checkbox`.
@@ -635,23 +712,31 @@ const [v, setV] = useState<string | number>('zh');
 
 ```ts
 type TooltipPlacement =
-  | 'top' | 'top-start' | 'top-end'
-  | 'bottom' | 'bottom-start' | 'bottom-end'
-  | 'left' | 'left-start' | 'left-end'
-  | 'right' | 'right-start' | 'right-end';
+    | 'top'
+    | 'top-start'
+    | 'top-end'
+    | 'bottom'
+    | 'bottom-start'
+    | 'bottom-end'
+    | 'left'
+    | 'left-start'
+    | 'left-end'
+    | 'right'
+    | 'right-start'
+    | 'right-end';
 
 type TooltipTrigger = 'hover' | 'focus' | 'click';
 type TooltipVariant = 'default' | 'island';
 
 interface TooltipProps {
-  title: React.ReactNode;            // REQUIRED — tooltip body
-  children: React.ReactElement;      // REQUIRED — single trigger element
-  placement?: TooltipPlacement;      // default 'top'
-  trigger?: TooltipTrigger;          // default 'hover'
-  variant?: TooltipVariant;          // default 'default'
-  bordered?: boolean;                // default true
-  className?: string;
-  style?: React.CSSProperties;
+    title: React.ReactNode; // REQUIRED — tooltip body
+    children: React.ReactElement; // REQUIRED — single trigger element
+    placement?: TooltipPlacement; // default 'top'
+    trigger?: TooltipTrigger; // default 'hover'
+    variant?: TooltipVariant; // default 'default'
+    bordered?: boolean; // default true
+    className?: string;
+    style?: React.CSSProperties;
 }
 ```
 
@@ -673,9 +758,9 @@ interface TooltipProps {
 
 ```ts
 interface LoadingProps {
-  active?: boolean;             // default true
-  className?: string;
-  style?: React.CSSProperties;
+    active?: boolean; // default true
+    className?: string;
+    style?: React.CSSProperties;
 }
 ```
 
@@ -694,40 +779,40 @@ interface LoadingProps {
 
 ```ts
 interface TableColumn<T = Record<string, unknown>> {
-  title: React.ReactNode;
-  dataIndex?: keyof T;
-  render?: (value: unknown, record: T, index: number) => React.ReactNode;
-  width?: string | number;
-  align?: 'left' | 'center' | 'right';
-  fixed?: 'left' | 'right';
-  style?: React.CSSProperties;
+    title: React.ReactNode;
+    dataIndex?: keyof T;
+    render?: (value: unknown, record: T, index: number) => React.ReactNode;
+    width?: string | number;
+    align?: 'left' | 'center' | 'right';
+    fixed?: 'left' | 'right';
+    style?: React.CSSProperties;
 }
 
 interface TableProps<T = Record<string, unknown>> {
-  columns?: TableColumn<T>[];                         // default []
-  dataSource?: T[];                                   // default []
-  rowKey?: string | ((record: T) => string);          // default 'key'
-  striped?: boolean;                                  // default true
-  showHeader?: boolean;                               // default true
-  rowClassName?: string | ((record: T, index: number) => string);
-  onRow?: (record: T, index: number) => React.HTMLAttributes<HTMLTableRowElement>;
-  loading?: boolean;                                  // default false
-  emptyText?: React.ReactNode;                        // default '暂无数据'
-  scroll?: { x?: number | string; y?: number | string };
-  className?: string;
-  style?: React.CSSProperties;
+    columns?: TableColumn<T>[]; // default []
+    dataSource?: T[]; // default []
+    rowKey?: string | ((record: T) => string); // default 'key'
+    striped?: boolean; // default true
+    showHeader?: boolean; // default true
+    rowClassName?: string | ((record: T, index: number) => string);
+    onRow?: (record: T, index: number) => React.HTMLAttributes<HTMLTableRowElement>;
+    loading?: boolean; // default false
+    emptyText?: React.ReactNode; // default '暂无数据'
+    scroll?: { x?: number | string; y?: number | string };
+    className?: string;
+    style?: React.CSSProperties;
 }
 ```
 
 ```tsx
 <Table
-  columns={[
-    { title: '名称', dataIndex: 'name', width: 160 },
-    { title: '价格', dataIndex: 'price', align: 'right' },
-    { title: '操作', render: (_, r) => <Button size="small">买</Button> },
-  ]}
-  dataSource={items}
-  rowKey="id"
+    columns={[
+        { title: '名称', dataIndex: 'name', width: 160 },
+        { title: '价格', dataIndex: 'price', align: 'right' },
+        { title: '操作', render: (_, r) => <Button size="small">买</Button> },
+    ]}
+    dataSource={items}
+    rowKey="id"
 />
 ```
 
@@ -739,9 +824,9 @@ interface TableProps<T = Record<string, unknown>> {
 
 ```ts
 interface CodeBlockProps {
-  code: string;                // REQUIRED — raw source string
-  style?: React.CSSProperties; // merged on top of the dark preset
-  className?: string;
+    code: string; // REQUIRED — raw source string
+    style?: React.CSSProperties; // merged on top of the dark preset
+    className?: string;
 }
 ```
 
@@ -763,33 +848,33 @@ interface CodeBlockProps {
 
 ```ts
 interface InvitationCardRef {
-  exportAsImage: (filename?: string) => Promise<void>;
-  getElement: () => HTMLDivElement | null;
+    exportAsImage: (filename?: string) => Promise<void>;
+    getElement: () => HTMLDivElement | null;
 }
 
 interface InvitationCardProps {
-  groomName?: string;          // default '小狸'
-  brideName?: string;          // default '小兔'
-  date?: string;               // default '2026.06.15'
-  weekday?: string;            // default '星期六'
-  time?: string;               // default '10:00 AM'
-  venue?: string;              // default '彩虹岛 · 樱花广场'
-  address?: string;            // default '动物之森 · 无人岛 · K.K. 演奏台前'
-  title?: React.ReactNode;     // default 'Wedding Invitation' — heading slot, NOT the <Title> component
-  subtitle?: React.ReactNode;  // default <img/> built-in subtitle
-  message?: React.ReactNode;   // default bilingual blessing text
-  showLotteryNumber?: boolean; // default true
-  lotteryNumber?: string;      // default '0001'
-  lotteryLabel?: React.ReactNode;  // default 'LUCKY NUMBER'
-  lotteryHint?: React.ReactNode;   // default bilingual hint
-  className?: string;
-  style?: React.CSSProperties;
+    groomName?: string; // default '小狸'
+    brideName?: string; // default '小兔'
+    date?: string; // default '2026.06.15'
+    weekday?: string; // default '星期六'
+    time?: string; // default '10:00 AM'
+    venue?: string; // default '彩虹岛 · 樱花广场'
+    address?: string; // default '动物之森 · 无人岛 · K.K. 演奏台前'
+    title?: React.ReactNode; // default 'Wedding Invitation' — heading slot, NOT the <Title> component
+    subtitle?: React.ReactNode; // default <img/> built-in subtitle
+    message?: React.ReactNode; // default bilingual blessing text
+    showLotteryNumber?: boolean; // default true
+    lotteryNumber?: string; // default '0001'
+    lotteryLabel?: React.ReactNode; // default 'LUCKY NUMBER'
+    lotteryHint?: React.ReactNode; // default bilingual hint
+    className?: string;
+    style?: React.CSSProperties;
 }
 
 // Companion export button
 interface InvitationCardExportButtonProps extends ButtonProps {
-  invitationRef: React.RefObject<InvitationCardRef>;
-  filename?: string;           // default 'wedding-invitation.png'
+    invitationRef: React.RefObject<InvitationCardRef>;
+    filename?: string; // default 'wedding-invitation.png'
 }
 ```
 
@@ -809,10 +894,12 @@ const ref = useRef<InvitationCardRef>(null);
 
 ```tsx
 <Card>
-  <label>Email</label>
-  <Input size="large" type="email" allowClear status={invalid ? 'error' : undefined} />
-  <Switch checkedChildren="Subscribe" unCheckedChildren="Off" />
-  <Button type="primary" htmlType="submit" block>Submit</Button>
+    <label>Email</label>
+    <Input size="large" type="email" allowClear status={invalid ? 'error' : undefined} />
+    <Switch checkedChildren="Subscribe" unCheckedChildren="Off" />
+    <Button type="primary" htmlType="submit" block>
+        Submit
+    </Button>
 </Card>
 ```
 
@@ -820,18 +907,30 @@ const ref = useRef<InvitationCardRef>(null);
 
 ```tsx
 <Modal
-  open={open}
-  title="Delete save file?"
-  onClose={close}
-  onOk={() => { remove(); close(); }}
-  footer={
-    <>
-      <Button onClick={close}>Cancel</Button>
-      <Button type="primary" danger onClick={() => { remove(); close(); }}>Delete</Button>
-    </>
-  }
+    open={open}
+    title="Delete save file?"
+    onClose={close}
+    onOk={() => {
+        remove();
+        close();
+    }}
+    footer={
+        <>
+            <Button onClick={close}>Cancel</Button>
+            <Button
+                type="primary"
+                danger
+                onClick={() => {
+                    remove();
+                    close();
+                }}
+            >
+                Delete
+            </Button>
+        </>
+    }
 >
-  This cannot be undone.
+    This cannot be undone.
 </Modal>
 ```
 
@@ -839,10 +938,12 @@ const ref = useRef<InvitationCardRef>(null);
 
 ```tsx
 <Cursor>
-  <Title size="large">FAQ</Title>
-  <Divider type="wave-yellow" />
-  {faqs.map(f => <Collapse key={f.id} question={f.q} answer={f.a} />)}
-  <Footer type="sea" />
+    <Title size="large">FAQ</Title>
+    <Divider type="wave-yellow" />
+    {faqs.map((f) => (
+        <Collapse key={f.id} question={f.q} answer={f.a} />
+    ))}
+    <Footer type="sea" />
 </Cursor>
 ```
 
@@ -850,7 +951,7 @@ const ref = useRef<InvitationCardRef>(null);
 
 ```tsx
 <Modal open={open} onClose={close} typewriter typeSpeed={60}>
-  Welcome to Animal Island! Press <strong>OK</strong> to begin.
+    Welcome to Animal Island! Press <strong>OK</strong> to begin.
 </Modal>
 ```
 
@@ -922,17 +1023,19 @@ ReactDOM.createRoot(document.getElementById('root')!).render(<App />);
 import { Cursor, Button, Card, Input, Footer, Title } from 'animal-island-ui';
 
 export default function App() {
-  return (
-    <Cursor>
-      <main style={{ padding: 32, maxWidth: 720, margin: '0 auto' }}>
-        <Title size="large">Animal Island</Title>
-        <Card>
-          <Input placeholder="What's on your mind?" allowClear />
-          <Button type="primary" block style={{ marginTop: 16 }}>Post</Button>
-        </Card>
-      </main>
-      <Footer type="sea" />
-    </Cursor>
-  );
+    return (
+        <Cursor>
+            <main style={{ padding: 32, maxWidth: 720, margin: '0 auto' }}>
+                <Title size="large">Animal Island</Title>
+                <Card>
+                    <Input placeholder="What's on your mind?" allowClear />
+                    <Button type="primary" block style={{ marginTop: 16 }}>
+                        Post
+                    </Button>
+                </Card>
+            </main>
+            <Footer type="sea" />
+        </Cursor>
+    );
 }
 ```

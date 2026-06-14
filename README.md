@@ -29,7 +29,6 @@ A React UI component library inspired by a cozy island-style UI
     English | <a href="./docs/README.zh-CN.md">简体中文</a>
 </p>
 
-
 ## Introduction
 
 This project is a lightweight UI component library built with React + TypeScript. The design style is inspired by a game company's "a cozy island-style UI" game interface, created for personal front-end technical practice and component development learning.
@@ -62,8 +61,6 @@ Non-developer and don't want to write code yourself? Use [`PROMPT.md`](./PROMPT.
 npm install animal-island-ui
 ```
 
-
-
 ## Quick Start
 
 > ⚠️ **Important**: Please make sure to import the styles with `import 'animal-island-ui/style'`, otherwise the components will have no styles or fonts!
@@ -76,9 +73,7 @@ function App() {
     return (
         <div>
             <Button type="primary">Start Adventure</Button>
-            <Card color="app-blue">
-                Welcome to the deserted island!
-            </Card>
+            <Card color="app-blue">Welcome to the deserted island!</Card>
         </div>
     );
 }
@@ -88,14 +83,13 @@ function App() {
 
 Complete reference for different scenarios:
 
-| Document | Purpose |
-|---|---|
-| [`PROMPT.md`](./PROMPT.md) | 🚀 One-click prompt for non-developers — paste into Cursor / Claude / ChatGPT / v0 / Bolt / Lovable / Windsurf to generate animal-island-ui-styled React pages. |
-| [`AI_USAGE.md`](./AI_USAGE.md) | AI code assistant handbook - all component props, types and defaults word-for-word, 19 hard rules and copy-paste boilerplate, no invented APIs. |
-| [`DESIGN_PROMPT.md`](./DESIGN_PROMPT.md) | Visual-style prompts for v0 / Figma AI / Midjourney / DALL-E, including color palette, fonts, size tables, Modal clip-path and prohibition list. |
-| [`skill/SKILL.md`](./skill/SKILL.md) | Pixel-perfect style specification Skill - design tokens, all component CSS, Demo layout values, CSS variable templates and new component development checklist. |
-| [`CONTRIBUTING.md`](./CONTRIBUTING.md) | Contributing Guide |
-
+| Document                                 | Purpose                                                                                                                                                         |
+| ---------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [`PROMPT.md`](./PROMPT.md)               | 🚀 One-click prompt for non-developers — paste into Cursor / Claude / ChatGPT / v0 / Bolt / Lovable / Windsurf to generate animal-island-ui-styled React pages. |
+| [`AI_USAGE.md`](./AI_USAGE.md)           | AI code assistant handbook - all component props, types and defaults word-for-word, 19 hard rules and copy-paste boilerplate, no invented APIs.                 |
+| [`DESIGN_PROMPT.md`](./DESIGN_PROMPT.md) | Visual-style prompts for v0 / Figma AI / Midjourney / DALL-E, including color palette, fonts, size tables, Modal clip-path and prohibition list.                |
+| [`skill/SKILL.md`](./skill/SKILL.md)     | Pixel-perfect style specification Skill - design tokens, all component CSS, Demo layout values, CSS variable templates and new component development checklist. |
+| [`CONTRIBUTING.md`](./CONTRIBUTING.md)   | Contributing Guide                                                                                                                                              |
 
 ## Local Development
 
@@ -116,7 +110,6 @@ npm run build
 # Build Demo site
 npm run build:demo
 ```
-
 
 ## Usage Cases
 
@@ -180,8 +173,6 @@ npm run build:demo
   </td>
 </tr>
 </table>
-
-
 
 ## Notes
 
