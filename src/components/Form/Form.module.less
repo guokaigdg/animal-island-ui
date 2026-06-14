@@ -1,0 +1,193 @@
+// ============================================
+// 设计 token（与全站设计系统保持一致）
+// ============================================
+
+@label-color: rgba(0, 0, 0, 0.85);
+@error-color: #ff4d4f;
+@warning-color: #faad14;
+@success-color: #52c41a;
+@validating-color: #1677ff;
+@required-color: @error-color;
+@help-color: rgba(0, 0, 0, 0.45);
+@help-font-size: 12px;
+
+@label-font-size-small: 12px;
+@label-font-size-middle: 14px;
+@label-font-size-large: 16px;
+
+@vertical-gap: 6px;
+@horizontal-gap: 16px;
+@inline-gap: 8px;
+@form-item-gap: 8px;
+@label-line-height: 1.6;
+
+// ============================================
+// island-form
+// ============================================
+
+.island-form {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    color: rgba(0, 0, 0, 0.85);
+    font-size: 14px;
+    line-height: @label-line-height;
+    list-style: none;
+
+    &-horizontal {
+        display: flex;
+        flex-direction: column;
+        gap: @form-item-gap;
+
+        .island-form-item {
+            display: grid;
+            grid-template-columns: repeat(24, minmax(0, 1fr));
+            align-items: baseline;
+            row-gap: @form-item-gap;
+            // horizontal 下 label/wrapper 在 24 列栅格里相邻，不该有 column-gap
+            // 否则 23 × 16px = 368px 直接撑爆 form
+        }
+    }
+
+    &-vertical {
+        display: flex;
+        flex-direction: column;
+        gap: @form-item-gap;
+
+        .island-form-item {
+            display: block;
+
+            &-label {
+                display: block;
+                margin-bottom: @vertical-gap;
+            }
+        }
+    }
+
+    &-inline {
+        display: flex;
+        flex-wrap: wrap;
+        gap: @inline-gap;
+
+        .island-form-item {
+            flex: 0 0 auto;
+        }
+    }
+
+    &-small {
+        .island-form-item-label {
+            font-size: @label-font-size-small;
+        }
+    }
+
+    &-middle {
+        .island-form-item-label {
+            font-size: @label-font-size-middle;
+        }
+    }
+
+    &-large {
+        .island-form-item-label {
+            font-size: @label-font-size-large;
+        }
+    }
+
+    &-disabled {
+        cursor: not-allowed;
+        opacity: 0.6;
+    }
+}
+
+// ============================================
+// island-form-item
+// ============================================
+
+.island-form-item {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    vertical-align: top;
+
+    &-label {
+        display: inline-block;
+        flex: 0 0 auto;
+        line-height: @label-line-height;
+        color: @label-color;
+        font-weight: normal;
+        white-space: nowrap;
+
+        &-required {
+            &::before {
+                content: '*';
+                color: @required-color;
+                margin-right: 4px;
+            }
+        }
+
+        &-colon {
+            &::after {
+                content: ':';
+                margin: 0 4px 0 2px;
+            }
+        }
+    }
+
+    &-control {
+        min-width: 0;
+    }
+
+    &-control-input {
+        position: relative;
+        display: flex;
+        align-items: center;
+        min-height: 32px;
+
+        > * {
+            flex: 1 1 auto;
+            max-width: 100%;
+        }
+    }
+
+    &-explain {
+        min-height: 22px;
+        color: @help-color;
+        font-size: @help-font-size;
+        line-height: 1.5;
+        margin-top: 4px;
+
+        &-error {
+            color: @error-color;
+        }
+    }
+
+    &-feedback-icon {
+        display: inline-block;
+        margin-right: 4px;
+        color: @error-color;
+        font-size: 12px;
+    }
+
+    &-has-error {
+        .island-form-item-explain {
+            color: @error-color;
+        }
+    }
+
+    &-has-warning {
+        .island-form-item-explain {
+            color: @warning-color;
+        }
+    }
+
+    &-has-success {
+        .island-form-item-explain {
+            color: @success-color;
+        }
+    }
+
+    &-is-validating {
+        .island-form-item-explain {
+            color: @validating-color;
+        }
+    }
+}
