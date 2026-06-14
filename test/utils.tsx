@@ -25,9 +25,10 @@ import { act } from '@testing-library/react';
 // 1) 受控组件工厂
 // ============================================================================
 
-export type ControlledChildren<TValue, TChange> = (
-    props: { value: TValue; onChange: (next: TChange) => void },
-) => ReactNode;
+export type ControlledChildren<TValue, TChange> = (props: {
+    value: TValue;
+    onChange: (next: TChange) => void;
+}) => ReactNode;
 
 export type ControlledRenderProps<TValue, TChange> = {
     children: ControlledChildren<TValue, TChange>;
@@ -93,10 +94,7 @@ export function getByClass(className: string, container: HTMLElement = document.
 }
 
 /** 在指定容器内按 class 名查询全部节点 */
-export function getAllByClass(
-    className: string,
-    container: HTMLElement = document.body,
-): HTMLElement[] {
+export function getAllByClass(className: string, container: HTMLElement = document.body): HTMLElement[] {
     return Array.from(container.querySelectorAll(`.${className}`)) as HTMLElement[];
 }
 
@@ -104,12 +102,12 @@ export function getAllByClass(
 export function getByTextInContainer(
     text: string,
     containerClass: string,
-    container: HTMLElement = document.body,
+    container: HTMLElement = document.body
 ): HTMLElement {
     const root = container.querySelector(`.${containerClass}`) as HTMLElement;
     if (!root) throw new Error(`[getByTextInContainer] 找不到 .${containerClass}`);
     const nodes = Array.from(root.querySelectorAll<HTMLElement>('*')).filter(
-        (el) => el.textContent?.includes(text) && el.children.length === 0,
+        (el) => el.textContent?.includes(text) && el.children.length === 0
     );
     if (!nodes.length) {
         throw new Error(`[getByTextInContainer] 在 .${containerClass} 内找不到含 "${text}" 的文本节点`);
@@ -140,9 +138,6 @@ export function setup(): UserEvent {
 // 4) render 封装（占位，目前只 re-export，方便后续统一 wrapper 注入）
 // ============================================================================
 
-export function renderWithWrapper(
-    ui: ReactElement,
-    options?: Omit<RenderOptions, 'wrapper'>,
-): RenderResult {
+export function renderWithWrapper(ui: ReactElement, options?: Omit<RenderOptions, 'wrapper'>): RenderResult {
     return render(ui, options);
 }
