@@ -16,8 +16,7 @@ const HL_TOKENS: { pattern: RegExp; style: React.CSSProperties }[] = [
     },
     { pattern: /(<\/?[\w.]+|\/?>)/g, style: { color: '#f0a870' } },
     {
-        pattern:
-            /\b(import|from|const|let|var|function|return|export|default|true|false|null|undefined)\b/g,
+        pattern: /\b(import|from|const|let|var|function|return|export|default|true|false|null|undefined)\b/g,
         style: { color: '#d4a0e0' },
     },
     { pattern: /\b(npm|yarn|pnpm)\b/g, style: { color: '#f0a870' } },
@@ -42,8 +41,7 @@ const highlightCode = (code: string): React.ReactNode[] => {
             const re = new RegExp(t.pattern.source, t.pattern.flags);
             let m: RegExpExecArray | null;
             while ((m = re.exec(line)) !== null) {
-                const s =
-                    m.index + (m[0] !== m[1] && m[1] ? m[0].indexOf(m[1]) : 0);
+                const s = m.index + (m[0] !== m[1] && m[1] ? m[0].indexOf(m[1]) : 0);
                 const text = m[1] || m[0];
                 segs.push({ start: s, end: s + text.length, style: t.style });
             }
@@ -51,11 +49,7 @@ const highlightCode = (code: string): React.ReactNode[] => {
         segs.sort((a, b) => a.start - b.start);
         const merged: Seg[] = [];
         for (const seg of segs) {
-            if (
-                merged.length === 0 ||
-                seg.start >= merged[merged.length - 1].end
-            )
-                merged.push(seg);
+            if (merged.length === 0 || seg.start >= merged[merged.length - 1].end) merged.push(seg);
         }
         let idx = 0;
         for (const seg of merged) {
@@ -73,38 +67,27 @@ const highlightCode = (code: string): React.ReactNode[] => {
     return parts;
 };
 
-const CodeBlock: React.FC<{ code: string }> = ({ code }) => (
-    <pre style={S.codeBox}>{highlightCode(code)}</pre>
-);
+const CodeBlock: React.FC<{ code: string }> = ({ code }) => <pre style={S.codeBox}>{highlightCode(code)}</pre>;
 
-const FeatureCard: React.FC<{ feature: typeof features[0] }> = ({ feature }) => {
+const FeatureCard: React.FC<{ feature: (typeof features)[0] }> = ({ feature }) => {
     const [hovered, setHovered] = useState(false);
     return (
         <Card
             style={{
                 ...S.featureCard,
                 transform: hovered ? 'translateY(-4px)' : 'none',
-                boxShadow: hovered
-                    ? '0 8px 24px rgba(114, 93, 66, 0.15)'
-                    : 'none',
+                boxShadow: hovered ? '0 8px 24px rgba(114, 93, 66, 0.15)' : 'none',
                 transition: 'all 0.3s ease',
             }}
             onMouseEnter={() => setHovered(true)}
             onMouseLeave={() => setHovered(false)}
         >
             <img
-                src={
-                    new URL(
-                        `./img/island-phone/${feature.icon}`,
-                        import.meta.url
-                    ).href
-                }
+                src={new URL(`./img/island-phone/${feature.icon}`, import.meta.url).href}
                 style={{
                     width: 42,
                     height: 42,
-                    transform: hovered
-                        ? 'scale(1.1) rotate(-4deg)'
-                        : 'scale(1) rotate(0deg)',
+                    transform: hovered ? 'scale(1.1) rotate(-4deg)' : 'scale(1) rotate(0deg)',
                     transition: 'transform 0.3s ease',
                     animation: hovered ? 'iconBounce 0.4s ease forwards' : 'none',
                 }}
@@ -174,7 +157,8 @@ const S = {
         alignItems: 'center',
     } as React.CSSProperties,
     heroTitle: {
-        fontFamily: "Nunito, 'Zen Maru Gothic', -apple-system, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif",
+        fontFamily:
+            "Nunito, 'Zen Maru Gothic', -apple-system, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif",
         fontSize: 55,
         fontWeight: 800,
         lineHeight: 1.1,
@@ -214,7 +198,8 @@ const S = {
         margin: '0 auto',
     } as React.CSSProperties,
     sectionTitle: {
-        fontFamily: "Nunito, 'Zen Maru Gothic', -apple-system, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif",
+        fontFamily:
+            "Nunito, 'Zen Maru Gothic', -apple-system, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif",
         fontSize: 24,
         fontWeight: 700,
         color: '#725d42',
@@ -404,175 +389,167 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
     };
 
     return (
-    <div ref={pageRef} style={{ ...S.page, overflow: 'auto' }} onScroll={handleScroll}>
-        {/* Hero */}
-        <div style={{ ...S.hero }}>
-            <div style={isMobile ? S.heroContentMobile : S.heroContent}>
-                {isMobile && (
-                    <div style={{ textAlign: 'center' }}>
-                        <img
-                            src={
-                                new URL('./img/animal_icon.png', import.meta.url).href
-                            }
-                            style={{ width: 180, height: 112 }}
-                            alt="logo"
-                            decoding="async"
-                        />
+        <div ref={pageRef} style={{ ...S.page, overflow: 'auto' }} onScroll={handleScroll}>
+            {/* Hero */}
+            <div style={{ ...S.hero }}>
+                <div style={isMobile ? S.heroContentMobile : S.heroContent}>
+                    {isMobile && (
+                        <div style={{ textAlign: 'center' }}>
+                            <img
+                                src={new URL('./img/animal_icon.png', import.meta.url).href}
+                                style={{ width: 180, height: 112 }}
+                                alt="logo"
+                                decoding="async"
+                            />
+                        </div>
+                    )}
+                    <div style={isMobile ? { textAlign: 'center' as const } : S.heroText}>
+                        <h1 style={{ ...S.heroTitle, fontSize: isMobile ? 37 : 60 }}>
+                            {isMobile ? (
+                                'Animal Island UI'
+                            ) : (
+                                <>
+                                    Animal <br /> Island UI
+                                </>
+                            )}
+                            <span style={S.heroVersion}>v0.8.1</span>
+                        </h1>
+                        <Typewriter speed={60}>
+                            <p style={{ ...S.heroSubtitle, fontSize: isMobile ? 14 : 17 }}>
+                                Animal 风格的 React 组件库，基于 TypeScript + Vite 构建，让 Web 应用充满温暖质感
+                            </p>
+                        </Typewriter>
+                        <div style={{ ...S.heroActions, justifyContent: isMobile ? 'center' : 'flex-start' }}>
+                            <Button type="primary" size="large" onClick={() => onNavigate?.('/button')}>
+                                开始使用 →
+                            </Button>
+                        </div>
                     </div>
-                )}
-                <div style={isMobile ? { textAlign: 'center' as const } : S.heroText}>
-                    <h1 style={{ ...S.heroTitle, fontSize: isMobile ? 37 : 60 }}>
-                        {isMobile ? 'Animal Island UI' : <>Animal <br /> Island UI</>}
-                        <span style={S.heroVersion}>v0.8.1</span>
-                    </h1>
-                    <Typewriter speed={60}>
-                        <p style={{ ...S.heroSubtitle, fontSize: isMobile ? 14 : 17 }}>
-                            Animal 风格的 React 组件库，基于 TypeScript + Vite 构建，让 Web 应用充满温暖质感
-                        </p>
-                    </Typewriter>
-                    <div style={{ ...S.heroActions, justifyContent: isMobile ? 'center' : 'flex-start' }}>
-                        <Button
-                            type="primary"
-                            size="large"
-                            onClick={() => onNavigate?.('/button')}
-                        >
-                            开始使用 →
-                        </Button>
-                    </div>
+                    {!isMobile && (
+                        <div style={{ textAlign: 'center' }}>
+                            <img
+                                src={new URL('./img/animal_icon.png', import.meta.url).href}
+                                style={{ width: 320, height: 200 }}
+                                alt="logo"
+                                decoding="async"
+                            />
+                        </div>
+                    )}
                 </div>
-                {!isMobile && (
-                    <div style={{ textAlign: 'center' }}>
-                        <img
-                            src={
-                                new URL('./img/animal_icon.png', import.meta.url).href
-                            }
-                            style={{ width: 320, height: 200 }}
-                            alt="logo"
-                            decoding="async"
-                        />
-                    </div>
-                )}
             </div>
-        </div>
 
-        <div style={{
-            position: 'absolute',
-            bottom: 40,
-            left: '50%',
-            transform: 'translateX(-50%)',
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            gap: 4,
-            cursor: 'pointer',
-            animation: showScrollHint ? 'bounce 2s ease-in-out infinite' : 'none',
-            opacity: showScrollHint ? 1 : 0,
-            transition: 'opacity 0.3s ease',
-            pointerEvents: showScrollHint ? 'auto' : 'none'
-        }}>
-            <span style={{ color: '#FFF9E6', fontSize: 12, textShadow: '0 1px 2px rgba(0,0,0,0.3)' }}>向下滑动</span>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-                <path d="M12 5v14M5 12l7 7 7-7" stroke="#FFF9E6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-        </div>
-        <style>{`
+            <div
+                style={{
+                    position: 'absolute',
+                    bottom: 40,
+                    left: '50%',
+                    transform: 'translateX(-50%)',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    gap: 4,
+                    cursor: 'pointer',
+                    animation: showScrollHint ? 'bounce 2s ease-in-out infinite' : 'none',
+                    opacity: showScrollHint ? 1 : 0,
+                    transition: 'opacity 0.3s ease',
+                    pointerEvents: showScrollHint ? 'auto' : 'none',
+                }}
+            >
+                <span style={{ color: '#FFF9E6', fontSize: 12, textShadow: '0 1px 2px rgba(0,0,0,0.3)' }}>
+                    向下滑动
+                </span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                    <path
+                        d="M12 5v14M5 12l7 7 7-7"
+                        stroke="#FFF9E6"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                    />
+                </svg>
+            </div>
+            <style>{`
             @keyframes bounce {
                 0%, 100% { transform: translateX(-50%) translateY(0); opacity: 1; }
                 50% { transform: translateX(-50%) translateY(-8px); opacity: 0.7; }
             }
         `}</style>
 
-        {/* Features */}
-        <div style={{ ...S.section, padding: isMobile ? '32px 16px' : '48px 40px' }}>
-            <div style={S.sectionTitle}>特性</div>
-            <div style={S.sectionDesc}>为什么选择 animal-island-ui</div>
-            <div style={S.features}>
-                {features.map((f) => (
-                    <FeatureCard key={f.title} feature={f} />
-                ))}
+            {/* Features */}
+            <div style={{ ...S.section, padding: isMobile ? '32px 16px' : '48px 40px' }}>
+                <div style={S.sectionTitle}>特性</div>
+                <div style={S.sectionDesc}>为什么选择 animal-island-ui</div>
+                <div style={S.features}>
+                    {features.map((f) => (
+                        <FeatureCard key={f.title} feature={f} />
+                    ))}
+                </div>
             </div>
-        </div>
 
-        <Divider style={{ width: isMobile ? '90%' : 800, margin: '0 auto' }} />
+            <Divider style={{ width: isMobile ? '90%' : 800, margin: '0 auto' }} />
 
-        {/* Components */}
-        <div style={{ ...S.section, padding: isMobile ? '32px 16px' : '48px 40px' }}>
-            <div style={S.sectionTitle}>组件一览</div>
-            <div style={S.sectionDesc}>点击卡片查看详细文档和在线演示</div>
-            <div style={S.compGrid}>
-                {components.map((c) => (
-                    <Card
-                        key={c.key}
-                        style={S.compCard}
-                        onClick={() => onNavigate?.(`/${c.key}`)}
+            {/* Components */}
+            <div style={{ ...S.section, padding: isMobile ? '32px 16px' : '48px 40px' }}>
+                <div style={S.sectionTitle}>组件一览</div>
+                <div style={S.sectionDesc}>点击卡片查看详细文档和在线演示</div>
+                <div style={S.compGrid}>
+                    {components.map((c) => (
+                        <Card key={c.key} style={S.compCard} onClick={() => onNavigate?.(`/${c.key}`)}>
+                            <div style={S.compName}>{c.name}</div>
+                            <div style={S.compDesc}>{c.desc}</div>
+                        </Card>
+                    ))}
+                </div>
+            </div>
+
+            <Divider style={{ width: isMobile ? '90%' : 800, margin: '0 auto' }} />
+
+            {/* Install */}
+            <div style={{ ...S.section, padding: isMobile ? '32px 16px' : '48px 40px' }}>
+                <div style={S.sectionTitle}>安装</div>
+                <div style={S.sectionDesc}>一行命令即可安装</div>
+                <CodeBlock code={`// 使用 npm 安装\nnpm install animal-island-ui`} />
+            </div>
+
+            <Divider style={{ width: isMobile ? '90%' : 800, margin: '0 auto' }} />
+
+            {/* Quick Start */}
+            <div style={{ ...S.section, padding: isMobile ? '32px 16px' : '48px 40px' }}>
+                <div style={S.sectionTitle}>快速上手</div>
+                <div style={S.sectionDesc}>引入组件即可使用，样式自动加载</div>
+                <CodeBlock
+                    code={`// 1. 引入组件\nimport { Button, Modal, Switch } from 'animal-island-ui';\nimport 'animal-island-ui/style';\n\nfunction App() {\n    return <Button>开始</Button>;\n}`}
+                />
+            </div>
+
+            <Divider style={{ width: isMobile ? '90%' : 800, margin: '0 auto' }} />
+
+            {/* Theme */}
+            <div style={{ ...S.section, padding: isMobile ? '32px 16px' : '48px 40px' }}>
+                <div style={S.sectionTitle}>主题定制</div>
+                <div style={S.sectionDesc}>通过覆盖 CSS 自定义属性实现运行时换肤，无需重新构建</div>
+                <CodeBlock
+                    code={`/* 覆盖主题变量 */\n:root {\n    --animal-primary-color: #19c8b9;\n    --animal-text-color: #827157;\n    --animal-font-family: 'Noto Sans SC', sans-serif;\n    --animal-border-radius-base: 18px;\n    /* ... 40+ 设计令牌 */\n}`}
+                />
+            </div>
+
+            {/* Footer */}
+            <div style={{ ...S.footer, padding: isMobile ? '24px 16px' : '32px 40px' }}>
+                <div style={S.footerLinks}>
+                    <span style={S.footerLink} onClick={() => onNavigate?.('/button')}>
+                        组件文档
+                    </span>
+                    <span
+                        style={S.footerLink}
+                        onClick={() => window.open('https://github.com/guokaigdg/animal-island-ui', '_blank')}
                     >
-                        <div style={S.compName}>{c.name}</div>
-                        <div style={S.compDesc}>{c.desc}</div>
-                    </Card>
-                ))}
+                        GitHub
+                    </span>
+                </div>
+                <div>MIT License · React + TypeScript + Vite</div>
             </div>
         </div>
-
-        <Divider style={{ width: isMobile ? '90%' : 800, margin: '0 auto' }} />
-
-        {/* Install */}
-        <div style={{ ...S.section, padding: isMobile ? '32px 16px' : '48px 40px' }}>
-            <div style={S.sectionTitle}>安装</div>
-            <div style={S.sectionDesc}>一行命令即可安装</div>
-            <CodeBlock
-                code={`// 使用 npm 安装\nnpm install animal-island-ui`}
-            />
-        </div>
-
-        <Divider style={{ width: isMobile ? '90%' : 800, margin: '0 auto' }} />
-
-        {/* Quick Start */}
-        <div style={{ ...S.section, padding: isMobile ? '32px 16px' : '48px 40px' }}>
-            <div style={S.sectionTitle}>快速上手</div>
-            <div style={S.sectionDesc}>引入组件即可使用，样式自动加载</div>
-            <CodeBlock
-                code={`// 1. 引入组件\nimport { Button, Modal, Switch } from 'animal-island-ui';\nimport 'animal-island-ui/style';\n\nfunction App() {\n    return <Button>开始</Button>;\n}`}
-            />
-        </div>
-
-        <Divider style={{ width: isMobile ? '90%' : 800, margin: '0 auto' }} />
-
-        {/* Theme */}
-        <div style={{ ...S.section, padding: isMobile ? '32px 16px' : '48px 40px' }}>
-            <div style={S.sectionTitle}>主题定制</div>
-            <div style={S.sectionDesc}>
-                通过覆盖 CSS 自定义属性实现运行时换肤，无需重新构建
-            </div>
-            <CodeBlock
-                code={`/* 覆盖主题变量 */\n:root {\n    --animal-primary-color: #19c8b9;\n    --animal-text-color: #827157;\n    --animal-font-family: 'Noto Sans SC', sans-serif;\n    --animal-border-radius-base: 18px;\n    /* ... 40+ 设计令牌 */\n}`}
-            />
-        </div>
-
-        {/* Footer */}
-        <div style={{ ...S.footer, padding: isMobile ? '24px 16px' : '32px 40px' }}>
-            <div style={S.footerLinks}>
-                <span
-                    style={S.footerLink}
-                    onClick={() => onNavigate?.('/button')}
-                >
-                    组件文档
-                </span>
-                <span
-                    style={S.footerLink}
-                    onClick={() =>
-                        window.open(
-                            'https://github.com/guokaigdg/animal-island-ui',
-                            '_blank'
-                        )
-                    }
-                >
-                    GitHub
-                </span>
-            </div>
-            <div>MIT License · React + TypeScript + Vite</div>
-        </div>
-    </div>
-);
-}
+    );
+};
 
 export default HomePage;

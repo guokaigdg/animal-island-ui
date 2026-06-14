@@ -12,8 +12,19 @@ import {
 } from '../../tools';
 
 const TOOLTIP_API: ApiRow[] = [
-    { prop: 'title', desc: '提示内容，支持多行（可用 \\n 或 <br/> 换行）', type: 'ReactNode', defaultVal: '-', required: true },
-    { prop: 'placement', desc: '位置', type: "'top' | 'top-start' | 'top-end' | 'bottom' | 'bottom-start' | 'bottom-end' | 'left' | 'left-start' | 'left-end' | 'right' | 'right-start' | 'right-end'", defaultVal: "'top'" },
+    {
+        prop: 'title',
+        desc: '提示内容，支持多行（可用 \\n 或 <br/> 换行）',
+        type: 'ReactNode',
+        defaultVal: '-',
+        required: true,
+    },
+    {
+        prop: 'placement',
+        desc: '位置',
+        type: "'top' | 'top-start' | 'top-end' | 'bottom' | 'bottom-start' | 'bottom-end' | 'left' | 'left-start' | 'left-end' | 'right' | 'right-start' | 'right-end'",
+        defaultVal: "'top'",
+    },
     { prop: 'trigger', desc: '触发方式', type: "'hover' | 'focus' | 'click'", defaultVal: "'hover'" },
     { prop: 'variant', desc: '视觉风格', type: "'default' | 'island'", defaultVal: "'default'" },
     { prop: 'bordered', desc: '是否显示边框（含箭头描边）', type: 'boolean', defaultVal: 'true' },
@@ -95,7 +106,9 @@ const TooltipDemo: React.FC = () => {
             <div style={demoBoxStyle}>
                 <div style={{ display: 'flex', gap: 16, alignItems: 'center', flexWrap: 'wrap' }}>
                     <Tooltip title="提示文字">
-                        <Button type="primary" size="small">Hover 我</Button>
+                        <Button type="primary" size="small">
+                            Hover 我
+                        </Button>
                     </Tooltip>
                 </div>
             </div>
@@ -169,7 +182,9 @@ const TooltipDemo: React.FC = () => {
                         </div>
 
                         <div style={centerMarkStyle}>
-                            12<br />placements
+                            12
+                            <br />
+                            placements
                         </div>
 
                         <div style={rightColStyle}>
@@ -244,10 +259,7 @@ const TooltipDemo: React.FC = () => {
                         <Button size="small">多行 JSX</Button>
                     </Tooltip>
 
-                    <Tooltip
-                        title={"第一行\n第二行\n第三行 🌿"}
-                        placement="top"
-                    >
+                    <Tooltip title={'第一行\n第二行\n第三行 🌿'} placement="top">
                         <Button size="small">换行符 \n</Button>
                     </Tooltip>
 

@@ -1,9 +1,17 @@
 import React from 'react';
 import { Footer as FooterComponent } from '../../../src';
-import { CodeBlock, ApiTable, ApiRow, sectionStyle, sectionTitleStyle, tagStyle, demoBodyStyle, labelStyle } from '../../tools';
+import {
+    CodeBlock,
+    ApiTable,
+    ApiRow,
+    sectionStyle,
+    sectionTitleStyle,
+    tagStyle,
+    demoBodyStyle,
+    labelStyle,
+} from '../../tools';
 
 const FooterDemo: React.FC = () => {
-
     return (
         <div style={sectionStyle}>
             <div style={sectionTitleStyle}>
@@ -27,8 +35,8 @@ const FooterDemo: React.FC = () => {
                     <FooterComponent type="sea" seamless />
                 </div>
             </div>
-            <CodeBlock 
-            code={`import React from 'react';
+            <CodeBlock
+                code={`import React from 'react';
 import { Footer } from 'animal-island-ui';
 
 const App = () => (
@@ -37,8 +45,8 @@ const App = () => (
         <Footer type="sea" />
         <Footer type="sea" seamless />
     </div>
-);`} 
-/>
+);`}
+            />
             <ApiTable rows={FOOTER_API} />
         </div>
     );

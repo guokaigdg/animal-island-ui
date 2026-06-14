@@ -51,37 +51,79 @@ const TabsDemo: React.FC = () => {
 
     return (
         <div style={sectionStyle}>
-            <div style={sectionTitleStyle}>Tab <span style={tagStyle}>基础用法</span></div>
+            <div style={sectionTitleStyle}>
+                Tab <span style={tagStyle}>基础用法</span>
+            </div>
             <div style={labelStyle}>shadow 阴影控制</div>
             <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}>
                 <div style={demoBoxStyle}>
-                    <Tabs items={[{ key: 'a', label: '鱼类', children: <p>鲈鱼、鲷鱼...</p> }, { key: 'b', label: '昆虫', children: <p>蝴蝶、瓢虫...</p> }]} defaultActiveKey="a" />
+                    <Tabs
+                        items={[
+                            { key: 'a', label: '鱼类', children: <p>鲈鱼、鲷鱼...</p> },
+                            { key: 'b', label: '昆虫', children: <p>蝴蝶、瓢虫...</p> },
+                        ]}
+                        defaultActiveKey="a"
+                    />
                 </div>
                 <div style={demoBoxStyle}>
-                    <Tabs items={[{ key: 'a', label: '鱼类', children: <p>鲈鱼、鲷鱼...</p> }, { key: 'b', label: '昆虫', children: <p>蝴蝶、瓢虫...</p> }]} defaultActiveKey="a" shadow={false} />
+                    <Tabs
+                        items={[
+                            { key: 'a', label: '鱼类', children: <p>鲈鱼、鲷鱼...</p> },
+                            { key: 'b', label: '昆虫', children: <p>蝴蝶、瓢虫...</p> },
+                        ]}
+                        defaultActiveKey="a"
+                        shadow={false}
+                    />
                 </div>
             </div>
             <div style={labelStyle}>非受控模式</div>
             <div style={demoBoxStyle}>
-                <Tabs items={[{ key: 'a', label: '鱼类', children: <p>鲈鱼、鲷鱼、河童...</p> }, { key: 'b', label: '昆虫', children: <p>蝴蝶、瓢虫、蜻蜓...</p> }, { key: 'c', label: '海洋生物', children: <p>海星、珊瑚、小丑鱼...</p> }]} defaultActiveKey="a" />
+                <Tabs
+                    items={[
+                        { key: 'a', label: '鱼类', children: <p>鲈鱼、鲷鱼、河童...</p> },
+                        { key: 'b', label: '昆虫', children: <p>蝴蝶、瓢虫、蜻蜓...</p> },
+                        { key: 'c', label: '海洋生物', children: <p>海星、珊瑚、小丑鱼...</p> },
+                    ]}
+                    defaultActiveKey="a"
+                />
             </div>
             <div style={labelStyle}>受控模式</div>
             <div style={demoBoxStyle}>
                 <Tabs items={items} activeKey={activeKey} onChange={setActiveKey} />
             </div>
-            <div style={{ marginTop: 16, fontSize: 13, color: '#a08060' }}>当前选中: <span style={{ color: '#19c8b9', fontWeight: 600 }}>{items.find(i => i.key === activeKey)?.label}</span></div>
+            <div style={{ marginTop: 16, fontSize: 13, color: '#a08060' }}>
+                当前选中:{' '}
+                <span style={{ color: '#19c8b9', fontWeight: 600 }}>
+                    {items.find((i) => i.key === activeKey)?.label}
+                </span>
+            </div>
             <div style={labelStyle}>leafAnimation 叶子动画控制</div>
             <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}>
                 <div style={demoBoxStyle}>
-                    <Tabs items={[{ key: 'a', label: '鱼类', children: <p>鲈鱼、鲷鱼...</p> }, { key: 'b', label: '昆虫', children: <p>蝴蝶、瓢虫...</p> }]} defaultActiveKey="a" leafAnimation={true} />
+                    <Tabs
+                        items={[
+                            { key: 'a', label: '鱼类', children: <p>鲈鱼、鲷鱼...</p> },
+                            { key: 'b', label: '昆虫', children: <p>蝴蝶、瓢虫...</p> },
+                        ]}
+                        defaultActiveKey="a"
+                        leafAnimation={true}
+                    />
                     <div style={{ fontSize: 12, color: '#a0936e', marginTop: 8 }}>leafAnimation=true (默认)</div>
                 </div>
                 <div style={demoBoxStyle}>
-                    <Tabs items={[{ key: 'a', label: '鱼类', children: <p>鲈鱼、鲷鱼...</p> }, { key: 'b', label: '昆虫', children: <p>蝴蝶、瓢虫...</p> }]} defaultActiveKey="a" leafAnimation={false} />
+                    <Tabs
+                        items={[
+                            { key: 'a', label: '鱼类', children: <p>鲈鱼、鲷鱼...</p> },
+                            { key: 'b', label: '昆虫', children: <p>蝴蝶、瓢虫...</p> },
+                        ]}
+                        defaultActiveKey="a"
+                        leafAnimation={false}
+                    />
                     <div style={{ fontSize: 12, color: '#a0936e', marginTop: 8 }}>leafAnimation=false</div>
                 </div>
             </div>
-            <CodeBlock code={`import React, { useState } from 'react';
+            <CodeBlock
+                code={`import React, { useState } from 'react';
 import { Tabs } from 'animal-island-ui';
 
 const App = () => {
@@ -101,7 +143,8 @@ const App = () => {
     );
 };
 
-export default App;`} />
+export default App;`}
+            />
             <ApiTable rows={TABS_API} />
         </div>
     );

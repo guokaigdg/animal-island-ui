@@ -14,7 +14,12 @@ import {
 const TITLE_API: ApiRow[] = [
     { prop: 'children', desc: '标题内容', type: 'ReactNode', defaultVal: '-', required: true },
     { prop: 'size', desc: '尺寸', type: "'small' | 'middle' | 'large'", defaultVal: "'middle'" },
-    { prop: 'color', desc: '配色', type: "'default' | 'app-pink' | 'purple' | 'app-blue' | 'app-yellow' | 'app-orange' | 'app-teal' | 'app-green' | 'app-red' | 'lime-green' | 'yellow-green' | 'brown' | 'warm-peach-pink'", defaultVal: "'default'" },
+    {
+        prop: 'color',
+        desc: '配色',
+        type: "'default' | 'app-pink' | 'purple' | 'app-blue' | 'app-yellow' | 'app-orange' | 'app-teal' | 'app-green' | 'app-red' | 'lime-green' | 'yellow-green' | 'brown' | 'warm-peach-pink'",
+        defaultVal: "'default'",
+    },
     { prop: 'className', desc: '自定义类名', type: 'string', defaultVal: '-' },
     { prop: 'style', desc: '自定义样式', type: 'React.CSSProperties', defaultVal: '-' },
 ];
@@ -35,12 +40,12 @@ const acBox = (bg: string, dot1: string, dot2: string, border: string): React.CS
 });
 
 // 各 section 主题
-const bgGreen      = acBox('#e8f5d8', 'rgba(120,200,80,0.18)',  'rgba(180,230,120,0.12)', '#b8d890'); // 草地
-const bgSky        = acBox('#ddf0fa', 'rgba(80,170,230,0.15)',  'rgba(140,210,250,0.10)', '#90cce8'); // 天空
-const bgSand       = acBox('#fdf3d8', 'rgba(220,180,80,0.15)',  'rgba(240,210,120,0.10)', '#e8d090'); // 沙滩
-const bgLavender   = acBox('#ede8f8', 'rgba(160,120,230,0.15)', 'rgba(200,170,250,0.10)', '#c0a8e8'); // 薰衣草
-const bgCoral      = acBox('#fce8e0', 'rgba(240,120,90,0.15)',  'rgba(250,170,140,0.10)', '#e8b0a0'); // 珊瑚
-const bgMint       = acBox('#d8f5f0', 'rgba(60,190,170,0.18)',  'rgba(120,230,210,0.12)', '#88d8c8'); // 薄荷
+const bgGreen = acBox('#e8f5d8', 'rgba(120,200,80,0.18)', 'rgba(180,230,120,0.12)', '#b8d890'); // 草地
+const bgSky = acBox('#ddf0fa', 'rgba(80,170,230,0.15)', 'rgba(140,210,250,0.10)', '#90cce8'); // 天空
+const bgSand = acBox('#fdf3d8', 'rgba(220,180,80,0.15)', 'rgba(240,210,120,0.10)', '#e8d090'); // 沙滩
+const bgLavender = acBox('#ede8f8', 'rgba(160,120,230,0.15)', 'rgba(200,170,250,0.10)', '#c0a8e8'); // 薰衣草
+const bgCoral = acBox('#fce8e0', 'rgba(240,120,90,0.15)', 'rgba(250,170,140,0.10)', '#e8b0a0'); // 珊瑚
+const bgMint = acBox('#d8f5f0', 'rgba(60,190,170,0.18)', 'rgba(120,230,210,0.12)', '#88d8c8'); // 薄荷
 
 const TitleDemo: React.FC = () => (
     <div style={sectionStyle}>
@@ -69,7 +74,6 @@ const TitleDemo: React.FC = () => (
             <Title color="brown">棕色</Title>
             <Title color="warm-peach-pink">暖桃粉</Title>
         </div>
-
 
         <div style={labelStyle}>小尺寸</div>
         <div style={bgCoral}>

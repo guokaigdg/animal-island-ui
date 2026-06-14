@@ -68,13 +68,15 @@ const IconDemo: React.FC = () => (
             <Icon name="icon-chat" size={32} bounce />
         </div>
         <div style={labelStyle}>图标列表</div>
-        <div style={{
-            border: '1px solid #e8e2d6',
-            borderRadius: 12,
-            overflow: 'hidden',
-            padding: '5px 16px',
-            marginBottom: 20,
-        }}>
+        <div
+            style={{
+                border: '1px solid #e8e2d6',
+                borderRadius: 12,
+                overflow: 'hidden',
+                padding: '5px 16px',
+                marginBottom: 20,
+            }}
+        >
             {ICON_LIST.map((icon, index) => (
                 <div
                     key={icon.name}
@@ -88,15 +90,15 @@ const IconDemo: React.FC = () => (
                     }}
                 >
                     <Icon name={icon.name} size={32} />
-                    <span style={{ fontSize: 14, color: '#725d42', fontFamily: 'inherit' }}>
-                        {icon.label}
-                    </span>
-                    <span style={{
-                        marginLeft: 'auto',
-                        fontSize: 12,
-                        color: '#a0936e',
-                        fontFamily: "'SF Mono', 'Fira Code', Consolas, monospace",
-                    }}>
+                    <span style={{ fontSize: 14, color: '#725d42', fontFamily: 'inherit' }}>{icon.label}</span>
+                    <span
+                        style={{
+                            marginLeft: 'auto',
+                            fontSize: 12,
+                            color: '#a0936e',
+                            fontFamily: "'SF Mono', 'Fira Code', Consolas, monospace",
+                        }}
+                    >
                         {icon.name}
                     </span>
                 </div>

@@ -1,6 +1,15 @@
 import React, { useState } from 'react';
 import { Table, Button } from '../../../src';
-import { CodeBlock, ApiTable, ApiRow, sectionStyle, sectionTitleStyle, tagStyle, demoBodyStyle, labelStyle } from '../../tools';
+import {
+    CodeBlock,
+    ApiTable,
+    ApiRow,
+    sectionStyle,
+    sectionTitleStyle,
+    tagStyle,
+    demoBodyStyle,
+    labelStyle,
+} from '../../tools';
 
 const TableDemo: React.FC = () => {
     const [striped, setStriped] = useState(true);
@@ -32,22 +41,24 @@ const TableDemo: React.FC = () => {
             render: (value: unknown) => {
                 const hobby = value as string;
                 const tagStyles: Record<string, { bg: string; color: string }> = {
-                    '音乐': { bg: 'rgba(147, 112, 219, 0.15)', color: '#9370db' },
-                    '运动': { bg: 'rgba(255, 140, 0, 0.15)', color: '#ff8c00' },
-                    '唱歌': { bg: 'rgba(255, 99, 71, 0.15)', color: '#ff6347' },
-                    '钓鱼': { bg: 'rgba(30, 144, 255, 0.15)', color: '#1e90ff' },
-                    '画画': { bg: 'rgba(255, 105, 180, 0.15)', color: '#ff69b4' },
+                    音乐: { bg: 'rgba(147, 112, 219, 0.15)', color: '#9370db' },
+                    运动: { bg: 'rgba(255, 140, 0, 0.15)', color: '#ff8c00' },
+                    唱歌: { bg: 'rgba(255, 99, 71, 0.15)', color: '#ff6347' },
+                    钓鱼: { bg: 'rgba(30, 144, 255, 0.15)', color: '#1e90ff' },
+                    画画: { bg: 'rgba(255, 105, 180, 0.15)', color: '#ff69b4' },
                 };
                 const style = tagStyles[hobby] || { bg: 'rgba(25, 200, 185, 0.15)', color: '#19c8b9' };
                 return (
-                    <span style={{
-                        padding: '4px 12px',
-                        background: style.bg,
-                        borderRadius: 20,
-                        color: style.color,
-                        fontWeight: 600,
-                        fontSize: 12,
-                    }}>
+                    <span
+                        style={{
+                            padding: '4px 12px',
+                            background: style.bg,
+                            borderRadius: 20,
+                            color: style.color,
+                            fontWeight: 600,
+                            fontSize: 12,
+                        }}
+                    >
                         {hobby}
                     </span>
                 );
@@ -73,9 +84,7 @@ const TableDemo: React.FC = () => {
             <div style={sectionTitleStyle}>
                 Table <span style={tagStyle}>表格</span>
             </div>
-            <div style={labelStyle}>
-                数据表格组件，支持斑马纹、边框、加载状态等常用功能。
-            </div>
+            <div style={labelStyle}>数据表格组件，支持斑马纹、边框、加载状态等常用功能。</div>
 
             <div style={{ marginBottom: 16, display: 'flex', gap: 16, flexWrap: 'wrap' }}>
                 <Button type={striped ? 'primary' : 'default'} onClick={() => setStriped(!striped)}>
@@ -87,12 +96,7 @@ const TableDemo: React.FC = () => {
             </div>
 
             <div style={{ ...demoBodyStyle, padding: 0, overflow: 'hidden' }}>
-                <Table
-                    columns={columns}
-                    dataSource={dataSource}
-                    striped={striped}
-                    loading={loading}
-                />
+                <Table columns={columns} dataSource={dataSource} striped={striped} loading={loading} />
             </div>
 
             <CodeBlock

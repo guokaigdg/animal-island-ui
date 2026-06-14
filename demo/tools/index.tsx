@@ -157,6 +157,7 @@ export const CodeBlock: React.FC<{ code: string }> = ({ code }) => (
                 marginTop: 0,
                 borderRadius: '0 20px 20px 20px',
             }}
-            code={code} />
+            code={code}
+        />
     </div>
 );

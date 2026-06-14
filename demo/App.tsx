@@ -21,13 +21,10 @@ const ComponentPage = lazy(() => import('./ComponentPage'));
 // Simple hash router
 // ============================================
 const useHash = () => {
-    const [hash, setHash] = useState(
-        () => window.location.hash.slice(1) || '/'
-    );
+    const [hash, setHash] = useState(() => window.location.hash.slice(1) || '/');
 
     useEffect(() => {
-        const onHashChange = () =>
-            setHash(window.location.hash.slice(1) || '/');
+        const onHashChange = () => setHash(window.location.hash.slice(1) || '/');
         window.addEventListener('hashchange', onHashChange);
         return () => window.removeEventListener('hashchange', onHashChange);
     }, []);
@@ -78,7 +75,7 @@ const MENU_ITEMS: MenuItem[] = [
             { key: 'footer', label: 'Footer 页脚' },
             { key: 'codeblock', label: 'CodeBlock 代码高亮' },
             { key: 'loading', label: 'Loading 加载', isNew: true },
-            { key: 'table', label: 'Table 表格'},
+            { key: 'table', label: 'Table 表格' },
         ],
     },
     {
@@ -101,7 +98,8 @@ const S = {
         display: 'flex',
         height: '100dvh',
         overflow: 'hidden',
-        fontFamily: "Nunito, 'Noto Sans SC', 'Zen Maru Gothic', -apple-system, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif",
+        fontFamily:
+            "Nunito, 'Noto Sans SC', 'Zen Maru Gothic', -apple-system, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif",
         background: `url(${new URL('./img/content_bg_pc.jpg', import.meta.url).href}) center / auto repeat`,
     } as React.CSSProperties,
     sidebar: {
@@ -140,7 +138,8 @@ const S = {
             margin: '1px 5px',
             height: 40,
             padding: '0 12px',
-            fontFamily: "Nunito, 'Noto Sans SC', 'Zen Maru Gothic', -apple-system, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif",
+            fontFamily:
+                "Nunito, 'Noto Sans SC', 'Zen Maru Gothic', -apple-system, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif",
             fontStyle: 'normal',
             fontWeight: 600,
             fontSize: 14,
@@ -159,14 +158,10 @@ const S = {
             fontWeight: 800,
             letterSpacing: 0.6,
             color: active ? '#fc736d' : '#fff',
-            background: active
-                ? '#fff'
-                : 'linear-gradient(135deg, #fc736d, #f7825a)',
+            background: active ? '#fff' : 'linear-gradient(135deg, #fc736d, #f7825a)',
             borderRadius: 8,
             lineHeight: '14px',
-            boxShadow: active
-                ? '0 1px 0 rgba(114, 93, 66, 0.15)'
-                : '0 1px 0 rgba(114, 93, 66, 0.25)',
+            boxShadow: active ? '0 1px 0 rgba(114, 93, 66, 0.15)' : '0 1px 0 rgba(114, 93, 66, 0.25)',
             animation: 'menuBadgePulse 1.8s ease-in-out infinite',
         }) as React.CSSProperties,
     main: {
@@ -214,12 +209,10 @@ const SidebarContent: React.FC<{
                                     style={S.menuItem(activeKey === child.key)}
                                     onClick={() => onNavigate(`/${child.key}`)}
                                     onMouseEnter={(e) => {
-                                        if (activeKey !== child.key)
-                                            e.currentTarget.style.background = '#d6dff0';
+                                        if (activeKey !== child.key) e.currentTarget.style.background = '#d6dff0';
                                     }}
                                     onMouseLeave={(e) => {
-                                        if (activeKey !== child.key)
-                                            e.currentTarget.style.background = 'transparent';
+                                        if (activeKey !== child.key) e.currentTarget.style.background = 'transparent';
                                     }}
                                 >
                                     <span
@@ -229,11 +222,7 @@ const SidebarContent: React.FC<{
                                     >
                                         {child.label}
                                     </span>
-                                    {child.isNew && (
-                                        <span style={S.menuBadge(activeKey === child.key)}>
-                                            NEW
-                                        </span>
-                                    )}
+                                    {child.isNew && <span style={S.menuBadge(activeKey === child.key)}>NEW</span>}
                                 </div>
                             ))}
                         </div>
@@ -245,17 +234,13 @@ const SidebarContent: React.FC<{
                         style={S.menuItem(activeKey === item.key)}
                         onClick={() => onNavigate(`/${item.key}`)}
                         onMouseEnter={(e) => {
-                            if (activeKey !== item.key)
-                                e.currentTarget.style.background = '#d6dff0';
+                            if (activeKey !== item.key) e.currentTarget.style.background = '#d6dff0';
                         }}
                         onMouseLeave={(e) => {
-                            if (activeKey !== item.key)
-                                e.currentTarget.style.background = 'transparent';
+                            if (activeKey !== item.key) e.currentTarget.style.background = 'transparent';
                         }}
                     >
-                        <span style={{ color: activeKey === item.key ? '#fff' : '#8a7b66' }}>
-                            {item.label}
-                        </span>
+                        <span style={{ color: activeKey === item.key ? '#fff' : '#8a7b66' }}>{item.label}</span>
                     </div>
                 );
             })}
@@ -274,8 +259,7 @@ const App: React.FC = () => {
     const [loadingMounted, setLoadingMounted] = useState(false);
     const mainRef = React.useRef<HTMLElement>(null);
 
-    const activeKey =
-        hash.startsWith('/') && hash.length > 1 ? hash.slice(1) : 'home';
+    const activeKey = hash.startsWith('/') && hash.length > 1 ? hash.slice(1) : 'home';
     const isHomePage = activeKey === 'home';
 
     // Close drawer when switching to desktop
@@ -339,10 +323,7 @@ const App: React.FC = () => {
                     {/* Desktop sidebar */}
                     {!isMobile && (
                         <aside style={S.sidebar}>
-                            <SidebarContent
-                                activeKey={activeKey}
-                                onNavigate={handleNavigate}
-                            />
+                            <SidebarContent activeKey={activeKey} onNavigate={handleNavigate} />
                         </aside>
                     )}
 
@@ -430,10 +411,7 @@ const App: React.FC = () => {
                                     boxShadow: '4px 0 24px rgba(0,0,0,0.15)',
                                 }}
                             >
-                                <SidebarContent
-                                    activeKey={activeKey}
-                                    onNavigate={handleNavigate}
-                                />
+                                <SidebarContent activeKey={activeKey} onNavigate={handleNavigate} />
                             </aside>
                         </>
                     )}
@@ -455,9 +433,7 @@ const App: React.FC = () => {
 
                     {!isMobile && (
                         <img
-                            src={
-                                new URL('./img/guide-bg-line.webp', import.meta.url).href
-                            }
+                            src={new URL('./img/guide-bg-line.webp', import.meta.url).href}
                             alt=""
                             loading="lazy"
                             decoding="async"
