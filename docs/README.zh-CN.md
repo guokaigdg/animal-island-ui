@@ -164,6 +164,13 @@ npm run build:demo
     <br/><a href="https://github.com/TIUCSIB/animal-island-blog">Island Life Journal</a><br/><sub>小岛生活图片志</sub>
   </td>
 </tr>
+<tr>
+  <td align="center" width="33%">
+    <br/>
+    <img src="img/island-themed-BGM-Player.png" alt="island-themed-BGM-Player" style="border-radius: 8px; width: 90%; display: block; margin: 8px auto 0;" />
+    <br/><a href="https://github.com/skyboooox/island-themed-Player">a cozy island-style UI BGM Player</a><br/><sub>氛围时钟+整点报时</sub>
+  </td>
+</tr>
 </table>
 
 ## 注意事项
