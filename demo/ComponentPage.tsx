@@ -25,8 +25,6 @@ import LoadingDemo from './components/Loading/LoadingDemo';
 import TableDemo from './components/Table/TableDemo';
 import InvitationCardDemo from './components/InvitationCard/InvitationCardDemo';
 import WalletDemo from './components/Wallet/WalletDemo';
-import type { TabItem } from '../src';
-
 // ============================================
 // Styles
 // ============================================

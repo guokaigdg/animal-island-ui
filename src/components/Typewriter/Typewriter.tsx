@@ -20,7 +20,7 @@ export interface TypewriterProps {
  * 递归计算 ReactNode 中的纯文本总长度（用于驱动打字机进度）
  */
 const countText = (node: React.ReactNode): number => {
-    if (node == null || typeof node === 'boolean') return 0;
+    if (node === null || node === undefined || typeof node === 'boolean') return 0;
     if (typeof node === 'string' || typeof node === 'number') return String(node).length;
     if (Array.isArray(node)) return node.reduce<number>((s, n) => s + countText(n), 0);
     if (React.isValidElement(node)) {
@@ -43,7 +43,7 @@ const renderTruncated = (
     keyPrefix = 'tw'
 ): React.ReactNode => {
     if (state.stopped) return null;
-    if (node == null || typeof node === 'boolean') return null;
+    if (node === null || node === undefined || typeof node === 'boolean') return null;
 
     if (typeof node === 'string' || typeof node === 'number') {
         const text = String(node);
