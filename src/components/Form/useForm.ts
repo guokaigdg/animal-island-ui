@@ -101,6 +101,30 @@ function createFormStore(): FormStore {
 // Form 实例创建
 // ============================================
 
+/**
+ * 把嵌套对象展平为 dot-path 形式，与 stringifyNamePath 配套。
+ * 例：{ user: { name: 'tom', tags: ['a','b'] } } → { 'user.name': 'tom', 'user.tags': ['a','b'] }
+ * - 数组当 leaf（不递归）
+ * - null/undefined 当 leaf
+ * - 已含 dot 的顶层 key 不再解析，按字面 key 写入
+ */
+function flattenInitialValues(
+    values: Record<string, unknown>,
+    prefix = '',
+    out: Record<string, unknown> = {}
+): Record<string, unknown> {
+    for (const k of Object.keys(values)) {
+        const fullKey = prefix ? `${prefix}.${k}` : k;
+        const v = values[k];
+        if (v !== null && typeof v === 'object' && !Array.isArray(v)) {
+            flattenInitialValues(v as Record<string, unknown>, fullKey, out);
+        } else {
+            out[fullKey] = v;
+        }
+    }
+    return out;
+}
+
 interface FormOptions {
     initialValues?: Record<string, unknown>;
     onValuesChange?: (changed: Record<string, unknown>, all: Record<string, unknown>) => void;
@@ -124,9 +148,10 @@ function createFormInstance(options: FormOptions): FormInstance {
 
     // 初始值写入
     if (options.initialValues) {
-        Object.keys(options.initialValues).forEach((k) => {
-            store.set(k, options.initialValues?.[k]);
-            initialStore.set(k, options.initialValues?.[k]);
+        const flat = flattenInitialValues(options.initialValues);
+        Object.keys(flat).forEach((k) => {
+            store.set(k, flat[k]);
+            initialStore.set(k, flat[k]);
         });
     }
 
@@ -164,11 +189,12 @@ function createFormInstance(options: FormOptions): FormInstance {
     }
 
     function setFieldsValue(values: Record<string, unknown>): void {
-        Object.keys(values).forEach((k) => {
-            store.set(k, values[k]);
+        const flat = flattenInitialValues(values);
+        Object.keys(flat).forEach((k) => {
+            store.set(k, flat[k]);
             // 首次写入时同步到 initialStore（resetFields 用）
             if (!initialStore.has(k)) {
-                initialStore.set(k, values[k]);
+                initialStore.set(k, flat[k]);
             }
         });
         // 通知所有字段

@@ -126,6 +126,44 @@ describe('Form', () => {
             expect(() => formRef?.getFieldValue('username')).not.toThrow();
         });
 
+        // 回归：嵌套 initialValues / setFieldsValue 必须展平为 dot-path，
+        // 否则 FormItem name=['a','b'] 取不到值。
+        it('回归: setFieldsValue 嵌套对象应展开为 dot-path', () => {
+            let formRef: FormInstance | null = null;
+            function Bind() {
+                const [form] = Form.useForm();
+                formRef = form;
+                return null;
+            }
+            render(<Bind />);
+            formRef!.setFieldsValue({ user: { name: 'tom', age: 18 } });
+            expect(formRef!.getFieldValue(['user', 'name'])).toBe('tom');
+            expect(formRef!.getFieldValue(['user', 'age'])).toBe(18);
+        });
+
+        it('回归: setFieldsValue 数组值当 leaf，不递归', () => {
+            let formRef: FormInstance | null = null;
+            function Bind() {
+                const [form] = Form.useForm();
+                formRef = form;
+                return null;
+            }
+            render(<Bind />);
+            formRef!.setFieldsValue({ tags: ['a', 'b'] } as never);
+            expect(formRef!.getFieldValue('tags')).toEqual(['a', 'b']);
+        });
+
+        it('回归: FormItem name=["user","name"] + 嵌套 initialValues 能渲染出值', () => {
+            const { container } = render(
+                <Form initialValues={{ user: { name: 'tom' } }}>
+                    <Form.Item name={['user', 'name']}>
+                        <Input />
+                    </Form.Item>
+                </Form>
+            );
+            expect(container.querySelector('input')?.value).toBe('tom');
+        });
+
         it('受控 form 实例 + setFieldsValue 同步到 Input', () => {
             function Host() {
                 const [form] = Form.useForm();
@@ -1107,8 +1145,7 @@ describe('Form', () => {
                 if (!setFieldsValueSpy) {
                     const orig = form.setFieldsValue.bind(form);
                     setFieldsValueSpy = vi.fn((v: Record<string, unknown>) => orig(v));
-                    (form as { setFieldsValue: typeof orig }).setFieldsValue =
-                        setFieldsValueSpy as never;
+                    (form as { setFieldsValue: typeof orig }).setFieldsValue = setFieldsValueSpy as never;
                 }
                 return null;
             }
@@ -1142,8 +1179,7 @@ describe('Form', () => {
                 if (!setFieldsValueSpy) {
                     const orig = form.setFieldsValue.bind(form);
                     setFieldsValueSpy = vi.fn((v: Record<string, unknown>) => orig(v));
-                    (form as { setFieldsValue: typeof orig }).setFieldsValue =
-                        setFieldsValueSpy as never;
+                    (form as { setFieldsValue: typeof orig }).setFieldsValue = setFieldsValueSpy as never;
                 }
                 return null;
             }
