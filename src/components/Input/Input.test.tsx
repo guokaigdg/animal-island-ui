@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest';
-import { render, screen } from '@testing-library/react';
+import { render, screen, act } from '@testing-library/react';
 import { Input, type InputProps } from './Input';
 import { setup } from '@test/utils';
 import { ControlledHost } from '@test/components';
@@ -109,4 +109,33 @@ describe('Input', () => {
             expect(screen.getByRole('button', { name: 'Clear' })).toBeInTheDocument();
         });
     });
+});
+
+it('Bug 复现: clear 触发的事件缺少 preventDefault 等 SyntheticEvent 方法', async () => {
+    const onChange = vi.fn();
+    render(<Input allowClear defaultValue="hello" name="username" onChange={onChange} />);
+    const clearBtn = screen.getByRole('button');
+    await act(async () => {
+        clearBtn.click();
+        await new Promise((r) => setTimeout(r, 0));
+    });
+    const eventArg = onChange.mock.calls[0][0];
+    // SyntheticEvent 应有的方法全部缺失
+    expect(typeof eventArg.preventDefault).toBe('function');
+    expect(typeof eventArg.stopPropagation).toBe('function');
+});
+
+it('Bug 复现: clear 触发的事件 target 只有 value，缺少真实 input 属性', async () => {
+    const onChange = vi.fn();
+    render(<Input allowClear defaultValue="hello" name="username" type="email" id="my-input" onChange={onChange} />);
+    const clearBtn = screen.getByRole('button');
+    await act(async () => {
+        clearBtn.click();
+        await new Promise((r) => setTimeout(r, 0));
+    });
+    const eventArg = onChange.mock.calls[0][0];
+    // 真实 input 的 ChangeEvent.target 应该带有这些属性
+    expect(eventArg.target.name).toBe('username');
+    expect(eventArg.target.type).toBe('email');
+    expect(eventArg.target.id).toBe('my-input');
 });
