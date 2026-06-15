@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+﻿import React, { useState, useCallback, useRef } from 'react';
 import styles from './input.module.less';
 
 export type InputSize = 'small' | 'middle' | 'large';
@@ -20,7 +20,7 @@ export interface InputProps extends Omit<React.InputHTMLAttributes<HTMLInputElem
     onChange?: React.ChangeEventHandler<HTMLInputElement>;
     /** 清除回调 */
     onClear?: () => void;
-    /** 清除按钮的无障碍标签，默认 "清除" */
+    /** 清除按钮的无障碍标签，默认"清除" */
     clearAriaLabel?: string;
 }
 
@@ -43,6 +43,7 @@ export const Input: React.FC<InputProps> = ({
     const [innerValue, setInnerValue] = useState(defaultValue ?? '');
     const isControlled = value !== undefined;
     const currentValue = isControlled ? value : innerValue;
+    const inputRef = useRef<HTMLInputElement>(null);
 
     const handleChange: React.ChangeEventHandler<HTMLInputElement> = useCallback(
         (e) => {
@@ -55,15 +56,19 @@ export const Input: React.FC<InputProps> = ({
     const handleClear = useCallback(() => {
         if (!isControlled) setInnerValue('');
         onClear?.();
-        // 触发 onChange 模拟清空
-        const nativeEvent = new Event('input', { bubbles: true });
-        const fakeTarget = { value: '' } as HTMLInputElement;
-        onChange?.({
-            target: fakeTarget,
-            currentTarget: fakeTarget,
-            nativeEvent,
-        } as React.ChangeEvent<HTMLInputElement>);
-    }, [isControlled, onChange, onClear]);
+        // 通过 dispatchEvent 产生真实的 React SyntheticEvent
+        // 避免手搓假事件导致的 preventDefault/stopPropagation 缺失和 target 属性残缺
+        const input = inputRef.current;
+        if (input) {
+            const nativeInputValueSetter = Object.getOwnPropertyDescriptor(
+                window.HTMLInputElement.prototype,
+                'value'
+            )?.set;
+            nativeInputValueSetter?.call(input, '');
+            const event = new Event('input', { bubbles: true });
+            input.dispatchEvent(event);
+        }
+    }, [isControlled, onClear]);
 
     const wrapperCls = [
         styles.wrapper,
@@ -80,6 +85,7 @@ export const Input: React.FC<InputProps> = ({
         <span className={wrapperCls}>
             {prefix && <span className={styles.prefix}>{prefix}</span>}
             <input
+                ref={inputRef}
                 className={styles.input}
                 disabled={disabled}
                 value={currentValue}
