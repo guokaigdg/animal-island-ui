@@ -62,9 +62,9 @@ jobs:
                   cache: npm
 
             - run: npm ci
-            - run: npm run build
+            - run: npm run build:demo
             - uses: actions/upload-artifact@v4
               with:
-                  name: dist
-                  path: dist
+                  name: demo-dist
+                  path: demo-dist
                   retention-days: 7
