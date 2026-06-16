@@ -39,12 +39,7 @@ export default defineConfig({
             reporter: ['text', 'html', 'json-summary'],
             include: ['src/components/**/*.{ts,tsx}'],
             // 与产物无关：d.ts / 桶文件 / fonts 资源 / 纯展示内联 SVG 装饰
-            exclude: [
-                '**/*.d.ts',
-                '**/index.ts',
-                'src/components/InvitationCard/fonts.ts',
-                'src/components/Icon/**',
-            ],
+            exclude: ['**/*.d.ts', '**/index.ts', 'src/components/Icon/**'],
             thresholds: {
                 // 整体目标：达到专业组件库基线
                 // branches 75% 是为 Loading 留口子 —— 它的 setTimeout 清理 + 强制 reflow 分支

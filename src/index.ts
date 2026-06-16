@@ -40,7 +40,7 @@ export type { DividerProps } from './components/Divider';
 export { Typewriter } from './components/Typewriter';
 export type { TypewriterProps } from './components/Typewriter';
 
-export { Icon, ICON_LIST, ITEM_LIST, ITEM_COUNT } from './components/Icon';
+export { Icon, ICON_LIST } from './components/Icon';
 export type { IconProps, IconName } from './components/Icon';
 
 export { Select } from './components/Select';
@@ -92,13 +92,6 @@ export type { LoadingProps } from './components/Loading';
 
 export { Table } from './components/Table';
 export type { TableProps, TableColumn } from './components/Table';
-
-export { InvitationCard, InvitationCardExportButton } from './components/InvitationCard';
-export type {
-    InvitationCardProps,
-    InvitationCardRef,
-    InvitationCardExportButtonProps,
-} from './components/InvitationCard';
 
 export { Wallet } from './components/Wallet';
 export type { WalletProps, WalletSize } from './components/Wallet';

@@ -18,6 +18,6 @@
         },
         "types": ["vitest/globals", "@testing-library/jest-dom", "node"]
     },
-    "include": ["src", "test", "vitest.config.ts"],
+    "include": ["src", "demo", "test", "items.d.ts", "vite.config.demo.ts", "vitest.config.ts"],
     "exclude": ["node_modules", "dist", "demo-dist", "coverage"]
 }

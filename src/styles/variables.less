@@ -42,17 +42,13 @@
 
 // ---------- Typography ----------
 // 字体栈策略：
-//   1. Nunito                  - 拉丁字符主字体（已打入库）
-//   2. Noto Sans SC            - 中文字体（已打入库）
-//   3. Zen Maru Gothic          - 日文字体（已打入库）
-//   4. HarmonyOS Sans SC/MiSans - 现代微圆中文字体（消费方按需加载）
-//   5. PingFang SC / YaHei      - 系统兜底中文字体（非圆体）
+//   1. Nunito                  - 拉丁字符主字体（src/assets/fonts/nunito-latin-*.woff2）
+//   2. Noto Sans SC            - 中文字体（src/assets/fonts/noto-sans-sc-*.woff2）
+//   3. PingFang SC / YaHei      - 系统兜底中文字体（非圆体）
+// @font-face 声明见 src/styles/fonts.less，由构建工具 emit 到 dist/index.css
 @font-family:
     Nunito,
     'Noto Sans SC',
-    'Zen Maru Gothic',
-    'HarmonyOS Sans SC',
-    'MiSans',
     -apple-system,
     'PingFang SC',
     'Hiragino Sans GB',

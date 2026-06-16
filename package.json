@@ -1,6 +1,6 @@
 {
     "name": "animal-island-ui",
-    "version": "1.0.0",
+    "version": "1.0.16",
     "description": "A nature-inspired React component library",
     "type": "module",
     "main": "dist/cjs/index.cjs",
@@ -13,17 +13,17 @@
             "require": "./dist/cjs/index.cjs"
         },
         "./style": "./dist/index.css",
-        "./dist/index.css": "./dist/index.css"
+        "./dist/index.css": "./dist/index.css",
+        "./es/*": "./dist/es/*",
+        "./items/*": "./dist/items/*"
     },
     "files": [
         "dist",
+        "items.d.ts",
         "AI_USAGE.md",
         "README.md"
     ],
-    "sideEffects": [
-        "**/*.css",
-        "**/*.less"
-    ],
+    "sideEffects": false,
     "repository": {
         "type": "git",
         "url": "https://github.com/guokaigdg/animal-island-ui"

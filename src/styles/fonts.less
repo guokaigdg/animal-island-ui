@@ -1,0 +1,84 @@
+// ============================================
+// 库全局字体声明
+// ============================================
+// 9 个 woff2 字重，覆盖 Nunito 拉丁 + Noto Sans SC 拉丁 + Noto Sans SC 简体中文。
+// 不依赖外部 @fontsource CSS —— 消费者只需 `import 'animal-island-ui/style'`
+// 即可自动加载全部字体的 @font-face 声明。
+//
+// 源文件位于 src/assets/fonts/，构建时由 libAssetsPlugin emit 到 dist/files/，
+// 由 emitGlobalStyleEntryPlugin 把 @font-face 拼到 dist/index.css。
+
+// ---------- Nunito (拉丁字符主字体) ----------
+@font-face {
+    font-family: 'Nunito';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url('../assets/fonts/nunito-latin-500-normal.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Nunito';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url('../assets/fonts/nunito-latin-700-normal.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Nunito';
+    font-style: normal;
+    font-weight: 900;
+    font-display: swap;
+    src: url('../assets/fonts/nunito-latin-900-normal.woff2') format('woff2');
+}
+
+// ---------- Noto Sans SC (拉丁子集) ----------
+@font-face {
+    font-family: 'Noto Sans SC';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('../assets/fonts/noto-sans-sc-latin-400-normal.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Noto Sans SC';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url('../assets/fonts/noto-sans-sc-latin-500-normal.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Noto Sans SC';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url('../assets/fonts/noto-sans-sc-latin-700-normal.woff2') format('woff2');
+}
+
+// ---------- Noto Sans SC (简体中文 · 大文件) ----------
+@font-face {
+    font-family: 'Noto Sans SC';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('../assets/fonts/noto-sans-sc-chinese-simplified-400-normal.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Noto Sans SC';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url('../assets/fonts/noto-sans-sc-chinese-simplified-500-normal.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Noto Sans SC';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url('../assets/fonts/noto-sans-sc-chinese-simplified-700-normal.woff2') format('woff2');
+}

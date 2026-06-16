@@ -1,6 +1,20 @@
 import React from 'react';
-import { Icon, ICON_LIST, ITEM_LIST, ITEM_COUNT } from '../../../src';
+import { Icon, ICON_LIST } from '../../../src';
 import { ApiTable, ApiRow, sectionStyle, sectionTitleStyle, tagStyle, CodeBlock, labelStyle } from '../../tools';
+
+// 模拟真实消费者：只用到一个物品图标时，直接静态 import 那一个 PNG。
+import singleItem from '../../../src/assets/img/icons/items/item-001.png';
+
+// item PNG 不再随库打包，由消费者按需 import。Demo 侧本地 glob 演示用法。
+const itemModules = import.meta.glob('../../../src/assets/img/icons/items/item-*.png', {
+    query: '?url',
+    import: 'default',
+    eager: true,
+}) as Record<string, string>;
+const ITEM_SRCS: string[] = Object.entries(itemModules)
+    .sort(([a], [b]) => a.localeCompare(b))
+    .map(([, url]) => url);
+const ITEM_COUNT = ITEM_SRCS.length;
 
 const ICON_API: ApiRow[] = [
     {
@@ -10,9 +24,9 @@ const ICON_API: ApiRow[] = [
         defaultVal: '-',
     },
     {
-        prop: 'item',
-        desc: '物品图标编号（与 name 二选一）',
-        type: 'number',
+        prop: 'src',
+        desc: '自定义图标资源 URL（与 name 二选一），物品图标等需消费者自行 import 传入',
+        type: 'string',
         defaultVal: '-',
     },
     {
@@ -108,17 +122,33 @@ const IconDemo: React.FC = () => (
             Items <span style={tagStyle}>{ITEM_COUNT} items</span>
         </div>
         <div style={labelStyle}>
-            {ITEM_COUNT} 个物品图标。通过 <code>item</code> 编号引用。
+            只用一个物品图标（最常见场景）：静态 <code>import</code> 那一个 PNG，按需进 bundle。
+        </div>
+        <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
+            <Icon src={singleItem} size={48} bounce />
+        </div>
+        <CodeBlock
+            code={`import { Icon } from 'animal-island-ui';
+// 物品图标随库发布在 items/ 子路径下，按需 import —— 只有它会进 bundle
+import item001 from 'animal-island-ui/items/item-001.png';
+
+export default function App() {
+    return <Icon src={item001} size={48} />;
+}`}
+        />
+        <div style={labelStyle}>
+            {ITEM_COUNT} 个物品图标。这些图随库发布在 <code>animal-island-ui/items/</code> 子路径下，由消费者按需{' '}
+            <code>import</code> 后通过 <code>src</code> 传入，仅被引用的图片才进 bundle。
         </div>
         <div style={{ display: 'flex', gap: 12, alignItems: 'center', flexWrap: 'wrap' }}>
-            <Icon item={1} size={48} bounce />
-            <Icon item={5} size={48} bounce />
-            <Icon item={20} size={48} bounce />
-            <Icon item={100} size={48} bounce />
-            <Icon item={200} size={48} bounce />
-            <Icon item={300} size={48} bounce />
-            <Icon item={400} size={48} bounce />
-            <Icon item={ITEM_LIST[ITEM_LIST.length - 1]} size={48} bounce />
+            <Icon src={ITEM_SRCS[0]} size={48} bounce />
+            <Icon src={ITEM_SRCS[4]} size={48} bounce />
+            <Icon src={ITEM_SRCS[19]} size={48} bounce />
+            <Icon src={ITEM_SRCS[99]} size={48} bounce />
+            <Icon src={ITEM_SRCS[199]} size={48} bounce />
+            <Icon src={ITEM_SRCS[299]} size={48} bounce />
+            <Icon src={ITEM_SRCS[399]} size={48} bounce />
+            <Icon src={ITEM_SRCS[ITEM_SRCS.length - 1]} size={48} bounce />
         </div>
         <div style={labelStyle}>全部 {ITEM_COUNT} 个物品</div>
         <div
@@ -134,10 +164,10 @@ const IconDemo: React.FC = () => (
                 overflowY: 'auto',
             }}
         >
-            {ITEM_LIST.map((id) => (
+            {ITEM_SRCS.map((src, idx) => (
                 <div
-                    key={id}
-                    title={`item={${id}}`}
+                    key={src}
+                    title={`item-${String(idx + 1).padStart(3, '0')}.png`}
                     style={{
                         display: 'flex',
                         flexDirection: 'column',
@@ -148,7 +178,7 @@ const IconDemo: React.FC = () => (
                         borderRadius: 8,
                     }}
                 >
-                    <Icon item={id} size={40} />
+                    <Icon src={src} size={40} />
                     <span
                         style={{
                             fontSize: 10,
@@ -156,7 +186,7 @@ const IconDemo: React.FC = () => (
                             fontFamily: "'SF Mono', 'Fira Code', Consolas, monospace",
                         }}
                     >
-                        {id}
+                        {idx + 1}
                     </span>
                 </div>
             ))}
@@ -164,6 +194,8 @@ const IconDemo: React.FC = () => (
         <CodeBlock
             code={`import React from 'react';
 import { Icon } from 'animal-island-ui';
+// 物品图标随库发布在 items/ 子路径下，按需 import
+import item001 from 'animal-island-ui/items/item-001.png';
 
 const App = () => {
     return (
@@ -172,8 +204,8 @@ const App = () => {
             <Icon name="icon-miles" size={32} />
             {/* 弹跳动画 */}
             <Icon name="icon-camera" size={48} bounce />
-            {/* 物品图标（来自 figma Items 设计稿） */}
-            <Icon item={1} size={48} />
+            {/* 物品图标 */}
+            <Icon src={item001} size={48} />
         </div>
     );
 };

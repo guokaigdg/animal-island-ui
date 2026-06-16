@@ -29,7 +29,6 @@ export const Select: React.FC<SelectProps> = ({
 }) => {
     const [open, setOpen] = useState(false);
     const [activeKey, setActiveKey] = useState<string | null>(null);
-    const [hoveredKey, setHoveredKey] = useState<string | null>(null);
     const [dropdownStyle, setDropdownStyle] = useState<React.CSSProperties>({});
     const [mounted, setMounted] = useState(false);
     const wrapperRef = useRef<HTMLDivElement>(null);
@@ -217,13 +216,11 @@ export const Select: React.FC<SelectProps> = ({
                                 id={optionId(option.key)}
                                 role="option"
                                 aria-selected={selected}
-                                className={`${styles.option} ${selected ? styles.active : ''} ${hoveredKey === option.key ? styles.hovered : ''}`}
+                                className={`${styles.option} ${selected ? styles.active : ''}`}
                                 onClick={() => handleSelect(option.key)}
                                 onMouseEnter={() => {
-                                    setHoveredKey(option.key);
                                     setActiveKey(option.key);
                                 }}
-                                onMouseLeave={() => setHoveredKey(null)}
                             >
                                 <span className={styles.optionDot} aria-hidden />
                                 {option.label}
