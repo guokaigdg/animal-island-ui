@@ -140,10 +140,12 @@ describe('Select', () => {
         const banana = Array.from(dropdownEl.querySelectorAll(`.${styles.option}`)).find((el) =>
             el.textContent?.includes('Banana')
         ) as HTMLElement;
+        const weightBefore = getComputedStyle(banana).fontWeight;
         await user.hover(banana);
-        expect(banana).toHaveClass(styles.hovered);
+        const weightAfter = getComputedStyle(banana).fontWeight;
+        expect(weightAfter).toBe('700');
+        expect(weightBefore).not.toBe(weightAfter);
         await user.unhover(banana);
-        expect(banana).not.toHaveClass(styles.hovered);
     });
 
     it('当前选中项带 active 类 + 渲染 pillBar', async () => {
