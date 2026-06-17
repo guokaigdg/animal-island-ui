@@ -336,7 +336,7 @@ export default defineConfig({
             entry: resolve(__dirname, 'src/index.ts'),
         },
         rollupOptions: {
-            external: ['react', 'react-dom', 'react/jsx-runtime', 'modern-screenshot', 'classnames'],
+            external: ['react', 'react-dom', 'react/jsx-runtime', 'classnames'],
             // 多输出：
             //  - ES：preserveModules 保持源码目录结构 → 消费者可按组件 tree-shake，
             //        CSS 随 cssCodeSplit 按组件拆分，配合 injectImportedCssPlugin 自动回填 import
