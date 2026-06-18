@@ -11,7 +11,7 @@ import '@fontsource/noto-sans-sc/chinese-simplified-400.css';
 import '@fontsource/noto-sans-sc/chinese-simplified-500.css';
 import '@fontsource/noto-sans-sc/chinese-simplified-700.css';
 import HomePage from './HomePage';
-import { PAGE_INFO } from './pageInfo';
+import { COMPONENT_NAV_SECTIONS, PAGE_INFO } from './pageInfo';
 import { useIsMobile } from './tools';
 
 // Lazy-load ComponentPage so homepage does not pull in every demo on initial load
@@ -35,61 +35,6 @@ const useHash = () => {
 
     return { hash, navigate };
 };
-
-interface MenuItemChild {
-    key: string;
-    label: string;
-    isNew?: boolean;
-}
-
-interface MenuItem {
-    key: string;
-    label: string;
-    children?: MenuItemChild[];
-}
-
-// ============================================
-// Menu config
-// ============================================
-const MENU_ITEMS: MenuItem[] = [
-    {
-        key: 'cat-basic',
-        label: '── 基础组件 ──',
-        children: [
-            { key: 'title', label: 'Title 标题', isNew: true },
-            { key: 'button', label: 'Button 按钮' },
-            { key: 'input', label: 'Input 输入框' },
-            { key: 'switch', label: 'Switch 开关' },
-            { key: 'card', label: 'Card 卡片' },
-            { key: 'collapse', label: 'Collapse 折叠面板' },
-            { key: 'cursor', label: 'Cursor 光标' },
-            { key: 'modal', label: 'Modal 弹窗' },
-            { key: 'typewriter', label: 'Typewriter 打字机' },
-            { key: 'divider-comp', label: 'Divider 分割线' },
-            { key: 'icon', label: 'Icon 图标' },
-            { key: 'select', label: 'Select 选择器' },
-            { key: 'checkbox', label: 'Checkbox 多选框' },
-            { key: 'radio', label: 'Radio 单选框' },
-            { key: 'tooltip', label: 'Tooltip 气泡提示' },
-            { key: 'tabs', label: 'Tabs 标签页' },
-            { key: 'footer', label: 'Footer 页脚' },
-            { key: 'codeblock', label: 'CodeBlock 代码高亮' },
-            { key: 'loading', label: 'Loading 加载', isNew: true },
-            { key: 'table', label: 'Table 表格' },
-            { key: 'form', label: 'Form 表单', isNew: true },
-        ],
-    },
-    {
-        key: 'cat-complex',
-        label: '── 复杂组件 ──',
-        children: [
-            { key: 'wallet', label: 'Wallet 钱包', isNew: true },
-            { key: 'time', label: 'Time 时间' },
-            { key: 'phone', label: 'Phone 手机' },
-            { key: 'wedding-invitation', label: 'Wedding 婚礼请柬', isNew: true },
-        ],
-    },
-];
 
 // ============================================
 // Shared styles
@@ -189,62 +134,43 @@ const SidebarContent: React.FC<{
             集合啦！Animal
         </div>
         <nav style={S.menuList}>
-            {MENU_ITEMS.map((item) => {
-                if (item.children) {
-                    return (
-                        <div key={item.key}>
-                            <div
-                                style={{
-                                    padding: '12px 16px 4px',
-                                    fontSize: 11,
-                                    color: '#a0936e',
-                                    fontWeight: 600,
-                                    letterSpacing: 0.5,
-                                }}
-                            >
-                                {item.label}
-                            </div>
-                            {item.children.map((child) => (
-                                <div
-                                    key={child.key}
-                                    style={S.menuItem(activeKey === child.key)}
-                                    onClick={() => onNavigate(`/${child.key}`)}
-                                    onMouseEnter={(e) => {
-                                        if (activeKey !== child.key) e.currentTarget.style.background = '#d6dff0';
-                                    }}
-                                    onMouseLeave={(e) => {
-                                        if (activeKey !== child.key) e.currentTarget.style.background = 'transparent';
-                                    }}
-                                >
-                                    <span
-                                        style={{
-                                            color: activeKey === child.key ? '#fff' : '#8a7b66',
-                                        }}
-                                    >
-                                        {child.label}
-                                    </span>
-                                    {child.isNew && <span style={S.menuBadge(activeKey === child.key)}>NEW</span>}
-                                </div>
-                            ))}
-                        </div>
-                    );
-                }
-                return (
+            {COMPONENT_NAV_SECTIONS.map((item) => (
+                <div key={item.key}>
                     <div
-                        key={item.key}
-                        style={S.menuItem(activeKey === item.key)}
-                        onClick={() => onNavigate(`/${item.key}`)}
-                        onMouseEnter={(e) => {
-                            if (activeKey !== item.key) e.currentTarget.style.background = '#d6dff0';
-                        }}
-                        onMouseLeave={(e) => {
-                            if (activeKey !== item.key) e.currentTarget.style.background = 'transparent';
+                        style={{
+                            padding: '12px 16px 4px',
+                            fontSize: 11,
+                            color: '#a0936e',
+                            fontWeight: 600,
+                            letterSpacing: 0.5,
                         }}
                     >
-                        <span style={{ color: activeKey === item.key ? '#fff' : '#8a7b66' }}>{item.label}</span>
+                        {item.label}
                     </div>
-                );
-            })}
+                    {item.children.map((child) => (
+                        <div
+                            key={child.key}
+                            style={S.menuItem(activeKey === child.key)}
+                            onClick={() => onNavigate(`/${child.key}`)}
+                            onMouseEnter={(e) => {
+                                if (activeKey !== child.key) e.currentTarget.style.background = '#d6dff0';
+                            }}
+                            onMouseLeave={(e) => {
+                                if (activeKey !== child.key) e.currentTarget.style.background = 'transparent';
+                            }}
+                        >
+                            <span
+                                style={{
+                                    color: activeKey === child.key ? '#fff' : '#8a7b66',
+                                }}
+                            >
+                                {child.label}
+                            </span>
+                            {child.isNew && <span style={S.menuBadge(activeKey === child.key)}>NEW</span>}
+                        </div>
+                    ))}
+                </div>
+            ))}
         </nav>
     </>
 );

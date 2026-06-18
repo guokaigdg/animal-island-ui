@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Card, Divider, Button, Switch, Collapse, Typewriter } from '../src';
+import { COMPONENT_NAV_ITEMS, PAGE_INFO } from './pageInfo';
 import { useIsMobile } from './tools';
 
 // ============================================
@@ -306,6 +307,12 @@ const S = {
 // ============================================
 // Data
 // ============================================
+const components = COMPONENT_NAV_ITEMS.map((item) => ({
+    key: item.key,
+    name: item.label,
+    desc: PAGE_INFO[item.key]?.desc ?? '组件文档与在线演示',
+}));
+
 const features = [
     {
         icon: 'nook1.svg',
@@ -314,8 +321,8 @@ const features = [
     },
     {
         icon: 'Property-Shopping.svg',
-        title: '24 个组件',
-        desc: 'Button / Input / Switch / Modal / Form / Table / Title / Tooltip / Typewriter / Card / Collapse / Cursor / Divider / Time / Phone / Footer / Icon / Checkbox / Select / Tabs / CodeBlock / Loading / Radio / WeddingInvitation',
+        title: `${components.length} 个组件文档`,
+        desc: components.map((item) => item.name.split(' ')[0]).join(' / '),
     },
     {
         icon: 'Property-Camera.svg',
@@ -327,48 +334,6 @@ const features = [
         title: '开箱即用',
         desc: 'ESM + CJS 双格式输出，TypeScript 类型声明完整',
     },
-];
-
-const components = [
-    {
-        key: 'button',
-        name: 'Button',
-        desc: '5 种类型、3 种尺寸、加载/危险/幽灵模式',
-    },
-    { key: 'input', name: 'Input', desc: '前后缀、一键清空、校验状态' },
-    {
-        key: 'form',
-        name: 'Form',
-        desc: '校验规则 / useForm 命令式 / 三种布局',
-    },
-    {
-        key: 'switch',
-        name: 'Switch',
-        desc: '受控/非受控、自定义文案、加载状态',
-    },
-    { key: 'checkbox', name: 'Checkbox', desc: '多选框组件，支持水平/垂直排列' },
-    {
-        key: 'select',
-        name: 'Select',
-        desc: '下拉选择器，支持搜索和禁用',
-    },
-    { key: 'tabs', name: 'Tabs', desc: '标签页组件，支持受控/非受控模式' },
-    { key: 'modal', name: 'Modal', desc: 'SVG 有机形状弹窗、ESC 关闭' },
-    {
-        key: 'typewriter',
-        name: 'Typewriter',
-        desc: '逐字打字机效果，支持多行与富内容',
-    },
-    { key: 'card', name: 'Card', desc: '默认/标题两种卡片风格' },
-    { key: 'collapse', name: 'Collapse', desc: 'FAQ 折叠面板、平滑展开动画' },
-    { key: 'cursor', name: 'Cursor', desc: '自定义手指光标，支持多种尺寸' },
-    { key: 'divider-comp', name: 'Divider', desc: '装饰性水平分割线' },
-    { key: 'icon', name: 'Icon', desc: 'SVG 图标库' },
-    { key: 'footer', name: 'Footer', desc: '页脚组件' },
-    { key: 'time', name: 'Time', desc: '可爱风格时间显示' },
-    { key: 'phone', name: 'Phone', desc: 'Phone 模拟器' },
-    { key: 'codeblock', name: 'CodeBlock', desc: '代码语法高亮组件' },
-    { key: 'loading', name: 'Loading', desc: '动森风格小岛加载动画' },
 ];
 
 // ============================================

@@ -1,4 +1,58 @@
 // 独立的轻量页面元信息，供 App 等场景静态导入，避免拉入整个 ComponentPage bundle
+export interface ComponentNavItem {
+    key: string;
+    label: string;
+    isNew?: boolean;
+}
+
+export interface ComponentNavSection {
+    key: string;
+    label: string;
+    children: ComponentNavItem[];
+}
+
+export const COMPONENT_NAV_SECTIONS: ComponentNavSection[] = [
+    {
+        key: 'cat-basic',
+        label: '── 基础组件 ──',
+        children: [
+            { key: 'title', label: 'Title 标题', isNew: true },
+            { key: 'button', label: 'Button 按钮' },
+            { key: 'input', label: 'Input 输入框' },
+            { key: 'switch', label: 'Switch 开关' },
+            { key: 'card', label: 'Card 卡片' },
+            { key: 'collapse', label: 'Collapse 折叠面板' },
+            { key: 'cursor', label: 'Cursor 光标' },
+            { key: 'modal', label: 'Modal 弹窗' },
+            { key: 'typewriter', label: 'Typewriter 打字机' },
+            { key: 'divider-comp', label: 'Divider 分割线' },
+            { key: 'icon', label: 'Icon 图标' },
+            { key: 'select', label: 'Select 选择器' },
+            { key: 'checkbox', label: 'Checkbox 多选框' },
+            { key: 'radio', label: 'Radio 单选框' },
+            { key: 'tooltip', label: 'Tooltip 气泡提示' },
+            { key: 'tabs', label: 'Tabs 标签页' },
+            { key: 'footer', label: 'Footer 页脚' },
+            { key: 'codeblock', label: 'CodeBlock 代码高亮' },
+            { key: 'loading', label: 'Loading 加载', isNew: true },
+            { key: 'table', label: 'Table 表格' },
+            { key: 'form', label: 'Form 表单', isNew: true },
+        ],
+    },
+    {
+        key: 'cat-complex',
+        label: '── 复杂组件 ──',
+        children: [
+            { key: 'wallet', label: 'Wallet 钱包', isNew: true },
+            { key: 'time', label: 'Time 时间' },
+            { key: 'phone', label: 'Phone 手机' },
+            { key: 'wedding-invitation', label: 'Wedding 婚礼请柬', isNew: true },
+        ],
+    },
+];
+
+export const COMPONENT_NAV_ITEMS = COMPONENT_NAV_SECTIONS.flatMap((section) => section.children);
+
 export const PAGE_INFO: Record<string, { title: string; desc: string }> = {
     button: {
         title: 'Button 按钮',
@@ -56,6 +110,10 @@ export const PAGE_INFO: Record<string, { title: string; desc: string }> = {
         title: 'Select 选择器',
         desc: '下拉选择器组件 — 支持自定义选项列表，高亮当前选中项',
     },
+    tabs: {
+        title: 'Tabs 标签页',
+        desc: '标签页组件 — 支持受控/非受控模式切换',
+    },
     checkbox: {
         title: 'Checkbox 多选框',
         desc: '多选框组件 — 支持受控/非受控、水平/垂直排列、三种尺寸、禁用单项或全部禁用',
@@ -79,6 +137,10 @@ export const PAGE_INFO: Record<string, { title: string; desc: string }> = {
     loading: {
         title: 'Loading 加载',
         desc: '动森风格小岛 Loading 动画组件，支持自定义样式和类名',
+    },
+    table: {
+        title: 'Table 表格',
+        desc: '数据表格组件，支持斑马纹、边框、加载状态等常用功能',
     },
     'wedding-invitation': {
         title: 'WeddingInvitation 婚礼请柬',
