@@ -29,7 +29,7 @@ You are a senior React engineer. Generate a **single self-contained `index.html`
 - Inject the Modal SVG `<defs>` clip-path block (see Modal section) once at the top of `<body>` so `clip-path: url(#animal-modal-clip)` resolves.
 - Every value below is exact. Do NOT round, approximate, or substitute "close" colors.
 - The npm package `animal-island-ui` is NOT available via UMD CDN in this offline-HTML mode, so you must **hand-roll the library's components inline as React components that mirror the real library's API** (named exports, prop names, prop values). **Always prefer the library API over raw HTML.** Concretely:
-    - At the top of the `<script type="text/babel">` block, define inline React components named exactly like the library's exports: `Button`, `Input`, `Switch`, `Checkbox`, `Radio`, `Card`, `Title`, `Tabs`, `Collapse`, `Modal`, `Select`, `Tooltip`, `Loading`, `Table`, `Time`, `Divider`, `Footer`, `Phone`, `Cursor`, `Typewriter`, `Icon`, `CodeBlock`, `InvitationCard`. Each component must accept the documented props (e.g. `<Card pattern="default">`, `<Button type="primary" size="large">`, `<Title color="app-teal" size="large">`, `<Switch checked onChange={...} />`).
+    - At the top of the `<script type="text/babel">` block, define inline React components named exactly like the library's exports: `Button`, `Input`, `Switch`, `Checkbox`, `Radio`, `Card`, `Title`, `Tabs`, `Collapse`, `Modal`, `Select`, `Tooltip`, `Loading`, `Table`, `Time`, `Divider`, `Footer`, `Phone`, `Cursor`, `Typewriter`, `Icon`, `CodeBlock`, `Form` (with `Form.Item`), `Wallet`. Each component must accept the documented props (e.g. `<Card pattern="default">`, `<Button type="primary" size="large">`, `<Title color="app-teal" size="large">`, `<Switch checked onChange={...} />`, `<Wallet value={1234} size="medium" />`).
     - In the page (`<App />`), **compose the UI exclusively with these JSX components** — do NOT write `<div className="card">` / `<button class="btn">` etc. inline. The page should read like real animal-island-ui usage.
     - Only fall back to raw HTML/JSX (`<div>`, `<span>`, `<h1>`, `<img>`, layout helpers, page-specific decorations, app-specific widgets) when no library component covers the use case (e.g. page layout, header bar, two-column grid, custom illustration). In that case, still use the design tokens (`var(--text-body)`, `var(--bg-content)` …) instead of raw colors.
     - Forbidden: native `<button>`, native `<input>`, native `<select>`, native checkbox/radio used as visible UI. They MUST be wrapped by the inline `Button` / `Input` / `Select` / `Checkbox` / `Radio` components defined above.
@@ -116,7 +116,7 @@ You are a senior React engineer. Generate a **single self-contained `index.html`
 - Cards have NO box-shadow. They float on hover with `transform: translateY(-2px);` only. Pattern variants add a 1.5px solid border in the palette hue.
 - Switch handle stays vertically centered via `transform: translateY(-50%);` and has a 2.5px border but NO `box-shadow` of its own. Track has only inset shadow (see SHADOW SYSTEM above).
 
-## COMPONENT SPECS (24 named exports = 23 components + 1 export-button companion)
+## COMPONENT SPECS (24 components + 3 companion exports: FormItem, useForm, ICON_LIST)
 
 ### Button (3 sizes × 5 types)
 
@@ -382,18 +382,34 @@ You are a senior React engineer. Generate a **single self-contained `index.html`
   component #80c0e0 func #61afef prop #e8c87a jsx #f0a870
   operator #d4b896
 
-### InvitationCard (specialty card + companion export button)
+### Form (form container — layout only in inline-HTML mode)
 
-- Envelope: max-width 420px; padding 56px 36px (top/sides) + var(--lottery-h, 160px) bottom; border-radius 16px.
-- Background: multi-layer radial-gradient + image (NOT a single solid color).
-- filter: drop-shadow(0 10px 24px rgba(61,52,40,0.18)); inset shadow 0 0 0 2px rgba(114,93,66,0.12).
-- ::before texture overlay: radial-gradient dot pattern at 14×14 px; opacity 0.55.
-- ::after dashed inner border: 1.5px dashed rgba(114,93,66,0.35); border-radius 22px 20px 24px 22px / 20px 24px 22px 20px.
-- Bottom 160px lottery / tear-off section: bg rgb(247,243,223); 1.6px dot at 10×5px rgba(114,93,66,0.7); inset shadow 0 4px 6px -3px rgba(61,52,40,0.18); 14px circular notches at the seam.
-- 4 corner leaves: drop-shadow 0 2px 3px rgba(61,52,40,0.15); rotated ±25° / ±115°.
-- Float decorations: animation float 4.5s ease-in-out infinite; Y 0→-6px, rot 0→8deg; stagger delays 0s/0.6s/1.2s/0.3s/1s.
-- Banner divider line: 64×2px linear-gradient(to right, transparent, #725d42, transparent).
-- Export PNG via `InvitationCardExportButton` (uses `modern-screenshot`); the component injects @font-face into the screenshot root because Chromium does not read document.fonts.
+- In static-HTML mode, implement Form as a **layout-only shell** matching the visual spec; do NOT reimplement field hijacking, useForm, validation, or submit. Real interactivity requires `npm i animal-island-ui`.
+- Root `<form class="island-form island-form-horizontal|vertical|inline island-form-{size}">`. Inline `<Form.Item>` is `<div class="island-form-item island-form-item-{layout} island-form-item-{size}">`.
+- Horizontal layout: outer is `display: flex; flex-direction: column; gap: 8px;`. Each item is a **24-column CSS grid** (`grid-template-columns: repeat(24, minmax(0,1fr)); align-items: baseline;`). Label sits in column 1 / span N (labelCol.span, default 6), wrapper in column N+1 / span M (wrapperCol.span, default 18). **No column-gap** between label and wrapper in horizontal (or 23×16px=368px explodes the form).
+- Vertical layout: outer flex column gap 8px; each item is `display: block`; label is `display: block; margin-bottom: 6px;` above the control.
+- Inline layout: outer `display: flex; flex-wrap: wrap; gap: 8px;`; items are `flex: 0 0 auto;` (each item internally stacks label-over-control like vertical).
+- Label: `color: rgba(0,0,0,0.85); font-weight: normal; white-space: nowrap; line-height: 1.6;`. Required `*` before label `color: #ff4d4f; margin-right: 4px;`. Optional colon `:` after label `margin: 0 4px 0 2px;`. Label font-size scales with size: small 12 / middle 14 / large 16 px.
+- Control wrapper: `min-width: 0;`. Help/explain slot: `min-height: 22px; font-size: 12px; color: rgba(0,0,0,0.45); margin-top: 4px;`. Error color `#ff4d4f`, warning `#faad14`, success `#52c41a`, validating `#1677ff`.
+- NOTE: Form's neutral grays (`rgba(0,0,0,0.85)` etc.) intentionally diverge from the warm-parchment token palette used by other components — they mirror conventional form-library defaults so existing forms look familiar. Do NOT recolor Form internals to `#725d42`.
+
+### Wallet (currency pill — 3 sizes)
+
+- Inline-flex column align center; width = pill width; `padding-top: calc(bag-size × 0.7)` reserves space for the bag icon overlapping above the pill.
+- Sizes (pill-w / pill-h / bag / text / halo):
+  small 96 / 32 / 38 / 12 / 3 px
+  medium 132 / 42 / 50 / 17 / 4 px ← default
+  large 176 / 54 / 66 / 22 / 6 px
+- Pill: `border-radius: 999px` (full capsule); `background: #b3a046` (olive-yellow);
+  box-shadow layers (exact):
+    `inset 0 -6px 0 rgba(91,78,30,0.18)` (dark bottom inside),
+    `inset 0 0 0 2px rgba(91,78,30,0.12)` (inset ring),
+    `0 0 0 var(--wallet-halo) #fffbe7` (cream halo outer ring — halo width = 3/4/6 px),
+    `0 6px 14px rgba(91,78,30,0.18)` (drop shadow).
+- Bag slot (icon): `position: absolute; left: 50%; top: 0; transform: translateX(-50%); width/height: var(--wallet-bag);` `filter: drop-shadow(0 4px 6px rgba(91,78,30,0.18)); z-index: 2; pointer-events: none;`. Default icon is the built-in Island bag PNG; replaceable via the `icon` prop (any ReactNode).
+- Value text: `font-weight: 800; letter-spacing: 0.04em; color: #fff; padding: 0 12px; white-space: nowrap; font-variant-numeric: tabular-nums;`. Double `text-shadow` for stroke: `0 2px 0 rgba(91,78,30,0.55), 0 0 1px rgba(91,78,30,0.55)`.
+- Number formatting: when `value` is a `number`, group thousands with `thousandSeparator` (default `,`, pass `""` to disable). When `value` is a `string`, render as-is. When `undefined` / `null`, render `00,000`.
+- Hover animation on the bag slot: `walletBagBounce 0.5s ease-in-out` — translateY -8px rotate -6deg (35%) → translateY -2px rotate 3deg (70%) → 0.
 
 ## HARD RULES (must obey — disqualifies the output if violated)
 
@@ -408,8 +424,8 @@ You are a senior React engineer. Generate a **single self-contained `index.html`
 9. Never use system fonts. Always include the Nunito + Noto Sans SC Google Fonts link.
 10. Never use weight < 400 anywhere. Body 500, headings 600–900.
 11. Never animate with hard cubic transitions; always use `cubic-bezier(0.4, 0, 0.2, 1)` over 0.15–0.35s.
-12. Title `title` prop on `<Modal>` and `<InvitationCard>` is the literal string heading — do NOT confuse it with the `<Title>` component.
-13. **Always reach for the library component first.** If a feature exists as an animal-island-ui component (Card, Button, Input, Switch, Checkbox, Radio, Title, Tabs, Collapse, Modal, Select, Tooltip, Loading, Table, Time, Divider, Footer, Phone, Cursor, Typewriter, Icon, CodeBlock, InvitationCard), use the inline-defined `<ComponentName>` JSX with documented props. Only hand-roll raw HTML/JSX when the library has no equivalent (page layout, app-specific composition, decorative blocks).
+12. Title `title` prop on `<Modal>` is the literal string heading — do NOT confuse it with the `<Title>` component.
+13. **Always reach for the library component first.** If a feature exists as an animal-island-ui component (Card, Button, Input, Switch, Checkbox, Radio, Title, Tabs, Collapse, Modal, Select, Tooltip, Loading, Table, Time, Divider, Footer, Phone, Cursor, Typewriter, Icon, CodeBlock, Form, Wallet), use the inline-defined `<ComponentName>` JSX with documented props. Only hand-roll raw HTML/JSX when the library has no equivalent (page layout, app-specific composition, decorative blocks).
 
 ## TASK
 
