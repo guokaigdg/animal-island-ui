@@ -9,7 +9,7 @@
 <br/>
 <div align="center">
     <a href="https://github.com/guokaigdg/animal-island-ui/stargazers"><img src="https://img.shields.io/github/stars/guokaigdg/animal-island-ui?style=flat-square" alt="Stars"></a>
-    <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square" alt="License"></a>
+    <a href="LICENSE"><img src="https://img.shields.io/badge/license-CC--BY--NC--4.0-orange.svg?style=flat-square" alt="License: CC BY-NC 4.0"></a>
     <a href="LICENSE"><img src="https://img.shields.io/npm/dm/animal-island-ui.svg?style=flat-square" alt=""></a>
     <a href="https://github.com/guokaigdg/animal-island-ui/releases"><img src="https://img.shields.io/github/v/tag/guokaigdg/animal-island-ui?label=version&style=flat-square" alt="Version"></a>
     <a href="https://gitcode.com/guokaigdg/animal-island-ui"><img src="https://gitcode.com/guokaigdg/animal-island-ui/star/badge.svg" alt="Stars"></a>
@@ -192,5 +192,9 @@ npm run build:demo
 
 ## License
 
-MIT
-本项目基于 MIT 开源协议发布，仅限学习使用，作者不对因使用本库导致的任何法律问题或损失承担责任。
+**知识共享 署名-非商业性使用 4.0 国际 (CC BY-NC 4.0)** — 完整文本见 [LICENSE](../LICENSE) 文件。
+
+- **商业使用**：**禁止**。
+- **允许的用途（非商业）**：个人学习、研究、评估、测试、非商业展示。
+- **需保留署名**：使用本库时必须保留原作者版权声明和协议声明。
+- 作者不对因使用本库导致的任何法律问题或损失承担责任。

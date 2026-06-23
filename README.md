@@ -9,7 +9,7 @@ A React UI component library inspired by a cozy island-style UI
 <br/>
 <div align="center">
     <a href="https://github.com/guokaigdg/animal-island-ui/stargazers"><img src="https://img.shields.io/github/stars/guokaigdg/animal-island-ui?style=flat-square" alt="Stars"></a>
-    <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square" alt="License"></a>
+    <a href="LICENSE"><img src="https://img.shields.io/badge/license-CC--BY--NC--4.0-orange.svg?style=flat-square" alt="License: CC BY-NC 4.0"></a>
     <a href="LICENSE"><img src="https://img.shields.io/npm/dm/animal-island-ui.svg?style=flat-square" alt=""></a>
     <a href="https://github.com/guokaigdg/animal-island-ui/releases"><img src="https://img.shields.io/github/v/tag/guokaigdg/animal-island-ui?label=version&style=flat-square" alt="Version"></a>
     <a href="https://gitcode.com/guokaigdg/animal-island-ui"><img src="https://gitcode.com/guokaigdg/animal-island-ui/star/badge.svg" alt="Stars"></a>
@@ -176,8 +176,8 @@ npm run build:demo
 
 ## Notes
 
-- This project is for personal learning, research, and non-commercial demonstration only. Any form of commercial use, resale, or profit-making activities is prohibited.
-- Not for use in any commercial products, enterprise projects, external services, or paid templates.
+- This project is intended for personal learning, research, and non-commercial demonstration only. Any form of commercial use, resale, or profit-making activities is prohibited.
+- Not to be used in any commercial product, enterprise project, external service, or paid template.
 - Users are solely responsible for any risks arising from the use of this component library.
 
 ## Copyright and Disclaimer
@@ -193,5 +193,9 @@ For any questions or copyright-related communications, please contact via Issue 
 
 ## License
 
-MIT
-This project is released under the MIT open-source license, for learning use only. The author is not responsible for any legal issues or losses caused by the use of this library.
+**Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)** — see the [LICENSE](LICENSE) file for the full text.
+
+- **Commercial use**: **PROHIBITED**.
+- **Permitted (non-commercial)**: personal learning, research, evaluation, testing, and non-commercial display.
+- **Attribution required**: must retain the original copyright notice and license declaration.
+- The author is not responsible for any legal issues or losses caused by the use of this library.
