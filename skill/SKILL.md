@@ -20,14 +20,14 @@ description: >
 ## 概述
 
 animal-island-ui 是一套受《治愈系海岛风格》启发的 React + TypeScript UI 组件库。
-设计语言核心：**温暖大地色系 + 大圆角 pill 形 + 游戏按键立体感 + 柔和动效 + 几何 / 有机形状并存**（几何代表：Title 飘带的 swallowtail clip-path；有机代表：Modal 的 SVG blob、InvitationCard 的不规则虚线边框）。
+设计语言核心：**温暖大地色系 + 大圆角 pill 形 + 游戏按键立体感 + 柔和动效 + 几何 / 有机形状并存**（几何代表：Title 飘带的 swallowtail clip-path、Wallet 的橄榄黄胶囊；有机代表：Modal 的 SVG blob）。
 
 - 源码：`src/components/<ComponentName>/`
 - Demo 站：`demo/`
 - 构建：Vite (library mode) + `vite.config.ts`（库）/ `vite.config.demo.ts`（Demo）
 - 样式系统：Less Modules + `src/styles/variables.less` 设计 token
 
-### 全量导出清单（24 个 named exports = 23 个组件 + 1 个伴生导出按钮）
+### 全量导出清单（24 个组件 + 3 个伴生导出：FormItem / useForm / ICON_LIST）
 
 从 `src/index.ts` 导出：
 
@@ -55,9 +55,10 @@ animal-island-ui 是一套受《治愈系海岛风格》启发的 React + TypeSc
 | `CodeBlock`         | JSX/TS 语法高亮代码块                                                                                             |      | ✓             |
 | `Loading`           | 全屏遮罩 + SVG spinner（mint `#19c8b9`，`stroke-dasharray` 动画）                                                 |      | ✓             |
 | `Table`             | 数据表格，固定列、空状态、loading                                                                                 | ✓    |               |
-| `InvitationCard` | 婚礼邀请函（含 `InvitationCardExportButton` 导出 PNG —— 这是清单里**唯一非组件的伴生导出按钮**）               |      | ✓             |
+| `Form`              | 表单容器 + 校验（含 `FormItem` / `useForm` 伴生导出，类主流表单库 API）                                          | ✓    |               |
+| `Wallet`            | 治愈海岛钱袋样式金额胶囊（橄榄黄 pill + Island bag 图标，3 种尺寸，千分位自动格式化）                                  |      | ✓             |
 
-类型导出：`ButtonProps/ButtonType/ButtonSize`、`InputProps/InputSize`、`SwitchProps/SwitchSize`、`ModalProps`、`CardProps/CardType/CardColor`、`TitleProps/TitleSize/TitleColor`、`FooterProps/FooterType`、`CollapseProps`、`CursorProps`、`TimeProps`、`PhoneProps`、`DividerProps`、`TypewriterProps`、`SelectProps/SelectOption`、`IconProps/IconName`、`TabsProps/TabItem`、`CheckboxProps/CheckboxOption/CheckboxSize`、`RadioProps/RadioOption/RadioSize`、`TooltipProps/TooltipPlacement/TooltipTrigger/TooltipVariant`、`CodeBlockProps`、`LoadingProps`、`TableProps/TableColumn`、`InvitationCardProps/InvitationCardRef/InvitationCardExportButtonProps`。运行时值：`ICON_LIST`。
+类型导出：`ButtonProps/ButtonType/ButtonSize`、`InputProps/InputSize`、`SwitchProps/SwitchSize`、`ModalProps`、`CardProps/CardType/CardColor`、`TitleProps/TitleSize/TitleColor`、`FooterProps/FooterType`、`CollapseProps`、`CursorProps`、`TimeProps`、`PhoneProps`、`DividerProps`、`TypewriterProps`、`SelectProps/SelectOption`、`IconProps/IconName`、`TabsProps/TabItem`、`CheckboxProps/CheckboxOption/CheckboxSize`、`RadioProps/RadioOption/RadioSize`、`TooltipProps/TooltipPlacement/TooltipTrigger/TooltipVariant`、`CodeBlockProps`、`LoadingProps`、`TableProps/TableColumn`、`FormProps/FormItemProps/FormInstance/FormLayout/FormItemLayout/FormSize/FormLabelAlign/ColProps/NamePath/RequiredMark/RuleObject/RuleRender/RuleType/Rules/FieldData/ValidateStatus/ValidateError/ValidateInfo/ScrollOptions`、`WalletProps/WalletSize`。运行时值：`ICON_LIST`。伴生导出：`FormItem`、`useForm`（默认导出 `Form` 也支持 `Form.Item` / `Form.useForm` 写法）。
 
 ---
 
@@ -1610,79 +1611,205 @@ color: #19c8b9;
 
 ---
 
-### InvitationCard
+### Form
 
-源码：`src/components/InvitationCard/weddingInvitation.module.less`。这是**特种卡**：信封外壳 + 底部可撕抽奖券 + 浮动叶子动画，整体用 `forwardRef` 暴露 `exportAsImage(filename?)`，导出走 `modern-screenshot`。
+源码：`src/components/Form/Form.tsx` + `FormItem.tsx` + `useForm.ts` + `Form.module.less` + `types.ts`。**表单容器**：类主流表单库 API，提供 `Form.useForm()` 实例、`<Form.Item>` 字段注册、校验、提交、reset 等命令式能力。`FormItem` 通过 `React.cloneElement` 劫持子控件的 `value` / `onChange`（受控注入），子控件无需自己实现受控逻辑。
 
 ```css
-/* 信封外壳 */
-max-width: 420px; /* 不是 600px */
-padding: 56px 36px var(--lottery-h, 160px); /* 顶/侧 56px+36px；底部预留抽奖券高度 */
-border-radius: 16px;
-
-/* 多层背景：径向渐变 + 图片，不是单色 #FAF6E8 */
-background:
-    radial-gradient(...) /* 多层 spotlight */,
-    url(envelope-texture.png);
-
-/* 阴影通过 filter 实现（drop-shadow），便于配合不规则裁切 */
-filter: drop-shadow(0 10px 24px rgba(61, 52, 40, 0.18));
-/* 内描边 */
-box-shadow: inset 0 0 0 2px rgba(114, 93, 66, 0.12);
-
-/* 顶层细点纹理 */
-&::before {
-    background: radial-gradient(circle, ... 14px 14px);
-    opacity: 0.55;
+/* 容器 .island-form —— 沿用中性灰色系，不走 parchment 暖棕系 */
+.island-form {
+    color: rgba(0, 0, 0, 0.85); /* label / 正文 —— 故意不是 #725d42 */
+    font-size: 14px;
+    line-height: 1.6;
+    box-sizing: border-box;
 }
 
-/* 内虚线边框（有机不规则圆角） */
-&::after {
-    border: 1.5px dashed rgba(114, 93, 66, 0.35);
-    border-radius: 22px 20px 24px 22px / 20px 24px 22px 20px;
+/* horizontal：垂直堆叠，每个 item 是 24 列 CSS Grid（label/wrapper 相邻无 column-gap）*/
+.island-form-horizontal {
+    display: flex;
+    flex-direction: column;
+    gap: 8px; /* @form-item-gap */
+}
+.island-form-horizontal .island-form-item {
+    display: grid;
+    grid-template-columns: repeat(24, minmax(0, 1fr));
+    align-items: baseline;
+    row-gap: 8px;
+    /* 注意：label 与 wrapper 之间不加 column-gap，否则 23 × 16px = 368px 撑爆 form */
 }
 
-/* 底部抽奖券（160px 撕条）*/
-.lottery {
-    height: 160px; /* --lottery-h */
-    padding: 38px 36px 18px;
-    background: rgb(247, 243, 223);
-    /* 1.6px 棕色点阵 10×5px */
-    background-image: radial-gradient(circle, rgba(114, 93, 66, 0.7) 1.6px, transparent 1.6px);
-    background-size: 10px 5px;
-    /* 撕痕阴影 */
-    box-shadow: inset 0 4px 6px -3px rgba(61, 52, 40, 0.18);
-    /* 圆形冲孔（信封与撕条接缝处） */
-    --notch: 14px;
+/* vertical：item 是 block，label 独占一行 */
+.island-form-vertical .island-form-item {
+    display: block;
+}
+.island-form-vertical .island-form-item-label {
+    display: block;
+    margin-bottom: 6px; /* @vertical-gap */
 }
 
-/* 4 角叶子：drop-shadow + ±25° / ±115° rotation */
-.cornerLeaf {
-    filter: drop-shadow(0 2px 3px rgba(61, 52, 40, 0.15));
+/* inline：item 横向排开 */
+.island-form-inline {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px; /* @inline-gap */
+}
+.island-form-inline .island-form-item {
+    flex: 0 0 auto;
 }
 
-/* 浮动小装饰 */
-@keyframes float {
-    0%,
-    100% {
-        transform: translateY(0) rotate(0deg);
-    }
-    50% {
-        transform: translateY(-6px) rotate(8deg);
-    }
+/* label */
+.island-form-item-label {
+    color: rgba(0, 0, 0, 0.85);
+    font-weight: normal;
+    white-space: nowrap;
+    line-height: 1.6;
 }
-animation: float 4.5s ease-in-out infinite;
-/* 多个装饰用错位 delay：0s / 0.6s / 1.2s / 0.3s / 1s */
+.island-form-item-label-required::before {
+    content: '*';
+    color: #ff4d4f;
+    margin-right: 4px;
+}
+.island-form-item-label-colon::after {
+    content: ':';
+    margin: 0 4px 0 2px;
+}
 
-/* banner 分隔线 */
-.bannerLine {
-    width: 64px;
-    height: 2px;
-    background: linear-gradient(to right, transparent, #725d42, transparent);
+/* 尺寸只缩放 label 字号 */
+.island-form-small .island-form-item-label { font-size: 12px; }
+.island-form-middle .island-form-item-label { font-size: 14px; } /* default */
+.island-form-large .island-form-item-label { font-size: 16px; }
+
+/* 控件容器 + 错误文案槽 */
+.island-form-item-control-input {
+    position: relative;
+    display: flex;
+    align-items: center;
+    min-height: 32px;
+}
+.island-form-item-explain {
+    min-height: 22px;
+    color: rgba(0, 0, 0, 0.45);
+    font-size: 12px;
+    line-height: 1.5;
+    margin-top: 4px;
+}
+/* 状态色（采用中性灰 + 主流状态色，不走 parchment token）*/
+.island-form-item-has-error  .island-form-item-explain { color: #ff4d4f; }
+.island-form-item-has-warning.island-form-item-explain { color: #faad14; }
+.island-form-item-has-success.island-form-item-explain { color: #52c41a; }
+.island-form-item-is-validating .island-form-item-explain { color: #1677ff; }
+
+/* 全局 disabled */
+.island-form-disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
 }
 ```
 
-> 导出 PNG 时 Chromium 不读 `document.fonts`，需要把 `@font-face` 作为 `<style>` 子节点塞进截图根节点 —— 见 `src/components/InvitationCard/InvitationCard.tsx` 中 `exportAsImage` 的 `embedFontStyles` 逻辑。
+> Form 内部中性灰 `rgba(0,0,0,0.85)` / `#ff4d4f` / `#faad14` / `#52c41a` / `#1677ff` **故意不走** `src/styles/variables.less` 的 parchment 暖棕 token，是为了贴合主流表单库的视觉习惯（用户在表单场景对这些状态色有既定认知）。请勿"为了统一"把它们改成 `#725d42` / `#e05a5a` 等。
+>
+> `FormItem` 必须在 `<Form>` 或 `<Form.Provider>` 内使用，否则抛 `Form.Item must be used inside <Form>`。disabled / size / `status="error"` 三个 prop 会通过 cloneElement 透传给子控件。
+
+---
+
+### Wallet
+
+源码：`src/components/Wallet/Wallet.tsx` + `wallet.module.less`。**金额展示组件**：橄榄黄胶囊 + 治愈海岛钱袋图标上凸，数字带描边。3 种尺寸预设（CSS 变量驱动），数字按千分位自动格式化。
+
+```css
+@wallet-pill-fill:   #b3a046; /* 橄榄黄主色 */
+@wallet-pill-shadow: #8e7d2c;
+@wallet-halo:        #fffbe7; /* 奶油外发光 */
+@wallet-text:        #ffffff;
+@wallet-text-shadow: rgba(91, 78, 30, 0.55);
+
+/* 根容器 —— inline-flex，顶部留出钱袋上凸空间 */
+.wallet {
+    --wallet-pill-w: 132px;
+    --wallet-pill-h: 42px;
+    --wallet-bag: 50px;
+    --wallet-text-size: 17px;
+    --wallet-halo: 4px;
+    position: relative;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    width: var(--wallet-pill-w);
+    padding-top: calc(var(--wallet-bag) * 0.7); /* 70% 钱袋上凸 */
+    user-select: none;
+    line-height: 1;
+}
+
+/* 尺寸预设 */
+.size-small  { --wallet-pill-w: 96px;  --wallet-pill-h: 32px; --wallet-bag: 38px; --wallet-text-size: 12px; --wallet-halo: 3px; }
+.size-large  { --wallet-pill-w: 176px; --wallet-pill-h: 54px; --wallet-bag: 66px; --wallet-text-size: 22px; --wallet-halo: 6px; }
+/* medium 是默认，不写修饰类 */
+
+/* 钱袋 slot（图标）：absolute 上凸于 pill */
+.bagSlot {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    width: var(--wallet-bag);
+    height: var(--wallet-bag);
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    z-index: 2;
+    filter: drop-shadow(0 4px 6px rgba(91, 78, 30, 0.18));
+}
+
+/* pill 本体：胶囊 + 多层 box-shadow */
+.pill {
+    position: relative;
+    width: 100%;
+    height: var(--wallet-pill-h);
+    border-radius: 999px;
+    background: @wallet-pill-fill;
+    /* 多层阴影：内暗部 + 内描边 + 外 halo + 投影 */
+    box-shadow:
+        inset 0 -6px 0 rgba(91, 78, 30, 0.18),
+        inset 0 0 0 2px rgba(91, 78, 30, 0.12),
+        0 0 0 var(--wallet-halo) @wallet-halo,
+        0 6px 14px rgba(91, 78, 30, 0.18);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: visible;
+}
+
+/* 数字文本 */
+.value {
+    font-family: 'Nunito', 'Noto Sans SC', system-ui, sans-serif;
+    font-weight: 800;
+    font-size: var(--wallet-text-size);
+    color: @wallet-text;
+    letter-spacing: 0.04em;
+    /* 双层 text-shadow 模拟描边 */
+    text-shadow:
+        0 2px 0 @wallet-text-shadow,
+        0 0 1px @wallet-text-shadow;
+    font-variant-numeric: tabular-nums; /* 防数字跳动 */
+    padding: 0 12px;
+    white-space: nowrap;
+}
+
+/* hover：钱袋 0.5s 跳动 */
+.wallet:hover .bagSlot {
+    animation: walletBagBounce 0.5s ease-in-out;
+}
+@keyframes walletBagBounce {
+    0%, 100% { transform: translateX(-50%) translateY(0) rotate(0deg); }
+    35%      { transform: translateX(-50%) translateY(-8px) rotate(-6deg); }
+    70%      { transform: translateX(-50%) translateY(-2px) rotate(3deg); }
+}
+```
+
+> 数字格式化（JS 逻辑，不是 CSS）：`value` 为 `number` 时按千分位插入 `thousandSeparator`（默认 `,`，传 `""` 关闭）；`string` 原样展示；`undefined` / `null` 显示 `00,000`。
+>
+> 默认钱袋图标是内置 `assets/img/icons/items/item-022.png`（治愈海岛风格钱袋），通过 `icon` prop 传任意 `ReactNode` 可替换。注意：内部使用了 `<Icon src={bagIcon} />` 的隐藏 `src` 入参（Icon 既支持 `name` 走 ICON_LIST，也支持 `src` 走任意图源）。
 
 ---
 
@@ -2100,7 +2227,8 @@ export const PAGE_INFO: Record<string, { title: string; desc: string }> = {
     title: { title: 'Title 章节标题', desc: '...' },
     loading: { title: 'Loading 加载', desc: '...' },
     table: { title: 'Table 表格', desc: '...' },
-    'wedding-invitation': { title: 'InvitationCard 邀请函', desc: '...' },
+    form: { title: 'Form 表单', desc: '...' },
+    wallet: { title: 'Wallet 钱袋', desc: '...' },
     codeblock: { title: 'CodeBlock 代码高亮', desc: '...' },
 };
 ```
