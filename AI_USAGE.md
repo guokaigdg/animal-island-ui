@@ -26,7 +26,7 @@ react-dom  >= 17.0.0
 
 ---
 
-## 1. Full API (24 named exports)
+## 1. Full API (24 components + 3 companion exports: FormItem, useForm, ICON_LIST)
 
 All named exports from `animal-island-ui`:
 
@@ -54,9 +54,13 @@ import {
     Loading,
     Table,
     CodeBlock,
-    InvitationCard,
-    InvitationCardExportButton,
+    Form,
+    FormItem,
+    Wallet,
 } from 'animal-island-ui';
+
+// Companion hook (form instance factory)
+import { useForm } from 'animal-island-ui';
 
 // Runtime value export (icon catalogue — 10 entries)
 import { ICON_LIST } from 'animal-island-ui';
@@ -104,9 +108,27 @@ import type {
     TableProps,
     TableColumn,
     CodeBlockProps,
-    InvitationCardProps,
-    InvitationCardRef,
-    InvitationCardExportButtonProps,
+    FormProps,
+    FormItemProps,
+    FormItemLayout,
+    FormLayout,
+    FormSize,
+    FormLabelAlign,
+    FormInstance,
+    ColProp,
+    NamePath,
+    RequiredMark,
+    RuleObject,
+    RuleRender,
+    RuleType,
+    Rules,
+    FieldData,
+    ValidateStatus,
+    ValidateError,
+    ValidateInfo,
+    ScrollOptions,
+    WalletProps,
+    WalletSize,
 } from 'animal-island-ui';
 ```
 
@@ -331,7 +353,7 @@ interface TitleProps {
 
 > Replaces the previous `Card type="title"`. Renders an island-style ribbon banner (swallowtail clip-path ends + fold-shadow triangles + raised front). Uses the same 13 IslandPhone palette as `Card.color`; size scales the entire ribbon via `em` units (small 14px / middle 20px / large 28px base).
 >
-> **Not supported:** no `level` (`h1..h6`) — renders as inline-block `<div>`; no `bordered`; no `code` / `mark` / `underline` / `delete` modifiers (this is NOT antd's `Typography.Title`).
+> **Not supported:** no `level` (`h1..h6`) — renders as inline-block `<div>`; no `bordered`; no `code` / `mark` / `underline` / `delete` modifiers (this is a decorative ribbon banner, NOT a generic typography-heading component).
 
 ---
 
@@ -771,7 +793,7 @@ interface LoadingProps {
 
 > Self-contained illustrated loading scene (no configurable content). When `active={false}`, the scene fades out via a CSS mask radius transition.
 >
-> **Not supported:** no `tip` / `text`, no `size`, no `spinning`, no `delay`, no `indicator`, no `children` (this is NOT antd's `Spin` — do not wrap content with it). Use it as a sibling overlay element controlled via `active`.
+> **Not supported:** no `tip` / `text`, no `size`, no `spinning`, no `delay`, no `indicator`, no `children` (this is NOT a generic Spin-style wrapper — do not wrap content with it). Use it as a sibling overlay element controlled via `active`.
 
 ---
 
@@ -844,47 +866,227 @@ interface CodeBlockProps {
 
 ---
 
-### 1.23 InvitationCard
+### 1.23 Form
 
 ```ts
-interface InvitationCardRef {
-    exportAsImage: (filename?: string) => Promise<void>;
-    getElement: () => HTMLDivElement | null;
+type FormLayout = 'horizontal' | 'vertical' | 'inline';
+type FormLabelAlign = 'left' | 'right';
+type FormSize = 'small' | 'middle' | 'large';
+type RequiredMark = boolean | 'optional';
+
+interface ColProps {
+    span?: number; // default 24
+    offset?: number; // default 0
 }
 
-interface InvitationCardProps {
-    groomName?: string; // default '小狸'
-    brideName?: string; // default '小兔'
-    date?: string; // default '2026.06.15'
-    weekday?: string; // default '星期六'
-    time?: string; // default '10:00 AM'
-    venue?: string; // default '彩虹岛 · 樱花广场'
-    address?: string; // default '动物之森 · 无人岛 · K.K. 演奏台前'
-    title?: React.ReactNode; // default 'Wedding Invitation' — heading slot, NOT the <Title> component
-    subtitle?: React.ReactNode; // default <img/> built-in subtitle
-    message?: React.ReactNode; // default bilingual blessing text
-    showLotteryNumber?: boolean; // default true
-    lotteryNumber?: string; // default '0001'
-    lotteryLabel?: React.ReactNode; // default 'LUCKY NUMBER'
-    lotteryHint?: React.ReactNode; // default bilingual hint
+type NamePath = string | number | (string | number)[];
+
+type RuleType =
+    | 'string'
+    | 'number'
+    | 'boolean'
+    | 'integer'
+    | 'float'
+    | 'array'
+    | 'object'
+    | 'email'
+    | 'url'
+    | 'date';
+
+interface RuleObject {
+    required?: boolean;
+    message?: string; // error message on failure
+    min?: number; // min length / min value
+    max?: number; // max length / max value
+    len?: number; // exact length
+    pattern?: RegExp;
+    whitespace?: boolean; // treat whitespace as invalid (with required)
+    type?: RuleType;
+    validator?: (rule: RuleObject, value: unknown) => Promise<void | string> | void | string;
+}
+
+type RuleRender = RuleObject | ((form: FormInstance) => RuleObject);
+type Rules = RuleRender[];
+
+interface ValidateError {
+    name: NamePath;
+    errors: string[];
+}
+
+interface ValidateInfo {
+    values: Record<string, unknown>;
+    errorFields: ValidateError[];
+    outOfDate: boolean;
+}
+
+interface FieldData {
+    name: NamePath;
+    value?: unknown;
+    errors?: string[];
+    touched?: boolean;
+    validating?: boolean;
+}
+
+interface FormInstance<T = Record<string, unknown>> {
+    getFieldValue: (name: NamePath) => unknown;
+    getFieldsValue: (nameList?: NamePath[] | true) => T;
+    setFieldValue: (name: NamePath, value: unknown) => void;
+    setFieldsValue: (values: Partial<T>) => void;
+    resetFields: (nameList?: NamePath[]) => void; // back to initialValues, clears errors
+    validateFields: (nameList?: NamePath[]) => Promise<T>; // rejects with ValidateInfo on error
+    submit: () => void; // validate → onFinish / onFinishFailed
+    setFields: (fields: FieldData[]) => void;
+    isFieldTouched: (name: NamePath) => boolean;
+    isFieldValidating: (name: NamePath) => boolean;
+    getFieldError: (name: NamePath) => string[] | undefined;
+    scrollToField: (name: NamePath, options?: ScrollOptions) => void;
+}
+
+interface ScrollOptions {
+    behavior?: 'auto' | 'smooth';
+    block?: 'start' | 'center' | 'end' | 'nearest';
+    inline?: 'start' | 'center' | 'end' | 'nearest';
+}
+
+interface FormProps<T = Record<string, unknown>> extends Omit<
+    React.FormHTMLAttributes<HTMLFormElement>,
+    'onSubmit' | 'children'
+> {
+    form?: FormInstance<T>; // controlled instance from Form.useForm()
+    initialValues?: Partial<T>;
+    layout?: FormLayout; // default 'horizontal'
+    labelAlign?: FormLabelAlign; // default 'right' (horizontal) / 'left' (vertical, inline)
+    labelCol?: ColProps; // default { span: 6 }
+    wrapperCol?: ColProps; // default { span: 18 }
+    size?: FormSize; // default 'middle' — only scales label font-size
+    disabled?: boolean; // default false — propagates to children via cloneElement
+    colon?: boolean; // default true
+    requiredMark?: RequiredMark; // default false
+    onFinish?: (values: T) => void; // invoked after successful validateFields on submit
+    onFinishFailed?: (info: ValidateInfo) => void;
+    onValuesChange?: (changedValues: Partial<T>, allValues: T) => void;
+    onReset?: (e: React.FormEvent<HTMLFormElement>) => void;
+    children?: React.ReactNode;
+}
+
+// Hook: factory for form instances
+declare function useForm<T = Record<string, unknown>>(): [FormInstance<T>];
+
+// FormItem
+type FormItemLayout = 'horizontal' | 'vertical';
+type ValidateStatus = 'success' | 'warning' | 'error' | 'validating' | '';
+
+interface FormItemProps {
+    name?: NamePath; // omit for display-only item (no field registration)
+    label?: React.ReactNode;
+    rules?: Rules;
+    required?: boolean; // shows * (when requiredMark is on); validation still comes from rules.required
+    dependencies?: NamePath[]; // revalidate this field when listed fields change
+    valuePropName?: string; // default 'value' — prop injected into child
+    trigger?: string; // default 'onChange' — event prop name on child
+    getValueFromEvent?: (event: unknown) => unknown;
+    normalize?: (value: unknown, prevValue: unknown, prevAllValues: Record<string, unknown>) => unknown;
+    hidden?: boolean; // default false — render nothing (still registered)
+    hasFeedback?: boolean; // default false — show ✕ icon on error
+    validateStatus?: ValidateStatus; // override inferred status
+    help?: React.ReactNode; // shown when no error
+    noStyle?: boolean; // default false — skip label/wrapper shell, only clone children
+    labelCol?: ColProps; // override parent
+    wrapperCol?: ColProps; // override parent
+    colon?: boolean; // override parent
+    requiredMark?: RequiredMark; // override parent
+    layout?: FormItemLayout; // override parent
+    initialValue?: unknown; // applied once on mount
     className?: string;
-    style?: React.CSSProperties;
-}
-
-// Companion export button
-interface InvitationCardExportButtonProps extends ButtonProps {
-    invitationRef: React.RefObject<InvitationCardRef>;
-    filename?: string; // default 'wedding-invitation.png'
+    children?: React.ReactNode; // single controlled element — value/onChange injected
 }
 ```
 
 ```tsx
-const ref = useRef<InvitationCardRef>(null);
-<InvitationCard ref={ref} groomName="Kai" brideName="Lily" />
-<InvitationCardExportButton invitationRef={ref}>导出 PNG</InvitationCardExportButton>
+// Controlled form with submit + validation
+const [form] = useForm();
+
+function onFinish(values: { email: string; agree: boolean }) {
+    console.log('submit', values);
+}
+
+<Form
+    form={form}
+    initialValues={{ agree: false }}
+    layout="horizontal"
+    labelCol={{ span: 6 }}
+    wrapperCol={{ span: 18 }}
+    onFinish={onFinish}
+>
+    <FormItem
+        label="Email"
+        name="email"
+        rules={[
+            { required: true, message: 'Email is required' },
+            { type: 'email', message: 'Invalid email' },
+        ]}
+    >
+        <Input placeholder="you@example.com" allowClear />
+    </FormItem>
+
+    <FormItem label="Agree" name="agree" valuePropName="checked">
+        <Switch />
+    </FormItem>
+
+    <FormItem wrapperCol={{ offset: 6, span: 18 }}>
+        <Button type="primary" htmlType="submit" block>
+            Submit
+        </Button>
+    </FormItem>
+</Form>;
+
+// Imperative validate / reset
+const values = await form.validateFields();
+form.resetFields();
+form.setFieldValue('email', 'kai@example.com');
 ```
 
-> `InvitationCard` is a `forwardRef` component. PNG export uses `modern-screenshot` with custom font injection. The companion export button accepts all `ButtonProps`. The `title` prop is plain heading text — NOT the `<Title>` ribbon component.
+Notes:
+
+- **API mirrors the conventional React form pattern.** Familiar concepts (`Form.useForm`, `Form.Item`, `initialValues`, `rules`, `onFinish`, `validateFields`) all work.
+- **FormItem injects `value` / `onChange` (or your custom `valuePropName` / `trigger`) into its child via `React.cloneElement`.** The child must accept these props (most animal-island-ui inputs do). For checkbox/switch use `valuePropName="checked"`.
+- **FormItem must be inside `<Form>`** (or `<Form.Provider>`), otherwise throws at runtime.
+- **Status colors intentionally diverge from the parchment palette** — Form uses conventional neutral status colors (`rgba(0,0,0,0.85)` text, `#ff4d4f` error, `#faad14` warning, `#52c41a` success, `#1677ff` validating). Do NOT recolor Form internals to `#725d42` etc. — see `skill/SKILL.md` § Form.
+- **`required` only controls the `*` mark visibility** (and only when `requiredMark !== false`); actual validation is driven by `rules: [{ required: true }]`.
+- **`size` only scales label font-size** (12/14/16 px). It does not resize the inner input — pass `size` to the inner `<Input size="large">` separately, or it will be propagated from Form via cloneElement if the child supports it.
+- **`disabled` propagates to children** via cloneElement if the child has no explicit `disabled` prop. Same for `size` and `status="error"`.
+- **horizontal layout uses a 24-column CSS Grid.** `labelCol` / `wrapperCol` map to `grid-column: start / span N`. No column-gap between label and wrapper (otherwise the form overflows). Inline items stack label-over-control per item.
+- **Default `labelCol` is `{ span: 6 }`, `wrapperCol` is `{ span: 18 }`.** To put a submit button flush-left under inputs, use `<FormItem wrapperCol={{ offset: 6, span: 18 }}>` with no `name` (no validation).
+
+---
+
+### 1.24 Wallet
+
+```ts
+type WalletSize = 'small' | 'medium' | 'large';
+
+interface WalletProps {
+    value?: number | string; // default '00,000' — numbers auto-formatted with thousandSeparator
+    icon?: React.ReactNode; // default built-in Island bag PNG (item-022.png)
+    size?: WalletSize; // default 'medium'
+    thousandSeparator?: string; // default ',' — pass '' to disable grouping
+    className?: string;
+    style?: React.CSSProperties;
+}
+```
+
+```tsx
+<Wallet value={12345} />
+<Wallet value="9,999,999" size="large" />
+<Wallet value={-1500} thousandSeparator="." size="small" />
+<Wallet value={8888} icon={<span>💰</span>} />
+```
+
+> Decorative currency display — Island-bag-style olive-yellow pill with the bag icon overlapping 70% above. Three sizes: small (96×32 pill / 38px bag / 12px text), medium default (132×42 / 50px / 17px), large (176×54 / 66px / 22px).
+>
+> **Value formatting:** `number` → thousand-grouped with `thousandSeparator`; `string` → rendered as-is; `undefined`/`null` → `00,000`. Negative numbers prefix `-`.
+>
+> **`icon` replaces the entire bag slot** (a single ReactNode in an absolutely-positioned 50×50 px container). Default is the built-in `assets/img/icons/items/item-022.png` rendered via the `Icon` component's hidden `src` prop.
 
 ---
 
@@ -984,7 +1186,7 @@ Follow these strictly; violations are bugs:
 21. **Radio is single-select; values are `string | number`.** Mirrors `Checkbox` API (options, size, direction) but `value` / `onChange` are scalars, not arrays.
 22. **Loading takes no content props** — it's a self-contained scene. Use `active` to fade in/out, do not pass `children`.
 23. **Title replaces `Card type="title"`.** Use `<Title size color>` for chapter/section headings (ribbon banner with swallowtail clip-path); do not try to recreate it on a `Card`.
-24. **Watch the `title` prop collision.** `<Modal title=…>` and `<InvitationCard title=…>` both take a `ReactNode` for their internal heading slot — this is NOT the `<Title>` component (§ 1.6). When you mean the ribbon-banner component, write `<Title>...</Title>` as a child. Do not pass a `<Title>` element to `Modal.title` (it works but doubles up font weight) — pass plain text instead.
+24. **Watch the `title` prop collision.** `<Modal title=…>` takes a `ReactNode` for its internal heading slot — this is NOT the `<Title>` component (§ 1.6). When you mean the ribbon-banner component, write `<Title>...</Title>` as a child. Do not pass a `<Title>` element to `Modal.title` (it works but doubles up font weight) — pass plain text instead.
 
 ---
 
@@ -992,7 +1194,7 @@ Follow these strictly; violations are bugs:
 
 Shipped inside the npm package (available under `node_modules/animal-island-ui/`):
 
-- `AI_USAGE.md` — this file (AI-optimized API reference for all 24 named exports — 23 components + 1 companion export button)
+- `AI_USAGE.md` — this file (AI-optimized API reference for all 24 components + 3 companion exports FormItem / useForm / ICON_LIST)
 - `README.md` — project overview & screenshots
 - `dist/types/index.d.ts` — machine-readable TypeScript types for every exported component / prop / enum
 
