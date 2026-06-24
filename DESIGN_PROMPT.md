@@ -2,7 +2,7 @@
 
 > 本文件目标：给 **AI 设计 / 出图工具**（v0、Figma AI、Framer AI、Locofy、Midjourney、DALL·E、SD）喂可以一次成型的视觉风格描述。
 >
-> - 描述对象是 `animal-island-ui` 组件库本身的视觉风格（v0.9.5，24 个具名导出 = 23 个组件 + 1 个伴生导出按钮）。
+> - 描述对象是 `animal-island-ui` 组件库本身的视觉风格（v0.9.5，24 个组件，外加 FormItem / useForm / ICON_LIST 三个伴生导出）。
 > - 文件中提到的 **侧边栏 / 页面背景图（home_bg.svg / content_bg_pc.jpg / menu_bg.svg）** 属于 **demo 文档站**，库本身不附带，仅作为整体风格参考保留。
 > - 配套文档：消费侧 API 看 [`AI_USAGE.md`](./AI_USAGE.md)；源码内部规范看 [`skill/SKILL.md`](./skill/SKILL.md)；贡献流程看 [`CONTRIBUTING.md`](./CONTRIBUTING.md)。
 
@@ -347,32 +347,50 @@ Behavior: recursively truncates ReactNode tree by character count while preservi
           element structure, className, and inline styles. Returns a plain fragment
           (NO extra wrapping div/span) so it has ZERO layout impact.
 
-=== WEDDING INVITATION (specialty card) ===
-Envelope container: max-width 420px; padding 56px 36px (top/sides);
-                    padding-bottom var(--lottery-h, 160px) (reserves space for tear-off ticket stub);
-                    border-radius 16px;
-                    multi-layer radial-gradient + image background;
-                    drop-shadow 0 10px 24px rgba(61,52,40,0.18) (via filter, NOT box-shadow);
-                    inset shadow 0 0 0 2px rgba(114,93,66,0.12) for soft inner border
-Texture overlay (::before): radial-gradient dot pattern at 14×14px, opacity 0.55
-Dashed inner border (::after): 1.5px dashed rgba(114,93,66,0.35);
-                    border-radius 22px 20px 24px 22px / 20px 24px 22px 20px (organic)
-Lottery / tear-off bottom (160px tall): bg rgb(247,243,223);
-                    1.6px brown dot pattern (rgba(114,93,66,0.7)) at 10×5px;
-                    inset shadow 0 4px 6px -3px rgba(61,52,40,0.18) for tear-line emphasis;
-                    notch radius 14px (circular punches at the seam)
-Corner leaves: drop-shadow 0 2px 3px rgba(61,52,40,0.15); rotated ±25° / ±115°
-Float decorations: 4.5s ease-in-out infinite "float" (Y: 0 → -6px, rot: 0 → 8°);
-                   stagger delays 0s / 0.6s / 1.2s / 0.3s / 1s
-Banner divider: 64px × 2px linear-gradient(to right, transparent, #725d42, transparent)
+=== FORM (form container + validation — conventional form API) ===
+Root class .island-form with -horizontal | -vertical | -inline | -small | -middle | -large | -disabled modifiers.
+Horizontal layout: display flex column gap 8px; each .island-form-item is a 24-column CSS grid
+                   (grid-template-columns: repeat(24, minmax(0,1fr)); align-items: baseline).
+Vertical layout:   flex column gap 8px; .island-form-item is display block; label stacks above control with margin-bottom 6px.
+Inline layout:     flex wrap gap 8px; items flex 0 0 auto; label/wrapper stack vertically per item.
+Label:             color rgba(0,0,0,0.85) (NOT the warm parchment text tokens), font-weight normal, white-space nowrap.
+                   Required mark: "*" before label, color #ff4d4f, margin-right 4px. Colon after label: ":", margin 0 4px 0 2px.
+Control input:     min-height 32px, flex align center. Help/explain block: min-height 22px, font-size 12px, color rgba(0,0,0,0.45), margin-top 4px.
+Status explain colors: error #ff4d4f / warning #faad14 / success #52c41a / validating #1677ff.
+Size only scales label font-size: small 12px / middle 14px / large 16px.
+Disabled: opacity 0.6, cursor not-allowed (also propagates disabled prop to child input).
+FormItem injects value/onChange into child via React.cloneElement (controlled hijack) — child must accept value + onChange.
 
-=== COMPONENT INVENTORY (24 named exports from src/index.ts) ===
+=== WALLET (currency pill — decorative data display) ===
+Container: inline-flex column align center; width = pill width; padding-top = bag size × 0.7 (钱袋上凸空间).
+Sizes (pill-w / pill-h / bag / text / halo):
+  small:  96px / 32px / 38px / 12px / 3px
+  medium: 132px / 42px / 50px / 17px / 4px (default)
+  large:  176px / 54px / 66px / 22px / 6px
+Pill: border-radius 999px (full capsule); background #b3a046 (olive-yellow main);
+      multi-layer box-shadow:
+        inset 0 -6px 0 rgba(91,78,30,0.18)         /* dark bottom inside */
+        inset 0 0 0 2px rgba(91,78,30,0.12)        /* inset ring */
+        0 0 0 var(--wallet-halo) #fffbe7           /* cream halo outer ring */
+        0 6px 14px rgba(91,78,30,0.18)             /* drop shadow */
+Bag slot: absolute, top 0, centered via translateX(-50%); size var(--wallet-bag);
+          filter drop-shadow 0 4px 6px rgba(91,78,30,0.18); z-index 2; pointer-events none.
+          Default icon: built-in Island bag PNG (item-022.png); replaceable via `icon` prop.
+Value text: font-weight 800; letter-spacing 0.04em; color #fff; padding 0 12px; white-space nowrap;
+            font-variant-numeric: tabular-nums; double text-shadow for fake stroke:
+              0 2px 0 rgba(91,78,30,0.55), 0 0 1px rgba(91,78,30,0.55).
+Number format: number → 千分位 with thousandSeparator (default ",", pass "" to disable);
+               string → 原样; undefined/null → '00,000'.
+Hover animation: bagSlot walletBagBounce 0.5s ease-in-out (translateY -8px rot -6deg → -2px rot 3deg → 0).
+
+=== COMPONENT INVENTORY (24 components from src/index.ts, + 3 companion exports FormItem / useForm / ICON_LIST) ===
 Interactive:           Button, Input, Switch, Modal, Collapse, Select, Tabs, Checkbox, Radio
 Container / Heading:   Card (13 colors + 13 dot patterns), Title (ribbon banner — 13 schemes), Table
+Forms:                 Form (with FormItem + useForm companions — conventional form layout + validation)
 Feedback:              Tooltip, Loading
 Decorative:            Time, Phone, Footer, Divider, Cursor, Typewriter, Icon
 Content display:       CodeBlock
-Specialty:             InvitationCard (+ InvitationCardExportButton companion — only export not a component)
+Currency display:      Wallet (3 sizes, olive-yellow pill + Island bag icon)
 
 === CODE BLOCK (dark theme, JSX/TS only) ===
 Container: padding 20px 24px; background #2b2118; border 1px solid #3d3028;
@@ -494,6 +512,11 @@ Interface details:
 | Divider                | `height: 12px`，5 种背景图                                                                                               | 装饰分割线                                         |
 | Cursor                 | `cursor: url(...) 4 0, auto !important`                                                                                  | 游戏手指光标                                       |
 | Typewriter 默认速度    | `90ms/字`                                                                                                                | 按字符打印，无包裹元素                             |
-| InvitationCard 外壳 | max-width 420px；filter drop-shadow；inset 软边                                                                          | 信封式特种卡                                       |
-| InvitationCard 票根 | bottom 160px tear-off + 14px 圆形冲孔 + 撕痕 inset 阴影                                                                  | 抽奖券效果                                         |
+| Form 布局              | horizontal=24 列 CSS Grid；vertical=label 上 control 下；inline=flex wrap                                                | 主流表单布局                                       |
+| Form label             | `rgba(0,0,0,0.85)`，必填星号 `#ff4d4f`                                                                                   | 不走 parchment 色系                                |
+| Form 错误文案          | `#ff4d4f`（error）/ `#faad14`（warning）/ `#52c41a`（success）/ `#1677ff`（validating）                                   | 12px，min-height 22px                              |
+| Wallet pill            | `#b3a046`（橄榄黄）+ `999px` 胶囊；多层 box-shadow（inset 暗部 + halo + drop）                                            | 金额胶囊                                           |
+| Wallet 默认尺寸        | small 96×32 / medium 132×42 / large 176×54 px（pill）；bag 38/50/66 px                                                    | medium 默认                                        |
+| Wallet 钱袋 slot       | absolute top:0，translateX(-50%)，drop-shadow `0 4px 6px rgba(91,78,30,0.18)`；70% 上凸于 pill                              | 默认 item-022.png，可自定义                        |
+| Wallet 数字            | weight 800，`tabular-nums`，`letter-spacing 0.04em`，白色 + 双层 text-shadow 描边                                          | 自动千分位                                         |
 | Google Fonts URL       | `fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;700&display=swap` | 在线加载                                           |
