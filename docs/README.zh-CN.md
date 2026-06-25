@@ -170,6 +170,11 @@ npm run build:demo
     <img src="img/island-themed-BGM-Player.png" alt="island-themed-BGM-Player" style="border-radius: 8px; width: 90%; display: block; margin: 8px auto 0;" />
     <br/><a href="https://github.com/skyboooox/island-themed-Player">a cozy island-style UI BGM Player</a><br/><sub>氛围时钟+整点报时</sub>
   </td>
+  <td align="center" width="33%">
+    <br/>
+    <img src="img/animal-island-ui-taro-port.png" alt="animal-island-ui-taro-port" style="border-radius: 8px; width: 90%; display: block; margin: 8px auto 0;" />
+    <br/><a href="https://github.com/Gospelion/animal-island-ui-taro-port">animal-island-ui-taro-port</a><br/><sub>Taro 与微信原生</sub>
+  </td>
 </tr>
 </table>
 
