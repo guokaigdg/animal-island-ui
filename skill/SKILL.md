@@ -271,6 +271,84 @@ transform: translateY(2px); /* 按钮 active */
 
 ---
 
+### 1.5 反例速查（视觉硬规则 ❌/✅ 配对）
+
+对应 `.cursorrules` §7.3 14 条契约。写代码前对照本节，**所有 ❌ 出现即不合格**。
+
+#### 1. 禁止纯黑文字
+
+- ❌ `color: #000;` / `color: #111;`
+- ✅ `color: #794f27;`（主）/ `#725d42`（次）/ `#8a7b66`（辅助）/ `#9f927d`（弱化）
+
+#### 2. 禁止冷蓝焦点环
+
+- ❌ `outline: 2px solid #0066ff;`
+- ✅ `outline: 2px solid #ffcc00;`（Input/Switch/Checkbox）/ `#f5c31c`（Radio）/ `#19c8b9`（Button）
+
+#### 3. 禁止 0px 圆角 / 交互元素最小 12px
+
+- ❌ `border-radius: 0;` / `border-radius: 4px;`（按钮、输入框、卡片、Tooltip）
+- ✅ `border-radius: 50px;`（按钮/输入框 pill）/ `20px`（卡片）/ `16px`（Tooltip）
+
+#### 4. 禁止冷灰背景
+
+- ❌ `background: #fafafa;` / `background: #f5f5f5;`
+- ✅ `background: #f8f8f0;`（主背景）/ `background: rgb(247, 243, 223);`（内容区）
+
+#### 5. 3D 像素堆叠阴影仅用于 primary / danger-primary 按钮
+
+- ❌ `<Button>` 默认就加 `box-shadow: 0 5px 0 0 #bdaea0;`
+- ✅ `<Button type="primary">` 加 3D 阴影；`type="default"` 用 `box-shadow: 0 2px 4px 0 rgba(61, 52, 40, 0.06);`
+
+#### 6. Input 默认无阴影
+
+- ❌ `<Input>` 组件默认就带 3D 阴影
+- ✅ `<Input>` 无阴影；`<Input shadow />` 加 `box-shadow: 0 3px 0 0 #d4c9b4;`；`status="error"` 不受 `shadow` 控制，始终渲染
+
+#### 7. Switch 无外阴影 / handle 不浮起
+
+- ❌ handle 用 `box-shadow` 浮起 / 用 `margin-top` 居中
+- ✅ handle `position: absolute; top: 50%; transform: translateY(-50%); border: 2.5px solid <同色调>;`
+
+#### 8. Card 无 box-shadow
+
+- ❌ `box-shadow: 0 4px 12px rgba(0,0,0,0.1);` 用于 Card
+- ✅ `&:hover { transform: translateY(-2px); }`；`type="pattern"` 时加 `border: 1.5px solid <同色调>;`
+
+#### 9. Modal 必须用 SVG blob clip-path
+
+- ❌ `border-radius: 20px;` 配合矩形容器
+- ✅ `clip-path: url(#animal-modal-clip);` 引用 SVG blob
+
+#### 10. Title 是 swallowtail 飘带
+
+- ❌ 用 `<Card type="title">` 或带 `border-radius` 的矩形 Title
+- ✅ 用 `<Title>` 组件，clip-path 配合 `transform: perspective(800px) rotateY(3deg);`
+
+#### 11. 字体
+
+- ❌ `font-family: -apple-system, sans-serif;`（UI 文字）
+- ✅ `font-family: var(--animal-font-family, 'Nunito', 'Noto Sans SC');`
+
+#### 12. 字重不得低于 400
+
+- ❌ `font-weight: 300;` / `font-weight: normal;`（< 400）
+- ✅ 正文 `500`；按钮/标题 `600-700`；Time/Title `900`；placeholder `400`
+
+#### 13. 动效缓动
+
+- ❌ `transition: all 0.3s ease;`
+- ✅ `transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);`（时长落在 0.15–0.35s 区间）
+
+#### 14. Radio 是高圆化方形 + SVG 对勾
+
+- ❌ `border-radius: 50%;` 配合 `<span class="dot" />`
+- ✅ `border-radius: 14px;` 配合内嵌 `<svg>` 对勾
+
+> 反例条目以 `.cursorrules` §7.3 为唯一真源；本节与 .cursorrules 冲突时以 .cursorrules 为准。
+
+---
+
 ## 2. 组件精确样式规范
 
 ### Button
