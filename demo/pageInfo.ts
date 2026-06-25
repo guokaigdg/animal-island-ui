@@ -88,6 +88,10 @@ export const PAGE_INFO: Record<string, { title: string; desc: string }> = {
         title: 'Wallet 钱包',
         desc: '治愈海岛风格金币展示 — 奶油描边胶囊 + 上凸钱袋图标，支持千分位、自定义图标与三种尺寸',
     },
+    tag: {
+        title: 'Tag 标签',
+        desc: '标签组件 — 支持 solid / outlined / dashed 三种风格，16 种颜色，三种尺寸，可关闭、可点击、自定义图标',
+    },
     form: {
         title: 'Form 表单',
         desc: '表单组件 — 支持 useForm 命令式实例、多种校验规则、三种布局（horizontal / vertical / inline）、labelCol / wrapperCol 网格',

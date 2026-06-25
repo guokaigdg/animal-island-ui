@@ -95,3 +95,6 @@ export type { TableProps, TableColumn } from './components/Table';
 
 export { Wallet } from './components/Wallet';
 export type { WalletProps, WalletSize } from './components/Wallet';
+
+export { Tag } from './components/Tag';
+export type { TagProps, TagSize, TagVariant, TagColor } from './components/Tag';

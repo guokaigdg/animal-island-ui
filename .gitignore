@@ -47,3 +47,4 @@ coverage/
 *.bak
 *.tmp
 *.temp
+.npmrc

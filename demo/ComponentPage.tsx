@@ -26,6 +26,7 @@ import TableDemo from './components/Table/TableDemo';
 import InvitationCardDemo from './components/InvitationCard/InvitationCardDemo';
 import WalletDemo from './components/Wallet/WalletDemo';
 import FormDemo from './components/Form';
+import TagDemo from './components/Tag';
 // ============================================
 // Styles
 // ============================================
@@ -1406,7 +1407,11 @@ export const PAGE_INFO: Record<string, { title: string; desc: string }> = {
     },
     wallet: {
         title: 'Wallet 钱包',
-        desc: '治愈海岛风格金币展示 — 奶油描边的橄榄黄胶囊 + 上凸钱袋图标，支持千分位格式化、自定义图标与三种尺寸',
+        desc: '治愈海岛风格金币展示 — 奶油描边胶囊 + 上凸钱袋图标，支持千分位、自定义图标与三种尺寸',
+    },
+    tag: {
+        title: 'Tag 标签',
+        desc: '标签组件 — 支持 solid / outlined / dashed 三种风格，16 种颜色，三种尺寸，可关闭、可点击、自定义图标',
     },
     form: {
         title: 'Form 表单',
@@ -1439,6 +1444,7 @@ const PAGES: Record<string, React.FC> = {
     table: TableDemo,
     'wedding-invitation': InvitationCardDemo,
     wallet: WalletDemo,
+    tag: TagDemo,
     form: FormDemo,
 };
 

@@ -1,0 +1,279 @@
+// ============================================
+// Tag — Animal Island Style
+// 配色与 Card 完全对齐
+// ============================================
+
+.tag {
+    box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    line-height: 1;
+    font-family: inherit;
+    font-weight: 600;
+    border-radius: 999px;
+    border: 1.5px solid transparent;
+    transition: all 0.2s ease;
+    user-select: none;
+    white-space: nowrap;
+}
+
+// ---------- Size ----------
+.size-small {
+    height: 24px;
+    line-height: 21px;
+    padding: 0 10px;
+    font-size: 12px;
+}
+
+.size-medium {
+    height: 29px;
+    line-height: 26px;
+    padding: 0 12px;
+    font-size: 13px;
+}
+
+.size-large {
+    height: 34px;
+    line-height: 31px;
+    padding: 0 16px;
+    font-size: 15px;
+}
+
+// ---------- Variant: solid ----------
+.variant-solid {
+    background: rgb(247, 243, 223);
+    color: #8f734f;
+    border-color: #d4c4a8;
+}
+
+// ---------- Variant: outlined ----------
+.variant-outlined {
+    background: transparent;
+    color: #8f734f;
+    border-color: #c4b89e;
+}
+
+// ---------- Variant: dashed ----------
+.variant-dashed {
+    background: transparent;
+    color: #8f734f;
+    border-style: dashed;
+    border-color: #c4b89e;
+}
+
+// ============================================
+// Color — solid variants
+// 背景 + 边框 = Card .pattern-{color} 边框色
+// 文字 = #fff（default 除外）
+// ============================================
+.color-app-pink-solid {
+    background: #f8a6b2;
+    border-color: #f8a6b2;
+    color: #fff;
+}
+
+.color-purple-solid {
+    background: #b77dee;
+    border-color: #b77dee;
+    color: #fff;
+}
+
+.color-app-blue-solid {
+    background: #889df0;
+    border-color: #889df0;
+    color: #fff;
+}
+
+.color-app-yellow-solid {
+    background: #f7cd67;
+    border-color: #f7cd67;
+    color: #fff;
+}
+
+.color-app-orange-solid {
+    background: #e59266;
+    border-color: #e59266;
+    color: #fff;
+}
+
+.color-app-teal-solid {
+    background: #82d5bb;
+    border-color: #82d5bb;
+    color: #fff;
+}
+
+.color-app-green-solid {
+    background: #8ac68a;
+    border-color: #8ac68a;
+    color: #fff;
+}
+
+.color-app-red-solid {
+    background: #fc736d;
+    border-color: #fc736d;
+    color: #fff;
+}
+
+.color-lime-green-solid {
+    background: #d1da49;
+    border-color: #d1da49;
+    color: #fff;
+}
+
+.color-yellow-green-solid {
+    background: #ecdf52;
+    border-color: #ecdf52;
+    color: #fff;
+}
+
+.color-brown-solid {
+    background: #9a835a;
+    border-color: #9a835a;
+    color: #fff;
+}
+
+.color-warm-peach-pink-solid {
+    background: #e18c6f;
+    border-color: #e18c6f;
+    color: #fff;
+}
+
+// ============================================
+// Color — outlined & dashed variants
+// 文字与描边同色 = Card .card-{color} 饱和色
+// ============================================
+.color-app-pink-outlined,
+.color-app-pink-dashed {
+    color: #f8a6b2;
+    border-color: #f8a6b2;
+}
+
+.color-purple-outlined,
+.color-purple-dashed {
+    color: #b77dee;
+    border-color: #b77dee;
+}
+
+.color-app-blue-outlined,
+.color-app-blue-dashed {
+    color: #889df0;
+    border-color: #889df0;
+}
+
+.color-app-yellow-outlined,
+.color-app-yellow-dashed {
+    color: #f7cd67;
+    border-color: #f7cd67;
+}
+
+.color-app-orange-outlined,
+.color-app-orange-dashed {
+    color: #e59266;
+    border-color: #e59266;
+}
+
+.color-app-teal-outlined,
+.color-app-teal-dashed {
+    color: #82d5bb;
+    border-color: #82d5bb;
+}
+
+.color-app-green-outlined,
+.color-app-green-dashed {
+    color: #8ac68a;
+    border-color: #8ac68a;
+}
+
+.color-app-red-outlined,
+.color-app-red-dashed {
+    color: #fc736d;
+    border-color: #fc736d;
+}
+
+.color-lime-green-outlined,
+.color-lime-green-dashed {
+    color: #d1da49;
+    border-color: #d1da49;
+}
+
+.color-yellow-green-outlined,
+.color-yellow-green-dashed {
+    color: #ecdf52;
+    border-color: #ecdf52;
+}
+
+.color-brown-outlined,
+.color-brown-dashed {
+    color: #9a835a;
+    border-color: #9a835a;
+}
+
+.color-warm-peach-pink-outlined,
+.color-warm-peach-pink-dashed {
+    color: #e18c6f;
+    border-color: #e18c6f;
+}
+
+// ============================================
+// Text
+// ============================================
+.text {
+
+    color: inherit;
+}
+
+.close {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 2px;
+    margin-right: -4px;
+    width: 16px;
+    height: 16px;
+    padding: 0;
+    border: none;
+    background: rgba(0, 0, 0, 0.08);
+    color: inherit;
+    font-size: 14px;
+    line-height: 1;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background 0.15s ease;
+}
+
+.close:hover {
+    background: rgba(0, 0, 0, 0.18);
+}
+
+.close:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+// ============================================
+// Interactive states
+// ============================================
+.is-clickable {
+    cursor: pointer;
+}
+
+.is-clickable:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 6px rgba(61, 52, 40, 0.12);
+}
+
+.is-clickable:active {
+    transform: translateY(0);
+}
+
+.is-clickable:focus-visible {
+    outline: 2px solid var(--animal-focus-yellow, #f5c31c);
+    outline-offset: 2px;
+}
+
+.is-disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+}
