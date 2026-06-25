@@ -20,7 +20,11 @@ describe('Tag', () => {
         });
 
         it('支持 className 与 style', () => {
-            const { container } = render(<Tag className="x" style={{ marginLeft: 4 }}>t</Tag>);
+            const { container } = render(
+                <Tag className="x" style={{ marginLeft: 4 }}>
+                    t
+                </Tag>
+            );
             const root = container.firstChild as HTMLElement;
             expect(root).toHaveClass('x');
             expect(root).toHaveStyle({ marginLeft: '4px' });
@@ -59,17 +63,29 @@ describe('Tag', () => {
         });
 
         it('color=app-pink + solid 应用 color-app-pink-solid 类', () => {
-            const { container } = render(<Tag color="app-pink" variant="solid">x</Tag>);
+            const { container } = render(
+                <Tag color="app-pink" variant="solid">
+                    x
+                </Tag>
+            );
             expect(container.firstChild).toHaveClass(styles['color-app-pink-solid']);
         });
 
         it('color=purple + outlined 应用 color-purple-outlined 类', () => {
-            const { container } = render(<Tag color="purple" variant="outlined">x</Tag>);
+            const { container } = render(
+                <Tag color="purple" variant="outlined">
+                    x
+                </Tag>
+            );
             expect(container.firstChild).toHaveClass(styles['color-purple-outlined']);
         });
 
         it('color=app-blue + dashed 应用 color-app-blue-dashed 类', () => {
-            const { container } = render(<Tag color="app-blue" variant="dashed">x</Tag>);
+            const { container } = render(
+                <Tag color="app-blue" variant="dashed">
+                    x
+                </Tag>
+            );
             expect(container.firstChild).toHaveClass(styles['color-app-blue-dashed']);
         });
     });
@@ -82,7 +98,11 @@ describe('Tag', () => {
 
         it('点击关闭按钮触发 onClose', () => {
             const onClose = vi.fn();
-            render(<Tag closable onClose={onClose}>x</Tag>);
+            render(
+                <Tag closable onClose={onClose}>
+                    x
+                </Tag>
+            );
             fireEvent.click(screen.getByRole('button', { name: 'close' }));
             expect(onClose).toHaveBeenCalledTimes(1);
         });

@@ -125,36 +125,88 @@ const TagDemo: React.FC = () => {
 
                 <div style={labelStyle}>color 颜色（outlined）</div>
                 <div style={S.row}>
-                    <Tag variant="outlined" color="default">default</Tag>
-                    <Tag variant="outlined" color="app-pink">app-pink</Tag>
-                    <Tag variant="outlined" color="purple">purple</Tag>
-                    <Tag variant="outlined" color="app-blue">app-blue</Tag>
-                    <Tag variant="outlined" color="app-yellow">app-yellow</Tag>
-                    <Tag variant="outlined" color="app-orange">app-orange</Tag>
-                    <Tag variant="outlined" color="app-teal">app-teal</Tag>
-                    <Tag variant="outlined" color="app-green">app-green</Tag>
-                    <Tag variant="outlined" color="app-red">app-red</Tag>
-                    <Tag variant="outlined" color="lime-green">lime-green</Tag>
-                    <Tag variant="outlined" color="yellow-green">yellow-green</Tag>
-                    <Tag variant="outlined" color="brown">brown</Tag>
-                    <Tag variant="outlined" color="warm-peach-pink">warm-peach-pink</Tag>
+                    <Tag variant="outlined" color="default">
+                        default
+                    </Tag>
+                    <Tag variant="outlined" color="app-pink">
+                        app-pink
+                    </Tag>
+                    <Tag variant="outlined" color="purple">
+                        purple
+                    </Tag>
+                    <Tag variant="outlined" color="app-blue">
+                        app-blue
+                    </Tag>
+                    <Tag variant="outlined" color="app-yellow">
+                        app-yellow
+                    </Tag>
+                    <Tag variant="outlined" color="app-orange">
+                        app-orange
+                    </Tag>
+                    <Tag variant="outlined" color="app-teal">
+                        app-teal
+                    </Tag>
+                    <Tag variant="outlined" color="app-green">
+                        app-green
+                    </Tag>
+                    <Tag variant="outlined" color="app-red">
+                        app-red
+                    </Tag>
+                    <Tag variant="outlined" color="lime-green">
+                        lime-green
+                    </Tag>
+                    <Tag variant="outlined" color="yellow-green">
+                        yellow-green
+                    </Tag>
+                    <Tag variant="outlined" color="brown">
+                        brown
+                    </Tag>
+                    <Tag variant="outlined" color="warm-peach-pink">
+                        warm-peach-pink
+                    </Tag>
                 </div>
 
                 <div style={labelStyle}>color 颜色（dashed）</div>
                 <div style={S.row}>
-                    <Tag variant="dashed" color="default">default</Tag>
-                    <Tag variant="dashed" color="app-pink">app-pink</Tag>
-                    <Tag variant="dashed" color="purple">purple</Tag>
-                    <Tag variant="dashed" color="app-blue">app-blue</Tag>
-                    <Tag variant="dashed" color="app-yellow">app-yellow</Tag>
-                    <Tag variant="dashed" color="app-orange">app-orange</Tag>
-                    <Tag variant="dashed" color="app-teal">app-teal</Tag>
-                    <Tag variant="dashed" color="app-green">app-green</Tag>
-                    <Tag variant="dashed" color="app-red">app-red</Tag>
-                    <Tag variant="dashed" color="lime-green">lime-green</Tag>
-                    <Tag variant="dashed" color="yellow-green">yellow-green</Tag>
-                    <Tag variant="dashed" color="brown">brown</Tag>
-                    <Tag variant="dashed" color="warm-peach-pink">warm-peach-pink</Tag>
+                    <Tag variant="dashed" color="default">
+                        default
+                    </Tag>
+                    <Tag variant="dashed" color="app-pink">
+                        app-pink
+                    </Tag>
+                    <Tag variant="dashed" color="purple">
+                        purple
+                    </Tag>
+                    <Tag variant="dashed" color="app-blue">
+                        app-blue
+                    </Tag>
+                    <Tag variant="dashed" color="app-yellow">
+                        app-yellow
+                    </Tag>
+                    <Tag variant="dashed" color="app-orange">
+                        app-orange
+                    </Tag>
+                    <Tag variant="dashed" color="app-teal">
+                        app-teal
+                    </Tag>
+                    <Tag variant="dashed" color="app-green">
+                        app-green
+                    </Tag>
+                    <Tag variant="dashed" color="app-red">
+                        app-red
+                    </Tag>
+                    <Tag variant="dashed" color="lime-green">
+                        lime-green
+                    </Tag>
+                    <Tag variant="dashed" color="yellow-green">
+                        yellow-green
+                    </Tag>
+                    <Tag variant="dashed" color="brown">
+                        brown
+                    </Tag>
+                    <Tag variant="dashed" color="warm-peach-pink">
+                        warm-peach-pink
+                    </Tag>
                 </div>
 
                 <div style={labelStyle}>closable 可关闭</div>
