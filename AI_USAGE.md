@@ -26,7 +26,7 @@ react-dom  >= 17.0.0
 
 ---
 
-## 1. Full API (24 components + 3 companion exports: FormItem, useForm, ICON_LIST)
+## 1. Full API (26 components + 3 companion exports: FormItem, useForm, ICON_LIST)
 
 All named exports from `animal-island-ui`:
 
@@ -36,6 +36,7 @@ import {
     Input,
     Switch,
     Modal,
+    Drawer,
     Card,
     Title,
     Collapse,
@@ -74,6 +75,8 @@ import type {
     SwitchProps,
     SwitchSize,
     ModalProps,
+    DrawerProps,
+    DrawerPlacement,
     CardProps,
     CardType,
     CardColor,
@@ -1087,6 +1090,48 @@ interface WalletProps {
 > **Value formatting:** `number` → thousand-grouped with `thousandSeparator`; `string` → rendered as-is; `undefined`/`null` → `00,000`. Negative numbers prefix `-`.
 >
 > **`icon` replaces the entire bag slot** (a single ReactNode in an absolutely-positioned 50×50 px container). Default is the built-in `assets/img/icons/items/item-022.png` rendered via the `Icon` component's hidden `src` prop.
+
+---
+
+### 1.25 Drawer
+
+```ts
+type DrawerPlacement = 'left' | 'right' | 'top' | 'bottom';
+
+interface DrawerProps {
+    open: boolean; // REQUIRED
+    title?: React.ReactNode; // heading text — plain text, NOT <Title>
+    placement?: DrawerPlacement; // default 'right'
+    width?: number | string; // for left/right, default 378
+    height?: number | string; // for top/bottom, default 300
+    maskClosable?: boolean; // default true
+    pushBackground?: boolean; // default true — signature depth effect (background sinks)
+    footer?: React.ReactNode | null; // null / undefined = no footer rendered
+    onClose?: () => void;
+    children?: React.ReactNode;
+    className?: string;
+    maskStyle?: React.CSSProperties;
+}
+```
+
+```tsx
+const [open, setOpen] = useState(false);
+<Button type="primary" onClick={() => setOpen(true)}>
+    打开抽屉
+</Button>
+<Drawer open={open} title="岛屿设置" onClose={() => setOpen(false)}>
+    打开时背景内容会下沉 + 缩放 + 降亮，突出抽屉主体，形成景深层次。
+</Drawer>
+```
+
+Notes:
+
+- `pushBackground` (default `true`) is the signature effect: when open, all non-fixed direct children of `document.body` are translated `translateY(24px) scale(0.96)` with `brightness(0.85)`, making the drawer float above a "sunken" page. Fixed-position elements (other overlays, portals) are auto-excluded. Set `pushBackground={false}` for a normal flat-mask drawer.
+- The mask uses a light black `rgba(0,0,0,0.18)` (lighter than Modal's 0.35) so the sunken background remains visible — this is what makes the depth readable.
+- Drawer has NO built-in typewriter (unlike Modal). Pass any content directly.
+- Default footer is **none** (unlike Modal's 取消/确定). Pass `footer={<><Button>...</Button></>}` for confirm-style actions.
+- A close × button is rendered in the header when `title` is provided. Esc / mask click also close.
+- a11y: `role="dialog"`, `aria-modal="true"`, `aria-labelledby` on title, focus trap + focus restore (same pattern as Modal).
 
 ---
 

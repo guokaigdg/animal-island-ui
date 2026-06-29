@@ -1,0 +1,148 @@
+// ============================================
+// Mask overlay — 浅黑遮罩，让下沉的背景仍可见（景深关键）
+// 用 transition 而非 @keyframes+animation：关闭时自动反向播放，
+// 避免「动画已播完后切换方向」时蒙层跳过退场直接消失的"闪"。
+// ============================================
+.mask {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    background: rgba(0, 0, 0, 0.18);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.36s ease;
+}
+
+.maskOpen {
+    opacity: 1;
+    pointer-events: all;
+}
+
+// ============================================
+// Panel — 抽屉面板
+// 关闭态由 placement 类（transform: translateX/Y(...)）定义，
+// 打开态由 .panelOpen 覆盖（transform: none），compound 选择器提高特异性。
+// 面板的交互性由外层 mask 统一控制（关闭时 maskOpen 缺失 → pointer-events: none，
+// 打开时 maskOpen 加上 → pointer-events: all），面板内按钮在打开态下自然可用。
+// ============================================
+.panel {
+    position: fixed;
+    z-index: 1001;
+    display: flex;
+    flex-direction: column;
+    background: rgb(247, 243, 223);
+    color: rgb(128, 115, 89);
+    font-family: Nunito, 'Noto Sans SC', sans-serif;
+    overflow: hidden;
+    transition: transform 0.36s cubic-bezier(0.2, 0, 0.2, 1);
+}
+
+.panelRight {
+    top: 0;
+    right: 0;
+    height: 100vh;
+    max-width: calc(100vw - 32px);
+    border-radius: 20px 0 0 20px;
+    box-shadow: -12px 0 32px rgba(61, 52, 40, 0.18);
+    transform: translateX(100%);
+}
+
+.panelLeft {
+    top: 0;
+    left: 0;
+    height: 100vh;
+    max-width: calc(100vw - 32px);
+    border-radius: 0 20px 20px 0;
+    box-shadow: 12px 0 32px rgba(61, 52, 40, 0.18);
+    transform: translateX(-100%);
+}
+
+.panelTop {
+    top: 0;
+    left: 0;
+    right: 0;
+    max-height: calc(100vh - 32px);
+    border-radius: 0 0 20px 20px;
+    box-shadow: 0 12px 32px rgba(61, 52, 40, 0.18);
+    transform: translateY(-100%);
+}
+
+.panelBottom {
+    bottom: 0;
+    left: 0;
+    right: 0;
+    max-height: calc(100vh - 32px);
+    border-radius: 20px 20px 0 0;
+    box-shadow: 0 -12px 32px rgba(61, 52, 40, 0.18);
+    transform: translateY(100%);
+}
+
+// 打开态：transform 回到 none / 0
+// 用 .panel.panelOpen 复合选择器，特异性 > 单类 .panel{Left,Right,Top,Bottom}，
+// 样式表中无需关心 .panelOpen 的声明顺序。
+.panel.panelOpen {
+    transform: none;
+}
+
+// ============================================
+// Header
+// ============================================
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 24px 24px 15px 24px;
+    flex-shrink: 0;
+}
+
+.title {
+    font-size: 28px;
+    font-weight: 700;
+    color: rgba(114, 93, 66, 1);
+}
+
+.close {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border: none;
+    background: transparent;
+    font-size: 22px;
+    line-height: 1;
+    color: rgba(114, 93, 66, 0.6);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.2s;
+
+    &:hover {
+        background: rgba(114, 93, 66, 0.1);
+        color: rgba(114, 93, 66, 1);
+    }
+}
+
+// ============================================
+// Body
+// ============================================
+.body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 0 24px 24px 24px;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 1.6;
+    color: #8a7b66;
+}
+
+// ============================================
+// Footer
+// ============================================
+.footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 12px;
+    padding: 0 24px 24px 24px;
+    flex-shrink: 0;
+}

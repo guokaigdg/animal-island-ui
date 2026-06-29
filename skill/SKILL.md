@@ -27,7 +27,7 @@ animal-island-ui 是一套受《治愈系海岛风格》启发的 React + TypeSc
 - 构建：Vite (library mode) + `vite.config.ts`（库）/ `vite.config.demo.ts`（Demo）
 - 样式系统：Less Modules + `src/styles/variables.less` 设计 token
 
-### 全量导出清单（24 个组件 + 3 个伴生导出：FormItem / useForm / ICON_LIST）
+### 全量导出清单（26 个组件 + 3 个伴生导出：FormItem / useForm / ICON_LIST）
 
 从 `src/index.ts` 导出：
 
@@ -37,6 +37,7 @@ animal-island-ui 是一套受《治愈系海岛风格》启发的 React + TypeSc
 | `Input`             | 输入框，3 种尺寸 + clear/prefix/suffix                                                                            | ✓    |               |
 | `Switch`            | 开关，默认/小号                                                                                                   | ✓    |               |
 | `Modal`             | SVG blob 裁切弹窗                                                                                                 | ✓    |               |
+| `Drawer`            | 下沉景深抽屉（背景下沉 + 缩放 + 降亮，left/right/top/bottom 四方向）                                              | ✓    |               |
 | `Card`              | 容器，`default`/`dashed`，13 种 IslandPhone 实色 + 13 种 `pattern` 波点墙纸（CSS radial-gradient，非图片）          |      | ✓             |
 | `Title`             | 章节标题，飘带横幅（swallowtail clip-path 燕尾 + 折角阴影 + 微透视正面），13 种配色（替代旧 `Card type="title"`） |      | ✓             |
 | `Collapse`          | 手风琴（动画用 CSS Grid 0fr↔1fr 实现，无 JS 动画）                                                                | ✓    |               |
@@ -58,7 +59,7 @@ animal-island-ui 是一套受《治愈系海岛风格》启发的 React + TypeSc
 | `Form`              | 表单容器 + 校验（含 `FormItem` / `useForm` 伴生导出，类主流表单库 API）                                          | ✓    |               |
 | `Wallet`            | 治愈海岛钱袋样式金额胶囊（橄榄黄 pill + Island bag 图标，3 种尺寸，千分位自动格式化）                                  |      | ✓             |
 
-类型导出：`ButtonProps/ButtonType/ButtonSize`、`InputProps/InputSize`、`SwitchProps/SwitchSize`、`ModalProps`、`CardProps/CardType/CardColor`、`TitleProps/TitleSize/TitleColor`、`FooterProps/FooterType`、`CollapseProps`、`CursorProps`、`TimeProps`、`PhoneProps`、`DividerProps`、`TypewriterProps`、`SelectProps/SelectOption`、`IconProps/IconName`、`TabsProps/TabItem`、`CheckboxProps/CheckboxOption/CheckboxSize`、`RadioProps/RadioOption/RadioSize`、`TooltipProps/TooltipPlacement/TooltipTrigger/TooltipVariant`、`CodeBlockProps`、`LoadingProps`、`TableProps/TableColumn`、`FormProps/FormItemProps/FormInstance/FormLayout/FormItemLayout/FormSize/FormLabelAlign/ColProps/NamePath/RequiredMark/RuleObject/RuleRender/RuleType/Rules/FieldData/ValidateStatus/ValidateError/ValidateInfo/ScrollOptions`、`WalletProps/WalletSize`。运行时值：`ICON_LIST`。伴生导出：`FormItem`、`useForm`（默认导出 `Form` 也支持 `Form.Item` / `Form.useForm` 写法）。
+类型导出：`ButtonProps/ButtonType/ButtonSize`、`InputProps/InputSize`、`SwitchProps/SwitchSize`、`ModalProps`、`DrawerProps/DrawerPlacement`、`CardProps/CardType/CardColor`、`TitleProps/TitleSize/TitleColor`、`FooterProps/FooterType`、`CollapseProps`、`CursorProps`、`TimeProps`、`PhoneProps`、`DividerProps`、`TypewriterProps`、`SelectProps/SelectOption`、`IconProps/IconName`、`TabsProps/TabItem`、`CheckboxProps/CheckboxOption/CheckboxSize`、`RadioProps/RadioOption/RadioSize`、`TooltipProps/TooltipPlacement/TooltipTrigger/TooltipVariant`、`CodeBlockProps`、`LoadingProps`、`TableProps/TableColumn`、`FormProps/FormItemProps/FormInstance/FormLayout/FormItemLayout/FormSize/FormLabelAlign/ColProps/NamePath/RequiredMark/RuleObject/RuleRender/RuleType/Rules/FieldData/ValidateStatus/ValidateError/ValidateInfo/ScrollOptions`、`WalletProps/WalletSize`。运行时值：`ICON_LIST`。伴生导出：`FormItem`、`useForm`（默认导出 `Form` 也支持 `Form.Item` / `Form.useForm` 写法）。
 
 ---
 
@@ -979,6 +980,90 @@ border-color: rgba(255, 204, 0, 1);
 background: rgba(255, 204, 0, 0.85);
 border-color: rgba(255, 204, 0, 0.85);
 ```
+
+---
+
+### Drawer
+
+**下沉景深抽屉 — 背景下沉 + 缩放 + 降亮突出主体。**
+
+```css
+/* 遮罩 — 浅黑（0.18），比 Modal 浅，让下沉的背景仍可见（景深关键）*/
+position: fixed;
+inset: 0;
+z-index: 1000;
+background: rgba(0, 0, 0, 0.18);
+animation: animal-drawer-fade-in 0.25s ease;
+
+/* 面板（通用） */
+position: fixed;
+z-index: 1001;
+display: flex;
+flex-direction: column;
+background: rgb(247, 243, 223);
+color: rgb(128, 115, 89);
+font-family: Nunito, 'Noto Sans SC', sans-serif;
+overflow: hidden;
+animation-duration: 0.3s;
+animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+animation-fill-mode: both;
+
+/* 面板方向（贴视口边 0 圆角，内容边 20px）*/
+/* right */
+top: 0; right: 0; height: 100vh;
+max-width: calc(100vw - 32px);
+border-radius: 20px 0 0 20px;
+box-shadow: -12px 0 32px rgba(61, 52, 40, 0.18);
+animation-name: animal-drawer-slide-right; /* translateX(100%) → 0 */
+/* left */
+border-radius: 0 20px 20px 0;
+box-shadow: 12px 0 32px rgba(61, 52, 40, 0.18);
+animation-name: animal-drawer-slide-left; /* translateX(-100%) → 0 */
+/* top */
+border-radius: 0 0 20px 20px;
+box-shadow: 0 12px 32px rgba(61, 52, 40, 0.18);
+animation-name: animal-drawer-slide-top; /* translateY(-100%) → 0 */
+/* bottom */
+border-radius: 20px 20px 0 0;
+box-shadow: 0 -12px 32px rgba(61, 52, 40, 0.18);
+animation-name: animal-drawer-slide-bottom; /* translateY(100%) → 0 */
+
+/* 标题 */
+font-size: 28px;
+font-weight: 700;
+color: rgba(114, 93, 66, 1);
+
+/* 关闭按钮 × */
+width: 32px; height: 32px;
+font-size: 22px;
+color: rgba(114, 93, 66, 0.6);
+border-radius: 50%;
+/* hover */
+background: rgba(114, 93, 66, 0.1);
+color: rgba(114, 93, 66, 1);
+
+/* body */
+font-size: 20px;
+font-weight: 600;
+line-height: 1.6;
+color: #8a7b66;
+padding: 0 24px 24px 24px;
+
+/* footer */
+gap: 12px;
+padding: 0 24px 24px 24px;
+```
+
+**背景下沉（JS 注入到 body 非固定子元素的 inline style）：**
+
+```css
+transform: translateY(24px) scale(0.96);
+filter: brightness(0.85) saturate(0.9);
+transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+            filter 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+```
+
+> `pushBackground={false}` 时跳过此效果，退化为普通遮罩抽屉。关闭时恢复元素原始 inline style。
 
 ---
 

@@ -2,7 +2,7 @@
 
 > 本文件目标：给 **AI 设计 / 出图工具**（v0、Figma AI、Framer AI、Locofy、Midjourney、DALL·E、SD）喂可以一次成型的视觉风格描述。
 >
-> - 描述对象是 `animal-island-ui` 组件库本身的视觉风格（v0.9.5，24 个组件，外加 FormItem / useForm / ICON_LIST 三个伴生导出）。
+> - 描述对象是 `animal-island-ui` 组件库本身的视觉风格（v0.9.5，26 个组件，外加 FormItem / useForm / ICON_LIST 三个伴生导出）。
 > - 文件中提到的 **侧边栏 / 页面背景图（home_bg.svg / content_bg_pc.jpg / menu_bg.svg）** 属于 **demo 文档站**，库本身不附带，仅作为整体风格参考保留。
 > - 配套文档：消费侧 API 看 [`AI_USAGE.md`](./AI_USAGE.md)；源码内部规范看 [`skill/SKILL.md`](./skill/SKILL.md)；贡献流程看 [`CONTRIBUTING.md`](./CONTRIBUTING.md)。
 
@@ -83,6 +83,7 @@ Buttons and inputs:        border-radius: 50px  (full pill/capsule — most impo
 Default cards:             border-radius: 20px
 Title heading (ribbon):    swallowtail clip-path banner with 3D fold (use <Title>, NOT <Card>)
 Modals:                    SVG blob clip-path (see path below)
+Drawers:                   rect panel, 20px radius on content-facing corners (0 on viewport edge), bg rgb(247,243,223); when open background sinks translateY(24px) scale(0.96) brightness(0.85), mask rgba(0,0,0,0.18)
 [Demo-site only] Sidebar menu items: border-radius: 12px
 Collapse panel outer:      border-radius: 18px
 Tooltip bubble:            border-radius: 16px (standard) — Tooltip variant=island uses transparent bg
@@ -383,8 +384,8 @@ Number format: number → 千分位 with thousandSeparator (default ",", pass ""
                string → 原样; undefined/null → '00,000'.
 Hover animation: bagSlot walletBagBounce 0.5s ease-in-out (translateY -8px rot -6deg → -2px rot 3deg → 0).
 
-=== COMPONENT INVENTORY (24 components from src/index.ts, + 3 companion exports FormItem / useForm / ICON_LIST) ===
-Interactive:           Button, Input, Switch, Modal, Collapse, Select, Tabs, Checkbox, Radio
+=== COMPONENT INVENTORY (26 components from src/index.ts, + 3 companion exports FormItem / useForm / ICON_LIST) ===
+Interactive:           Button, Input, Switch, Modal, Drawer, Collapse, Select, Tabs, Checkbox, Radio
 Container / Heading:   Card (13 colors + 13 dot patterns), Title (ribbon banner — 13 schemes), Table
 Forms:                 Form (with FormItem + useForm companions — conventional form layout + validation)
 Feedback:              Tooltip, Loading
@@ -467,7 +468,7 @@ Interface details:
 
 | Token                  | 精确值                                                                                                                   | 用途                                               |
 | ---------------------- | ------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------- |
-| 内容区背景             | `rgb(247, 243, 223)`                                                                                                     | Modal、Card、Table、Tooltip 内容区                 |
+| 内容区背景             | `rgb(247, 243, 223)`                                                                                                     | Modal、Drawer、Card、Table、Tooltip 内容区        |
 | 主背景                 | `#f8f8f0`                                                                                                                | 按钮、通用背景                                     |
 | 正文文字               | `#725d42`                                                                                                                | 组件内正文                                         |
 | Header 文字            | `#794f27`                                                                                                                | 章节标题、checked label                            |
@@ -481,6 +482,8 @@ Interface details:
 | 焦点黄                 | `#ffcc00`                                                                                                                | Input / Switch / Checkbox focus                    |
 | Radio focus 黄         | `#f5c31c`                                                                                                                | Radio focus（暖一档黄）                            |
 | Modal 确认按钮         | bg `#ffcc00`, color `#725d42`                                                                                            | 游戏黄主操作                                       |
+| Drawer 背景下沉        | `translateY(24px) scale(0.96)` + `brightness(0.85)`                                                                      | `pushBackground` 默认开，非 fixed 的 body 子元素   |
+| Drawer 遮罩            | `rgba(0, 0, 0, 0.18)`                                                                                                    | 比 Modal 浅，让下沉背景可见（景深关键）            |
 | 按钮高度（中）         | `45px`                                                                                                                   | middle size                                        |
 | pill 圆角              | `50px`                                                                                                                   | 按钮、输入框                                       |
 | Title 飘带             | swallowtail clip-path + fold 三角阴影 + 3deg X 透视                                                                      | `<Title>` 章节标题                                 |

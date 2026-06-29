@@ -116,7 +116,7 @@ You are a senior React engineer. Generate a **single self-contained `index.html`
 - Cards have NO box-shadow. They float on hover with `transform: translateY(-2px);` only. Pattern variants add a 1.5px solid border in the palette hue.
 - Switch handle stays vertically centered via `transform: translateY(-50%);` and has a 2.5px border but NO `box-shadow` of its own. Track has only inset shadow (see SHADOW SYSTEM above).
 
-## COMPONENT SPECS (24 components + 3 companion exports: FormItem, useForm, ICON_LIST)
+## COMPONENT SPECS (26 components + 3 companion exports: FormItem, useForm, ICON_LIST)
 
 ### Button (3 sizes × 5 types)
 
@@ -192,6 +192,20 @@ You are a senior React engineer. Generate a **single self-contained `index.html`
 - Modal content: clip-path: url(#animal-modal-clip); bg rgb(247,243,223); padding 48px 48px 32px 48px; color #725d42.
 - Backdrop: rgba(40, 30, 20, 0.45); backdrop-filter: blur(2px).
 - Confirm button uses game yellow: bg #ffcc00, color #725d42, 3D shadow #e0b800.
+
+### Drawer (sinking-depth drawer — background sinks to create depth)
+
+- When open, ALL non-fixed direct children of `<body>` get `transform: translateY(24px) scale(0.96); filter: brightness(0.85) saturate(0.9)` with a 0.3s cubic-bezier(0.4,0,0.2,1) transition. Fixed-position elements (overlays, portals) are auto-excluded. This is the signature depth effect — `pushBackground` prop defaults true; set false to disable.
+- Mask is LIGHT black rgba(0,0,0,0.18) — lighter than Modal — so the sunken page stays visible (the depth must be readable).
+- Panel: fixed; bg rgb(247,243,223); color #8a7b66; font Nunito, 'Noto Sans SC'.
+- placement: 'left' | 'right' (default) | 'top' | 'bottom'. Panel slides in from that side (translateX/Y 100% → 0, 0.3s ease).
+- Border-radius: 20px on content-facing corners, 0 on the edge flush with viewport.
+- Box-shadow on the content-facing edge: ±12px 0 32px (left/right) or 0 ±12px 32px (top/bottom) rgba(61,52,40,0.18) — enhances "floating above sunken page".
+- Title: 28px / 700 / rgba(114,93,66,1). Close × button (32×32, 50% radius, color rgba(114,93,66,0.6) → hover 1) in header.
+- Body: 20px / 600 / #8a7b66 / line-height 1.6.
+- Default footer: NONE (unlike Modal). Pass `footer={<><Button>...</Button></>}` for confirm actions.
+- a11y: role="dialog", aria-modal="true", aria-labelledby on title, focus trap + restore, Esc / mask close.
+- width default 378 (left/right); height default 300 (top/bottom).
 
 ### Card (default radius 20px + 13 colors + 13 dot patterns)
 

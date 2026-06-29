@@ -65,6 +65,7 @@ const MENU_ITEMS: MenuItem[] = [
             { key: 'collapse', label: 'Collapse 折叠面板' },
             { key: 'cursor', label: 'Cursor 光标' },
             { key: 'modal', label: 'Modal 弹窗' },
+            { key: 'drawer', label: 'Drawer 抽屉', isNew: true },
             { key: 'typewriter', label: 'Typewriter 打字机' },
             { key: 'divider-comp', label: 'Divider 分割线' },
             { key: 'icon', label: 'Icon 图标' },

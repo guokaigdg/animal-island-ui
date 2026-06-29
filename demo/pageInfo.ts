@@ -40,6 +40,10 @@ export const PAGE_INFO: Record<string, { title: string; desc: string }> = {
         title: 'Modal 弹窗',
         desc: '模态弹窗组件 — SVG 有机形状裁切、支持标题、关闭按钮、自定义 Footer、ESC / 遮罩关闭',
     },
+    drawer: {
+        title: 'Drawer 抽屉',
+        desc: '下沉景深抽屉组件 — 背景下沉 + 缩放 + 降亮突出主体，支持 left/right/top/bottom 四个方向、自定义宽高、ESC / 遮罩关闭',
+    },
     typewriter: {
         title: 'Typewriter 打字机',
         desc: '打字机组件 — 按字符逐个显示文本，支持多行与 ReactNode 富内容，不改变原有样式',

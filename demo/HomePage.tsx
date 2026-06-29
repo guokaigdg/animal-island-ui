@@ -354,6 +354,7 @@ const components = [
     },
     { key: 'tabs', name: 'Tabs', desc: '标签页组件，支持受控/非受控模式' },
     { key: 'modal', name: 'Modal', desc: 'SVG 有机形状弹窗、ESC 关闭' },
+    { key: 'drawer', name: 'Drawer', desc: '下沉景深抽屉，四方向 + 背景下沉' },
     {
         key: 'typewriter',
         name: 'Typewriter',

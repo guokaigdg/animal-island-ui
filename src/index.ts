@@ -16,6 +16,9 @@ export type { SwitchProps, SwitchSize } from './components/Switch';
 export { Modal } from './components/Modal';
 export type { ModalProps } from './components/Modal';
 
+export { Drawer } from './components/Drawer';
+export type { DrawerProps, DrawerPlacement } from './components/Drawer';
+
 export { Card } from './components/Card';
 export type { CardProps, CardType, CardColor } from './components/Card';
 
