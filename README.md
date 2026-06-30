@@ -1,7 +1,7 @@
 # 🏝 Animal-Island-UI
 
 <div align="center">
-    <img src="docs/img/readme-home.png" alt="animal-island-ui" style="border-radius: 12px; width: 40%; display: block; margin: 0 auto;" />    
+    <img src="docs/img/readme-home.png" alt="animal-island-ui" style="border-radius: 12px; width: 40%; display: block; margin: 0 auto;" />
 </div>
 <div align="center">
 A React UI component library inspired by a cozy island-style UI
@@ -175,6 +175,11 @@ npm run build:demo
     <br/>
     <img src="docs/img/animal-island-ui-taro-port.png" alt="animal-island-ui-taro-port" style="border-radius: 8px; width: 90%; display: block; margin: 8px auto 0;" />
     <br/><a href="https://github.com/Gospelion/animal-island-ui-taro-port">animal-island-ui-taro-port</a><br/><sub>Taro & WeChat Mini Program</sub>
+  </td>
+  <td align="center" width="33%">
+    <br/>
+    <img src="docs/img/portal-os-preview.png" alt="portal-os" style="border-radius: 8px; width: 90%; display: block; margin: 8px auto 0;" />
+    <br/><a href="https://github.com/guowenju/portal-os">portal-os</a><br/><sub>Animal desktop blog</sub>
   </td>
 </tr>
 </table>
