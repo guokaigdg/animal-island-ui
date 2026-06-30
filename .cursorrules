@@ -4,9 +4,10 @@
 
 <!-- META
 - 适用版本：v1.x（与 package.json 对齐）
-- 最后校准：2026-06-25
+- 最后校准：2026-06-30
 - 维护者：guokaigdg
 - 配套文档：AI_USAGE.md（API）/ skill/SKILL.md（样式）/ DESIGN_PROMPT.md（设计 token）/ PROMPT.md（用户提示词）
+- 同步工具：`npm run check:docs`（`scripts/check-docs-sync.mjs`，已挂 `npm run ci`）—— 任何组件增删都会扫到漂移并 fail
 -->
 
 ## 0. AI 工作流（拿到任务先做）
@@ -385,6 +386,7 @@ describe('Foo', () => {
 
 每次实质性修改本文件（新增/删除/重写任意章节）必须追加一条，AI 和维护者可追溯规则演进。
 
+- **2026-06-30** — Tag backfill + 文档漂移硬拦截：新增 `scripts/check-docs-sync.mjs`，自动扫 `src/components/` 校验 4 份文档是否收录每个组件，挂在 `npm run check:docs` + `npm run ci` 任一漂移即失败。`AI_USAGE.md` 补 §1.26 Tag、§1 导入/类型块；`skill/SKILL.md` 补 §0 清单 + §2 Tag / Icon / Select 三段像素级 CSS；`PROMPT.md` 补 Tag self-contained spec + HARD RULES §13 组件清单；`DESIGN_PROMPT.md` 关键数值表补 Tag 4 行。
 - **2026-06-25** — 优化 v2：§0.0 速查表改为指针型（去重）；§7.3 ❌/✅ 反例下沉到 `skill/SKILL.md` §1.5；§15 改为差异条款（去重）；软化过期数字（`v1.x` / `22.x` / `24 个` / `488 个`）；新增文件头 META 注释、CHANGELOG 段；§14 拆为 14.A / 14.B；§9.3 删除"207+"硬编码。
 - **2026-06-25** — 优化 v1：新增 §0.0 速查表；§0.3 升级为强约束；§7.3 新增 ❌/✅ 反例配对；§14 拆为 14A/14B；新增文件头 META 注释。
 - **初版** — 建立 15 节结构，覆盖技术栈/组件/样式/测试/构建/文档同步/禁止事项。

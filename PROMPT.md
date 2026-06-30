@@ -425,6 +425,18 @@ You are a senior React engineer. Generate a **single self-contained `index.html`
 - Number formatting: when `value` is a `number`, group thousands with `thousandSeparator` (default `,`, pass `""` to disable). When `value` is a `string`, render as-is. When `undefined` / `null`, render `00,000`.
 - Hover animation on the bag slot: `walletBagBounce 0.5s ease-in-out` — translateY -8px rotate -6deg (35%) → translateY -2px rotate 3deg (70%) → 0.
 
+### Tag (capsule label — 3 sizes × 3 variants × 12 colors)
+
+- Inline-flex capsule, `border-radius: 999px`, `border: 1.5px solid transparent` (reserves space so outlined/dashed don't shift layout), `font-weight: 600`, `transition: all 0.2s ease`.
+- Sizes (height / line-height / padding-x / font-size):
+  small 24 / 21 / 10 / 12 px
+  medium 29 / 26 / 12 / 13 px ← default
+  large 34 / 31 / 16 / 15 px
+- Variant × Color grid: solid uses saturated color as background + white text; outlined / dashed use the same color for text + border on transparent background. Palette is **exactly the same 12 brand colors as Card** (app-pink, purple, app-blue, app-yellow, app-orange, app-teal, app-green, app-red, lime-green, yellow-green, brown, warm-peach-pink) plus `default` (parchment `rgb(247,243,223)` bg + `#8f734f` text).
+- Closable × button: 16×16 circle `background: rgba(0,0,0,0.08)` (hover 0.18), `aria-label="close"`, click `stopPropagation` (does NOT bubble to `onClick`).
+- Interactive: providing `onClick` upgrades root to `role="button"` + `tabIndex={0}` and adds `cursor: pointer`. Hover: `translateY(-1px)` + `box-shadow: 0 2px 6px rgba(61,52,40,0.12)`. Active: reset translateY. Focus: `2px solid var(--animal-focus-yellow, #f5c31c)` outline.
+- Disabled: `opacity: 0.5` + `pointer-events: none` on the whole tag, AND close button is `disabled` with `cursor: not-allowed`.
+
 ## HARD RULES (must obey — disqualifies the output if violated)
 
 1. Never use pure black (#000) or near-black (#111) text. Use #794f27 / #725d42 / #8a7b66.
@@ -439,7 +451,7 @@ You are a senior React engineer. Generate a **single self-contained `index.html`
 10. Never use weight < 400 anywhere. Body 500, headings 600–900.
 11. Never animate with hard cubic transitions; always use `cubic-bezier(0.4, 0, 0.2, 1)` over 0.15–0.35s.
 12. Title `title` prop on `<Modal>` is the literal string heading — do NOT confuse it with the `<Title>` component.
-13. **Always reach for the library component first.** If a feature exists as an animal-island-ui component (Card, Button, Input, Switch, Checkbox, Radio, Title, Tabs, Collapse, Modal, Select, Tooltip, Loading, Table, Time, Divider, Footer, Phone, Cursor, Typewriter, Icon, CodeBlock, Form, Wallet), use the inline-defined `<ComponentName>` JSX with documented props. Only hand-roll raw HTML/JSX when the library has no equivalent (page layout, app-specific composition, decorative blocks).
+13. **Always reach for the library component first.** If a feature exists as an animal-island-ui component (Card, Button, Input, Switch, Checkbox, Radio, Title, Tabs, Collapse, Modal, Select, Tooltip, Loading, Table, Time, Divider, Footer, Phone, Cursor, Typewriter, Icon, CodeBlock, Form, Wallet, Tag), use the inline-defined `<ComponentName>` JSX with documented props. Only hand-roll raw HTML/JSX when the library has no equivalent (page layout, app-specific composition, decorative blocks).
 
 ## TASK
 
@@ -462,7 +474,7 @@ Only proceed to STEP 2 after the user answers.
 Structure the script like this:
 
 ```jsx
-// 1) Inline React components mirroring animal-island-ui's API (Card, Button, Input, Switch, ...)
+// 1) Inline React components mirroring animal-island-ui's API (Card, Button, Input, Switch, Tag, ...)
 function Button({ type = 'default', size = 'middle', loading, disabled, children, ...rest }) { ... }
 function Card({ pattern, color, type, children, ...rest }) { ... }
 // ...all components used by the page

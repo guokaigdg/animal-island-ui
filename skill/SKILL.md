@@ -58,8 +58,9 @@ animal-island-ui 是一套受《治愈系海岛风格》启发的 React + TypeSc
 | `Table`             | 数据表格，固定列、空状态、loading                                                                                 | ✓    |               |
 | `Form`              | 表单容器 + 校验（含 `FormItem` / `useForm` 伴生导出，类主流表单库 API）                                          | ✓    |               |
 | `Wallet`            | 治愈海岛钱袋样式金额胶囊（橄榄黄 pill + Island bag 图标，3 种尺寸，千分位自动格式化）                                  |      | ✓             |
+| `Tag`               | 胶囊标签，3 尺寸 × 3 变体（solid/outlined/dashed）× 12 配色（与 Card 调色板完全对齐），支持 closable / onClick / disabled  | ✓    |               |
 
-类型导出：`ButtonProps/ButtonType/ButtonSize`、`InputProps/InputSize`、`SwitchProps/SwitchSize`、`ModalProps`、`DrawerProps/DrawerPlacement`、`CardProps/CardType/CardColor`、`TitleProps/TitleSize/TitleColor`、`FooterProps/FooterType`、`CollapseProps`、`CursorProps`、`TimeProps`、`PhoneProps`、`DividerProps`、`TypewriterProps`、`SelectProps/SelectOption`、`IconProps/IconName`、`TabsProps/TabItem`、`CheckboxProps/CheckboxOption/CheckboxSize`、`RadioProps/RadioOption/RadioSize`、`TooltipProps/TooltipPlacement/TooltipTrigger/TooltipVariant`、`CodeBlockProps`、`LoadingProps`、`TableProps/TableColumn`、`FormProps/FormItemProps/FormInstance/FormLayout/FormItemLayout/FormSize/FormLabelAlign/ColProps/NamePath/RequiredMark/RuleObject/RuleRender/RuleType/Rules/FieldData/ValidateStatus/ValidateError/ValidateInfo/ScrollOptions`、`WalletProps/WalletSize`。运行时值：`ICON_LIST`。伴生导出：`FormItem`、`useForm`（默认导出 `Form` 也支持 `Form.Item` / `Form.useForm` 写法）。
+类型导出：`ButtonProps/ButtonType/ButtonSize`、`InputProps/InputSize`、`SwitchProps/SwitchSize`、`ModalProps`、`DrawerProps/DrawerPlacement`、`CardProps/CardType/CardColor`、`TitleProps/TitleSize/TitleColor`、`FooterProps/FooterType`、`CollapseProps`、`CursorProps`、`TimeProps`、`PhoneProps`、`DividerProps`、`TypewriterProps`、`SelectProps/SelectOption`、`IconProps/IconName`、`TabsProps/TabItem`、`CheckboxProps/CheckboxOption/CheckboxSize`、`RadioProps/RadioOption/RadioSize`、`TooltipProps/TooltipPlacement/TooltipTrigger/TooltipVariant`、`CodeBlockProps`、`LoadingProps`、`TableProps/TableColumn`、`FormProps/FormItemProps/FormInstance/FormLayout/FormItemLayout/FormSize/FormLabelAlign/ColProps/NamePath/RequiredMark/RuleObject/RuleRender/RuleType/Rules/FieldData/ValidateStatus/ValidateError/ValidateInfo/ScrollOptions`、`WalletProps/WalletSize`、`TagProps/TagSize/TagVariant/TagColor`。运行时值：`ICON_LIST`。伴生导出：`FormItem`、`useForm`（默认导出 `Form` 也支持 `Form.Item` / `Form.useForm` 写法）。
 
 ---
 
@@ -1973,6 +1974,180 @@ color: #19c8b9;
 > 数字格式化（JS 逻辑，不是 CSS）：`value` 为 `number` 时按千分位插入 `thousandSeparator`（默认 `,`，传 `""` 关闭）；`string` 原样展示；`undefined` / `null` 显示 `00,000`。
 >
 > 默认钱袋图标是内置 `assets/img/icons/items/item-022.png`（治愈海岛风格钱袋），通过 `icon` prop 传任意 `ReactNode` 可替换。注意：内部使用了 `<Icon src={bagIcon} />` 的隐藏 `src` 入参（Icon 既支持 `name` 走 ICON_LIST，也支持 `src` 走任意图源）。
+
+---
+
+### Icon
+
+源码：`src/components/Icon/Icon.tsx`。SVG 单色图标库，10 个内置图标（arrow-down、arrow-up、check、close、copy、leaf、menu、search、star、trash 等——以运行时 `ICON_LIST` 导出为准）。支持 `name`（查 ICON_LIST）和隐藏的 `src`（任意图源，Wallet 内部用此加载钱袋 PNG）。
+
+```css
+.icon {
+    display: inline-block;
+    vertical-align: middle;
+    fill: currentColor; /* 颜色继承父级 color */
+    width: 1em;
+    height: 1em;
+}
+```
+
+> 用法：`<Icon name="check" size={20} color="#19c8b9" />`。`size` 默认 16，`color` 默认 `currentColor`。`src` 模式走 `<img>` 渲染，可用于内置图标库之外的任意图标源。
+
+---
+
+### Select
+
+源码：`src/components/Select/Select.tsx`。受控下拉选择器，hover/click 展开下拉面板，选项支持键盘 ↑/↓ 导航 + Enter 确认 + Esc 取消。
+
+```css
+.select {
+    position: relative;
+    display: inline-block;
+    min-width: 120px;
+}
+.selectTrigger {
+    /* 与 Input 同款：border 1.5px solid @border-color-light，radius 12px */
+    /* 背景 rgb(247,243,223)，hover/focus 切换到 @border-color-hover */
+}
+.selectDropdown {
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    right: 0;
+    max-height: 240px;
+    overflow-y: auto;
+    background: #fffcef;
+    border: 1.5px solid @border-color-light;
+    border-radius: 12px;
+    box-shadow: 0 6px 18px rgba(61, 52, 40, 0.12);
+    z-index: 1000;
+}
+.selectOption {
+    padding: 8px 12px;
+    cursor: pointer;
+    color: @text-color-body;
+}
+.selectOption.isActive { background: @primary-color-bg; color: @primary-color; }
+.selectOption.isSelected { font-weight: 600; }
+```
+
+> 完整交互（键盘 roving、滚动到选中项、点击外部关闭）见 `src/components/Select/Select.tsx`，API 见 `AI_USAGE.md §1`。
+
+---
+
+### Tag
+
+源码：`src/components/Tag/Tag.tsx` + `tag.module.less`。**胶囊标签**：与 Card 调色板完全对齐（12 品牌色 + 1 默认），3 种尺寸 × 3 种变体（solid / outlined / dashed），支持 closable / onClick / disabled。
+
+```less
+// 根容器 —— 全胶囊，1.5px transparent border（为变体预留空间，避免抖动）
+.tag {
+    box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    line-height: 1;
+    font-family: inherit;
+    font-weight: 600;
+    border-radius: 999px;
+    border: 1.5px solid transparent;
+    transition: all 0.2s ease;
+    user-select: none;
+    white-space: nowrap;
+}
+
+// ---------- Size ----------
+.size-small  { height: 24px; line-height: 21px; padding: 0 10px; font-size: 12px; }
+.size-medium { height: 29px; line-height: 26px; padding: 0 12px; font-size: 13px; } /* 默认 */
+.size-large  { height: 34px; line-height: 31px; padding: 0 16px; font-size: 15px; }
+
+// ---------- Variant ----------
+.variant-solid    { background: rgb(247, 243, 223); color: #8f734f; border-color: #d4c4a8; }
+.variant-outlined { background: transparent;    color: #8f734f; border-color: #c4b89e; }
+.variant-dashed   { background: transparent;    color: #8f734f; border-color: #c4b89e; border-style: dashed; }
+
+// ---------- Color（与 Card 的 .pattern-{color} 边框色完全一致） ----------
+// solid 变体：背景 = 饱和色，文字 #fff
+.color-app-pink-solid         { background: #f8a6b2; border-color: #f8a6b2; color: #fff; }
+.color-purple-solid           { background: #b77dee; border-color: #b77dee; color: #fff; }
+.color-app-blue-solid         { background: #889df0; border-color: #889df0; color: #fff; }
+.color-app-yellow-solid       { background: #f7cd67; border-color: #f7cd67; color: #fff; }
+.color-app-orange-solid       { background: #e59266; border-color: #e59266; color: #fff; }
+.color-app-teal-solid         { background: #82d5bb; border-color: #82d5bb; color: #fff; }
+.color-app-green-solid        { background: #8ac68a; border-color: #8ac68a; color: #fff; }
+.color-app-red-solid          { background: #fc736d; border-color: #fc736d; color: #fff; }
+.color-lime-green-solid       { background: #d1da49; border-color: #d1da49; color: #fff; }
+.color-yellow-green-solid     { background: #ecdf52; border-color: #ecdf52; color: #fff; }
+.color-brown-solid            { background: #9a835a; border-color: #9a835a; color: #fff; }
+.color-warm-peach-pink-solid  { background: #e18c6f; border-color: #e18c6f; color: #fff; }
+
+// outlined / dashed 变体：文字 + 边框 = 饱和色，背景透明
+.color-app-pink-outlined,
+.color-app-pink-dashed         { color: #f8a6b2; border-color: #f8a6b2; }
+.color-purple-outlined,
+.color-purple-dashed           { color: #b77dee; border-color: #b77dee; }
+.color-app-blue-outlined,
+.color-app-blue-dashed         { color: #889df0; border-color: #889df0; }
+.color-app-yellow-outlined,
+.color-app-yellow-dashed       { color: #f7cd67; border-color: #f7cd67; }
+.color-app-orange-outlined,
+.color-app-orange-dashed       { color: #e59266; border-color: #e59266; }
+.color-app-teal-outlined,
+.color-app-teal-dashed         { color: #82d5bb; border-color: #82d5bb; }
+.color-app-green-outlined,
+.color-app-green-dashed        { color: #8ac68a; border-color: #8ac68a; }
+.color-app-red-outlined,
+.color-app-red-dashed          { color: #fc736d; border-color: #fc736d; }
+.color-lime-green-outlined,
+.color-lime-green-dashed       { color: #d1da49; border-color: #d1da49; }
+.color-yellow-green-outlined,
+.color-yellow-green-dashed     { color: #ecdf52; border-color: #ecdf52; }
+.color-brown-outlined,
+.color-brown-dashed            { color: #9a835a; border-color: #9a835a; }
+.color-warm-peach-pink-outlined,
+.color-warm-peach-pink-dashed  { color: #e18c6f; border-color: #e18c6f; }
+
+// ---------- Close button ----------
+.close {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 2px;
+    margin-right: -4px;
+    width: 16px;
+    height: 16px;
+    padding: 0;
+    border: none;
+    background: rgba(0, 0, 0, 0.08);
+    color: inherit;
+    font-size: 14px;
+    line-height: 1;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background 0.15s ease;
+}
+.close:hover { background: rgba(0, 0, 0, 0.18); }
+.close:disabled { cursor: not-allowed; opacity: 0.5; }
+
+// ---------- Interactive ----------
+.is-clickable { cursor: pointer; }
+.is-clickable:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 6px rgba(61, 52, 40, 0.12);
+}
+.is-clickable:active { transform: translateY(0); }
+.is-clickable:focus-visible {
+    outline: 2px solid var(--animal-focus-yellow, #f5c31c);
+    outline-offset: 2px;
+}
+.is-disabled { opacity: 0.5; cursor: not-allowed; pointer-events: none; }
+```
+
+> **关键设计决策**：
+> - 与 Card 共用同一 12 色调色板（直接复用其 `pattern-{color}` 边框色），保证「卡片 + 标签」组合视觉一致。
+> - `border: 1.5px solid transparent` 默认占位，让 outlined/dashed 切换时不会因为 border 出现/消失导致尺寸抖动。
+> - `closable` × 按钮的 click `stopPropagation`，不会冒泡触发 `onClick`。
+> - 提供 `onClick` 时整个 tag 升格为 `role="button"` + `tabIndex={0}`，支持 Enter / Space 键盘触发。
 
 ---
 

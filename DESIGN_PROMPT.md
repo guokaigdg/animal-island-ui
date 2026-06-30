@@ -522,4 +522,8 @@ Interface details:
 | Wallet 默认尺寸        | small 96×32 / medium 132×42 / large 176×54 px（pill）；bag 38/50/66 px                                                    | medium 默认                                        |
 | Wallet 钱袋 slot       | absolute top:0，translateX(-50%)，drop-shadow `0 4px 6px rgba(91,78,30,0.18)`；70% 上凸于 pill                              | 默认 item-022.png，可自定义                        |
 | Wallet 数字            | weight 800，`tabular-nums`，`letter-spacing 0.04em`，白色 + 双层 text-shadow 描边                                          | 自动千分位                                         |
+| Tag 胶囊               | `border-radius: 999px`，`border: 1.5px solid transparent`（占位防抖动），`font-weight: 600`                                 | 复用 Card 12 色调色板                                |
+| Tag 尺寸               | small 24 / medium 29 / large 34 px（height）；font-size 12 / 13 / 15 px                                                     | medium 默认                                         |
+| Tag × 按钮             | 16×16 圆，`background: rgba(0,0,0,0.08)`（hover 0.18），`aria-label="close"`，`stopPropagation` 不冒泡                    | closable=true 时渲染                                 |
+| Tag 焦点               | 提供 onClick 时升格为 `role="button"`，focus 环 `2px solid #f5c31c`                                                          | Enter / Space 触发                                  |
 | Google Fonts URL       | `fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;700&display=swap` | 在线加载                                           |

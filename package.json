@@ -43,11 +43,12 @@
         "test:run": "vitest run",
         "test:cov": "vitest run --coverage --reporter=json --outputFile=coverage/vitest-results.json",
         "badges": "node scripts/generate-coverage-badges.mjs",
+        "check:docs": "node scripts/check-docs-sync.mjs",
         "lint": "eslint .",
         "lint:fix": "eslint . --fix",
         "format": "prettier --write .",
         "format:check": "prettier --check .",
-        "ci": "npm run format:check && npm run lint && npm run test:run && npm run build"
+        "ci": "npm run format:check && npm run check:docs && npm run lint && npm run test:run && npm run build"
     },
     "peerDependencies": {
         "react": ">=17.0.0",
