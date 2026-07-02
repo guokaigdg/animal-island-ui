@@ -181,6 +181,13 @@ npm run build:demo
     <br/><a href="https://github.com/guowenju/portal-os">portal-os</a><br/><sub>动物森林桌面博客</sub>
   </td>
 </tr>
+<tr>
+  <td align="center" width="33%">
+    <br/>
+    <img src="img/awesome-splatoon3.png" alt="Awesome-splatoon3" style="border-radius: 8px; width: 90%; display: block; margin: 8px auto 0;" />
+    <br/><a href="https://github.com/961853266hyt/awesome-splatoon3">Awesome-splatoon3</a><br/><sub>斯普拉顿3 资源站</sub>
+  </td>
+</tr>
 </table>
 
 ## 注意事项
