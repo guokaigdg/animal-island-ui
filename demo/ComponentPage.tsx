@@ -28,6 +28,7 @@ import WalletDemo from './components/Wallet/WalletDemo';
 import DrawerDemo from './components/Drawer/DrawerDemo';
 import FormDemo from './components/Form';
 import TagDemo from './components/Tag';
+import NotificationDemo from './components/Notification';
 // ============================================
 // Styles
 // ============================================
@@ -1418,6 +1419,10 @@ export const PAGE_INFO: Record<string, { title: string; desc: string }> = {
         title: 'Tag 标签',
         desc: '标签组件 — 支持 solid / outlined / dashed 三种风格，16 种颜色，三种尺寸，可关闭、可点击、自定义图标',
     },
+    notification: {
+        title: 'Notification 通知',
+        desc: '命令式通知组件 — 4 种 type (success/info/warning/error) × 6 个 position，支持 description / btn / onClick / onClose，显式 key 二次调用会更新现有通知',
+    },
     form: {
         title: 'Form 表单',
         desc: '表单组件 — 支持 useForm 命令式实例、多种校验规则、三种布局（horizontal / vertical / inline）、labelCol / wrapperCol 网格',
@@ -1451,6 +1456,7 @@ const PAGES: Record<string, React.FC> = {
     'wedding-invitation': InvitationCardDemo,
     wallet: WalletDemo,
     tag: TagDemo,
+    notification: NotificationDemo,
     form: FormDemo,
 };
 

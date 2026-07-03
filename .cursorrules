@@ -4,7 +4,7 @@
 
 <!-- META
 - 适用版本：v1.x（与 package.json 对齐）
-- 最后校准：2026-06-30
+- 最后校准：2026-07-02
 - 维护者：guokaigdg
 - 配套文档：AI_USAGE.md（API）/ skill/SKILL.md（样式）/ DESIGN_PROMPT.md（设计 token）/ PROMPT.md（用户提示词）
 - 同步工具：`npm run check:docs`（`scripts/check-docs-sync.mjs`，已挂 `npm run ci`）—— 任何组件增删都会扫到漂移并 fail
@@ -324,6 +324,7 @@ describe('Foo', () => {
 | 视觉风格变化 | `DESIGN_PROMPT.md`（色板/尺寸/形状） |
 | 新增组件 | `PROMPT.md`（追加 `### 组件名` spec 段落，self-contained） |
 | 组件数/覆盖率变化 | `README.md` + `docs/README.zh-CN.md` 徽章（跑 `npm run badges` 自动同步） |
+| **新增/改组件 demo** | **三处必须同步：①`demo/pageInfo.ts`（移动端顶栏）②`demo/ComponentPage.tsx` 的 `PAGE_INFO` + `PAGES`（主区域标题 + 组件挂载）③`demo/HomePage.tsx` 的 `components` 列表（首页卡片）—— 缺任意一处都会出现「菜单能选中但主区域空白」或「首页没这个卡片」** |
 | 任何贡献 | `CONTRIBUTING.md`（流程不变则无需改） |
 
 四份文档分工：`AI_USAGE.md`（API 手册，写代码优先查）/ `skill/SKILL.md`（像素级样式，调样式查）/ `DESIGN_PROMPT.md`（喂外部 AI 工具）/ `PROMPT.md`（普通用户一键提示词）。
@@ -370,6 +371,8 @@ describe('Foo', () => {
 
 - **字符串批量替换**用脚本时注意：`String.replace` 不可变、回调里 `changed` flag 会逃逸、`[^>]*` 跨引号不匹配、vitest json 必须 `--outputFile` 指定路径。
 - **DOM-to-PNG 导出**（html-to-image / modern-screenshot）时，Chromium 不读 `document.fonts`，需把 `@font-face` 作为 `<style>` 子节点塞进截图根节点。
+- **Demo 双 PAGE_INFO 必须同时同步**：`demo/pageInfo.ts`（移动端顶栏 PAGE_INFO）和 `demo/ComponentPage.tsx` 内部导出的 `PAGE_INFO`（主区域 PAGE_INFO + `PAGES` 映射）是**两份独立的常量对象**——`pageInfo.ts` 删了主区域白屏、`ComponentPage.tsx` 删了移动端顶栏无标题。`scripts/check-docs-sync.mjs` 只校验 4 份文档不校验 demo 文件，新增组件务必三处都加（`pageInfo.ts` + `ComponentPage.tsx` 的 `PAGE_INFO` 与 `PAGES` + `HomePage.tsx` 的 `components` 数组）。最简核对：菜单点击后若主区域空白，**第一反应是查 `ComponentPage.tsx` 内部 `PAGE_INFO` 漏没漏这个 key**，不是查组件代码。
+- **命令式组件**（Notification 这类 antd 风格 API）无 JSX 元素，测试不能用 `render(<Notification />)` 断言；用 `act(() => Notification.success('x'))` 触发，再 `waitFor` 容器挂载。CI 不强制单测覆盖命令式组件，但要保证 demo 页能跑通。
 
 ## 15. 禁止事项清单（差异条款）
 
@@ -386,6 +389,7 @@ describe('Foo', () => {
 
 每次实质性修改本文件（新增/删除/重写任意章节）必须追加一条，AI 和维护者可追溯规则演进。
 
+- **2026-07-02** — Notification 组件（第 27 个）落地后的规则收尾：① §10 文档同步矩阵新增「demo 三处同步」行，明确 `demo/pageInfo.ts` + `demo/ComponentPage.tsx` 的 `PAGE_INFO`/`PAGES` + `demo/HomePage.tsx` 的 `components` 缺一不可（Notification 首版就因为漏了 `ComponentPage.tsx` 内部 `PAGE_INFO` 导致主区域空白、菜单能选中但渲染 null）；② §14.B 增加「双 PAGE_INFO 同步」与「命令式组件测试」两条踩坑，固化现场诊断顺序；③ META 校准日期更新到 2026-07-02。组件总数 27 个（较 v1.0 26 个 +1），命令式组件 1 个（Notification）。
 - **2026-06-30** — Tag backfill + 文档漂移硬拦截：新增 `scripts/check-docs-sync.mjs`，自动扫 `src/components/` 校验 4 份文档是否收录每个组件，挂在 `npm run check:docs` + `npm run ci` 任一漂移即失败。`AI_USAGE.md` 补 §1.26 Tag、§1 导入/类型块；`skill/SKILL.md` 补 §0 清单 + §2 Tag / Icon / Select 三段像素级 CSS；`PROMPT.md` 补 Tag self-contained spec + HARD RULES §13 组件清单；`DESIGN_PROMPT.md` 关键数值表补 Tag 4 行。
 - **2026-06-25** — 优化 v2：§0.0 速查表改为指针型（去重）；§7.3 ❌/✅ 反例下沉到 `skill/SKILL.md` §1.5；§15 改为差异条款（去重）；软化过期数字（`v1.x` / `22.x` / `24 个` / `488 个`）；新增文件头 META 注释、CHANGELOG 段；§14 拆为 14.A / 14.B；§9.3 删除"207+"硬编码。
 - **2026-06-25** — 优化 v1：新增 §0.0 速查表；§0.3 升级为强约束；§7.3 新增 ❌/✅ 反例配对；§14 拆为 14A/14B；新增文件头 META 注释。

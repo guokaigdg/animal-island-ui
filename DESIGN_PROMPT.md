@@ -384,14 +384,15 @@ Number format: number → 千分位 with thousandSeparator (default ",", pass ""
                string → 原样; undefined/null → '00,000'.
 Hover animation: bagSlot walletBagBounce 0.5s ease-in-out (translateY -8px rot -6deg → -2px rot 3deg → 0).
 
-=== COMPONENT INVENTORY (26 components from src/index.ts, + 3 companion exports FormItem / useForm / ICON_LIST) ===
+=== COMPONENT INVENTORY (27 components from src/index.ts, + 3 companion exports FormItem / useForm / ICON_LIST) ===
 Interactive:           Button, Input, Switch, Modal, Drawer, Collapse, Select, Tabs, Checkbox, Radio
 Container / Heading:   Card (13 colors + 13 dot patterns), Title (ribbon banner — 13 schemes), Table
 Forms:                 Form (with FormItem + useForm companions — conventional form layout + validation)
-Feedback:              Tooltip, Loading
+Feedback:              Tooltip, Loading, Notification (imperative — 4 types × 6 positions)
 Decorative:            Time, Phone, Footer, Divider, Cursor, Typewriter, Icon
 Content display:       CodeBlock
 Currency display:      Wallet (3 sizes, olive-yellow pill + Island bag icon)
+Tags / labels:         Tag (3 sizes × 3 variants × 12 colors)
 
 === CODE BLOCK (dark theme, JSX/TS only) ===
 Container: padding 20px 24px; background #2b2118; border 1px solid #3d3028;
@@ -526,4 +527,10 @@ Interface details:
 | Tag 尺寸               | small 24 / medium 29 / large 34 px（height）；font-size 12 / 13 / 15 px                                                     | medium 默认                                         |
 | Tag × 按钮             | 16×16 圆，`background: rgba(0,0,0,0.08)`（hover 0.18），`aria-label="close"`，`stopPropagation` 不冒泡                    | closable=true 时渲染                                 |
 | Tag 焦点               | 提供 onClick 时升格为 `role="button"`，focus 环 `2px solid #f5c31c`                                                          | Enter / Space 触发                                  |
+| Notification 根容器     | `position: fixed; inset: 0; pointer-events: none; z-index: 2000`                                                            | 高于 Modal(1000)/Drawer(1001)                       |
+| Notification 6 position | top(默认)/topLeft/topRight/bottom/bottomLeft/bottomRight 各自 fixed 24px 边距；bottom 组用 `flex-direction: column-reverse` | 顶部组新通知追加到队尾，底部组新通知出现在最下方      |
+| Notification 卡片      | 384px 宽，`padding: 14px 16px`，`border-radius: 18px`，`border: 2px solid` 按 type 染色，`box-shadow: 0 6px 18px`         | 4 type 覆盖 border + box-shadow + icon-wrap bg     |
+| Notification 4 type 配色 | success `#6fba2c` / info `#19c8b9` / warning `#f5c31c` / error `#e05a5a` 描边，对应 icon-wrap 浅色底                    | 文字色更深，icon-wrap 32×32 圆 + 内嵌 SVG          |
+| Notification 默认 duration | 4.5 秒；传 0 关闭自动关闭；退场动画 250ms                                                                       | 退场后从 store 移除并触发 `onClose`               |
+| Notification key 复用   | 同 key 二次调用会替换现有通知（`storeItems[idx] = item`），适合上传进度等流式更新                                         | 不传 key 时每次都追加新通知                        |
 | Google Fonts URL       | `fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;700&display=swap` | 在线加载                                           |

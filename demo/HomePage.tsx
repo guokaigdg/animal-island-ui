@@ -356,6 +356,11 @@ const components = [
     { key: 'modal', name: 'Modal', desc: 'SVG 有机形状弹窗、ESC 关闭' },
     { key: 'drawer', name: 'Drawer', desc: '下沉景深抽屉，四方向 + 背景下沉' },
     {
+        key: 'notification',
+        name: 'Notification',
+        desc: '命令式通知，4 种 type × 6 个 position',
+    },
+    {
         key: 'typewriter',
         name: 'Typewriter',
         desc: '逐字打字机效果，支持多行与富内容',

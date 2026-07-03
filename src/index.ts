@@ -101,3 +101,18 @@ export type { WalletProps, WalletSize } from './components/Wallet';
 
 export { Tag } from './components/Tag';
 export type { TagProps, TagSize, TagVariant, TagColor } from './components/Tag';
+
+export {
+    Notification,
+    notificationOpen,
+    notificationDestroy,
+    NOTIFICATION_DEFAULT_DURATION,
+} from './components/Notification';
+export type {
+    NotificationStatic,
+    NotificationConfig,
+    NotificationType,
+    NotificationPosition,
+    NotificationPlacement,
+    NotificationItem,
+} from './components/Notification';

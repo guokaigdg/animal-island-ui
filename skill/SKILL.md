@@ -58,9 +58,10 @@ animal-island-ui 是一套受《治愈系海岛风格》启发的 React + TypeSc
 | `Table`             | 数据表格，固定列、空状态、loading                                                                                 | ✓    |               |
 | `Form`              | 表单容器 + 校验（含 `FormItem` / `useForm` 伴生导出，类主流表单库 API）                                          | ✓    |               |
 | `Wallet`            | 治愈海岛钱袋样式金额胶囊（橄榄黄 pill + Island bag 图标，3 种尺寸，千分位自动格式化）                                  |      | ✓             |
-| `Tag`               | 胶囊标签，3 尺寸 × 3 变体（solid/outlined/dashed）× 12 配色（与 Card 调色板完全对齐），支持 closable / onClick / disabled  | ✓    |               |
+| `Tag`               | 胶囊标签，3 尺寸 × 3 变体（solid/outlined/dashed）× 12 配色（与 Card 调色板完全对齐），支持 closable / onClick / disabled | ✓    |               |
+| `Notification`      | 命令式全局通知（antd 风格）：4 种 type × 6 个 position，支持 description / btn / onClick / key 复用更新 / destroy 全部 | ✓    |               |
 
-类型导出：`ButtonProps/ButtonType/ButtonSize`、`InputProps/InputSize`、`SwitchProps/SwitchSize`、`ModalProps`、`DrawerProps/DrawerPlacement`、`CardProps/CardType/CardColor`、`TitleProps/TitleSize/TitleColor`、`FooterProps/FooterType`、`CollapseProps`、`CursorProps`、`TimeProps`、`PhoneProps`、`DividerProps`、`TypewriterProps`、`SelectProps/SelectOption`、`IconProps/IconName`、`TabsProps/TabItem`、`CheckboxProps/CheckboxOption/CheckboxSize`、`RadioProps/RadioOption/RadioSize`、`TooltipProps/TooltipPlacement/TooltipTrigger/TooltipVariant`、`CodeBlockProps`、`LoadingProps`、`TableProps/TableColumn`、`FormProps/FormItemProps/FormInstance/FormLayout/FormItemLayout/FormSize/FormLabelAlign/ColProps/NamePath/RequiredMark/RuleObject/RuleRender/RuleType/Rules/FieldData/ValidateStatus/ValidateError/ValidateInfo/ScrollOptions`、`WalletProps/WalletSize`、`TagProps/TagSize/TagVariant/TagColor`。运行时值：`ICON_LIST`。伴生导出：`FormItem`、`useForm`（默认导出 `Form` 也支持 `Form.Item` / `Form.useForm` 写法）。
+类型导出：`ButtonProps/ButtonType/ButtonSize`、`InputProps/InputSize`、`SwitchProps/SwitchSize`、`ModalProps`、`DrawerProps/DrawerPlacement`、`CardProps/CardType/CardColor`、`TitleProps/TitleSize/TitleColor`、`FooterProps/FooterType`、`CollapseProps`、`CursorProps`、`TimeProps`、`PhoneProps`、`DividerProps`、`TypewriterProps`、`SelectProps/SelectOption`、`IconProps/IconName`、`TabsProps/TabItem`、`CheckboxProps/CheckboxOption/CheckboxSize`、`RadioProps/RadioOption/RadioSize`、`TooltipProps/TooltipPlacement/TooltipTrigger/TooltipVariant`、`CodeBlockProps`、`LoadingProps`、`TableProps/TableColumn`、`FormProps/FormItemProps/FormInstance/FormLayout/FormItemLayout/FormSize/FormLabelAlign/ColProps/NamePath/RequiredMark/RuleObject/RuleRender/RuleType/Rules/FieldData/ValidateStatus/ValidateError/ValidateInfo/ScrollOptions`、`WalletProps/WalletSize`、`TagProps/TagSize/TagVariant/TagColor`、`NotificationConfig/NotificationType/NotificationPosition/NotificationPlacement/NotificationItem/NotificationStatic`。运行时值：`Notification`、`notificationOpen`、`notificationDestroy`、`NOTIFICATION_DEFAULT_DURATION`、`ICON_LIST`。伴生导出：`FormItem`、`useForm`（默认导出 `Form` 也支持 `Form.Item` / `Form.useForm` 写法）。
 
 ---
 
@@ -2151,6 +2152,177 @@ color: #19c8b9;
 
 ---
 
+### Notification
+
+源码：`src/components/Notification/NotificationPortal.tsx`（命令式 API + 全局 store + 容器） + `Notification.tsx`（单条视图） + `notification.module.less`。
+**命令式组件**（类似 antd）：无 `<Notification>` JSX 元素，全部通过 `Notification.open / .success / .info / .warning / .error / .destroy` 触发；首次调用时在 `document.body` 挂一个根容器（`data-animal-notification-root`），后续 `useSyncExternalStore` 订阅 store 变化。SSR 安全（typeof document 守卫）。
+
+```tsx
+// 6 种静态方法,config 可以是字符串(仅 message)或完整对象
+Notification.open({ message: '...', description: '...', type: 'info', position: 'top', duration: 4.5 });
+Notification.success('保存成功!');
+Notification.error({ message: '网络错误', description: '请稍后重试' });
+Notification.warning('库存不足');
+Notification.info('系统通知');
+Notification.destroy();        // 关闭全部
+Notification.destroy('upload'); // 关闭指定 key
+```
+
+**根容器（视口层）：**
+
+```css
+.notificationRoot {
+    position: fixed;
+    inset: 0;
+    pointer-events: none; /* 通知自身 pointer-events: auto,根容器透传 */
+    z-index: 2000; /* 高于 Modal(1000)/Drawer(1001) */
+}
+
+/* 6 个 fixed 容器,各自按位置对齐,内层 column 堆叠 */
+.position-top, .position-topLeft, .position-topRight,
+.position-bottom, .position-bottomLeft, .position-bottomRight {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    pointer-events: none;
+    max-width: calc(100vw - 32px);
+}
+.position-top       { top: 24px; left: 50%; transform: translateX(-50%); align-items: center; }
+.position-topLeft   { top: 24px; left: 24px; align-items: flex-start; }
+.position-topRight  { top: 24px; right: 24px; align-items: flex-end; }
+.position-bottom       { bottom: 24px; left: 50%; transform: translateX(-50%); align-items: center; flex-direction: column-reverse; }
+.position-bottomLeft   { bottom: 24px; left: 24px; align-items: flex-start; flex-direction: column-reverse; }
+.position-bottomRight  { bottom: 24px; right: 24px; align-items: flex-end; flex-direction: column-reverse; }
+```
+
+> 顶部组（`top*`）从顶向下堆叠，新通知追加到队尾；底部组（`bottom*`）使用 `flex-direction: column-reverse` 让新通知出现在最下方。
+
+**单条卡片（精确值）：**
+
+```css
+.notification {
+    pointer-events: auto;
+    box-sizing: border-box;
+    display: flex; align-items: flex-start; gap: 12px;
+    width: 384px;
+    max-width: calc(100vw - 48px);
+    padding: 14px 16px;
+    background: rgb(247, 243, 223);
+    border: 2px solid #c4b89e; /* 默认无 type 时 */
+    border-radius: 18px;
+    box-shadow: 0 6px 18px rgba(61, 52, 40, 0.14);
+    color: #725d42;
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+    will-change: transform, opacity;
+}
+
+/* 4 种 type 覆盖 border + shadow + 图标底色 */
+.type-success  { border-color: #6fba2c; box-shadow: 0 6px 18px rgba(111, 186, 44, 0.18); }
+.type-success  .iconWrap { background: #e9f6d4; color: #5a9e1e; }
+.type-info     { border-color: #19c8b9; box-shadow: 0 6px 18px rgba(25, 200, 185, 0.18); }
+.type-info     .iconWrap { background: #e6f9f6; color: #11a89b; }
+.type-warning  { border-color: #f5c31c; box-shadow: 0 6px 18px rgba(245, 195, 28, 0.20); }
+.type-warning  .iconWrap { background: #fdf3c4; color: #b88a06; }
+.type-error    { border-color: #e05a5a; box-shadow: 0 6px 18px rgba(224, 90, 90, 0.18); }
+.type-error    .iconWrap { background: #fbe0e0; color: #c94444; }
+
+/* 可点击时（onClick 提供） */
+.clickable { cursor: pointer; }
+.clickable:hover  { box-shadow: 0 10px 26px rgba(61, 52, 40, 0.18); transform: translateY(-1px); }
+.clickable:focus-visible { outline: 2px solid #ffcc00; outline-offset: 2px; }
+```
+
+**结构（单条）：**
+
+```css
+.iconWrap { /* 32×32 圆 */
+    flex: 0 0 auto;
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 18px; line-height: 1;
+    user-select: none;
+    /* 颜色由 .type-* 注入 */
+}
+.body { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 4px; }
+.title       { font-size: 15px; font-weight: 700; line-height: 1.4; color: #794f27; letter-spacing: 0.01em; }
+.description { font-size: 13px; font-weight: 500; line-height: 1.55; color: #8a7b66; letter-spacing: 0.01em; }
+.btnSlot { flex: 0 0 auto; margin-left: 4px; }
+.close { /* 22×22 圆 × 按钮 */
+    width: 22px; height: 22px;
+    color: rgba(114, 93, 66, 0.55);
+    background: transparent;
+    border-radius: 50%;
+    font-size: 18px; line-height: 1;
+    transition: all 0.15s ease;
+}
+.close:hover         { background: rgba(114, 93, 66, 0.12); color: rgba(114, 93, 66, 1); }
+.close:focus-visible { outline: 2px solid #ffcc00; outline-offset: 2px; }
+```
+
+**入场 / 退场动画（按 placement 分方向）：**
+
+```css
+.placement-top    { animation: animal-notification-slide-down 0.25s cubic-bezier(0.4,0,0.2,1) both; }
+.placement-top.leaving    { animation: animal-notification-slide-up 0.25s cubic-bezier(0.4,0,0.2,1) both; }
+.placement-bottom { animation: animal-notification-slide-up   0.25s cubic-bezier(0.4,0,0.2,1) both; }
+.placement-bottom.leaving { animation: animal-notification-slide-down 0.25s cubic-bezier(0.4,0,0.2,1) both; }
+
+@keyframes animal-notification-slide-down {
+    from { opacity: 0; transform: translateY(-16px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes animal-notification-slide-up {
+    from { opacity: 1; transform: translateY(0); }
+    to   { opacity: 0; transform: translateY(-16px); }
+}
+
+/* 减弱动效 */
+@media (prefers-reduced-motion: reduce) {
+    .placement-top, .placement-bottom,
+    .placement-top.leaving, .placement-bottom.leaving {
+        animation-duration: 0.01s;
+    }
+}
+```
+
+**关键实现要点：**
+
+- 全局 store（module-level `storeItems`）+ `useSyncExternalStore`，React 组件订阅后通过 `setState` 触发 re-render。
+- 单条 `NotificationView` 内部维护 `leaving` 状态：用户点击 × 或 duration 到期 → 设置 `leaving=true` → 250ms 退场动画结束 → 回调 `onRemove` 从 store 删除并触发 `item.onClose`。
+- 显式 `key` 时，`open` 会先 `findIndex` 现有 key，存在则替换 store 中的 item（用 `next[idx] = item`），否则追加。适合上传进度等流式更新场景。
+- `Notification(config)` 直接调用等价于 `Notification.open(config)`（type='info'）。所有方法共享 `open` 路径，仅 type 不同。
+- 注意类型导出：`Notification` 是值（API 函数对象），`NotificationStatic` 是其类型；项目 barrel `src/index.ts` 已分别导出，避免与浏览器全局 `Notification` 构造器同名冲突。
+- 关闭按钮的 `click` 内部 `stopPropagation`，不会冒泡到通知本体触发 `onClick`。
+- 提供 `onClick` 时整个 `<div>` 升格为 `role="button" tabIndex={0}`，支持 Enter / Space 键盘触发。
+
+**Props 完整签名：**
+
+```ts
+type NotificationType = 'success' | 'info' | 'warning' | 'error';
+type NotificationPosition = 'top' | 'topLeft' | 'topRight' | 'bottom' | 'bottomLeft' | 'bottomRight';
+type NotificationPlacement = 'top' | 'bottom';
+
+interface NotificationConfig {
+    message: ReactNode;              // 必填
+    description?: ReactNode;
+    duration?: number;               // 默认 4.5 秒,传 0 关闭自动关闭
+    position?: NotificationPosition; // 默认 'top'(顶部居中)
+    type?: NotificationType;
+    icon?: ReactNode;                // 覆盖 type 默认图标
+    btn?: ReactNode;                 // 自定义操作按钮
+    key?: string;                    // 同 key 二次调用会更新现有通知
+    onClose?: () => void;            // 退场动画结束触发
+    onClick?: () => void;            // 点击通知本体触发
+    closeIcon?: ReactNode;
+    className?: string;
+    style?: CSSProperties;
+}
+```
+
+---
+
 ## 3. Demo 布局精确规范
 
 这是 Demo 站（`demo/App.tsx`）的实际布局数值，用于还原完整页面效果：
@@ -2568,6 +2740,7 @@ export const PAGE_INFO: Record<string, { title: string; desc: string }> = {
     form: { title: 'Form 表单', desc: '...' },
     wallet: { title: 'Wallet 钱袋', desc: '...' },
     codeblock: { title: 'CodeBlock 代码高亮', desc: '...' },
+    notification: { title: 'Notification 通知', desc: '...' },
 };
 ```
 

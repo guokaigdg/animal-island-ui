@@ -59,6 +59,7 @@ import {
     FormItem,
     Wallet,
     Tag,
+    Notification,
 } from 'animal-island-ui';
 
 // Companion hook (form instance factory)
@@ -137,6 +138,12 @@ import type {
     TagSize,
     TagVariant,
     TagColor,
+    NotificationStatic,
+    NotificationConfig,
+    NotificationType,
+    NotificationPosition,
+    NotificationPlacement,
+    NotificationItem,
 } from 'animal-island-ui';
 ```
 
@@ -1192,6 +1199,102 @@ Notes:
 - **`onClick` upgrades the tag to a button** (`role="button"`, `tabIndex={0}`) — supports Enter and Space keys. Without `onClick` the tag is a plain `<span>`. Hover/active states add `translateY(-1px)` lift + `box-shadow 0 2px 6px rgba(61,52,40,0.12)`. Focus ring is `2px solid var(--animal-focus-yellow, #f5c31c)`.
 - **`disabled`** sets `opacity: 0.5` and `pointer-events: none` on the whole tag, AND disables the close button (which gets a separate `cursor: not-allowed`).
 - a11y: when clickable, the tag is a button. Close button is reachable via Tab. All interactive states have visible focus styles.
+
+---
+
+### 1.27 Notification (imperative)
+
+Notification is **NOT a JSX component** — it's a static-method API (à la antd). Calling `Notification.success({...})` mounts a portal under `document.body`, renders the toast, and auto-unmounts after `duration` seconds. There is no `<Notification>` element to put in your tree.
+
+```ts
+type NotificationType = 'success' | 'info' | 'warning' | 'error';
+type NotificationPosition =
+    | 'top' // top-center (DEFAULT)
+    | 'topLeft'
+    | 'topRight'
+    | 'bottom'
+    | 'bottomLeft'
+    | 'bottomRight';
+
+interface NotificationConfig {
+    message: React.ReactNode; // REQUIRED
+    description?: React.ReactNode;
+    duration?: number; // seconds; default 4.5; pass 0 to disable auto-close
+    position?: NotificationPosition; // default 'top'
+    type?: NotificationType; // default depends on the called method
+    icon?: React.ReactNode; // overrides the default type icon
+    btn?: React.ReactNode; // action button rendered left of the close ×
+    key?: string; // explicit key — re-calling with same key UPDATES the existing toast instead of adding a new one (use for progress / live updates)
+    onClose?: () => void; // fires after the leave animation completes
+    onClick?: () => void; // fires when the toast body is clicked (also makes it keyboard-activatable: Enter / Space)
+    closeIcon?: React.ReactNode; // replaces the default ×
+    className?: string;
+    style?: React.CSSProperties;
+}
+
+interface NotificationStatic {
+    (config: NotificationConfig | string): void; // direct call → type 'info'
+    open: (config: NotificationConfig | string) => void;
+    success: (config: NotificationConfig | string) => void;
+    info: (config: NotificationConfig | string) => void;
+    warning: (config: NotificationConfig | string) => void;
+    error: (config: NotificationConfig | string) => void;
+    destroy: (key?: string) => void; // no arg → close ALL toasts
+}
+```
+
+```tsx
+import { Notification, Button } from 'animal-island-ui';
+
+// 1) String shortcut
+Notification.success('保存成功!');
+Notification.error('网络请求失败');
+
+// 2) Object form with description
+Notification.info({
+    message: '系统通知',
+    description: '今天有流星雨,记得晚上 8 点去海滩许愿。',
+});
+
+// 3) Six positions
+Notification.warning({ message: '顶部居中', position: 'top' });
+Notification.warning({ message: '右下角', position: 'bottomRight' });
+
+// 4) Manual dismiss / no auto-close
+Notification.info({ message: '常驻通知', duration: 0, btn: <Button size="small">接受</Button> });
+
+// 5) Live update via shared key (e.g. upload progress)
+Notification.info({ message: '上传中 0%', key: 'upload', duration: 0 });
+setTimeout(() => Notification.info({ message: '上传中 50%', key: 'upload', duration: 0 }), 300);
+setTimeout(
+    () => Notification.success({ message: '上传完成', key: 'upload', duration: 3 }),
+    600
+);
+
+// 6) Clickable toast
+Notification.success({
+    message: '点击我',
+    description: '点击通知本体可触发 onClick',
+    onClick: () => console.log('clicked'),
+});
+
+// 7) Global destroy
+Notification.destroy(); // close all
+Notification.destroy('upload'); // close by key
+```
+
+Notes:
+
+- **Imperative only.** There is no `<Notification>` JSX element — do not try to use one. All interaction goes through the static methods.
+- **`config` accepts a plain string** as shorthand for `{ message: <string> }`. The other 12 fields are dropped in that case.
+- **Default position is `top` (top-center)**. Pass `position` to use one of the 6 slots. Top/bottom placement groups are independent — toasts at the same position stack vertically, with the latest on top (for `top*`) or bottom (for `bottom*`).
+- **Default `duration` is 4.5s.** Pass `0` to disable auto-close (toast persists until the user clicks × or `destroy` is called). The leave animation is `~250ms`.
+- **Re-calling with the same `key` UPDATES** the in-place toast (used for upload progress / streaming status). Without `key`, each call appends a new toast.
+- **`Notification.destroy()`** with no argument closes every active toast. With a `key` argument it closes only that one.
+- **`onClick` upgrades the toast to a button** (`role="button"`, `tabIndex={0}`) — Enter / Space trigger `onClick`. The close × button has its own `stopPropagation` so it won't fire `onClick` on the parent.
+- **Type determines default icon + accent color**: success = green `#6fba2c`, info = mint `#19c8b9`, warning = yellow `#f5c31c`, error = red `#e05a5a`. Pass `icon` to override.
+- **Lifecycle**: first call lazily creates a single React root on `document.body` (`data-animal-notification-root`); the root stays mounted between toasts and re-renders on every store change via `useSyncExternalStore`. There is exactly one root per page regardless of toast count.
+- **No CSS import required separately** — the root + per-type styles are bundled with the component. `import 'animal-island-ui/style'` is still required for the rest of the library.
 
 ---
 

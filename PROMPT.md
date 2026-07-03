@@ -437,6 +437,25 @@ You are a senior React engineer. Generate a **single self-contained `index.html`
 - Interactive: providing `onClick` upgrades root to `role="button"` + `tabIndex={0}` and adds `cursor: pointer`. Hover: `translateY(-1px)` + `box-shadow: 0 2px 6px rgba(61,52,40,0.12)`. Active: reset translateY. Focus: `2px solid var(--animal-focus-yellow, #f5c31c)` outline.
 - Disabled: `opacity: 0.5` + `pointer-events: none` on the whole tag, AND close button is `disabled` with `cursor: not-allowed`.
 
+### Notification (imperative global toast — 4 types × 6 positions)
+
+- **Imperative API only** (no JSX `<Notification>` element). Static methods: `Notification.open / .success / .info / .warning / .error` and `Notification.destroy([key])`. Direct call `Notification(config)` is an alias for `.open` (type=info).
+- `config` is either a string (shorthand for `{ message: <string> }`) or a `NotificationConfig` object. Key fields: `message` (required), `description`, `duration` (seconds, default 4.5, 0 = no auto-close), `position` (default `'top'`), `type`, `icon` (overrides default type icon), `btn` (custom action button rendered left of ×), `key` (same key re-call UPDATES the existing toast — use for upload progress), `onClose` (fires after leave animation), `onClick` (also enables keyboard activation), `closeIcon`.
+- 6 positions: `top` (top-center, default), `topLeft`, `topRight`, `bottom`, `bottomLeft`, `bottomRight`. Top groups stack downward (newest on top); bottom groups use `flex-direction: column-reverse` so newest appears on the inside (closest to viewport center).
+- Root container: `position: fixed; inset: 0; pointer-events: none; z-index: 2000` (above Modal 1000 / Drawer 1001). First call lazily mounts a single React root on `document.body` (tagged `data-animal-notification-root`); subsequent calls update an in-module store and re-render via `useSyncExternalStore`.
+- Single-toast card: `width: 384px; max-width: calc(100vw - 48px); padding: 14px 16px; background: rgb(247,243,223); border: 2px solid #c4b89e; border-radius: 18px; box-shadow: 0 6px 18px rgba(61,52,40,0.14)`.
+- 4 type accent (override border + box-shadow + icon-wrap):
+  success: `border-color #6fba2c; box-shadow 0 6px 18px rgba(111,186,44,0.18); icon-wrap bg #e9f6d4 / color #5a9e1e`
+  info:    `border-color #19c8b9; box-shadow 0 6px 18px rgba(25,200,185,0.18); icon-wrap bg #e6f9f6 / color #11a89b`
+  warning: `border-color #f5c31c; box-shadow 0 6px 18px rgba(245,195,28,0.20); icon-wrap bg #fdf3c4 / color #b88a06`
+  error:   `border-color #e05a5a; box-shadow 0 6px 18px rgba(224,90,90,0.18); icon-wrap bg #fbe0e0 / color #c94444`
+- Icon slot: 32×32 circle `border-radius: 50%`, `font-size: 18px; line-height: 1; user-select: none;`. Default icons are inline SVG check / info-i / triangle / × strokes using `currentColor`.
+- Body: `flex: 1 1 auto; min-width: 0; flex-direction: column; gap: 4px;`. Title `font-size: 15px; font-weight: 700; color: #794f27; letter-spacing: 0.01em`. Description `font-size: 13px; font-weight: 500; color: #8a7b66; line-height: 1.55`. Both `word-break: break-word`.
+- Close × button: 22×22 circle, `color: rgba(114,93,66,0.55); background: transparent; font-size: 18px`. Hover: `background: rgba(114,93,66,0.12); color: rgba(114,93,66,1)`. Focus: `2px solid #ffcc00` outline. Click `stopPropagation` so it never bubbles to `onClick`.
+- Enter / leave animation: `placement=top` uses `animal-notification-slide-down 0.25s cubic-bezier(0.4,0,0.2,1)` enter and `slide-up` leave; `placement=bottom` is mirrored. Leave fires when user clicks × OR when `duration` timer elapses; the timer is `useEffect`-driven, `setTimeout(item.duration * 1000)`. Single internal `leaving` state gates the leave animation; after 250ms it calls `onRemove` (drops the item from store) and `item.onClose` (user callback).
+- `Notification.destroy()` (no arg) clears the entire store. With a `key` arg it filters that one out. Both paths notify subscribers and trigger the leave animation for the affected items.
+- `prefers-reduced-motion: reduce` shortens both enter and leave animation to `0.01s`.
+
 ## HARD RULES (must obey — disqualifies the output if violated)
 
 1. Never use pure black (#000) or near-black (#111) text. Use #794f27 / #725d42 / #8a7b66.
@@ -451,7 +470,7 @@ You are a senior React engineer. Generate a **single self-contained `index.html`
 10. Never use weight < 400 anywhere. Body 500, headings 600–900.
 11. Never animate with hard cubic transitions; always use `cubic-bezier(0.4, 0, 0.2, 1)` over 0.15–0.35s.
 12. Title `title` prop on `<Modal>` is the literal string heading — do NOT confuse it with the `<Title>` component.
-13. **Always reach for the library component first.** If a feature exists as an animal-island-ui component (Card, Button, Input, Switch, Checkbox, Radio, Title, Tabs, Collapse, Modal, Select, Tooltip, Loading, Table, Time, Divider, Footer, Phone, Cursor, Typewriter, Icon, CodeBlock, Form, Wallet, Tag), use the inline-defined `<ComponentName>` JSX with documented props. Only hand-roll raw HTML/JSX when the library has no equivalent (page layout, app-specific composition, decorative blocks).
+13. **Always reach for the library component first.** If a feature exists as an animal-island-ui component (Card, Button, Input, Switch, Checkbox, Radio, Title, Tabs, Collapse, Modal, Drawer, Select, Tooltip, Loading, Table, Time, Divider, Footer, Phone, Cursor, Typewriter, Icon, CodeBlock, Form, Wallet, Tag, Notification), use the inline-defined `<ComponentName>` JSX with documented props. For Notification specifically, call the static methods (`Notification.success({...})`) — it has no JSX element. Only hand-roll raw HTML/JSX when the library has no equivalent (page layout, app-specific composition, decorative blocks).
 
 ## TASK
 
@@ -474,7 +493,7 @@ Only proceed to STEP 2 after the user answers.
 Structure the script like this:
 
 ```jsx
-// 1) Inline React components mirroring animal-island-ui's API (Card, Button, Input, Switch, Tag, ...)
+// 1) Inline React components mirroring animal-island-ui's API (Card, Button, Input, Switch, Tag, Drawer, Notification, ...)
 function Button({ type = 'default', size = 'middle', loading, disabled, children, ...rest }) { ... }
 function Card({ pattern, color, type, children, ...rest }) { ... }
 // ...all components used by the page

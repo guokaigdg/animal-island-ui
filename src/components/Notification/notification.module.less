@@ -1,0 +1,320 @@
+// ============================================
+// Notification — Animal Island Style
+// 4 类型走同套结构,通过 .type-* 区分左侧色条与图标底色
+// 6 个 position 各自 fixed 在视口,内层 column 堆叠
+// 进场从 placement 方向滑入,退场反向滑出
+// ============================================
+
+.notificationRoot {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 2000;
+    /* 高于 Modal(1000)/Drawer(1001) */
+}
+
+// ---------- Position groups ----------
+.position-top,
+.position-topLeft,
+.position-topRight,
+.position-bottom,
+.position-bottomLeft,
+.position-bottomRight {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    pointer-events: none;
+    max-width: calc(100vw - 32px);
+}
+
+.position-top {
+    top: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    align-items: center;
+}
+
+.position-topLeft {
+    top: 24px;
+    left: 24px;
+    align-items: flex-start;
+}
+
+.position-topRight {
+    top: 24px;
+    right: 24px;
+    align-items: flex-end;
+}
+
+.position-bottom {
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    align-items: center;
+    flex-direction: column-reverse;
+}
+
+.position-bottomLeft {
+    bottom: 24px;
+    left: 24px;
+    align-items: flex-start;
+    flex-direction: column-reverse;
+}
+
+.position-bottomRight {
+    bottom: 24px;
+    right: 24px;
+    align-items: flex-end;
+    flex-direction: column-reverse;
+}
+
+// ---------- Notification card ----------
+.notification {
+    pointer-events: auto;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 384px;
+    max-width: calc(100vw - 48px);
+    padding: 14px 16px;
+    background: rgb(247, 243, 223);
+    border: 2px solid #c4b89e;
+    border-radius: 18px;
+    box-shadow: 0 6px 18px rgba(61, 52, 40, 0.14);
+    font-family:
+        Nunito,
+        'Noto Sans SC',
+        -apple-system,
+        'PingFang SC',
+        'Hiragino Sans GB',
+        sans-serif;
+    color: #725d42;
+    transition:
+        box-shadow 0.2s ease,
+        transform 0.2s ease;
+    will-change: transform, opacity;
+}
+
+.clickable {
+    cursor: pointer;
+}
+
+.clickable:hover {
+    box-shadow: 0 10px 26px rgba(61, 52, 40, 0.18);
+    transform: translateY(-1px);
+}
+
+.clickable:focus-visible {
+    outline: 2px solid #ffcc00;
+    outline-offset: 2px;
+}
+
+// ---------- Type accent (背景染色 + 左侧色条 + 图标底色) ----------
+.type-success {
+    background: #f5fae9;
+    border-color: #6fba2c;
+    box-shadow: 0 6px 18px rgba(111, 186, 44, 0.18);
+}
+
+.type-success .iconWrap {
+    background: #d8efc1;
+    color: #5a9e1e;
+}
+
+.type-info {
+    background: #ecf9f6;
+    border-color: #19c8b9;
+    box-shadow: 0 6px 18px rgba(25, 200, 185, 0.18);
+}
+
+.type-info .iconWrap {
+    background: #c2ece6;
+    color: #11a89b;
+}
+
+.type-warning {
+    background: #fdf6d9;
+    border-color: #f5c31c;
+    box-shadow: 0 6px 18px rgba(245, 195, 28, 0.2);
+}
+
+.type-warning .iconWrap {
+    background: #fbeaa1;
+    color: #b88a06;
+}
+
+.type-error {
+    background: #fde8e8;
+    border-color: #e05a5a;
+    box-shadow: 0 6px 18px rgba(224, 90, 90, 0.18);
+}
+
+.type-error .iconWrap {
+    background: #f7c8c8;
+    color: #c94444;
+}
+
+// ---------- Icon ----------
+.iconWrap {
+    flex: 0 0 auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    font-size: 18px;
+    line-height: 1;
+    user-select: none;
+}
+
+// ---------- Body ----------
+.body {
+    flex: 1 1 auto;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.title {
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.4;
+    color: #794f27;
+    letter-spacing: 0.01em;
+    word-break: break-word;
+}
+
+.description {
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.55;
+    color: #8a7b66;
+    letter-spacing: 0.01em;
+    word-break: break-word;
+}
+
+// ---------- Action button slot ----------
+.btnSlot {
+    flex: 0 0 auto;
+    display: inline-flex;
+    align-items: center;
+    margin-left: 4px;
+}
+
+// ---------- Close button ----------
+.close {
+    flex: 0 0 auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    margin-left: 4px;
+    padding: 0;
+    border: none;
+    background: transparent;
+    color: rgba(114, 93, 66, 0.55);
+    font-size: 18px;
+    line-height: 1;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.close:hover {
+    background: rgba(114, 93, 66, 0.12);
+    color: rgba(114, 93, 66, 1);
+}
+
+.close:focus-visible {
+    outline: 2px solid #ffcc00;
+    outline-offset: 2px;
+}
+
+// ---------- Enter / leave animations ----------
+// placement=top: 从 -16px 滑入,leave 向上滑出
+.placement-top {
+    animation: animal-notification-slide-from-top 0.25s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+.placement-top.leaving {
+    animation: animal-notification-slide-out-top 0.25s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+// placement=bottom: 从 +16px 滑入,leave 向下滑出
+.placement-bottom {
+    animation: animal-notification-rise-from-bottom 0.25s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+.placement-bottom.leaving {
+    animation: animal-notification-sink-out-bottom 0.25s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+// top 方向:从 -16px 滑入(向下)
+@keyframes animal-notification-slide-from-top {
+    from {
+        opacity: 0;
+        transform: translateY(-16px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+// top 方向:leave 向上滑出到 -16px
+@keyframes animal-notification-slide-out-top {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateY(-16px);
+    }
+}
+
+// bottom 方向:从 +16px 滑入(向上)
+@keyframes animal-notification-rise-from-bottom {
+    from {
+        opacity: 0;
+        transform: translateY(16px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+// bottom 方向:leave 向下滑出到 +16px
+@keyframes animal-notification-sink-out-bottom {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateY(16px);
+    }
+}
+
+// 全局降低动效偏好
+@media (prefers-reduced-motion: reduce) {
+    .placement-top,
+    .placement-bottom {
+        animation-duration: 0.01s;
+    }
+
+    .placement-top.leaving,
+    .placement-bottom.leaving {
+        animation-duration: 0.01s;
+    }
+}
