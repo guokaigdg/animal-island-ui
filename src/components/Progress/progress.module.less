@@ -1,0 +1,166 @@
+// ============================================
+// Progress — Animal Island Style
+// 进度条，fill 复用 Button loading 的 -45° 斜纹动画
+// ============================================
+
+// ---------- Tokens (avoid importing variables.less in module CSS) ----------
+@stripe-bg: #0ec4b6;
+@stripe-bg-2: #01b0a7;
+@stripe-size: 10px; // 与 Button loading 保持一致（10px 单段 + 10px 双段 = 20px 周期）
+
+@track-bg: #f8f8f0;
+@track-border: #e8dcc8;
+@track-inner: rgba(114, 93, 66, 0.08);
+
+@text-on-fill: #fff;
+@text-on-track: #725d42;
+
+// ---------- Root ----------
+.progress {
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    font-family: inherit;
+    line-height: 1;
+    user-select: none;
+    vertical-align: middle;
+    width: 100%;
+}
+
+.body {
+    flex: 1 1 auto;
+    min-width: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.body.noGap {
+    gap: 0;
+}
+
+.row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.info {
+    font-weight: 700;
+    color: @text-on-track;
+    white-space: nowrap;
+    flex-shrink: 0;
+    letter-spacing: 0.02em;
+}
+
+.info.right {
+    min-width: 44px;
+    text-align: right;
+}
+
+.info.top {
+    align-self: flex-end;
+}
+
+// ---------- Track ----------
+.track {
+    position: relative;
+    flex: 1 1 auto;
+    width: 100%;
+    min-width: 80px;
+    background: @track-bg;
+    border: 2px solid @track-border;
+    box-shadow: inset 0 2px 4px @track-inner;
+    overflow: hidden;
+    border-radius: 999px;
+}
+
+.track.size-small {
+    height: 12px;
+    border-width: 1.5px;
+}
+
+.track.size-middle {
+    height: 20px;
+}
+
+.track.size-large {
+    height: 28px;
+}
+
+// ---------- Fill (Button loading 风格斜纹) ----------
+.fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    border-radius: 999px;
+    background: @stripe-bg;
+    background-image: repeating-linear-gradient(
+        -45deg,
+        @stripe-bg 0,
+        @stripe-bg @stripe-size,
+        @stripe-bg-2 @stripe-size,
+        @stripe-bg-2 (@stripe-size * 2)
+    );
+    // 28.28px = 10px * √2(条纹沿水平方向投影的步进)，与 Button loading 完全一致
+    background-size: 28.28px 28.28px;
+    animation: animal-progress-stripe 1s linear infinite;
+    transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 4px;
+}
+
+.fill.noTransition {
+    transition: none;
+}
+
+@keyframes animal-progress-stripe {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: -28.28px 0;
+    }
+}
+
+// ---------- Info text (inside fill) ----------
+.infoInside {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: @text-on-fill;
+    font-weight: 800;
+    font-size: 11px;
+    letter-spacing: 0.02em;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.15);
+    pointer-events: none;
+    white-space: nowrap;
+    z-index: 1;
+}
+
+.track.size-large .infoInside {
+    font-size: 13px;
+}
+
+.track.size-small .infoInside {
+    font-size: 9px;
+    right: 4px;
+}
+
+// ---------- Reduced motion ----------
+@media (prefers-reduced-motion: reduce) {
+    .fill {
+        transition: none;
+        animation: none;
+    }
+}

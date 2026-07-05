@@ -314,8 +314,8 @@ const features = [
     },
     {
         icon: 'Property-Shopping.svg',
-        title: '24 个组件',
-        desc: 'Button / Input / Switch / Modal / Form / Table / Title / Tooltip / Typewriter / Card / Collapse / Cursor / Divider / Time / Phone / Footer / Icon / Checkbox / Select / Tabs / CodeBlock / Loading / Radio / InvitationCard',
+        title: '28 个组件',
+        desc: 'Button / Input / Switch / Modal / Form / Table / Title / Tooltip / Typewriter / Card / Collapse / Cursor / Divider / Time / Phone / Footer / Icon / Checkbox / Select / Tabs / CodeBlock / Loading / Radio / InvitationCard / Wallet / Tag / Notification / Progress',
     },
     {
         icon: 'Property-Camera.svg',
@@ -359,6 +359,11 @@ const components = [
         key: 'notification',
         name: 'Notification',
         desc: '命令式通知，4 种 type × 6 个 position',
+    },
+    {
+        key: 'progress',
+        name: 'Progress',
+        desc: '叶子填充进度条，5 种 status × 3 档 size',
     },
     {
         key: 'typewriter',

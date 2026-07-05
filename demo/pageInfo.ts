@@ -100,6 +100,10 @@ export const PAGE_INFO: Record<string, { title: string; desc: string }> = {
         title: 'Notification 通知',
         desc: '命令式通知组件 — 4 种 type (success/info/warning/error) × 6 个 position,支持 description / btn / onClick / onClose,显式 key 二次调用会更新现有通知',
     },
+    progress: {
+        title: 'Progress 进度条',
+        desc: '叶子填充进度条 — 5 种 status × 3 档 size,支持 inside/right/top 三种文字位置、自定义格式化、strokeColor、leafAnimated',
+    },
     form: {
         title: 'Form 表单',
         desc: '表单组件 — 支持 useForm 命令式实例、多种校验规则、三种布局（horizontal / vertical / inline）、labelCol / wrapperCol 网格',

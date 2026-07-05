@@ -2,7 +2,7 @@
 
 > 本文件目标：给 **AI 设计 / 出图工具**（v0、Figma AI、Framer AI、Locofy、Midjourney、DALL·E、SD）喂可以一次成型的视觉风格描述。
 >
-> - 描述对象是 `animal-island-ui` 组件库本身的视觉风格（v0.9.5，26 个组件，外加 FormItem / useForm / ICON_LIST 三个伴生导出）。
+> - 描述对象是 `animal-island-ui` 组件库本身的视觉风格（v1.2.0，28 个组件，外加 FormItem / useForm / ICON_LIST 三个伴生导出）。
 > - 文件中提到的 **侧边栏 / 页面背景图（home_bg.svg / content_bg_pc.jpg / menu_bg.svg）** 属于 **demo 文档站**，库本身不附带，仅作为整体风格参考保留。
 > - 配套文档：消费侧 API 看 [`AI_USAGE.md`](./AI_USAGE.md)；源码内部规范看 [`skill/SKILL.md`](./skill/SKILL.md)；贡献流程看 [`CONTRIBUTING.md`](./CONTRIBUTING.md)。
 
@@ -384,7 +384,7 @@ Number format: number → 千分位 with thousandSeparator (default ",", pass ""
                string → 原样; undefined/null → '00,000'.
 Hover animation: bagSlot walletBagBounce 0.5s ease-in-out (translateY -8px rot -6deg → -2px rot 3deg → 0).
 
-=== COMPONENT INVENTORY (27 components from src/index.ts, + 3 companion exports FormItem / useForm / ICON_LIST) ===
+=== COMPONENT INVENTORY (28 components from src/index.ts, + 3 companion exports FormItem / useForm / ICON_LIST) ===
 Interactive:           Button, Input, Switch, Modal, Drawer, Collapse, Select, Tabs, Checkbox, Radio
 Container / Heading:   Card (13 colors + 13 dot patterns), Title (ribbon banner — 13 schemes), Table
 Forms:                 Form (with FormItem + useForm companions — conventional form layout + validation)
@@ -393,6 +393,7 @@ Decorative:            Time, Phone, Footer, Divider, Cursor, Typewriter, Icon
 Content display:       CodeBlock
 Currency display:      Wallet (3 sizes, olive-yellow pill + Island bag icon)
 Tags / labels:         Tag (3 sizes × 3 variants × 12 colors)
+Progress:              Progress (striped-scrolling bar — reuses Button loading `-45°` stripes 1:1, 3 sizes, infoPosition inside/right/top)
 
 === CODE BLOCK (dark theme, JSX/TS only) ===
 Container: padding 20px 24px; background #2b2118; border 1px solid #3d3028;
@@ -533,4 +534,8 @@ Interface details:
 | Notification 4 type 配色 | success `#6fba2c` / info `#19c8b9` / warning `#f5c31c` / error `#e05a5a` 描边，对应 icon-wrap 浅色底                    | 文字色更深，icon-wrap 32×32 圆 + 内嵌 SVG          |
 | Notification 默认 duration | 4.5 秒；传 0 关闭自动关闭；退场动画 250ms                                                                       | 退场后从 store 移除并触发 `onClose`               |
 | Notification key 复用   | 同 key 二次调用会替换现有通知（`storeItems[idx] = item`），适合上传进度等流式更新                                         | 不传 key 时每次都追加新通知                        |
+| Progress 轨道 (track)  | pill `border-radius: 999px`, `background: #f8f8f0` 主背景色 (与 `--animal-bg` 一致, 视觉融入页面), `border: 2px solid #e8dcc8` 极浅描边 (比 #c4b89e 浅一档, 整体更柔), `box-shadow: inset 0 2px 4px rgba(114,93,66,0.08)` 极弱内凹陷, `min-width: 80px`  | 三档高度 small 12 / middle 20 / large 28 px |
+| Progress 填充 (fill)   | `position: absolute; left:0; right:auto`, `width: ${percent}%`, fill 复用 Button loading 同款 -45° 斜纹: `background: #0ec4b6; background-image: repeating-linear-gradient(-45deg, #0ec4b6 0, #0ec4b6 10px, #01b0a7 10px, #01b0a7 20px); background-size: 28.28px 28.28px;`  | 必填 `percent` 受控, 0-100 自动 clamp;无 status/strokeColor |
+| Progress 斜纹滚动       | `animation: animal-progress-stripe 1s linear infinite;`  (background-position 0 0 → -28.28px 0)  | `prefers-reduced-motion: reduce` 时关闭;`duration=0` 不影响斜纹 |
+| Progress 文字位置       | inside (默认): fill 右侧白字; right: bar 右侧深字; top: bar 上方深字  | inside + percent<18 自动改在 track 末端深字避免遮挡 |
 | Google Fonts URL       | `fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;700&display=swap` | 在线加载                                           |

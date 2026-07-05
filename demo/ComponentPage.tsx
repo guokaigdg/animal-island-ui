@@ -29,6 +29,7 @@ import DrawerDemo from './components/Drawer/DrawerDemo';
 import FormDemo from './components/Form';
 import TagDemo from './components/Tag';
 import NotificationDemo from './components/Notification';
+import ProgressDemo from './components/Progress';
 // ============================================
 // Styles
 // ============================================
@@ -1423,6 +1424,10 @@ export const PAGE_INFO: Record<string, { title: string; desc: string }> = {
         title: 'Notification 通知',
         desc: '命令式通知组件 — 4 种 type (success/info/warning/error) × 6 个 position，支持 description / btn / onClick / onClose，显式 key 二次调用会更新现有通知',
     },
+    progress: {
+        title: 'Progress 进度条',
+        desc: '斜纹滚动进度条 — fill 复用 Button loading 的 -45° 斜纹 (1s 无限滚动), 3 档 size, 支持 inside/right/top 三种文字位置、自定义格式化、duration 控制 fill 宽度动画',
+    },
     form: {
         title: 'Form 表单',
         desc: '表单组件 — 支持 useForm 命令式实例、多种校验规则、三种布局（horizontal / vertical / inline）、labelCol / wrapperCol 网格',
@@ -1457,6 +1462,7 @@ const PAGES: Record<string, React.FC> = {
     wallet: WalletDemo,
     tag: TagDemo,
     notification: NotificationDemo,
+    progress: ProgressDemo,
     form: FormDemo,
 };
 

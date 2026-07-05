@@ -61,6 +61,7 @@ const MENU_ITEMS: MenuItem[] = [
             { key: 'input', label: 'Input 输入框' },
             { key: 'tag', label: 'Tag 标签' },
             { key: 'notification', label: 'Notification 通知', isNew: true },
+            { key: 'progress', label: 'Progress 进度条', isNew: true },
             { key: 'switch', label: 'Switch 开关' },
             { key: 'card', label: 'Card 卡片' },
             { key: 'collapse', label: 'Collapse 折叠面板' },

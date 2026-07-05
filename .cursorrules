@@ -4,7 +4,7 @@
 
 <!-- META
 - 适用版本：v1.x（与 package.json 对齐）
-- 最后校准：2026-07-02
+- 最后校准：2026-07-04
 - 维护者：guokaigdg
 - 配套文档：AI_USAGE.md（API）/ skill/SKILL.md（样式）/ DESIGN_PROMPT.md（设计 token）/ PROMPT.md（用户提示词）
 - 同步工具：`npm run check:docs`（`scripts/check-docs-sync.mjs`，已挂 `npm run ci`）—— 任何组件增删都会扫到漂移并 fail
@@ -389,6 +389,8 @@ describe('Foo', () => {
 
 每次实质性修改本文件（新增/删除/重写任意章节）必须追加一条，AI 和维护者可追溯规则演进。
 
+- **2026-07-04** — Progress 组件重设计为 Button loading 同款斜纹：① 移除 `status` / `strokeColor` / `leafAnimated` 三个 prop，删 `Leaf` 内联 SVG / `.leaf` / `.shine` / `shineSweep` / `leafSway` / `status-*` 渐变 5 套相关样式与测试；② `.fill` 改为 `background: #0ec4b6; background-image: repeating-linear-gradient(-45deg, #0ec4b6 0, #0ec4b6 10px, #01b0a7 10px, #01b0a7 20px); background-size: 28.28px 28.28px;` 与 Button loading 1:1 + 新 keyframe `animal-progress-stripe 1s linear infinite`（background-position 0 0 → -28.28px 0）；③ track 背景三档浅化：`#e8e0cd`（沙土）→ `#f0e8d5`（浅沙土）→ 最终定为 `#f8f8f0`（= `--animal-bg` 主背景色，视觉融入页面），内阴影 `0.12 → 0.10 → 0.08` 配合逐步浅化的底色；④ track 描边由 `#c4b89e`（与 Input/Switch 同款）→ `#e8dcc8`（极浅，整体更柔）；⑤ 修 demo 高度爆炸 BUG：原本 `.row.fill` / `.body.fill` 修饰类与 `.fill` 同名 → 元素被同时套上 `position: absolute; top:0; left:0; bottom:0;` 直接撑满视口（933px 高），改为 `.row` / `.body` 默认 `flex: 1 1 auto; width: 100%; min-width: 0;` 取消修饰类；⑥ 根容器从 `display: inline-flex` 改为 `display: flex; width: 100%` 撑满父级；⑦ 4 份 AI/设计文档（AI_USAGE / SKILL / PROMPT / DESIGN_PROMPT）+ demo 页面 desc 全部重写 Progress 章节，移除 `ProgressStatus` 类型导出，PROMPT/DESIGN_PROMPT 头部 `v1.1.1 → v1.2.0` 对齐。组件总数仍 28 个（API 表面"瘦身"：12 个 prop → 8 个 prop，2 个动画 → 1 个 stripe 动画）。
+- **2026-07-03** — Progress 组件（第 28 个）落地：① 5 种 status × 3 档 size 叶子填充进度条，受控 `percent`（自动 clamp / NaN 兜底 0），唯一"魔法"行为：`infoPosition="inside"` + `percent < 18` 时自动把文字移到 track 末端深色避免被叶子挡住；② 命令式 API 增 0 仍是 0 个，Notification 仍独占；③ `prefers-reduced-motion: reduce` 自动关闭 fill width 过渡 + 叶子摇摆 + 光斑扫过；④ 4 份 AI/设计文档（AI_USAGE / SKILL / PROMPT / DESIGN_PROMPT）+ HomePage features 计数 `24 → 28` + PROMPT/DESIGN_PROMPT 头部 `v0.9.5 → v1.1.1` 全部对齐。组件总数 28 个（较 v1.1.1 27 个 +1）。
 - **2026-07-02** — Notification 组件（第 27 个）落地后的规则收尾：① §10 文档同步矩阵新增「demo 三处同步」行，明确 `demo/pageInfo.ts` + `demo/ComponentPage.tsx` 的 `PAGE_INFO`/`PAGES` + `demo/HomePage.tsx` 的 `components` 缺一不可（Notification 首版就因为漏了 `ComponentPage.tsx` 内部 `PAGE_INFO` 导致主区域空白、菜单能选中但渲染 null）；② §14.B 增加「双 PAGE_INFO 同步」与「命令式组件测试」两条踩坑，固化现场诊断顺序；③ META 校准日期更新到 2026-07-02。组件总数 27 个（较 v1.0 26 个 +1），命令式组件 1 个（Notification）。
 - **2026-06-30** — Tag backfill + 文档漂移硬拦截：新增 `scripts/check-docs-sync.mjs`，自动扫 `src/components/` 校验 4 份文档是否收录每个组件，挂在 `npm run check:docs` + `npm run ci` 任一漂移即失败。`AI_USAGE.md` 补 §1.26 Tag、§1 导入/类型块；`skill/SKILL.md` 补 §0 清单 + §2 Tag / Icon / Select 三段像素级 CSS；`PROMPT.md` 补 Tag self-contained spec + HARD RULES §13 组件清单；`DESIGN_PROMPT.md` 关键数值表补 Tag 4 行。
 - **2026-06-25** — 优化 v2：§0.0 速查表改为指针型（去重）；§7.3 ❌/✅ 反例下沉到 `skill/SKILL.md` §1.5；§15 改为差异条款（去重）；软化过期数字（`v1.x` / `22.x` / `24 个` / `488 个`）；新增文件头 META 注释、CHANGELOG 段；§14 拆为 14.A / 14.B；§9.3 删除"207+"硬编码。

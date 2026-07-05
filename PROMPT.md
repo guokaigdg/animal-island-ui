@@ -4,7 +4,7 @@
 >
 > **AI 会先反问你想做什么页面**（例如「做一个个人博客」、「做一个商品列表」、「做一个 FAQ 页面」），你回答后它再输出**一个 self-contained `index.html` 文件**，**保存后双击即可在浏览器预览**——不需要 npm、不需要打包工具、不需要任何安装。
 >
-> - **最后同步**：v0.9.5 / 2026-06-02。
+> - **最后同步**：v1.2.0 / 2026-07-04。
 > - **真实数据源**：`src/styles/variables.less` + 各组件 `*.module.less`。
 > - **冲突处理**：本文件与源码冲突时，**以源码为准**。新增 / 修改组件时请同步更新本文件。
 > - **要 100% 像素级还原**：项目内直接 `npm i animal-island-ui` + `import` 真实组件。
@@ -12,7 +12,7 @@
 ---
 
 ````markdown
-You are a senior React engineer. Generate a **single self-contained `index.html` file** that the user can save to disk and double-click to preview in a browser. It must PERFECTLY match the visual style of the npm package "animal-island-ui" (an a cozy island-style UI-inspired component library, v0.9.5).
+You are a senior React engineer. Generate a **single self-contained `index.html` file** that the user can save to disk and double-click to preview in a browser. It must PERFECTLY match the visual style of the npm package "animal-island-ui" (an a cozy island-style UI-inspired component library, v1.2.0).
 
 ## OUTPUT REQUIREMENTS
 
@@ -29,7 +29,7 @@ You are a senior React engineer. Generate a **single self-contained `index.html`
 - Inject the Modal SVG `<defs>` clip-path block (see Modal section) once at the top of `<body>` so `clip-path: url(#animal-modal-clip)` resolves.
 - Every value below is exact. Do NOT round, approximate, or substitute "close" colors.
 - The npm package `animal-island-ui` is NOT available via UMD CDN in this offline-HTML mode, so you must **hand-roll the library's components inline as React components that mirror the real library's API** (named exports, prop names, prop values). **Always prefer the library API over raw HTML.** Concretely:
-    - At the top of the `<script type="text/babel">` block, define inline React components named exactly like the library's exports: `Button`, `Input`, `Switch`, `Checkbox`, `Radio`, `Card`, `Title`, `Tabs`, `Collapse`, `Modal`, `Select`, `Tooltip`, `Loading`, `Table`, `Time`, `Divider`, `Footer`, `Phone`, `Cursor`, `Typewriter`, `Icon`, `CodeBlock`, `Form` (with `Form.Item`), `Wallet`. Each component must accept the documented props (e.g. `<Card pattern="default">`, `<Button type="primary" size="large">`, `<Title color="app-teal" size="large">`, `<Switch checked onChange={...} />`, `<Wallet value={1234} size="medium" />`).
+    - At the top of the `<script type="text/babel">` block, define inline React components named exactly like the library's exports: `Button`, `Input`, `Switch`, `Checkbox`, `Radio`, `Card`, `Title`, `Tabs`, `Collapse`, `Modal`, `Select`, `Tooltip`, `Loading`, `Table`, `Time`, `Divider`, `Footer`, `Phone`, `Cursor`, `Typewriter`, `Icon`, `CodeBlock`, `Form` (with `Form.Item`), `Wallet`, `Tag`, `Progress`. Each component must accept the documented props (e.g. `<Card pattern="default">`, `<Button type="primary" size="large">`, `<Title color="app-teal" size="large">`, `<Switch checked onChange={...} />`, `<Wallet value={1234} size="medium" />`, `<Progress percent={50} />`).
     - In the page (`<App />`), **compose the UI exclusively with these JSX components** — do NOT write `<div className="card">` / `<button class="btn">` etc. inline. The page should read like real animal-island-ui usage.
     - Only fall back to raw HTML/JSX (`<div>`, `<span>`, `<h1>`, `<img>`, layout helpers, page-specific decorations, app-specific widgets) when no library component covers the use case (e.g. page layout, header bar, two-column grid, custom illustration). In that case, still use the design tokens (`var(--text-body)`, `var(--bg-content)` …) instead of raw colors.
     - Forbidden: native `<button>`, native `<input>`, native `<select>`, native checkbox/radio used as visible UI. They MUST be wrapped by the inline `Button` / `Input` / `Select` / `Checkbox` / `Radio` components defined above.
@@ -116,7 +116,7 @@ You are a senior React engineer. Generate a **single self-contained `index.html`
 - Cards have NO box-shadow. They float on hover with `transform: translateY(-2px);` only. Pattern variants add a 1.5px solid border in the palette hue.
 - Switch handle stays vertically centered via `transform: translateY(-50%);` and has a 2.5px border but NO `box-shadow` of its own. Track has only inset shadow (see SHADOW SYSTEM above).
 
-## COMPONENT SPECS (26 components + 3 companion exports: FormItem, useForm, ICON_LIST)
+## COMPONENT SPECS (28 components + 3 companion exports: FormItem, useForm, ICON_LIST)
 
 ### Button (3 sizes × 5 types)
 
@@ -456,6 +456,21 @@ You are a senior React engineer. Generate a **single self-contained `index.html`
 - `Notification.destroy()` (no arg) clears the entire store. With a `key` arg it filters that one out. Both paths notify subscribers and trigger the leave animation for the affected items.
 - `prefers-reduced-motion: reduce` shortens both enter and leave animation to `0.01s`.
 
+### Progress (striped-scrolling horizontal progress bar)
+
+- **JSX component** (NOT imperative — just `<Progress percent={50} />`). The component is fully controlled; pass `percent` and it animates from the previous value to the new one via `transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1)` (override with `duration` prop; pass `0` to disable — does NOT affect the stripe scroll).
+- Track: pill `border-radius: 999px`, `background: #f8f8f0` (主背景色, 与 `--animal-bg` 一致, 视觉融入页面), `border: 2px solid #e8dcc8` (极浅描边, 比 #c4b89e 浅一档, 整体更柔) (small = 1.5px border), `box-shadow: inset 0 2px 4px rgba(114,93,66,0.08)` (very soft inner dent). Heights: small 12px / middle 20px / large 28px. `min-width: 80px` so a single bar in a flex row never collapses.
+- Fill (`position: absolute; top: 0; left: 0; bottom: 0; border-radius: 999px;` driven by inline `width: ${percent}%`): **reuses the Button loading stripe pattern 1:1**:
+  `background: #0ec4b6; background-image: repeating-linear-gradient(-45deg, #0ec4b6 0, #0ec4b6 10px, #01b0a7 10px, #01b0a7 20px); background-size: 28.28px 28.28px; animation: animal-progress-stripe 1s linear infinite;` (background-position: 0 0 → -28.28px 0). Same exact values as `<Button type="primary" loading>` so progress bars and loading buttons feel like "the same thing in progress".
+- No status / no strokeColor / no leaf. Fill is a single fixed teal stripe — one library, one "in-progress" visual.
+- Info text — 3 positions:
+  `inside` (default): absolute at `right: 8px; top: 50%; transform: translateY(-50%)`, white `#fff`, font-weight 800, font-size 11px (small 9px / large 13px), `text-shadow: 0 1px 1px rgba(0,0,0,0.15)`. Auto-fallback: when `percent < 18`, the text is rendered outside the fill at the track's right edge in dark `#725d42` (avoids the white text sitting on the sandy track).
+  `right`: dark text after the bar, `min-width: 44px; text-align: right; color: #725d42; font-weight: 700;`
+  `top`: dark text above the bar, `align-self: flex-end; color: #725d42; font-weight: 700;`
+- `infoFormat?: (percent: number) => ReactNode` lets the caller render "5/10", "3500 / 5000 星", or any React node. Default is `${Math.round(percent)}%`.
+- a11y: root has `role="progressbar"` + `aria-valuemin=0` / `aria-valuemax=100` / `aria-valuenow=<rounded percent>` / `aria-valuetext=<infoFormat string result>`. `percent` is auto-clamped to `[0, 100]`; `NaN` is treated as `0`.
+- `prefers-reduced-motion: reduce` cancels both `transition` (fill width) and `animation` (stripe scroll).
+
 ## HARD RULES (must obey — disqualifies the output if violated)
 
 1. Never use pure black (#000) or near-black (#111) text. Use #794f27 / #725d42 / #8a7b66.
@@ -470,7 +485,7 @@ You are a senior React engineer. Generate a **single self-contained `index.html`
 10. Never use weight < 400 anywhere. Body 500, headings 600–900.
 11. Never animate with hard cubic transitions; always use `cubic-bezier(0.4, 0, 0.2, 1)` over 0.15–0.35s.
 12. Title `title` prop on `<Modal>` is the literal string heading — do NOT confuse it with the `<Title>` component.
-13. **Always reach for the library component first.** If a feature exists as an animal-island-ui component (Card, Button, Input, Switch, Checkbox, Radio, Title, Tabs, Collapse, Modal, Drawer, Select, Tooltip, Loading, Table, Time, Divider, Footer, Phone, Cursor, Typewriter, Icon, CodeBlock, Form, Wallet, Tag, Notification), use the inline-defined `<ComponentName>` JSX with documented props. For Notification specifically, call the static methods (`Notification.success({...})`) — it has no JSX element. Only hand-roll raw HTML/JSX when the library has no equivalent (page layout, app-specific composition, decorative blocks).
+13. **Always reach for the library component first.** If a feature exists as an animal-island-ui component (Card, Button, Input, Switch, Checkbox, Radio, Title, Tabs, Collapse, Modal, Drawer, Select, Tooltip, Loading, Table, Time, Divider, Footer, Phone, Cursor, Typewriter, Icon, CodeBlock, Form, Wallet, Tag, Notification, Progress), use the inline-defined `<ComponentName>` JSX with documented props. For Notification specifically, call the static methods (`Notification.success({...})`) — it has no JSX element. Only hand-roll raw HTML/JSX when the library has no equivalent (page layout, app-specific composition, decorative blocks).
 
 ## TASK
 

@@ -27,7 +27,7 @@ animal-island-ui 是一套受《治愈系海岛风格》启发的 React + TypeSc
 - 构建：Vite (library mode) + `vite.config.ts`（库）/ `vite.config.demo.ts`（Demo）
 - 样式系统：Less Modules + `src/styles/variables.less` 设计 token
 
-### 全量导出清单（26 个组件 + 3 个伴生导出：FormItem / useForm / ICON_LIST）
+### 全量导出清单（28 个组件 + 3 个伴生导出：FormItem / useForm / ICON_LIST）
 
 从 `src/index.ts` 导出：
 
@@ -60,8 +60,9 @@ animal-island-ui 是一套受《治愈系海岛风格》启发的 React + TypeSc
 | `Wallet`            | 治愈海岛钱袋样式金额胶囊（橄榄黄 pill + Island bag 图标，3 种尺寸，千分位自动格式化）                                  |      | ✓             |
 | `Tag`               | 胶囊标签，3 尺寸 × 3 变体（solid/outlined/dashed）× 12 配色（与 Card 调色板完全对齐），支持 closable / onClick / disabled | ✓    |               |
 | `Notification`      | 命令式全局通知（antd 风格）：4 种 type × 6 个 position，支持 description / btn / onClick / key 复用更新 / destroy 全部 | ✓    |               |
+| `Progress`          | 斜纹滚动进度条：fill 复用 Button loading 的 -45° 斜纹（`#0ec4b6`/`#01b0a7`）+ 1s 无限滚动，3 档 size，支持 inside/right/top 三种文字位置、infoFormat 自定义、duration 控制 fill 宽度动画 |      | ✓             |
 
-类型导出：`ButtonProps/ButtonType/ButtonSize`、`InputProps/InputSize`、`SwitchProps/SwitchSize`、`ModalProps`、`DrawerProps/DrawerPlacement`、`CardProps/CardType/CardColor`、`TitleProps/TitleSize/TitleColor`、`FooterProps/FooterType`、`CollapseProps`、`CursorProps`、`TimeProps`、`PhoneProps`、`DividerProps`、`TypewriterProps`、`SelectProps/SelectOption`、`IconProps/IconName`、`TabsProps/TabItem`、`CheckboxProps/CheckboxOption/CheckboxSize`、`RadioProps/RadioOption/RadioSize`、`TooltipProps/TooltipPlacement/TooltipTrigger/TooltipVariant`、`CodeBlockProps`、`LoadingProps`、`TableProps/TableColumn`、`FormProps/FormItemProps/FormInstance/FormLayout/FormItemLayout/FormSize/FormLabelAlign/ColProps/NamePath/RequiredMark/RuleObject/RuleRender/RuleType/Rules/FieldData/ValidateStatus/ValidateError/ValidateInfo/ScrollOptions`、`WalletProps/WalletSize`、`TagProps/TagSize/TagVariant/TagColor`、`NotificationConfig/NotificationType/NotificationPosition/NotificationPlacement/NotificationItem/NotificationStatic`。运行时值：`Notification`、`notificationOpen`、`notificationDestroy`、`NOTIFICATION_DEFAULT_DURATION`、`ICON_LIST`。伴生导出：`FormItem`、`useForm`（默认导出 `Form` 也支持 `Form.Item` / `Form.useForm` 写法）。
+类型导出：`ButtonProps/ButtonType/ButtonSize`、`InputProps/InputSize`、`SwitchProps/SwitchSize`、`ModalProps`、`DrawerProps/DrawerPlacement`、`CardProps/CardType/CardColor`、`TitleProps/TitleSize/TitleColor`、`FooterProps/FooterType`、`CollapseProps`、`CursorProps`、`TimeProps`、`PhoneProps`、`DividerProps`、`TypewriterProps`、`SelectProps/SelectOption`、`IconProps/IconName`、`TabsProps/TabItem`、`CheckboxProps/CheckboxOption/CheckboxSize`、`RadioProps/RadioOption/RadioSize`、`TooltipProps/TooltipPlacement/TooltipTrigger/TooltipVariant`、`CodeBlockProps`、`LoadingProps`、`TableProps/TableColumn`、`FormProps/FormItemProps/FormInstance/FormLayout/FormItemLayout/FormSize/FormLabelAlign/ColProps/NamePath/RequiredMark/RuleObject/RuleRender/RuleType/Rules/FieldData/ValidateStatus/ValidateError/ValidateInfo/ScrollOptions`、`WalletProps/WalletSize`、`TagProps/TagSize/TagVariant/TagColor`、`NotificationConfig/NotificationType/NotificationPosition/NotificationPlacement/NotificationItem/NotificationStatic`、`ProgressProps/ProgressSize/ProgressInfoPosition`。运行时值：`Notification`、`notificationOpen`、`notificationDestroy`、`NOTIFICATION_DEFAULT_DURATION`、`ICON_LIST`。伴生导出：`FormItem`、`useForm`（默认导出 `Form` 也支持 `Form.Item` / `Form.useForm` 写法）。
 
 ---
 
@@ -2320,6 +2321,93 @@ interface NotificationConfig {
     style?: CSSProperties;
 }
 ```
+
+---
+
+### Progress
+
+源码：`src/components/Progress/Progress.tsx`（受控渲染 + aria 适配）+ `types.ts`（类型定义）+ `progress.module.less`。
+**JSX 组件**（非命令式）：`percent` 受控传入，从 0 平滑动画到目标值。track 是沙土色 pill 带内阴影，fill 直接复用 Button loading 的 `-45°` 斜纹（`#0ec4b6` / `#01b0a7`），从右往左无限滚动（1s linear），与 Button 视觉上"同款进行中"。
+
+**props**：
+```ts
+type ProgressSize = 'small' | 'middle' | 'large';
+type ProgressInfoPosition = 'inside' | 'right' | 'top';
+
+interface ProgressProps {
+    percent: number;            // 必填,0-100,自动 clamp;非整数对 aria 四舍五入
+    size?: ProgressSize;        // small=12px / middle=20px / large=28px
+    showInfo?: boolean;         // 默认 true
+    infoPosition?: ProgressInfoPosition; // 默认 'inside'
+    infoFormat?: (p: number) => ReactNode; // 默认 `${p}%`
+    duration?: number;          // 秒;0 关闭 fill 宽度动画;默认 0.6(不影响斜纹滚动)
+    className?: string;
+    style?: CSSProperties;
+}
+```
+
+**Track（精确值）：**
+```css
+.track {
+    position: relative;
+    flex: 1 1 auto;
+    width: 100%;
+    min-width: 80px;
+    background: #f8f8f0;          /* 主背景色 (与 --animal-bg 一致, 视觉融入页面) */
+    border: 2px solid #e8dcc8;     /* 极浅描边, 比 #c4b89e 浅一档, 整体更柔 */
+    box-shadow: inset 0 2px 4px rgba(114, 93, 66, 0.08); /* 内凹陷(很弱) */
+    border-radius: 999px;         /* pill */
+    overflow: hidden;
+}
+.track.size-small  { height: 12px; border-width: 1.5px; }
+.track.size-middle { height: 20px; }
+.track.size-large  { height: 28px; }
+```
+
+**Fill（精确值，与 Button loading 1:1）：**
+```css
+.fill {
+    position: absolute;
+    top: 0; left: 0; bottom: 0;
+    width: 0;
+    border-radius: 999px;
+    background: #0ec4b6;
+    background-image: repeating-linear-gradient(
+        -45deg,
+        #0ec4b6 0, #0ec4b6 10px,
+        #01b0a7 10px, #01b0a7 20px
+    );
+    background-size: 28.28px 28.28px;  /* 10px * √2,与 Button loading 一致 */
+    animation: animal-progress-stripe 1s linear infinite;
+    transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+    display: flex; align-items: center; justify-content: flex-end; padding-right: 4px;
+}
+@keyframes animal-progress-stripe {
+    0%   { background-position: 0 0; }
+    100% { background-position: -28.28px 0; }
+}
+```
+
+**Info 文字：**
+```css
+.infoInside {
+    position: absolute; right: 8px; top: 50%; transform: translateY(-50%);
+    color: #fff; font-weight: 800; font-size: 11px;  /* small 9px / large 13px */
+    letter-spacing: 0.02em; text-shadow: 0 1px 1px rgba(0, 0, 0, 0.15);
+    pointer-events: none; white-space: nowrap; z-index: 1;
+}
+.info.right { min-width: 44px; text-align: right; color: #725d42; font-weight: 700; }
+.info.top   { align-self: flex-end; color: #725d42; font-weight: 700; }
+```
+
+**关键交互细节：**
+- `infoPosition="inside"` + `percent < 18%` 时，文字自动从 fill 内（白色）移到 track 末端（深色 `#725d42`），避免白字落在沙土色 track 上看不清。这是唯一「魔法」行为，其它都是声明式。
+- `duration=0` → 关闭 fill 宽度过渡（`transition: none`），瞬间到位；**不影响斜纹滚动**。
+- 斜纹滚动与 `prefers-reduced-motion: reduce` 联动：偏好降低动效时 `animation: none`，但 fill 宽度仍可过渡（也置 none）。
+- 旧版 `status` / `strokeColor` / `leafAnimated` 已全部移除：fill 颜色固定为 Button loading 同款 teal 斜纹，库内只保留一种"进行中"视觉，避免与状态色打架。
+- a11y：根 div 有 `role="progressbar"` + `aria-valuemin=0/aria-valuemax=100/aria-valuenow=<四舍五入后的 percent>/aria-valuetext=<infoFormat 的字符串结果>`。
+- `prefers-reduced-motion: reduce` 时所有动画自动关闭。
 
 ---
 

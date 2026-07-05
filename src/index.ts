@@ -116,3 +116,6 @@ export type {
     NotificationPlacement,
     NotificationItem,
 } from './components/Notification';
+
+export { Progress } from './components/Progress';
+export type { ProgressProps, ProgressSize, ProgressInfoPosition } from './components/Progress';

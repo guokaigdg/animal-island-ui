@@ -1298,6 +1298,66 @@ Notes:
 
 ---
 
+### 1.28 Progress
+
+A horizontal progress bar whose fill reuses the **Button loading** stripe pattern. The track uses the **page background** color (`#f8f8f0`, same as `--animal-bg`) so the bar visually blends into the parchment page; a very light `#e8dcc8` border + soft inner dent provide just enough structural definition without visual weight. The fill is a teal `-45°` striped ribbon (`#0ec4b6` / `#01b0a7`) that scrolls infinitely from right to left, just like the Button's loading state. The percent label can be displayed **inside the fill** (default, white), **to the right**, or **on top** of the bar.
+
+```ts
+type ProgressSize = 'small' | 'middle' | 'large';
+type ProgressInfoPosition = 'inside' | 'right' | 'top';
+
+interface ProgressProps {
+    percent: number; // REQUIRED, 0-100, clamped; non-integer rounded for aria
+    size?: ProgressSize; // default 'middle' (small=12px, middle=20px, large=28px)
+    showInfo?: boolean; // default true
+    infoPosition?: ProgressInfoPosition; // default 'inside'
+    infoFormat?: (percent: number) => React.ReactNode; // default `${percent}%`
+    duration?: number; // fill WIDTH transition in seconds; 0 disables; default 0.6 — does NOT affect stripe scroll
+    className?: string;
+    style?: React.CSSProperties;
+}
+```
+
+```tsx
+import { Progress } from 'animal-island-ui';
+
+// 1) Basic — 25 / 50 / 75 / 100
+<Progress percent={50} />
+
+// 2) Sizes
+<Progress percent={50} size="small" />
+<Progress percent={50} size="large" />
+
+// 3) Label position
+<Progress percent={45} infoPosition="inside" /> {/* default — text floats with fill */}
+<Progress percent={45} infoPosition="right" /> {/* text on the right side */}
+<Progress percent={45} infoPosition="top" /> {/* text above the bar */}
+
+// 4) Custom format (e.g. "5/10 任务")
+<Progress
+    percent={50}
+    infoFormat={(p) => `${Math.round(p / 10)} / 10`}
+/>
+
+// 5) No fill-width animation (stripe scroll keeps going)
+<Progress percent={pct} duration={0} />
+
+// 6) Hide the percent label
+<Progress percent={66} showInfo={false} />
+```
+
+Notes:
+
+- **Always provide `percent`.** Out-of-range values are clamped to `[0, 100]`. NaN is treated as `0`. The aria value is rounded.
+- **Default `infoPosition="inside"`** — the label rides at the right edge of the fill. If `percent < 18`, the label is **automatically moved outside** the fill (track-end, dark text) to keep white text readable on the sandy track. This is the only "magic" behavior; everything else is purely declarative.
+- **Fill color is fixed** (the same teal stripe as `Button` loading) — there is no `status` / `strokeColor` / `leafAnimated` prop. The intent is to keep a single, recognizable "in-progress" visual across the library.
+- **Two independent animations**:
+  1. Fill **width** transitions on `percent` change (`duration` prop, default 0.6s, set `0` to disable). Uses `cubic-bezier(0.4, 0, 0.2, 1)`.
+  2. Stripe **background-position** scrolls infinitely from `0 0` to `-28.28px 0` over 1s linear (matches Button loading 1:1). Disabled only under `prefers-reduced-motion: reduce`.
+- **Accessibility**: the root has `role="progressbar"` with `aria-valuemin=0`, `aria-valuemax=100`, `aria-valuenow=<rounded percent>`, and `aria-valuetext` set to the rendered text when it's a string.
+
+---
+
 ## 2. Common Recipes
 
 ### 2.1 Form row
