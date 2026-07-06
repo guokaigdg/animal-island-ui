@@ -275,27 +275,51 @@ const NotificationDemo: React.FC = () => {
                     </Button>
                 </div>
 
-                <div style={labelStyle}>key 更新现有通知</div>
+                <div style={labelStyle}>key 更新现有通知(用户关闭后停止后续状态)</div>
                 <div style={S.row}>
                     <Button
                         type="primary"
                         onClick={() => {
-                            // 连续 3 次同 key,只会显示最后一条(被前 2 条替换)
-                            Notification.info({ message: '上传中... 0%', key: 'upload', duration: 0 });
-                            setTimeout(
-                                () => Notification.info({ message: '上传中... 50%', key: 'upload', duration: 0 }),
-                                300
-                            );
-                            setTimeout(
-                                () =>
-                                    Notification.info({
-                                        message: '上传完成 100%',
-                                        key: 'upload',
-                                        duration: 3,
-                                        type: 'success',
-                                    }),
-                                600
-                            );
+                            // 同 key 走"原地更新"分支(NotificationPortal L115-124)
+                            // 关键:dismissed 必须"点 × 瞬间"置 true,不能等 onClose 退场动画结束 (250ms)
+                            // —— 否则在 (click, 退场结束) 区间内排队的 setTimeout 仍会触发 open,
+                            // 而那条 0% 还留在 store 里(只是 leaving 态),50% / 100% 就会被同 key "复活"。
+                            // closeIcon onClick 同步触发,先于父 button 的 handleCloseClick,setLeaving 之前就把 dismissed 置位。
+                            const uploadKey = 'upload';
+                            let dismissed = false;
+                            const markDismissed = () => {
+                                dismissed = true;
+                            };
+                            const open = (percent: number, type: 'info' | 'success' = 'info', duration = 0) => {
+                                if (dismissed) return;
+                                Notification.info({
+                                    message: percent === 100 ? `上传完成 ${percent}%` : `上传中... ${percent}%`,
+                                    key: uploadKey,
+                                    type,
+                                    duration,
+                                    closeIcon: (
+                                        <span
+                                            onClick={markDismissed}
+                                            style={{
+                                                display: 'inline-flex',
+                                                alignItems: 'center',
+                                                justifyContent: 'center',
+                                                width: '100%',
+                                                height: '100%',
+                                                cursor: 'pointer',
+                                            }}
+                                        >
+                                            ×
+                                        </span>
+                                    ),
+                                    onClose: () => {
+                                        dismissed = true;
+                                    },
+                                });
+                            };
+                            open(0);
+                            setTimeout(() => open(50), 300);
+                            setTimeout(() => open(100, 'success', 3), 600);
                         }}
                     >
                         模拟上传进度
@@ -392,12 +416,29 @@ const App = () => {
                 弹出常驻通知
             </Button>
 
-            {/* key 替换现有通知 */}
+            {/* key 原地更新 + dismissed 闭包 + closeIcon 即时置位:用户点 × 瞬间就停止后续状态。
+                关键:不能等 onClose(那个要等 250ms 退场动画),否则在 (click, 退场结束) 区间内
+                排队的 setTimeout 仍会触发 open,把 leaving 态的通知"复活"。closeIcon onClick
+                同步触发,先于父 button 的 handleCloseClick,setLeaving 之前就把 dismissed 置位。 */}
             <Button
                 onClick={() => {
-                    Notification.info({ message: '上传中 0%', key: 'upload', duration: 0 });
-                    setTimeout(() => Notification.info({ message: '上传中 50%', key: 'upload', duration: 0 }), 300);
-                    setTimeout(() => Notification.info({ message: '上传完成', key: 'upload', type: 'success', duration: 3 }), 600);
+                    const uploadKey = 'upload';
+                    let dismissed = false;
+                    const markDismissed = () => { dismissed = true; };
+                    const open = (percent, type = 'info', duration = 0) => {
+                        if (dismissed) return;
+                        Notification.info({
+                            message: percent === 100 ? \`上传完成 \${percent}%\` : \`上传中... \${percent}%\`,
+                            key: uploadKey,
+                            type,
+                            duration,
+                            closeIcon: <span onClick={markDismissed} style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%', cursor: 'pointer' }}>×</span>,
+                            onClose: () => { dismissed = true; },
+                        });
+                    };
+                    open(0);
+                    setTimeout(() => open(50), 300);
+                    setTimeout(() => open(100, 'success', 3), 600);
                 }}
             >
                 模拟上传进度

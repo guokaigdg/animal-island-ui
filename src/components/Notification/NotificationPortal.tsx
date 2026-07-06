@@ -129,16 +129,24 @@ const open = (config: NotificationConfig | string, type: NotificationType = 'inf
 };
 
 const destroy = (key?: string): void => {
+    let removed: NotificationItem[] = [];
     if (key) {
+        removed = storeItems.filter((it) => it.key === key);
         const next = storeItems.filter((it) => it.key !== key);
         if (next.length === storeItems.length) return;
         storeItems = next;
     } else if (storeItems.length === 0) {
         return;
     } else {
+        removed = storeItems.slice();
         storeItems = [];
     }
     listeners.forEach((l) => l());
+    // 关闭契约对齐"用户点 × / duration 到期":无论哪种路径,onClose 都该同步触发。
+    // 调用方常在 onClose 里设置 dismissed / abort 等闭包标志位(见 upload 进度场景),
+    // 如果 destroy 路径不走 onClose,这些标志位就收不到信号,后续同 key open 仍会"复活"。
+    // 顺序:先通知 listeners(让 React unmount)再触发 onClose,与 setLeaving → 250ms → onRemove+onClose 一致。
+    removed.forEach((it) => it.onClose?.());
 };
 
 /**

@@ -2293,6 +2293,8 @@ Notification.destroy('upload'); // 关闭指定 key
 - 全局 store（module-level `storeItems`）+ `useSyncExternalStore`，React 组件订阅后通过 `setState` 触发 re-render。
 - 单条 `NotificationView` 内部维护 `leaving` 状态：用户点击 × 或 duration 到期 → 设置 `leaving=true` → 250ms 退场动画结束 → 回调 `onRemove` 从 store 删除并触发 `item.onClose`。
 - 显式 `key` 时，`open` 会先 `findIndex` 现有 key，存在则替换 store 中的 item（用 `next[idx] = item`），否则追加。适合上传进度等流式更新场景。
+- **注意**：用户点 × 关闭后 key 已在 store 中消失，下次同 key `open` 会被当作"新增"再次弹出。需要在调用方用闭包 `dismissed` 标志来抑制"用户已关掉又被弹回来"的场景。**关键**：`dismissed` 必须"点 × 瞬间"置 `true`，不能只放在 `onClose` 里 —— `onClose` 要等 250ms 退场动画结束，期间同 key `open` 仍会把 leaving 态的通知原地更新复活。正确做法：在 `closeIcon` 的 `onClick` 里同步置位（先于父 button 的 handleCloseClick），`onClose` 里再置一次作兜底（参考 `demo/components/Notification/index.tsx`）。
+- **`destroy()` 也会同步触发 `onClose`**：与"点 × / duration 到期"契约一致,被移除项的 `onClose` 立即调用(无 250ms 退场动画)。这样在 onClose 里设的闭包标志位能跨所有关闭路径统一生效 —— 用户点 "destroy 关闭全部" 后,后续排队的同 key open 也会被 `dismissed` 拦截。
 - `Notification(config)` 直接调用等价于 `Notification.open(config)`（type='info'）。所有方法共享 `open` 路径，仅 type 不同。
 - 注意类型导出：`Notification` 是值（API 函数对象），`NotificationStatic` 是其类型；项目 barrel `src/index.ts` 已分别导出，避免与浏览器全局 `Notification` 构造器同名冲突。
 - 关闭按钮的 `click` 内部 `stopPropagation`，不会冒泡到通知本体触发 `onClick`。
