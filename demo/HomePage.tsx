@@ -379,7 +379,7 @@ const components = [
     { key: 'time', name: 'Time', desc: '可爱风格时间显示' },
     { key: 'phone', name: 'Phone', desc: 'Phone 模拟器' },
     { key: 'codeblock', name: 'CodeBlock', desc: '代码语法高亮组件' },
-    { key: 'loading', name: 'Loading', desc: '治愈海岛风格小岛加载动画' },
+    { key: 'loading', name: 'Loading', desc: '动物主题小岛加载动画' },
 ];
 
 // ============================================

@@ -113,7 +113,7 @@ const TooltipDemo: React.FC = () => {
                 </div>
             </div>
 
-            <div style={labelStyle}>风格 — island 治愈海岛不规则气泡</div>
+            <div style={labelStyle}>风格 — island 不规则气泡</div>
             <div style={{ ...demoBoxStyle, overflow: 'visible' }}>
                 <div style={{ display: 'flex', gap: 24, alignItems: 'center', flexWrap: 'wrap' }}>
                     <Tooltip title="标准矩形气泡" placement="top">
@@ -284,7 +284,7 @@ const App = () => {
                 <Button>Hover 我</Button>
             </Tooltip>
 
-            {/* 治愈海岛 island 风格 — bordered 默认 true，箭头更清晰 */}
+            {/* 动物主题 island 风格 — bordered 默认 true，箭头更清晰 */}
             <Tooltip variant="island" bordered title="有边框有机气泡">
                 <Button>Island</Button>
             </Tooltip>

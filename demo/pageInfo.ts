@@ -30,7 +30,7 @@ export const PAGE_INFO: Record<string, { title: string; desc: string }> = {
     },
     phone: {
         title: 'Phone 手机',
-        desc: '治愈海岛风格手机界面，包含对话框和背包功能',
+        desc: '动物主题手机界面，包含对话框和背包功能',
     },
     footer: {
         title: 'Footer 底部装饰',
@@ -54,7 +54,7 @@ export const PAGE_INFO: Record<string, { title: string; desc: string }> = {
     },
     icon: {
         title: 'Icon 图标',
-        desc: '图标组件 — 治愈海岛风格图标集，包含 10 个可爱图标，支持自定义尺寸',
+        desc: '图标组件 — 动物主题图标集，包含 10 个可爱图标，支持自定义尺寸',
     },
     select: {
         title: 'Select 选择器',
@@ -82,15 +82,15 @@ export const PAGE_INFO: Record<string, { title: string; desc: string }> = {
     },
     loading: {
         title: 'Loading 加载',
-        desc: '治愈海岛风格小岛 Loading 动画组件，支持自定义样式和类名',
+        desc: '动物主题小岛 Loading 动画组件，支持自定义样式和类名',
     },
     'wedding-invitation': {
         title: 'InvitationCard 婚礼请柬',
-        desc: '治愈海岛风格婚礼请柬，叶子边角 + 飘散花瓣 + 心跳爱心 + 吉祥物头像',
+        desc: '动物主题婚礼请柬，叶子边角 + 飘散花瓣 + 心跳爱心 + 吉祥物头像',
     },
     wallet: {
         title: 'Wallet 钱包',
-        desc: '治愈海岛风格金币展示 — 奶油描边胶囊 + 上凸钱袋图标，支持千分位、自定义图标与三种尺寸',
+        desc: '动物主题金币展示 — 奶油描边胶囊 + 上凸钱袋图标，支持千分位、自定义图标与三种尺寸',
     },
     tag: {
         title: 'Tag 标签',

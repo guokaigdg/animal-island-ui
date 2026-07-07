@@ -49,43 +49,66 @@ interface MenuItem {
 }
 
 // ============================================
-// Menu config
+// Menu config — 5 categories by function:
+//   基础      → 无状态/纯展示 (Title, Button, Divider, Icon, Tag, Cursor, CodeBlock, Footer)
+//   表单      → 数据录入/校验 (Input, Switch, Select, Checkbox, Radio, Form)
+//   反馈      → 浮层/状态/异步反馈 (Notification, Modal, Drawer, Tooltip, Loading, Progress)
+//   数据展示  → 容器/列表/排版 (Card, Collapse, Tabs, Table, Typewriter)
+//   主题  → 业务复合/主题专属 (Wallet, Time, Phone, Wedding)
 // ============================================
 const MENU_ITEMS: MenuItem[] = [
     {
         key: 'cat-basic',
-        label: '── 基础组件 ──',
+        label: '── 基础 ──',
         children: [
             { key: 'title', label: 'Title 标题', isNew: true },
             { key: 'button', label: 'Button 按钮' },
-            { key: 'input', label: 'Input 输入框' },
-            { key: 'tag', label: 'Tag 标签' },
-            { key: 'notification', label: 'Notification 通知', isNew: true },
-            { key: 'progress', label: 'Progress 进度条', isNew: true },
-            { key: 'switch', label: 'Switch 开关' },
-            { key: 'card', label: 'Card 卡片' },
-            { key: 'collapse', label: 'Collapse 折叠面板' },
-            { key: 'cursor', label: 'Cursor 光标' },
-            { key: 'modal', label: 'Modal 弹窗' },
-            { key: 'drawer', label: 'Drawer 抽屉', isNew: true },
-            { key: 'typewriter', label: 'Typewriter 打字机' },
             { key: 'divider-comp', label: 'Divider 分割线' },
             { key: 'icon', label: 'Icon 图标' },
+            { key: 'tag', label: 'Tag 标签' },
+            { key: 'cursor', label: 'Cursor 光标' },
+            { key: 'codeblock', label: 'CodeBlock 代码高亮' },
+            { key: 'footer', label: 'Footer 页脚' },
+        ],
+    },
+    {
+        key: 'cat-form',
+        label: '── 表单 ──',
+        children: [
+            { key: 'input', label: 'Input 输入框' },
+            { key: 'switch', label: 'Switch 开关' },
             { key: 'select', label: 'Select 选择器' },
             { key: 'checkbox', label: 'Checkbox 多选框' },
             { key: 'radio', label: 'Radio 单选框' },
-            { key: 'tooltip', label: 'Tooltip 气泡提示' },
-            { key: 'tabs', label: 'Tabs 标签页' },
-            { key: 'footer', label: 'Footer 页脚' },
-            { key: 'codeblock', label: 'CodeBlock 代码高亮' },
-            { key: 'loading', label: 'Loading 加载', isNew: true },
-            { key: 'table', label: 'Table 表格' },
             { key: 'form', label: 'Form 表单', isNew: true },
         ],
     },
     {
-        key: 'cat-complex',
-        label: '── 复杂组件 ──',
+        key: 'cat-feedback',
+        label: '── 反馈 ──',
+        children: [
+            { key: 'notification', label: 'Notification 通知', isNew: true },
+            { key: 'modal', label: 'Modal 弹窗' },
+            { key: 'drawer', label: 'Drawer 抽屉', isNew: true },
+            { key: 'tooltip', label: 'Tooltip 气泡提示' },
+            { key: 'loading', label: 'Loading 加载', isNew: true },
+            { key: 'progress', label: 'Progress 进度条', isNew: true },
+        ],
+    },
+    {
+        key: 'cat-data-display',
+        label: '── 数据展示 ──',
+        children: [
+            { key: 'card', label: 'Card 卡片' },
+            { key: 'collapse', label: 'Collapse 折叠面板' },
+            { key: 'tabs', label: 'Tabs 标签页' },
+            { key: 'table', label: 'Table 表格' },
+            { key: 'typewriter', label: 'Typewriter 打字机' },
+        ],
+    },
+    {
+        key: 'cat-animal',
+        label: '── 主题 ──',
         children: [
             { key: 'wallet', label: 'Wallet 钱包', isNew: true },
             { key: 'time', label: 'Time 时间' },

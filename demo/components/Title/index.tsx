@@ -24,7 +24,7 @@ const TITLE_API: ApiRow[] = [
     { prop: 'style', desc: '自定义样式', type: 'React.CSSProperties', defaultVal: '-' },
 ];
 
-// 治愈海岛风格背景工厂：底色 + 错位圆点纹理，每个 section 用不同主题色
+// 背景工厂：底色 + 错位圆点纹理，每个 section 用不同主题色
 const acBox = (bg: string, dot1: string, dot2: string, border: string): React.CSSProperties => ({
     ...demoBoxStyle,
     padding: 40,

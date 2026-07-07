@@ -137,8 +137,8 @@ const ProgressDemo: React.FC = () => {
                 </div>
                 <Progress percent={pct} infoPosition="right" />
 
-                {/* ---- 5. 治愈海岛经典场景: 上传/经验/任务 ---- */}
-                <div style={labelStyle}>治愈海岛场景 — 上传 / 经验 / 任务</div>
+                {/* ---- 5. 经典场景: 上传/经验/任务 ---- */}
+                <div style={labelStyle}>经典场景 — 上传 / 经验 / 任务</div>
                 <div style={S.barRow}>
                     {/* 上传进度 */}
                     <div>
