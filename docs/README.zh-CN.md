@@ -189,7 +189,7 @@ npm run build:demo
   </td>
   <td align="center" width="33%">
     <br/>
-    <img src="docs/img/acorn.png" alt="Acorn" style="border-radius: 8px; width: 90%; display: block; margin: 8px auto 0;" />
+    <img src="img/acorn.png" alt="Acorn" style="border-radius: 8px; width: 90%; display: block; margin: 8px auto 0;" />
     <br/><a href="https://github.com/Mystic-Stars/acorn-theme">Acorn</a><br/><sub>Acorn Astro 博客主题</sub>
   </td>
 </tr>
