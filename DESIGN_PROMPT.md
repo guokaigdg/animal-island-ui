@@ -75,7 +75,7 @@ Borders:
   Input:        none by default; opt-in via shadow={true} → 0 3px 0 0 #d4c9b4 | small: 0 2px | large: 0 4px
   Switch track: inset 0 2px 4px rgba(114,93,66,0.15) (off) / inset 0 2px 4px rgba(90,158,30,0.20) (on)  — INSET only, no outer 3D shadow
   Switch handle: NO box-shadow (flat circle with 2.5px border, vertically centered)
-  Card:         NO box-shadow. Hover: transform translateY(-2px). Pattern variants add 1.5px solid border in palette hue.
+  Card:         NO box-shadow by default. Hover (only when `hoverable={true}`): transform translateY(-2px) + cursor pointer. Pattern variants add 1.5px solid border in palette hue.
   Feature card hover: 0 8px 24px rgba(114, 93, 66, 0.15)
 
 === SHAPE & RADIUS ===

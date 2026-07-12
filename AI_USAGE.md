@@ -318,12 +318,14 @@ interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
     type?: CardType; // default 'default'
     color?: CardColor; // default 'default'
     pattern?: CardPattern; // default 'none'
+    hoverable?: boolean; // default false (no hover); true → cursor pointer + translateY(-2px) on hover
     children?: React.ReactNode;
 }
 ```
 
 ```tsx
-<Card>Default parchment card</Card>
+<Card>Default parchment card (read-only, no hover)</Card>
+<Card hoverable>Interactive card (hover lifts -2px, cursor pointer)</Card>
 <Card type="dashed">Draft / empty-state container</Card>
 <Card color="app-yellow">Notification</Card>
 <Card color="app-blue" pattern="app-pink">With decorative pattern overlay</Card>
@@ -455,7 +457,7 @@ type FooterType = 'sea' | 'tree';
 
 interface FooterProps {
     type?: FooterType; // default 'tree'
-    seamless?: boolean; // default false
+    seamless?: boolean; // default true (无缝拼接背景循环平铺)
     className?: string;
     style?: React.CSSProperties;
 }

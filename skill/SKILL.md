@@ -617,21 +617,26 @@ border-color: #a89878;
 ### Card
 
 ```css
-/* 默认 */
+/* 默认 (无 hover) */
 border-radius: 20px;
 background: rgb(247, 243, 223);
 padding: 16px 24px;
 color: #725d42;
 font-weight: 500;
-/* 默认 NO box-shadow（依赖 border / pattern 分层，不靠悬浮阴影）*/
+/* 默认 NO box-shadow(依赖 border / pattern 分层,不靠悬浮阴影)*/
 transition: all 0.3s ease;
-/* hover */
-transform: translateY(-2px);
+/* 默认无 cursor:pointer、无 hover transform —— 只读卡片场景 */
+
+/* hoverable=true 时才应用(光标 + 上浮) */
+cursor: pointer;
+&:hover { transform: translateY(-2px); }
 
 /* dashed 类型 */
 border: 2px dashed #e8dcc8;
 background: rgb(250, 248, 242);
 box-shadow: none;
+/* dashed + hoverable:hover  → 只换边框色,不做位移 */
+&.card-dashed:hover { transform: none; border-color: #d4c4a8; }
 
 /* pattern 叠加（pattern !== 'none' 时，纯 CSS 实现，**无 png/svg**） */
 /* 双层 radial-gradient 点阵 + 同色调 1.5px solid 边框 + pastel 浅底，

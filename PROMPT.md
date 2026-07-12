@@ -210,8 +210,9 @@ You are a senior React engineer. Generate a **single self-contained `index.html`
 ### Card (default radius 20px + 13 colors + 13 dot patterns)
 
 - **VISUAL DEFAULT — always pass a `pattern` prop on Card unless the user specifically asks for a flat solid color.** The polka-dot wallpaper is the signature animal-island look. (API default is `pattern="none"`, but in generated pages prefer `<Card pattern="default" />` or any other matching `pattern="<color-name>"` for that island vibe.)
-- Default (no pattern): bg rgb(247,243,223); padding 16px 24px; color #725d42; weight 500; **no box-shadow**; transition 0.3s ease; hover transform translateY(-2px); cursor pointer.
-- type="dashed": bg rgb(250,248,242); border 2px dashed #e8dcc8; no shadow; hover border-color #d4c4a8 + no transform.
+- Default (no pattern): bg rgb(247,243,223); padding 16px 24px; color #725d42; weight 500; **no box-shadow**; transition 0.3s ease.
+- **hover 行为**:API 默认 `hoverable={false}` —— 不传 `hoverable` 时,Card 是**纯静态**的(无 cursor pointer,无位移)。需要交互感(列表项 / 可点击卡片)时**显式传 `hoverable`** 才会开启 `cursor: pointer` + hover 时 `transform: translateY(-2px)`。
+- type="dashed": bg rgb(250,248,242); border 2px dashed #e8dcc8; no shadow. 当 `hoverable=true` + `type="dashed"` 时:hover 仍不位移,只把 dashed 边框换为 `#d4c4a8`。
 - color prop (13 solid variants — choose one):
   default rgb(247,243,223)+#725d42 / app-pink #f8a6b2+#fff / purple #b77dee+#fff / app-blue #889df0+#fff / app-yellow #f7cd67+#725d42 / app-orange #e59266+#fff / app-teal #82d5bb+#fff / app-green #8ac68a+#fff / app-red #fc736d+#fff / lime-green #d1da49+#3d5a1a / yellow-green #ecdf52+#725d42 / brown #9a835a+#fff / warm-peach-pink #e18c6f+#fff
 - pattern prop (13 names same as color, polka-dot pastel WALLPAPER overriding solid color):

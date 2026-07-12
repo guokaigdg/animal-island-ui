@@ -14,7 +14,7 @@ export interface FooterProps {
     style?: React.CSSProperties;
 }
 
-export const Footer: React.FC<FooterProps> = ({ type = 'tree', seamless = false, className, style }) => {
+export const Footer: React.FC<FooterProps> = ({ type = 'tree', seamless = true, className, style }) => {
     const cls = [styles.footer, styles[type], seamless && styles.seamless, className].filter(Boolean).join(' ');
     return <div className={cls} style={style} />;
 };

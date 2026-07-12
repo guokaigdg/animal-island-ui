@@ -25,13 +25,19 @@ describe('Footer', () => {
         expect(root).toHaveStyle({ height: '50px' });
     });
 
-    it('seamless=true 添加 seamless 类', () => {
-        const { container } = render(<Footer seamless />);
+    it('默认 seamless=true 添加 seamless 类', () => {
+        const { container } = render(<Footer />);
         const root = container.firstChild as HTMLElement;
         expect(root).toHaveClass(styles.seamless);
     });
 
-    it('seamless=false 不添加 seamless 类', () => {
+    it('显式 seamless={true} 添加 seamless 类', () => {
+        const { container } = render(<Footer seamless={true} />);
+        const root = container.firstChild as HTMLElement;
+        expect(root).toHaveClass(styles.seamless);
+    });
+
+    it('seamless={false} 关闭无缝拼接', () => {
         const { container } = render(<Footer seamless={false} />);
         const root = container.firstChild as HTMLElement;
         expect(root).not.toHaveClass(styles.seamless);
