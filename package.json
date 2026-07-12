@@ -1,6 +1,6 @@
 {
     "name": "animal-island-ui",
-    "version": "1.2.0",
+    "version": "1.2.2",
     "description": "A nature-inspired React component library",
     "type": "module",
     "main": "dist/cjs/index.cjs",
@@ -48,7 +48,9 @@
         "lint:fix": "eslint . --fix",
         "format": "prettier --write .",
         "format:check": "prettier --check .",
-        "ci": "npm run format:check && npm run check:docs && npm run lint && npm run test:run && npm run build"
+        "ci": "npm run format:check && npm run check:docs && npm run lint && npm run test:run && npm run build",
+        "setup:hooks": "git config core.hooksPath .githooks",
+        "prepare": "npm run setup:hooks"
     },
     "peerDependencies": {
         "react": ">=17.0.0",

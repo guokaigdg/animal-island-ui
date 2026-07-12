@@ -18,7 +18,7 @@ export type TooltipPlacement =
 
 export type TooltipTrigger = 'hover' | 'focus' | 'click';
 
-/** default 标准矩形；island 治愈海岛不规则有机气泡（与 Modal 同款 clip-path） */
+/** default 标准矩形；island 动物主题不规则有机气泡（与 Modal 同款 clip-path） */
 export type TooltipVariant = 'default' | 'island';
 
 const ISLAND_CLIP_PATH =

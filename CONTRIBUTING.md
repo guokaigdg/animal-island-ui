@@ -11,7 +11,7 @@
 ## 提交 Pull Request
 
 1. Fork 本仓库并基于 `main` 创建分支 (`git checkout -b feature/my-feature`)
-2. 编写代码并确保 `npm run build` 通过
+2. 编写代码并确保 `npm run ci` 通过
 3. 提交修改，遵循 [Conventional Commits](https://www.conventionalcommits.org/) 格式：
     - `feat: add xxx` — 新功能
     - `fix: resolve xxx` — Bug 修复
@@ -19,6 +19,16 @@
     - `refactor: simplify xxx` — 重构
 4. 推送到你的分支 (`git push origin feature/my-feature`)
 5. 创建 Pull Request，描述改动内容和动机
+
+## 提交前检查（pre-commit hook）
+
+本项目使用 git pre-commit hook 强制在 `git commit` 之前跑 `npm run ci`（format:check + check:docs + lint + test:run + build）。如果 CI 失败，commit 会被中止。
+
+- **新克隆**：`npm install` 会自动通过 `prepare` 脚本安装钩子（`git config core.hooksPath .githooks`）
+- **手动安装**：`npm run setup:hooks`
+- **手动卸载**：`git config --unset core.hooksPath`
+- **紧急绕过**（不推荐）：`git commit --no-verify` —— 会跳过 CI 检查，坏代码可能进库
+- **钩子文件位置**：`.githooks/pre-commit`（已 commit，新 clone 下来就生效）
 
 ## 本地开发
 
