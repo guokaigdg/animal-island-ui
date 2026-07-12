@@ -189,6 +189,11 @@ npm run build:demo
   </td>
   <td align="center" width="33%">
     <br/>
+    <img src="img/callai.png" alt="callai" style="border-radius: 8px; width: 90%; display: block; margin: 8px auto 0;" />
+    <br/><a href="https://github.com/YuniqueUnic/callai">callai</a><br/><sub>治愈海岛风 AI 额度窗口小闹钟（Tauri 桌面 + CLI）</sub>
+  </td>
+  <td align="center" width="33%">
+    <br/>
     <img src="img/acorn.png" alt="Acorn" style="border-radius: 8px; width: 90%; display: block; margin: 8px auto 0;" />
     <br/><a href="https://github.com/Mystic-Stars/acorn-theme">Acorn</a><br/><sub>Acorn Astro 博客主题</sub>
   </td>
