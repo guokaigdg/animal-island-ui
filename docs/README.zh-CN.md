@@ -187,6 +187,11 @@ npm run build:demo
     <img src="img/awesome-splatoon3.png" alt="Awesome-splatoon3" style="border-radius: 8px; width: 90%; display: block; margin: 8px auto 0;" />
     <br/><a href="https://github.com/961853266hyt/awesome-splatoon3">Awesome-splatoon3</a><br/><sub>斯普拉顿3 资源站</sub>
   </td>
+  <td align="center" width="33%">
+    <br/>
+    <img src="img/callai.png" alt="callai" style="border-radius: 8px; width: 90%; display: block; margin: 8px auto 0;" />
+    <br/><a href="https://github.com/YuniqueUnic/callai">callai</a><br/><sub>治愈海岛风 AI 额度窗口小闹钟（Tauri 桌面 + CLI）</sub>
+  </td>
 </tr>
 </table>
 
