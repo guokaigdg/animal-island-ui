@@ -634,6 +634,12 @@ const CardDemo: React.FC = () => (
                     <p>欢迎来到无人岛！虚线边框适合用于轻量提示或次要信息展示。</p>
                 </Card>
             </div>
+            <div style={labelStyle}>hoverable 启用 hover(默认关闭)</div>
+            <div style={S.row}>
+                <Card hoverable style={{ width: 260 }}>
+                    <p>鼠标移上来看看 ↑</p>
+                </Card>
+            </div>
         </div>
         {/* ---- pattern ---- */}
         <div style={{ ...demoBodyStyle, gap: 24 }}>
@@ -765,6 +771,11 @@ const App = () => {
             {/* 花纹 */}
             <Card pattern="default">
                 默认花纹卡片
+            </Card>
+
+            {/* 启用 hover(默认关闭,显式传 hoverable 才上浮) */}
+            <Card hoverable style={{ width: 260 }}>
+                鼠标移上来看看 ↑
             </Card>
         </div>
     );

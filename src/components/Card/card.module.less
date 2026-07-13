@@ -9,11 +9,7 @@
     color: #725d42;
     font-weight: 500;
     transition: all 0.3s ease;
-    cursor: pointer;
-
-    &:hover {
-        transform: translateY(-2px);
-    }
+    /* hover 效果默认关闭;通过 `hoverable` prop 启用,见 .card-hoverable */
 }
 
 // ---------- Type: dashed ----------
@@ -21,8 +17,19 @@
     background: rgb(250, 248, 242);
     border: 2px dashed #e8dcc8;
     box-shadow: none;
+    /* 自身的 hover 行为也是默认关闭;开启 hoverable 时只换 border 颜色,不做位移 */
+}
+
+// ---------- Hoverable (opt-in) ----------
+.card-hoverable {
+    cursor: pointer;
 
     &:hover {
+        transform: translateY(-2px);
+    }
+
+    /* dashed + hoverable: 不做位移,只换 dashed 边框颜色 */
+    &.card-dashed:hover {
         transform: none;
         border-color: #d4c4a8;
     }

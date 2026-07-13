@@ -165,4 +165,47 @@ describe('Card', () => {
         expect(root).toHaveAttribute('data-testid', 'card-root');
         expect(root).toHaveAttribute('role', 'region');
     });
+
+    // ---------- hoverable prop (default false, opt-in) ----------
+
+    it('默认 (不传 hoverable) 不应用 card-hoverable 类', () => {
+        const { container } = render(<Card>x</Card>);
+        expect(container.firstChild).not.toHaveClass(styles['card-hoverable']);
+    });
+
+    it('hoverable={false} 显式不应用 card-hoverable 类', () => {
+        const { container } = render(<Card hoverable={false}>x</Card>);
+        expect(container.firstChild).not.toHaveClass(styles['card-hoverable']);
+    });
+
+    it('hoverable={true} 应用 card-hoverable 类', () => {
+        const { container } = render(<Card hoverable={true}>x</Card>);
+        const root = container.firstChild as HTMLElement;
+        expect(root).toHaveClass(styles['card-hoverable']);
+        expect(root).toHaveClass(styles.card);
+    });
+
+    it('hoverable 与 type / color / pattern 自由组合', () => {
+        const { container } = render(
+            <Card type="dashed" color="app-pink" pattern="purple" hoverable>
+                x
+            </Card>
+        );
+        const root = container.firstChild as HTMLElement;
+        expect(root).toHaveClass(styles['card-hoverable']);
+        expect(root).toHaveClass(styles['card-dashed']);
+        expect(root).toHaveClass(styles['card-app-pink']);
+        expect(root).toHaveClass(styles['pattern-purple']);
+    });
+
+    it('className 透传仍然生效,且与 hoverable 共存', () => {
+        const { container } = render(
+            <Card hoverable className="my-card" data-testid="h">
+                x
+            </Card>
+        );
+        const root = container.firstChild as HTMLElement;
+        expect(root).toHaveClass('my-card');
+        expect(root).toHaveClass(styles['card-hoverable']);
+    });
 });

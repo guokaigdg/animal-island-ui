@@ -41,6 +41,13 @@ export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
     color?: CardColor;
     /** 背景花纹类型 */
     pattern?: CardPattern;
+    /**
+     * 是否启用 hover 效果(光标 pointer + translateY -2px)。
+     * 默认 `false`(只读卡片):无 hover、无 cursor 变化。
+     * 设为 `true` 开启(可点击卡片 / 列表项等交互场景)。
+     * @default false
+     */
+    hoverable?: boolean;
     /** 自定义内容 */
     children?: React.ReactNode;
 }
@@ -49,6 +56,7 @@ export const Card: React.FC<CardProps> = ({
     type = 'default',
     color = 'default',
     pattern = 'none',
+    hoverable = false,
     children,
     className,
     style,
@@ -59,6 +67,7 @@ export const Card: React.FC<CardProps> = ({
         type === 'dashed' && styles['card-dashed'],
         color !== 'default' && styles[`card-${color}`],
         pattern !== 'none' && styles[`pattern-${pattern}`],
+        hoverable && styles['card-hoverable'],
         className,
     ]
         .filter(Boolean)
