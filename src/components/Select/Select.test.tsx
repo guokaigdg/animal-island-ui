@@ -284,10 +284,12 @@ describe('Select', () => {
             const user = userEvent.setup();
             render(<Select options={options} value="" onChange={() => {}} aria-label="水果" />);
             const trigger = screen.getByRole('combobox');
-            expect(trigger).toHaveAttribute('aria-label', '水果');
+            // a11y 契约：aria-label 透传到 trigger 后，可被 toHaveAccessibleName 识别
+            expect(trigger).toHaveAccessibleName('水果');
             await user.click(trigger);
             await flushRaf();
-            expect(screen.getByRole('listbox')).toHaveAttribute('aria-label', '水果');
+            // a11y 契约：aria-label 同时透传到 listbox，屏幕阅读器可读出名字
+            expect(screen.getByRole('listbox')).toHaveAccessibleName('水果');
         });
     });
 });

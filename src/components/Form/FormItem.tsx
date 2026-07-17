@@ -147,6 +147,18 @@ export const FormItem: React.FC<FormItemProps> = (props) => {
             const finalValue = normalize ? normalize(rawValue, prevValue, form.getFieldsValue(true)) : rawValue;
             form.setFieldValue(name as never, finalValue);
         };
+        // 把 form field key 作为 input id，和上面 label.htmlFor={fieldKey} 自动配对
+        // 用户已显式传 id 时不覆盖（与 disabled/size/status 透传策略一致）
+        if (childProps.id === undefined) {
+            childProps.id = fieldKey;
+        }
+    }
+
+    // a11y 契约：错误态下把 child input 与错误文案节点用 aria-errormessage 关联，
+    // 屏幕阅读器会自动播报错误（仅当用户未显式覆盖时透传，与 id/disabled 策略一致）
+    const helpId = fieldKey ? `${fieldKey}_help` : undefined;
+    if (helpId && childIsElement && childProps['aria-errormessage'] === undefined) {
+        childProps['aria-errormessage'] = computedStatus === 'error' ? helpId : undefined;
     }
 
     // disabled 透传
@@ -217,6 +229,7 @@ export const FormItem: React.FC<FormItemProps> = (props) => {
     const helpNode =
         showHelp !== undefined ? (
             <div
+                id={helpId}
                 className={classNames(styles[`${prefixCls}-explain`], {
                     [styles[`${prefixCls}-explain-error`]]: computedStatus === 'error',
                 })}

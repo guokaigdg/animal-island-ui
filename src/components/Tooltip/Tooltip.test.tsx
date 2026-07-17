@@ -14,6 +14,11 @@ describe('Tooltip', () => {
         const tip = screen.getByRole('tooltip', { hidden: true });
         expect(tip).toHaveAttribute('aria-hidden', 'true');
         expect(tip).not.toHaveClass(styles.visible);
+        // jest-dom v6: 显式 role 校验
+        // 注:tooltip 隐藏时 aria-hidden=true,无障碍树会排除其子树,
+        // 此时 toHaveAccessibleName('hi') 不适用(按 WAI-ARIA 规范应为空);
+        // 可访问名校验在显示态(trigger 的 aria-describedby)处覆盖。
+        expect(tip).toHaveRole('tooltip');
     });
 
     it('hover 触发显示，离开后隐藏', async () => {
@@ -107,6 +112,8 @@ describe('Tooltip', () => {
             await user.click(trigger);
             expect(trigger.getAttribute('aria-describedby')).toBe(tip.id);
             expect(tip.id).toMatch(/^animal-tooltip-/);
+            // jest-dom v6: 从 aria-describedby 推出可访问描述
+            expect(trigger).toHaveAccessibleDescription('hi');
         });
 
         it('隐藏时 trigger 不带 aria-describedby（保留子元素原值）', async () => {

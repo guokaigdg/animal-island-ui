@@ -193,4 +193,12 @@ describe('Button', () => {
         expect(onClick.mock.calls[0][0]).toBeInstanceOf(Object);
         expect(onClick.mock.calls[0][0].type).toBe('click');
     });
+
+    // a11y 契约：按钮必须拥有可访问名（无参 = 仅断言存在可访问名，不校验具体文本）
+    it('按钮文本作为可访问名（toHaveAccessibleName 不传参数）', () => {
+        render(<Button>保存</Button>);
+        const btn = screen.getByRole('button', { name: '保存' });
+        // 不传参数表示只断言"有可访问名"，不查具体值
+        expect(btn).toHaveAccessibleName();
+    });
 });

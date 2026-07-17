@@ -164,6 +164,9 @@ describe('Card', () => {
         expect(root).toHaveAttribute('aria-label', 'card');
         expect(root).toHaveAttribute('data-testid', 'card-root');
         expect(root).toHaveAttribute('role', 'region');
+        // jest-dom v6: 显式 role 与可访问名（来自 aria-label）
+        expect(root).toHaveRole('region');
+        expect(root).toHaveAccessibleName('card');
     });
 
     // ---------- hoverable prop (default false, opt-in) ----------

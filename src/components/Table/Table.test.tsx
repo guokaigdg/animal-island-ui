@@ -29,6 +29,8 @@ describe('Table', () => {
         expect(screen.getByText('Age')).toBeInTheDocument();
         expect(screen.getByText('Alice')).toBeInTheDocument();
         expect(screen.getByText('Bob')).toBeInTheDocument();
+        // jest-dom v6: <table> 隐式 role=table，校验 a11y 契约
+        expect(screen.getByRole('table')).toHaveRole('table');
     });
 
     it('showHeader=false 时不渲染表头', () => {

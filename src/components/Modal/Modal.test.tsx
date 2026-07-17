@@ -19,6 +19,9 @@ describe('Modal', () => {
         const dialog = screen.getByRole('dialog');
         expect(dialog).toBeInTheDocument();
         expect(dialog).toHaveAttribute('aria-modal', 'true');
+        // jest-dom v6: 显式 role 与可访问名校验
+        expect(dialog).toHaveRole('dialog');
+        expect(dialog).toHaveAccessibleName('标题');
         expect(screen.getByText('标题')).toBeInTheDocument();
         expect(screen.getByTestId('body')).toBeInTheDocument();
     });
@@ -123,6 +126,9 @@ describe('Modal', () => {
             expect(describedBy).toBeTruthy();
             expect(document.getElementById(labelledBy!)).toHaveTextContent('嗨标题');
             expect(document.getElementById(describedBy!)).toHaveTextContent('嗨内容');
+            // jest-dom v6: 从 aria-labelledby / aria-describedby 推出可访问名/描述
+            expect(dialog).toHaveAccessibleName('嗨标题');
+            expect(dialog).toHaveAccessibleDescription('嗨内容');
         });
 
         it('无 title 时 aria-labelledby 缺省', () => {

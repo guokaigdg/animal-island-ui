@@ -33,4 +33,8 @@ export interface ProgressProps {
     className?: string;
     /** 自定义样式 */
     style?: React.CSSProperties;
+    /** 无可见标题时给 progressbar 一个无障碍标签（WCAG aria-progressbar-name 必需） */
+    'aria-label'?: string;
+    /** 关联外部可见标题的 id */
+    'aria-labelledby'?: string;
 }

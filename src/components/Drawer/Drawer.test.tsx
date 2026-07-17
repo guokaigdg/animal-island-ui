@@ -21,6 +21,9 @@ describe('Drawer', () => {
         const dialog = screen.getByRole('dialog');
         expect(dialog).toBeInTheDocument();
         expect(dialog).toHaveAttribute('aria-modal', 'true');
+        // jest-dom v6: 显式 role 与可访问名校验
+        expect(dialog).toHaveRole('dialog');
+        expect(dialog).toHaveAccessibleName('标题');
         expect(screen.getByText('标题')).toBeInTheDocument();
         expect(screen.getByTestId('body')).toBeInTheDocument();
     });
@@ -202,6 +205,8 @@ describe('Drawer', () => {
             const labelledBy = dialog.getAttribute('aria-labelledby');
             expect(labelledBy).toBeTruthy();
             expect(document.getElementById(labelledBy!)).toHaveTextContent('嗨标题');
+            // jest-dom v6: 从 aria-labelledby 推出可访问名
+            expect(dialog).toHaveAccessibleName('嗨标题');
         });
 
         it('无 title 时 aria-labelledby 缺省', () => {
@@ -219,6 +224,9 @@ describe('Drawer', () => {
             );
             const closeBtn = screen.getByLabelText('关闭');
             expect(closeBtn).toBeInTheDocument();
+            // jest-dom v6: 显式 role 与可访问名校验
+            expect(closeBtn).toHaveRole('button');
+            expect(closeBtn).toHaveAccessibleName('关闭');
             await user.click(closeBtn);
             expect(onClose).toHaveBeenCalled();
         });

@@ -39,6 +39,16 @@ describe('Progress', () => {
             expect(root).toHaveClass('custom-class');
             expect(root).toHaveStyle({ width: '320px' });
         });
+
+        it('forwards aria-label and aria-labelledby to progressbar role (a11y)', () => {
+            const { rerender } = render(<Progress percent={50} aria-label="任务进度" />);
+            const bar = screen.getByRole('progressbar');
+            // jest-dom v6: 显式 role 透传校验
+            expect(bar).toHaveRole('progressbar');
+            expect(bar).toHaveAttribute('aria-label', '任务进度');
+            rerender(<Progress percent={50} aria-labelledby="external-title-id" />);
+            expect(screen.getByRole('progressbar')).toHaveAttribute('aria-labelledby', 'external-title-id');
+        });
     });
 
     describe('info text', () => {

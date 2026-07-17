@@ -1,4 +1,4 @@
-﻿import React, { useState, useCallback, useRef } from 'react';
+import React, { useState, useCallback, useRef } from 'react';
 import styles from './input.module.less';
 
 export type InputSize = 'small' | 'middle' | 'large';
@@ -90,6 +90,7 @@ export const Input: React.FC<InputProps> = ({
                 disabled={disabled}
                 value={currentValue}
                 onChange={handleChange}
+                aria-invalid={status === 'error' ? 'true' : undefined}
                 {...rest}
             />
             {allowClear && currentValue && !disabled && (

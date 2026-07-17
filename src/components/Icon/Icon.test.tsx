@@ -76,6 +76,8 @@ describe('Icon', () => {
         const root = container.firstChild as HTMLElement;
         expect(root).toHaveAttribute('data-testid', 'my-icon');
         expect(root).toHaveAttribute('aria-label', '里程');
+        // a11y 契约：aria-label 必须作为可访问名被屏幕阅读器读出
+        expect(root).toHaveAccessibleName('里程');
     });
 
     it('style 可覆盖默认的 width/height', () => {

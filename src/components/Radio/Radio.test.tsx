@@ -23,8 +23,11 @@ describe('Radio', () => {
         it('渲染所有选项 label 与对应 radio 输入', () => {
             const { getInputs } = makeSetup();
             expect(getInputs()).toHaveLength(baseOptions.length);
+            const group = screen.getByRole('radiogroup');
             baseOptions.forEach((o) => {
                 expect(screen.getByText(String(o.label))).toBeInTheDocument();
+                // a11y 契约：label 文本必须通过 for/id 正确绑定到 input（用 within(radiogroup) 限定避免歧义）
+                expect(within(group).getByLabelText(o.label as string)).toHaveRole('radio');
             });
         });
 

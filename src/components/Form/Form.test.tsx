@@ -40,6 +40,34 @@ describe('Form', () => {
             );
             expect(container.querySelector('[data-field-name="hidden"]')).toBeNull();
         });
+
+        it('Form.Item.name 自动把 child id 与 label htmlFor 配对（a11y）', () => {
+            // 回归：label.htmlFor={fieldKey} 之前没把 id 注入到 child，
+            // 导致 <label for="username"> 指向一个不存在的 id，屏幕阅读器读不到名字
+            render(
+                <Form>
+                    <Form.Item label="用户名" name="username">
+                        <Input />
+                    </Form.Item>
+                </Form>
+            );
+            const input = screen.getByRole('textbox');
+            expect(input).toHaveAttribute('id', 'username');
+            const label = screen.getByText('用户名').closest('label');
+            expect(label).toHaveAttribute('for', 'username');
+        });
+
+        it('Form.Item 在 child 已传 id 时不覆盖（用户优先）', () => {
+            render(
+                <Form>
+                    <Form.Item label="邮箱" name="email">
+                        <Input id="custom-email-id" />
+                    </Form.Item>
+                </Form>
+            );
+            const input = screen.getByRole('textbox');
+            expect(input).toHaveAttribute('id', 'custom-email-id');
+        });
     });
 
     describe('布局', () => {
@@ -435,6 +463,30 @@ describe('Form', () => {
             // 第一次 setFieldsValue 在 effect 中，不会触发 onValuesChange
             // 之后用户输入 'new' 应触发
             expect(onValuesChange).toHaveBeenCalled();
+        });
+
+        // a11y 契约：校验失败时 FormItem 应把 child input 标记为 aria-invalid=true，
+        // 并通过 aria-errormessage 把错误文案暴露给屏幕阅读器
+        it('FormItem 校验失败时 input 标记 aria-invalid=true 且可被 toBeInvalid / toHaveAccessibleErrorMessage 识别', async () => {
+            const { container } = render(
+                <Form>
+                    <Form.Item name="username" rules={[{ required: true, message: '用户名必填' }]}>
+                        <Input />
+                    </Form.Item>
+                </Form>
+            );
+            const form = container.querySelector('form') as HTMLFormElement;
+
+            // 提交空表单 → 触发校验失败
+            await act(async () => {
+                fireEvent.submit(form);
+            });
+
+            const input = screen.getByRole('textbox') as HTMLInputElement;
+            // a11y 契约：错误态下 input 应被识别为 invalid
+            expect(input).toBeInvalid();
+            // a11y 契约：错误文案应通过 aria-errormessage 暴露给屏幕阅读器
+            expect(input).toHaveAccessibleErrorMessage('用户名必填');
         });
     });
 

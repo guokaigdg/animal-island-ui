@@ -21,6 +21,8 @@ export const Progress: React.FC<ProgressProps> = ({
     duration = 0.6,
     className,
     style,
+    'aria-label': ariaLabel,
+    'aria-labelledby': ariaLabelledBy,
 }) => {
     const safePercent = useMemo(() => {
         if (typeof percent !== 'number' || Number.isNaN(percent)) return 0;
@@ -53,6 +55,8 @@ export const Progress: React.FC<ProgressProps> = ({
             className={cls}
             style={style}
             role="progressbar"
+            aria-label={ariaLabel}
+            aria-labelledby={ariaLabelledBy}
             aria-valuemin={0}
             aria-valuemax={100}
             aria-valuenow={Math.round(safePercent)}

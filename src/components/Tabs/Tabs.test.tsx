@@ -70,6 +70,11 @@ describe('Tabs', () => {
             const panel = screen.getByRole('tabpanel');
             expect(panel).toHaveAttribute('aria-labelledby', tabs[0].id);
             expect(tabs[0]).toHaveAttribute('aria-controls', panel.id);
+
+            // a11y 契约：tab 必须拥有可访问名（来自 children label 文本）
+            expect(tabs[0]).toHaveAccessibleName('Apple');
+            expect(tabs[1]).toHaveAccessibleName('Banana');
+            expect(tabs[2]).toHaveAccessibleName('Cherry');
         });
 
         it('roving tabindex：仅 active tab 为 0，其余为 -1', () => {

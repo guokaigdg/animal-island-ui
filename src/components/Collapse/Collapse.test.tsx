@@ -11,6 +11,8 @@ describe('Collapse', () => {
         const btn = screen.getByRole('button');
         expect(btn).toHaveAttribute('aria-expanded', 'false');
         expect(btn).toHaveTextContent('+');
+        // a11y 契约：折叠按钮必须以 question 文本作为可访问名
+        expect(btn).toHaveAccessibleName('Q');
     });
 
     it('defaultExpanded=true 初始展开', () => {
@@ -79,6 +81,8 @@ describe('Collapse', () => {
             expect(btn.getAttribute('aria-controls')).toBe(panel.id);
             expect(panel.getAttribute('aria-labelledby')).toBe(btn.id);
             expect(panel.id).toMatch(/^animal-collapse-/);
+            // a11y 契约：panel 必须显式暴露 region 语义角色
+            expect(panel).toHaveRole('region');
         });
     });
 });

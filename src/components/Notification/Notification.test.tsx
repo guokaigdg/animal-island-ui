@@ -138,6 +138,9 @@ describe('Notification', () => {
             });
             await waitForContainer();
             const closeBtn = await screen.findByLabelText('close');
+            // jest-dom v6: 显式 role 与可访问名校验
+            expect(closeBtn).toHaveRole('button');
+            expect(closeBtn).toHaveAccessibleName('close');
             await user.click(closeBtn);
             await waitForGone('close me');
         });
@@ -292,6 +295,9 @@ describe('Notification', () => {
             const card = (await screen.findByText('kb')).closest(`.${styles.notification}`) as HTMLElement;
             expect(card).toHaveAttribute('role', 'button');
             expect(card).toHaveAttribute('tabindex', '0');
+            // jest-dom v6: 显式 role 与可访问名(text content)校验
+            expect(card).toHaveRole('button');
+            expect(card).toHaveAccessibleName('kb');
         });
 
         it('键盘 Enter 触发 onClick', async () => {

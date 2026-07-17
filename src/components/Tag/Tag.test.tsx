@@ -93,7 +93,11 @@ describe('Tag', () => {
     describe('closable', () => {
         it('closable=true 渲染关闭按钮', () => {
             render(<Tag closable>x</Tag>);
-            expect(screen.getByRole('button', { name: 'close' })).toBeInTheDocument();
+            const btn = screen.getByRole('button', { name: 'close' });
+            expect(btn).toBeInTheDocument();
+            // jest-dom v6: 关闭按钮显式 role + 通过 aria-label 提供可访问名
+            expect(btn).toHaveRole('button');
+            expect(btn).toHaveAccessibleName('close');
         });
 
         it('点击关闭按钮触发 onClose', () => {
@@ -127,6 +131,9 @@ describe('Tag', () => {
             render(<Tag onClick={onClick}>x</Tag>);
             const tag = screen.getByRole('button');
             expect(tag).toHaveClass(styles['is-clickable']);
+            // jest-dom v6: 显式 role 校验 + 文本内容作为可访问名
+            expect(tag).toHaveRole('button');
+            expect(tag).toHaveAccessibleName('x');
             fireEvent.click(tag);
             expect(onClick).toHaveBeenCalledTimes(1);
         });

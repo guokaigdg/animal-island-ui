@@ -26,7 +26,10 @@ describe('Input', () => {
 
         it('status=error 应用错误类', () => {
             makeSetup({ status: 'error' });
-            expect(screen.getByRole('textbox').parentElement).toHaveClass(styles['wrapper-error']);
+            const textbox = screen.getByRole('textbox');
+            expect(textbox.parentElement).toHaveClass(styles['wrapper-error']);
+            // a11y 契约：错误态下输入框应被标记 aria-invalid=true，可被 toBeInvalid 识别
+            expect(textbox).toBeInvalid();
         });
 
         it('渲染 prefix / suffix', () => {
@@ -106,7 +109,10 @@ describe('Input', () => {
 
         it('清除按钮自定义 clearAriaLabel', () => {
             render(<Input allowClear defaultValue="abc" clearAriaLabel="Clear" />);
-            expect(screen.getByRole('button', { name: 'Clear' })).toBeInTheDocument();
+            const btn = screen.getByRole('button', { name: 'Clear' });
+            expect(btn).toBeInTheDocument();
+            // a11y 契约：清除按钮可被 toHaveAccessibleName 识别为 "Clear"
+            expect(btn).toHaveAccessibleName('Clear');
         });
     });
 });

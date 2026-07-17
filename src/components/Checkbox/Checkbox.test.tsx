@@ -47,8 +47,11 @@ describe('Checkbox', () => {
         it('渲染所有选项的 label 与对应 checkbox 输入', () => {
             const { getInputs } = setup();
             expect(getInputs()).toHaveLength(baseOptions.length);
+            const group = screen.getByRole('group');
             baseOptions.forEach((o) => {
                 expect(screen.getByText(String(o.label))).toBeInTheDocument();
+                // a11y 契约：label 文本必须通过 for/id 正确绑定到 input（用 within(group) 限定避免歧义）
+                expect(within(group).getByLabelText(o.label as string)).toHaveRole('checkbox');
             });
         });
 

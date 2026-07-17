@@ -19,6 +19,8 @@ describe('Switch', () => {
             const { getSwitch } = makeSetup();
             expect(getSwitch()).toBeInTheDocument();
             expect(getSwitch()).toHaveAttribute('aria-checked', 'false');
+            // a11y 契约：显式校验 role 属性被正确设置为 switch
+            expect(getSwitch()).toHaveRole('switch');
         });
 
         it('应用 className', () => {
@@ -121,7 +123,10 @@ describe('Switch', () => {
 
         it('aria-label 透传', () => {
             render(<Switch aria-label="深色模式" />);
-            expect(screen.getByRole('switch')).toHaveAttribute('aria-label', '深色模式');
+            const btn = screen.getByRole('switch');
+            expect(btn).toHaveAttribute('aria-label', '深色模式');
+            // a11y 契约：aria-label 必须作为可访问名被屏幕阅读器读出
+            expect(btn).toHaveAccessibleName('深色模式');
         });
     });
 });
