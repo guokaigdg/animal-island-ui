@@ -11,12 +11,12 @@ describe('Tag', () => {
             expect(screen.getByText('hello')).toBeInTheDocument();
         });
 
-        it('默认应用基础 tag 类与 medium/solid 尺寸', () => {
+        it('默认应用基础 tag 类与 medium/soft 尺寸', () => {
             const { container } = render(<Tag>x</Tag>);
             const root = container.firstChild as HTMLElement;
             expect(root).toHaveClass(styles.tag);
             expect(root).toHaveClass(styles['size-medium']);
-            expect(root).toHaveClass(styles['variant-solid']);
+            expect(root).toHaveClass(styles['variant-soft']);
         });
 
         it('支持 className 与 style', () => {
@@ -53,6 +53,11 @@ describe('Tag', () => {
             const { container } = render(<Tag variant="dashed">x</Tag>);
             expect(container.firstChild).toHaveClass(styles['variant-dashed']);
         });
+
+        it('variant=soft 应用对应类', () => {
+            const { container } = render(<Tag variant="soft">x</Tag>);
+            expect(container.firstChild).toHaveClass(styles['variant-soft']);
+        });
     });
 
     describe('color', () => {
@@ -87,6 +92,24 @@ describe('Tag', () => {
                 </Tag>
             );
             expect(container.firstChild).toHaveClass(styles['color-app-blue-dashed']);
+        });
+
+        it('color=app-pink + soft 应用 color-app-pink-soft 类', () => {
+            const { container } = render(
+                <Tag color="app-pink" variant="soft">
+                    x
+                </Tag>
+            );
+            expect(container.firstChild).toHaveClass(styles['color-app-pink-soft']);
+        });
+
+        it('color=app-green + soft 应用 color-app-green-soft 类', () => {
+            const { container } = render(
+                <Tag color="app-green" variant="soft">
+                    x
+                </Tag>
+            );
+            expect(container.firstChild).toHaveClass(styles['color-app-green-soft']);
         });
     });
 

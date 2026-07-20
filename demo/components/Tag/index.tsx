@@ -31,7 +31,7 @@ const TAG_API: ApiRow[] = [
     {
         prop: 'variant',
         desc: '风格变体',
-        type: `'solid' | 'outlined' | 'dashed'`,
+        type: `'solid' | 'outlined' | 'dashed' | 'soft'`,
         defaultVal: "'solid'",
     },
     {
@@ -78,7 +78,7 @@ const TagDemo: React.FC = () => {
     return (
         <div style={sectionStyle}>
             <div style={sectionTitleStyle}>
-                Tag <span style={tagStyle}>3 variants</span> <span style={tagStyle}>16 colors</span>{' '}
+                Tag <span style={tagStyle}>4 variants</span> <span style={tagStyle}>16 colors</span>{' '}
                 <span style={tagStyle}>3 sizes</span>
             </div>
             <div style={demoBodyStyle}>
@@ -90,6 +90,9 @@ const TagDemo: React.FC = () => {
                     </Tag>
                     <Tag variant="dashed" color="app-orange">
                         dashed
+                    </Tag>
+                    <Tag variant="soft" color="app-pink">
+                        soft
                     </Tag>
                 </div>
 
@@ -106,21 +109,90 @@ const TagDemo: React.FC = () => {
                     </Tag>
                 </div>
 
+                <div style={labelStyle}>color 颜色（soft · 同色系）</div>
+                <div style={S.row}>
+                    <Tag variant="soft" color="default">
+                        default
+                    </Tag>
+                    <Tag variant="soft" color="app-pink">
+                        app-pink
+                    </Tag>
+                    <Tag variant="soft" color="purple">
+                        purple
+                    </Tag>
+                    <Tag variant="soft" color="app-blue">
+                        app-blue
+                    </Tag>
+                    <Tag variant="soft" color="app-yellow">
+                        app-yellow
+                    </Tag>
+                    <Tag variant="soft" color="app-orange">
+                        app-orange
+                    </Tag>
+                    <Tag variant="soft" color="app-teal">
+                        app-teal
+                    </Tag>
+                    <Tag variant="soft" color="app-green">
+                        app-green
+                    </Tag>
+                    <Tag variant="soft" color="app-red">
+                        app-red
+                    </Tag>
+                    <Tag variant="soft" color="lime-green">
+                        lime-green
+                    </Tag>
+                    <Tag variant="soft" color="yellow-green">
+                        yellow-green
+                    </Tag>
+                    <Tag variant="soft" color="brown">
+                        brown
+                    </Tag>
+                    <Tag variant="soft" color="warm-peach-pink">
+                        warm-peach-pink
+                    </Tag>
+                </div>
+
                 <div style={labelStyle}>color 颜色（solid）</div>
                 <div style={S.row}>
-                    <Tag color="default">default</Tag>
-                    <Tag color="app-pink">app-pink</Tag>
-                    <Tag color="purple">purple</Tag>
-                    <Tag color="app-blue">app-blue</Tag>
-                    <Tag color="app-yellow">app-yellow</Tag>
-                    <Tag color="app-orange">app-orange</Tag>
-                    <Tag color="app-teal">app-teal</Tag>
-                    <Tag color="app-green">app-green</Tag>
-                    <Tag color="app-red">app-red</Tag>
-                    <Tag color="lime-green">lime-green</Tag>
-                    <Tag color="yellow-green">yellow-green</Tag>
-                    <Tag color="brown">brown</Tag>
-                    <Tag color="warm-peach-pink">warm-peach-pink</Tag>
+                    <Tag variant="solid" color="default">
+                        default
+                    </Tag>
+                    <Tag variant="solid" color="app-pink">
+                        app-pink
+                    </Tag>
+                    <Tag variant="solid" color="purple">
+                        purple
+                    </Tag>
+                    <Tag variant="solid" color="app-blue">
+                        app-blue
+                    </Tag>
+                    <Tag variant="solid" color="app-yellow">
+                        app-yellow
+                    </Tag>
+                    <Tag variant="solid" color="app-orange">
+                        app-orange
+                    </Tag>
+                    <Tag variant="solid" color="app-teal">
+                        app-teal
+                    </Tag>
+                    <Tag variant="solid" color="app-green">
+                        app-green
+                    </Tag>
+                    <Tag variant="solid" color="app-red">
+                        app-red
+                    </Tag>
+                    <Tag variant="solid" color="lime-green">
+                        lime-green
+                    </Tag>
+                    <Tag variant="solid" color="yellow-green">
+                        yellow-green
+                    </Tag>
+                    <Tag variant="solid" color="brown">
+                        brown
+                    </Tag>
+                    <Tag variant="solid" color="warm-peach-pink">
+                        warm-peach-pink
+                    </Tag>
                 </div>
 
                 <div style={labelStyle}>color 颜色（outlined）</div>
@@ -257,6 +329,7 @@ const App = () => {
             {/* 风格变体 */}
             <Tag variant="outlined" color="purple">outlined</Tag>
             <Tag variant="dashed" color="app-orange">dashed</Tag>
+            <Tag variant="soft" color="app-teal">soft</Tag>
 
             {/* 尺寸 */}
             <Tag size="small">small</Tag>

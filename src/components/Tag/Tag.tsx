@@ -4,7 +4,7 @@ import styles from './tag.module.less';
 
 export type TagSize = 'small' | 'medium' | 'large';
 
-export type TagVariant = 'solid' | 'outlined' | 'dashed';
+export type TagVariant = 'solid' | 'outlined' | 'dashed' | 'soft';
 
 export type TagColor =
     | 'default'
@@ -54,6 +54,7 @@ const VARIANT_CLASS: Record<TagVariant, string> = {
     solid: styles['variant-solid'],
     outlined: styles['variant-outlined'],
     dashed: styles['variant-dashed'],
+    soft: styles['variant-soft'],
 };
 
 const COLOR_CLASS = (color: TagColor, variant: TagVariant): string => {
@@ -65,7 +66,7 @@ const COLOR_CLASS = (color: TagColor, variant: TagVariant): string => {
 export const Tag: React.FC<TagProps> = ({
     children,
     size = 'medium',
-    variant = 'solid',
+    variant = 'soft',
     color = 'default',
     closable = false,
     onClose,
