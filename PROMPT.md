@@ -472,6 +472,27 @@ You are a senior React engineer. Generate a **single self-contained `index.html`
 - a11y: root has `role="progressbar"` + `aria-valuemin=0` / `aria-valuemax=100` / `aria-valuenow=<rounded percent>` / `aria-valuetext=<infoFormat string result>`. `percent` is auto-clamped to `[0, 100]`; `NaN` is treated as `0`.
 - `prefers-reduced-motion: reduce` cancels both `transition` (fill width) and `animation` (stripe scroll).
 
+### BackTop (floating back-to-top button)
+
+- **JSX component** — `<BackTop visibilityHeight={400} />`. A floating Island bag icon in the bottom-right corner that appears after scrolling past a threshold. Clicking scrolls smoothly to the top.
+- Props: `target` (scroll container function, default `() => window`), `visibilityHeight` (default 400), `duration` (ms, default 300), `icon` (custom ReactNode), `onClick`, `className`, `style`.
+- Default icon is a 158×136 Island bag PNG embedded as base64, displayed at 120×120px via `object-fit: contain` (80×80px on mobile).
+- Desktop: `bottom: 48px; right: 32px`. Mobile (<768px): `bottom: 24px; right: 16px`.
+- Visual states: hover `scale(1.08)` + stronger shadow, active `translateY(2px) scale(0.96)`. Focus-visible: `2px solid #ffcc00` outline, 4px offset, border-radius 50%.
+- Drop-shadow: `0 4px 10px rgba(91,78,30,0.22)` (rest), `0 4px 14px rgba(91,78,30,0.32)` (hover).
+- A11y: `role="button"`, `tabIndex={0}`, `aria-label="返回顶部"`, Enter/Space support.
+- `target` prop: pass `() => document.querySelector('main')` for a custom scroll container.
+
+### Skeleton (loading placeholder)
+
+- **JSX component** — `<Skeleton variant="text" />`. Renders gray/beige blocks with a warm-ivory shimmer animation.
+- 4 variants: `text` (12px radius line), `circle` (50%), `rect` (18px radius), `paragraph` (multiple lines).
+- Props: `loading` (default true, false = render children), `variant`, `active` (shimmer, default true), `rows` (paragraph, default 3), `width` / `widthValue` / `heightValue`, `rowWidths` (per-line widths for paragraph), `className`, `style`.
+- Sub-components: `<SkeletonButton size="middle" />`, `<SkeletonInput size="large" />`, `<SkeletonAvatar size="small" shape="square" />`.
+- Colors: base `#eae5db` (light beige), line `#dfd9ce`, shimmer `rgba(255,252,242,0.55)` light / `rgba(255,250,235,0.18)` mid.
+- Shimmer animation: `1.6s ease-in-out` left-to-right sweep (`translateX(-100%) → 100%`). All radii ≥12px (matching the "no sharp corners" rule).
+- A11y: `aria-hidden` when loading; children rendered when `loading=false`.
+
 ## HARD RULES (must obey — disqualifies the output if violated)
 
 1. Never use pure black (#000) or near-black (#111) text. Use #794f27 / #725d42 / #8a7b66.
@@ -486,7 +507,7 @@ You are a senior React engineer. Generate a **single self-contained `index.html`
 10. Never use weight < 400 anywhere. Body 500, headings 600–900.
 11. Never animate with hard cubic transitions; always use `cubic-bezier(0.4, 0, 0.2, 1)` over 0.15–0.35s.
 12. Title `title` prop on `<Modal>` is the literal string heading — do NOT confuse it with the `<Title>` component.
-13. **Always reach for the library component first.** If a feature exists as an animal-island-ui component (Card, Button, Input, Switch, Checkbox, Radio, Title, Tabs, Collapse, Modal, Drawer, Select, Tooltip, Loading, Table, Time, Divider, Footer, Phone, Cursor, Typewriter, Icon, CodeBlock, Form, Wallet, Tag, Notification, Progress), use the inline-defined `<ComponentName>` JSX with documented props. For Notification specifically, call the static methods (`Notification.success({...})`) — it has no JSX element. Only hand-roll raw HTML/JSX when the library has no equivalent (page layout, app-specific composition, decorative blocks).
+13. **Always reach for the library component first.** If a feature exists as an animal-island-ui component (Card, Button, Input, Switch, Checkbox, Radio, Title, Tabs, Collapse, Modal, Drawer, Select, Tooltip, Loading, Table, Time, Divider, Footer, Phone, Cursor, Typewriter, Icon, CodeBlock, Form, Wallet, Tag, Notification, Progress, BackTop, Skeleton), use the inline-defined `<ComponentName>` JSX with documented props. For Notification specifically, call the static methods (`Notification.success({...})`) — it has no JSX element. Only hand-roll raw HTML/JSX when the library has no equivalent (page layout, app-specific composition, decorative blocks).
 
 ## TASK
 

@@ -2418,6 +2418,147 @@ interface ProgressProps {
 
 ---
 
+### BackTop
+
+源码：`src/components/BackTop/BackTop.tsx` + `back-top.module.less`。
+
+固定右下角的返回顶部按钮，默认使用 Island 袋 PNG（base64 内嵌），点击后 easeInOutQuad 平滑滚动到顶部。
+
+**props**：
+```ts
+interface BackTopProps {
+    target?: () => HTMLElement | Window; // 默认 () => window
+    visibilityHeight?: number;           // 默认 400
+    duration?: number;                   // 动画时长 ms, 默认 300
+    icon?: ReactNode;                    // 自定义图标
+    onClick?: (e: MouseEvent) => void;
+    className?: string;
+    style?: CSSProperties;
+}
+```
+
+**样式精确值**：
+```less
+// 容器
+position: fixed;
+bottom: 48px;
+right: 32px;
+z-index: 1000;
+cursor: pointer;
+opacity: 0;
+visibility: hidden;
+transition: opacity 0.3s, transform 0.3s, visibility 0.3s cubic-bezier(0.4,0,0.2,1);
+
+// visible 状态
+opacity: 1;
+visibility: visible;
+transform: translateY(0);
+
+// 图标
+width: 120px;           // 桌面端
+height: 120px;
+object-fit: contain;    // 保持原图 158×136 比例不拉伸
+filter: drop-shadow(0 4px 10px rgba(91,78,30,0.22));
+
+// hover
+transform: scale(1.08);
+filter: drop-shadow(0 4px 14px rgba(91,78,30,0.32));
+
+// focus-visible
+outline: 2px solid #ffcc00;
+outline-offset: 4px;
+border-radius: 50%;
+
+// 移动端 @media (max-width: 768px)
+bottom: 24px;
+right: 16px;
+图标 80×80px;
+```
+
+**关键交互细节：**
+- 默认监听 `window.scroll`，超过 `visibilityHeight` 显示。
+- `target` prop 支持传入自定义滚动容器函数。
+- 滚动动画使用 `requestAnimationFrame` + easeInOutQuad 缓动。
+- 键盘 Enter/Space 触发滚动。
+- 图标是 158×136px PNG，通过 `object-fit: contain` 在 120×120px 容器内等比缩放。
+
+---
+
+### Skeleton
+
+源码：`src/components/Skeleton/Skeleton.tsx` + `skeleton.module.less`。
+
+骨架屏加载占位组件。四种变体：`text` / `circle` / `rect` / `paragraph`。`loading=false` 时直接渲染 children。
+
+**props**：
+```ts
+type SkeletonVariant = 'text' | 'circle' | 'rect' | 'paragraph';
+
+interface SkeletonProps {
+    loading?: boolean;           // 默认 true
+    variant?: SkeletonVariant;   // 默认 'text'
+    active?: boolean;            // 流光动画, 默认 true
+    rows?: number;               // paragraph 行数, 默认 3
+    width?: number | string;     // text/circle/rect 宽度
+    rowWidths?: (number | string)[]; // paragraph 行宽数组
+    widthValue?: number | string;    // circle/rect 宽
+    heightValue?: number | string;   // circle/rect 高
+    className?: string;
+    style?: CSSProperties;
+    children?: ReactNode;
+}
+
+// 子组件
+SkeletonButtonProps { size?: 'small'|'middle'|'large'; active?: boolean; }
+SkeletonInputProps  { size?: 'small'|'middle'|'large'; active?: boolean; }
+SkeletonAvatarProps { size?: 'small'|'middle'|'large'; shape?: 'circle'|'square'; active?: boolean; }
+```
+
+**样式精确值**：
+```less
+// 底色
+@bg-base: #eae5db;      // 浅米灰
+@bg-line: #dfd9ce;      // 行底色稍深
+
+// 流光（暖白）
+@shimmer-light: rgba(255, 252, 242, 0.55);
+@shimmer-mid: rgba(255, 250, 235, 0.18);
+
+// 通用
+.skeleton {
+    background: @bg-base;
+    border-radius: 12px;            // 最小圆角
+    overflow: hidden;
+    position: relative;
+}
+
+// 流光动画
+.active::after {
+    background: linear-gradient(90deg, transparent, @shimmer-mid, @shimmer-light, @shimmer-mid, transparent);
+    animation: animal-skeleton-shimmer 1.6s ease-in-out infinite;
+}
+
+// 变体圆角
+.vt-text   { border-radius: 12px; height: 16px; }
+.vt-circle { border-radius: 50%; }
+.vt-rect   { border-radius: 18px; }
+.vt-paragraph { background: none; }
+.line      { border-radius: 12px; background: @bg-line; }
+
+// 子组件
+.skeleton-btn   { border-radius: 50px; }             // pill 状
+.skeleton-input { border-radius: 50px; }             // pill 状
+.skeleton-avatar { border-radius: (circle)50%/(square)12px; }
+```
+
+**关键交互细节：**
+- 流光动画是暖白色渐变，从左到右扫描，时长 1.6s。
+- 所有圆角 ≥12px，符合「无锐角」规则。
+- paragraph 模式最后一行默认宽 60%（可通 `rowWidths` 覆盖）。
+- `aria-hidden` 屏蔽屏幕阅读器。
+
+---
+
 ## 3. Demo 布局精确规范
 
 这是 Demo 站（`demo/App.tsx`）的实际布局数值，用于还原完整页面效果：

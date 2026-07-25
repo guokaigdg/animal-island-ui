@@ -1379,6 +1379,99 @@ Notes:
 
 ---
 
+### 1.29 BackTop
+
+A floating back-to-top button that appears in the bottom-right corner after scrolling past a threshold. The default icon is a Island bag PNG (base64-embedded). Clicking triggers a smooth scroll to the top with an easeInOutQuad animation.
+
+```ts
+interface BackTopProps {
+    target?: () => HTMLElement | Window; // default () => window
+    visibilityHeight?: number;           // default 400 (px)
+    duration?: number;                   // scroll animation ms, default 300
+    icon?: React.ReactNode;              // custom icon, default Island bag
+    onClick?: React.MouseEventHandler<HTMLDivElement>;
+    className?: string;
+    style?: React.CSSProperties;
+}
+```
+
+```tsx
+import { BackTop } from 'animal-island-ui';
+
+// Default — Island bag icon, 400px threshold, smooth scroll
+<BackTop />
+
+// Custom container
+<div ref={ref} style={{ height: 300, overflow: 'auto' }}>
+    <BackTop target={() => ref.current!} visibilityHeight={200} />
+</div>
+
+// Custom icon & longer animation
+<BackTop icon={<span>🚀</span>} duration={800} />
+```
+
+Notes:
+- **Default target is `window`** — works out of the box for page-level scrolling. Pass `target` for a custom scroll container.
+- **Mobile responsive**: icon shrinks from 120px to 80px under 768px viewport.
+- **A11y**: `role="button"`, `tabIndex={0}`, `aria-label="返回顶部"`. Enter/Space trigger the scroll.
+
+---
+
+### 1.30 Skeleton
+
+Loading placeholder that renders gray/beige blocks with a shimmer animation. Supports multiple variants: `text`, `circle`, `rect`, and `paragraph`. When `loading` is `false`, children are rendered directly.
+
+```ts
+type SkeletonVariant = 'text' | 'circle' | 'rect' | 'paragraph';
+
+interface SkeletonProps {
+    loading?: boolean;           // default true
+    variant?: SkeletonVariant;   // default 'text'
+    active?: boolean;            // shimmer animation, default true
+    rows?: number;               // for 'paragraph', default 3
+    width?: number | string;     // for 'text'/'circle'/'rect'
+    rowWidths?: (number | string)[]; // for 'paragraph', per-line widths
+    widthValue?: number | string;    // for 'circle'/'rect'
+    heightValue?: number | string;   // for 'circle'/'rect'
+    className?: string;
+    style?: React.CSSProperties;
+    children?: React.ReactNode;  // rendered when loading=false
+}
+
+// Sub-components
+interface SkeletonButtonProps { size?: 'small' | 'middle' | 'large'; active?: boolean; }
+interface SkeletonInputProps  { size?: 'small' | 'middle' | 'large'; active?: boolean; }
+interface SkeletonAvatarProps { size?: 'small' | 'middle' | 'large'; shape?: 'circle' | 'square'; active?: boolean; }
+```
+
+```tsx
+import { Skeleton, SkeletonButton, SkeletonInput, SkeletonAvatar } from 'animal-island-ui';
+
+// Text / circle / rect / paragraph
+<Skeleton variant="text" width="80%" />
+<Skeleton variant="circle" widthValue={44} />
+<Skeleton variant="rect" widthValue={200} heightValue={120} />
+<Skeleton variant="paragraph" rows={4} />
+
+// Sub-components
+<SkeletonButton size="middle" />
+<SkeletonInput size="large" />
+<SkeletonAvatar size="small" shape="square" />
+
+// loading mode
+<Skeleton loading={fetching}>
+    <div>Content loaded</div>
+</Skeleton>
+```
+
+Notes:
+- **Shimmer**: a warm-ivory `linear-gradient(90deg, transparent, rgba(255,252,235,0.18), rgba(255,252,242,0.55), ...)` sweeps left-to-right over 1.6s.
+- **Shapes**: `circle` is 50% rounded; `rect` uses 18px radius; `text` uses 12px radius (matching the "no sharp corners" rule).
+- **All sub-components** (`SkeletonButton`, `SkeletonInput`, `SkeletonAvatar`) share the same `active` shimmer and light-beige background.
+- **A11y**: the skeleton root is marked `aria-hidden` to hide it from screen readers when `loading=true`.
+
+---
+
 ## 2. Common Recipes
 
 ### 2.1 Form row

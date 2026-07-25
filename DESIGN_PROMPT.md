@@ -384,7 +384,7 @@ Number format: number → 千分位 with thousandSeparator (default ",", pass ""
                string → 原样; undefined/null → '00,000'.
 Hover animation: bagSlot walletBagBounce 0.5s ease-in-out (translateY -8px rot -6deg → -2px rot 3deg → 0).
 
-=== COMPONENT INVENTORY (28 components from src/index.ts, + 3 companion exports FormItem / useForm / ICON_LIST) ===
+=== COMPONENT INVENTORY (30 components from src/index.ts, + 3 companion exports FormItem / useForm / ICON_LIST) ===
 Interactive:           Button, Input, Switch, Modal, Drawer, Collapse, Select, Tabs, Checkbox, Radio
 Container / Heading:   Card (13 colors + 13 dot patterns), Title (ribbon banner — 13 schemes), Table
 Forms:                 Form (with FormItem + useForm companions — conventional form layout + validation)
@@ -394,6 +394,8 @@ Content display:       CodeBlock
 Currency display:      Wallet (3 sizes, olive-yellow pill + Island bag icon)
 Tags / labels:         Tag (3 sizes × 3 variants × 12 colors)
 Progress:              Progress (striped-scrolling bar — reuses Button loading `-45°` stripes 1:1, 3 sizes, infoPosition inside/right/top)
+BackTop:               BackTop (floating Island bag button, bottom-right, smooth scroll to top)
+Skeleton:              Skeleton (loading placeholder — text/circle/rect/paragraph variants, shimmer animation)
 
 === CODE BLOCK (dark theme, JSX/TS only) ===
 Container: padding 20px 24px; background #2b2118; border 1px solid #3d3028;

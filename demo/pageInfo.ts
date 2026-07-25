@@ -108,4 +108,8 @@ export const PAGE_INFO: Record<string, { title: string; desc: string }> = {
         title: 'Form 表单',
         desc: '表单组件 — 支持 useForm 命令式实例、多种校验规则、三种布局（horizontal / vertical / inline）、labelCol / wrapperCol 网格',
     },
+    skeleton: {
+        title: 'Skeleton 骨架屏',
+        desc: '骨架屏加载占位组件 — 四种变体（text / circle / rect / paragraph），包含 Skeleton.Button / Skeleton.Input / Skeleton.Avatar 子组件，支持 loading 切换动画',
+    },
 };

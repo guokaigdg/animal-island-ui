@@ -119,3 +119,15 @@ export type {
 
 export { Progress } from './components/Progress';
 export type { ProgressProps, ProgressSize, ProgressInfoPosition } from './components/Progress';
+
+// ============================================
+// 新增组件
+// ============================================
+export { Skeleton, SkeletonButton, SkeletonInput, SkeletonAvatar } from './components/Skeleton';
+export type {
+    SkeletonProps,
+    SkeletonVariant,
+    SkeletonButtonProps,
+    SkeletonInputProps,
+    SkeletonAvatarProps,
+} from './components/Skeleton';

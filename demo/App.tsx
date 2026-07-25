@@ -93,6 +93,7 @@ const MENU_ITEMS: MenuItem[] = [
             { key: 'tooltip', label: 'Tooltip 气泡提示' },
             { key: 'loading', label: 'Loading 加载', isNew: true },
             { key: 'progress', label: 'Progress 进度条', isNew: true },
+            { key: 'skeleton', label: 'Skeleton 骨架屏' },
         ],
     },
     {
@@ -137,13 +138,18 @@ const S = {
         display: 'flex',
         flexDirection: 'column',
         overflow: 'hidden',
+        margin: '12px 0 12px 12px',
+        borderRadius: 16,
+        border: '2px solid rgba(250, 250, 250, 1)',
+        boxShadow: '0 4px 16px rgba(61, 52, 40, 0.10)',
+        height: 'calc(100dvh - 20px)',
     } as React.CSSProperties,
     homeBg: {
         background: `url(${new URL('./img/home_bg.webp', import.meta.url).href}) 0 0 / auto repeat, #7DC395`,
         animation: 'bgScroll 80s linear infinite',
     } as React.CSSProperties,
     sidebarHeader: {
-        padding: '20px 16px 12px',
+        padding: '20px 20px 12px',
         borderBottom: '1px solid #e8e2d6',
         fontWeight: 700,
         fontSize: 15,

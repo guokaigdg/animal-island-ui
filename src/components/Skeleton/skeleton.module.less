@@ -1,0 +1,85 @@
+// ============================================
+// Skeleton — Animal Island Style
+// 骨架屏加载占位组件，浅灰基调 + 银白流光
+// ============================================
+
+@bg-base: #eae5db;
+@bg-line: #dfd9ce;
+@shimmer-light: rgba(255, 252, 242, 0.55);
+@shimmer-mid: rgba(255, 250, 235, 0.18);
+
+@border-radius-sm: 12px;
+@border-radius-base: 18px;
+
+// ---------- Root ----------
+.skeleton {
+    background: @bg-base;
+    border-radius: @border-radius-sm;
+    display: inline-block;
+    line-height: 1;
+    position: relative;
+    overflow: hidden;
+    vertical-align: middle;
+    flex-shrink: 0;
+}
+
+// ---------- Active shimmer animation (银白流光) ----------
+.active {
+    &::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(90deg, transparent, @shimmer-mid, @shimmer-light, @shimmer-mid, transparent);
+        animation: animal-skeleton-shimmer 1.6s ease-in-out infinite;
+    }
+}
+
+@keyframes animal-skeleton-shimmer {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+// ---------- Variants ----------
+.vt-text {
+    border-radius: 12px;
+    height: 16px;
+    margin-bottom: 8px;
+}
+
+.vt-circle {
+    border-radius: 50%;
+}
+
+.vt-rect {
+    border-radius: 18px;
+}
+
+.vt-paragraph {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border-radius: 0;
+    background: none;
+}
+
+.paragraphBlock {
+    background: none;
+}
+
+.line {
+    height: 14px;
+    border-radius: 12px;
+    background: @bg-line;
+
+    &:last-child {
+        width: 60%;
+    }
+}
+
+.skeleton-btn {
+    border-radius: 50px;
+}
