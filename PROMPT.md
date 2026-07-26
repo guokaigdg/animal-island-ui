@@ -475,7 +475,7 @@ You are a senior React engineer. Generate a **single self-contained `index.html`
 ### BackTop (floating back-to-top button)
 
 - **JSX component** — `<BackTop visibilityHeight={400} />`. A floating Island bag icon in the bottom-right corner that appears after scrolling past a threshold. Clicking scrolls smoothly to the top.
-- Props: `target` (scroll container function, default `() => window`), `visibilityHeight` (default 400), `duration` (ms, default 300), `icon` (custom ReactNode), `onClick`, `className`, `style`.
+- Props: `target` (scroll container function, default `() => window`), `visibilityHeight` (default 400), `duration` (ms, default 300), `onClick`, `className`, `style`.
 - Default icon is a 158×136 Island bag PNG embedded as base64, displayed at 120×120px via `object-fit: contain` (80×80px on mobile).
 - Desktop: `bottom: 48px; right: 32px`. Mobile (<768px): `bottom: 24px; right: 16px`.
 - Visual states: hover `scale(1.08)` + stronger shadow, active `translateY(2px) scale(0.96)`. Focus-visible: `2px solid #ffcc00` outline, 4px offset, border-radius 50%.
@@ -508,6 +508,10 @@ You are a senior React engineer. Generate a **single self-contained `index.html`
 11. Never animate with hard cubic transitions; always use `cubic-bezier(0.4, 0, 0.2, 1)` over 0.15–0.35s.
 12. Title `title` prop on `<Modal>` is the literal string heading — do NOT confuse it with the `<Title>` component.
 13. **Always reach for the library component first.** If a feature exists as an animal-island-ui component (Card, Button, Input, Switch, Checkbox, Radio, Title, Tabs, Collapse, Modal, Drawer, Select, Tooltip, Loading, Table, Time, Divider, Footer, Phone, Cursor, Typewriter, Icon, CodeBlock, Form, Wallet, Tag, Notification, Progress, BackTop, Skeleton), use the inline-defined `<ComponentName>` JSX with documented props. For Notification specifically, call the static methods (`Notification.success({...})`) — it has no JSX element. Only hand-roll raw HTML/JSX when the library has no equivalent (page layout, app-specific composition, decorative blocks).
+
+14. **禁止过度使用 emoji。** 不要用 emoji（🌊 🎨 🌳 ✨ 🚀 等）替代 UI 图标。emoji 在不同平台渲染不一致，无法保证视觉统一。使用组件库内置的 `<Icon name="..." />` 组件（10 个内置名称）。
+
+15. **图标优先使用 `<Icon>` 组件。** 不要使用 Unicode 符号（✓ ✕ ✗ → ←）、原始 SVG 内联或第三方图标库。`<Icon>` 支持 10 个内置图标，通过 `name` prop 调用（详见上文 Icon 节）。如所需图标不在内置列表中，用 CSS/HTML 装饰元素替代，不要硬编码 SVG。
 
 ## TASK
 
