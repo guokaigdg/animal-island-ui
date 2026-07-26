@@ -131,3 +131,6 @@ export type {
     SkeletonInputProps,
     SkeletonAvatarProps,
 } from './components/Skeleton';
+
+export { BackTop } from './components/BackTop';
+export type { BackTopProps } from './components/BackTop';
