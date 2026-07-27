@@ -6,7 +6,7 @@ import {
     ApiRow,
     sectionStyle,
     sectionTitleStyle,
-    tagStyle,
+    DemoTag,
     demoBoxStyle,
     CodeBlock as CodeBlockBase,
 } from '../../tools';
@@ -21,7 +21,7 @@ const CodeBlockDemo: React.FC = () => {
     return (
         <div style={sectionStyle}>
             <div style={sectionTitleStyle}>
-                CodeBlock <span style={tagStyle}>代码高亮</span>
+                CodeBlock <DemoTag>代码高亮</DemoTag>
             </div>
             <div style={labelStyle}>基础用法</div>
             <div style={demoBoxStyle}>

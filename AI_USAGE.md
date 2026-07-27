@@ -1388,7 +1388,6 @@ interface BackTopProps {
     target?: () => HTMLElement | Window; // default () => window
     visibilityHeight?: number;           // default 400 (px)
     duration?: number;                   // scroll animation ms, default 300
-    icon?: React.ReactNode;              // custom icon, default Island bag
     onClick?: React.MouseEventHandler<HTMLDivElement>;
     className?: string;
     style?: React.CSSProperties;
@@ -1406,8 +1405,8 @@ import { BackTop } from 'animal-island-ui';
     <BackTop target={() => ref.current!} visibilityHeight={200} />
 </div>
 
-// Custom icon & longer animation
-<BackTop icon={<span>🚀</span>} duration={800} />
+// Longer animation
+<BackTop duration={800} />
 ```
 
 Notes:
@@ -1569,6 +1568,10 @@ Follow these strictly; violations are bugs:
 22. **Loading takes no content props** — it's a self-contained scene. Use `active` to fade in/out, do not pass `children`.
 23. **Title replaces `Card type="title"`.** Use `<Title size color>` for chapter/section headings (ribbon banner with swallowtail clip-path); do not try to recreate it on a `Card`.
 24. **Watch the `title` prop collision.** `<Modal title=…>` takes a `ReactNode` for its internal heading slot — this is NOT the `<Title>` component (§ 1.6). When you mean the ribbon-banner component, write `<Title>...</Title>` as a child. Do not pass a `<Title>` element to `Modal.title` (it works but doubles up font weight) — pass plain text instead.
+
+25. **Do NOT use emoji as UI icons.** Never replace UI icons with emoji (🌊 🎨 🌳 ✨ 🚀 etc.) — emoji rendering varies across platforms (color temperature, style, weight) and cannot guarantee visual consistency. Use the built-in `<Icon>` component instead.
+
+26. **Always prefer `<Icon>` for icons.** Do NOT use Unicode symbols (✓ ✕ ✗ → ←), raw inline SVG, or third-party icon libraries. `<Icon>` supports 10 built-in icons via `<Icon name="..." />` (see § 1.15). If the icon you need is not in the built-in list, use CSS/HTML decorative elements instead — never hard-code SVG.
 
 ---
 

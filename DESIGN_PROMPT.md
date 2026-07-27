@@ -424,6 +424,8 @@ Token colors:
 ✗ System monospace fonts for UI text (code blocks excluded)
 ✗ Using <Card type="title"> — that variant is removed; use <Title> instead
 ✗ Treating Title as a blob/organic shape — it is a flat ribbon with swallowtail ends
+✗ 过度使用 emoji（🌊 🎨 🌳 ✨ 🚀 等）替代 UI 图标 — emoji 跨平台色温不统一，无法保证视觉一致性
+✗ 使用 Unicode 符号（✓ ✕ ✗ → ←）、原始 SVG 内联或第三方图标库 — 图标应使用组件库内置的 `<Icon name="..." />`（10 个内置名称见 AI_USAGE.md § 1.15）
 ```
 
 ---
@@ -540,4 +542,11 @@ Interface details:
 | Progress 填充 (fill)   | `position: absolute; left:0; right:auto`, `width: ${percent}%`, fill 复用 Button loading 同款 -45° 斜纹: `background: #0ec4b6; background-image: repeating-linear-gradient(-45deg, #0ec4b6 0, #0ec4b6 10px, #01b0a7 10px, #01b0a7 20px); background-size: 28.28px 28.28px;`  | 必填 `percent` 受控, 0-100 自动 clamp;无 status/strokeColor |
 | Progress 斜纹滚动       | `animation: animal-progress-stripe 1s linear infinite;`  (background-position 0 0 → -28.28px 0)  | `prefers-reduced-motion: reduce` 时关闭;`duration=0` 不影响斜纹 |
 | Progress 文字位置       | inside (默认): fill 右侧白字; right: bar 右侧深字; top: bar 上方深字  | inside + percent<18 自动改在 track 末端深字避免遮挡 |
+| BackTop 容器            | `position: fixed; bottom: 48px; right: 32px; z-index: 1000`（桌面端）  | 移动端 `bottom: 24px; right: 16px` |
+| BackTop 图标            | 默认 Island 袋 PNG（base64 内嵌）; `width: 120px; height: 120px; object-fit: contain`（桌面端） | 移动端 80×80px; hover `scale(1.08)` + 加深 `drop-shadow` |
+| BackTop 动画            | 滚动显示 `opacity/visibility/translateY 0.3s ease`; 点击 easeInOutQuad 300ms 平滑滚动 | `visibilityHeight=400` 默认; `duration` 可配 |
+| Skeleton 底色           | `#eae5db`（浅米灰） | `object-fit: contain` 防止原图 158×136 拉伸 |
+| Skeleton 行色           | `#dfd9ce`（稍深）  | paragraph 最后一行默认 60% 宽 |
+| Skeleton 流光           | `rgba(255,252,242,0.55)` / `rgba(255,250,235,0.18)` 暖白渐变 | `1.6s ease-in-out` 从左到右扫描 |
+| Skeleton 圆角           | text=12px / circle=50% / rect=18px / paragraph 行=12px | 按钮/输入框子组件 pill 50px / 头像子组件 50% 或 12px |
 | Google Fonts URL       | `fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;700&display=swap` | 在线加载                                           |

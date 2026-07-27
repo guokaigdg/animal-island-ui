@@ -1,6 +1,6 @@
 import React from 'react';
 import { Icon, ICON_LIST } from '../../../src';
-import { ApiTable, ApiRow, sectionStyle, sectionTitleStyle, tagStyle, CodeBlock, labelStyle } from '../../tools';
+import { ApiTable, ApiRow, sectionStyle, sectionTitleStyle, DemoTag, CodeBlock, labelStyle } from '../../tools';
 
 // 模拟真实消费者：只用到一个物品图标时，直接静态 import 那一个 PNG。
 import singleItem from '../../../src/assets/img/icons/items/item-001.png';
@@ -58,7 +58,7 @@ const ICON_API: ApiRow[] = [
 const IconDemo: React.FC = () => (
     <div style={sectionStyle}>
         <div style={sectionTitleStyle}>
-            Icon <span style={tagStyle}>10 icons</span>
+            Icon <DemoTag>10 icons</DemoTag>
         </div>
         <div style={labelStyle}>基础用法</div>
         <div style={{ display: 'flex', gap: 20, flexWrap: 'wrap' as const, alignItems: 'center' }}>
@@ -119,7 +119,7 @@ const IconDemo: React.FC = () => (
             ))}
         </div>
         <div style={sectionTitleStyle}>
-            Items <span style={tagStyle}>{ITEM_COUNT} items</span>
+            Items <DemoTag>{ITEM_COUNT} items</DemoTag>
         </div>
         <div style={labelStyle}>
             只用一个物品图标（最常见场景）：静态 <code>import</code> 那一个 PNG，按需进 bundle。

@@ -6,7 +6,7 @@ import {
     ApiRow,
     sectionStyle,
     sectionTitleStyle,
-    tagStyle,
+    DemoTag,
     demoBodyStyle,
     labelStyle,
 } from '../../tools';
@@ -78,8 +78,7 @@ const TagDemo: React.FC = () => {
     return (
         <div style={sectionStyle}>
             <div style={sectionTitleStyle}>
-                Tag <span style={tagStyle}>4 variants</span> <span style={tagStyle}>16 colors</span>{' '}
-                <span style={tagStyle}>3 sizes</span>
+                Tag <DemoTag>4 variants</DemoTag> <DemoTag>16 colors</DemoTag> <DemoTag>3 sizes</DemoTag>
             </div>
             <div style={demoBodyStyle}>
                 <div style={labelStyle}>variant 风格变体</div>

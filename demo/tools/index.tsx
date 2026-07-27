@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { CodeBlock as CodeBlockBase } from '../../src';
+import { CodeBlock as CodeBlockBase, Tag } from '../../src';
 
 export const useIsMobile = (breakpoint = 768) => {
     const [isMobile, setIsMobile] = useState(() => window.innerWidth < breakpoint);
@@ -36,14 +36,12 @@ export const sectionTitleStyle: React.CSSProperties = {
     gap: 8,
 };
 
-export const tagStyle: React.CSSProperties = {
-    fontSize: 10,
-    padding: '2px 8px',
-    borderRadius: 20,
-    background: '#f0e8d8',
-    color: '#a08060',
-    fontWeight: 500,
-};
+/** Demo 标题旁的语义标签，用 Tag 组件渲染，替代原来手写 tagStyle 的 span */
+export const DemoTag: React.FC<{ children?: React.ReactNode }> = ({ children }) => (
+    <Tag size="small" variant="soft">
+        {children}
+    </Tag>
+);
 
 export const labelStyle: React.CSSProperties = {
     fontSize: 14,

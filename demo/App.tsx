@@ -1,15 +1,7 @@
 import React, { useState, useEffect, useCallback, Suspense, lazy } from 'react';
 import { Cursor, Loading } from '../src';
 import '../src/styles/index.less';
-import '@fontsource/nunito/latin-500.css';
-import '@fontsource/nunito/latin-700.css';
-import '@fontsource/nunito/latin-900.css';
-import '@fontsource/noto-sans-sc/latin-400.css';
-import '@fontsource/noto-sans-sc/latin-500.css';
-import '@fontsource/noto-sans-sc/latin-700.css';
-import '@fontsource/noto-sans-sc/chinese-simplified-400.css';
-import '@fontsource/noto-sans-sc/chinese-simplified-500.css';
-import '@fontsource/noto-sans-sc/chinese-simplified-700.css';
+import './fonts.css';
 import HomePage from './HomePage';
 import { PAGE_INFO } from './pageInfo';
 import { useIsMobile } from './tools';
@@ -92,8 +84,9 @@ const MENU_ITEMS: MenuItem[] = [
             { key: 'drawer', label: 'Drawer 抽屉', isNew: true },
             { key: 'tooltip', label: 'Tooltip 气泡提示' },
             { key: 'loading', label: 'Loading 加载', isNew: true },
-            { key: 'progress', label: 'Progress 进度条', isNew: true },
+            { key: 'progress', label: 'Progress 进度条' },
             { key: 'skeleton', label: 'Skeleton 骨架屏' },
+            { key: 'backtop', label: 'BackTop 返回顶部', isNew: true },
         ],
     },
     {

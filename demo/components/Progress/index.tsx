@@ -6,7 +6,7 @@ import {
     ApiRow,
     sectionStyle,
     sectionTitleStyle,
-    tagStyle,
+    DemoTag,
     demoBodyStyle,
     labelStyle,
 } from '../../tools';
@@ -94,7 +94,7 @@ const ProgressDemo: React.FC = () => {
     return (
         <div style={sectionStyle}>
             <div style={sectionTitleStyle}>
-                Progress <span style={tagStyle}>进度条</span> <span style={tagStyle}>斜纹滚动</span>
+                Progress <DemoTag>进度条</DemoTag> <DemoTag>斜纹滚动</DemoTag>
             </div>
             <div style={demoBodyStyle}>
                 {/* ---- 1. 基础 ---- */}

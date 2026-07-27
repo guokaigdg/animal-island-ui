@@ -509,9 +509,9 @@ You are a senior React engineer. Generate a **single self-contained `index.html`
 12. Title `title` prop on `<Modal>` is the literal string heading — do NOT confuse it with the `<Title>` component.
 13. **Always reach for the library component first.** If a feature exists as an animal-island-ui component (Card, Button, Input, Switch, Checkbox, Radio, Title, Tabs, Collapse, Modal, Drawer, Select, Tooltip, Loading, Table, Time, Divider, Footer, Phone, Cursor, Typewriter, Icon, CodeBlock, Form, Wallet, Tag, Notification, Progress, BackTop, Skeleton), use the inline-defined `<ComponentName>` JSX with documented props. For Notification specifically, call the static methods (`Notification.success({...})`) — it has no JSX element. Only hand-roll raw HTML/JSX when the library has no equivalent (page layout, app-specific composition, decorative blocks).
 
-14. **禁止过度使用 emoji。** 不要用 emoji（🌊 🎨 🌳 ✨ 🚀 等）替代 UI 图标。emoji 在不同平台渲染不一致，无法保证视觉统一。使用组件库内置的 `<Icon name="..." />` 组件（10 个内置名称）。
+14. **Do NOT use emoji as UI icons.** Never replace UI icons with emoji (🌊 🎨 🌳 ✨ 🚀 etc.) — emoji rendering varies across platforms (color temperature, style, weight) and cannot guarantee visual consistency. Use the built-in `<Icon name="..." />` component instead (10 icon names).
 
-15. **图标优先使用 `<Icon>` 组件。** 不要使用 Unicode 符号（✓ ✕ ✗ → ←）、原始 SVG 内联或第三方图标库。`<Icon>` 支持 10 个内置图标，通过 `name` prop 调用（详见上文 Icon 节）。如所需图标不在内置列表中，用 CSS/HTML 装饰元素替代，不要硬编码 SVG。
+15. **Always prefer `<Icon>` for icons.** Do NOT use Unicode symbols (✓ ✕ ✗ → ←), raw inline SVG, or third-party icon libraries. `<Icon>` supports 10 built-in icons via its `name` prop (see Icon section above). If the icon you need is not in the built-in list, use CSS/HTML decorative elements instead — never hard-code SVG.
 
 ## TASK
 

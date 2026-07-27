@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Form, FormItem, useForm, Input, Button, Radio, Checkbox, Card } from '../../../src';
 import type { FormInstance } from '../../../src';
 import type { CardPattern } from '../../../src/components/Card/Card';
-import { labelStyle, ApiTable, CodeBlock, ApiRow, sectionStyle, sectionTitleStyle, tagStyle } from '../../tools';
+import { labelStyle, ApiTable, CodeBlock, ApiRow, sectionStyle, sectionTitleStyle, DemoTag } from '../../tools';
 
 // 随机 pattern 池（排除 'none'，保证 5 个 Card 都有可见纹理）
 const CARD_PATTERNS: CardPattern[] = [
@@ -114,8 +114,7 @@ const FormDemo: React.FC = () => {
     return (
         <div style={sectionStyle}>
             <div style={sectionTitleStyle}>
-                Form <span style={tagStyle}>表单</span> <span style={tagStyle}>useForm</span>{' '}
-                <span style={tagStyle}>校验</span>
+                Form <DemoTag>表单</DemoTag> <DemoTag>useForm</DemoTag> <DemoTag>校验</DemoTag>
             </div>
 
             <div style={labelStyle}>Form 表单组件 — 集成表单实例、校验规则、布局网格、依赖字段等基础能力。</div>

@@ -30,7 +30,7 @@ export const PAGE_INFO: Record<string, { title: string; desc: string }> = {
     },
     phone: {
         title: 'Phone 手机',
-        desc: '动物主题手机界面，包含对话框和背包功能',
+        desc: '主题手机界面，包含对话框和背包功能',
     },
     footer: {
         title: 'Footer 底部装饰',
@@ -38,7 +38,7 @@ export const PAGE_INFO: Record<string, { title: string; desc: string }> = {
     },
     modal: {
         title: 'Modal 弹窗',
-        desc: '模态弹窗组件 — SVG 有机形状裁切、支持标题、关闭按钮、自定义 Footer、ESC / 遮罩关闭',
+        desc: '模态弹窗组件 — SVG 有机形状裁切、支持标题、关闭按钮、自定义 Footer、ESC / 遮罩关闭、自定义遮罩样式',
     },
     drawer: {
         title: 'Drawer 抽屉',
@@ -59,6 +59,10 @@ export const PAGE_INFO: Record<string, { title: string; desc: string }> = {
     select: {
         title: 'Select 选择器',
         desc: '下拉选择器组件 — 支持自定义选项列表，高亮当前选中项',
+    },
+    tabs: {
+        title: 'Tabs 标签页',
+        desc: '标签页组件 — 支持受控/非受控模式切换',
     },
     checkbox: {
         title: 'Checkbox 多选框',
@@ -82,11 +86,15 @@ export const PAGE_INFO: Record<string, { title: string; desc: string }> = {
     },
     loading: {
         title: 'Loading 加载',
-        desc: '动物主题小岛 Loading 动画组件，支持自定义样式和类名',
+        desc: '主题小岛 Loading 动画组件，支持自定义样式和类名',
+    },
+    table: {
+        title: 'Table 表格',
+        desc: '数据表格组件，支持斑马纹、边框、加载状态等常用功能',
     },
     'wedding-invitation': {
         title: 'InvitationCard 婚礼请柬',
-        desc: '动物主题婚礼请柬，叶子边角 + 飘散花瓣 + 心跳爱心 + 吉祥物头像',
+        desc: '动物主题婚礼请柬，叶子边角、飘散花瓣、心跳爱心、吉祥物头像，所有装饰均为内联 SVG，无需外部素材',
     },
     wallet: {
         title: 'Wallet 钱包',
@@ -98,11 +106,11 @@ export const PAGE_INFO: Record<string, { title: string; desc: string }> = {
     },
     notification: {
         title: 'Notification 通知',
-        desc: '命令式通知组件 — 4 种 type (success/info/warning/error) × 6 个 position,支持 description / btn / onClick / onClose,显式 key 二次调用会更新现有通知',
+        desc: '命令式通知组件 — 4 种 type (success/info/warning/error) × 6 个 position，支持 description / btn / onClick / onClose，显式 key 二次调用会更新现有通知',
     },
     progress: {
         title: 'Progress 进度条',
-        desc: '叶子填充进度条 — 5 种 status × 3 档 size,支持 inside/right/top 三种文字位置、自定义格式化、strokeColor、leafAnimated',
+        desc: '斜纹滚动进度条 —  3 档 size, 支持 inside/right/top 三种文字位置、自定义格式化、duration 控制 fill 宽度动画',
     },
     form: {
         title: 'Form 表单',
@@ -111,5 +119,9 @@ export const PAGE_INFO: Record<string, { title: string; desc: string }> = {
     skeleton: {
         title: 'Skeleton 骨架屏',
         desc: '骨架屏加载占位组件 — 四种变体（text / circle / rect / paragraph），包含 Skeleton.Button / Skeleton.Input / Skeleton.Avatar 子组件，支持 loading 切换动画',
+    },
+    backtop: {
+        title: 'BackTop 返回顶部',
+        desc: '返回顶部组件，支持全局/容器内滚动、自定义显示高度、自定义图标、平滑动画',
     },
 };

@@ -7,7 +7,7 @@ import {
     ApiRow,
     sectionStyle,
     sectionTitleStyle,
-    tagStyle,
+    DemoTag,
     demoBoxStyle,
 } from '../../tools';
 
@@ -53,7 +53,7 @@ const RadioDemo: React.FC = () => {
     return (
         <div style={sectionStyle}>
             <div style={sectionTitleStyle}>
-                Radio <span style={tagStyle}>单选框</span>
+                Radio <DemoTag>单选框</DemoTag>
             </div>
 
             <div style={labelStyle}>水平排列（受控）— 支持方向键 ↑↓←→ 切换</div>

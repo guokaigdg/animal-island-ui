@@ -6,7 +6,7 @@ import {
     ApiRow,
     sectionStyle,
     sectionTitleStyle,
-    tagStyle,
+    DemoTag,
     demoBodyStyle,
     labelStyle,
 } from '../../tools';
@@ -50,7 +50,7 @@ const SkeletonDemo: React.FC = () => {
     return (
         <div style={sectionStyle}>
             <div style={sectionTitleStyle}>
-                Skeleton <span style={tagStyle}>骨架屏</span> <span style={tagStyle}>加载占位</span>
+                Skeleton <DemoTag>骨架屏</DemoTag> <DemoTag>加载占位</DemoTag>
             </div>
             <div style={demoBodyStyle}>
                 {/* ---- 切换 loading ---- */}
@@ -128,7 +128,7 @@ const SkeletonDemo: React.FC = () => {
                             fontWeight: 600,
                         }}
                     >
-                        ✅ 内容已加载，骨架屏自动隐藏
+                        内容已加载，骨架屏自动隐藏
                     </div>
                 </Skeleton>
             </div>

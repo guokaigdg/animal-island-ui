@@ -7,7 +7,7 @@ import {
     ApiRow,
     sectionStyle,
     sectionTitleStyle,
-    tagStyle,
+    DemoTag,
     demoBoxStyle,
 } from '../../tools';
 
@@ -99,7 +99,7 @@ const TooltipDemo: React.FC = () => {
     return (
         <div style={sectionStyle}>
             <div style={sectionTitleStyle}>
-                Tooltip <span style={tagStyle}>气泡提示</span>
+                Tooltip <DemoTag>气泡提示</DemoTag>
             </div>
 
             <div style={labelStyle}>基础用法 — hover 触发</div>

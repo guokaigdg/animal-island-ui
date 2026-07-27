@@ -6,7 +6,7 @@ import {
     ApiRow,
     sectionStyle,
     sectionTitleStyle,
-    tagStyle,
+    DemoTag,
     demoBodyStyle,
     labelStyle,
 } from '../../tools';
@@ -104,8 +104,8 @@ const NotificationDemo: React.FC = () => {
     return (
         <div style={sectionStyle}>
             <div style={sectionTitleStyle}>
-                Notification <span style={tagStyle}>命令式</span> <span style={tagStyle}>4 types</span>{' '}
-                <span style={tagStyle}>6 positions</span>
+                Notification <DemoTag>命令式</DemoTag> <DemoTag>4 types</DemoTag>
+                <DemoTag>6 positions</DemoTag>
             </div>
             <p style={{ ...labelStyle, marginBottom: 12, color: '#7c5734' }}>
                 Notification 沿用 antd 风格的命令式 API — 在任意位置调用 <code>Notification.success(...)</code>{' '}

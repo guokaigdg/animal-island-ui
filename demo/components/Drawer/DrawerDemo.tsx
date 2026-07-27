@@ -7,7 +7,7 @@ import {
     ApiRow,
     sectionStyle,
     sectionTitleStyle,
-    tagStyle,
+    DemoTag,
     demoBodyStyle,
     labelStyle,
 } from '../../tools';
@@ -86,7 +86,7 @@ const DrawerDemo: React.FC = () => {
     return (
         <div style={sectionStyle}>
             <div style={sectionTitleStyle}>
-                Drawer <span style={tagStyle}>下沉景深抽屉</span>
+                Drawer <DemoTag>下沉景深抽屉</DemoTag>
             </div>
             <div style={demoBodyStyle}>
                 <div style={labelStyle}>四个方向</div>

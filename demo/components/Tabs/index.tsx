@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Tabs } from '../../../src';
 import type { TabItem } from '../../../src';
-import { labelStyle, ApiTable, CodeBlock, sectionStyle, sectionTitleStyle, tagStyle, demoBoxStyle } from '../../tools';
+import { labelStyle, ApiTable, CodeBlock, sectionStyle, sectionTitleStyle, DemoTag, demoBoxStyle } from '../../tools';
 
 const TABS_API = [
     { prop: 'items', desc: '标签页配置列表', type: 'TabItem[]', defaultVal: '-', required: true },
@@ -52,7 +52,7 @@ const TabsDemo: React.FC = () => {
     return (
         <div style={sectionStyle}>
             <div style={sectionTitleStyle}>
-                Tab <span style={tagStyle}>基础用法</span>
+                Tab <DemoTag>基础用法</DemoTag>
             </div>
             <div style={labelStyle}>shadow 阴影控制</div>
             <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}>

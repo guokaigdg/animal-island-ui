@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Card, Divider, Button, Switch, Collapse, Typewriter } from '../src';
+import React, { useState } from 'react';
+import { Card, Divider, Button, Typewriter } from '../src';
 import { useIsMobile } from './tools';
 
 // ============================================
@@ -167,10 +167,11 @@ const S = {
         margin: '0 0 12px',
     } as React.CSSProperties,
     heroVersion: {
-        display: 'inline-block',
+        display: 'inline-flex',
+        alignItems: 'center',
         fontSize: 12,
         fontWeight: 600,
-        padding: '2px 10px',
+        padding: '4px 10px',
         borderRadius: 10,
         background: '#e6f9f6',
         color: '#19c8b9',
@@ -428,7 +429,7 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                                     Animal <br /> Island UI
                                 </>
                             )}
-                            <span style={S.heroVersion}>v1.0.0</span>
+                            <span style={S.heroVersion}>v1.4.0</span>
                         </h1>
                         <Typewriter speed={60}>
                             <p style={{ ...S.heroSubtitle, fontSize: isMobile ? 14 : 17 }}>

@@ -6,7 +6,7 @@ import {
     ApiRow,
     sectionStyle,
     sectionTitleStyle,
-    tagStyle,
+    DemoTag,
     demoBodyStyle,
     labelStyle,
 } from '../../tools';
@@ -82,7 +82,7 @@ const TableDemo: React.FC = () => {
     return (
         <div style={sectionStyle}>
             <div style={sectionTitleStyle}>
-                Table <span style={tagStyle}>表格</span>
+                Table <DemoTag>表格</DemoTag>
             </div>
             <div style={labelStyle}>数据表格组件，支持斑马纹、边框、加载状态等常用功能。</div>
 

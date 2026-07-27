@@ -6,7 +6,7 @@ import {
     ApiRow,
     sectionStyle,
     sectionTitleStyle,
-    tagStyle,
+    DemoTag,
     demoBodyStyle,
     labelStyle,
 } from '../../tools';
@@ -15,7 +15,7 @@ const FooterDemo: React.FC = () => {
     return (
         <div style={sectionStyle}>
             <div style={sectionTitleStyle}>
-                Footer <span style={tagStyle}>底部装饰</span>
+                Footer <DemoTag>底部装饰</DemoTag>
             </div>
             <div style={labelStyle}>
                 Footer 组件 — 页面底部装饰图片，支持 sea（海）和 tree（树）两种类型，seamless

@@ -349,6 +349,16 @@ transform: translateY(2px); /* 按钮 active */
 - ❌ `border-radius: 50%;` 配合 `<span class="dot" />`
 - ✅ `border-radius: 14px;` 配合内嵌 `<svg>` 对勾
 
+#### 15. 禁止过度使用 emoji 替代 UI 图标
+
+- ❌ `<span>🌊 海滩</span>` / `<span>✨ 特价</span>` — emoji 跨平台色温/样式/权重不统一
+- ✅ `<Icon name="..." />` 使用组件库内置图标；装饰性图标用 CSS/HTML 实现
+
+#### 16. 图标优先使用 `<Icon>` 组件，禁止内联 SVG 或 Unicode 符号
+
+- ❌ 直接写 Unicode 符号（✓ ✕ ✗ → ←）、硬编码 `<svg>`、或引入第三方图标库
+- ✅ `<Icon name="icon-camera" size={24} />`（见 AI_USAGE.md § 1.15 10 个内置名称）；如无匹配图标，用纯 CSS 装饰元素替代
+
 > 反例条目以 `.cursorrules` §7.3 为唯一真源；本节与 .cursorrules 冲突时以 .cursorrules 为准。
 
 ---
@@ -2430,7 +2440,6 @@ interface BackTopProps {
     target?: () => HTMLElement | Window; // 默认 () => window
     visibilityHeight?: number;           // 默认 400
     duration?: number;                   // 动画时长 ms, 默认 300
-    icon?: ReactNode;                    // 自定义图标
     onClick?: (e: MouseEvent) => void;
     className?: string;
     style?: CSSProperties;

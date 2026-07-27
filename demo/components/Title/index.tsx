@@ -7,7 +7,7 @@ import {
     ApiRow,
     sectionStyle,
     sectionTitleStyle,
-    tagStyle,
+    DemoTag,
     demoBoxStyle,
 } from '../../tools';
 
@@ -50,7 +50,7 @@ const bgMint = acBox('#d8f5f0', 'rgba(60,190,170,0.18)', 'rgba(120,230,210,0.12)
 const TitleDemo: React.FC = () => (
     <div style={sectionStyle}>
         <div style={sectionTitleStyle}>
-            Title <span style={tagStyle}>标题</span>
+            Title <DemoTag>标题</DemoTag>
         </div>
 
         <div style={labelStyle}>飘带标题</div>

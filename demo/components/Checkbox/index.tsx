@@ -7,7 +7,7 @@ import {
     ApiRow,
     sectionStyle,
     sectionTitleStyle,
-    tagStyle,
+    DemoTag,
     demoBoxStyle,
 } from '../../tools';
 
@@ -45,7 +45,7 @@ const CheckboxDemo: React.FC = () => {
     return (
         <div style={sectionStyle}>
             <div style={sectionTitleStyle}>
-                Checkbox <span style={tagStyle}>基础用法</span>
+                Checkbox <DemoTag>基础用法</DemoTag>
             </div>
 
             <div style={labelStyle}>默认水平排列（受控）</div>
