@@ -47,14 +47,22 @@ All visual elements, layouts, icons, and animations are independently designed a
 
 ## 🚀 Use AI to Generate animal-island-ui Pages (No Coding Needed)
 
-Non-developer and don't want to write code yourself? Use [`PROMPT.md`](./PROMPT.md) — no npm, no build step.
+Non-developer and don't want to write code yourself? Use the
+[one-click prompt](./docs/one-click-prompt.md) — no npm, no build step.
 
 **4 steps:**
 
-1. Copy [`PROMPT.md`](./PROMPT.md) in full.
-2. Paste into any AI tool (Cursor / Claude / ChatGPT / Gemini / DeepSeek) and send.
+1. Copy the prompt block from [`docs/one-click-prompt.md`](./docs/one-click-prompt.md).
+2. Paste into any AI tool that can fetch URLs (Cursor / Claude / ChatGPT / Gemini / v0 / Bolt) and send.
 3. The AI asks what page you want — reply in one phrase (e.g. "personal blog", "product list", "FAQ").
 4. Save the `index.html` it returns and double-click to preview.
+
+Using an AI coding agent (Claude Code / Codex / Cursor)? Install the
+[animal-island-ui-style skill](./skills/animal-island-ui-style/README.md) instead:
+
+```bash
+skills add guokaigdg/animal-island-ui
+```
 
 ## Installation
 
@@ -82,15 +90,18 @@ function App() {
 
 ## Documentation
 
-Complete reference for different scenarios:
+Routed by audience and scenario (English primary; Chinese mirrors under [`docs/zh-CN/`](./docs/zh-CN/)):
 
-| Document                                 | Purpose                                                                                                                                                         |
-| ---------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [`PROMPT.md`](./PROMPT.md)               | 🚀 One-click prompt for non-developers — paste into Cursor / Claude / ChatGPT / v0 / Bolt / Lovable / Windsurf to generate animal-island-ui-styled React pages. |
-| [`AI_USAGE.md`](./AI_USAGE.md)           | AI code assistant handbook - all component props, types and defaults word-for-word, 19 hard rules and copy-paste boilerplate, no invented APIs.                 |
-| [`DESIGN_PROMPT.md`](./DESIGN_PROMPT.md) | Visual-style prompts for v0 / Figma AI / Midjourney / DALL-E, including color palette, fonts, size tables, Modal clip-path and prohibition list.                |
-| [`skill/SKILL.md`](./skill/SKILL.md)     | Pixel-perfect style specification Skill - design tokens, all component CSS, Demo layout values, CSS variable templates and new component development checklist. |
-| [`CONTRIBUTING.md`](./CONTRIBUTING.md)   | Contributing Guide                                                                                                                                              |
+| Document                                                                      | Purpose                                                                                                                                                       |
+| ----------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [`docs/design-system/`](./docs/design-system/README.md)                       | 🎨 Canonical design definition (single source of truth) — tokens, design rules, pixel-exact per-component specs, CSS variable template.                       |
+| [`skills/animal-island-ui-style/`](./skills/animal-island-ui-style/README.md) | 🤖 Installable Agent skill (`skills add guokaigdg/animal-island-ui`) — React project usage + standalone-HTML generation, with per-component props references. |
+| [`docs/one-click-prompt.md`](./docs/one-click-prompt.md)                      | 🚀 One-click prompt for non-developers — paste one bootstrap prompt, the AI fetches the specs itself and returns a ready `index.html`.                        |
+| [`docs/design-prompts.md`](./docs/design-prompts.md)                          | Prompts for design/image tools (v0 / Figma AI / Midjourney / DALL-E), linking to the canonical spec files.                                                    |
+| [`docs/development/`](./docs/development/README.md)                           | Development guide for this repository — structure, component development, coding standards, testing, build contract.                                          |
+| [`docs/adr/`](./docs/adr/README.md)                                           | Architecture decision records.                                                                                                                                |
+| [`AGENTS.md`](./AGENTS.md)                                                    | Entry point for coding agents working in this repository.                                                                                                     |
+| [`CONTRIBUTING.md`](./CONTRIBUTING.md)                                        | Contributing guide.                                                                                                                                           |
 
 ## Local Development
 
