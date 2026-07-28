@@ -163,16 +163,45 @@ Props：
 .animal-cursor.animal-cursor--scoped { cursor: url(…) 4 0, url(data:…) 4 0, default !important; }
 
 /* … 后代回退浏览器默认语义 */
-.animal-cursor--scoped * { cursor: auto !important; }
-/* 交互元素显式恢复 pointer（a[href]、button、[role='button']、[role='link']、
-   label[for]、select、summary、input[type='button'|'submit'|'reset'|'checkbox'|'radio']、
-   [data-cursor='pointer']） */
-.animal-cursor--scoped a[href] { cursor: pointer !important; }
-/* 文本输入控件保留 text（text/search/email/password/number/tel/url、textarea） */
-.animal-cursor--scoped textarea { cursor: text !important; }
+.animal-cursor--scoped *,
+.animal-cursor.animal-cursor--scoped * {
+    cursor: auto !important;
+}
+
+/* 交互元素显式恢复 pointer */
+.animal-cursor--scoped a[href],
+.animal-cursor--scoped button,
+.animal-cursor--scoped [role='button'],
+.animal-cursor--scoped [role='link'],
+.animal-cursor--scoped label[for],
+.animal-cursor--scoped select,
+.animal-cursor--scoped summary,
+.animal-cursor--scoped input[type='button'],
+.animal-cursor--scoped input[type='submit'],
+.animal-cursor--scoped input[type='reset'],
+.animal-cursor--scoped input[type='checkbox'],
+.animal-cursor--scoped input[type='radio'],
+.animal-cursor--scoped [data-cursor='pointer'] {
+    cursor: pointer !important;
+}
+
+/* 文本输入控件保留 text */
+.animal-cursor--scoped input[type='text'],
+.animal-cursor--scoped input[type='search'],
+.animal-cursor--scoped input[type='email'],
+.animal-cursor--scoped input[type='password'],
+.animal-cursor--scoped input[type='number'],
+.animal-cursor--scoped input[type='tel'],
+.animal-cursor--scoped input[type='url'],
+.animal-cursor--scoped textarea {
+    cursor: text !important;
+}
+
 /* 禁用态优先 */
 .animal-cursor--scoped [disabled],
-.animal-cursor--scoped [aria-disabled='true'] { cursor: not-allowed !important; }
+.animal-cursor--scoped [aria-disabled='true'] {
+    cursor: not-allowed !important;
+}
 ```
 
 - `cursor-icon.png` 热点坐标 `(4, 0)`；base64 data URI 是同图 fallback

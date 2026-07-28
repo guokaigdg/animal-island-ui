@@ -163,16 +163,45 @@ The stylesheet is **plain CSS** (`cursor.css`, not a CSS module) with two modes 
 .animal-cursor.animal-cursor--scoped { cursor: url(…) 4 0, url(data:…) 4 0, default !important; }
 
 /* … while descendants fall back to browser semantics */
-.animal-cursor--scoped * { cursor: auto !important; }
-/* interactive elements restore pointer (a[href], button, [role='button'], [role='link'],
-   label[for], select, summary, input[type='button'|'submit'|'reset'|'checkbox'|'radio'],
-   [data-cursor='pointer']) */
-.animal-cursor--scoped a[href] { cursor: pointer !important; }
-/* text inputs keep the text cursor (text/search/email/password/number/tel/url, textarea) */
-.animal-cursor--scoped textarea { cursor: text !important; }
+.animal-cursor--scoped *,
+.animal-cursor.animal-cursor--scoped * {
+    cursor: auto !important;
+}
+
+/* interactive elements restore pointer */
+.animal-cursor--scoped a[href],
+.animal-cursor--scoped button,
+.animal-cursor--scoped [role='button'],
+.animal-cursor--scoped [role='link'],
+.animal-cursor--scoped label[for],
+.animal-cursor--scoped select,
+.animal-cursor--scoped summary,
+.animal-cursor--scoped input[type='button'],
+.animal-cursor--scoped input[type='submit'],
+.animal-cursor--scoped input[type='reset'],
+.animal-cursor--scoped input[type='checkbox'],
+.animal-cursor--scoped input[type='radio'],
+.animal-cursor--scoped [data-cursor='pointer'] {
+    cursor: pointer !important;
+}
+
+/* text inputs keep the text cursor */
+.animal-cursor--scoped input[type='text'],
+.animal-cursor--scoped input[type='search'],
+.animal-cursor--scoped input[type='email'],
+.animal-cursor--scoped input[type='password'],
+.animal-cursor--scoped input[type='number'],
+.animal-cursor--scoped input[type='tel'],
+.animal-cursor--scoped input[type='url'],
+.animal-cursor--scoped textarea {
+    cursor: text !important;
+}
+
 /* disabled state wins */
 .animal-cursor--scoped [disabled],
-.animal-cursor--scoped [aria-disabled='true'] { cursor: not-allowed !important; }
+.animal-cursor--scoped [aria-disabled='true'] {
+    cursor: not-allowed !important;
+}
 ```
 
 - `cursor-icon.png` hotspot coordinates are `(4, 0)`; the base64 data URI is a same-image fallback

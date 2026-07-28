@@ -221,7 +221,7 @@ outline-offset: 2px;
 background: #19c8b9;   /* @primary-color, applied via .checked .cbx input */
 border-color: #50b9ab; /* @primary-color-active, on input:checked */
 
-/* check mark — inline SVG polyline, drawn on with a dash transition */
+/* check mark — an inline SVG whose single <path> is drawn on with a dash transition */
 .check {
     position: absolute; top: 50%; left: 50%;
     width: var(--cbx-check-w);  /* 10 / 12 / 15px by size */

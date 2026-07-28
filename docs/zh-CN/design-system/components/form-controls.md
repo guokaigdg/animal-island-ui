@@ -221,7 +221,7 @@ outline-offset: 2px;
 background: #19c8b9;   /* @primary-color，经 .checked .cbx input 应用 */
 border-color: #50b9ab; /* @primary-color-active，作用于 input:checked */
 
-/* 对勾 —— 内联 SVG polyline，dash 过渡画出 */
+/* 对勾 —— 内联 SVG，单个 <path> 以 dash 过渡画出 */
 .check {
     position: absolute; top: 50%; left: 50%;
     width: var(--cbx-check-w);  /* 按尺寸 10 / 12 / 15px */

@@ -35,6 +35,6 @@ Enforcement runs in two places. `npm run check:docs` invokes it directly; `npm r
 - The pre-commit hook runs the entire CI pipeline — formatting, docs, lint, unit tests, accessibility tests, and the build — so commits are slow. `git commit --no-verify` bypasses it for emergencies; CI still enforces the same checks.
 - The check verifies **presence, not accuracy**. A section heading with wrong or empty content passes. Correctness of props, values, and prose remains a review responsibility.
 - Adding a new required document means updating the script's document list, otherwise the new document drifts unchecked.
-- Parity is enforced structurally, not semantically: the Chinese mirrors must contain the same component sections, but nothing detects an English section that has been revised while its translation was left behind. Substantive edits must be carried to both languages by hand.
+- Parity is enforced at the file level, not semantically: every English document must have a Chinese mirror file and vice versa, but nothing inspects the mirrors' contents — a missing section or an English revision left untranslated goes undetected. Substantive edits must be carried to both languages by hand.
 
 The contributor workflow around this check is described in [development](../development/).
