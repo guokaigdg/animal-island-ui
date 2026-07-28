@@ -196,7 +196,7 @@ SkeletonAvatarProps { size?: 'small'|'middle'|'large'; shape?: 'circle'|'square'
 // sub-components
 .skeleton-btn   { border-radius: 50px; }             // pill
 .skeleton-input { border-radius: 50px; }             // pill
-.skeleton-avatar { border-radius: (circle)50%/(square)12px; }
+.skeleton-avatar { border-radius: 50%; }             // shape="circle"（默认）；shape="square" → 12px，由 shape prop 以内联样式设置
 ```
 
 **关键交互细节：**

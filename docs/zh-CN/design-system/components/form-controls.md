@@ -99,7 +99,7 @@ top: 50%;
 left: 2px;
 transform: translateY(-50%); /* 垂直居中 */
 background: rgb(247, 243, 223);
-border: 2.5px solid #bdaea0;
+border: 2.5px solid #c4b89e;
 border-radius: 50%;
 /* handle 无 outer box-shadow，仅靠 border 与 track inset 阴影分层 */
 
@@ -107,9 +107,9 @@ border-radius: 50%;
 background: #86d67a;
 border-color: #6fba2c;
 box-shadow: inset 0 2px 4px rgba(90, 158, 30, 0.2);
-/* handle 开启后 left */
+/* handle 开启后 */
 left: calc(100% - 24px);
-border-color: #5a9e1e;
+border-color: #6fba2c;
 
 /* focus-visible */
 outline: 2px solid #ffcc00;
@@ -124,16 +124,15 @@ opacity: 0.5;
 ```css
 min-width: 38px;
 height: 20px;
-border-width: 2px;
-/* handle */
+border-width: 2.5px;
+/* handle —— 与默认尺寸同样的扁平处理：无 outer box-shadow */
 width: 14px;
 height: 14px;
-top: 1px;
+top: 50%;
+transform: translateY(-50%);
 left: 1px;
-box-shadow: 0 2px 0 0 #bdaea0;
 /* 开启 handle left */
 left: calc(100% - 16px);
-box-shadow: 0 2px 0 0 #5a9e1e;
 ```
 
 **inner 文字（checkedChildren/unCheckedChildren）：**
@@ -184,67 +183,88 @@ Props：
 | `direction`    | `'horizontal' \| 'vertical'`     | `'horizontal'` | 排列方向                                     |
 | `onChange`     | `(values) => void`               | —              | 选中值变化                                   |
 
-**尺寸表（box 方框）：**
+**尺寸表（box 是圆形；对勾是内联 SVG，不是文字字符）：**
 
-| 属性           | small   | middle      | large   |
-| -------------- | ------- | ----------- | ------- |
-| 宽高           | 18×18px | **22×22px** | 28×28px |
-| border-width   | 2px     | 2.5px       | 3px     |
-| 标签 font-size | 12px    | 14px        | 16px    |
-| 对勾 font-size | 11px    | 13px        | 16px    |
+| 属性               | small   | middle      | large   |
+| ------------------ | ------- | ----------- | ------- |
+| box 宽高           | 18×18px | **22×22px** | 28×28px |
+| 对勾 SVG 宽高      | 10×9px  | 12×11px     | 15×14px |
+| 标签 font-size     | 12px    | 14px        | 16px    |
 
 **精确样式：**
 
 ```css
 /* group */
 display: flex; flex-wrap: wrap;
-gap: 12px;                                 /* horizontal */
-/* vertical */ flex-direction: column; gap: 8px;
+gap: 16px;
+/* vertical */ flex-direction: column;
 
 /* item */
 display: inline-flex; align-items: center;
 gap: 8px;
-cursor: pointer;
-transition: all 0.25s cubic-bezier(0.4,0,0.2,1);
+cursor: pointer; user-select: none; position: relative;
 
-/* box（未选）*/
+/* box —— 原生 input 本体，restyle 成圆形 */
+appearance: none;
+width: var(--cbx-size);   /* 按尺寸 18 / 22 / 28px */
+height: var(--cbx-size);
+border: 2px solid #c4b89e;
+border-radius: 50%;
 background: rgb(247, 243, 223);
-border: 2.5px solid #c4b89e;
-border-radius: 8px;
-display: inline-flex; align-items: center; justify-content: center;
-
-/* box hover */
-border-color: #19c8b9;
-transform: translateY(-1px);
+transition: border-color 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 
 /* box focus-visible */
-outline: 2px solid #ffcc00; outline-offset: 2px;
+outline: 2px solid #f5c31c; /* @focus-yellow (= @warning-color) */
+outline-offset: 2px;
 
-/* 选中 */
-background: #19c8b9;
-border-color: #11a89b;
-/* 选中 hover */ background: #3dd4c6; border-color: #19c8b9;
+/* 选中 box */
+background: #19c8b9;   /* @primary-color，经 .checked .cbx input 应用 */
+border-color: #50b9ab; /* @primary-color-active，作用于 input:checked */
 
-/* 对勾 ✓ */
-color: #fff; font-weight: 700; line-height: 1;
-animation: animal-checkbox-pop 0.15s cubic-bezier(0.4,0,0.2,1);
+/* 对勾 —— 内联 SVG，单个 <path> 以 dash 过渡画出 */
+.check {
+    position: absolute; top: 50%; left: 50%;
+    width: var(--cbx-check-w);  /* 按尺寸 10 / 12 / 15px */
+    height: var(--cbx-check-h); /* 按尺寸  9 / 11 / 14px */
+    transform: translate(-50%, -54%);
+}
+.check path {
+    stroke: #fff; stroke-width: 3;
+    stroke-linecap: round; stroke-linejoin: round;
+    stroke-dasharray: 19; stroke-dashoffset: 19;
+    transition: stroke-dashoffset 0.3s ease;
+    transition-delay: 0.2s;
+}
+input:checked ~ .check path { stroke-dashoffset: 0; }
 
-@keyframes animal-checkbox-pop {
-  0%   { transform: scale(0.4); opacity: 0; }
-  60%  { transform: scale(1.2); }
-  100% { transform: scale(1);   opacity: 1; }
+/* 选中 splash 迸溅 —— 六个圆点向外飞散后淡出 */
+input:checked ~ .splash { animation: animal-cbx-splash 0.6s ease forwards; }
+@keyframes animal-cbx-splash {
+    40% {
+        background: #19c8b9; /* @splash-color = @primary-color */
+        box-shadow:
+            0 -18px 0 -8px #19c8b9, 16px -8px 0 -8px #19c8b9, 16px 8px 0 -8px #19c8b9,
+            0 18px 0 -8px #19c8b9, -16px 8px 0 -8px #19c8b9, -16px -8px 0 -8px #19c8b9;
+    }
+    100% {
+        background: #19c8b9;
+        box-shadow:
+            0 -36px 0 -10px transparent, 32px -16px 0 -10px transparent, 32px 16px 0 -10px transparent,
+            0 36px 0 -10px transparent, -32px 16px 0 -10px transparent, -32px -16px 0 -10px transparent;
+    }
 }
 
 /* label */
 color: #725d42; font-weight: 500;
 letter-spacing: 0.01em;
-/* item hover */ label color: #794f27;
+/* 选中 label */ color: #794f27;
 
 /* 禁用（单项或整组）*/
 cursor: not-allowed;
 opacity: 0.55;
-/* box */ background: #f0ece2; border-color: #d4c9b4; transform: none !important;
-/* label */ color: #c4b89e;
+/* box */ background: #f0ece2; border-color: #d4c9b4;
+/* 对勾 */ stroke: #c4b89e;
+/* splash */ animation: none;
 ```
 
 ## Radio

@@ -96,6 +96,7 @@ interface CursorProps {
     children?: React.ReactNode;
     className?: string;
     style?: React.CSSProperties;
+    forceAll?: boolean; // default true — force the custom cursor on every descendant
 }
 ```
 
@@ -107,4 +108,4 @@ Wrap the region where you want a game-style finger cursor:
 </Cursor>
 ```
 
-Applies `cursor: url(...) 4 0, auto !important` to `*` descendants. Do NOT nest multiple `<Cursor>`. `style` is for layout only — do not try to override the cursor URL via inline style.
+With `forceAll` (default `true`) every descendant gets `cursor: url(...) 4 0 !important`. Set `forceAll={false}` for scoped mode: only the container shows the custom cursor while links/buttons keep `pointer`, text inputs keep `text`, and disabled elements keep `not-allowed`. Do NOT nest multiple `<Cursor>`. `style` is for layout only — do not try to override the cursor URL via inline style.

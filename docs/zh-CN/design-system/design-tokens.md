@@ -71,7 +71,10 @@
 
 ## 字体
 
-项目使用两款 Google Fonts 圆体字，**必须**按以下方式引入，本地未安装时通过在线地址加载：
+设计语言使用两款圆体字，按场景有两种交付方式：
+
+- **使用组件库时**：两款字体以 `@fontsource` woff2 资源打进包内，`import 'animal-island-ui/style'` 即完成加载，不需要任何字体 `<link>`
+- **脱离组件库自行实现风格时**（单文件 HTML、demo、外部工具）：按以下方式从 Google Fonts 引入：
 
 ```html
 <!-- 在 index.html <head> 中引入 -->

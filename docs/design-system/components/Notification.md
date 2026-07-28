@@ -112,18 +112,28 @@ Notification.destroy('upload'); // close a specific key
 ## Enter / leave animation (direction follows placement)
 
 ```css
-.placement-top    { animation: animal-notification-slide-down 0.25s cubic-bezier(0.4,0,0.2,1) both; }
-.placement-top.leaving    { animation: animal-notification-slide-up 0.25s cubic-bezier(0.4,0,0.2,1) both; }
-.placement-bottom { animation: animal-notification-slide-up   0.25s cubic-bezier(0.4,0,0.2,1) both; }
-.placement-bottom.leaving { animation: animal-notification-slide-down 0.25s cubic-bezier(0.4,0,0.2,1) both; }
+.placement-top    { animation: animal-notification-slide-from-top 0.25s cubic-bezier(0.4,0,0.2,1) both; }
+.placement-top.leaving    { animation: animal-notification-slide-out-top 0.25s cubic-bezier(0.4,0,0.2,1) both; }
+.placement-bottom { animation: animal-notification-rise-from-bottom 0.25s cubic-bezier(0.4,0,0.2,1) both; }
+.placement-bottom.leaving { animation: animal-notification-sink-out-bottom 0.25s cubic-bezier(0.4,0,0.2,1) both; }
 
-@keyframes animal-notification-slide-down {
+/* top: enter sliding down from -16px, leave sliding back up */
+@keyframes animal-notification-slide-from-top {
     from { opacity: 0; transform: translateY(-16px); }
     to   { opacity: 1; transform: translateY(0); }
 }
-@keyframes animal-notification-slide-up {
+@keyframes animal-notification-slide-out-top {
     from { opacity: 1; transform: translateY(0); }
     to   { opacity: 0; transform: translateY(-16px); }
+}
+/* bottom: enter rising up from +16px, leave sinking back down */
+@keyframes animal-notification-rise-from-bottom {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes animal-notification-sink-out-bottom {
+    from { opacity: 1; transform: translateY(0); }
+    to   { opacity: 0; transform: translateY(16px); }
 }
 
 /* reduced motion */
