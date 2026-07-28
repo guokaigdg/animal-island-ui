@@ -85,9 +85,9 @@ Form 容器及其伴生导出 `Form.Item`（FormItem）、`Form.useForm` 的像�
     margin-top: 4px;
 }
 /* 状态色（采用中性灰 + 主流状态色，不走 parchment token）*/
-.island-form-item-has-error  .island-form-item-explain { color: #ff4d4f; }
-.island-form-item-has-warning.island-form-item-explain { color: #faad14; }
-.island-form-item-has-success.island-form-item-explain { color: #52c41a; }
+.island-form-item-has-error .island-form-item-explain { color: #ff4d4f; }
+.island-form-item-has-warning .island-form-item-explain { color: #faad14; }
+.island-form-item-has-success .island-form-item-explain { color: #52c41a; }
 .island-form-item-is-validating .island-form-item-explain { color: #1677ff; }
 
 /* 全局 disabled */

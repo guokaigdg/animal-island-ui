@@ -89,19 +89,28 @@ box-shadow: 0 5px 0 0 #c94444; /* error-active */
 
 ## Icon
 
-SVG 单色图标库，10 个内置图标（arrow-down、arrow-up、check、close、copy、leaf、menu、search、star、trash 等——以运行时 `ICON_LIST` 导出为准）。支持 `name`（查 ICON_LIST）和隐藏的 `src`（任意图源，Wallet 内部用此加载钱袋 PNG）。
+SVG 单色图标库，10 个内置图标 —— `icon-miles`、`icon-camera`、`icon-chat`、`icon-encyclopedia`、`icon-design`、`icon-diy`、`icon-helicopter`、`icon-map`、`icon-shopping`、`icon-variant`（以运行时 `ICON_LIST` 导出为准）。支持 `name`（内置图标名之一）或 `src`（任意图片 URL，Wallet 内部用此加载钱袋 PNG）。
 
 ```css
 .icon {
     display: inline-block;
-    vertical-align: middle;
-    fill: currentColor; /* 颜色继承父级 color */
-    width: 1em;
-    height: 1em;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+
+/* 可选 hover 弹跳（`bounce` prop） */
+.icon-bounce:hover {
+    animation: iconBounce 0.3s ease-in-out forwards;
+}
+@keyframes iconBounce {
+    0%   { transform: scale(1) rotate(0deg); }
+    50%  { transform: scale(1.2) rotate(-5deg); }
+    100% { transform: scale(1.1) rotate(-4deg); }
 }
 ```
 
-> 用法：`<Icon name="check" size={20} color="#19c8b9" />`。`size` 默认 16，`color` 默认 `currentColor`。`src` 模式走 `<img>` 渲染，可用于内置图标库之外的任意图标源。
+> 用法：`<Icon name="icon-camera" size={32} />`。`size` 默认 `24`，以内联 `width`/`height` 应用（number 为 px，string 为任意 CSS 长度）。组件渲染为 `<span>`，图标通过 `background-image` 呈现：`name` 映射到带内置 SVG 的 class，`src` 则内联设置 `background-image: url(...)` 以支持任意图源。没有 `color` prop —— 内置图标是固定的单色资源。
 
 ## Typewriter
 
@@ -137,16 +146,34 @@ Props：
 </Cursor>
 ```
 
-样式文件为 **普通 CSS**（非 module）：
+样式文件为 **普通 CSS**（`cursor.css`，非 module），由 `forceAll` prop（默认 `true`）选择两种模式；根 `<div>` 挂 `animal-cursor` 加一个模式 class：
 
 ```css
-.animal-cursor,
-.animal-cursor * {
+/* force 模式（默认，forceAll={true}）：所有后代都使用自定义光标 */
+.animal-cursor--force,
+.animal-cursor--force * {
     cursor:
-        url('./cursor-icon.png') 4 0,
-        auto !important;
+        url('../../assets/img/cursor/cursor-icon.png') 4 0,
+        url(data:image/png;base64,…) 4 0, /* 同图 base64 内联 fallback */
+        default !important;
 }
+
+/* scoped 模式（forceAll={false}）：仅容器本身显示自定义光标 …
+   （双类选择器保证嵌套在 force Cursor 内部的 scoped Cursor 仍能胜出） */
+.animal-cursor.animal-cursor--scoped { cursor: url(…) 4 0, url(data:…) 4 0, default !important; }
+
+/* … 后代回退浏览器默认语义 */
+.animal-cursor--scoped * { cursor: auto !important; }
+/* 交互元素显式恢复 pointer（a[href]、button、[role='button']、[role='link']、
+   label[for]、select、summary、input[type='button'|'submit'|'reset'|'checkbox'|'radio']、
+   [data-cursor='pointer']） */
+.animal-cursor--scoped a[href] { cursor: pointer !important; }
+/* 文本输入控件保留 text（text/search/email/password/number/tel/url、textarea） */
+.animal-cursor--scoped textarea { cursor: text !important; }
+/* 禁用态优先 */
+.animal-cursor--scoped [disabled],
+.animal-cursor--scoped [aria-disabled='true'] { cursor: not-allowed !important; }
 ```
 
-- `cursor-icon.png` 热点坐标 `(4, 0)`
-- 使用 `!important` 覆盖默认光标；`className` 直接挂在根 `<div>` 上，类名固定为 `animal-cursor`
+- `cursor-icon.png` 热点坐标 `(4, 0)`；base64 data URI 是同图 fallback
+- 每条规则都带 `!important`，保证模式语义不被组件级 cursor 样式覆盖；`className` 挂在根 `<div>` 上，与固定的 `animal-cursor` class 并存

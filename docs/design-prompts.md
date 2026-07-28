@@ -62,7 +62,7 @@ Interface details:
   light blue #B7C6E5
 - Nunito rounded font family (Google Fonts), weight 600-700, friendly chubby letterforms
 - Yellow focus highlight #ffcc00 on focused inputs (NOT blue)
-- Switch toggle with floating 3D handle, green #86d67a when ON
+- Switch toggle with a flat circular handle (thin border, no outer shadow; the track carries an inset shadow only), track green #86d67a when ON
 - Collapse accordion with teal circle icon, leaf SVG decoration
 - Time widget showing weekday in green #6fba2c, large 48px clock digits
 - Pastel parchment Table with dashed dotted row dividers and diagonal teal stripe hover

@@ -71,7 +71,10 @@
 
 ## Typography
 
-The project uses two rounded Google Fonts. They **must** be loaded as follows, falling back to the online source when not installed locally:
+The design language uses two rounded typefaces, delivered in one of two ways depending on the scenario:
+
+- **Consuming the component library**: both fonts ship inside the package as `@fontsource` woff2 assets — `import 'animal-island-ui/style'` loads them, and no font `<link>` is needed.
+- **Re-implementing the style without the library** (standalone HTML, demos, external tools): load them from Google Fonts as follows:
 
 ```html
 <!-- In the <head> of index.html -->

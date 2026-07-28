@@ -14,15 +14,16 @@ Accepted（已采纳）
 
 把文档收录当作构建期不变量，用机器强制执行。
 
-`scripts/check-docs-sync.mjs` 从源码树而非人工维护的列表中发现组件集合：它扫描 `src/components/`，找出含有同名 `<ComponentName>.tsx` 的目录。每个被发现的组件，都必须在下列每一份文档中以一个章节出现：
+`scripts/check-docs-sync.mjs` 从源码树而非人工维护的列表中发现组件集合：它扫描 `src/components/`，找出含有同名 `<ComponentName>.tsx` 的目录。每个被发现的组件，都必须在下列每一个文档组中以一个章节出现：
 
 - `docs/design-system/components/*.md` —— 权威的英文设计体系参考。
-- `skills/animal-island-ui-style/references/components/*.md` —— 随对外 style skill 一起发布的参考材料。
-- `docs/zh-CN/**` —— 上述文档的中文镜像，保持对等。
+- `skills/animal-island-ui-style/references/components/*.md` —— 随对外 style skill 一起发布的参考材料；该组每个文件另有 200 行上限。
 
-收录情况以标题匹配来断言：组件名必须作为 Markdown 章节标题出现在每份必需文档中，而不只是出现在正文某处。表格或示例里顺带提到一次不算通过，因为这项检查的意图是每个组件都有属于自己的一块地方来记录。
+收录情况按文档组以标题匹配来断言：组件名必须作为 Markdown 章节标题出现在该组的某个文件里，而不只是出现在正文某处。表格或示例里顺带提到一次不算通过，因为这项检查的意图是每个组件都有属于自己的一块地方来记录。
 
-脚本输出逐组件的矩阵，任一组件在任一必需文档中缺席即以非零码退出，并指名是哪个组件缺在哪些文档里。
+`docs/zh-CN/**` 中文镜像按文件路径与 `docs/**` 对等校验（每份英文文档必须有镜像，反之亦然），`SKILL.zh-CN.md` 必须存在且非空；镜像内部不再重复断言组件标题。
+
+任何漂移都会让脚本以非零码退出，并逐条列出缺失的组件标题、缺失或多余的镜像文件，以及超限的 skill reference 文件。
 
 强制执行发生在两个地方。`npm run check:docs` 直接调用它；`npm run ci` 把它串在格式检查与 lint 之间，因此它卡在流水线上。`.githooks/` 里的 pre-commit 钩子跑的是完整的 `npm run ci`，由 `prepare` 生命周期脚本经 `npm run setup:hooks` 自动安装。于是漂移在本地就会失败于提交之前，即使钩子被绕过，CI 仍会失败。
 

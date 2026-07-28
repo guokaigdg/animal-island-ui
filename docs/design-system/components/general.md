@@ -89,19 +89,28 @@ box-shadow: 0 5px 0 0 #c94444; /* error-active */
 
 ## Icon
 
-Monochrome SVG icon library, 10 built-in icons (arrow-down, arrow-up, check, close, copy, leaf, menu, search, star, trash and so on — the runtime `ICON_LIST` export is authoritative). Accepts `name` (looked up in `ICON_LIST`) and the undocumented `src` (any image source; Wallet uses it internally to load the coin-bag PNG).
+Monochrome SVG icon library, 10 built-in icons — `icon-miles`, `icon-camera`, `icon-chat`, `icon-encyclopedia`, `icon-design`, `icon-diy`, `icon-helicopter`, `icon-map`, `icon-shopping`, `icon-variant` (the runtime `ICON_LIST` export is authoritative). Accepts `name` (one of the built-in names) or `src` (any image URL; Wallet uses it internally to load the coin-bag PNG).
 
 ```css
 .icon {
     display: inline-block;
-    vertical-align: middle;
-    fill: currentColor; /* color inherits the parent's color */
-    width: 1em;
-    height: 1em;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+
+/* optional hover bounce (`bounce` prop) */
+.icon-bounce:hover {
+    animation: iconBounce 0.3s ease-in-out forwards;
+}
+@keyframes iconBounce {
+    0%   { transform: scale(1) rotate(0deg); }
+    50%  { transform: scale(1.2) rotate(-5deg); }
+    100% { transform: scale(1.1) rotate(-4deg); }
 }
 ```
 
-> Usage: `<Icon name="check" size={20} color="#19c8b9" />`. `size` defaults to 16, `color` defaults to `currentColor`. The `src` mode renders through `<img>` and covers any icon source outside the built-in library.
+> Usage: `<Icon name="icon-camera" size={32} />`. `size` defaults to `24` and is applied as inline `width`/`height` (number = px, string = any CSS length). The component renders a `<span>` whose icon is a `background-image`: `name` maps to a class carrying the built-in SVG, while `src` sets `background-image: url(...)` inline for arbitrary sources. There is no `color` prop — the built-in icons are fixed monochrome assets.
 
 ## Typewriter
 
@@ -137,16 +146,34 @@ Props:
 </Cursor>
 ```
 
-The stylesheet is **plain CSS** (not a CSS module):
+The stylesheet is **plain CSS** (`cursor.css`, not a CSS module) with two modes selected by the `forceAll` prop (default `true`); the root `<div>` carries `animal-cursor` plus a mode class:
 
 ```css
-.animal-cursor,
-.animal-cursor * {
+/* force mode (default, forceAll={true}): every descendant gets the custom cursor */
+.animal-cursor--force,
+.animal-cursor--force * {
     cursor:
-        url('./cursor-icon.png') 4 0,
-        auto !important;
+        url('../../assets/img/cursor/cursor-icon.png') 4 0,
+        url(data:image/png;base64,…) 4 0, /* inlined base64 fallback of the same PNG */
+        default !important;
 }
+
+/* scoped mode (forceAll={false}): only the container shows the custom cursor …
+   (double-class selector so a scoped Cursor nested inside a force Cursor still wins) */
+.animal-cursor.animal-cursor--scoped { cursor: url(…) 4 0, url(data:…) 4 0, default !important; }
+
+/* … while descendants fall back to browser semantics */
+.animal-cursor--scoped * { cursor: auto !important; }
+/* interactive elements restore pointer (a[href], button, [role='button'], [role='link'],
+   label[for], select, summary, input[type='button'|'submit'|'reset'|'checkbox'|'radio'],
+   [data-cursor='pointer']) */
+.animal-cursor--scoped a[href] { cursor: pointer !important; }
+/* text inputs keep the text cursor (text/search/email/password/number/tel/url, textarea) */
+.animal-cursor--scoped textarea { cursor: text !important; }
+/* disabled state wins */
+.animal-cursor--scoped [disabled],
+.animal-cursor--scoped [aria-disabled='true'] { cursor: not-allowed !important; }
 ```
 
-- `cursor-icon.png` hotspot coordinates are `(4, 0)`
-- `!important` overrides the default cursor; `className` is applied directly to the root `<div>`, and the class name is fixed as `animal-cursor`
+- `cursor-icon.png` hotspot coordinates are `(4, 0)`; the base64 data URI is a same-image fallback
+- `!important` on every rule so the mode semantics survive component-level cursor styles; `className` is applied to the root `<div>` alongside the fixed `animal-cursor` class

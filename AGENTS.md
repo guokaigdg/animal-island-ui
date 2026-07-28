@@ -49,8 +49,10 @@ intentional duplication — when you touch one side, update the other in the sam
 
 Everything else is single-source: the design system ([docs/design-system/](docs/design-system/README.md))
 defines the design language and depends on nothing; code implements it; all other docs
-link instead of restating. The skill directory is self-contained — it never references
-repo files by relative path, only GitHub URLs.
+link instead of restating. The skill directory is self-contained — links between files
+inside the skill stay relative (they must resolve after the skill is installed on its
+own), while anything outside the skill directory is referenced only by GitHub URL, never
+by repo-relative path.
 
 `npm run check:docs` enforces: every component in `src/components/` is covered in both
 `docs/design-system/components/` and the skill's `references/components/` (which are also

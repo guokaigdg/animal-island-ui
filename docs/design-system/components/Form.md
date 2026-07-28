@@ -85,9 +85,9 @@ Pixel-level styling for the Form container together with its companion exports `
     margin-top: 4px;
 }
 /* status colors (neutral gray + mainstream status colors, not parchment tokens) */
-.island-form-item-has-error  .island-form-item-explain { color: #ff4d4f; }
-.island-form-item-has-warning.island-form-item-explain { color: #faad14; }
-.island-form-item-has-success.island-form-item-explain { color: #52c41a; }
+.island-form-item-has-error .island-form-item-explain { color: #ff4d4f; }
+.island-form-item-has-warning .island-form-item-explain { color: #faad14; }
+.island-form-item-has-success .island-form-item-explain { color: #52c41a; }
 .island-form-item-is-validating .island-form-item-explain { color: #1677ff; }
 
 /* global disabled */

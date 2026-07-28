@@ -119,6 +119,6 @@ interface TooltipProps {
 <Tooltip title="Game-style bubble" variant="island"><span>?</span></Tooltip>
 ```
 
-> `children` must be a SINGLE React element capable of receiving event/ref props (do not pass strings or fragments). `variant="island"` renders an organic SVG-clipped bubble matching the Modal silhouette.
+> `children` must be a SINGLE React element capable of receiving event/ref props (do not pass strings or fragments). `variant="island"` renders a transparent container (no border, no shadow) whose inner content carries its own organic bubble — it is NOT the Modal blob clip-path.
 >
 > **Not supported:** no `open` / `defaultOpen` (uncontrolled visibility only — driven by `trigger`), no `onOpenChange`, no `mouseEnterDelay` / `mouseLeaveDelay`, no arrow toggle, no `getPopupContainer`, no `color`. The bubble color is fixed by `variant`.
