@@ -20,7 +20,6 @@
     "files": [
         "dist",
         "items.d.ts",
-        "AI_USAGE.md",
         "README.md"
     ],
     "sideEffects": false,

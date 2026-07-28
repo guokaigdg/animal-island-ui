@@ -46,14 +46,21 @@
 
 ## 🚀 用 AI 工具一键生成 animal-island-ui 风格页面（无需写代码）
 
-非研发人员，不想自己写代码？用 [`PROMPT.md`](../PROMPT.md) 即可，不需要 npm，不需要打包工具。
+非研发人员，不想自己写代码？用[一键提示词](./one-click-prompt.md)即可，不需要 npm，不需要打包工具。
 
 **4 步使用：**
 
-1. 复制 [`PROMPT.md`](../PROMPT.md) 全文。
-2. 粘贴到任意 AI 工具（Cursor / Claude / ChatGPT / Gemini / DeepSeek）发送。
+1. 复制 [`docs/one-click-prompt.md`](./one-click-prompt.md) 中的提示词代码块。
+2. 粘贴到任意可访问 URL 的 AI 工具（Cursor / Claude / ChatGPT / Gemini / v0 / Bolt）发送。
 3. AI 会反问做什么页面，用一句话回答即可（如「个人博客」「商品列表」「FAQ」）。
 4. 保存 AI 输出的 `index.html`，双击即可预览。
+
+在用 AI 编程 Agent（Claude Code / Codex / Cursor）？直接安装
+[animal-island-ui-style skill](../skills/animal-island-ui-style/README.md)：
+
+```bash
+skills add guokaigdg/animal-island-ui
+```
 
 ## 安装
 
@@ -81,15 +88,18 @@ function App() {
 
 ## 文档
 
-面向不同场景的完整参考：
+按读者与场景路由（英文为主文档，中文镜像在 [`docs/zh-CN/`](./zh-CN/)）：
 
-| 文档                                      | 用途                                                                                                                                     |
-| ----------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
-| [`PROMPT.md`](../PROMPT.md)               | 🚀 给普通用户的一键提示词，复制到 Cursor / Claude / ChatGPT / v0 / Bolt / Lovable / Windsurf 即可生成 animal-island-ui 风格 React 页面。 |
-| [`AI_USAGE.md`](../AI_USAGE.md)           | 面向 AI 代码助手的使用手册，逐字收录全部组件 props、类型与默认值，附 19 条硬性规则与可复制样板，杜绝臆造 API。                           |
-| [`DESIGN_PROMPT.md`](../DESIGN_PROMPT.md) | 视觉风格提示词，适配 v0 / Figma AI / Midjourney / DALL-E，含色板、字体、尺寸表、Modal clip-path 与禁用清单。                             |
-| [`skill/SKILL.md`](../skill/SKILL.md)     | 像素级样式规范 Skill，覆盖设计 token、全部组件精确 CSS、Demo 布局数值、CSS 变量模板与新组件开发 Checklist。                              |
-| [`CONTRIBUTING.md`](../CONTRIBUTING.md)   | 贡献指南                                                                                                                                 |
+| 文档                                                                           | 用途                                                                                                                          |
+| ------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------- |
+| [`docs/design-system/`](./zh-CN/design-system/README.md)                       | 🎨 设计系统严格定义 (single source of truth) —— 设计 token、设计规则、逐组件像素级规范、CSS 变量模板。                        |
+| [`skills/animal-island-ui-style/`](../skills/animal-island-ui-style/README.md) | 🤖 可安装的 Agent skill（`skills add guokaigdg/animal-island-ui`）—— React 项目使用 + 单文件 HTML 生成，含分组件 props 参考。 |
+| [`docs/one-click-prompt.md`](./zh-CN/one-click-prompt.md)                      | 🚀 给普通用户的一键提示词 —— 粘贴一段引导提示词，AI 自行抓取规范文件并产出可直接双击预览的 `index.html`。                     |
+| [`docs/design-prompts.md`](./zh-CN/design-prompts.md)                          | 设计 / 出图工具提示词（v0 / Figma AI / Midjourney / DALL-E），指向规范文件链接。                                              |
+| [`docs/development/`](./zh-CN/development/README.md)                           | 本仓库开发文档 —— 目录结构、组件开发、代码规范、测试、构建契约。                                                              |
+| [`docs/adr/`](./zh-CN/adr/README.md)                                           | 架构决策记录 (ADR)。                                                                                                          |
+| [`AGENTS.md`](../AGENTS.md)                                                    | 在本仓库内工作的 coding agent 入口。                                                                                          |
+| [`CONTRIBUTING.md`](../CONTRIBUTING.md)                                        | 贡献指南。                                                                                                                    |
 
 ## 本地开发
 

@@ -1,125 +1,133 @@
 #!/usr/bin/env node
 /**
- * 文档同步对账：扫 src/components/ 自动发现组件，校验 4 份规则文档是否都已收录。
+ * Docs sync check — documentation is a first-class deliverable in this repo.
  *
- * 校验矩阵：
- *   - AI_USAGE.md     → 必须含 `### 1.X <Name>` 段
- *   - skill/SKILL.md  → 必须含 `### <Name>` 段
- *   - PROMPT.md       → 必须含 `### <Name>` 段
- *   - DESIGN_PROMPT.md→ 必须含 `<Name>`（样式用现成调色板，松校验：仅出现一次即可）
+ * Discovers components from src/components/ and verifies:
+ *   1. Component coverage — every component has a `## <Name>` (any level) heading in:
+ *        - docs/design-system/components/*.md          (canonical pixel specs)
+ *        - skills/animal-island-ui-style/references/components/*.md (published skill)
+ *   2. Skill reference size — each skill components file is ≤ 200 lines.
+ *   3. Translation parity — docs/zh-CN/ mirrors docs/ file-for-file
+ *      (excluding docs/zh-CN/ itself, docs/img/, docs/README.zh-CN.md).
+ *   4. skills/animal-island-ui-style/SKILL.zh-CN.md exists (human-review translation).
  *
- * 用法：node scripts/check-docs-sync.mjs
- * 退出码：0 全部对齐；1 存在漂移。
+ * Usage: node scripts/check-docs-sync.mjs
+ * Exit code: 0 all aligned; 1 drift found.
  *
- * 来源真源：.cursorrules §10 文档同步矩阵。
+ * Sync policy source of truth: AGENTS.md "Content that must be kept in sync".
  */
-import { readdirSync, readFileSync, existsSync } from 'node:fs';
-import { resolve, dirname } from 'node:path';
+import { readdirSync, readFileSync, existsSync, statSync } from 'node:fs';
+import { resolve, join, dirname, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, '..');
 
 const COMPONENTS_DIR = resolve(ROOT, 'src/components');
-const DOCS = {
-    'AI_USAGE.md': resolve(ROOT, 'AI_USAGE.md'),
-    'skill/SKILL.md': resolve(ROOT, 'skill/SKILL.md'),
-    'PROMPT.md': resolve(ROOT, 'PROMPT.md'),
-    'DESIGN_PROMPT.md': resolve(ROOT, 'DESIGN_PROMPT.md'),
-};
+const DESIGN_SYSTEM_COMPONENTS = resolve(ROOT, 'docs/design-system/components');
+const SKILL_DIR = resolve(ROOT, 'skills/animal-island-ui-style');
+const SKILL_COMPONENTS = resolve(SKILL_DIR, 'references/components');
+const DOCS_DIR = resolve(ROOT, 'docs');
+const DOCS_ZH_DIR = resolve(ROOT, 'docs/zh-CN');
+const SKILL_REF_MAX_LINES = 200;
 
-// ---------- 1. 扫 src/components/ 自动发现组件 ----------
+const problems = [];
+
+// ---------- 1. Discover components from src/components/ ----------
 const components = readdirSync(COMPONENTS_DIR, { withFileTypes: true })
     .filter((d) => d.isDirectory() && existsSync(resolve(COMPONENTS_DIR, d.name, `${d.name}.tsx`)))
     .map((d) => d.name)
     .sort();
 
-// ---------- 2. 读 4 份文档 ----------
-const readSafe = (p) => (existsSync(p) ? readFileSync(p, 'utf8') : '');
-const contents = {
-    'AI_USAGE.md': readSafe(DOCS['AI_USAGE.md']),
-    'skill/SKILL.md': readSafe(DOCS['skill/SKILL.md']),
-    'PROMPT.md': readSafe(DOCS['PROMPT.md']),
-    'DESIGN_PROMPT.md': readSafe(DOCS['DESIGN_PROMPT.md']),
-};
+// ---------- Helpers ----------
+const listMarkdown = (dir) =>
+    existsSync(dir)
+        ? readdirSync(dir)
+              .filter((f) => f.endsWith('.md'))
+              .sort()
+              .map((f) => join(dir, f))
+        : [];
 
-// ---------- 3. 逐组件校验 ----------
-/**
- * 严格匹配：必须是 markdown 段头形式。
- * - AI_USAGE.md 用 `### 1.X <Name>` 编号
- * - skill/SKILL.md 用 `### <Name>`
- * - PROMPT.md 用 `### <Name>`（括号描述可忽略）
- * 容忍大小写、容忍前后空格；不命中任何宽松形式即视为缺失。
- */
-const checkStrict = (text, name, file) => {
-    if (!text) return false;
+/** Strict match: a markdown heading starting with the component name. */
+const hasHeading = (text, name) => {
     const escaped = name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-    let re;
-    if (file === 'AI_USAGE.md') {
-        // ### 1.1 Button / ### 1.10 Phone (decorative IslandPhone)
-        re = new RegExp(`^#{1,6}\\s+\\d+\\.\\d+\\s+${escaped}\\b`, 'm');
-    } else {
-        re = new RegExp(`^#{1,6}\\s+${escaped}\\b`, 'm');
+    return new RegExp(`^#{1,6}\\s+${escaped}\\b`, 'm').test(text);
+};
+
+const walkFiles = (dir, skip = () => false) => {
+    const out = [];
+    if (!existsSync(dir)) return out;
+    for (const entry of readdirSync(dir, { withFileTypes: true })) {
+        const full = join(dir, entry.name);
+        if (skip(full)) continue;
+        if (entry.isDirectory()) out.push(...walkFiles(full, skip));
+        else out.push(full);
     }
-    return re.test(text);
+    return out;
 };
 
-/** 松散匹配：文档正文里提到组件名（用于 DESIGN_PROMPT 等只引述不细写的文件）。 */
-const checkLoose = (text, name) => {
-    if (!text) return false;
-    return text.includes(name);
+// ---------- 2. Component coverage in design system + skill references ----------
+const coverageGroups = {
+    'docs/design-system/components/': listMarkdown(DESIGN_SYSTEM_COMPONENTS),
+    'skills/animal-island-ui-style/references/components/': listMarkdown(SKILL_COMPONENTS),
 };
 
-const matrix = components.map((name) => ({
-    name,
-    'AI_USAGE.md': checkStrict(contents['AI_USAGE.md'], name, 'AI_USAGE.md'),
-    'skill/SKILL.md': checkStrict(contents['skill/SKILL.md'], name, 'skill/SKILL.md'),
-    'PROMPT.md': checkStrict(contents['PROMPT.md'], name, 'PROMPT.md'),
-    'DESIGN_PROMPT.md': checkLoose(contents['DESIGN_PROMPT.md'], name),
-}));
-
-// ---------- 4. 报告 ----------
-const DOC_HEADERS = Object.keys(DOCS);
-const widths = {
-    name: Math.max(4, ...components.map((n) => n.length)),
-    ...Object.fromEntries(DOC_HEADERS.map((h) => [h, Math.max(h.length, 4)])),
-};
-
-const pad = (s, w) => String(s).padEnd(w, ' ');
-const STATUS = { true: '✅', false: '❌' };
-
-console.log(`\n🔎 文档同步对账（自动扫 src/components/ → ${components.length} 个组件）\n`);
-
-const header = [pad('组件', widths.name), ...DOC_HEADERS.map((h) => pad(h, widths[h]))].join('  ');
-console.log(header);
-console.log('-'.repeat(header.length));
-
-let driftCount = 0;
-for (const row of matrix) {
-    const cells = DOC_HEADERS.map((h) => pad(`${STATUS[row[h]]} ${row[h] ? 'ok' : 'MISS'}`, widths[h]));
-    console.log(`${pad(row.name, widths.name)}  ${cells.join('  ')}`);
-    if (DOC_HEADERS.some((h) => !row[h])) driftCount++;
+for (const [label, files] of Object.entries(coverageGroups)) {
+    if (files.length === 0) {
+        problems.push(`${label} contains no markdown files`);
+        continue;
+    }
+    const corpus = files.map((f) => readFileSync(f, 'utf8')).join('\n');
+    for (const name of components) {
+        if (!hasHeading(corpus, name)) {
+            problems.push(`component "${name}" has no heading in ${label}`);
+        }
+    }
 }
 
-console.log('-'.repeat(header.length));
-console.log(
-    `总计：${components.length} 组件 · 漂移：${driftCount} 组件 · 通过率：${(
-        (1 - driftCount / components.length) *
-        100
-    ).toFixed(1)}%\n`
-);
+// ---------- 3. Skill reference size cap ----------
+for (const file of listMarkdown(SKILL_COMPONENTS)) {
+    const lines = readFileSync(file, 'utf8').split('\n').length;
+    if (lines > SKILL_REF_MAX_LINES) {
+        problems.push(`${relative(ROOT, file)} has ${lines} lines (cap ${SKILL_REF_MAX_LINES}) — split or compress it`);
+    }
+}
 
-if (driftCount === 0) {
-    console.log('🎉 全部对齐，文档与源码一致。\n');
+// ---------- 4. Translation parity: docs/ ↔ docs/zh-CN/ ----------
+const skipInDocs = (p) => p === DOCS_ZH_DIR || p === join(DOCS_DIR, 'img') || p === join(DOCS_DIR, 'README.zh-CN.md');
+
+const enDocs = walkFiles(DOCS_DIR, skipInDocs)
+    .filter((f) => f.endsWith('.md'))
+    .map((f) => relative(DOCS_DIR, f))
+    .sort();
+const zhDocs = walkFiles(DOCS_ZH_DIR)
+    .filter((f) => f.endsWith('.md'))
+    .map((f) => relative(DOCS_ZH_DIR, f))
+    .sort();
+
+for (const f of enDocs) {
+    if (!zhDocs.includes(f)) problems.push(`missing Chinese mirror: docs/zh-CN/${f} (for docs/${f})`);
+}
+for (const f of zhDocs) {
+    if (!enDocs.includes(f)) problems.push(`orphan Chinese mirror: docs/zh-CN/${f} has no docs/${f}`);
+}
+
+// ---------- 5. Skill translation for human review ----------
+if (!existsSync(join(SKILL_DIR, 'SKILL.zh-CN.md'))) {
+    problems.push('skills/animal-island-ui-style/SKILL.zh-CN.md is missing');
+} else if (!statSync(join(SKILL_DIR, 'SKILL.zh-CN.md')).size) {
+    problems.push('skills/animal-island-ui-style/SKILL.zh-CN.md is empty');
+}
+
+// ---------- Report ----------
+console.log(`\n🔎 docs sync check — ${components.length} components from src/components/\n`);
+
+if (problems.length === 0) {
+    console.log('🎉 all aligned: design-system + skill coverage, size caps, zh-CN parity.\n');
     process.exit(0);
 }
 
-console.error('⚠️  发现文档漂移，请按 .cursorrules §10 同步矩阵补齐：\n');
-for (const row of matrix) {
-    const missing = DOC_HEADERS.filter((h) => !row[h]);
-    if (missing.length) {
-        console.error(`   • ${row.name}  →  缺失于：${missing.join(', ')}`);
-    }
-}
-console.error('\n补齐后再跑一次：npm run check:docs\n');
+console.error(`⚠️  ${problems.length} drift issue(s) found:\n`);
+for (const p of problems) console.error(`   • ${p}`);
+console.error('\nSync policy: AGENTS.md § "Content that must be kept in sync". Re-run: npm run check:docs\n');
 process.exit(1);
