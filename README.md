@@ -211,6 +211,19 @@ npm run build:demo
     <br/><a href="https://github.com/Mystic-Stars/acorn-theme">Acorn</a><br/><sub>Acorn Astro Theme</sub>
   </td>
 </tr>
+<tr>
+  <td align="center" width="33%">
+    <br/>
+    <img src="docs/img/resident-test.png" alt="resident-test" style="border-radius: 8px; width: 90%; display: block; margin: 8px auto 0;" />
+    <br/><a href="http://39.106.95.74:7765/api/file-links/f/17b0da9ffc5b/resident-test-v2.html">resident-test</a><br/><sub>无人岛性格测试</sub>
+  </td>
+  <td align="center" width="33%">
+    <br/>
+  </td>
+  <td align="center" width="33%">
+    <br/>
+  </td>
+</tr>
 
 </table>
 
