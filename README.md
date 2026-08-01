@@ -219,6 +219,8 @@ npm run build:demo
   </td>
   <td align="center" width="33%">
     <br/>
+    <img src="docs/img/animal-island-uniapp.png" alt="animal-island-uniapp" style="border-radius: 8px; width: 90%; display: block; margin: 8px auto 0;" />
+    <br/><a href="https://leepule.github.io/animal-island-uniapp/#/">animal-island-uniapp</a><br/><sub>a cozy island-style UI style uni-app UI library</sub>
   </td>
   <td align="center" width="33%">
     <br/>
