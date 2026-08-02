@@ -124,4 +124,8 @@ export const PAGE_INFO: Record<string, { title: string; desc: string }> = {
         title: 'BackTop 返回顶部',
         desc: '返回顶部组件，支持全局/容器内滚动、自定义显示高度、自定义图标、平滑动画',
     },
+    image: {
+        title: 'Image 图片',
+        desc: '图片组件 — 白色衬板相框 + 错误占位，支持懒加载、点击预览',
+    },
 };

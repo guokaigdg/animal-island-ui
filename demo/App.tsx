@@ -98,6 +98,7 @@ const MENU_ITEMS: MenuItem[] = [
             { key: 'tabs', label: 'Tabs 标签页' },
             { key: 'table', label: 'Table 表格' },
             { key: 'typewriter', label: 'Typewriter 打字机' },
+            { key: 'image', label: 'Image 图片', isNew: true },
         ],
     },
     {

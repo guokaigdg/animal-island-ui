@@ -116,3 +116,46 @@ Notes:
 - **`onClick` upgrades the tag to a button** (`role="button"`, `tabIndex={0}`) — supports Enter and Space keys. Without `onClick` the tag is a plain `<span>`. Hover/active states add `translateY(-1px)` lift + `box-shadow 0 2px 6px rgba(61,52,40,0.12)`. Focus ring is `2px solid var(--animal-focus-yellow, #f5c31c)`.
 - **`disabled`** sets `opacity: 0.5` and `pointer-events: none` on the whole tag, AND disables the close button (which gets a separate `cursor: not-allowed`).
 - a11y: when clickable, the tag is a button. Close button is reachable via Tab. All interactive states have visible focus styles.
+
+## Image
+
+```ts
+type ImageColor =
+    | 'white'
+    | 'default'
+    | 'app-pink'
+    | 'purple'
+    | 'app-blue'
+    | 'app-yellow'
+    | 'app-orange'
+    | 'app-teal'
+    | 'app-green'
+    | 'app-red'
+    | 'lime-green'
+    | 'yellow-green'
+    | 'brown'
+    | 'warm-peach-pink';
+
+interface ImageProps extends Omit<React.ImgHTMLAttributes<HTMLImageElement>, 'src' | 'alt' | 'width' | 'height' | 'onLoad' | 'onError'> {
+    src: string; // REQUIRED
+    alt?: string; // default '' — empty means decorative
+    width?: number | string;
+    height?: number | string;
+    color?: ImageColor; // default 'white' — plain #fff; others are the Card pattern base colours (pastel, no dots)
+    lazy?: boolean; // default false — maps to native loading="lazy"
+    preview?: boolean; // default true — click opens a lightbox (ESC / mask / close button)
+    onLoad?: (e: React.SyntheticEvent<HTMLImageElement>) => void;
+    onError?: (e: React.SyntheticEvent<HTMLImageElement>) => void;
+}
+```
+
+```tsx
+<Image src="/photo.png" alt="岛屿风景" width={200} height={150} />
+<Image src="/photo.png" alt="纯白" color="white" />
+<Image src="/photo.png" alt="粉色" color="app-pink" />
+<Image src="/photo.png" alt="懒加载" lazy />
+<Image src="/photo.png" alt="预览" width={200} height={130} preview />
+<Image src="/broken.png" alt="失败" width={140} height={140} />
+```
+
+> Renders a `<img>` in a fixed mat frame (`#fff` plain background for `color="white"`; every other `color` is the Card `pattern` base colour — soft pastel, no dotted overlay — 12px padding so the image sits inset, 8px rounded corners, `0 8px 14px 0 rgba(0,0,0,0.08)` shadow, no border, `overflow: hidden` + `line-height: 0`). `width`/`height` apply to the frame while the image fills it at 100%. The image stays hidden (`opacity: 0`) until `onLoad` fades it in; on error it renders a built-in placeholder (`role="img"` + `aria-label`). With `preview` (on by default), the frame becomes a `<button>` and clicking opens a portaled lightbox (`role="dialog"` + `aria-modal`, name from `alt`) — close via ESC, the mask, or the top-right close button; focus is moved to the close button on open and restored on close.

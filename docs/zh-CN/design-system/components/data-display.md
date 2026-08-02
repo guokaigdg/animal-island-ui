@@ -215,3 +215,107 @@ tab-size: 4;
 > - `border: 1.5px solid transparent` 默认占位，让 outlined/dashed 切换时不会因为 border 出现/消失导致尺寸抖动。
 > - `closable` × 按钮的 click `stopPropagation`，不会冒泡触发 `onClick`。
 > - 提供 `onClick` 时整个 tag 升格为 `role="button"` + `tabIndex={0}`，支持 Enter / Space 键盘触发。
+
+## Image（衬板相框）
+
+源码：`src/components/Image/image.module.less`。**衬板相框**：默认白色 `#fff`（`color="white"` 为纯白；其他 `color` 渲染 Card `pattern` 同款底色 — 柔和浅色，无花纹）+ 12px 内边距（图片像照片衬板一样内缩）+ 8px 圆角 + `0 8px 14px 0 rgba(0, 0, 0, 0.08)` 柔和投影，内置错误占位。
+
+```less
+// 相框外壳
+.image {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    box-sizing: border-box;
+    border: none; /* 相框无边框；preview 默认开启时相框是 <button>，显式去除 UA 边框 */
+    background: #fff; /* 默认白色；`color` prop 覆盖 */
+    padding: 12px; /* 相框内边距，图片像照片衬板一样内缩 */
+    border-radius: 8px; /* 圆角固定，不提供 radius prop */
+    box-shadow: 0 8px 14px 0 rgba(0, 0, 0, 0.08);
+    line-height: 0;
+    vertical-align: middle;
+    flex-shrink: 0;
+    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+// 内层 img — 填满相框，加载完成后淡入
+.img        { display: block; width: 100%; height: 100%; opacity: 0; transition: opacity 0.25s ease; }
+.loaded .img { opacity: 1; }
+
+// 错误占位 — 相机图标 + 弱化文字
+.error { flex-direction: column; gap: 8px; color: #c4b89e; font-size: 13px; font-weight: 500; line-height: 1.5; }
+```
+
+**颜色变体** — `color="white"` 渲染纯白 `#fff` 底色；其余每个值（`default` + 12 品牌色）渲染 Card `pattern` 的**底色**（花纹底下的柔和浅色，去掉点状花纹）。每个类同时设置可读的文字色（错误占位中的文字可见）：
+
+```less
+// White — 纯白，由 base .image 提供
+.image-default         { background: rgb(247, 243, 223); color: #725d42; }
+.image-app-pink        { background: #fde4e8; color: #a85565; }
+.image-purple          { background: #f0e8ff; color: #6a3a9a; }
+.image-app-blue        { background: #e8edff; color: #4a5a8a; }
+.image-app-yellow      { background: #fff8e0; color: #7a6528; }
+.image-app-orange      { background: #fff0e8; color: #8a4a2a; }
+.image-app-teal        { background: #e8faf5; color: #2a6b5a; }
+.image-app-green       { background: #e8f5e8; color: #3a6b3a; }
+.image-app-red         { background: #ffe8e8; color: #9a3a3a; }
+.image-lime-green      { background: #f5f8e0; color: #5a6b28; }
+.image-yellow-green    { background: #fffde8; color: #6a5a28; }
+.image-brown           { background: #f5f0e0; color: #5a4a2a; }
+.image-warm-peach-pink { background: #fff0e8; color: #8a4a2a; }
+```
+
+**大图预览**（点击放大，`preview` prop，**默认开启**）。相框升格为 `<button type="button">`（原生支持 Enter / Space，`cursor: zoom-in`）；弹层经 Portal 挂到 `document.body`，避开祖先 `transform` 造成的定位上下文：
+
+```less
+// 全屏遮罩 — 与 Modal 同款（--animal-mask-bg，默认 rgba(0,0,0,0.35)），点击关闭
+.mask {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--animal-mask-bg);
+    animation: animal-image-fade-in 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+// dialog — 包裹大图；其 click 被 stopPropagation（只有遮罩能关闭）
+.dialog { position: relative; display: inline-flex; line-height: 0; }
+
+// 大图
+.previewImg {
+    max-width: min(88vw, 1100px);
+    max-height: 86vh;
+    border-radius: 20px;
+    box-shadow: 0 12px 40px rgba(43, 33, 24, 0.55);
+    object-fit: contain;
+    animation: animal-image-zoom-in 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+// 关闭按钮 — 40×40 圆形，浅灰背景 + 白色叉号，纯 CSS 绘制 ×
+.closeBtn {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    z-index: 1;
+    width: 40px;
+    height: 40px;
+    border: 1.5px solid rgba(255, 255, 255, 0.75);
+    border-radius: 50%;
+    background: rgba(216, 220, 226, 0.9);
+    color: #fff;
+    cursor: pointer;
+}
+.closeBtn:hover { background: rgba(196, 201, 208, 0.95); transform: scale(1.06); }
+.closeBtn:focus-visible { outline: 2px solid #ffcc00; outline-offset: 2px; }
+```
+
+> **关键设计决策**：
+> - `width` / `height` 落在相框外壳上，`<img>` 以 100% 填满（固定 `object-fit: cover`），并因 12px 内边距内缩。`color="white"` 为纯白 `#fff`，其余 `color` 为 Card `pattern` 同款底色（无花纹）；12px 内边距与 8px 相框圆角由样式表固定，不可配置。相框带柔和投影 `0 8px 14px 0 rgba(0, 0, 0, 0.08)`（无边框）；`overflow: hidden` + `line-height: 0` 保证图片像素级对齐。
+> - 加载失败时渲染内置占位，占位以 `role="img"` + `aria-label` 暴露（优先用 `alt`，缺省为「图片加载失败」）。
+> - 未加载完成时图片 `opacity: 0`；`onLoad` 后淡入（`.loaded .img`）。
+> - **预览无障碍**：打开时聚焦关闭按钮；`Escape` 关闭；Tab 圈定在关闭按钮上（遮罩内唯一可聚焦元素）；关闭后焦点还给触发元素。弹层为 `role="dialog"` + `aria-modal`，名称取自 `alt`，关闭按钮带 `aria-label="关闭预览"`。触发按钮使用黄色 `#ffcc00` 焦点环（`:focus-visible`），取代浏览器默认样式。
+

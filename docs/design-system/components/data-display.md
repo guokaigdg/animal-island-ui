@@ -215,3 +215,107 @@ Source: `src/components/Tag/Tag.tsx` + `tag.module.less`. **Pill-shaped tag**: p
 > - `border: 1.5px solid transparent` is the default placeholder so that switching to outlined/dashed never resizes the tag as the border appears or disappears.
 > - The `closable` button's click calls `stopPropagation`, so it never bubbles into `onClick`.
 > - When `onClick` is provided, the whole tag is promoted to `role="button"` + `tabIndex={0}` and responds to Enter / Space.
+
+## Image (mat frame)
+
+Source: `src/components/Image/image.module.less`. **Mat frame**: `#fff` background by default (`color="white"` — plain; any other `color` renders the Card `pattern` base colour — soft pastel, dots omitted), 12px padding (the image sits inset like a photo mat), 8px radius, `0 8px 14px 0 rgba(0, 0, 0, 0.08)` soft shadow and a built-in error placeholder.
+
+```less
+// frame wrapper
+.image {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    box-sizing: border-box;
+    border: none; /* 相框无边框；preview 默认开启时相框是 <button>，显式去除 UA 边框 */
+    background: #fff; /* 默认白色；`color` prop 覆盖 */
+    padding: 12px; /* 相框内边距，图片像照片衬板一样内缩 */
+    border-radius: 8px; /* 圆角固定，不提供 radius prop */
+    box-shadow: 0 8px 14px 0 rgba(0, 0, 0, 0.08);
+    line-height: 0;
+    vertical-align: middle;
+    flex-shrink: 0;
+    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+// inner img — fills the frame, fades in after load
+.img        { display: block; width: 100%; height: 100%; opacity: 0; transition: opacity 0.25s ease; }
+.loaded .img { opacity: 1; }
+
+// error placeholder — camera icon + muted text
+.error { flex-direction: column; gap: 8px; color: #c4b89e; font-size: 13px; font-weight: 500; line-height: 1.5; }
+```
+
+**Color variants** — `color="white"` renders the plain `#fff` base; every other value (`default` + 12 brand colours) renders the Card `pattern` **base colour** (the soft pastel the pattern sits on, dots omitted). Each class also sets a readable text colour (visible in the error placeholder):
+
+```less
+// White — 纯白，由 base .image 提供
+.image-default         { background: rgb(247, 243, 223); color: #725d42; }
+.image-app-pink        { background: #fde4e8; color: #a85565; }
+.image-purple          { background: #f0e8ff; color: #6a3a9a; }
+.image-app-blue        { background: #e8edff; color: #4a5a8a; }
+.image-app-yellow      { background: #fff8e0; color: #7a6528; }
+.image-app-orange      { background: #fff0e8; color: #8a4a2a; }
+.image-app-teal        { background: #e8faf5; color: #2a6b5a; }
+.image-app-green       { background: #e8f5e8; color: #3a6b3a; }
+.image-app-red         { background: #ffe8e8; color: #9a3a3a; }
+.image-lime-green      { background: #f5f8e0; color: #5a6b28; }
+.image-yellow-green    { background: #fffde8; color: #6a5a28; }
+.image-brown           { background: #f5f0e0; color: #5a4a2a; }
+.image-warm-peach-pink { background: #fff0e8; color: #8a4a2a; }
+```
+
+**Preview lightbox** (click-to-zoom, `preview` prop — **on by default**). The frame is promoted to a `<button type="button">` (native Enter/Space support, `cursor: zoom-in`); the overlay is portaled to `document.body` so it escapes any ancestor `transform` stacking context:
+
+```less
+// full-screen mask — same as Modal (`--animal-mask-bg`, default rgba(0,0,0,0.35)), click closes
+.mask {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--animal-mask-bg);
+    animation: animal-image-fade-in 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+// dialog — shrink-wraps the large image; its click is stopPropagation'd (only the mask closes)
+.dialog { position: relative; display: inline-flex; line-height: 0; }
+
+// large image
+.previewImg {
+    max-width: min(88vw, 1100px);
+    max-height: 86vh;
+    border-radius: 20px;
+    box-shadow: 0 12px 40px rgba(43, 33, 24, 0.55);
+    object-fit: contain;
+    animation: animal-image-zoom-in 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+// close button — 40×40 circle, light gray scrim + white ×
+.closeBtn {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    z-index: 1;
+    width: 40px;
+    height: 40px;
+    border: 1.5px solid rgba(255, 255, 255, 0.75);
+    border-radius: 50%;
+    background: rgba(216, 220, 226, 0.9);
+    color: #fff;
+    cursor: pointer;
+}
+.closeBtn:hover { background: rgba(196, 201, 208, 0.95); transform: scale(1.06); }
+.closeBtn:focus-visible { outline: 2px solid #ffcc00; outline-offset: 2px; }
+```
+
+> **Key design decisions**:
+> - `width` / `height` land on the frame wrapper while the `<img>` fills it at 100% (fixed `object-fit: cover`), inset by the 12px padding. The background is plain `#fff` for `color="white"` and the Card `pattern` base colour (dots omitted) for every other `color`; 12px padding and 8px frame radius are fixed by the stylesheet, not configurable. The frame carries a soft `0 8px 14px 0 rgba(0, 0, 0, 0.08)` shadow (no border), and `overflow: hidden` + `line-height: 0` keep the image pixel-perfectly aligned.
+> - On load error the built-in placeholder is rendered, exposed as `role="img"` with `aria-label` (uses `alt`, else "图片加载失败").
+> - While unloaded, the image is `opacity: 0`; `onLoad` fades it in (`.loaded .img`).
+> - **Preview a11y**: opening focuses the close button; `Escape` closes; Tab stays trapped on the close button (the only focusable element); closing restores focus to the trigger. The overlay is `role="dialog"` + `aria-modal` with a name derived from `alt`, and the close button carries `aria-label="关闭预览"`. The trigger button shows the yellow `#ffcc00` focus ring (`:focus-visible`) instead of the browser default.
+

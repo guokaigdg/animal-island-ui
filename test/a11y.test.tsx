@@ -29,6 +29,7 @@
  */
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { cleanup, render, type RenderResult } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import axe from 'axe-core';
 import React from 'react';
 
@@ -50,6 +51,7 @@ import { Drawer } from '@/components/Drawer';
 import { Footer } from '@/components/Footer';
 import { Form, FormItem } from '@/components/Form';
 import { Icon } from '@/components/Icon';
+import { Image } from '@/components/Image';
 import { Input } from '@/components/Input';
 import { Loading } from '@/components/Loading';
 import { Modal } from '@/components/Modal';
@@ -136,7 +138,7 @@ function containerOf(r: RenderResult): HTMLElement {
 // 测试套件
 // ---------------------------------------------------------------------------
 
-describe('a11y smoke / 28 组件 axe-core 自动检查', () => {
+describe('a11y smoke / 29 组件 axe-core 自动检查', () => {
     // -------- 交互触发器 --------
 
     it('Button', async () => {
@@ -362,5 +364,17 @@ describe('a11y smoke / 28 组件 axe-core 自动检查', () => {
     it('Loading (纯装饰)', async () => {
         const r = render(<Loading active />);
         await expectNoA11yViolations(containerOf(r), 'Loading');
+    });
+
+    it('Image (带 alt)', async () => {
+        const r = render(<Image src="https://example.com/photo.png" alt="岛屿风景" width={120} height={120} />);
+        await expectNoA11yViolations(containerOf(r), 'Image');
+    });
+
+    it('Image (preview 弹层)', async () => {
+        const user = userEvent.setup();
+        const r = render(<Image src="https://example.com/photo.png" alt="岛屿风景" preview />);
+        await user.click(r.getByRole('button', { name: /岛屿风景/ }));
+        await expectNoA11yViolations(document.body, 'Image preview');
     });
 });

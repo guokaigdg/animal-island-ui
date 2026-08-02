@@ -1,0 +1,249 @@
+// ============================================
+// Image — Animal Island Style
+// 白色衬板相框 + 错误占位 + 点击预览
+// ============================================
+
+@frame-bg: #fff; // 默认背景白色
+
+// ---------- Frame ----------
+.image {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    box-sizing: border-box;
+    border: none; // 相框无边框；preview 默认开启时相框是 <button>，显式去除 UA 边框
+    background: @frame-bg;
+    padding: 12px;
+    border-radius: 8px;
+    box-shadow: 0 8px 14px 0 rgba(0, 0, 0, 0.08);
+    line-height: 0;
+    vertical-align: middle;
+    flex-shrink: 0;
+    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.25s ease;
+}
+
+.loaded .img {
+    opacity: 1;
+}
+
+// ---------- Error placeholder (错误占位) ----------
+.error {
+    line-height: 1.5;
+    flex-direction: column;
+    gap: 8px;
+    color: #c4b89e;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+// ============================================
+// Color variants — Card pattern 同款底色（无花纹）
+// 白色（white）由 base .image 提供；其余为 pattern 底色的纯色
+// ============================================
+
+// Default — 奶油色
+.image-default {
+    background: rgb(247, 243, 223);
+    color: #725d42;
+}
+
+// App Pink — 应用粉
+.image-app-pink {
+    background: #fde4e8;
+    color: #a85565;
+}
+
+// Purple — 紫色
+.image-purple {
+    background: #f0e8ff;
+    color: #6a3a9a;
+}
+
+// App Blue — 应用蓝
+.image-app-blue {
+    background: #e8edff;
+    color: #4a5a8a;
+}
+
+// App Yellow — 应用黄
+.image-app-yellow {
+    background: #fff8e0;
+    color: #7a6528;
+}
+
+// App Orange — 应用橙
+.image-app-orange {
+    background: #fff0e8;
+    color: #8a4a2a;
+}
+
+// App Teal — 应用青
+.image-app-teal {
+    background: #e8faf5;
+    color: #2a6b5a;
+}
+
+// App Green — 应用绿
+.image-app-green {
+    background: #e8f5e8;
+    color: #3a6b3a;
+}
+
+// App Red — 应用红
+.image-app-red {
+    background: #ffe8e8;
+    color: #9a3a3a;
+}
+
+// Lime Green — 青柠绿
+.image-lime-green {
+    background: #f5f8e0;
+    color: #5a6b28;
+}
+
+// Yellow-Green — 黄绿色
+.image-yellow-green {
+    background: #fffde8;
+    color: #6a5a28;
+}
+
+// Brown — 棕色
+.image-brown {
+    background: #f5f0e0;
+    color: #5a4a2a;
+}
+
+// Warm Peach Pink — 暖桃粉
+.image-warm-peach-pink {
+    background: #fff0e8;
+    color: #8a4a2a;
+}
+
+// ---------- Preview trigger (点击预览) ----------
+.preview {
+    font: inherit;
+    color: inherit;
+    -webkit-appearance: none;
+    appearance: none;
+    cursor: zoom-in;
+
+    &:focus-visible {
+        outline: 2px solid #ffcc00;
+        outline-offset: 2px;
+    }
+}
+
+// ---------- Preview mask (大图预览遮罩) ----------
+.mask {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.55);
+    animation: animal-image-fade-in 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.previewImg {
+    max-width: min(88vw, 1100px);
+    max-height: 86vh;
+    border-radius: 20px;
+    box-shadow: 0 12px 40px rgba(43, 33, 24, 0.55);
+    object-fit: contain;
+    animation: animal-image-zoom-in 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.dialog {
+    position: relative;
+    display: inline-flex;
+    line-height: 0;
+}
+
+.closeBtn {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    z-index: 1;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: 1.5px solid rgba(255, 255, 255, 0.75);
+    border-radius: 50%;
+    background: rgba(216, 220, 226, 0.9); // 浅灰背景
+    color: #fff; // 白色叉号
+    cursor: pointer;
+    transition:
+        background 0.15s ease,
+        transform 0.15s ease;
+
+    &:hover {
+        background: rgba(196, 201, 208, 0.95);
+        transform: scale(1.06);
+    }
+
+    &:focus-visible {
+        outline: 2px solid #ffcc00;
+        outline-offset: 2px;
+    }
+}
+
+.closeMark {
+    position: relative;
+    display: block;
+    width: 16px;
+    height: 16px;
+
+    &::before,
+    &::after {
+        content: '';
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 16px;
+        height: 2px;
+        border-radius: 2px;
+        background: currentColor;
+    }
+
+    &::before {
+        transform: translate(-50%, -50%) rotate(45deg);
+    }
+
+    &::after {
+        transform: translate(-50%, -50%) rotate(-45deg);
+    }
+}
+
+@keyframes animal-image-fade-in {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes animal-image-zoom-in {
+    from {
+        opacity: 0;
+        transform: scale(0.92);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}

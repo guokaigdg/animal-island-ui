@@ -381,6 +381,7 @@ const components = [
     { key: 'phone', name: 'Phone', desc: 'Phone 模拟器' },
     { key: 'codeblock', name: 'CodeBlock', desc: '代码语法高亮组件' },
     { key: 'loading', name: 'Loading', desc: '动物主题小岛加载动画' },
+    { key: 'image', name: 'Image', desc: '白色衬板图片，支持懒加载 / 点击预览' },
 ];
 
 // ============================================
