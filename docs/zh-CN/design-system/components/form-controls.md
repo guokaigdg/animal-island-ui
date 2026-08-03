@@ -12,18 +12,17 @@
 | padding                          | `0 14px`            | `0 18px`            | `0 22px`            |
 | font-size                        | 12px                | 14px                | 16px                |
 | border-radius                    | 40px                | 50px                | 50px                |
-| border-width                     | 2.5px               | 2.5px               | **3px**             |
 | box-shadow（仅 `shadow={true}`） | `0 2px 0 0 #d4c9b4` | `0 3px 0 0 #d4c9b4` | `0 4px 0 0 #d4c9b4` |
 
 **精确颜色值：**
 
 ```css
-background: rgb(247, 243, 223);
-border: 2.5px solid #c4b89e;
+background: #fffbe7;
+/* 无边框；总高度即 token 高度（32/40/48px），原边框占用的空间并入内容区 */
 /* 默认无 box-shadow；shadow={true} 时按上表中号取 0 3px 0 0 #d4c9b4 */
 
 /* 文字 */
-color: #725d42;
+color: #8a7b66;
 font-weight: 500;
 letter-spacing: 0.01em;
 
@@ -41,18 +40,15 @@ margin-right: 6px;
 margin-left: 6px;
 
 /* hover */
-border-color: #a89878;
 box-shadow: 0 3px 0 0 #c4b89e;
 
 /* focus */
-border-color: #ffcc00;
 box-shadow:
     0 3px 0 0 #e0b800,
     0 0 0 3px rgba(255, 204, 0, 0.15);
 
 /* disabled */
 background: #ece8dc;
-border-color: #d4c9b4;
 box-shadow: none;
 opacity: 0.6;
 color: #c4b89e;
@@ -345,8 +341,8 @@ gap: 8px;
     min-width: 120px;
 }
 .selectTrigger {
-    /* 与 Input 同款：border 1.5px solid @border-color-light，radius 12px */
-    /* 背景 rgb(247,243,223)，hover/focus 切换到 @border-color-hover */
+    /* border 2px solid #e8dcc8，radius 12px */
+    /* 背景 #fff，hover 时 border-color 切为 #d4c4a8、背景切为 #fffdf7 */
 }
 .selectDropdown {
     position: absolute;

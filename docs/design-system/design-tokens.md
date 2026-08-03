@@ -26,7 +26,7 @@
 @bg-color-content: rgb(247, 243, 223); // Content area (Modal, Card)
 @bg-color-secondary: #f0e8d8;
 @bg-color-disabled: #f0ece2;
-@bg-color-input: rgb(247, 243, 223); // Input background
+@bg-color-input: #fffbe7; // Input background
 @bg-color-input-dis: #ece8dc; // Input disabled
 
 // Status colors

@@ -26,7 +26,7 @@
 @bg-color-content: rgb(247, 243, 223); // 内容区（Modal、Card）
 @bg-color-secondary: #f0e8d8;
 @bg-color-disabled: #f0ece2;
-@bg-color-input: rgb(247, 243, 223); // 输入框背景
+@bg-color-input: #fffbe7; // 输入框背景
 @bg-color-input-dis: #ece8dc; // 输入框禁用
 
 // 状态色

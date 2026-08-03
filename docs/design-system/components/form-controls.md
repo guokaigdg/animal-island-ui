@@ -12,18 +12,17 @@ Pixel-level styling for the interactive input controls: Input, Switch, Checkbox,
 | padding                           | `0 14px`            | `0 18px`            | `0 22px`            |
 | font-size                         | 12px                | 14px                | 16px                |
 | border-radius                     | 40px                | 50px                | 50px                |
-| border-width                      | 2.5px               | 2.5px               | **3px**             |
 | box-shadow (only `shadow={true}`) | `0 2px 0 0 #d4c9b4` | `0 3px 0 0 #d4c9b4` | `0 4px 0 0 #d4c9b4` |
 
 **Exact color values:**
 
 ```css
-background: rgb(247, 243, 223);
-border: 2.5px solid #c4b89e;
+background: #fffbe7;
+/* no border; the total height is the token height (32/40/48px), with the space the border used to occupy now belonging to the content */
 /* no box-shadow by default; with shadow={true} the middle size takes 0 3px 0 0 #d4c9b4 from the table above */
 
 /* text */
-color: #725d42;
+color: #8a7b66;
 font-weight: 500;
 letter-spacing: 0.01em;
 
@@ -41,18 +40,15 @@ margin-right: 6px;
 margin-left: 6px;
 
 /* hover */
-border-color: #a89878;
 box-shadow: 0 3px 0 0 #c4b89e;
 
 /* focus */
-border-color: #ffcc00;
 box-shadow:
     0 3px 0 0 #e0b800,
     0 0 0 3px rgba(255, 204, 0, 0.15);
 
 /* disabled */
 background: #ece8dc;
-border-color: #d4c9b4;
 box-shadow: none;
 opacity: 0.6;
 color: #c4b89e;
@@ -345,8 +341,8 @@ Controlled dropdown selector; the panel opens on hover/click, and options suppor
     min-width: 120px;
 }
 .selectTrigger {
-    /* same as Input: border 1.5px solid @border-color-light, radius 12px */
-    /* background rgb(247,243,223), hover/focus switches to @border-color-hover */
+    /* border 2px solid #e8dcc8, radius 12px */
+    /* background #fff, hover switches border-color to #d4c4a8 and background to #fffdf7 */
 }
 .selectDropdown {
     position: absolute;
