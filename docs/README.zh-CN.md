@@ -243,6 +243,12 @@ npm run build:demo
 
 如有问题或版权相关沟通，请通过 Issue 或邮件联系。
 
+## 给小岛续续航
+
+如果这个项目对你有帮助，不妨请开发者的猫吃个罐罐——喵星人才是小岛运转的真正燃料
+
+[赞助小岛](https://guokaigdg.github.io/home/payment.html)
+
 ## License
 
 **知识共享 署名-非商业性使用 4.0 国际 (CC BY-NC 4.0)** — 完整文本见 [LICENSE](../LICENSE) 文件。

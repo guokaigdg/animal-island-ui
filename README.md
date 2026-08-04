@@ -246,6 +246,12 @@ npm run build:demo
 
 For any questions or copyright-related communications, please contact via Issue or email.
 
+## Keep the Island Running
+
+If this project has been helpful to you, consider buying the developer's cat a can of tuna — meowsters are the real fuel that keeps the island running.
+
+[Sponsor this Island](https://guokaigdg.github.io/home/payment.html)
+
 ## License
 
 **Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)** — see the [LICENSE](LICENSE) file for the full text.
