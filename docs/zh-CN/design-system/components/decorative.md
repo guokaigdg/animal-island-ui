@@ -2,7 +2,11 @@
 
 承载海岛主题氛围的场景件：Time、Phone、Footer、Wallet 的精确取值
 
-## Time（时钟面板）
+## Time
+
+通过 `type` prop 提供两种布局：`hud`（左右结构）和 `game`（上下结构，默认）。
+
+**hud（左右结构）：**
 
 ```css
 /* container */
@@ -45,6 +49,56 @@ padding: 12px 20px; gap: 12px;
 .acWeekday → font-size: 11px;
 .acMonthday → font-size: 16px;
 .acTime / .acColon → font-size: 32px;
+```
+
+**game（上下结构，默认）：**
+
+```css
+/* container — 纯文字 HUD：无 padding、无边框、无背景 */
+display: flex; flex-direction: column; align-items: center;
+gap: 12px;
+animation: ac-fade-up 0.5s ease-out;
+
+/* 时间数字（上） */
+color: #8b7355;
+font-weight: 900; font-size: 40px;
+letter-spacing: 2px;
+
+/* 冒号（闪烁） */
+font-size: 40px; color: #8b7355;
+position: relative; top: -0.08em;
+margin: 0 1px;
+animation: blink 1s step-end infinite;
+
+/* 分割线（水平） */
+width: 100%;
+height: 3px;
+background: rgba(159, 146, 125, 0.35);
+border-radius: 2px;
+
+/* 日期行（月/日 + 周几，下） */
+display: flex; align-items: center;
+gap: 16px;
+margin-top: 5px;
+
+/* 月 / 日（6月8日） */
+color: #8b7355;
+font-weight: 800; font-size: 22px;
+
+/* 周几（中文单字：一 … 日）— 椭圆徽章，背景 #fffbe7 */
+display: inline-flex; align-items: center; justify-content: center;
+padding: 0 16px;
+height: 27px;
+border-radius: 999px;
+background: #fffbe7;
+color: #8b7355;
+font-weight: 900; font-size: 18px;
+line-height: 1;
+letter-spacing: 1px;
+
+/* responsive 768px */
+.gameTime / .gameColon → font-size: 32px;
+.gameMonthday → font-size: 14px;
 ```
 
 ## Phone（IslandPhone）

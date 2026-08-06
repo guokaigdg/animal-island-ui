@@ -2,7 +2,11 @@
 
 Exact values for the scene-setting pieces that carry the island theme: Time, Phone, Footer and Wallet.
 
-## Time (clock panel)
+## Time
+
+Two layouts via the `type` prop: `hud` (horizontal) and `game` (vertical, default).
+
+**hud（左右结构）:**
 
 ```css
 /* container */
@@ -45,6 +49,56 @@ padding: 12px 20px; gap: 12px;
 .acWeekday → font-size: 11px;
 .acMonthday → font-size: 16px;
 .acTime / .acColon → font-size: 32px;
+```
+
+**game（上下结构，默认）:**
+
+```css
+/* container — bare text HUD: no padding, no border, no background */
+display: flex; flex-direction: column; align-items: center;
+gap: 12px;
+animation: ac-fade-up 0.5s ease-out;
+
+/* time digits (top) */
+color: #8b7355;
+font-weight: 900; font-size: 40px;
+letter-spacing: 2px;
+
+/* colon (blinking) */
+font-size: 40px; color: #8b7355;
+position: relative; top: -0.08em;
+margin: 0 1px;
+animation: blink 1s step-end infinite;
+
+/* divider (horizontal separator) */
+width: 100%;
+height: 3px;
+background: rgba(159, 146, 125, 0.35);
+border-radius: 2px;
+
+/* date row (month/day + weekday, bottom) */
+display: flex; align-items: center;
+gap: 16px;
+margin-top: 5px;
+
+/* month / day (6月8日) */
+color: #8b7355;
+font-weight: 800; font-size: 22px;
+
+/* weekday (single Chinese char: 一 … 日) — pill badge with #fffbe7 background */
+display: inline-flex; align-items: center; justify-content: center;
+padding: 0 16px;
+height: 27px;
+border-radius: 999px;
+background: #fffbe7;
+color: #8b7355;
+font-weight: 900; font-size: 18px;
+line-height: 1;
+letter-spacing: 1px;
+
+/* responsive 768px */
+.gameTime / .gameColon → font-size: 32px;
+.gameMonthday → font-size: 14px;
 ```
 
 ## Phone (IslandPhone)

@@ -7,14 +7,16 @@ Props/types below are copied from the library source. In an npm-installed projec
 ```ts
 interface TimeProps {
     className?: string;
+    type?: 'hud' | 'game'; // 'game' (default): vertical — time / divider / date + weekday (中文单字周几); 'hud': horizontal — weekday/date | time
 }
 ```
 
 ```tsx
-<Time /> // auto-updates every second, shows weekday + date + clock
+<Time />             // default: game — vertical layout: time / divider / date + weekday
+<Time type="hud" />  // horizontal: weekday/date | time
 ```
 
-> No configurable props beyond `className` — it is a self-contained HUD widget. No `format`, no `value`, no timezone — uses the browser's local clock.
+> Only `className` and `type` — it is a self-contained HUD widget. No `format`, no `value`, no timezone — uses the browser's local clock. In `game` mode the date renders as `6月8日` and the weekday as a single Chinese character (`一` for Monday … `日` for Sunday).
 
 ## Phone (decorative IslandPhone)
 

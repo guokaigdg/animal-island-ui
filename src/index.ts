@@ -32,7 +32,7 @@ export { Cursor } from './components/Cursor';
 export type { CursorProps } from './components/Cursor';
 
 export { Time } from './components/Time';
-export type { TimeProps } from './components/Time';
+export type { TimeProps, TimeType } from './components/Time';
 
 export { Phone } from './components/Phone';
 export type { PhoneProps } from './components/Phone';
