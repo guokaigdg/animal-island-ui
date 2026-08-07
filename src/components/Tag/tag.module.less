@@ -19,25 +19,25 @@
 }
 
 // ---------- Size ----------
+// line-height 由基础类的 1 统一管理,vertical centering 交给 inline-flex + align-items: center,
+// 避免 line-height = height 在 1.5px border + box-sizing: border-box 下导致文字偏移。
+// height 取 8px 等差(24/32/40),font-size 取主流 12/14/16,比例协调。
 .size-small {
     height: 24px;
-    line-height: 24px;
     padding: 0 10px;
     font-size: 12px;
 }
 
 .size-medium {
-    height: 29px;
-    line-height: 29px;
+    height: 32px;
     padding: 0 12px;
-    font-size: 13px;
+    font-size: 14px;
 }
 
 .size-large {
-    height: 34px;
-    line-height: 34px;
+    height: 40px;
     padding: 0 16px;
-    font-size: 15px;
+    font-size: 16px;
 }
 
 // ---------- Variant: solid ----------

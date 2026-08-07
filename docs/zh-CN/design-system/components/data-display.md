@@ -104,7 +104,7 @@ tab-size: 4;
 
 ## Tag（胶囊标签，12 色调色板）
 
-源码：`src/components/Tag/Tag.tsx` + `tag.module.less`。**胶囊标签**：与 Card 调色板完全对齐（12 品牌色 + 1 默认），3 种尺寸 × 3 种变体（solid / outlined / dashed），支持 closable / onClick / disabled。
+源码：`src/components/Tag/Tag.tsx` + `tag.module.less`。**胶囊标签**：与 Card 调色板完全对齐（12 品牌色 + 1 默认），3 种尺寸 × 4 种变体（solid / outlined / dashed / soft），支持 closable / onClick / disabled。
 
 ```less
 // root — full pill, 1.5px transparent border (reserves space for the variants so nothing jitters)
@@ -124,14 +124,18 @@ tab-size: 4;
 }
 
 // ---------- Size ----------
-.size-small  { height: 24px; line-height: 21px; padding: 0 10px; font-size: 12px; }
-.size-medium { height: 29px; line-height: 26px; padding: 0 12px; font-size: 13px; } /* default */
-.size-large  { height: 34px; line-height: 31px; padding: 0 16px; font-size: 15px; }
+// line-height stays at 1 (inherited from .tag root); vertical centering is handled
+// by inline-flex + align-items: center, so size classes only set height / padding / font-size.
+// height uses 8px steps (24/32/40); font-size uses 12/14/16.
+.size-small  { height: 24px; padding: 0 10px; font-size: 12px; }
+.size-medium { height: 32px; padding: 0 12px; font-size: 14px; } /* default */
+.size-large  { height: 40px; padding: 0 16px; font-size: 16px; }
 
 // ---------- Variant ----------
 .variant-solid    { background: rgb(247, 243, 223); color: #8f734f; border-color: #d4c4a8; }
 .variant-outlined { background: transparent;    color: #8f734f; border-color: #c4b89e; }
 .variant-dashed   { background: transparent;    color: #8f734f; border-color: #c4b89e; border-style: dashed; }
+.variant-soft     { background: #f5f0e6; color: #8f734f; border-color: transparent; }
 
 // ---------- Colour (identical to Card's .pattern-{color} border colours) ----------
 // solid variant: background = saturated colour, text #fff
@@ -173,6 +177,20 @@ tab-size: 4;
 .color-brown-dashed            { color: #9a835a; border-color: #9a835a; }
 .color-warm-peach-pink-outlined,
 .color-warm-peach-pink-dashed  { color: #e18c6f; border-color: #e18c6f; }
+
+// soft variant: light pastel background + deeper same-hue text, no border
+.color-app-pink-soft         { background: #fce4ec; color: #c2185b; }
+.color-purple-soft           { background: #f3e5f5; color: #7b1fa2; }
+.color-app-blue-soft         { background: #e6f0ff; color: #1565c0; }
+.color-app-yellow-soft       { background: #fff8e1; color: #f9a825; }
+.color-app-orange-soft       { background: #fff3e0; color: #e65100; }
+.color-app-teal-soft         { background: #e0f2f1; color: #00695c; }
+.color-app-green-soft        { background: #e8f5e9; color: #2e7d32; }
+.color-app-red-soft          { background: #ffebee; color: #c62828; }
+.color-lime-green-soft       { background: #f1f8e9; color: #558b2f; }
+.color-yellow-green-soft     { background: #f9fbe7; color: #827717; }
+.color-brown-soft            { background: #efebe9; color: #4e342e; }
+.color-warm-peach-pink-soft  { background: #fbe9e7; color: #bf360c; }
 
 // ---------- Close button ----------
 .close {

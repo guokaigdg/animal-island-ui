@@ -68,7 +68,7 @@ interface CodeBlockProps {
 
 ```ts
 type TagSize = 'small' | 'medium' | 'large';
-type TagVariant = 'solid' | 'outlined' | 'dashed';
+type TagVariant = 'solid' | 'outlined' | 'dashed' | 'soft';
 type TagColor =
     | 'default'
     | 'app-pink'
@@ -87,7 +87,7 @@ type TagColor =
 interface TagProps {
     children?: React.ReactNode;
     size?: TagSize; // default 'medium'
-    variant?: TagVariant; // default 'solid'
+    variant?: TagVariant; // default 'soft'
     color?: TagColor; // default 'default'
     closable?: boolean; // default false
     onClose?: (e: React.MouseEvent<HTMLElement>) => void;
@@ -110,8 +110,8 @@ interface TagProps {
 
 Notes:
 
-- **Color palette exactly matches `Card`** — 12 brand colors + 1 default. `solid` uses the saturated color as background with white text; `outlined` and `dashed` use the same color for text + border on a transparent background. `color="default"` renders the parchment-pill neutral (`rgb(247,243,223)` bg, `#8f734f` text) — use it for plain chips.
-- **3 sizes** (driven by CSS class `size-{size}`): small 24px / medium 29px / large 34px. All have `border-radius: 999px` (full capsule), `font-weight: 600`, and 1.5px transparent border (reserves space so outlined/dashed don't shift layout).
+- **Color palette exactly matches `Card`** — 12 brand colors + 1 default. `solid` uses the saturated color as background with white text; `outlined` and `dashed` use the same color for text + border on a transparent background; `soft` uses a light pastel background with a deeper same-hue text color and no border. `color="default"` renders the parchment-pill neutral (`rgb(247,243,223)` bg, `#8f734f` text) — use it for plain chips.
+- **3 sizes** (driven by CSS class `size-{size}`): small 24px / medium 32px / large 40px (8px steps), with font-size 12 / 14 / 16. All have `border-radius: 999px` (full capsule), `font-weight: 600`, and 1.5px transparent border (reserves space so outlined/dashed don't shift layout). Vertical centering is handled by `inline-flex + align-items: center`; `line-height: 1` on the root keeps the line box tight to the glyph — size classes do not override it.
 - **`closable` renders a × button** with `aria-label="close"` and a 16×16 circle background `rgba(0,0,0,0.08)` (hover `0.18`). Close click is `stopPropagation`'d, so it will NOT trigger the parent `onClick`.
 - **`onClick` upgrades the tag to a button** (`role="button"`, `tabIndex={0}`) — supports Enter and Space keys. Without `onClick` the tag is a plain `<span>`. Hover/active states add `translateY(-1px)` lift + `box-shadow 0 2px 6px rgba(61,52,40,0.12)`. Focus ring is `2px solid var(--animal-focus-yellow, #f5c31c)`.
 - **`disabled`** sets `opacity: 0.5` and `pointer-events: none` on the whole tag, AND disables the close button (which gets a separate `cursor: not-allowed`).
