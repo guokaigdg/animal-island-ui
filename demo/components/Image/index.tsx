@@ -4,6 +4,37 @@ import { labelStyle, sectionStyle, sectionTitleStyle, DemoTag, ApiTable, ApiRow,
 import xjbdao from '../../img/xjbdao.jpg';
 import flower from '../../img/flower.jpg';
 
+/** 治愈海岛风格随机图片池 */
+const heroImages = [
+    'https://placehold.co/640x400?text==island%20island%20landscape%20vibrant%20green%20grass%20blue%20sky%20cherry%20blossoms%20game%20style&image_size=landscape_16_9',
+    'https://placehold.co/640x400?text==island%20museum%20interior%20warm%20lighting%20fossils%20art%20gallery&image_size=landscape_16_9',
+    'https://placehold.co/640x400?text==island%20beach%20sunset%20palm%20trees%20coconut%20game%20cute&image_size=landscape_16_9',
+    'https://placehold.co/640x400?text==island%20winter%20snow%20christmas%20lights%20cozy%20village&image_size=landscape_16_9',
+    'https://placehold.co/640x400?text==island%20fishing%20river%20peaceful%20nature%20game&image_size=landscape_16_9',
+    'https://placehold.co/640x400?text==island%20residents%20singing%20together%20happy%20game%20cute&image_size=landscape_16_9',
+    'https://placehold.co/640x400?text==island%20campfire%20night%20starry%20sky%20cozy%20tent%20game%20style&image_size=landscape_16_9',
+    'https://placehold.co/640x400?text==island%20flower%20garden%20tulips%20roses%20colorful%20hybrid%20flowers%20game&image_size=landscape_16_9',
+    'https://placehold.co/640x400?text==island%20wooden%20bridge%20over%20river%20waterfall%20lush%20forest%20game&image_size=landscape_16_9',
+    'https://placehold.co/640x400?text==island%20fruit%20orchard%20apple%20orange%20peach%20trees%20sunny%20game&image_size=landscape_16_9',
+    'https://placehold.co/640x400?text==island%20lighthouse%20ocean%20cliff%20seagulls%20blue%20sky%20game%20cute&image_size=landscape_16_9',
+    'https://placehold.co/640x400?text==island%20festival%20fireworks%20night%20sky%20lanterns%20celebration%20game&image_size=landscape_16_9',
+    'https://placehold.co/640x400?text==island%20cafe%20interior%20cozy%20coffee%20wooden%20furniture%20warm%20game&image_size=landscape_16_9',
+    'https://placehold.co/640x400?text==island%20hot%20air%20balloon%20sky%20adventure%20clouds%20colorful%20game&image_size=landscape_16_9',
+];
+
+/** Fisher-Yates 洗牌，返回打乱后的新数组 */
+const shuffle = <T,>(arr: T[]): T[] => {
+    const a = [...arr];
+    for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+};
+
+/** 14 张图打乱后与 14 个颜色一一对应，不重复 */
+const shuffledImages = shuffle(heroImages);
+
 const IMAGE_COLORS: { color: ImageColor; label: string }[] = [
     { color: 'white', label: 'White 白色' },
     { color: 'default', label: 'Default 奶油色' },
@@ -67,9 +98,9 @@ const ImageDemo: React.FC = () => (
         {/* 背景颜色 */}
         <div style={labelStyle}>背景颜色（color，Card pattern 同款底色，无花纹）</div>
         <div style={{ display: 'flex', gap: 16, alignItems: 'center', flexWrap: 'wrap' }}>
-            {IMAGE_COLORS.map((c) => (
+            {IMAGE_COLORS.map((c, i) => (
                 <div key={c.color} style={{ textAlign: 'center' }}>
-                    <Image src={xjbdao} alt={c.label} width={330} height={200} color={c.color} />
+                    <Image src={shuffledImages[i]} alt={c.label} width={330} height={200} color={c.color} />
                     <div style={{ fontSize: 12, color: '#a0936e', marginTop: 6 }}>{c.label}</div>
                 </div>
             ))}
