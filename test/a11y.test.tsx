@@ -46,6 +46,7 @@ import { Checkbox } from '@/components/Checkbox';
 import { CodeBlock } from '@/components/CodeBlock';
 import { Collapse } from '@/components/Collapse';
 import { Cursor } from '@/components/Cursor';
+import { DatePicker } from '@/components/DatePicker';
 import { Divider } from '@/components/Divider';
 import { Drawer } from '@/components/Drawer';
 import { Footer } from '@/components/Footer';
@@ -138,7 +139,7 @@ function containerOf(r: RenderResult): HTMLElement {
 // 测试套件
 // ---------------------------------------------------------------------------
 
-describe('a11y smoke / 29 组件 axe-core 自动检查', () => {
+describe('a11y smoke / 30 组件 axe-core 自动检查', () => {
     // -------- 交互触发器 --------
 
     it('Button', async () => {
@@ -241,6 +242,16 @@ describe('a11y smoke / 29 组件 axe-core 自动检查', () => {
             />
         );
         await expectNoA11yViolations(containerOf(r), 'Select');
+    });
+
+    it('DatePicker (带 aria-label，展开面板)', async () => {
+        const r = render(<DatePicker aria-label="选择日期" open />);
+        await expectNoA11yViolations(containerOf(r), 'DatePicker');
+    });
+
+    it('DatePicker range (带 aria-label，展开双面板)', async () => {
+        const r = render(<DatePicker range aria-label="选择日期范围" open />);
+        await expectNoA11yViolations(containerOf(r), 'DatePicker range');
     });
 
     it('Form (FormItem + label)', async () => {

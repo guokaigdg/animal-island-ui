@@ -70,6 +70,7 @@ const MENU_ITEMS: MenuItem[] = [
             { key: 'input', label: 'Input 输入框' },
             { key: 'switch', label: 'Switch 开关' },
             { key: 'select', label: 'Select 选择器' },
+            { key: 'date-picker', label: 'DatePicker 日期选择' },
             { key: 'checkbox', label: 'Checkbox 多选框' },
             { key: 'radio', label: 'Radio 单选框' },
             { key: 'form', label: 'Form 表单', isNew: true },

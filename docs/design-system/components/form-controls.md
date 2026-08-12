@@ -367,3 +367,91 @@ Controlled dropdown selector; the panel opens on hover/click, and options suppor
 ```
 
 > Full interaction behavior: roving keyboard focus, scroll-into-view for the selected option, and click-outside to close.
+
+## DatePicker
+
+Calendar popup date selector; value is a plain `YYYY-MM-DD` string (no date library, zero runtime deps). The trigger
+follows the Input visual spec; the popup panel is a cream card with month/year/date three-level switching.
+
+**Trigger (matches Input):**
+
+| Property    | small | middle | large |
+| ----------- | ----- | ------ | ----- |
+| height      | 32px  | 40px   | 48px  |
+| padding     | `0 14px` | `0 18px` | `0 22px` |
+| font-size   | 12px  | 14px   | 16px  |
+| border-radius | 40px | 50px   | 50px  |
+
+```css
+background: #fffbe7;      /* no border, same as Input */
+/* hover */ box-shadow: 0 3px 0 0 #c4b89e;
+/* open/focus */ box-shadow: 0 3px 0 0 #e0b800, 0 0 0 3px rgba(255, 204, 0, 0.15);
+/* error */ box-shadow: 0 3px 0 0 #c94444;
+/* warning */ box-shadow: 0 3px 0 0 #dba90e;
+/* disabled */ background: #ece8dc; box-shadow: none; opacity: 0.6;
+```
+
+**Popup panel:**
+
+```css
+width: 280px;
+padding: 14px 14px 16px;
+background: #fffdf7;
+border: 1.5px solid #e8dcc8;
+border-radius: 20px;
+box-shadow: 0 6px 18px rgba(61, 52, 40, 0.12);
+/* entrance: fade + 6px slide-up, 0.2s cubic-bezier(0.4, 0, 0.2, 1) */
+/* exit: the same 0.2s transition plays reversed; the panel unmounts only after the animation finishes */
+```
+
+**Header nav buttons** (`上一年` / `上个月` / `下个月` / `下一年`): 26×26px, no border, `#a0936e`, hover `rgba(114, 93, 66, 0.1)`
+background + `#19c8b9` color, radius 8px. **Year-month label button**: 14px / 700 / `#725d42`, hover teal tint.
+
+**Day cells** (42 = 6 weeks, prev/next month days included):
+
+```css
+width: 32px; height: 32px; border-radius: 50%;   /* circle */
+color: #725d42; font-size: 13px; font-weight: 500;
+/* hover */ background: #e6f9f6; color: #19c8b9;
+/* range-mode hover */ background: #ffd54f; color: #725d42; /* amber family, matching the selection */
+/* today (single-date mode only; range mode does not circle today) */ box-shadow: inset 0 0 0 1.5px #19c8b9; color: #19c8b9; font-weight: 700;
+/* selected */ background: #19c8b9; color: #fff; font-weight: 700;
+/* outside month */ color: #c4b89e; font-weight: 400;
+/* disabled (disabledDate) */ color: #d4c9b4; cursor: not-allowed;
+```
+
+**Month / year cells** (3×4 grid): height 36px, border-radius 12px, same color set as day cells.
+
+**Footer** — `今天` (single-date mode only, optional via `showToday`; jumps to today and sets it as the pending date)
+13px / 700 / `#8a7b66`, hover `rgba(114, 93, 66, 0.1)` with `#725d42` text, top border `1px solid #f0e8d8`; `确定`
+(`#8a7b66` background, `#fff` text, 12px / 700, hover `#796c5a`) commits the pending selection via `onChange` and
+closes with the 0.2s exit animation.
+
+**Interaction:** picking a date only sets the pending value (shown live in the trigger); `确定` commits and closes,
+Esc / click-outside discards. Keyboard Enter/Space/ArrowDown opens, arrows move the focus date, Enter sets the pending
+date, PageUp/PageDown flips months; the panel flips upward when there is no space below the trigger.
+
+**Range mode (`range`)** — two linked month panels (left = the start month, right = the following month); the first
+click sets the pending start date, the second sets the pending end date (both commit on `确定`); a second click earlier
+than the start resets the start; the trigger splits into two columns (`开始 | 结束`) separated by a 1px vertical divider
+(`#e8dcc8`, 16px tall), mirroring a
+check-in / check-out control. The panel width becomes 600px (two 280px panels + 12px gap). Every date inside the
+effective range (start, end, and everything in between) renders as an orange circle:
+
+```css
+/* in-range cells (selected range, or hover preview while picking the end) */
+background: #ffc107; color: #fff; border-radius: 50%;
+/* in-range hover */ background: #e5a200;
+/* start / end endpoints */ background: #ffb400; color: #fff; font-weight: 700; border-radius: 50%; border: 1px solid #fff;
+```
+
+**Range selection** — the selected dates are light-amber circles (`#ffc107` background with `#fff` white text and
+`border-radius: 50%`); hovering deepens the background to `#e5a200`. The start and end cells are `#ffb400` with `#fff`
+white text and additionally carry a 1px white border. Cells are fixed 32×32 and centered in their grid track
+(`justify-self: center`), so the fill is a perfect circle. There is no continuous band background — each selected date
+is its own circle.
+
+**Hover preview while picking the end date** — once the start date is picked, hovering previews the pending range and
+the old range highlight gives way: hovering a later date highlights `[start, hover]` with the hovered date as the
+pending end; hovering an earlier date highlights `[hover, start]` in reverse, marking the hovered date as the new
+pending start (clicking it resets the start). This follows the mainstream range-picker interaction model.

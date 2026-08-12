@@ -49,6 +49,9 @@ export type { IconProps, IconName } from './components/Icon';
 export { Select } from './components/Select';
 export type { SelectProps, SelectOption } from './components/Select';
 
+export { DatePicker } from './components/DatePicker';
+export type { DatePickerProps, DatePickerSize, DatePickerStatus, DatePickerValue } from './components/DatePicker';
+
 export { Tabs } from './components/Tabs';
 export type { TabsProps, TabItem } from './components/Tabs';
 

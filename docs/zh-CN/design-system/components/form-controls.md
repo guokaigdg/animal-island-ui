@@ -367,3 +367,85 @@ gap: 8px;
 ```
 
 > 完整交互行为：键盘 roving、滚动到选中项、点击外部关闭。
+
+## DatePicker
+
+日历弹层日期选择器；值为纯 `YYYY-MM-DD` 字符串（不依赖日期库，零运行时依赖）。触发区沿用 Input 视觉规格，
+弹层为奶油色卡片，支持 月 / 年 / 日 三级视图切换。
+
+**触发区（对齐 Input）：**
+
+| 属性        | small | middle | large |
+| ----------- | ----- | ------ | ----- |
+| 高度        | 32px  | 40px   | 48px  |
+| 内边距      | `0 14px` | `0 18px` | `0 22px` |
+| 字号        | 12px  | 14px   | 16px  |
+| 圆角        | 40px  | 50px   | 50px  |
+
+```css
+background: #fffbe7;      /* 无边框，同 Input */
+/* hover */ box-shadow: 0 3px 0 0 #c4b89e;
+/* 展开/聚焦 */ box-shadow: 0 3px 0 0 #e0b800, 0 0 0 3px rgba(255, 204, 0, 0.15);
+/* error */ box-shadow: 0 3px 0 0 #c94444;
+/* warning */ box-shadow: 0 3px 0 0 #dba90e;
+/* disabled */ background: #ece8dc; box-shadow: none; opacity: 0.6;
+```
+
+**弹出面板：**
+
+```css
+width: 280px;
+padding: 14px 14px 16px;
+background: #fffdf7;
+border: 1.5px solid #e8dcc8;
+border-radius: 20px;
+box-shadow: 0 6px 18px rgba(61, 52, 40, 0.12);
+/* 入场：淡入 + 6px 上滑，0.2s cubic-bezier(0.4, 0, 0.2, 1) */
+/* 退场：同款 0.2s 过渡反向播放，动画结束后才卸载面板 */
+```
+
+**头部导航按钮**（`上一年` / `上个月` / `下个月` / `下一年`）：26×26px、无边框、`#a0936e`，hover 为 `rgba(114, 93, 66, 0.1)`
+背景 + `#19c8b9` 前景，圆角 8px。**年-月标签按钮**：14px / 700 / `#725d42`，hover 青色浅底。
+
+**日期格**（42 格 = 6 周，含上/下月补位日期）：
+
+```css
+width: 32px; height: 32px; border-radius: 50%;   /* 圆形 */
+color: #725d42; font-size: 13px; font-weight: 500;
+/* hover */ background: #e6f9f6; color: #19c8b9;
+/* 范围模式 hover */ background: #ffd54f; color: #725d42; /* 与选中同色系（琥珀） */
+/* 今天（仅单日期模式；范围模式不圈出今天） */ box-shadow: inset 0 0 0 1.5px #19c8b9; color: #19c8b9; font-weight: 700;
+/* 选中 */ background: #19c8b9; color: #fff; font-weight: 700;
+/* 相邻月 */ color: #c4b89e; font-weight: 400;
+/* 禁用（disabledDate） */ color: #d4c9b4; cursor: not-allowed;
+```
+
+**月份 / 年份格**（3×4 网格）：高 36px、圆角 12px，配色同日期格。
+
+**底部** —— `今天`（仅单日期模式，可用 `showToday` 关闭；跳转到今天并将其设为待选日期）13px / 700 / `#8a7b66`，
+hover 背景 `rgba(114, 93, 66, 0.1)` + `#725d42` 文字，上边框 `1px solid #f0e8d8`；`确定`（`#8a7b66` 底、`#fff` 字、
+12px / 700，hover `#796c5a`）经 `onChange` 提交待选值并以 0.2s 退场动效关闭。
+
+**交互：** 点选日期仅更新待选值（触发区实时显示）；`确定` 提交并关闭，Esc / 点击外部丢弃待选。键盘 Enter/空格/
+下箭头展开，方向键移动焦点日期，Enter 设为待选，PageUp/PageDown 切换月份；下方空间不足时面板向上翻转。
+
+**范围模式（`range`）** —— 左右联动双面板（左侧为开始月份，右侧为下一月）；第一次点击确定待选开始日期，第二次点击
+确定待选结束日期（两者均在 `确定` 时提交）；第二次点击早于开始日期时重置为新的开始日期；触发区分为两栏显示
+（`开始 | 结束`），中间以 1px 竖向
+分隔线（`#e8dcc8`，高 16px）隔开，类似入住 / 退房控件。面板宽度变为 600px（两个 280px 面板 + 12px 间距）；
+有效范围内的每个日期（开始、结束及中间所有日期）均以橙色圆呈现：
+
+```css
+/* 区间内（已选范围，或选择结束日期时的悬停预览） */
+background: #ffc107; color: #fff; border-radius: 50%;
+/* 区间内 hover */ background: #e5a200;
+/* 起止端点 */ background: #ffb400; color: #fff; font-weight: 700; border-radius: 50%; border: 1px solid #fff;
+```
+
+**范围选中** —— 选中日期均以浅琥珀色圆呈现（`#ffc107` 底 + `#fff` 白色文字，`border-radius: 50%`）；
+hover 背景加深为 `#e5a200`。起止端点使用 `#ffb400`，配 `#fff` 白色文字并带 1px 白色描边。日期格固定 32×32 并在
+网格轨道中居中（`justify-self: center`），保证填充为正圆而非椭圆。无连续色带背景，每个选中日期独立成圆。
+
+**选择结束日期时的悬停预览** —— 确定开始日期后，悬停会实时预览待选区间，且旧范围高亮让位：悬停晚于开始日期的日期时
+高亮 `[开始, 悬停]`，悬停日期作为潜在终点；悬停早于开始日期的日期时反向高亮 `[悬停, 开始]`，把悬停日期作为新的
+潜在起点（点击即重置开始日期）。与主流范围选择器的交互模型一致。

@@ -1,0 +1,425 @@
+.wrapper {
+    position: relative;
+    display: inline-block;
+    font-family: 'Nunito', 'Noto Sans SC', sans-serif;
+    vertical-align: middle;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+/* 触发区 —— 视觉对齐 Input：奶油底、胶囊圆角、无边框 */
+.trigger {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    gap: 8px;
+    background: #fffbe7;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.trigger-small {
+    height: 32px;
+    padding: 0 14px;
+    font-size: 12px;
+}
+
+.trigger-middle {
+    height: 40px;
+    padding: 0 18px;
+    font-size: 14px;
+}
+
+.trigger-large {
+    height: 48px;
+    padding: 0 22px;
+    font-size: 16px;
+}
+
+.trigger:hover {
+    box-shadow: 0 3px 0 0 #c4b89e;
+}
+
+.trigger-open {
+    box-shadow:
+        0 3px 0 0 #e0b800,
+        0 0 0 3px rgba(255, 204, 0, 0.15);
+}
+
+.trigger-error {
+    box-shadow: 0 3px 0 0 #c94444;
+}
+
+.trigger-warning {
+    box-shadow: 0 3px 0 0 #dba90e;
+}
+
+.value {
+    flex: 1;
+    color: #8a7b66;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+}
+
+.placeholder {
+    flex: 1;
+    color: #c4b89e;
+    font-weight: 400;
+}
+
+.calendarIcon {
+    display: flex;
+    align-items: center;
+    color: #a0936e;
+}
+
+/* 范围模式触发区分隔线：开始 | 结束 */
+.rangeDivider {
+    width: 1px;
+    height: 16px;
+    margin: 0 2px;
+    background: #e8dcc8;
+    flex-shrink: 0;
+}
+
+.clear {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    margin-left: 4px;
+    border: none;
+    background: transparent;
+    border-radius: 50%;
+    color: #c4b89e;
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+
+.clear:hover {
+    color: #725d42;
+    background: rgba(114, 93, 66, 0.1);
+}
+
+.wrapper-disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.wrapper-disabled .trigger,
+.wrapper-disabled .trigger:hover {
+    background: #ece8dc;
+    box-shadow: none;
+    cursor: not-allowed;
+}
+
+.wrapper-disabled .value,
+.wrapper-disabled .placeholder {
+    color: #c4b89e;
+}
+
+/* 弹出面板 */
+.panel {
+    position: absolute;
+    width: 280px;
+    padding: 14px 14px 14px;
+    background: #fffdf7;
+    border: 1.5px solid #e8dcc8;
+    border-radius: 20px;
+    box-shadow: 0 6px 18px rgba(61, 52, 40, 0.12);
+    z-index: 1000;
+    opacity: 0;
+    transform: translateY(-6px);
+    transition:
+        opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+        transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.panelVisible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* 退场动效：与入场同款 0.2s 过渡，动画结束后由 closePanel 卸载面板 */
+.panelClosing {
+    opacity: 0;
+    transform: translateY(-6px);
+}
+
+/* 范围模式：左右双面板 */
+.panelRange {
+    width: 600px;
+}
+
+.rangePanels {
+    display: flex;
+    gap: 12px;
+}
+
+.rangePanel {
+    width: 280px;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.headerGroup {
+    display: flex;
+    gap: 2px;
+}
+
+.navBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    border: none;
+    background: transparent;
+    border-radius: 8px;
+    color: #a0936e;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+
+.navBtn:hover {
+    background: rgba(114, 93, 66, 0.1);
+    // color: #19c8b9;
+}
+
+.navIcon {
+    width: 16px;
+    height: auto;
+    display: block;
+}
+
+.labelBtn {
+    padding: 4px 10px;
+    border: none;
+    background: transparent;
+    border-radius: 10px;
+    color: #725d42;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+
+.labelBtn:hover {
+    background: #e6f9f6;
+    color: #19c8b9;
+}
+
+.yearLabel {
+    padding: 4px 10px;
+    color: #725d42;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+/* 星期表头 + 日期网格 */
+.weekRow {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    margin-bottom: 4px;
+}
+
+.weekCell {
+    height: 24px;
+    line-height: 24px;
+    text-align: center;
+    color: #a09080;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 2px;
+}
+
+.dayCell {
+    width: 32px;
+    height: 32px;
+    /* 网格轨道约 34.29px 宽，固定 32×32 并居中，保证正圆而非椭圆 */
+    justify-self: center;
+    border: none;
+    background: transparent;
+    border-radius: 50%;
+    color: #725d42;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+
+.dayCell:hover {
+    background: #e6f9f6;
+    color: #19c8b9;
+}
+
+/* 范围模式：日期 hover 与选中同色系（琥珀色系） */
+.panelRange .dayCell:hover {
+    background: #ffd54f;
+    color: #725d42;
+}
+
+.dayCellOutside {
+    color: #c4b89e;
+    font-weight: 400;
+}
+
+.dayCellToday {
+    box-shadow: inset 0 0 0 1.5px #19c8b9;
+    color: #19c8b9;
+    font-weight: 700;
+}
+
+.dayCellSelected,
+.dayCellSelected:hover {
+    background: #19c8b9;
+    color: #fff;
+    font-weight: 700;
+}
+
+.dayCellSelected:hover {
+    background: #3dd4c6;
+}
+
+/* 范围模式：选中日期均为浅琥珀色圆（取消色带背景），文字白色 */
+.dayCellInRange,
+.dayCellInRange:hover {
+    background: #ffc107;
+    border-radius: 50%;
+    color: #fff;
+    font-weight: 600;
+}
+
+.dayCellInRange:hover {
+    background: #e5a200;
+}
+
+/* 起止端点：#FFB400 正圆 + 1px 白色描边，文字白色 */
+.dayCellRangeStart,
+.dayCellRangeEnd,
+.dayCellRangeStart:hover,
+.dayCellRangeEnd:hover {
+    background: #ffc107;
+    border: 1px solid #fff;
+    border-radius: 50%;
+    color: #fff;
+    font-weight: 700;
+}
+
+.dayCellRangeStart:hover,
+.dayCellRangeEnd:hover {
+    background: #ffb400;
+}
+
+.dayCellDisabled,
+.dayCellDisabled:hover {
+    background: transparent;
+    color: #d4c9b4;
+    cursor: not-allowed;
+}
+
+/* 月份 / 年份网格 */
+.grid3x4 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4px;
+}
+
+.monthCell,
+.yearCell {
+    height: 36px;
+    border: none;
+    background: transparent;
+    border-radius: 12px;
+    color: #725d42;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+
+.monthCell:hover,
+.yearCell:hover {
+    background: #e6f9f6;
+    color: #19c8b9;
+}
+
+.monthCellSelected,
+.monthCellSelected:hover,
+.yearCellSelected,
+.yearCellSelected:hover {
+    background: #19c8b9;
+    color: #fff;
+    font-weight: 700;
+}
+
+.monthCellSelected:hover,
+.yearCellSelected:hover {
+    background: #3dd4c6;
+}
+
+/* 底部快捷区 */
+.footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid #f0e8d8;
+}
+
+.todayBtn {
+    padding: 4px 12px;
+    border: none;
+    background: transparent;
+    border-radius: 10px;
+    color: #8a7b66;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+
+.todayBtn:hover {
+    background: rgba(114, 93, 66, 0.1);
+    color: #725d42;
+}
+
+/* 底部「确定」按钮 */
+.confirmBtn {
+    padding: 6px 16px;
+    border: none;
+    background: rgba(114, 93, 66, 0.1);
+    border-radius: 12px;
+    color: #8a7b66;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+
+.confirmBtn:hover {
+    background: #796c5a;
+    color: #fff;
+}

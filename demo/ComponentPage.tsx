@@ -32,6 +32,7 @@ import ModalDemo from './components/Modal';
 import TypewriterDemo from './components/Typewriter';
 import DividerDemo from './components/Divider';
 import SelectDemo from './components/Select';
+import DatePickerDemo from './components/DatePicker';
 import { PAGE_INFO } from './pageInfo';
 const pageDescStyle: React.CSSProperties = {
     fontSize: 14,
@@ -59,6 +60,7 @@ const PAGES: Record<string, React.FC> = {
     'divider-comp': DividerDemo,
     icon: IconDemo,
     select: SelectDemo,
+    'date-picker': DatePickerDemo,
     tabs: TabsDemo,
     checkbox: CheckboxDemo,
     radio: RadioDemo,

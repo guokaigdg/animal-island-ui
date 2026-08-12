@@ -60,6 +60,10 @@ export const PAGE_INFO: Record<string, { title: string; desc: string }> = {
         title: 'Select 选择器',
         desc: '下拉选择器组件 — 支持自定义选项列表，高亮当前选中项',
     },
+    'date-picker': {
+        title: 'DatePicker 日期选择',
+        desc: '日期选择组件 — 年/月/日三级面板切换与开始~结束范围选择，支持受控/非受控、三种尺寸、allowClear 清空、disabledDate 禁用日期、自定义格式与键盘导航',
+    },
     tabs: {
         title: 'Tabs 标签页',
         desc: '标签页组件 — 支持受控/非受控模式切换',

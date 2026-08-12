@@ -20,10 +20,7 @@ interface InputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, '
 ```
 
 ```tsx
-<Input placeholder="Your name" allowClear />
-<Input size="large" prefix={<SearchIcon />} value={q} onChange={e => setQ(e.target.value)} />
-<Input status="error" suffix="@gmail.com" />
-<Input disabled value="locked" />
+<Input placeholder="Your name" allowClear size="large" prefix={<SearchIcon />} value={q} onChange={e => setQ(e.target.value)} status="error" disabled />
 ```
 
 ## Switch
@@ -46,8 +43,7 @@ interface SwitchProps {
 
 ```tsx
 <Switch defaultChecked onChange={v => console.log(v)} />
-<Switch size="small" checkedChildren="ON" unCheckedChildren="OFF" />
-<Switch loading disabled />
+<Switch size="small" checkedChildren="ON" unCheckedChildren="OFF" loading disabled />
 ```
 
 ## Checkbox
@@ -75,18 +71,7 @@ interface CheckboxProps {
 ```
 
 ```tsx
-// Uncontrolled — string values
-<Checkbox
-  options={[
-    { label: '🌊 海滩', value: 'beach' },
-    { label: '🌳 森林', value: 'forest' },
-    { label: '🦀 螃蟹', value: 'crab', disabled: true },
-  ]}
-  defaultValue={['beach']}
-/>
-
-// Controlled + vertical (numeric values are equally valid: string | number)
-const [values, setValues] = useState<Array<string | number>>([]);
+<Checkbox options={[{ label: '🌊 海滩', value: 'beach' }, { label: '🌳 森林', value: 'forest' }, { label: '🦀 螃蟹', value: 'crab', disabled: true }]} defaultValue={['beach']} />
 <Checkbox options={options} value={values} onChange={setValues} direction="vertical" size="large" />
 ```
 
@@ -118,20 +103,10 @@ interface RadioProps {
 
 ```tsx
 const [v, setV] = useState<string | number>('zh');
-<Radio
-    value={v}
-    onChange={setV}
-    options={[
-        { label: '中文', value: 'zh' },
-        { label: 'English', value: 'en' },
-        { label: '日本語', value: 'ja', disabled: true },
-    ]}
-/>;
+<Radio value={v} onChange={setV} options={[{ label: '中文', value: 'zh' }, { label: 'English', value: 'en' }, { label: '日本語', value: 'ja', disabled: true }]} />;
 ```
 
-Implements WAI-ARIA roving tabindex (Arrow / Home / End keyboard navigation). Single-select counterpart to `Checkbox`.
-
-**Not supported:** no `optionType="button"`, no `buttonStyle`, no indeterminate, no nested groups, no per-`<Radio>` standalone form (the API is group-only via `options`).
+Implements WAI-ARIA roving tabindex (Arrow / Home / End keyboard navigation). Single-select counterpart to `Checkbox`. **Not supported:** no `optionType="button"` / `buttonStyle` / indeterminate / nested groups / standalone per-`<Radio>` (group-only via `options`).
 
 ## Select
 
@@ -149,19 +124,43 @@ interface SelectProps {
 
 ```tsx
 const [lang, setLang] = useState('zh');
-<Select
-    value={lang}
-    onChange={setLang}
-    options={[
-        { key: 'zh', label: '简体中文' },
-        { key: 'en', label: 'English' },
-        { key: 'ja', label: '日本語' },
-    ]}
-    placeholder="Choose language"
-/>;
+<Select value={lang} onChange={setLang} options={[{ key: 'zh', label: '简体中文' }, { key: 'en', label: 'English' }, { key: 'ja', label: '日本語' }]} placeholder="Choose language" />;
 ```
 
-- **Controlled only.** `value` and `onChange` are required — there is no `defaultValue`.
-- Dropdown auto-flips (top/bottom, left/right) based on viewport space; click-outside to close is built in.
-- Does NOT accept `className` / `style` / a custom `renderOption`; style it via CSS targeting the descendant `.wrapper`.
-- **Not supported:** no `multiple`, no `mode="tags"`, no `showSearch`, no `loading`, no `allowClear`, no `optionLabelProp`, no `notFoundContent` (just hides).
+- **Controlled only** — `value` / `onChange` required, no `defaultValue`. Dropdown auto-flips (top/bottom, left/right); click-outside closes. No `className` / `style` / `renderOption`; style via the descendant `.wrapper`. **Not supported:** no `multiple` / `tags` / `showSearch` / `loading` / `allowClear` / `optionLabelProp` / `notFoundContent`.
+
+## DatePicker
+
+```ts
+type DatePickerSize = 'small' | 'middle' | 'large';
+type DatePickerStatus = 'error' | 'warning';
+type DatePickerValue = string | [string, string] | null; // null = cleared
+
+interface DatePickerProps {
+    range?: boolean; // default false — pick a start & end date
+    value?: DatePickerValue; // string for date mode, [start, end] for range
+    defaultValue?: string | [string, string]; // uncontrolled
+    onChange?: (value: DatePickerValue) => void; // null when cleared
+    placeholder?: string; // default '请选择日期'
+    disabled?: boolean; // default false
+    allowClear?: boolean; // default false
+    size?: DatePickerSize; // default 'middle'
+    status?: DatePickerStatus;
+    format?: string; // default 'YYYY-MM-DD'; tokens YYYY / MM / DD / M / D
+    disabledDate?: (date: Date) => boolean;
+    open?: boolean; // controlled open state
+    onOpenChange?: (open: boolean) => void;
+    showToday?: boolean; // default true
+    'aria-label'?: string;
+    'aria-labelledby'?: string;
+    className?: string;
+    style?: React.CSSProperties;
+}
+```
+
+```tsx
+<DatePicker value={date} onChange={setDate} allowClear />
+<DatePicker range value={range} onChange={setRange} disabledDate={d => d.getDay() === 0} />
+```
+
+Calendar popup date picker. The value is a plain `YYYY-MM-DD` string — no date library, zero runtime deps. Click the year-month label to switch to year / month selection; `disabledDate` disables any date (weekends etc.); `range` renders two linked month panels for a start & end date. Picking sets a pending value shown live in the trigger; `确定` commits and closes, Esc / click-outside discards. Keyboard: Enter/Space/ArrowDown opens, arrows move the focus date, Enter sets the pending date, Esc closes, PageUp/PageDown flips months.
