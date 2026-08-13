@@ -164,3 +164,36 @@ interface DatePickerProps {
 ```
 
 Calendar popup date picker. The value is a plain `YYYY-MM-DD` string — no date library, zero runtime deps. Click the year-month label to switch to year / month selection; `disabledDate` disables any date (weekends etc.); `range` renders two linked month panels for a start & end date. Picking sets a pending value shown live in the trigger; `确定` commits and closes, Esc / click-outside discards. Keyboard: Enter/Space/ArrowDown opens, arrows move the focus date, Enter sets the pending date, Esc closes, PageUp/PageDown flips months.
+
+## TimePicker
+
+```ts
+type TimePickerSize = 'small' | 'middle' | 'large';
+type TimePickerStatus = 'error' | 'warning';
+type TimePart = { h: number; m: number; s: number };
+
+interface TimePickerProps {
+    value?: string; // controlled, HH:mm:ss
+    defaultValue?: string; // uncontrolled
+    onChange?: (value: string | null) => void; // null when cleared
+    placeholder?: string; // default '请选择时间'
+    disabled?: boolean; // default false
+    allowClear?: boolean; // default false
+    size?: TimePickerSize; // default 'middle'
+    status?: TimePickerStatus;
+    format?: string; // default 'HH:mm:ss'; tokens HH / mm / ss; ss shows the seconds column
+    hourStep?: number; // default 1
+    minuteStep?: number; // default 1
+    secondStep?: number; // default 1
+    open?: boolean; // controlled open state
+    onOpenChange?: (open: boolean) => void;
+    'aria-label'?: string; 'aria-labelledby'?: string;
+    className?: string;
+    style?: React.CSSProperties;
+}
+```
+```tsx
+<TimePicker value={time} onChange={setTime} minuteStep={15} allowClear />
+```
+
+Time popup picker with hour / minute / second scroll columns; picking updates the pending value live in the trigger; `此刻` sets the current time, `确定` commits (`onChange`) and closes; Esc / click-outside discard. Enter/Space opens, Enter confirms, Esc closes.

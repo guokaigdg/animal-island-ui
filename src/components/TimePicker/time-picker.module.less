@@ -1,0 +1,255 @@
+.wrapper {
+    position: relative;
+    display: inline-block;
+    font-family: 'Nunito', 'Noto Sans SC', sans-serif;
+    vertical-align: middle;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+/* 触发区 —— 视觉对齐 Input：奶油底、胶囊圆角、无边框 */
+.trigger {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    gap: 8px;
+    background: #fffbe7;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.trigger-small {
+    height: 32px;
+    padding: 0 14px;
+    font-size: 12px;
+}
+
+.trigger-middle {
+    height: 40px;
+    padding: 0 18px;
+    font-size: 14px;
+}
+
+.trigger-large {
+    height: 48px;
+    padding: 0 22px;
+    font-size: 16px;
+}
+
+.trigger:hover {
+    box-shadow: 0 3px 0 0 #c4b89e;
+}
+
+.trigger-open {
+    box-shadow:
+        0 3px 0 0 #e0b800,
+        0 0 0 3px rgba(255, 204, 0, 0.15);
+}
+
+.trigger-error {
+    box-shadow: 0 3px 0 0 #c94444;
+}
+
+.trigger-warning {
+    box-shadow: 0 3px 0 0 #dba90e;
+}
+
+.value {
+    flex: 1;
+    color: #8a7b66;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+}
+
+.placeholder {
+    flex: 1;
+    color: #c4b89e;
+    font-weight: 400;
+}
+
+.clockIcon {
+    display: flex;
+    align-items: center;
+    color: #a0936e;
+}
+
+.clear {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    margin-left: 4px;
+    border: none;
+    background: transparent;
+    border-radius: 50%;
+    color: #c4b89e;
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+
+.clear:hover {
+    color: #725d42;
+    background: rgba(114, 93, 66, 0.1);
+}
+
+.wrapper-disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.wrapper-disabled .trigger,
+.wrapper-disabled .trigger:hover {
+    background: #ece8dc;
+    box-shadow: none;
+    cursor: not-allowed;
+}
+
+.wrapper-disabled .value,
+.wrapper-disabled .placeholder {
+    color: #c4b89e;
+}
+
+/* 弹出面板 */
+.panel {
+    position: absolute;
+    width: 248px;
+    padding: 14px 14px 14px;
+    background: #fffdf7;
+    border: 1.5px solid #e8dcc8;
+    border-radius: 20px;
+    box-shadow: 0 6px 18px rgba(61, 52, 40, 0.12);
+    z-index: 1000;
+    opacity: 0;
+    transform: translateY(-6px);
+    transition:
+        opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+        transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.panelVisible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* format 不含 ss 时仅时/分两列，宽度相应收窄 */
+.panelNoSeconds {
+    width: 172px;
+}
+
+/* 退场动效：与入场同款 0.2s 过渡，动画结束后由 closePanel 卸载面板 */
+.panelClosing {
+    opacity: 0;
+    transform: translateY(-6px);
+}
+
+/* 时 / 分 / 秒 三列 */
+.columns {
+    display: flex;
+    gap: 8px;
+}
+
+.column {
+    flex: 1;
+    min-width: 0;
+}
+
+.columnTitle {
+    margin-bottom: 6px;
+    text-align: center;
+    color: #a09080;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.columnList {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    max-height: 232px;
+    overflow-y: auto;
+    padding: 2px;
+}
+
+.option {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* 关键：禁止 flex 子项被压缩，否则 max-height 容器会把选项压扁（实测被压到约 20px） */
+    flex-shrink: 0;
+    height: 28px;
+    padding: 0;
+    border: none;
+    background: transparent;
+    border-radius: 16px;
+    appearance: none;
+    color: #725d42;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+
+.option:hover {
+    background: #ffd54f;
+    color: #725d42;
+}
+
+.optionSelected,
+.optionSelected:hover {
+    background: #ffb400;
+    color: #fff;
+    font-weight: 700;
+}
+
+/* 底部：此刻 / 确定 */
+.footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 6px;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid #f0e8d8;
+}
+
+.footerBtn {
+    padding: 6px 14px;
+    border: none;
+    background: transparent;
+    border-radius: 10px;
+    color: #8a7b66;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+
+.footerBtn:hover {
+    background: rgba(114, 93, 66, 0.1);
+    color: #725d42;
+}
+
+.confirmBtn {
+    padding: 6px 16px;
+    border: none;
+    background: rgba(114, 93, 66, 0.1);
+    border-radius: 12px;
+    color: #8a7b66;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+
+.confirmBtn:hover {
+    background: #8a7b66;
+    color: #fff;
+}

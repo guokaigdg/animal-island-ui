@@ -52,6 +52,9 @@ export type { SelectProps, SelectOption } from './components/Select';
 export { DatePicker } from './components/DatePicker';
 export type { DatePickerProps, DatePickerSize, DatePickerStatus, DatePickerValue } from './components/DatePicker';
 
+export { TimePicker } from './components/TimePicker';
+export type { TimePickerProps, TimePickerSize, TimePickerStatus, TimePart } from './components/TimePicker';
+
 export { Tabs } from './components/Tabs';
 export type { TabsProps, TabItem } from './components/Tabs';
 

@@ -449,3 +449,40 @@ hover 背景加深为 `#e5a200`。起止端点使用 `#ffb400`，配 `#fff` 白�
 **选择结束日期时的悬停预览** —— 确定开始日期后，悬停会实时预览待选区间，且旧范围高亮让位：悬停晚于开始日期的日期时
 高亮 `[开始, 悬停]`，悬停日期作为潜在终点；悬停早于开始日期的日期时反向高亮 `[悬停, 开始]`，把悬停日期作为新的
 潜在起点（点击即重置开始日期）。与主流范围选择器的交互模型一致。
+
+## TimePicker
+
+时间弹出选择器；值为纯 `HH:mm:ss` 字符串（不依赖日期库，零运行时依赖）。触发区沿用 Input 视觉规格（奶油胶囊、
+无边框）；面板为 时 / 分 / 秒 三列滚选 + 底部按钮。
+
+**触发区（对齐 Input）：**
+
+| 属性        | small | middle | large |
+| ----------- | ----- | ------ | ----- |
+| 高度        | 32px  | 40px   | 48px  |
+| 内边距      | `0 14px` | `0 18px` | `0 22px` |
+| 字号        | 12px  | 14px   | 16px  |
+| 圆角        | 40px  | 50px   | 50px  |
+
+```css
+background: #fffbe7;      /* 无边框，同 Input */
+/* hover */ box-shadow: 0 3px 0 0 #c4b89e;
+/* 展开/聚焦 */ box-shadow: 0 3px 0 0 #e0b800, 0 0 0 3px rgba(255, 204, 0, 0.15);
+/* error */ box-shadow: 0 3px 0 0 #c94444;
+/* warning */ box-shadow: 0 3px 0 0 #dba90e;
+/* disabled */ background: #ece8dc; box-shadow: none; opacity: 0.6;
+```
+
+**面板**（宽 248px，`format` 不含 `ss` 时收窄至 172px）：时 / 分 / 秒 三列（`format` 不含 `ss` 时隐藏秒列）；
+每列为可滚动列表，选项为胶囊（高 28px、圆角 16px）：
+
+```css
+/* 选项 */ color: #725d42; border-radius: 16px;
+/* 选项 hover */ background: #ffd54f; color: #725d42;
+/* 选中选项 */ background: #ffb400; color: #fff; font-weight: 700;
+```
+
+**底部** —— `此刻`（待选值设为当前时间）+ `确定`（经 `onChange` 提交并以 0.2s 退场动效关闭）。点选某列数值时
+触发区实时更新；Esc / 点击外部丢弃待选值。
+
+**交互：** 键盘 Enter/空格/下箭头展开，Enter 确认，Esc 关闭；`hourStep` / `minuteStep` / `secondStep` 过滤列选项。

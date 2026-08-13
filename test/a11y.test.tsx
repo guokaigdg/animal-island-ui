@@ -66,6 +66,7 @@ import { Table } from '@/components/Table';
 import { Tabs } from '@/components/Tabs';
 import { Tag } from '@/components/Tag';
 import { Time } from '@/components/Time';
+import { TimePicker } from '@/components/TimePicker';
 import { Title } from '@/components/Title';
 import { Tooltip } from '@/components/Tooltip';
 import { Typewriter } from '@/components/Typewriter';
@@ -139,7 +140,7 @@ function containerOf(r: RenderResult): HTMLElement {
 // 测试套件
 // ---------------------------------------------------------------------------
 
-describe('a11y smoke / 30 组件 axe-core 自动检查', () => {
+describe('a11y smoke / 31 组件 axe-core 自动检查', () => {
     // -------- 交互触发器 --------
 
     it('Button', async () => {
@@ -252,6 +253,11 @@ describe('a11y smoke / 30 组件 axe-core 自动检查', () => {
     it('DatePicker range (带 aria-label，展开双面板)', async () => {
         const r = render(<DatePicker range aria-label="选择日期范围" open />);
         await expectNoA11yViolations(containerOf(r), 'DatePicker range');
+    });
+
+    it('TimePicker (带 aria-label，展开面板)', async () => {
+        const r = render(<TimePicker aria-label="选择时间" open />);
+        await expectNoA11yViolations(containerOf(r), 'TimePicker');
     });
 
     it('Form (FormItem + label)', async () => {

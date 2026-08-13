@@ -455,3 +455,41 @@ is its own circle.
 the old range highlight gives way: hovering a later date highlights `[start, hover]` with the hovered date as the
 pending end; hovering an earlier date highlights `[hover, start]` in reverse, marking the hovered date as the new
 pending start (clicking it resets the start). This follows the mainstream range-picker interaction model.
+
+## TimePicker
+
+Time popup selector; value is a plain `HH:mm:ss` string (no date library, zero runtime deps). The trigger follows the
+Input visual spec (cream pill, no border); the panel holds three scrollable columns (时 / 分 / 秒) plus a footer.
+
+**Trigger (matches Input):**
+
+| Property    | small | middle | large |
+| ----------- | ----- | ------ | ----- |
+| height      | 32px  | 40px   | 48px  |
+| padding     | `0 14px` | `0 18px` | `0 22px` |
+| font-size   | 12px  | 14px   | 16px  |
+| border-radius | 40px | 50px   | 50px  |
+
+```css
+background: #fffbe7;      /* no border, same as Input */
+/* hover */ box-shadow: 0 3px 0 0 #c4b89e;
+/* open/focus */ box-shadow: 0 3px 0 0 #e0b800, 0 0 0 3px rgba(255, 204, 0, 0.15);
+/* error */ box-shadow: 0 3px 0 0 #c94444;
+/* warning */ box-shadow: 0 3px 0 0 #dba90e;
+/* disabled */ background: #ece8dc; box-shadow: none; opacity: 0.6;
+```
+
+**Panel** (248px wide, narrowing to 172px when `format` omits `ss`): three columns titled 时 / 分 / 秒 (`format`
+without `ss` hides the seconds column); each column is a scrollable list of pill options (28px tall, radius 16px):
+
+```css
+/* option */ color: #725d42; border-radius: 16px;
+/* option hover */ background: #ffd54f; color: #725d42;
+/* selected option */ background: #ffb400; color: #fff; font-weight: 700;
+```
+
+**Footer** — `此刻` (sets the pending value to the current time) + `确定` (commits via `onChange` and closes with the
+0.2s exit animation). Picking a column value updates the trigger live; Esc / click-outside discards the pending value.
+
+**Interaction:** keyboard Enter/Space/ArrowDown opens, Enter confirms, Esc closes; `hourStep` / `minuteStep` /
+`secondStep` filter the column options.
