@@ -364,4 +364,57 @@ describe('DatePicker', () => {
             expect(todayCell).not.toHaveClass(styles.dayCellToday);
         });
     });
+
+    describe('月份选择模式', () => {
+        it('展开后面板直接显示月份网格', async () => {
+            const user = setup();
+            render(<DatePicker picker="month" />);
+            await user.click(screen.getByRole('combobox'));
+            expect(screen.getByRole('button', { name: '8月' })).toBeInTheDocument();
+            // 日期网格不渲染
+            expect(screen.queryByRole('button', { name: /2026年8月15日/ })).not.toBeInTheDocument();
+        });
+
+        it('点击月份并确定后提交 YYYY-MM', async () => {
+            const user = setup();
+            const onChange = vi.fn();
+            render(<DatePicker picker="month" onChange={onChange} />);
+            await user.click(screen.getByRole('combobox'));
+            await user.click(screen.getByRole('button', { name: '8月' }));
+            // 触发区实时显示待选月份
+            expect(screen.getByText('2026-08')).toBeInTheDocument();
+            await user.click(screen.getByRole('button', { name: '确定' }));
+            expect(onChange).toHaveBeenCalledWith('2026-08');
+            await expectPanelClosed();
+        });
+
+        it('展示受控月份值', () => {
+            render(<DatePicker picker="month" value="2026-08" />);
+            expect(screen.getByText('2026-08')).toBeInTheDocument();
+        });
+
+        it('非法月份值回退到占位文本', () => {
+            render(<DatePicker picker="month" value="2026-13" />);
+            expect(screen.getByText('请选择日期')).toBeInTheDocument();
+        });
+
+        it('月份模式下可切换年份并返回月份网格', async () => {
+            const user = setup();
+            render(<DatePicker picker="month" />);
+            await user.click(screen.getByRole('combobox'));
+            // 点击年份标签进入年份选择，选中 2028 年后返回月份网格
+            await user.click(screen.getByRole('button', { name: '2026年' }));
+            await user.click(screen.getByRole('button', { name: '2028年' }));
+            expect(screen.getByRole('button', { name: '2028年' })).toBeInTheDocument();
+            expect(screen.getByRole('button', { name: '8月' })).toBeInTheDocument();
+        });
+
+        it('点击月份后该格出现选中高亮', async () => {
+            const user = setup();
+            render(<DatePicker picker="month" />);
+            await user.click(screen.getByRole('combobox'));
+            await user.click(screen.getByRole('button', { name: '9月' }));
+            expect(screen.getByRole('button', { name: '9月' })).toHaveClass(styles.monthCellSelected);
+        });
+    });
 });

@@ -431,6 +431,10 @@ closes with the 0.2s exit animation.
 Esc / click-outside discards. Keyboard Enter/Space/ArrowDown opens, arrows move the focus date, Enter sets the pending
 date, PageUp/PageDown flips months; the panel flips upward when there is no space below the trigger.
 
+**Month picker (`picker="month"`)** — the panel opens directly on the 12-month grid (no day cells); clicking a month
+sets the pending value and `确定` commits `YYYY-MM` (the `format` defaults to `YYYY-MM`); the year label still switches
+to year navigation and back.
+
 **Range mode (`range`)** — two linked month panels (left = the start month, right = the following month); the first
 click sets the pending start date, the second sets the pending end date (both commit on `确定`); a second click earlier
 than the start resets the start; the trigger splits into two columns (`开始 | 结束`) separated by a 1px vertical divider

@@ -148,11 +148,11 @@ interface DatePickerProps {
     status?: DatePickerStatus;
     format?: string; // default 'YYYY-MM-DD'; tokens YYYY / MM / DD / M / D
     disabledDate?: (date: Date) => boolean;
+    picker?: 'date' | 'month'; // default 'date' — 'month' opens the month grid and commits YYYY-MM
     open?: boolean; // controlled open state
     onOpenChange?: (open: boolean) => void;
     showToday?: boolean; // default true
-    'aria-label'?: string;
-    'aria-labelledby'?: string;
+    'aria-label'?: string; 'aria-labelledby'?: string;
     className?: string;
     style?: React.CSSProperties;
 }

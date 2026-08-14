@@ -5,6 +5,12 @@ import { ApiTable, ApiRow, CodeBlock, DemoTag, labelStyle, sectionStyle, section
 const DATE_PICKER_API: ApiRow[] = [
     { prop: 'range', desc: '范围选择模式：联动选择开始日期与结束日期', type: 'boolean', defaultVal: 'false' },
     {
+        prop: 'picker',
+        desc: '选择粒度：date 选择日期，month 选择月份（值为 YYYY-MM）',
+        type: `'date' | 'month'`,
+        defaultVal: "'date'",
+    },
+    {
         prop: 'value',
         desc: '当前选中值（受控）；日期模式为 YYYY-MM-DD，范围模式为 [开始, 结束]，清空为 null',
         type: 'string | [string, string] | null',
@@ -93,6 +99,10 @@ const DatePickerDemo: React.FC = () => {
             <div style={labelStyle}>隐藏「今天」快捷按钮</div>
             <div style={S.demoBox}>
                 <DatePicker showToday={false} />
+            </div>
+            <div style={labelStyle}>月份选择模式</div>
+            <div style={S.demoBox}>
+                <DatePicker picker="month" defaultValue="2026-08" />
             </div>
             <div style={labelStyle}>范围选择（开始日期 ~ 结束日期）</div>
             <div style={{ marginBottom: 8, fontSize: 13, color: '#a08060' }}>

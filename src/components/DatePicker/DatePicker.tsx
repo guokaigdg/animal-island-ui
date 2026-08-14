@@ -13,6 +13,8 @@ export type DatePickerValue = string | [string, string] | null;
 export interface DatePickerProps {
     /** 范围选择模式：联动选择开始日期与结束日期 */
     range?: boolean;
+    /** 选择粒度：date 选择日期（YYYY-MM-DD），month 选择月份（YYYY-MM），面板直接打开月份网格 */
+    picker?: 'date' | 'month';
     /** 当前选中值（受控）；日期模式为 YYYY-MM-DD，范围模式为 [开始, 结束]，清空为 null */
     value?: DatePickerValue;
     /** 默认选中值（非受控）；日期模式为 YYYY-MM-DD，范围模式为 [开始, 结束] */
@@ -81,14 +83,17 @@ const pad = (n: number) => `${n}`.padStart(2, '0');
 /** 将 YYYY-MM-DD 字符串解析为本地时间 Date，非法输入返回 null */
 const parseValue = (value: string | null | undefined): Date | null => {
     if (!value) return null;
-    const match = /^(\d{4})-(\d{1,2})-(\d{1,2})$/.exec(value);
-    if (!match) return null;
-    const date = new Date(Number(match[1]), Number(match[2]) - 1, Number(match[3]));
+    const match = /^(\d{4})-(\d{1,2})(?:-(\d{1,2}))?$/.exec(value);
+    if (!match || Number(match[2]) > 12) return null;
+    const date = new Date(Number(match[1]), Number(match[2]) - 1, Number(match[3] ?? 1));
     return Number.isNaN(date.getTime()) ? null : date;
 };
 
 /** 将 Date 序列化为 YYYY-MM-DD */
 const toValue = (date: Date) => `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}`;
+
+/** 将 Date 序列化为 YYYY-MM（月份选择模式的值） */
+const toMonthValue = (date: Date) => `${date.getFullYear()}-${pad(date.getMonth() + 1)}`;
 
 /** 按模板格式化日期，支持 YYYY / MM / DD / M / D 占位符 */
 const formatDate = (date: Date, format: string) =>
@@ -120,12 +125,13 @@ export const DatePicker: React.FC<DatePickerProps> = ({
     defaultValue,
     onChange,
     range = false,
+    picker = 'date',
     placeholder = '请选择日期',
     disabled = false,
     allowClear = false,
     size = 'middle',
     status,
-    format = 'YYYY-MM-DD',
+    format = picker === 'month' ? 'YYYY-MM' : 'YYYY-MM-DD',
     disabledDate,
     open: openProp,
     onOpenChange,
@@ -221,7 +227,7 @@ export const DatePicker: React.FC<DatePickerProps> = ({
             : (parseValue(typeof current === 'string' ? current : null) ?? new Date());
         setViewDate(base);
         setFocusedDate(base);
-        setMode('date');
+        setMode(picker === 'month' && !range ? 'month' : 'date');
         setRangeStart(null);
         setRangeEnd(null);
         setHoverDate(null);
@@ -307,7 +313,7 @@ export const DatePicker: React.FC<DatePickerProps> = ({
             // 单日期模式：跳转到今天所在月份，并把今天设为待选日期
             setViewDate(new Date(today.getFullYear(), today.getMonth(), 1));
             setFocusedDate(today);
-            setMode('date');
+            setMode(picker === 'month' ? 'month' : 'date');
             setPendingDate(today);
             return;
         }
@@ -322,7 +328,7 @@ export const DatePicker: React.FC<DatePickerProps> = ({
     const confirmTime = () => {
         if (!range) {
             if (pendingDate) {
-                const next = toValue(pendingDate);
+                const next = picker === 'month' ? toMonthValue(pendingDate) : toValue(pendingDate);
                 if (!isControlled) setInnerValue(next);
                 onChange?.(next);
             }
@@ -372,9 +378,14 @@ export const DatePicker: React.FC<DatePickerProps> = ({
                 }
                 setPendingDate(focusedDate);
             } else if (mode === 'month') {
-                setViewDate(new Date(viewDate.getFullYear(), viewDate.getMonth(), 1));
-                setFocusedDate(new Date(viewDate.getFullYear(), viewDate.getMonth(), 1));
-                setMode('date');
+                if (picker === 'month' && !range) {
+                    // 月份选择模式：回车设为待选月份
+                    setPendingDate(new Date(viewDate.getFullYear(), viewDate.getMonth(), 1));
+                } else {
+                    setViewDate(new Date(viewDate.getFullYear(), viewDate.getMonth(), 1));
+                    setFocusedDate(new Date(viewDate.getFullYear(), viewDate.getMonth(), 1));
+                    setMode('date');
+                }
             } else {
                 setFocusedDate(new Date(viewDate.getFullYear(), viewDate.getMonth(), 1));
                 setMode('month');
@@ -776,10 +787,11 @@ export const DatePicker: React.FC<DatePickerProps> = ({
                             {mode === 'month' && (
                                 <div className={styles.grid3x4}>
                                     {MONTHS.map((label, i) => {
+                                        const activeDate = pendingDate ?? selectedDate;
                                         const selected =
-                                            !!selectedDate &&
-                                            selectedDate.getFullYear() === year &&
-                                            selectedDate.getMonth() === i;
+                                            !!activeDate &&
+                                            activeDate.getFullYear() === year &&
+                                            activeDate.getMonth() === i;
                                         return (
                                             <button
                                                 key={label}
@@ -787,9 +799,14 @@ export const DatePicker: React.FC<DatePickerProps> = ({
                                                 className={`${styles.monthCell} ${selected ? styles.monthCellSelected : ''}`}
                                                 aria-label={`${i + 1}月`}
                                                 onClick={() => {
-                                                    setViewDate(new Date(year, i, 1));
-                                                    setFocusedDate(new Date(year, i, 1));
-                                                    setMode('date');
+                                                    if (picker === 'month' && !range) {
+                                                        // 月份选择模式：点击即设为待选月份
+                                                        setPendingDate(new Date(year, i, 1));
+                                                    } else {
+                                                        setViewDate(new Date(year, i, 1));
+                                                        setFocusedDate(new Date(year, i, 1));
+                                                        setMode('date');
+                                                    }
                                                 }}
                                                 onMouseDown={(e) => e.preventDefault()}
                                             >
@@ -822,7 +839,7 @@ export const DatePicker: React.FC<DatePickerProps> = ({
                                     })}
                                 </div>
                             )}
-                            {mode === 'date' && (
+                            {(mode === 'date' || (picker === 'month' && mode === 'month')) && (
                                 <div className={styles.footer}>
                                     {showToday && (
                                         <button
