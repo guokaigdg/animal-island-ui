@@ -267,3 +267,25 @@ icon 80×80px;
 - The scroll animation uses `requestAnimationFrame` with easeInOutQuad easing.
 - Enter/Space on the keyboard triggers the scroll.
 - The icon is a 158×136px PNG, scaled proportionally inside the 120×120px container via `object-fit: contain`.
+
+## Countdown (deadline timer)
+
+Source: `src/components/Countdown/Countdown.tsx` + `countdown.module.less`.
+
+The component calculates the non-negative distance between `value` (`number | Date`) and `Date.now()`, refreshing every 250ms so the displayed, ceiling-rounded second changes on time. `onFinish` fires once when the value reaches zero.
+
+```ts
+type CountdownSize = 'small' | 'middle' | 'large';
+type CountdownVariant = 'default' | 'island';
+interface CountdownProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange' | 'prefix'> {
+    value: number | Date;
+    format?: string; // default 'HH:mm:ss'; tokens DD / HH / mm / ss
+    prefix?: ReactNode;
+    size?: CountdownSize; // default 'middle'
+    variant?: CountdownVariant; // default 'default'
+    onChange?: (remaining: number) => void;
+    onFinish?: () => void;
+}
+```
+
+The default variant is a white 20px-radius panel with a warm border and soft elevation. `island` uses the parchment background `rgb(247,243,223)` with a 2px dashed `#d4c4a8` border. The numeric value is teal, 900 weight, tabular and sized 20/26/34px. The root uses `role="timer"` and `aria-live="off"` so screen readers are not interrupted four times per second.

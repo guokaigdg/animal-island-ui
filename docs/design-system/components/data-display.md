@@ -67,6 +67,8 @@ Props:
 | `code`      | `string`        | —       | **required**; raw source string, tokenized and highlighted internally as JSX/TS |
 | `style`     | `CSSProperties` | —       | merged over the default dark theme                                              |
 | `className` | `string`        | —       | custom class name                                                               |
+| `copyable`  | `boolean`       | `true`  | shows the copy button                                                           |
+| `onCopy`    | `(code) => void`| —       | called after the code was copied successfully                                   |
 
 **Default theme (hard-coded in the component, not driven by Less):**
 
@@ -85,6 +87,8 @@ overflow: auto;
 tab-size: 4;
 ```
 
+When the copy button is visible and the consumer has not supplied custom `padding` / `paddingRight`, the component reserves `96px` on the right so the button never covers the first line.
+
 **Token palette (the `COLORS` constant):**
 
 | token     | colour    | covers                                                                    |
@@ -100,7 +104,7 @@ tab-size: 4;
 | operator  | `#d4b896` | `{}[]();,` and `+-\*/=<>&\|^~?:` etc.                                     |
 | default   | `#e8d5bc` | everything else                                                           |
 
-> There is no `language` prop; non-JS/TS code (Python/Shell/SQL) is coloured by the generic rules and may render inaccurately. No copy button, line numbers or soft wrapping.
+The top-right copy button uses the Clipboard API and reports `已复制` or `复制失败`; set `copyable={false}` to hide it. There is no `language` prop, line numbers or soft wrapping; non-JS/TS code is coloured by the generic rules and may render inaccurately.
 
 ## Tag (pill, 12-colour palette)
 
@@ -336,4 +340,3 @@ Source: `src/components/Image/image.module.less`. **Mat frame**: `#fff` backgrou
 > - On load error the built-in placeholder is rendered, exposed as `role="img"` with `aria-label` (uses `alt`, else "图片加载失败").
 > - While unloaded, the image is `opacity: 0`; `onLoad` fades it in (`.loaded .img`).
 > - **Preview a11y**: opening focuses the close button; `Escape` closes; Tab stays trapped on the close button (the only focusable element); closing restores focus to the trigger. The overlay is `role="dialog"` + `aria-modal` with a name derived from `alt`, and the close button carries `aria-label="关闭预览"`. The trigger button shows the yellow `#ffcc00` focus ring (`:focus-visible`) instead of the browser default.
-

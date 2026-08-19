@@ -15,6 +15,8 @@ const CODEBLOCK_API: ApiRow[] = [
     { prop: 'code', desc: '代码字符串', type: 'string', defaultVal: '-', required: true },
     { prop: 'style', desc: '自定义样式', type: 'CSSProperties', defaultVal: '-' },
     { prop: 'className', desc: '自定义类名', type: 'string', defaultVal: '-' },
+    { prop: 'copyable', desc: '是否显示复制按钮', type: 'boolean', defaultVal: 'true' },
+    { prop: 'onCopy', desc: '复制成功回调', type: '(code: string) => void', defaultVal: '-' },
 ];
 
 const CodeBlockDemo: React.FC = () => {
@@ -35,6 +37,11 @@ const App = () => (
 
 export default App;`}
                 />
+            </div>
+
+            <div style={labelStyle}>关闭复制功能</div>
+            <div style={demoBoxStyle}>
+                <CodeBlock code="const copyButton = false;" copyable={false} />
             </div>
 
             <div style={labelStyle}>自定义样式</div>

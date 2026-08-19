@@ -267,3 +267,25 @@ icon 80×80px;
 - 滚动动画使用 `requestAnimationFrame` + easeInOutQuad 缓动。
 - 键盘 Enter/Space 触发滚动。
 - 图标是 158×136px PNG，通过 `object-fit: contain` 在 120×120px 容器内等比缩放。
+
+## Countdown（截止倒计时）
+
+源码：`src/components/Countdown/Countdown.tsx` + `countdown.module.less`。
+
+组件计算 `value`（`number | Date`）与 `Date.now()` 的非负差值，每 250ms 刷新，使向上取整后的秒数准时变化。到零时 `onFinish` 只触发一次。
+
+```ts
+type CountdownSize = 'small' | 'middle' | 'large';
+type CountdownVariant = 'default' | 'island';
+interface CountdownProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange' | 'prefix'> {
+    value: number | Date;
+    format?: string; // 默认 'HH:mm:ss'；支持 DD / HH / mm / ss
+    prefix?: ReactNode;
+    size?: CountdownSize; // 默认 'middle'
+    variant?: CountdownVariant; // 默认 'default'
+    onChange?: (remaining: number) => void;
+    onFinish?: () => void;
+}
+```
+
+默认风格是白色 20px 圆角面板、暖色边框和柔和投影；`island` 使用 `rgb(247,243,223)` 羊皮纸背景与 2px `#d4c4a8` 虚线边框。数字为 teal、900 字重、等宽数字，三档字号为 20/26/34px。根节点使用 `role="timer"` 与 `aria-live="off"`，避免读屏软件每 250ms 打断用户。

@@ -94,6 +94,27 @@ bottom: -0.4em;
 }
 ```
 
+## Carousel (fade carousel)
+
+Source: `src/components/Carousel/Carousel.tsx` + `carousel.module.less`.
+
+```ts
+interface CarouselProps extends Omit<HTMLAttributes<HTMLElement>, 'onChange'> {
+    children: ReactNode;
+    activeIndex?: number;
+    defaultActiveIndex?: number; // default 0
+    onChange?: (index: number) => void;
+    autoplay?: boolean; // default false
+    interval?: number; // default 3000; minimum effective interval 1000
+    loop?: boolean; // default true
+    showArrows?: boolean; // default true
+    showDots?: boolean; // default true
+    pauseOnHover?: boolean; // default true; also pauses while focused
+}
+```
+
+The 20px-radius viewport uses a parchment background and cross-fades slides over 0.3s; inactive slides are invisible and non-interactive. Circular 42px arrow buttons are built with CSS borders. Every dot has a 30×30px pill-shaped hit target and draws its 10px mark with `::before`; the current mark expands to a 24px teal pill. Autoplay adds a visible top-right pause/resume pill. The root is a focusable `region` with `aria-roledescription="carousel"`; slides expose position/count labels. ArrowLeft/ArrowRight, Home and End navigate, and reduced-motion mode removes transitions.
+
 Sizes (`SIZE_MAP` is injected as an inline `font-size`; every internal `em` scales automatically):
 
 | size   | font-size |

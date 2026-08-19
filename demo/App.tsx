@@ -101,6 +101,7 @@ const MENU_ITEMS: MenuItem[] = [
             { key: 'table', label: 'Table 表格' },
             { key: 'typewriter', label: 'Typewriter 打字机' },
             { key: 'image', label: 'Image 图片', isNew: true },
+            { key: 'carousel', label: 'Carousel 轮播图', isNew: true },
         ],
     },
     {
@@ -109,6 +110,7 @@ const MENU_ITEMS: MenuItem[] = [
         children: [
             { key: 'wallet', label: 'Wallet 钱包', isNew: true },
             { key: 'time', label: 'Time 时间' },
+            { key: 'countdown', label: 'Countdown 倒计时', isNew: true },
             { key: 'phone', label: 'Phone 手机' },
             { key: 'wedding-invitation', label: 'Wedding 婚礼请柬', isNew: true },
         ],

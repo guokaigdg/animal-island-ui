@@ -67,6 +67,8 @@ Props：
 | `code`      | `string`        | —       | **必填**；原始源码字符串，内部自动按 JSX/TS 分词高亮 |
 | `style`     | `CSSProperties` | —       | 会合并覆盖默认深色主题                               |
 | `className` | `string`        | —       | 自定义类名                                           |
+| `copyable`  | `boolean`       | `true`  | 是否显示复制按钮                                     |
+| `onCopy`    | `(code) => void`| —       | 代码复制成功后的回调                                 |
 
 **默认主题（写死在组件，不走 Less）：**
 
@@ -85,6 +87,8 @@ overflow: auto;
 tab-size: 4;
 ```
 
+复制按钮显示时，如果使用者没有传入自定义 `padding` / `paddingRight`，组件会在右侧预留 `96px`，避免按钮遮挡首行代码。
+
 **Token 调色板（`COLORS` 常量）：**
 
 | token     | 颜色      | 覆盖                                                               |
@@ -100,7 +104,7 @@ tab-size: 4;
 | operator  | `#d4b896` | `{}[]();,` 和 `+-\*/=<>&\|^~?:` 等                                 |
 | default   | `#e8d5bc` | 其余文本                                                           |
 
-> 不支持 `language` prop；非 JS/TS 代码（Python/Shell/SQL）会按通用规则着色，显示可能不准确。不带 copy 按钮、行号或折行。
+右上角复制按钮使用 Clipboard API，并显示“已复制”或“复制失败”反馈；传入 `copyable={false}` 可隐藏。不支持 `language` prop、行号或折行；非 JS/TS 代码会按通用规则着色，显示可能不准确。
 
 ## Tag（胶囊标签，12 色调色板）
 
@@ -336,4 +340,3 @@ tab-size: 4;
 > - 加载失败时渲染内置占位，占位以 `role="img"` + `aria-label` 暴露（优先用 `alt`，缺省为「图片加载失败」）。
 > - 未加载完成时图片 `opacity: 0`；`onLoad` 后淡入（`.loaded .img`）。
 > - **预览无障碍**：打开时聚焦关闭按钮；`Escape` 关闭；Tab 圈定在关闭按钮上（遮罩内唯一可聚焦元素）；关闭后焦点还给触发元素。弹层为 `role="dialog"` + `aria-modal`，名称取自 `alt`，关闭按钮带 `aria-label="关闭预览"`。触发按钮使用黄色 `#ffcc00` 焦点环（`:focus-visible`），取代浏览器默认样式。
-

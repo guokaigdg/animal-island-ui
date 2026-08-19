@@ -44,8 +44,10 @@ import { Button } from '@/components/Button';
 import { Card } from '@/components/Card';
 import { Checkbox } from '@/components/Checkbox';
 import { CodeBlock } from '@/components/CodeBlock';
+import { Carousel } from '@/components/Carousel';
 import { Collapse } from '@/components/Collapse';
 import { Cursor } from '@/components/Cursor';
+import { Countdown } from '@/components/Countdown';
 import { DatePicker } from '@/components/DatePicker';
 import { Divider } from '@/components/Divider';
 import { Drawer } from '@/components/Drawer';
@@ -140,7 +142,7 @@ function containerOf(r: RenderResult): HTMLElement {
 // 测试套件
 // ---------------------------------------------------------------------------
 
-describe('a11y smoke / 31 组件 axe-core 自动检查', () => {
+describe('a11y smoke / 全组件 axe-core 自动检查', () => {
     // -------- 交互触发器 --------
 
     it('Button', async () => {
@@ -360,6 +362,21 @@ describe('a11y smoke / 31 组件 axe-core 自动检查', () => {
     it('CodeBlock (有 code 文案)', async () => {
         const r = render(<CodeBlock code="const x = 1;" />);
         await expectNoA11yViolations(containerOf(r), 'CodeBlock');
+    });
+
+    it('Countdown (有可见倒计时)', async () => {
+        const r = render(<Countdown value={Date.now() + 60_000} prefix="活动结束还有" />);
+        await expectNoA11yViolations(containerOf(r), 'Countdown');
+    });
+
+    it('Carousel (有可见图片说明)', async () => {
+        const r = render(
+            <Carousel aria-label="岛屿照片">
+                <div>海滩</div>
+                <div>广场</div>
+            </Carousel>
+        );
+        await expectNoA11yViolations(containerOf(r), 'Carousel');
     });
 
     it('Table (有 dataSource)', async () => {

@@ -1,0 +1,37 @@
+.wrapper {
+    position: relative;
+    min-width: 0;
+    margin: 1em 0;
+}
+
+.copy-button {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    min-width: 62px;
+    height: 32px;
+    padding: 0 12px;
+    border: 1px solid rgba(232, 213, 188, 0.3);
+    border-radius: 50px;
+    background: rgba(61, 48, 40, 0.94);
+    color: #e8d5bc;
+    font-family: var(--animal-font-family, 'Nunito', 'Noto Sans SC');
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all var(--animal-motion-duration-base, 0.2s) var(--animal-motion-ease, cubic-bezier(0.4, 0, 0.2, 1));
+}
+
+.copy-button:hover {
+    background: #4b3b31;
+    transform: translateY(-1px);
+}
+
+.copy-button:active {
+    transform: translateY(0);
+}
+
+.copy-button:focus-visible {
+    outline: 2px solid var(--animal-primary-color, #19c8b9);
+    outline-offset: 2px;
+}

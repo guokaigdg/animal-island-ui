@@ -94,6 +94,27 @@ bottom: -0.4em;
 }
 ```
 
+## Carousel（淡入淡出轮播）
+
+源码：`src/components/Carousel/Carousel.tsx` + `carousel.module.less`。
+
+```ts
+interface CarouselProps extends Omit<HTMLAttributes<HTMLElement>, 'onChange'> {
+    children: ReactNode;
+    activeIndex?: number;
+    defaultActiveIndex?: number; // 默认 0
+    onChange?: (index: number) => void;
+    autoplay?: boolean; // 默认 false
+    interval?: number; // 默认 3000；实际最小间隔 1000
+    loop?: boolean; // 默认 true
+    showArrows?: boolean; // 默认 true
+    showDots?: boolean; // 默认 true
+    pauseOnHover?: boolean; // 默认 true；聚焦时也暂停
+}
+```
+
+20px 圆角视口使用羊皮纸背景，幻灯片以 0.3s 淡入淡出；非活动页不可见且不可交互。圆形箭头按钮为 42px，箭头由 CSS border 绘制。每个圆点拥有 30×30px pill 点击区，10px 标记由 `::before` 绘制；当前标记展开成 24px teal 胶囊。自动播放时右上角显示暂停/继续 pill。根节点是可聚焦 `region` 并带 `aria-roledescription="carousel"`，每页暴露位置/总数标签；ArrowLeft/ArrowRight、Home、End 可导航，减少动态效果模式会移除过渡。
+
 尺寸（`SIZE_MAP` 通过 inline `font-size` 注入；所有内部 `em` 自动缩放）：
 
 | size   | font-size |

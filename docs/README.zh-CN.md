@@ -15,8 +15,8 @@
     <a href="https://gitcode.com/guokaigdg/animal-island-ui"><img src="https://gitcode.com/guokaigdg/animal-island-ui/star/badge.svg" alt="Stars"></a>
     <br/>
     <a href="../coverage/badges/coverage.json"><img src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/guokaigdg/animal-island-ui/main/coverage/badges/coverage.json&style=flat-square" alt="Coverage"></a>
-    <img src="https://img.shields.io/badge/tests-475%20✓-brightgreen?style=flat-square" alt="Tests">
-    <img src="https://img.shields.io/badge/components-33-blue?style=flat-square" alt="Components">
+    <img src="https://img.shields.io/badge/tests-493%20✓-brightgreen?style=flat-square" alt="Tests">
+    <img src="https://img.shields.io/badge/components-35-blue?style=flat-square" alt="Components">
     <img src="https://img.shields.io/badge/a11y-WAI--ARIA%20APG-brightgreen?style=flat-square" alt="Accessibility">
 </div>
 <br/>
