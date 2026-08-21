@@ -90,7 +90,7 @@ export const PAGE_INFO: Record<string, { title: string; desc: string }> = {
     },
     codeblock: {
         title: 'CodeBlock 代码高亮',
-        desc: '代码高亮组件 — 语法高亮显示，支持自定义样式和类名',
+        desc: '代码高亮组件 — JSX/TS 语法高亮，支持一键复制、自定义样式和类名',
     },
     loading: {
         title: 'Loading 加载',
@@ -135,5 +135,13 @@ export const PAGE_INFO: Record<string, { title: string; desc: string }> = {
     image: {
         title: 'Image 图片',
         desc: '图片组件 — 白色衬板相框 + 错误占位，支持懒加载、点击预览',
+    },
+    countdown: {
+        title: 'Countdown 倒计时',
+        desc: '倒计时组件 — 接收结束时间，支持天/时/分/秒格式、三种尺寸、两种风格与归零回调',
+    },
+    carousel: {
+        title: 'Carousel 轮播图',
+        desc: '轮播图组件 — 支持受控/非受控索引、自动播放、首尾循环、箭头/圆点和完整键盘导航',
     },
 };

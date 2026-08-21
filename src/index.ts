@@ -143,3 +143,9 @@ export type { BackTopProps } from './components/BackTop';
 
 export { Image } from './components/Image';
 export type { ImageProps, ImageColor } from './components/Image';
+
+export { Countdown } from './components/Countdown';
+export type { CountdownProps, CountdownSize, CountdownVariant } from './components/Countdown';
+
+export { Carousel } from './components/Carousel';
+export type { CarouselProps } from './components/Carousel';

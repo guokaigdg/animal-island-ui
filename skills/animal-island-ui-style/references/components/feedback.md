@@ -132,3 +132,26 @@ Notes:
 - **Default target is `window`** — works out of the box for page-level scrolling. Pass `target` for a custom scroll container.
 - **Mobile responsive**: icon shrinks from 120px to 80px under 768px viewport.
 - **A11y**: `role="button"`, `tabIndex={0}`, `aria-label="返回顶部"`. Enter/Space trigger the scroll.
+
+## Countdown
+
+```ts
+type CountdownSize = 'small' | 'middle' | 'large';
+type CountdownVariant = 'default' | 'island';
+interface CountdownProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onChange' | 'prefix'> {
+    value: number | Date; // REQUIRED — absolute deadline
+    format?: string; // default 'HH:mm:ss'; DD / HH / mm / ss tokens
+    prefix?: React.ReactNode;
+    size?: CountdownSize; // default 'middle'
+    variant?: CountdownVariant; // default 'default'
+    onChange?: (remaining: number) => void;
+    onFinish?: () => void;
+}
+```
+
+```tsx
+<Countdown value={Date.now() + 60_000} />
+<Countdown value={deadline} format="DD 天 HH:mm:ss" prefix="活动结束还有" variant="island" />
+```
+
+The remaining time never drops below zero and `onFinish` fires once. Without a `DD` token, `HH` is total hours; with `DD`, hours are the 0–23 remainder. The root is `role="timer"` with `aria-live="off"`.

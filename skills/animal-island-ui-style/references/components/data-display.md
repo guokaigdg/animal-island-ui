@@ -52,6 +52,8 @@ interface CodeBlockProps {
     code: string; // REQUIRED — raw source string
     style?: React.CSSProperties; // merged on top of the dark preset
     className?: string;
+    copyable?: boolean; // default true
+    onCopy?: (code: string) => void;
 }
 ```
 
@@ -62,7 +64,7 @@ interface CodeBlockProps {
 <CodeBlock code={src} style={{ borderRadius: 5, backgroundColor: '#242c46' }} />
 ```
 
-> Renders a `<pre>` with built-in JSX/TS tokenizer. No `language` prop — always treated as JSX/TS. Default theme: bg `#2b2118`, border `1px solid #3d3028`, radius 20px, font-size 14, line-height 1.7. No copy button, no line numbers, no word-wrap.
+> Renders a `<pre>` with built-in JSX/TS tokenizer and a top-right copy button. The button reports copied/error status; set `copyable={false}` to hide it. It reserves 96px right padding unless custom padding is supplied. No `language` prop, line numbers or word-wrap. Default theme: bg `#2b2118`, border `1px solid #3d3028`, radius 20px, font-size 14, line-height 1.7.
 
 ## Tag
 

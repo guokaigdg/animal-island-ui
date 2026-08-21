@@ -148,3 +148,29 @@ const [activeKey, setActiveKey] = useState('tab1');
 Supports both controlled and uncontrolled modes, with a smooth fade animation on tab switch.
 
 **Not supported:** no `tabPosition` (always top), no `type="card"` / `type="editable-card"`, no `tabBarExtraContent`, no closable tabs.
+
+## Carousel
+
+```ts
+interface CarouselProps extends Omit<React.HTMLAttributes<HTMLElement>, 'onChange'> {
+    children: React.ReactNode; // REQUIRED; each direct child is one slide
+    activeIndex?: number;
+    defaultActiveIndex?: number; // default 0
+    onChange?: (index: number) => void;
+    autoplay?: boolean; // default false
+    interval?: number; // default 3000
+    loop?: boolean; // default true
+    showArrows?: boolean; // default true
+    showDots?: boolean; // default true
+    pauseOnHover?: boolean; // default true; focus also pauses
+}
+```
+
+```tsx
+<Carousel autoplay aria-label="岛屿照片">
+    <img src="/beach.jpg" alt="海滩" />
+    <img src="/plaza.jpg" alt="广场" />
+</Carousel>
+```
+
+Supports controlled/uncontrolled indexes, CSS fade transitions, looping, arrows, dots and ArrowLeft/ArrowRight/Home/End navigation. Autoplay automatically renders a pause/resume control and pauses on hover/focus. Set a useful `aria-label`; every slide receives a position/count label automatically.

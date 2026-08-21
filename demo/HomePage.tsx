@@ -380,10 +380,12 @@ const components = [
     { key: 'icon', name: 'Icon', desc: 'SVG 图标库' },
     { key: 'footer', name: 'Footer', desc: '页脚组件' },
     { key: 'time', name: 'Time', desc: '可爱风格时间显示' },
+    { key: 'countdown', name: 'Countdown', desc: '活动与任务倒计时，支持天/时/分/秒' },
     { key: 'phone', name: 'Phone', desc: 'Phone 模拟器' },
     { key: 'codeblock', name: 'CodeBlock', desc: '代码语法高亮组件' },
     { key: 'loading', name: 'Loading', desc: '动物主题小岛加载动画' },
     { key: 'image', name: 'Image', desc: '白色衬板图片，支持懒加载 / 点击预览' },
+    { key: 'carousel', name: 'Carousel', desc: '自动播放、箭头/圆点与键盘导航' },
 ];
 
 // ============================================
