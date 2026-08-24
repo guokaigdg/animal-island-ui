@@ -315,7 +315,7 @@ const features = [
     },
     {
         icon: 'Property-Shopping.svg',
-        title: '30 个组件',
+        title: '30+ 个组件',
         desc: 'Button / Input / Switch / Modal / Form / Table / Title / Tooltip / Typewriter / Card / Collapse / Cursor / Divider / Time / Phone / Footer / Icon / Checkbox / Select / DatePicker / TimePicker / Tabs / CodeBlock / Loading / Radio / InvitationCard / Wallet / Tag / Notification / Progress',
     },
     {
@@ -434,7 +434,7 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                                     Animal <br /> Island UI
                                 </>
                             )}
-                            <span style={S.heroVersion}>v1.4.0</span>
+                            <span style={S.heroVersion}>v1.6.0</span>
                         </h1>
                         <Typewriter speed={60}>
                             <p style={{ ...S.heroSubtitle, fontSize: isMobile ? 14 : 17 }}>
