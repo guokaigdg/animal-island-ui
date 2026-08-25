@@ -1,6 +1,6 @@
 {
     "name": "animal-island-ui",
-    "version": "1.6.0",
+    "version": "1.7.0",
     "description": "A nature-inspired React component library",
     "type": "module",
     "main": "dist/cjs/index.cjs",
