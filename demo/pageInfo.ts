@@ -144,4 +144,8 @@ export const PAGE_INFO: Record<string, { title: string; desc: string }> = {
         title: 'Carousel 轮播图',
         desc: '轮播图组件 — 支持受控/非受控索引、自动播放、首尾循环、箭头/圆点和完整键盘导航',
     },
+    skill: {
+        title: 'Skill 介绍',
+        desc: '项目配套的 animal-island-ui-style 技能 — 可安装到 AI 编码代理（Claude Code / Codex / Cursor），教模型按动物之森风格搭建 React 页面或单文件 HTML',
+    },
 };

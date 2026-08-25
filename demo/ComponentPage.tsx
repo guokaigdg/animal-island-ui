@@ -36,6 +36,7 @@ import DatePickerDemo from './components/DatePicker';
 import TimePickerDemo from './components/TimePicker';
 import CountdownDemo from './components/Countdown';
 import CarouselDemo from './components/Carousel';
+import SkillDemo from './components/Skill';
 import { PAGE_INFO } from './pageInfo';
 const pageDescStyle: React.CSSProperties = {
     fontSize: 14,
@@ -84,6 +85,7 @@ const PAGES: Record<string, React.FC> = {
     image: ImageDemo,
     countdown: CountdownDemo,
     carousel: CarouselDemo,
+    skill: SkillDemo,
 };
 
 // ============================================

@@ -50,6 +50,11 @@ interface MenuItem {
 // ============================================
 const MENU_ITEMS: MenuItem[] = [
     {
+        key: 'cat-guide',
+        label: '── 指南 ──',
+        children: [{ key: 'skill', label: 'Skill 介绍', isNew: true }],
+    },
+    {
         key: 'cat-basic',
         label: '── 基础 ──',
         children: [

@@ -386,6 +386,11 @@ const components = [
     { key: 'loading', name: 'Loading', desc: '动物主题小岛加载动画' },
     { key: 'image', name: 'Image', desc: '白色衬板图片，支持懒加载 / 点击预览' },
     { key: 'carousel', name: 'Carousel', desc: '自动播放、箭头/圆点与键盘导航' },
+    {
+        key: 'skill',
+        name: 'AI Skill',
+        desc: 'animal-island-ui-style 技能介绍，教 AI 搭建同风格页面',
+    },
 ];
 
 // ============================================
