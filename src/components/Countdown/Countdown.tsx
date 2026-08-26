@@ -24,7 +24,7 @@ export interface CountdownProps extends Omit<React.HTMLAttributes<HTMLDivElement
 const toTimestamp = (value: number | Date) => (value instanceof Date ? value.getTime() : value);
 
 const pad = (value: number) => String(value).padStart(2, '0');
-
+//5-->05
 const formatRemaining = (remaining: number, format: string) => {
     const totalSeconds = Math.ceil(remaining / 1_000);
     const days = Math.floor(totalSeconds / 86_400);
@@ -61,23 +61,37 @@ export const Countdown: React.FC<CountdownProps> = ({
     onFinishRef.current = onFinish;
 
     useEffect(() => {
-        finishedRef.current = false;
+        let timer: number | undefined;
 
         const update = () => {
             const next = getRemaining();
+
             setRemaining(next);
             onChangeRef.current?.(next);
 
-            if (next === 0 && !finishedRef.current) {
-                finishedRef.current = true;
-                onFinishRef.current?.();
+            if (next === 0) {
+                if (!finishedRef.current) {
+                    finishedRef.current = true;
+                    onFinishRef.current?.();
+                }
+
+                if (timer !== undefined) {
+                    window.clearInterval(timer);
+                }
             }
+
             return next;
         };
 
-        if (update() === 0) return;
-        const timer = window.setInterval(update, 250);
-        return () => window.clearInterval(timer);
+        if (update() > 0) {
+            timer = window.setInterval(update, 250);
+        }
+
+        return () => {
+            if (timer !== undefined) {
+                window.clearInterval(timer);
+            }
+        };
     }, [getRemaining]);
 
     const classNames = [styles.countdown, styles[size], styles[variant], className].filter(Boolean).join(' ');
