@@ -144,6 +144,7 @@ interface CountdownProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onC
     prefix?: React.ReactNode;
     size?: CountdownSize; // default 'middle'
     variant?: CountdownVariant; // default 'default'
+    bordered?: boolean; // default false — draws the 1.5px digit-tile borders
     onChange?: (remaining: number) => void;
     onFinish?: () => void;
 }
@@ -154,4 +155,4 @@ interface CountdownProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onC
 <Countdown value={deadline} format="DD 天 HH:mm:ss" prefix="活动结束还有" variant="island" />
 ```
 
-The remaining time never drops below zero and `onFinish` fires once. Without a `DD` token, `HH` is total hours; with `DD`, hours are the 0–23 remainder. The root is `role="timer"` with `aria-live="off"`.
+The remaining time never drops below zero and `onFinish` fires once. Without a `DD` token, `HH` is total hours; with `DD`, hours are the 0–23 remainder. Each DD / HH / mm / ss token renders as its own 12px-radius digit tile; every digit inside is a vertical strip of two 0-9 cycles that always rolls downward to the current value with a 0.35s transition (odometer style — wrapping past 0 teleports to the next cycle and keeps rolling down, never reversing). Format literals such as `:` or `天` render as plain separators. The rolling strips are `aria-hidden`; a visually-hidden span carries the full formatted value. The root is `role="timer"` with `aria-live="off"`.

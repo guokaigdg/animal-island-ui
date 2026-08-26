@@ -15,7 +15,7 @@
 .default {
     padding: 12px 18px;
     background: var(--animal-bg-color, #fff);
-    border: 1.5px solid var(--animal-border-color, #d4c9b4);
+    // border: 1.5px solid var(--animal-border-color, #d4c9b4);
     box-shadow: var(--animal-shadow-sm, 0 2px 4px rgba(61, 52, 40, 0.06));
 }
 
@@ -31,19 +31,107 @@
     white-space: nowrap;
 }
 
-.value {
-    color: var(--animal-primary-color-active, #0ea89c);
+.group {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.unit {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    box-sizing: border-box;
+    padding: 3px 8px;
+    border-radius: 12px;
+    // 与 Time 组件同款渐变底；边框由 bordered 属性控制，默认无
+    background: linear-gradient(180deg, #fff 0%, #f8f8f0 100%);
+}
+
+.island .unit {
+    background: linear-gradient(180deg, #fffdf4 0%, #f8f8f0 100%);
+}
+
+// bordered=true 时数字块带细边框
+.bordered .unit {
+    border: 1.5px solid #d4c9b4;
+}
+
+.bordered.island .unit {
+    border-color: #d4c4a8;
+}
+
+// ---------- 滚动数字位 ----------
+
+.digitCell {
+    display: inline-block;
+    overflow: hidden;
+    height: 1.2em;
+}
+
+.digitStrip {
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.35s var(--animal-motion-ease, cubic-bezier(0.4, 0, 0.2, 1));
+    will-change: transform;
+}
+
+.digitFace {
+    display: block;
+    height: 1.2em;
+    // 与 Time 组件数字同色 #8b7355（900 字重、等宽数字）
+    color: #8b7355;
     font-weight: 900;
     font-variant-numeric: tabular-nums;
-    letter-spacing: 0.06em;
+    line-height: 1.2;
+    text-align: center;
+}
+
+.sep {
+    color: #8b7355;
+    font-weight: 700;
+    white-space: pre;
+}
+
+// 时间冒号：参考 Time 组件，放大加粗并轻微上移光学居中
+.colon {
+    color: #8b7355;
+    font-weight: 900;
+    white-space: pre;
+    position: relative;
+    top: -0.08em;
+}
+
+.small .colon {
+    font-size: 20px;
+}
+
+.middle .colon {
+    font-size: 26px;
+}
+
+.large .colon {
+    font-size: 34px;
+}
+
+// 读屏专用文本：滚动数字条对辅助技术不可见
+.srOnly {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
     white-space: nowrap;
+    border: 0;
 }
 
 .small {
     min-height: 40px;
     font-size: 13px;
 
-    .value {
+    .digitCell {
         font-size: 20px;
     }
 }
@@ -52,7 +140,7 @@
     min-height: 48px;
     font-size: 14px;
 
-    .value {
+    .digitCell {
         font-size: 26px;
     }
 }
@@ -61,7 +149,7 @@
     min-height: 56px;
     font-size: 16px;
 
-    .value {
+    .digitCell {
         font-size: 34px;
     }
 }
