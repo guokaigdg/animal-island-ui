@@ -134,22 +134,36 @@ export const Countdown: React.FC<CountdownProps> = ({
 
     useEffect(() => {
         finishedRef.current = false;
+        let timer: number | undefined;
 
         const update = () => {
             const next = getRemaining();
             setRemaining(next);
             onChangeRef.current?.(next);
 
-            if (next === 0 && !finishedRef.current) {
-                finishedRef.current = true;
-                onFinishRef.current?.();
+            if (next === 0) {
+                if (!finishedRef.current) {
+                    finishedRef.current = true;
+                    onFinishRef.current?.();
+                }
+                // 归零后清除定时器，避免 setInterval 空转（远端 5a002e0 修复）
+                if (timer !== undefined) {
+                    window.clearInterval(timer);
+                    timer = undefined;
+                }
             }
             return next;
         };
 
-        if (update() === 0) return;
-        const timer = window.setInterval(update, 250);
-        return () => window.clearInterval(timer);
+        if (update() > 0) {
+            timer = window.setInterval(update, 250);
+        }
+
+        return () => {
+            if (timer !== undefined) {
+                window.clearInterval(timer);
+            }
+        };
     }, [getRemaining]);
 
     const classNames = [styles.countdown, styles[size], styles[variant], bordered && styles.bordered, className]
