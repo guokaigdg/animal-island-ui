@@ -1,0 +1,288 @@
+// ============================================
+// Skill 介绍页专属样式
+// 颜色/圆角/间距一律取 --animal-* 令牌，不写死 hex —— 与技能自身的硬性规则保持一致
+// ============================================
+
+.page {
+    display: flex;
+    flex-direction: column;
+    gap: var(--animal-spacing-lg);
+}
+
+// ---------- 通用文字 ----------
+.lead {
+    margin: 0;
+    font-size: var(--animal-font-size-sm);
+    line-height: 1.8;
+    color: var(--animal-text-color-secondary);
+}
+
+.leadSpaced {
+    margin: 0 0 14px;
+}
+
+.tagRow {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--animal-spacing-xs);
+    margin-top: var(--animal-spacing-sm);
+}
+
+// 行内路径/命令片段
+.pathChip {
+    padding: 3px 10px;
+    font-size: 12px;
+    color: var(--animal-text-color);
+    background: var(--animal-bg-color);
+    border: 1px solid var(--animal-border-color-light);
+    border-radius: 12px;
+}
+
+.pathChipQuiet {
+    padding: 2px 8px;
+    font-size: 12px;
+    color: var(--animal-text-color-secondary);
+    background: var(--animal-bg-color-secondary);
+    border-radius: 12px;
+}
+
+// ---------- 快速开始 ----------
+.quickList {
+    display: flex;
+    flex-direction: column;
+    gap: var(--animal-spacing-md);
+    margin: var(--animal-spacing-md) 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.quickItem {
+    display: flex;
+    gap: var(--animal-spacing-sm);
+}
+
+.quickBody {
+    flex: 1;
+    min-width: 0;
+}
+
+.quickTitle {
+    margin: 0 0 6px;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--animal-text-color);
+}
+
+// ---------- 序号圆点（快速开始 / 工作原理共用）----------
+.index {
+    display: inline-flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    font-size: 13px;
+    font-weight: 800;
+    color: #fff;
+    background: var(--animal-primary-color);
+    border-radius: 50%;
+}
+
+// ---------- 工作原理步骤卡 ----------
+.stepGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 20px;
+}
+
+.step {
+    position: relative;
+}
+
+.stepCard {
+    height: 100%;
+    padding: 18px;
+}
+
+.cardHead {
+    display: flex;
+    align-items: center;
+    gap: var(--animal-spacing-sm);
+    margin-bottom: var(--animal-spacing-xs);
+}
+
+.cardTitle {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--animal-text-color);
+}
+
+.cardDesc {
+    margin: 0;
+    font-size: var(--animal-font-size-sm);
+    line-height: 1.7;
+    color: var(--animal-text-color-secondary);
+}
+
+// ---------- 使用场景 ----------
+.scenarioGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: var(--animal-spacing-md);
+}
+
+.scenarioCard {
+    padding: 20px;
+}
+
+.scenarioTitle {
+    font-size: var(--animal-font-size-base);
+    font-weight: 700;
+    color: var(--animal-text-color);
+}
+
+.scenarioDesc {
+    margin: 0 0 var(--animal-spacing-sm);
+}
+
+.agentRow {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: var(--animal-spacing-sm);
+}
+
+// ---------- 组件目录 ----------
+.catalogList {
+    display: flex;
+    flex-direction: column;
+    gap: var(--animal-spacing-sm);
+}
+
+.catalogRow {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--animal-spacing-sm);
+    padding: 12px var(--animal-spacing-md);
+    background: var(--animal-bg-color);
+    border: 1px solid var(--animal-border-color-light);
+    border-radius: 14px;
+}
+
+.catalogCategory {
+    min-width: 128px;
+    justify-content: center;
+}
+
+.catalogComponents {
+    display: flex;
+    flex: 1;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+// ---------- 设计令牌 ----------
+.tokenGroup {
+    margin-bottom: 18px;
+}
+
+.swatchRow {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 20px;
+    padding-bottom: 4px;
+    overflow-x: auto;
+}
+
+.swatch {
+    display: flex;
+    flex-shrink: 0;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    width: 124px;
+}
+
+.swatchChip {
+    width: 54px;
+    height: 54px;
+    border: 1px solid var(--animal-border-color-light);
+    border-radius: var(--animal-border-radius-lg);
+    // 色块底部内阴影 —— 与库内色块一致的轻微立体感
+    box-shadow: inset 0 -3px 0 rgba(0, 0, 0, 0.08);
+}
+
+.swatchName,
+.swatchValue {
+    font-size: 10px;
+    white-space: nowrap;
+}
+
+.swatchName {
+    font-weight: 600;
+    color: var(--animal-text-color);
+}
+
+.swatchValue {
+    color: var(--animal-text-color-secondary);
+}
+
+.tokenTagRow {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--animal-spacing-xs);
+    margin-bottom: var(--animal-spacing-sm);
+}
+
+.tokenTagLabel {
+    min-width: 48px;
+    font-size: var(--animal-font-size-sm);
+    font-weight: 600;
+    color: var(--animal-text-color);
+}
+
+// ---------- 硬性规则 ----------
+.ruleGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--animal-spacing-md);
+}
+
+.ruleCard {
+    padding: 18px;
+}
+
+.ruleList {
+    margin: 0;
+    padding-left: 18px;
+    font-size: var(--animal-font-size-sm);
+    line-height: 1.9;
+    color: var(--animal-text-color-secondary);
+
+    li + li {
+        margin-top: 6px;
+    }
+}
+
+// ---------- Shell 代码块 ----------
+// 库的 CodeBlock 只做 JSX/TS 词法高亮，不识别 shell 的 `#` 注释与目录树字符，
+// 这里沿用它的深色底与配色，仅替换词法规则
+.shell {
+    box-sizing: border-box;
+    width: 100%;
+    margin: 0;
+    padding: 20px 24px;
+    overflow: auto;
+    font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', Consolas, monospace;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.7;
+    color: #e8d5bc;
+    white-space: pre;
+    background: #2b2118;
+    border: 1px solid #3d3028;
+    border-radius: 20px;
+    tab-size: 4;
+}
