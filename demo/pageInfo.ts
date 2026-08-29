@@ -98,7 +98,11 @@ export const PAGE_INFO: Record<string, { title: string; desc: string }> = {
     },
     table: {
         title: 'Table 表格',
-        desc: '数据表格组件，支持斑马纹、边框、加载状态等常用功能',
+        desc: '数据表格组件，支持斑马纹、边框、加载状态、内置分页等常用功能',
+    },
+    pagination: {
+        title: 'Pagination 分页',
+        desc: '分页组件 — 支持受控/非受控、每页条数切换、快速跳转、总条数展示，可配合 Table 使用',
     },
     'wedding-invitation': {
         title: 'InvitationCard 婚礼请柬',

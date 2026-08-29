@@ -2,6 +2,8 @@
 
 Props/types below are copied from the library source. In an npm-installed project, the installed package's TypeScript declarations (`dist/types/index.d.ts`) are the ground truth — prefer exploring them when in doubt.
 
+Covers: Table, Pagination, CodeBlock, Tag, Image.
+
 ## Table
 
 ```ts
@@ -26,6 +28,7 @@ interface TableProps<T = Record<string, unknown>> {
     loading?: boolean; // default false
     emptyText?: React.ReactNode; // default '暂无数据'
     scroll?: { x?: number | string; y?: number | string };
+    pagination?: false | PaginationProps; // default false — object enables client-side paging
     className?: string;
     style?: React.CSSProperties;
 }
@@ -43,7 +46,39 @@ interface TableProps<T = Record<string, unknown>> {
 />
 ```
 
-> **Not supported:** no `pagination` (paginate `dataSource` yourself), no built-in `sorter` / `filters` / column-search, no `rowSelection` / checkbox column, no `expandable` / nested rows, no `summary` row, no `bordered` toggle (always borderless), no virtual scroll. `scroll.x` / `scroll.y` only enable native overflow scrolling.
+> **Not supported:** no built-in `sorter` / `filters` / column-search, no `rowSelection` / checkbox column, no `expandable` / nested rows, no `summary` row, no `bordered` toggle (always borderless), no virtual scroll. `scroll.x` / `scroll.y` only enable native overflow scrolling. Client-side paging IS built in via `pagination={{ ... }}` (see Pagination below) — for server-side paging, slice `dataSource` yourself and drive `<Pagination current pageSize>`.
+
+## Pagination
+
+```ts
+interface PaginationProps {
+    total: number; // REQUIRED
+    current?: number; // controlled page; defaultCurrent defaults to 1
+    pageSize?: number; // controlled size; defaultPageSize defaults to 10
+    onChange?: (page: number, pageSize: number) => void;
+    onShowSizeChange?: (current: number, size: number) => void; // size change only; current clamped
+    showSizeChanger?: boolean; // default false — page-size popover; pageSizeOptions default [10,20,50,100]
+    showQuickJumper?: boolean; // default false — "跳至 <input> 页"
+    showTotal?: boolean; // default false — "共 N 条" on the left
+    disabled?: boolean; // default false
+    className?: string;
+    style?: React.CSSProperties;
+}
+```
+
+```tsx
+<Pagination total={85} defaultCurrent={3} showTotal showSizeChanger pageSizeOptions={[10, 20, 50]} />
+// controlled
+<Pagination total={500} current={page} pageSize={20} showQuickJumper onChange={(p) => setPage(p)} />
+// inside Table — Table owns the page state when current/pageSize are not set
+<Table columns={columns} dataSource={data} pagination={{ defaultPageSize: 5, showTotal: true }} />
+```
+
+Notes:
+- DatePicker visual language: ghost 32px circles (transparent bg) hover to `#e6f9f6` + teal text; active page is a teal `#19c8b9` solid circle with white text (hover `#3dd4c6`); size trigger & jumper input are cream `#fffbe7` capsules with `0 3px 0 0 #c4b89e` hover shadow (gold `#e0b800` when focused); the size popover is `#fffdf7` + `1.5px #e8dcc8` + radius 20.
+- Page run: first + last page always visible, current ±1 neighbourhood, `···` ellipses when `pageCount > 7`.
+- `current` / `pageSize` are controlled when passed, otherwise internal state. `onChange` fires for both page and size changes; `onShowSizeChange` only for size (page clamped into the new page count). Quick jumper accepts Enter/blur and clamps out-of-range input.
+- The size changer is a self-contained upward popover (click-outside / Escape closes) — no dependency on `Select`. a11y: `<nav aria-label="分页">` root, active page has `aria-current="page"`, prev/next use native `disabled` + `aria-label`.
 
 ## CodeBlock
 

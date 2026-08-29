@@ -1,6 +1,6 @@
 # Data display — 精确样式规范
 
-承载内容展示的组件：Table、CodeBlock、Tag 的精确取值
+承载内容展示的组件：Table、Pagination、CodeBlock、Tag 的精确取值
 
 ## Table（虚线行分隔，条纹 hover）
 
@@ -57,6 +57,113 @@ backdrop-filter: blur(2px);
 /* spinner */
 color: #19c8b9;
 ```
+
+**内置分页** — 传入 `pagination`（`PaginationProps` 对象，默认 `false` 关闭），Table 在客户端对 `dataSource` 切片，并在外壳内部渲染 `Pagination` 底部条：
+
+```css
+/* 分页容器 — 在表格外壳内右对齐 */
+display: flex;
+justify-content: flex-end;
+padding: 10px 16px 8px;
+```
+
+`pagination.current` / `pagination.pageSize` 受控时优先；否则由 Table 内部维护页码状态。其余 `PaginationProps`（见下）全部透传，`onChange` 签名同为 `(page, pageSize)`。
+
+## Pagination（幽灵格子分页器，DatePicker 视觉语言）
+
+源码：`src/components/Pagination/pagination.module.less`。**与 DatePicker 面板同语言的幽灵格子分页器**：透明底页码格子 hover 浅青色，当前页为青色正圆实底；每页条数切换器 / 跳转输入框沿用 DatePicker 触发区的奶油胶囊 + 3px 硬底阴影。页数超过 7 时显示省略号。
+
+```less
+// 根节点 — inline-flex 行，gap 2px，颜色 #725d42
+.pagination {
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+    font-family: 'Nunito', 'Noto Sans SC', sans-serif;
+    font-size: 14px;
+    user-select: none;
+}
+
+// 总条数文本（showTotal）
+.total { margin-right: 10px; font-size: 13px; font-weight: 600; color: #a09080; }
+
+// 页码 / 前后翻页按钮 — 幽灵正圆（同 DatePicker dayCell / navBtn）
+.item {
+    width: 32px;
+    height: 32px;
+    border: none;
+    border-radius: 50%;
+    background: transparent;
+    color: #725d42;
+    font-size: 13px;
+    font-weight: 500;
+    transition: all 0.15s ease;
+    // hover（非当前页、非禁用）：背景 #e6f9f6 + 文字 #19c8b9（同 dayCell:hover）
+    // focus-visible：outline 2px solid #ffcc00，offset 1
+    // disabled：文字 #d4c9b4，cursor not-allowed，背景保持透明
+}
+
+// 当前页 — 青色正圆实底白字（同 dayCellSelected）
+.active {
+    background: #19c8b9;
+    color: #fff;
+    font-weight: 700;
+    cursor: default;
+    &:hover { background: #3dd4c6; } // 加深，无位移
+}
+
+// 页码区间之间的省略号
+.ellipsis { width: 24px; height: 32px; color: #c4b89e; font-weight: 900; letter-spacing: 1px; }
+
+// 每页条数触发器（showSizeChanger）— DatePicker 触发区样式
+.sizeTrigger {
+    height: 32px;
+    padding: 0 14px;
+    border: none;
+    border-radius: 50px;
+    background: #fffbe7;
+    color: #8a7b66;
+    font-size: 12px;
+    transition: box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    // hover：box-shadow 0 3px 0 0 #c4b89e + 文字 #725d42
+    // focus-visible：0 3px 0 0 #e0b800 + 0 0 0 3px rgba(255, 204, 0, 0.15)（同 trigger-open）
+}
+
+// 选项列表 — 向上弹出（bottom: calc(100% + 8px)），DatePicker panel 样式
+.sizeList {
+    padding: 8px;
+    background: #fffdf7;
+    border: 1.5px solid #e8dcc8;
+    border-radius: 20px;
+    box-shadow: 0 6px 18px rgba(61, 52, 40, 0.12);
+    animation: size-list-in 0.2s cubic-bezier(0.4, 0, 0.2, 1); // 淡入 + 上浮 6px
+}
+.sizeOption       { min-width: 96px; padding: 7px 16px; border-radius: 10px; font-size: 13px; font-weight: 500;
+                    &:hover { background: #e6f9f6; color: #19c8b9; } }
+.sizeOptionActive { background: #19c8b9; color: #fff; font-weight: 700; &:hover { background: #3dd4c6; } }
+
+// 快速跳转输入框（showQuickJumper）— 奶油胶囊 + 金色 focus（同 trigger-open）
+.jumperInput {
+    width: 52px;
+    height: 32px;
+    border: none;
+    border-radius: 50px;
+    background: #fffbe7;
+    color: #725d42;
+    font-size: 13px;
+    font-weight: 700;
+    text-align: center;
+    // focus：box-shadow 0 3px 0 0 #e0b800 + 0 0 0 3px rgba(255, 204, 0, 0.15)
+    // disabled：背景 #ece8dc，opacity 0.5
+}
+```
+
+> **关键设计决策**：
+> - 分页器刻意复用 DatePicker 面板语言（幽灵格子、`#e6f9f6` hover、青色 `#19c8b9` 选中圆、`#fffdf7` 弹层 + `#e8dcc8` 边框），让日期网格与页码网格读起来是同一个产品家族。
+> - 页码序列遵循经典分页器：首尾页恒显、当前页 ±1 邻域、`pageCount > 7` 时显示 `···` 省略号。
+> - `current` / `pageSize` 传入即受控；否则走内部状态（`defaultCurrent` 1、`defaultPageSize` 10）。页码与每页条数变化都会触发 `onChange(page, pageSize)`；仅每页条数变化触发 `onShowSizeChange(current, size)`，其中 `current` 已按新页数收敛。
+> - 每页条数切换器为自包含弹层（点击外部 / Escape 关闭），不复用 `Select`，分页器因此不依赖表单组件。
+> - a11y：根节点为 `<nav aria-label="分页">`；当前页带 `aria-current="page"`；前后翻页按钮带 `aria-label` 并使用原生 `disabled`；跳转输入框带 `aria-label`。
 
 ## CodeBlock（深色主题，JSX/TS 分词）
 

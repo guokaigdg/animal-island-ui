@@ -356,6 +356,11 @@ const components = [
     { key: 'date-picker', name: 'DatePicker', desc: '日期选择与范围选择，年/月/日面板、禁用日期、键盘导航' },
     { key: 'time-picker', name: 'TimePicker', desc: '时间选择，时/分/秒滚选、此刻/确定、步进' },
     { key: 'tabs', name: 'Tabs', desc: '标签页组件，支持受控/非受控模式' },
+    {
+        key: 'pagination',
+        name: 'Pagination',
+        desc: '分页组件，每页条数切换、快速跳转',
+    },
     { key: 'modal', name: 'Modal', desc: 'SVG 有机形状弹窗、ESC 关闭' },
     { key: 'drawer', name: 'Drawer', desc: '下沉景深抽屉，四方向 + 背景下沉' },
     {

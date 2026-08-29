@@ -1,6 +1,6 @@
 # Data display — pixel spec
 
-Exact values for the components that present content: Table, CodeBlock and Tag.
+Exact values for the components that present content: Table, Pagination, CodeBlock and Tag.
 
 ## Table (dashed row rules, striped hover)
 
@@ -57,6 +57,113 @@ backdrop-filter: blur(2px);
 /* spinner */
 color: #19c8b9;
 ```
+
+**Built-in pagination** — pass `pagination` (a `PaginationProps` object, default `false` = off) and Table slices `dataSource` client-side and renders a `Pagination` footer inside the shell:
+
+```css
+/* footer wrapper — right aligned inside the table shell */
+display: flex;
+justify-content: flex-end;
+padding: 10px 16px 8px;
+```
+
+`pagination.current` / `pagination.pageSize` are controlled when provided; otherwise Table keeps the page state internally. All other `PaginationProps` (see below) pass through, and `onChange` receives the same signature `(page, pageSize)`.
+
+## Pagination (ghost-cell pager, DatePicker visual language)
+
+Source: `src/components/Pagination/pagination.module.less`. **Ghost-cell pager sharing the DatePicker panel vocabulary**: transparent page cells that hover to light-teal, the active page as a solid teal circle, and the size-changer / jumper controls styled like the DatePicker trigger (cream capsule + 3px hard bottom shadow). Ellipses when pages exceed 7.
+
+```less
+// root — inline-flex row, gap 2px, colour #725d42
+.pagination {
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+    font-family: 'Nunito', 'Noto Sans SC', sans-serif;
+    font-size: 14px;
+    user-select: none;
+}
+
+// total text (showTotal)
+.total { margin-right: 10px; font-size: 13px; font-weight: 600; color: #a09080; }
+
+// page & prev/next buttons — ghost circles (same as DatePicker dayCell / navBtn)
+.item {
+    width: 32px;
+    height: 32px;
+    border: none;
+    border-radius: 50%;
+    background: transparent;
+    color: #725d42;
+    font-size: 13px;
+    font-weight: 500;
+    transition: all 0.15s ease;
+    // hover (non-active, non-disabled): background #e6f9f6 + color #19c8b9 (same as dayCell:hover)
+    // focus-visible: outline 2px solid #ffcc00, offset 1
+    // disabled: color #d4c9b4, cursor not-allowed, background stays transparent
+}
+
+// active page — teal solid circle, white text (same as dayCellSelected)
+.active {
+    background: #19c8b9;
+    color: #fff;
+    font-weight: 700;
+    cursor: default;
+    &:hover { background: #3dd4c6; } // deepen, no lift
+}
+
+// ellipsis between page runs
+.ellipsis { width: 24px; height: 32px; color: #c4b89e; font-weight: 900; letter-spacing: 1px; }
+
+// size changer trigger (showSizeChanger) — DatePicker trigger style
+.sizeTrigger {
+    height: 32px;
+    padding: 0 14px;
+    border: none;
+    border-radius: 50px;
+    background: #fffbe7;
+    color: #8a7b66;
+    font-size: 12px;
+    transition: box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    // hover: box-shadow 0 3px 0 0 #c4b89e + color #725d42
+    // focus-visible: 0 3px 0 0 #e0b800 + 0 0 0 3px rgba(255, 204, 0, 0.15) (same as trigger-open)
+}
+
+// size options — upward popover (bottom: calc(100% + 8px)), DatePicker panel style
+.sizeList {
+    padding: 8px;
+    background: #fffdf7;
+    border: 1.5px solid #e8dcc8;
+    border-radius: 20px;
+    box-shadow: 0 6px 18px rgba(61, 52, 40, 0.12);
+    animation: size-list-in 0.2s cubic-bezier(0.4, 0, 0.2, 1); // fade + rise 6px
+}
+.sizeOption       { min-width: 96px; padding: 7px 16px; border-radius: 10px; font-size: 13px; font-weight: 500;
+                    &:hover { background: #e6f9f6; color: #19c8b9; } }
+.sizeOptionActive { background: #19c8b9; color: #fff; font-weight: 700; &:hover { background: #3dd4c6; } }
+
+// quick jumper input (showQuickJumper) — cream capsule, gold focus (same as trigger-open)
+.jumperInput {
+    width: 52px;
+    height: 32px;
+    border: none;
+    border-radius: 50px;
+    background: #fffbe7;
+    color: #725d42;
+    font-size: 13px;
+    font-weight: 700;
+    text-align: center;
+    // focus: box-shadow 0 3px 0 0 #e0b800 + 0 0 0 3px rgba(255, 204, 0, 0.15)
+    // disabled: background #ece8dc, opacity 0.5
+}
+```
+
+> **Key design decisions**:
+> - The pager deliberately reuses the DatePicker panel vocabulary (ghost cells, `#e6f9f6` hover, teal `#19c8b9` selection circle, `#fffdf7` popover with `#e8dcc8` border) so date grids and page grids read as the same product family.
+> - Page runs follow the classic pager: first + last page always visible, current ±1 neighbourhood, `···` ellipses when `pageCount > 7`.
+> - `current` / `pageSize` are controlled when passed; otherwise internal state (`defaultCurrent` 1, `defaultPageSize` 10). `onChange(page, pageSize)` fires on both page and size changes; `onShowSizeChange(current, size)` only on size change, with `current` already clamped into the new page count.
+> - The size changer is a self-contained popover (click outside / Escape closes) rather than reusing `Select`, so the pager has no dependency on the form components.
+> - a11y: root is `<nav aria-label="分页">`; the active page carries `aria-current="page"`; prev/next have `aria-label` and use native `disabled`; the jumper input has an `aria-label`.
 
 ## CodeBlock (dark theme, JSX/TS tokenizer)
 

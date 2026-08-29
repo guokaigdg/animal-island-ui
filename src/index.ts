@@ -102,6 +102,9 @@ export type { LoadingProps } from './components/Loading';
 export { Table } from './components/Table';
 export type { TableProps, TableColumn } from './components/Table';
 
+export { Pagination } from './components/Pagination';
+export type { PaginationProps } from './components/Pagination';
+
 export { Wallet } from './components/Wallet';
 export type { WalletProps, WalletSize } from './components/Wallet';
 

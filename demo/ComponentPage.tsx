@@ -12,6 +12,7 @@ import TitleDemo from './components/Title';
 import CodeBlockDemo from './components/CodeBlock';
 import LoadingDemo from './components/Loading/LoadingDemo';
 import TableDemo from './components/Table/TableDemo';
+import PaginationDemo from './components/Pagination';
 import InvitationCardDemo from './components/InvitationCard/InvitationCardDemo';
 import WalletDemo from './components/Wallet/WalletDemo';
 import DrawerDemo from './components/Drawer/DrawerDemo';
@@ -74,6 +75,7 @@ const PAGES: Record<string, React.FC> = {
     codeblock: CodeBlockDemo,
     loading: LoadingDemo,
     table: TableDemo,
+    pagination: PaginationDemo,
     'wedding-invitation': InvitationCardDemo,
     wallet: WalletDemo,
     tag: TagDemo,
