@@ -41,13 +41,13 @@ const TableDemo: React.FC = () => {
             render: (value: unknown) => {
                 const hobby = value as string;
                 const tagStyles: Record<string, { bg: string; color: string }> = {
-                    音乐: { bg: 'rgba(147, 112, 219, 0.15)', color: '#9370db' },
-                    运动: { bg: 'rgba(255, 140, 0, 0.15)', color: '#ff8c00' },
-                    唱歌: { bg: 'rgba(255, 99, 71, 0.15)', color: '#ff6347' },
-                    钓鱼: { bg: 'rgba(30, 144, 255, 0.15)', color: '#1e90ff' },
-                    画画: { bg: 'rgba(255, 105, 180, 0.15)', color: '#ff69b4' },
+                    音乐: { bg: '#ece7f8', color: '#7b5cd6' },
+                    运动: { bg: '#fff0dc', color: '#d97a00' },
+                    唱歌: { bg: '#ffe8e4', color: '#dd5040' },
+                    钓鱼: { bg: '#e2effd', color: '#1d7fd6' },
+                    画画: { bg: '#ffe8f1', color: '#dd5096' },
                 };
-                const style = tagStyles[hobby] || { bg: 'rgba(25, 200, 185, 0.15)', color: '#19c8b9' };
+                const style = tagStyles[hobby] || { bg: '#e0f7f4', color: '#129a8e' };
                 return (
                     <span
                         style={{
@@ -165,9 +165,9 @@ const columns = [
         render: (value) => (
             <span style={{
                 padding: '4px 12px',
-                background: 'rgba(25, 200, 185, 0.15)',
+                background: '#e0f7f4',
                 borderRadius: 20,
-                color: '#19c8b9',
+                color: '#129a8e',
             }}>
                 {value}
             </span>

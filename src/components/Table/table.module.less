@@ -65,9 +65,10 @@
 }
 
 .row {
-    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
 
+    // 注意：tr 上的伪元素会被 Chrome 包进匿名单元格（行首伪元素会导致整行列错位），
+    // 因此 hover 背景直接绘制在 tr 上，圆角用 border-radius（不影响命中区域，无闪烁）
     &::after {
         content: '';
         position: absolute;
@@ -84,23 +85,20 @@
         );
     }
 
+    // hover 条纹保持半透明（透明度 0.5），深棕文字无需换色即可读，避免字色切换闪烁
     &:hover {
         background-image: repeating-linear-gradient(
             -45deg,
-            rgba(25, 200, 185, 0.6),
-            rgba(25, 200, 185, 0.6) 10px,
-            rgba(14, 196, 182, 0.6) 10px,
-            rgba(14, 196, 182, 0.6) 20px
+            rgba(25, 200, 185, 0.5),
+            rgba(25, 200, 185, 0.5) 10px,
+            rgba(14, 196, 182, 0.5) 10px,
+            rgba(14, 196, 182, 0.5) 20px
         );
         background-size: 28.28px 28.28px;
-        clip-path: inset(0 0 0 0 round 30px);
+        border-radius: 30px;
 
         &::after {
             opacity: 0;
-        }
-
-        .cell {
-            color: #3d2e1e;
         }
     }
 
@@ -117,20 +115,16 @@
     &:hover {
         background-image: repeating-linear-gradient(
             -45deg,
-            rgba(25, 200, 185, 0.65),
-            rgba(25, 200, 185, 0.65) 10px,
-            rgba(14, 196, 182, 0.65) 10px,
-            rgba(14, 196, 182, 0.65) 20px
+            rgba(25, 200, 185, 0.5),
+            rgba(25, 200, 185, 0.5) 10px,
+            rgba(14, 196, 182, 0.5) 10px,
+            rgba(14, 196, 182, 0.5) 20px
         );
         background-size: 28.28px 28.28px;
-        clip-path: inset(0 0 0 0 round 30px);
+        border-radius: 30px;
 
         &::after {
             opacity: 0;
-        }
-
-        .cell {
-            color: #3d2e1e;
         }
     }
 }
@@ -165,6 +159,12 @@
 .emptyIcon {
     color: #9f927d;
     opacity: 0.5;
+}
+
+.paginationWrapper {
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px 16px 8px;
 }
 
 .loading {
