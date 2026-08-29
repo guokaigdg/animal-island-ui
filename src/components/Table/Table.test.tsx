@@ -1,5 +1,5 @@
-import { describe, it, expect } from 'vitest';
-import { render, screen } from '@testing-library/react';
+import { describe, it, expect, vi } from 'vitest';
+import { render, screen, fireEvent } from '@testing-library/react';
 import { Table, type TableColumn } from './Table';
 import styles from './table.module.less';
 
@@ -69,5 +69,60 @@ describe('Table', () => {
         const { container } = render(<Table columns={anyColumns} dataSource={data} loading />);
         expect(container.querySelector('table')).toHaveClass(styles.loading);
         expect(container.querySelector(`.${styles.loadingOverlay}`)).toBeInTheDocument();
+    });
+
+    it('pagination 对象开启客户端分页，只渲染当前页数据', () => {
+        const many: Row[] = Array.from({ length: 25 }, (_, i) => ({
+            key: String(i + 1),
+            name: `Name${i + 1}`,
+            age: 20 + i,
+        }));
+        const { container } = render(<Table columns={anyColumns} dataSource={many} pagination={{ pageSize: 10 }} />);
+        // 第一页 10 行
+        expect(container.querySelectorAll('tbody tr')).toHaveLength(10);
+        expect(screen.getByText('Name1')).toBeInTheDocument();
+        expect(screen.queryByText('Name11')).not.toBeInTheDocument();
+        // 分页导航出现且显示总页数
+        expect(screen.getByRole('navigation', { name: '分页' })).toBeInTheDocument();
+        expect(screen.getByRole('button', { name: '3' })).toBeInTheDocument();
+    });
+
+    it('点击页码切换分页数据', () => {
+        const many: Row[] = Array.from({ length: 25 }, (_, i) => ({
+            key: String(i + 1),
+            name: `Name${i + 1}`,
+            age: 20 + i,
+        }));
+        const onChange = vi.fn();
+        const { container } = render(
+            <Table columns={anyColumns} dataSource={many} pagination={{ pageSize: 10, onChange }} />
+        );
+        fireEvent.click(screen.getByRole('button', { name: '2' }));
+        expect(onChange).toHaveBeenCalledWith(2, 10);
+        expect(container.querySelectorAll('tbody tr')).toHaveLength(10);
+        expect(screen.getByText('Name11')).toBeInTheDocument();
+        expect(screen.queryByText('Name1')).not.toBeInTheDocument();
+    });
+
+    it('defaultPageSize / defaultCurrent 作为非受控初值生效', () => {
+        const many: Row[] = Array.from({ length: 25 }, (_, i) => ({
+            key: String(i + 1),
+            name: `Name${i + 1}`,
+            age: 20 + i,
+        }));
+        const { container } = render(
+            <Table columns={anyColumns} dataSource={many} pagination={{ defaultPageSize: 5, defaultCurrent: 2 }} />
+        );
+        // 第二页 5 条：Name6 ~ Name10
+        expect(container.querySelectorAll('tbody tr')).toHaveLength(5);
+        expect(screen.getByText('Name6')).toBeInTheDocument();
+        expect(screen.queryByText('Name1')).not.toBeInTheDocument();
+        expect(screen.getByRole('button', { name: '2' })).toHaveAttribute('aria-current', 'page');
+    });
+
+    it('pagination=false 或缺省时不渲染分页', () => {
+        const { container } = render(<Table columns={anyColumns} dataSource={data} />);
+        expect(screen.queryByRole('navigation')).not.toBeInTheDocument();
+        expect(container.querySelectorAll('tbody tr')).toHaveLength(2);
     });
 });

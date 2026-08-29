@@ -74,6 +74,19 @@ const TableDemo: React.FC = () => {
         { key: '5', name: '小润', age: 22, island: '摸鱼岛', fruit: '桃子', hobby: '画画' },
     ] as Record<string, unknown>[];
 
+    // 分页示例数据：12 条，配 defaultPageSize 3
+    const hobbies = ['音乐', '运动', '唱歌', '钓鱼', '画画'];
+    const fruits = ['苹果', '橘子', '樱桃', '梨', '桃子', '椰子'];
+    const islands = ['彩虹岛', '好评岛', '无人岛', '摸鱼岛'];
+    const bigDataSource = Array.from({ length: 12 }, (_, i) => ({
+        key: String(i + 1),
+        name: `岛民${i + 1}号`,
+        age: 20 + i,
+        island: islands[i % islands.length],
+        fruit: fruits[i % fruits.length],
+        hobby: hobbies[i % hobbies.length],
+    })) as Record<string, unknown>[];
+
     const handleLoading = () => {
         setLoading(true);
         setTimeout(() => setLoading(false), 2000);
@@ -97,6 +110,20 @@ const TableDemo: React.FC = () => {
 
             <div style={{ ...demoBodyStyle, padding: 0, overflow: 'hidden' }}>
                 <Table columns={columns} dataSource={dataSource} striped={striped} loading={loading} />
+            </div>
+
+            <div style={labelStyle}>内置分页（pagination 属性，客户端分页）</div>
+            <div style={{ ...demoBodyStyle, padding: 0, overflow: 'hidden' }}>
+                <Table
+                    columns={columns}
+                    dataSource={bigDataSource}
+                    pagination={{
+                        defaultPageSize: 3,
+                        showTotal: true,
+                        showSizeChanger: true,
+                        pageSizeOptions: [3, 5, 8],
+                    }}
+                />
             </div>
 
             <CodeBlock
@@ -179,6 +206,12 @@ const TABLE_API: ApiRow[] = [
     { prop: 'showHeader', desc: '是否显示表头', type: 'boolean', defaultVal: 'true' },
     { prop: 'loading', desc: '加载状态', type: 'boolean', defaultVal: 'false' },
     { prop: 'emptyText', desc: '空数据显示文本', type: 'ReactNode', defaultVal: '暂无数据' },
+    {
+        prop: 'pagination',
+        desc: '分页配置，传入对象开启客户端分页（透传 Pagination 属性）',
+        type: 'false | PaginationProps',
+        defaultVal: 'false',
+    },
     { prop: 'className', desc: '自定义类名', type: 'string', defaultVal: '-' },
     { prop: 'style', desc: '自定义样式', type: 'CSSProperties', defaultVal: '-' },
 ];

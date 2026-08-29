@@ -1,4 +1,5 @@
-import React, { HTMLAttributes } from 'react';
+import React, { HTMLAttributes, useState } from 'react';
+import { Pagination, type PaginationProps } from '../Pagination';
 import styles from './table.module.less';
 
 export interface TableColumn<T = Record<string, unknown>> {
@@ -25,6 +26,8 @@ export interface TableProps {
         x?: number | string;
         y?: number | string;
     };
+    /** 分页配置；传入对象开启客户端分页，false 或缺省不分页（total 由 Table 内部按数据量计算，无需传入） */
+    pagination?: false | Omit<PaginationProps, 'total'>;
     className?: string;
     style?: React.CSSProperties;
 }
@@ -40,9 +43,18 @@ export const Table: React.FC<TableProps> = ({
     loading = false,
     emptyText = '暂无数据',
     scroll,
+    pagination,
     className,
     style,
 }) => {
+    // 分页状态：pagination.current / pagination.pageSize 受控时优先，否则走内部状态（初值取 default*）
+    const paginated = pagination !== false && pagination !== undefined;
+    const [innerPage, setInnerPage] = useState(() => (paginated ? (pagination.defaultCurrent ?? 1) : 1));
+    const [innerPageSize, setInnerPageSize] = useState(() => (paginated ? (pagination.defaultPageSize ?? 10) : 10));
+    const pageSize = paginated ? (pagination.pageSize ?? innerPageSize) : dataSource.length;
+    const pageCount = Math.max(1, Math.ceil(dataSource.length / Math.max(1, pageSize)));
+    const currentPage = paginated ? Math.min(pagination.current ?? innerPage, pageCount) : 1;
+    const pageData = paginated ? dataSource.slice((currentPage - 1) * pageSize, currentPage * pageSize) : dataSource;
     const getRowKey = (record: Record<string, unknown>, index: number): string => {
         if (typeof rowKey === 'function') {
             return rowKey(record);
@@ -115,7 +127,7 @@ export const Table: React.FC<TableProps> = ({
                             </td>
                         </tr>
                     ) : (
-                        dataSource.map((record, index) => (
+                        pageData.map((record, index) => (
                             <tr
                                 key={getRowKey(record, index)}
                                 className={getRowClassName(record, index)}
@@ -138,6 +150,21 @@ export const Table: React.FC<TableProps> = ({
                     )}
                 </tbody>
             </table>
+            {paginated && (
+                <div className={styles.paginationWrapper}>
+                    <Pagination
+                        {...pagination}
+                        total={dataSource.length}
+                        current={currentPage}
+                        pageSize={pageSize}
+                        onChange={(page, size) => {
+                            if (pagination.current === undefined) setInnerPage(page);
+                            if (pagination.pageSize === undefined) setInnerPageSize(size);
+                            pagination.onChange?.(page, size);
+                        }}
+                    />
+                </div>
+            )}
             {loading && (
                 <div className={styles.loadingOverlay}>
                     <div className={styles.loadingSpinner}>
