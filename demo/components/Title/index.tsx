@@ -1,5 +1,5 @@
 import React from 'react';
-import { Title } from '../../../src';
+import { Title, type TitleColor } from '../../../src';
 import {
     labelStyle,
     ApiTable,
@@ -47,6 +47,23 @@ const bgLavender = acBox('#ede8f8', 'rgba(160,120,230,0.15)', 'rgba(200,170,250,
 const bgCoral = acBox('#fce8e0', 'rgba(240,120,90,0.15)', 'rgba(250,170,140,0.10)', '#e8b0a0'); // 珊瑚
 const bgMint = acBox('#d8f5f0', 'rgba(60,190,170,0.18)', 'rgba(120,230,210,0.12)', '#88d8c8'); // 薄荷
 
+// 配色变体：prop 值 + 展示文案 + 飘带正面色（与 title.module.less 的 --rf 一致）
+const COLOR_VARIANTS: [TitleColor, string, string][] = [
+    ['default', '默认绿', '#27d039'],
+    ['app-pink', '粉色', '#f8a6b2'],
+    ['purple', '紫色', '#b77dee'],
+    ['app-blue', '蓝色', '#889df0'],
+    ['app-yellow', '黄色', '#f7cd67'],
+    ['app-orange', '橙色', '#e59266'],
+    ['app-teal', '青色', '#82d5bb'],
+    ['app-green', '绿色', '#8ac68a'],
+    ['app-red', '红色', '#fc736d'],
+    ['lime-green', '青柠', '#d1da49'],
+    ['yellow-green', '黄绿', '#ecdf52'],
+    ['brown', '棕色', '#9a835a'],
+    ['warm-peach-pink', '暖桃粉', '#e18c6f'],
+];
+
 const TitleDemo: React.FC = () => (
     <div style={sectionStyle}>
         <div style={sectionTitleStyle}>
@@ -59,20 +76,22 @@ const TitleDemo: React.FC = () => (
         </div>
 
         <div style={labelStyle}>配色变体</div>
-        <div style={{ ...bgSand, display: 'flex', flexWrap: 'wrap', gap: 50 }}>
-            <Title color="default">默认绿</Title>
-            <Title color="app-pink">粉色</Title>
-            <Title color="purple">紫色</Title>
-            <Title color="app-blue">蓝色</Title>
-            <Title color="app-yellow">黄色</Title>
-            <Title color="app-orange">橙色</Title>
-            <Title color="app-teal">青色</Title>
-            <Title color="app-green">绿色</Title>
-            <Title color="app-red">红色</Title>
-            <Title color="lime-green">青柠</Title>
-            <Title color="yellow-green">黄绿</Title>
-            <Title color="brown">棕色</Title>
-            <Title color="warm-peach-pink">暖桃粉</Title>
+        <div style={{ ...bgSand, display: 'flex', flexWrap: 'wrap', gap: '32px 50px' }}>
+            {COLOR_VARIANTS.map(([color, label, ribbonColor]) => (
+                <div key={color} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 16 }}>
+                    <Title color={color}>{label}</Title>
+                    <span
+                        style={{
+                            fontSize: 12,
+                            color: ribbonColor,
+                            fontWeight: 600,
+                            fontFamily: "'Nunito', 'Noto Sans SC', sans-serif",
+                        }}
+                    >
+                        {color}
+                    </span>
+                </div>
+            ))}
         </div>
 
         <div style={labelStyle}>小尺寸</div>
