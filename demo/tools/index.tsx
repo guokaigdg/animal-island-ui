@@ -37,8 +37,8 @@ export const sectionTitleStyle: React.CSSProperties = {
 };
 
 /** Demo 标题旁的语义标签，用 Tag 组件渲染，替代原来手写 tagStyle 的 span */
-export const DemoTag: React.FC<{ children?: React.ReactNode }> = ({ children }) => (
-    <Tag size="small" variant="soft">
+export const DemoTag: React.FC<{ children?: React.ReactNode; style?: React.CSSProperties }> = ({ children, style }) => (
+    <Tag size="small" variant="soft" style={style}>
         {children}
     </Tag>
 );
