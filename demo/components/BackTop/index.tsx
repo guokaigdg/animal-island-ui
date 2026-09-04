@@ -121,11 +121,11 @@ const BackTopDemo: React.FC = () => {
     return (
         <div style={sectionStyle}>
             <div style={sectionTitleStyle}>
-                BackTop <DemoTag>返回顶部</DemoTag> <DemoTag>Island 袋</DemoTag>
+                BackTop <DemoTag>返回顶部</DemoTag> <DemoTag>徽章图形</DemoTag>
             </div>
             <div style={demoBodyStyle}>
                 <div style={{ fontSize: 14, color: '#9f927d', marginBottom: 16, lineHeight: 1.6 }}>
-                    页面已自动滚动到底部，点击右下角的 Island 袋图标返回顶部。
+                    页面已自动滚动到底部，点击右下角的徽章图标返回顶部。
                     <br />
                     <code style={{ background: '#f0e8d8', padding: '2px 8px', borderRadius: 6, fontSize: 12 }}>
                         visibilityHeight=400
