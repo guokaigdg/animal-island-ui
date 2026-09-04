@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Card, Divider, Button, Typewriter } from '../src';
-import { islandGradient, flowersGradient, sceneryGradient } from './gradients';
+import { Card, Button, Typewriter } from '../src';
+import { islandPlaceholder, flowersPlaceholder, sceneryPlaceholder } from './placeholders';
 import { useIsMobile } from './tools';
 
 // ============================================
@@ -310,22 +310,22 @@ const S = {
 // ============================================
 const features = [
     {
-        icon: islandGradient,
+        icon: islandPlaceholder,
         title: '治愈系风格',
         desc: 'SVG 有机形状裁切，3D 按压按钮，温暖质朴的自然 UI 质感',
     },
     {
-        icon: flowersGradient,
+        icon: flowersPlaceholder,
         title: '30+ 个组件',
         desc: 'Button / Input / Switch / Modal / Form / Table / Title / Tooltip / Typewriter / Card / Collapse / Cursor / Divider / Footer / Icon / Checkbox / Select / DatePicker / TimePicker / Tabs / CodeBlock / Radio / Tag / Notification / Progress',
     },
     {
-        icon: sceneryGradient,
+        icon: sceneryPlaceholder,
         title: '主题定制',
         desc: '40+ CSS 自定义属性，运行时换肤无需重新构建',
     },
     {
-        icon: islandGradient,
+        icon: islandPlaceholder,
         title: '开箱即用',
         desc: 'ESM + CJS 双格式输出，TypeScript 类型声明完整',
     },
@@ -394,7 +394,7 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                     {isMobile && (
                         <div style={{ textAlign: 'center', display: 'none' }}>
                             <img
-                                src={islandGradient}
+                                src={islandPlaceholder}
                                 style={{ width: 180, height: 112, borderRadius: 12 }}
                                 alt="logo"
                                 decoding="async"
@@ -428,7 +428,7 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                     {!isMobile && (
                         <div style={{ textAlign: 'center', display: 'none' }}>
                             <img
-                                src={islandGradient}
+                                src={islandPlaceholder}
                                 style={{ width: 320, height: 200, borderRadius: 16 }}
                                 alt="logo"
                                 decoding="async"
@@ -486,8 +486,6 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                 </div>
             </div>
 
-            <Divider style={{ width: isMobile ? '90%' : 800, margin: '0 auto' }} />
-
             {/* Components */}
             <div style={{ ...S.section, padding: isMobile ? '32px 16px' : '48px 40px' }}>
                 <div style={S.sectionTitle}>组件一览</div>
@@ -502,16 +500,12 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                 </div>
             </div>
 
-            <Divider style={{ width: isMobile ? '90%' : 800, margin: '0 auto' }} />
-
             {/* Install */}
             <div style={{ ...S.section, padding: isMobile ? '32px 16px' : '48px 40px' }}>
                 <div style={S.sectionTitle}>安装</div>
                 <div style={S.sectionDesc}>一行命令即可安装</div>
                 <CodeBlock code={`// 使用 npm 安装\nnpm install animal-island-ui`} />
             </div>
-
-            <Divider style={{ width: isMobile ? '90%' : 800, margin: '0 auto' }} />
 
             {/* Quick Start */}
             <div style={{ ...S.section, padding: isMobile ? '32px 16px' : '48px 40px' }}>
@@ -521,8 +515,6 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                     code={`// 1. 引入组件\nimport { Button, Modal, Switch } from 'animal-island-ui';\nimport 'animal-island-ui/style';\n\nfunction App() {\n    return <Button>开始</Button>;\n}`}
                 />
             </div>
-
-            <Divider style={{ width: isMobile ? '90%' : 800, margin: '0 auto' }} />
 
             {/* Theme */}
             <div style={{ ...S.section, padding: isMobile ? '32px 16px' : '48px 40px' }}>

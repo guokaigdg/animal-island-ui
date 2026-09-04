@@ -1,7 +1,7 @@
 import React from 'react';
 import { Carousel } from '../../../src';
 import { ApiRow, ApiTable, CodeBlock, DemoTag, labelStyle, sectionStyle, sectionTitleStyle } from '../../tools';
-import { islandGradient, flowersGradient, sceneryGradient } from '../../gradients';
+import { islandPlaceholder, flowersPlaceholder, sceneryPlaceholder } from '../../placeholders';
 
 const CAROUSEL_API: ApiRow[] = [
     { prop: 'children', desc: '每个直接子元素为一张', type: 'ReactNode', defaultVal: '-', required: true },
@@ -17,9 +17,9 @@ const CAROUSEL_API: ApiRow[] = [
 ];
 
 const slides = [
-    { src: islandGradient, title: '海岛晨光', desc: '晨雾散去，海面泛起层层波光。' },
-    { src: flowersGradient, title: '花园漫步', desc: '在盛开的花丛间享受午后时光。' },
-    { src: sceneryGradient, title: '远山如黛', desc: '远山与天空在渐变色里相遇。' },
+    { src: islandPlaceholder, title: '海岛晨光', desc: '晨雾散去，海面泛起层层波光。' },
+    { src: flowersPlaceholder, title: '花园漫步', desc: '在盛开的花丛间享受午后时光。' },
+    { src: sceneryPlaceholder, title: '远山如黛', desc: '远山与天空在暮色中相融。' },
 ];
 
 const CarouselDemo: React.FC = () => (
@@ -40,10 +40,10 @@ const CarouselDemo: React.FC = () => (
                         padding: 28,
                         boxSizing: 'border-box',
                         color: '#fff9e3',
-                        background: `linear-gradient(0deg, rgba(43,33,24,.72), transparent 62%), url(${slide.src}) center / cover`,
+                        background: `url(${slide.src}) center / cover`,
                     }}
                 >
-                    <div style={{ paddingBottom: 30 }}>
+                    <div style={{ padding: '14px 18px', background: 'rgba(43,33,24,.72)', borderRadius: 12 }}>
                         <div style={{ fontSize: 26, fontWeight: 900 }}>{slide.title}</div>
                         <div style={{ marginTop: 6, fontSize: 14, fontWeight: 600 }}>{slide.desc}</div>
                     </div>

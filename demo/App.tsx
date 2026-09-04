@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback, Suspense, lazy } from 'react';
 import { Cursor } from '../src';
-import { islandGradient } from './gradients';
+import { islandPlaceholder } from './placeholders';
 import '../src/styles/index.less';
 import './fonts.css';
 import HomePage from './HomePage';
@@ -133,12 +133,19 @@ const S = {
         overflow: 'hidden',
         fontFamily:
             "Nunito, 'Noto Sans SC', 'Zen Maru Gothic', -apple-system, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif",
-        background: 'linear-gradient(180deg, #fdf8ec 0%, #f7ecd8 100%)',
+        // 圆点纹理：两层错位圆点 + 纯色底，background 作为最后一层避免简写重置 background-color
+        background: `
+            radial-gradient(circle, rgba(138,198,138,.18) 1.5px, transparent 1.5px),
+            radial-gradient(circle, rgba(180,220,180,.12) 1px, transparent 1px),
+            #e8f5e8
+        `,
+        backgroundSize: '28px 28px, 14px 14px, auto',
+        backgroundPosition: '0 0, 7px 7px, 0 0',
     } as React.CSSProperties,
     sidebar: {
         width: 220,
         minWidth: 220,
-        background: 'linear-gradient(160deg, #e8f5d0 0%, #d3ecc8 50%, #bfe3f2 100%)',
+        background: 'rgb(250, 248, 243)',
         display: 'flex',
         flexDirection: 'column',
         overflow: 'hidden',
@@ -149,7 +156,14 @@ const S = {
         height: 'calc(100dvh - 20px)',
     } as React.CSSProperties,
     homeBg: {
-        background: 'linear-gradient(180deg, #9fd8a8 0%, #7DC395 60%, #bfe3c4 100%)',
+        // 圆点纹理：两层错位圆点 + 纯色底，background 作为最后一层避免简写重置 background-color
+        background: `
+            radial-gradient(circle, rgba(90,160,90,.22) 1.5px, transparent 1.5px),
+            radial-gradient(circle, rgba(140,200,140,.15) 1px, transparent 1px),
+            #bfe3bf
+        `,
+        backgroundSize: '28px 28px, 14px 14px, auto',
+        backgroundPosition: '0 0, 7px 7px, 0 0',
     } as React.CSSProperties,
     sidebarHeader: {
         padding: '20px 20px 12px',
@@ -195,7 +209,7 @@ const S = {
             fontWeight: 800,
             letterSpacing: 0.6,
             color: active ? '#fc736d' : '#fff',
-            background: active ? '#fff' : 'linear-gradient(135deg, #fc736d, #f7825a)',
+            background: active ? '#fff' : '#fc736d',
             borderRadius: 8,
             lineHeight: '14px',
             boxShadow: active ? '0 1px 0 rgba(114, 93, 66, 0.15)' : '0 1px 0 rgba(114, 93, 66, 0.25)',
@@ -217,7 +231,11 @@ const SidebarContent: React.FC<{
 }> = ({ activeKey, onNavigate }) => (
     <>
         <div style={S.sidebarHeader} onClick={() => onNavigate('/')}>
-            <img src={islandGradient} style={{ width: 24, height: 24, marginRight: 8, borderRadius: 6 }} alt="island" />
+            <img
+                src={islandPlaceholder}
+                style={{ width: 24, height: 24, marginRight: 8, borderRadius: 6 }}
+                alt="island"
+            />
             Island UI
         </div>
         <nav style={S.menuList}>
@@ -358,7 +376,7 @@ const App: React.FC = () => {
                                 alignItems: 'center',
                                 justifyContent: 'space-between',
                                 padding: '0 12px',
-                                background: 'rgba(255,252,244,0.92)',
+                                background: 'rgba(240,248,235,0.92)',
                                 backdropFilter: 'blur(8px)',
                                 borderBottom: '1px solid #e8e2d6',
                                 zIndex: 50,
