@@ -206,7 +206,7 @@ const BackTopDemo: React.FC = () => {
             <CodeBlock
                 code={`import { BackTop } from 'animal-island-ui';
 
-// 基础用法 — 右下角 Island 袋返回顶部
+// 基础用法 — 右下角徽章返回顶部
 <BackTop visibilityHeight={400} />
 
 // 自定义动画时长

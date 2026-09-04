@@ -160,11 +160,11 @@ SkeletonAvatarProps { size?: 'small'|'middle'|'large'; shape?: 'circle'|'square'
 - paragraph 模式最后一行默认宽 60%（可通 `rowWidths` 覆盖）。
 - `aria-hidden` 屏蔽屏幕阅读器。
 
-## BackTop（Island 袋返回顶部）
+## BackTop（徽章返回顶部）
 
 源码：`src/components/BackTop/BackTop.tsx` + `back-top.module.less`。
 
-固定右下角的返回顶部按钮，默认使用 Island 袋 PNG（base64 内嵌），点击后 easeInOutQuad 平滑滚动到顶部。
+固定右下角的返回顶部按钮，默认使用原创徽章 SVG（内联 data URI），点击后 easeInOutQuad 平滑滚动到顶部。
 
 **props**：
 ```ts

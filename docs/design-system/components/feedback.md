@@ -160,11 +160,11 @@ SkeletonAvatarProps { size?: 'small'|'middle'|'large'; shape?: 'circle'|'square'
 - In paragraph mode the last row defaults to 60% width (overridable via `rowWidths`).
 - `aria-hidden` keeps it out of screen readers.
 
-## BackTop (Island bag scroll-to-top)
+## BackTop (badge scroll-to-top)
 
 Source: `src/components/BackTop/BackTop.tsx` + `back-top.module.less`.
 
-A fixed bottom-right back-to-top button, using the Island bag PNG (inlined as base64) by default; clicking it scrolls smoothly to the top with easeInOutQuad.
+A fixed bottom-right back-to-top button, using an original badge SVG (inlined data URI) by default; clicking it scrolls smoothly to the top with easeInOutQuad.
 
 **props**:
 ```ts

@@ -87,7 +87,7 @@ Notes:
 
 ## BackTop
 
-Floating back-to-top button that appears in the bottom-right corner after scrolling past a threshold. Default icon is a Island bag PNG (base64-embedded); clicking smooth-scrolls to the top with an easeInOutQuad animation.
+Floating back-to-top button that appears in the bottom-right corner after scrolling past a threshold. Default icon is an original badge SVG (inline data URI); clicking smooth-scrolls to the top with an easeInOutQuad animation.
 
 ```ts
 interface BackTopProps {
@@ -101,7 +101,7 @@ interface BackTopProps {
 ```
 
 ```tsx
-<BackTop />                                    {/* Island bag icon, 400px threshold */}
+<BackTop />                                    {/* badge icon, 400px threshold */}
 <div ref={ref} style={{ height: 300, overflow: 'auto' }}>
     <BackTop target={() => ref.current!} visibilityHeight={200} />
 </div>

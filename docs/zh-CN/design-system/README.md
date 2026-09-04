@@ -46,7 +46,7 @@ animal-island-ui 是一套受《治愈系海岛风格》启发的 React + TypeSc
 | `Notification` | 命令式全局通知（antd 风格）：4 种 type × 6 个 position，支持 description / btn / onClick / key 复用更新 / destroy 全部                                                                      | ✓    |               |
 | `Progress`     | 斜纹滚动进度条：fill 复用 Button loading 的 -45° 斜纹（`#0ec4b6`/`#01b0a7`）+ 1s 无限滚动，3 档 size，支持 inside/right/top 三种文字位置、infoFormat 自定义、duration 控制 fill 宽度动画 |      | ✓             |
 | `Skeleton`     | 加载占位骨架，4 种变体（`text`/`circle`/`rect`/`paragraph`）加 `SkeletonButton` / `SkeletonInput` / `SkeletonAvatar` 子组件，暖白微光扫过                                                   |      | ✓             |
-| `BackTop`      | 固定右下角回到顶部按钮（Island bag 图案，easeInOutQuad 平滑滚动）                                                                                                                            | ✓    |               |
+| `BackTop`      | 固定右下角回到顶部按钮（原创徽章图形，easeInOutQuad 平滑滚动）                                                                                                                            | ✓    |               |
 | `Image`        | 衬板相框图片，支持懒加载、错误占位和点击预览                                                                                                                                                 | ✓    |               |
 | `Countdown`    | 实时截止倒计时，支持 DD/HH/mm/ss 格式、三种尺寸和两种视觉风格                                                                                                                               |      | ✓             |
 | `Carousel`     | 受控/非受控轮播，支持自动播放、循环、箭头、圆点和键盘导航                                                                                                                                   | ✓    |               |
