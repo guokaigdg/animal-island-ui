@@ -1,7 +1,5 @@
 import React from 'react';
 import { Title, TitleColor, Typewriter } from '../src';
-import TimeDemo from './components/Time';
-import PhoneDemo from './components/Phone';
 import FooterDemo from './components/Footer';
 import IconDemo from './components/Icon/IconDemo';
 import TabsDemo from './components/Tabs';
@@ -13,8 +11,6 @@ import CodeBlockDemo from './components/CodeBlock';
 import LoadingDemo from './components/Loading/LoadingDemo';
 import TableDemo from './components/Table/TableDemo';
 import PaginationDemo from './components/Pagination';
-import InvitationCardDemo from './components/InvitationCard/InvitationCardDemo';
-import WalletDemo from './components/Wallet/WalletDemo';
 import DrawerDemo from './components/Drawer/DrawerDemo';
 import FormDemo from './components/Form';
 import TagDemo from './components/Tag';
@@ -56,8 +52,6 @@ const PAGES: Record<string, React.FC> = {
     card: CardDemo,
     collapse: CollapseDemo,
     cursor: CursorDemo,
-    time: TimeDemo,
-    phone: PhoneDemo,
     footer: FooterDemo,
     modal: ModalDemo,
     drawer: DrawerDemo,
@@ -76,8 +70,6 @@ const PAGES: Record<string, React.FC> = {
     loading: LoadingDemo,
     table: TableDemo,
     pagination: PaginationDemo,
-    'wedding-invitation': InvitationCardDemo,
-    wallet: WalletDemo,
     tag: TagDemo,
     notification: NotificationDemo,
     progress: ProgressDemo,

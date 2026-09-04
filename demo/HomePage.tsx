@@ -317,7 +317,7 @@ const features = [
     {
         icon: 'placeholder-flowers.svg',
         title: '30+ 个组件',
-        desc: 'Button / Input / Switch / Modal / Form / Table / Title / Tooltip / Typewriter / Card / Collapse / Cursor / Divider / Time / Phone / Footer / Icon / Checkbox / Select / DatePicker / TimePicker / Tabs / CodeBlock / Loading / Radio / InvitationCard / Wallet / Tag / Notification / Progress',
+        desc: 'Button / Input / Switch / Modal / Form / Table / Title / Tooltip / Typewriter / Card / Collapse / Cursor / Divider / Footer / Icon / Checkbox / Select / DatePicker / TimePicker / Tabs / CodeBlock / Loading / Radio / Tag / Notification / Progress',
     },
     {
         icon: 'placeholder-scenery.svg',
@@ -385,9 +385,7 @@ const components = [
     { key: 'divider-comp', name: 'Divider', desc: '装饰性水平分割线' },
     { key: 'icon', name: 'Icon', desc: 'SVG 图标库' },
     { key: 'footer', name: 'Footer', desc: '页脚组件' },
-    { key: 'time', name: 'Time', desc: '可爱风格时间显示' },
     { key: 'countdown', name: 'Countdown', desc: '活动与任务倒计时，支持天/时/分/秒' },
-    { key: 'phone', name: 'Phone', desc: 'Phone 模拟器' },
     { key: 'codeblock', name: 'CodeBlock', desc: '代码语法高亮组件' },
     { key: 'loading', name: 'Loading', desc: '动物主题小岛加载动画' },
     { key: 'image', name: 'Image', desc: '白色衬板图片，支持懒加载 / 点击预览' },

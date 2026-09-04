@@ -46,7 +46,7 @@ interface MenuItem {
 //   表单      → 数据录入/校验 (Input, Switch, Select, Checkbox, Radio, Form)
 //   反馈      → 浮层/状态/异步反馈 (Notification, Modal, Drawer, Tooltip, Loading, Progress)
 //   数据展示  → 容器/列表/排版 (Card, Collapse, Tabs, Table, Typewriter)
-//   主题  → 业务复合/主题专属 (Wallet, Time, Phone, Wedding)
+//   主题  → 业务复合/主题专属 (Countdown)
 // ============================================
 const MENU_ITEMS: MenuItem[] = [
     {
@@ -113,13 +113,7 @@ const MENU_ITEMS: MenuItem[] = [
     {
         key: 'cat-animal',
         label: '── 主题 ──',
-        children: [
-            { key: 'wallet', label: 'Wallet 钱包', isNew: true },
-            { key: 'time', label: 'Time 时间' },
-            { key: 'countdown', label: 'Countdown 倒计时', isNew: true },
-            { key: 'phone', label: 'Phone 手机' },
-            { key: 'wedding-invitation', label: 'Wedding 婚礼请柬', isNew: true },
-        ],
+        children: [{ key: 'countdown', label: 'Countdown 倒计时', isNew: true }],
     },
 ];
 

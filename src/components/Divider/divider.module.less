@@ -1,23 +1,26 @@
+// Divider — 纯 CSS 装饰分隔线（无图片资源）
+// line-*：conic-gradient 三角锯齿带（每个 12px tile 一个 ▼ 三角，连续排列）
+// dashed-*：linear-gradient 破折线（12px 节奏 + 6px dash + 6px gap，2px 粗细）
+
 .divider {
     width: 100%;
     height: 12px;
-    background: url('../../assets/img/dividers/divider-line-brown.svg') center / contain no-repeat;
+    /* 默认 type=line-brown */
+    background: conic-gradient(from -45deg at 50% 100%, #b08d57 90deg, #0000 0) center / 12px 100%;
 }
 
 .line-teal {
-    background-image: url('../../assets/img/dividers/divider-line-teal.svg');
+    background: conic-gradient(from -45deg at 50% 100%, #19c8b9 90deg, #0000 0) center / 12px 100%;
 }
 
 .line-white {
-    background-image: url('../../assets/img/dividers/divider-line-white.svg');
+    background: conic-gradient(from -45deg at 50% 100%, #ffffff 90deg, #0000 0) center / 12px 100%;
 }
 
 .line-yellow {
-    background-image: url('../../assets/img/dividers/divider-line-yellow.svg');
+    background: conic-gradient(from -45deg at 50% 100%, #f5d04a 90deg, #0000 0) center / 12px 100%;
 }
 
-// ---------- Dashed (CSS-only, no asset) ----------
-// 12px 节奏 + 6px dash + 6px gap，居中绘制 2px 粗细的破折线
 .dashed-brown,
 .dashed-teal,
 .dashed-white,

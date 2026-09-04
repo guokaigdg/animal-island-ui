@@ -74,7 +74,7 @@ FAQ page:
 ```tsx
 <Cursor>
     <Title size="large">FAQ</Title>
-    <Divider type="wave-yellow" />
+    <Divider type="dashed-teal" />
     {faqs.map((f) => (
         <Collapse key={f.id} question={f.q} answer={f.a} />
     ))}

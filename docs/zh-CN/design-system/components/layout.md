@@ -149,30 +149,27 @@ interface CarouselProps extends Omit<HTMLAttributes<HTMLElement>, 'onChange'> {
 <Divider type="line-teal" />
 <Divider type="line-white" />
 <Divider type="line-yellow" />
-<Divider type="wave-yellow" />
 ```
 
 ```less
 .divider {
     width: 100%;
     height: 12px;
-    background: url('./img/divider-line-brown.svg') center/contain no-repeat;
+    /* 默认 type=line-brown */
+    background: conic-gradient(from -45deg at 50% 100%, #b08d57 90deg, #0000 0) center / 12px 100%;
 }
 .line-teal {
-    background-image: url('./img/divider-line-teal.svg');
+    background: conic-gradient(from -45deg at 50% 100%, #19c8b9 90deg, #0000 0) center / 12px 100%;
 }
 .line-white {
-    background-image: url('./img/divider-line-white.png');
+    background: conic-gradient(from -45deg at 50% 100%, #ffffff 90deg, #0000 0) center / 12px 100%;
 }
 .line-yellow {
-    background-image: url('./img/divider-line-yellow.svg');
-}
-.wave-yellow {
-    background-image: url('./img/wave-yellow.svg');
+    background: conic-gradient(from -45deg at 50% 100%, #f5d04a 90deg, #0000 0) center / 12px 100%;
 }
 ```
 
-默认 SVG 色值参考：`#D8D0C3`（米褐），`viewBox="0 0 297 14"`。
+纯 CSS 实现，无图片资源：`line-*` 用 12px `conic-gradient` tile 画出三角锯齿带；`dashed-*` 用 `linear-gradient` 画 2px 破折线（12px 节奏，50% 实 / 50% 空）。
 
 ## Collapse
 

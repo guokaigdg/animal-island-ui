@@ -24,7 +24,7 @@ animal-island-ui 是采用原创治愈系海岛风格设计的 React + TypeScrip
 
 ### 一段话说清风格
 
-温暖羊皮纸底色（`--animal-bg`）、大地棕文字（绝不用纯黑）、薄荷青绿主色、大圆角 pill 形（按钮和输入框是 50px pill；交互元素圆角最小 12px）、3D「游戏按键」堆叠阴影仅用于 primary 按钮、圆体 Nunito + Noto Sans SC 字体（正文字重 500，标题 600–900）、`cubic-bezier(0.4, 0, 0.2, 1)` 柔和动效（0.15–0.35s），几何形（燕尾飘带 Title、胶囊 Wallet）与有机形（SVG blob 裁切的 Modal）并存
+温暖羊皮纸底色（`--animal-bg`）、大地棕文字（绝不用纯黑）、薄荷青绿主色、大圆角 pill 形（按钮和输入框是 50px pill；交互元素圆角最小 12px）、3D「游戏按键」堆叠阴影仅用于 primary 按钮、圆体 Nunito + Noto Sans SC 字体（正文字重 500，标题 600–900）、`cubic-bezier(0.4, 0, 0.2, 1)` 柔和动效（0.15–0.35s），几何形（燕尾飘带 Title、数字块 Countdown）与有机形（SVG blob 裁切的 Modal）并存
 
 ### Design Tokens
 
@@ -56,7 +56,7 @@ props 参考按大类分组在 `references/components/` 下（props、合法取�
 | 反馈 | Loading, Progress, Skeleton, BackTop | [feedback.md](references/components/feedback.md) |
 | 通知 | Notification（命令式 API） | [Notification.md](references/components/Notification.md) |
 | 数据展示 | Table, CodeBlock, Tag | [data-display.md](references/components/data-display.md) |
-| 装饰 | Time, Phone, Footer, Wallet | [decorative.md](references/components/decorative.md) |
+| 装饰 | Footer, Divider, Cursor, Typewriter | [decorative.md](references/components/decorative.md) |
 
 ### 硬规则（违反即 bug）
 

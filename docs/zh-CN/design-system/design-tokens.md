@@ -49,7 +49,7 @@
 @shadow-switch-on: #5a9e1e; // Switch 开启 3D 阴影
 ```
 
-**IslandPhone 应用调色板**（Card `color` prop 可选值）：
+**海岛应用块调色板**（Card `color` prop 可选值）：
 
 | color 值        | 背景色               | 文字色    |
 | --------------- | -------------------- | --------- |

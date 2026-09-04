@@ -25,7 +25,7 @@
 9. Modal 必须用 SVG blob clip-path（`#animal-modal-clip`），不可换成圆角矩形。
 10. Title 是 swallowtail 飘带（clip-path + 折角三角阴影 + 3deg 透视），不是 blob / pill / 矩形。`<Card type="title">` 已移除，统一用 `<Title>`。
 11. 字体：`Nunito, 'Noto Sans SC'`（@fontsource 自带 woff2，构建时剥掉 woff 备份）。禁止系统等宽字体用于 UI 文字（CodeBlock 除外）。
-12. 字重：正文 500，按钮/标题 600–700，Time 数字 / Title 飘带 900，placeholder 400。任何位置不得低于 400。
+12. 字重：正文 500，按钮/标题 600–700，Countdown 数字 / Title 飘带 900，placeholder 400。任何位置不得低于 400。
 13. 动效缓动统一 `cubic-bezier(0.4, 0, 0.2, 1)`，时长 0.15–0.35s。
 14. Radio 是高圆化方形（border-radius 12/14/16px），不是正圆；内含 SVG 对勾，不是圆点。
 
@@ -79,7 +79,7 @@
 
 12. **字重不得低于 400**
     - ❌ `font-weight: 300;` / `font-weight: normal;`（< 400）
-    - ✅ 正文 `500`；按钮/标题 `600-700`；Time/Title `900`；placeholder `400`
+    - ✅ 正文 `500`；按钮/标题 `600-700`；Countdown/Title `900`；placeholder `400`
 
 13. **动效缓动**
     - ❌ `transition: all 0.3s ease;`

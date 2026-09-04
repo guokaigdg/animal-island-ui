@@ -49,7 +49,7 @@
 @shadow-switch-on: #5a9e1e; // Switch ON 3D shadow
 ```
 
-**IslandPhone app palette** (accepted values of the Card `color` prop):
+**Island app-tile palette** (accepted values of the Card `color` prop):
 
 | color value     | Background           | Text      |
 | --------------- | -------------------- | --------- |

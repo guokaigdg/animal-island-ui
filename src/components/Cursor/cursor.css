@@ -1,8 +1,10 @@
+/* 内联 SVG 光标（28×28 几何箭头，hotspot 6 4），无外部图片资源 */
 /* ============ force 模式（默认）：全覆盖所有后代 ============ */
 .animal-cursor--force,
 .animal-cursor--force * {
     cursor:
-        url('../../assets/img/pointers/arrow-pointer.svg') 6 4,
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 28 28'%3E%3Cpath d='M6 4 L6 21 L10.5 16.5 L13.5 23 L16.8 21.5 L13.8 15.2 L20.5 15.2 Z' fill='%23fff7e6' stroke='%23794f27' stroke-width='2.2' stroke-linejoin='round'/%3E%3C/svg%3E")
+            6 4,
         default !important;
 }
 
@@ -14,7 +16,8 @@
 /* 容器自身：使用自定义光标（双类提升特异性 (0,2,0) > 祖先 (0,1,1)） */
 .animal-cursor.animal-cursor--scoped {
     cursor:
-        url('../../assets/img/pointers/arrow-pointer.svg') 6 4,
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 28 28'%3E%3Cpath d='M6 4 L6 21 L10.5 16.5 L13.5 23 L16.8 21.5 L13.8 15.2 L20.5 15.2 Z' fill='%23fff7e6' stroke='%23794f27' stroke-width='2.2' stroke-linejoin='round'/%3E%3C/svg%3E")
+            6 4,
         default !important;
 }
 

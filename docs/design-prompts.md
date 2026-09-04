@@ -28,7 +28,7 @@ inputs are full pills, nothing has a sharp right angle. Primary buttons sit on a
 3D bottom shadow and press down like a physical game button, while secondary buttons stay
 flat with only a soft warm elevation shadow. Shapes mix geometric and organic: section
 headings are flat swallowtail ribbons with a folded-corner shadow, dialogs are clipped to
-an irregular organic blob, cards are pastel IslandPhone app tiles or polka-dot wallpaper.
+an irregular organic blob, cards are pastel island app tiles or polka-dot wallpaper.
 Type is Nunito rounded, never lighter than weight 400, chunky and friendly. Focus states
 are warm yellow, never blue. Motion is short and soft — small lifts on hover, a press-down
 on active, nothing snappy or mechanical.
@@ -51,9 +51,9 @@ Interface details:
 - Organic blob-shaped modal dialog with irregular soft SVG silhouette
 - Ribbon-banner section headings (Title component): swallowtail clip-path ends like a
   flat heraldic ribbon, with darker fold-shadow triangles tucked behind, and a slightly
-  3D-tilted front face — comes in 13 IslandPhone color schemes (green/pink/purple/blue/
+  3D-tilted front face — comes in 13 island color schemes (green/pink/purple/blue/
   yellow/orange/teal/red/brown etc.). NOT a blob, NOT a Card.
-- Pastel IslandPhone app icon color cards: pink #f8a6b2, lavender #b77dee, sky blue #889df0,
+- Pastel island app-tile color cards: pink #f8a6b2, lavender #b77dee, sky blue #889df0,
   sunshine yellow #f7cd67, coral #e59266, seafoam #82d5bb, sage green #8ac68a
 - Polka-dot pastel "wallpaper" Card variants: light tinted bg with two layered radial-gradient
   dot grids (28px and 14px) and a 1.5px solid colored border in the matching palette hue
@@ -64,7 +64,7 @@ Interface details:
 - Yellow focus highlight #ffcc00 on focused inputs (NOT blue)
 - Switch toggle with a flat circular handle (thin border, no outer shadow; the track carries an inset shadow only), track green #86d67a when ON
 - Collapse accordion with teal circle icon, leaf SVG decoration
-- Time widget showing weekday in green #6fba2c, large 48px clock digits
+- Countdown digit tiles: 900-weight tabular numerals on a cream gradient face, DD/HH/mm/ss tiles rolling odometer-style
 - Pastel parchment Table with dashed dotted row dividers and diagonal teal stripe hover
 - Soft warm Tooltip bubble with 8px diamond arrow, OR transparent island-bubble variant
 - Nature decorations: leaf SVG icons, illustrated ocean wave footer, forest tree silhouette

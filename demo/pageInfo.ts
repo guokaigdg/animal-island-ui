@@ -24,14 +24,6 @@ export const PAGE_INFO: Record<string, { title: string; desc: string }> = {
         title: 'Cursor 光标',
         desc: '光标组件 — 自定义手指光标，支持自定义尺寸、点击动画',
     },
-    time: {
-        title: 'Time 时间',
-        desc: '经典 HUD 风格的时间显示组件，实时更新时间',
-    },
-    phone: {
-        title: 'Phone 手机',
-        desc: '主题手机界面，包含对话框和背包功能',
-    },
     footer: {
         title: 'Footer 底部装饰',
         desc: '页面底部装饰图片，支持树和海两种类型',
@@ -103,14 +95,6 @@ export const PAGE_INFO: Record<string, { title: string; desc: string }> = {
     pagination: {
         title: 'Pagination 分页',
         desc: '分页组件 — 支持受控/非受控、每页条数切换、快速跳转、总条数展示，可配合 Table 使用',
-    },
-    'wedding-invitation': {
-        title: 'InvitationCard 婚礼请柬',
-        desc: '动物主题婚礼请柬，叶子边角、飘散花瓣、心跳爱心、吉祥物头像，所有装饰均为内联 SVG，无需外部素材',
-    },
-    wallet: {
-        title: 'Wallet 钱包',
-        desc: '动物主题金币展示 — 奶油描边胶囊 + 上凸钱袋图标，支持千分位、自定义图标与三种尺寸',
     },
     tag: {
         title: 'Tag 标签',

@@ -31,12 +31,6 @@ export type { CollapseProps } from './components/Collapse';
 export { Cursor } from './components/Cursor';
 export type { CursorProps } from './components/Cursor';
 
-export { Time } from './components/Time';
-export type { TimeProps, TimeType } from './components/Time';
-
-export { Phone } from './components/Phone';
-export type { PhoneProps } from './components/Phone';
-
 export { Divider } from './components/Divider';
 export type { DividerProps } from './components/Divider';
 
@@ -104,9 +98,6 @@ export type { TableProps, TableColumn } from './components/Table';
 
 export { Pagination } from './components/Pagination';
 export type { PaginationProps } from './components/Pagination';
-
-export { Wallet } from './components/Wallet';
-export type { WalletProps, WalletSize } from './components/Wallet';
 
 export { Tag } from './components/Tag';
 export type { TagProps, TagSize, TagVariant, TagColor } from './components/Tag';

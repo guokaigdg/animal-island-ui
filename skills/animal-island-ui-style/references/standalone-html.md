@@ -74,7 +74,7 @@ For a real React project, use [react-project.md](react-project.md) instead.
 
 ## Scenario-specific rules
 
-- Typography: body weight 500, buttons/headings 600–700, Time digits / Title ribbon 900,
+- Typography: body weight 500, buttons/headings 600–700, Countdown digits / Title ribbon 900,
   placeholder 400; letter-spacing 0.01–0.02em; never below weight 400.
 - All hard rules from [SKILL.md](../SKILL.md) apply (blob Modal, ribbon Title, no emoji
   icons, minimum 12px radius, warm palette only).

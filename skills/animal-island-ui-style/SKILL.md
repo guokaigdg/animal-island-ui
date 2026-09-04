@@ -33,7 +33,7 @@ primary accent, large-radius pill shapes (buttons and inputs are 50px pills; not
 interactive below 12px radius), 3D "game button" stacked shadow on primary buttons only,
 rounded Nunito + Noto Sans SC typography (body weight 500, headings 600–900), soft
 `cubic-bezier(0.4, 0, 0.2, 1)` motion over 0.15–0.35s, and a mix of geometric shapes
-(swallowtail ribbon Title, capsule Wallet) with organic ones (SVG blob-clipped Modal).
+(swallowtail ribbon Title, digit-tile Countdown) with organic ones (SVG blob-clipped Modal).
 
 ## Design tokens
 
@@ -72,7 +72,7 @@ values, defaults — copied from source):
 | Feedback | Loading, Progress, Skeleton, BackTop | [feedback.md](references/components/feedback.md) |
 | Notification | Notification (imperative API) | [Notification.md](references/components/Notification.md) |
 | Data display | Table, CodeBlock, Tag | [data-display.md](references/components/data-display.md) |
-| Decorative | Time, Phone, Footer, Wallet | [decorative.md](references/components/decorative.md) |
+| Decorative | Footer, Divider, Cursor, Typewriter | [decorative.md](references/components/decorative.md) |
 
 ## Hard rules (violations are bugs)
 

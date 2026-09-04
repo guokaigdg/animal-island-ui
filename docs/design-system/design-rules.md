@@ -25,7 +25,7 @@ These fourteen contracts are the visual contract of the library. Violating any o
 9. Modal must use the SVG blob clip-path (`#animal-modal-clip`); it may not be swapped for a rounded rectangle.
 10. Title is a swallowtail ribbon (clip-path + folded-corner triangle shadow + 3deg perspective), not a blob, pill, or rectangle. `<Card type="title">` has been removed; use `<Title>`.
 11. Fonts: `Nunito, 'Noto Sans SC'` (shipped as woff2 through @fontsource, with the woff fallbacks stripped at build time). System monospace fonts are forbidden for UI text (CodeBlock excepted).
-12. Font weight: body 500, buttons and headings 600–700, Time digits and Title ribbons 900, placeholder 400. Never below 400 anywhere.
+12. Font weight: body 500, buttons and headings 600–700, Countdown digits and Title ribbons 900, placeholder 400. Never below 400 anywhere.
 13. Motion easing is uniformly `cubic-bezier(0.4, 0, 0.2, 1)` with durations of 0.15–0.35s.
 14. Radio is a heavily rounded square (border-radius 12/14/16px), not a perfect circle, and contains an SVG checkmark rather than a dot.
 
@@ -79,7 +79,7 @@ Check code against this list before submitting it. **Any ❌ that appears is a f
 
 12. **Font weight never below 400**
     - ❌ `font-weight: 300;` / `font-weight: normal;` (< 400)
-    - ✅ body `500`; buttons and headings `600-700`; Time/Title `900`; placeholder `400`
+    - ✅ body `500`; buttons and headings `600-700`; Countdown/Title `900`; placeholder `400`
 
 13. **Motion easing**
     - ❌ `transition: all 0.3s ease;`

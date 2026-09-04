@@ -58,7 +58,7 @@ interface TitleProps {
 <Title size="large" color="app-yellow">Notification</Title>
 ```
 
-Renders an island-style ribbon banner (swallowtail clip-path ends + fold-shadow triangles + raised front). Uses the same 13 IslandPhone palette as `Card.color`; `size` scales the whole ribbon via `em` units (small 14px / middle 20px / large 28px base).
+Renders an island-style ribbon banner (swallowtail clip-path ends + fold-shadow triangles + raised front). Uses the same 13 island palette as `Card.color`; `size` scales the whole ribbon via `em` units (small 14px / middle 20px / large 28px base).
 
 **Not supported:** no `level` (`h1..h6`) — renders as an inline-block `<div>`; no `bordered`; no `code` / `mark` / `underline` / `delete` modifiers (this is a decorative ribbon banner, NOT a generic typography-heading component).
 
@@ -70,7 +70,6 @@ type DividerType =
     | 'line-teal'
     | 'line-white'
     | 'line-yellow'
-    | 'wave-yellow'
     | 'dashed-brown'
     | 'dashed-teal'
     | 'dashed-white'
@@ -85,10 +84,10 @@ interface DividerProps {
 
 ```tsx
 <Divider />
-<Divider type="wave-yellow" />
+<Divider type="dashed-teal" />
 ```
 
-Height fixed at 12px. Purely decorative background-image band. No `orientation` / `dashed` / `plain` / children — for a vertical separator, use a CSS `border-left` on adjacent elements.
+Height fixed at 12px. Purely decorative band drawn with CSS gradients only (conic-gradient zigzag for `line-*`, linear-gradient dashes for `dashed-*`) — no image assets. No `orientation` / `dashed` / `plain` / children — for a vertical separator, use a CSS `border-left` on adjacent elements.
 
 ## Collapse
 

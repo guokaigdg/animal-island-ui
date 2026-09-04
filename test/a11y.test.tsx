@@ -2,7 +2,7 @@
  * a11y 烟雾测试 —— 全组件 axe-core 自动检查
  * --------------------------------------------------------------------------
  * 设计目的：
- *   作为 28 个组件的"无障碍基线设施"，用 axe-core 跑一轮 WCAG 2.1 AA 自动化
+ *   作为 33 个组件的"无障碍基线设施"，用 axe-core 跑一轮 WCAG 2.1 AA 自动化
  *   规则，把"我应该写 aria-label 但忘了"这类问题在 CI 里拦下来。
  *
  * 入口策略：
@@ -12,9 +12,9 @@
  *     节点设为 document.body，否则 portal 输出（挂在 body 上、容器外）扫不到
  *
  * 不并入 npm run ci：
- *   28 个组件首次跑一定会有几十条违规（多是需要补 aria-label/aria-labelledby
+ *   33 个组件首次跑一定会有几十条违规（多是需要补 aria-label/aria-labelledby
  *   的契约缺口），目前单独跑 `npm run test:a11y`，等 Tier 1 契约层在
- *   28 个组件测试里就近补完后，再视情况并入 ci。
+ *   33 个组件测试里就近补完后，再视情况并入 ci。
  *
  * 已知规则差异（在 axeOptions 中关闭）：
  *   - color-contrast          jsdom 不计算样式，永远不通过
@@ -59,7 +59,6 @@ import { Input } from '@/components/Input';
 import { Loading } from '@/components/Loading';
 import { Modal } from '@/components/Modal';
 import { Notification } from '@/components/Notification';
-import { Phone } from '@/components/Phone';
 import { Progress } from '@/components/Progress';
 import { Radio } from '@/components/Radio';
 import { Select } from '@/components/Select';
@@ -67,12 +66,10 @@ import { Switch } from '@/components/Switch';
 import { Table } from '@/components/Table';
 import { Tabs } from '@/components/Tabs';
 import { Tag } from '@/components/Tag';
-import { Time } from '@/components/Time';
 import { TimePicker } from '@/components/TimePicker';
 import { Title } from '@/components/Title';
 import { Tooltip } from '@/components/Tooltip';
 import { Typewriter } from '@/components/Typewriter';
-import { Wallet } from '@/components/Wallet';
 
 afterEach(() => {
     cleanup();
@@ -327,24 +324,9 @@ describe('a11y smoke / 全组件 axe-core 自动检查', () => {
         await expectNoA11yViolations(containerOf(r), 'Divider');
     });
 
-    it('Time (有日期文本)', async () => {
-        const r = render(<Time />);
-        await expectNoA11yViolations(containerOf(r), 'Time');
-    });
-
     it('Typewriter (有 children 文本)', async () => {
         const r = render(<Typewriter>欢迎来到治愈海岛</Typewriter>);
         await expectNoA11yViolations(containerOf(r), 'Typewriter');
-    });
-
-    it('Phone (纯装饰)', async () => {
-        const r = render(<Phone />);
-        await expectNoA11yViolations(containerOf(r), 'Phone');
-    });
-
-    it('Wallet (有 value)', async () => {
-        const r = render(<Wallet value={12345} />);
-        await expectNoA11yViolations(containerOf(r), 'Wallet');
     });
 
     it('Footer (纯装饰)', async () => {
