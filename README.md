@@ -33,10 +33,6 @@ This project is a lightweight UI component library built with React + TypeScript
 
 All visual elements, layouts, icons, and animations are independently designed and implemented from scratch.
 
-## 🎉 Vue Version
-
-- [animal-island-ui](https://github.com/guokaigdg/animal-island-ui)
-
 ## Preview
 
 - Online Preview (PC) [animal-island-ui-pc](https://guokaigdg.github.io/animal-island-ui/#/)

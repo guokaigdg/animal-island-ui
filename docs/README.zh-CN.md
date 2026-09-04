@@ -35,10 +35,6 @@
 
 所有视觉元素、布局、图标、动画均为本项目从零独立设计实现。
 
-## 🎉 vue 版本
-
-- [animal-island-ui](https://github.com/guokaigdg/animal-island-ui)
-
 ## 预览
 
 - 在线预览 (PC 端) [animal-island-ui-pc](https://guokaigdg.github.io/animal-island-ui/#/)
