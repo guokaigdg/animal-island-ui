@@ -252,7 +252,6 @@ const S = {
     } as React.CSSProperties,
     compCard: {
         padding: '16px 20px',
-        cursor: 'pointer',
     } as React.CSSProperties,
     compName: {
         fontSize: 15,
@@ -333,11 +332,6 @@ const features = [
 ];
 
 const components = [
-    {
-        key: 'button',
-        name: 'Button',
-        desc: '5 种类型、3 种尺寸、加载/危险/幽灵模式',
-    },
     { key: 'input', name: 'Input', desc: '前后缀、一键清空、校验状态' },
     {
         key: 'form',
@@ -350,51 +344,23 @@ const components = [
         desc: '受控/非受控、自定义文案、加载状态',
     },
     { key: 'checkbox', name: 'Checkbox', desc: '多选框组件，支持水平/垂直排列' },
-    {
-        key: 'select',
-        name: 'Select',
-        desc: '下拉选择器，支持搜索和禁用',
-    },
     { key: 'date-picker', name: 'DatePicker', desc: '日期选择与范围选择，年/月/日面板、禁用日期、键盘导航' },
     { key: 'time-picker', name: 'TimePicker', desc: '时间选择，时/分/秒滚选、此刻/确定、步进' },
-    { key: 'tabs', name: 'Tabs', desc: '标签页组件，支持受控/非受控模式' },
     {
         key: 'pagination',
         name: 'Pagination',
         desc: '分页组件，每页条数切换、快速跳转',
     },
-    { key: 'modal', name: 'Modal', desc: 'SVG 有机形状弹窗、ESC 关闭' },
     { key: 'drawer', name: 'Drawer', desc: '下沉景深抽屉，四方向 + 背景下沉' },
     {
         key: 'notification',
         name: 'Notification',
         desc: '命令式通知，4 种 type × 6 个 position',
     },
-    {
-        key: 'progress',
-        name: 'Progress',
-        desc: '叶子填充进度条，5 种 status × 3 档 size',
-    },
-    {
-        key: 'typewriter',
-        name: 'Typewriter',
-        desc: '逐字打字机效果，支持多行与富内容',
-    },
     { key: 'card', name: 'Card', desc: '默认/标题两种卡片风格' },
-    { key: 'collapse', name: 'Collapse', desc: 'FAQ 折叠面板、平滑展开动画' },
-    { key: 'cursor', name: 'Cursor', desc: '自定义手指光标，支持多种尺寸' },
-    { key: 'divider-comp', name: 'Divider', desc: '装饰性水平分割线' },
-    { key: 'icon', name: 'Icon', desc: 'SVG 图标库' },
-    { key: 'footer', name: 'Footer', desc: '页脚组件' },
-    { key: 'countdown', name: 'Countdown', desc: '活动与任务倒计时，支持天/时/分/秒' },
     { key: 'codeblock', name: 'CodeBlock', desc: '代码语法高亮组件' },
     { key: 'image', name: 'Image', desc: '白色衬板图片，支持懒加载 / 点击预览' },
     { key: 'carousel', name: 'Carousel', desc: '自动播放、箭头/圆点与键盘导航' },
-    {
-        key: 'skill',
-        name: 'AI Skill',
-        desc: 'animal-island-ui-style 技能介绍，教 AI 搭建同风格页面',
-    },
 ];
 
 // ============================================
@@ -452,14 +418,8 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                             </p>
                         </Typewriter>
                         {/* 暂时隐藏：恢复时去掉 display: 'none' */}
-                        <div
-                            style={{
-                                ...S.heroActions,
-                                justifyContent: isMobile ? 'center' : 'flex-start',
-                                display: 'none',
-                            }}
-                        >
-                            <Button type="primary" size="large" onClick={() => onNavigate?.('/button')}>
+                        <div style={{ ...S.heroActions, justifyContent: isMobile ? 'center' : 'flex-start' }}>
+                            <Button type="primary" size="large" onClick={() => onNavigate?.('/input')}>
                                 开始使用 →
                             </Button>
                         </div>
@@ -531,10 +491,10 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
             {/* Components */}
             <div style={{ ...S.section, padding: isMobile ? '32px 16px' : '48px 40px' }}>
                 <div style={S.sectionTitle}>组件一览</div>
-                <div style={S.sectionDesc}>点击卡片查看详细文档和在线演示</div>
+                <div style={S.sectionDesc}>详细文档与在线演示请从左侧菜单进入</div>
                 <div style={S.compGrid}>
                     {components.map((c) => (
-                        <Card key={c.key} style={S.compCard} onClick={() => onNavigate?.(`/${c.key}`)}>
+                        <Card key={c.key} style={S.compCard}>
                             <div style={S.compName}>{c.name}</div>
                             <div style={S.compDesc}>{c.desc}</div>
                         </Card>

@@ -50,23 +50,25 @@ interface MenuItem {
 //   主题  → 业务复合/主题专属 (Countdown)
 // ============================================
 const MENU_ITEMS: MenuItem[] = [
-    {
-        key: 'cat-guide',
-        label: '── 指南 ──',
-        children: [{ key: 'skill', label: 'Skill 介绍', isNew: true }],
-    },
+    // 隐藏：暂不展示，恢复时取消注释
+    // {
+    //     key: 'cat-guide',
+    //     label: '── 指南 ──',
+    //     children: [{ key: 'skill', label: 'Skill 介绍', isNew: true }],
+    // },
     {
         key: 'cat-basic',
         label: '── 基础 ──',
         children: [
-            { key: 'title', label: 'Title 标题', isNew: true },
-            { key: 'button', label: 'Button 按钮' },
-            { key: 'divider-comp', label: 'Divider 分割线' },
-            { key: 'icon', label: 'Icon 图标' },
+            // 隐藏：暂不展示，恢复时取消注释
+            // { key: 'title', label: 'Title 标题', isNew: true },
+            // { key: 'button', label: 'Button 按钮' },
+            // { key: 'divider-comp', label: 'Divider 分割线' },
+            // { key: 'icon', label: 'Icon 图标' },
             { key: 'tag', label: 'Tag 标签' },
-            { key: 'cursor', label: 'Cursor 光标' },
+            // { key: 'cursor', label: 'Cursor 光标' },
             { key: 'codeblock', label: 'CodeBlock 代码高亮' },
-            { key: 'footer', label: 'Footer 页脚' },
+            // { key: 'footer', label: 'Footer 页脚' },
         ],
     },
     {
@@ -75,7 +77,8 @@ const MENU_ITEMS: MenuItem[] = [
         children: [
             { key: 'input', label: 'Input 输入框' },
             { key: 'switch', label: 'Switch 开关' },
-            { key: 'select', label: 'Select 选择器' },
+            // 隐藏：暂不展示，恢复时取消注释
+            // { key: 'select', label: 'Select 选择器' },
             { key: 'date-picker', label: 'DatePicker 日期选择' },
             { key: 'time-picker', label: 'TimePicker 时间选择' },
             { key: 'checkbox', label: 'Checkbox 多选框' },
@@ -88,12 +91,13 @@ const MENU_ITEMS: MenuItem[] = [
         label: '── 反馈 ──',
         children: [
             { key: 'notification', label: 'Notification 通知' },
-            { key: 'modal', label: 'Modal 弹窗' },
+            // 隐藏：暂不展示，恢复时取消注释
+            // { key: 'modal', label: 'Modal 弹窗' },
             { key: 'drawer', label: 'Drawer 抽屉' },
-            { key: 'tooltip', label: 'Tooltip 气泡提示' },
-            { key: 'progress', label: 'Progress 进度条' },
-            { key: 'skeleton', label: 'Skeleton 骨架屏' },
-            { key: 'backtop', label: 'BackTop 返回顶部', isNew: true },
+            // { key: 'tooltip', label: 'Tooltip 气泡提示' },
+            // { key: 'progress', label: 'Progress 进度条' },
+            // { key: 'skeleton', label: 'Skeleton 骨架屏' },
+            // { key: 'backtop', label: 'BackTop 返回顶部', isNew: true },
         ],
     },
     {
@@ -101,20 +105,22 @@ const MENU_ITEMS: MenuItem[] = [
         label: '── 数据展示 ──',
         children: [
             { key: 'card', label: 'Card 卡片' },
-            { key: 'collapse', label: 'Collapse 折叠面板' },
-            { key: 'tabs', label: 'Tabs 标签页' },
+            // 隐藏：暂不展示，恢复时取消注释
+            // { key: 'collapse', label: 'Collapse 折叠面板' },
+            // { key: 'tabs', label: 'Tabs 标签页' },
             { key: 'table', label: 'Table 表格' },
             { key: 'pagination', label: 'Pagination 分页', isNew: true },
-            { key: 'typewriter', label: 'Typewriter 打字机' },
+            // { key: 'typewriter', label: 'Typewriter 打字机' },
             { key: 'image', label: 'Image 图片', isNew: true },
             { key: 'carousel', label: 'Carousel 轮播图', isNew: true },
         ],
     },
-    {
-        key: 'cat-animal',
-        label: '── 主题 ──',
-        children: [{ key: 'countdown', label: 'Countdown 倒计时', isNew: true }],
-    },
+    // 隐藏：暂不展示，恢复时取消注释
+    // {
+    //     key: 'cat-animal',
+    //     label: '── 主题 ──',
+    //     children: [{ key: 'countdown', label: 'Countdown 倒计时', isNew: true }],
+    // },
 ];
 
 // ============================================
