@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback, Suspense, lazy } from 'react';
 import { Cursor } from '../src';
+import { islandGradient } from './gradients';
 import '../src/styles/index.less';
 import './fonts.css';
 import HomePage from './HomePage';
@@ -210,11 +211,7 @@ const SidebarContent: React.FC<{
 }> = ({ activeKey, onNavigate }) => (
     <>
         <div style={S.sidebarHeader} onClick={() => onNavigate('/')}>
-            <img
-                src={new URL('./img/placeholder-island.svg', import.meta.url).href}
-                style={{ width: 24, height: 24, marginRight: 8, borderRadius: 6 }}
-                alt="island"
-            />
+            <img src={islandGradient} style={{ width: 24, height: 24, marginRight: 8, borderRadius: 6 }} alt="island" />
             Island UI
         </div>
         <nav style={S.menuList}>

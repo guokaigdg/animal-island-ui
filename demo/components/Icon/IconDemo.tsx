@@ -2,7 +2,7 @@ import React from 'react';
 import { Heart, Star, Sun, Umbrella } from 'lucide-react';
 import { Icon, ICON_LIST } from '../../../src';
 import { ApiTable, ApiRow, sectionStyle, sectionTitleStyle, DemoTag, CodeBlock, labelStyle } from '../../tools';
-import customImage from '../../img/placeholder-island.svg';
+import { islandGradient as customImage } from '../../gradients';
 
 const ICON_API: ApiRow[] = [
     {

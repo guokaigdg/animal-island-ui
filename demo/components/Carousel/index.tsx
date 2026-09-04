@@ -1,9 +1,7 @@
 import React from 'react';
 import { Carousel } from '../../../src';
 import { ApiRow, ApiTable, CodeBlock, DemoTag, labelStyle, sectionStyle, sectionTitleStyle } from '../../tools';
-import island from '../../img/placeholder-island.svg';
-import flowers from '../../img/placeholder-flowers.svg';
-import home from '../../img/placeholder-scenery.svg';
+import { islandGradient, flowersGradient, sceneryGradient } from '../../gradients';
 
 const CAROUSEL_API: ApiRow[] = [
     { prop: 'children', desc: '每个直接子元素为一张', type: 'ReactNode', defaultVal: '-', required: true },
@@ -19,9 +17,9 @@ const CAROUSEL_API: ApiRow[] = [
 ];
 
 const slides = [
-    { src: island, title: '无人岛启程', desc: '乘坐水上飞机，开始新的岛屿生活。' },
-    { src: flowers, title: '花园散步', desc: '在盛开的花丛间寻找今天的小惊喜。' },
-    { src: home, title: '温暖小屋', desc: '回到自己的房间，慢慢布置喜欢的家具。' },
+    { src: islandGradient, title: '海岛晨光', desc: '晨雾散去，海面泛起层层波光。' },
+    { src: flowersGradient, title: '花园漫步', desc: '在盛开的花丛间享受午后时光。' },
+    { src: sceneryGradient, title: '远山如黛', desc: '远山与天空在渐变色里相遇。' },
 ];
 
 const CarouselDemo: React.FC = () => (

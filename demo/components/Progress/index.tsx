@@ -25,13 +25,13 @@ const S = {
         flexWrap: 'wrap' as const,
         alignItems: 'center',
     } as React.CSSProperties,
-    sliderRow: {
+    trackRow: {
         display: 'flex',
         alignItems: 'center',
         gap: 12,
         marginBottom: 8,
     } as React.CSSProperties,
-    sliderLabel: {
+    trackLabel: {
         minWidth: 56,
         fontSize: 13,
         color: '#725d42',
@@ -123,8 +123,8 @@ const ProgressDemo: React.FC = () => {
 
                 {/* ---- 4. 受控滑块 ---- */}
                 <div style={labelStyle}>受控 — 滑块驱动 percent (0–100,自动 clamp)</div>
-                <div style={S.sliderRow}>
-                    <span style={S.sliderLabel}>percent:</span>
+                <div style={S.trackRow}>
+                    <span style={S.trackLabel}>percent:</span>
                     <input
                         type="range"
                         min={0}

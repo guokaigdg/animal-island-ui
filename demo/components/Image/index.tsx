@@ -1,26 +1,10 @@
 import React from 'react';
 import { Image, type ImageColor } from '../../../src';
 import { labelStyle, sectionStyle, sectionTitleStyle, DemoTag, ApiTable, ApiRow, CodeBlock } from '../../tools';
-import island from '../../img/placeholder-island.svg';
-import flowers from '../../img/placeholder-flowers.svg';
+import { islandGradient, flowersGradient, GRADIENTS } from '../../gradients';
 
-/** 治愈海岛风格随机图片池 */
-const heroImages = [
-    'https://placehold.co/640x400?text==tropical%20island%20landscape%20vibrant%20green%20grass%20blue%20sky%20cherry%20blossoms%20cozy%20pastel%20illustration&image_size=landscape_16_9',
-    'https://placehold.co/640x400?text==cozy%20museum%20interior%20warm%20lighting%20fossils%20art%20gallery%20pastel%20illustration&image_size=landscape_16_9',
-    'https://placehold.co/640x400?text==seaside%20beach%20sunset%20palm%20trees%20coconut%20cute%20pastel%20illustration&image_size=landscape_16_9',
-    'https://placehold.co/640x400?text==winter%20snow%20village%20christmas%20lights%20cozy%20cottage%20pastel%20illustration&image_size=landscape_16_9',
-    'https://placehold.co/640x400?text==fishing%20river%20peaceful%20nature%20watercolor%20cozy%20illustration&image_size=landscape_16_9',
-    'https://placehold.co/640x400?text==friends%20singing%20together%20around%20campfire%20happy%20cute%20pastel%20illustration&image_size=landscape_16_9',
-    'https://placehold.co/640x400?text==campfire%20night%20starry%20sky%20cozy%20tent%20cute%20pastel%20illustration&image_size=landscape_16_9',
-    'https://placehold.co/640x400?text==flower%20garden%20tulips%20roses%20colorful%20pastel%20illustration&image_size=landscape_16_9',
-    'https://placehold.co/640x400?text==wooden%20bridge%20over%20river%20waterfall%20lush%20forest%20pastel%20illustration&image_size=landscape_16_9',
-    'https://placehold.co/640x400?text==fruit%20orchard%20apple%20orange%20peach%20trees%20sunny%20pastel%20illustration&image_size=landscape_16_9',
-    'https://placehold.co/640x400?text==lighthouse%20ocean%20cliff%20seagulls%20blue%20sky%20cute%20pastel%20illustration&image_size=landscape_16_9',
-    'https://placehold.co/640x400?text==festival%20fireworks%20night%20sky%20lanterns%20celebration%20pastel%20illustration&image_size=landscape_16_9',
-    'https://placehold.co/640x400?text==cafe%20interior%20cozy%20coffee%20wooden%20furniture%20warm%20pastel%20illustration&image_size=landscape_16_9',
-    'https://placehold.co/640x400?text==hot%20air%20balloon%20sky%20adventure%20clouds%20colorful%20pastel%20illustration&image_size=landscape_16_9',
-];
+/** 渐变图池（本地生成，无外链） */
+const heroImages = Array.from({ length: 14 }, (_, i) => GRADIENTS[i % GRADIENTS.length]);
 
 /** Fisher-Yates 洗牌，返回打乱后的新数组 */
 const shuffle = <T,>(arr: T[]): T[] => {
@@ -85,14 +69,14 @@ const ImageDemo: React.FC = () => (
         {/* 点击预览 */}
         <div style={labelStyle}>点击预览（preview 默认开启，点击图片弹出大图，ESC / 遮罩 / 关闭按钮均可关闭）</div>
         <div style={{ display: 'flex', gap: 16, alignItems: 'center', flexWrap: 'wrap' }}>
-            <Image src={island} alt="点击预览大图" width={330} height={200} preview />
+            <Image src={islandGradient} alt="点击预览大图" width={330} height={200} preview />
         </div>
 
         {/* 基础用法 */}
         <div style={labelStyle}>基础用法（自定义宽高）</div>
         <div style={{ display: 'flex', gap: 16, alignItems: 'center', flexWrap: 'wrap' }}>
-            <Image src={island} alt="示例图片 1" width={330} height={200} />
-            <Image src={flowers} alt="示例图片 2" width={480} height={300} />
+            <Image src={islandGradient} alt="示例图片 1" width={330} height={200} />
+            <Image src={flowersGradient} alt="示例图片 2" width={480} height={300} />
         </div>
 
         {/* 背景颜色 */}
@@ -108,7 +92,7 @@ const ImageDemo: React.FC = () => (
 
         {/* 懒加载 */}
         <div style={labelStyle}>懒加载（lazy，滚动到视口附近才加载）</div>
-        <Image src={island} alt="懒加载图片" width={360} height={230} lazy />
+        <Image src={islandGradient} alt="懒加载图片" width={360} height={230} lazy />
 
         {/* 错误占位 */}
         <div style={labelStyle}>错误占位（加载失败时显示占位）</div>

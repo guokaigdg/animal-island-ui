@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Card, Divider, Button, Typewriter } from '../src';
+import { islandGradient, flowersGradient, sceneryGradient } from './gradients';
 import { useIsMobile } from './tools';
 
 // ============================================
@@ -83,7 +84,7 @@ const FeatureCard: React.FC<{ feature: (typeof features)[0] }> = ({ feature }) =
             onMouseLeave={() => setHovered(false)}
         >
             <img
-                src={new URL(`./img/${feature.icon}`, import.meta.url).href}
+                src={feature.icon}
                 style={{
                     width: 42,
                     height: 42,
@@ -310,22 +311,22 @@ const S = {
 // ============================================
 const features = [
     {
-        icon: 'placeholder-island.svg',
+        icon: islandGradient,
         title: '治愈系风格',
         desc: 'SVG 有机形状裁切，3D 按压按钮，温暖质朴的自然 UI 质感',
     },
     {
-        icon: 'placeholder-flowers.svg',
+        icon: flowersGradient,
         title: '30+ 个组件',
         desc: 'Button / Input / Switch / Modal / Form / Table / Title / Tooltip / Typewriter / Card / Collapse / Cursor / Divider / Footer / Icon / Checkbox / Select / DatePicker / TimePicker / Tabs / CodeBlock / Radio / Tag / Notification / Progress',
     },
     {
-        icon: 'placeholder-scenery.svg',
+        icon: sceneryGradient,
         title: '主题定制',
         desc: '40+ CSS 自定义属性，运行时换肤无需重新构建',
     },
     {
-        icon: 'placeholder-island.svg',
+        icon: islandGradient,
         title: '开箱即用',
         desc: 'ESM + CJS 双格式输出，TypeScript 类型声明完整',
     },
@@ -423,10 +424,11 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
             {/* Hero */}
             <div style={{ ...S.hero }}>
                 <div style={isMobile ? S.heroContentMobile : S.heroContent}>
+                    {/* 暂时隐藏：恢复时去掉 display: 'none' */}
                     {isMobile && (
-                        <div style={{ textAlign: 'center' }}>
+                        <div style={{ textAlign: 'center', display: 'none' }}>
                             <img
-                                src={new URL('./img/placeholder-island.svg', import.meta.url).href}
+                                src={islandGradient}
                                 style={{ width: 180, height: 112, borderRadius: 12 }}
                                 alt="logo"
                                 decoding="async"
@@ -449,16 +451,24 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                                 治愈系海岛风格的 React 组件库，基于 TypeScript + Vite 构建，让 Web 应用充满温暖质感
                             </p>
                         </Typewriter>
-                        <div style={{ ...S.heroActions, justifyContent: isMobile ? 'center' : 'flex-start' }}>
+                        {/* 暂时隐藏：恢复时去掉 display: 'none' */}
+                        <div
+                            style={{
+                                ...S.heroActions,
+                                justifyContent: isMobile ? 'center' : 'flex-start',
+                                display: 'none',
+                            }}
+                        >
                             <Button type="primary" size="large" onClick={() => onNavigate?.('/button')}>
                                 开始使用 →
                             </Button>
                         </div>
                     </div>
+                    {/* 暂时隐藏：恢复时去掉 display: 'none' */}
                     {!isMobile && (
-                        <div style={{ textAlign: 'center' }}>
+                        <div style={{ textAlign: 'center', display: 'none' }}>
                             <img
-                                src={new URL('./img/placeholder-island.svg', import.meta.url).href}
+                                src={islandGradient}
                                 style={{ width: 320, height: 200, borderRadius: 16 }}
                                 alt="logo"
                                 decoding="async"
