@@ -16,7 +16,7 @@
 
 - `include: ['src/components/**/*.{ts,tsx}']`
 - `exclude: ['**/*.d.ts', '**/index.ts', 'src/components/Icon/**']` —— 桶文件与纯展示性的 Icon 集合是有意的取舍，不是遗漏。
-- 阈值：statements 85、branches 75、functions 85、lines 85。branches 调低是为了给 Loading 的浏览器时序分支留口子（`setTimeout` 清理与强制 reflow 路径在 jsdom 中不可达），其余组件都应在 90% 以上。
+- 阈值：statements 85、branches 75、functions 85、lines 85。所有组件都应在 90% 以上。
 
 ## 编写约定
 

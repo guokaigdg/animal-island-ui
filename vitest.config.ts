@@ -42,8 +42,6 @@ export default defineConfig({
             exclude: ['**/*.d.ts', '**/index.ts', 'src/components/Icon/**'],
             thresholds: {
                 // 整体目标：达到专业组件库基线
-                // branches 75% 是为 Loading 留口子 —— 它的 setTimeout 清理 + 强制 reflow 分支
-                // 属浏览器/动画时序耦合路径，jsdom 下不可达；其它 23 个组件均 ≥ 90%
                 statements: 85,
                 branches: 75,
                 functions: 85,

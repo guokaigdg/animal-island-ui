@@ -12,7 +12,7 @@ description: >
 # animal-island-ui style
 
 animal-island-ui is a React + TypeScript component library with an original
-cozy island-style design — 30 components, zero runtime dependencies,
+cozy island-style design — 31 components, zero runtime dependencies,
 CC BY-NC 4.0 (non-commercial use only).
 
 Source & canonical design definition: https://github.com/guokaigdg/animal-island-ui
@@ -69,7 +69,7 @@ values, defaults — copied from source):
 | Form controls | Input, Switch, Checkbox, Radio, Select | [form-controls.md](references/components/form-controls.md) |
 | Form container | Form (+ FormItem, useForm) | [Form.md](references/components/Form.md) |
 | Overlays | Modal, Drawer, Tooltip | [overlays.md](references/components/overlays.md) |
-| Feedback | Loading, Progress, Skeleton, BackTop | [feedback.md](references/components/feedback.md) |
+| Feedback | Progress, Skeleton, BackTop | [feedback.md](references/components/feedback.md) |
 | Notification | Notification (imperative API) | [Notification.md](references/components/Notification.md) |
 | Data display | Table, CodeBlock, Tag | [data-display.md](references/components/data-display.md) |
 | Decorative | Footer, Divider, Cursor, Typewriter | [decorative.md](references/components/decorative.md) |

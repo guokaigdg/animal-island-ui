@@ -90,9 +90,6 @@ export type { TitleProps, TitleSize, TitleColor } from './components/Title';
 export { CodeBlock } from './components/CodeBlock';
 export type { CodeBlockProps } from './components/CodeBlock';
 
-export { Loading } from './components/Loading';
-export type { LoadingProps } from './components/Loading';
-
 export { Table } from './components/Table';
 export type { TableProps, TableColumn } from './components/Table';
 

@@ -84,10 +84,6 @@ export const PAGE_INFO: Record<string, { title: string; desc: string }> = {
         title: 'CodeBlock 代码高亮',
         desc: '代码高亮组件 — JSX/TS 语法高亮，支持一键复制、自定义样式和类名',
     },
-    loading: {
-        title: 'Loading 加载',
-        desc: '主题小岛 Loading 动画组件，支持自定义样式和类名',
-    },
     table: {
         title: 'Table 表格',
         desc: '数据表格组件，支持斑马纹、边框、加载状态、内置分页等常用功能',

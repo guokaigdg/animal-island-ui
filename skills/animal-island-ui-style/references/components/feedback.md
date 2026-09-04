@@ -2,25 +2,6 @@
 
 Props/types below are copied from the library source. In an npm-installed project, the installed package's TypeScript declarations (`dist/types/index.d.ts`) are the ground truth — prefer exploring them when in doubt.
 
-## Loading
-
-```ts
-interface LoadingProps {
-    active?: boolean; // default true
-    className?: string;
-    style?: React.CSSProperties;
-}
-```
-
-```tsx
-<Loading />                  {/* full-bleed loading scene */}
-<Loading active={isLoading} />
-```
-
-> Self-contained illustrated loading scene (no configurable content). When `active={false}`, the scene fades out via a CSS mask radius transition.
->
-> **Not supported:** no `tip` / `text`, no `size`, no `spinning`, no `delay`, no `indicator`, no `children` (this is NOT a generic Spin-style wrapper — do not wrap content with it). Use it as a sibling overlay element controlled via `active`.
-
 ## Progress
 
 Horizontal bar whose fill reuses the **Button loading** stripe: a teal `-45°` ribbon (`#0ec4b6` / `#01b0a7`) scrolling infinitely right-to-left. The track uses the page background (`#f8f8f0`, same as `--animal-bg`) with a light `#e8dcc8` border + soft inner dent. The percent label sits inside the fill (default, white), to the right, or on top.

@@ -1,51 +1,6 @@
 # Feedback — 精确样式规范
 
-反馈进度与等待状态的组件：Loading、Progress、Skeleton、BackTop 的精确取值
-
-## Loading（全屏遮罩）
-
-源码：`src/components/Loading/loading.module.less`。**项目无 GSAP / MotionPath**，全部用原生 CSS + SVG `stroke-dasharray` 实现。
-
-```css
-/* container */
-position: absolute; /* not fixed — bounded by the nearest positioned ancestor */
-inset: 0;
-background: black; /* not #f8f8f0 */
-overflow: hidden;
-
-/* reveal mask (radius ramps up as it disappears) */
---mask-r: 0;
-mask: radial-gradient(circle at center, transparent var(--mask-r), black calc(var(--mask-r) + 1px));
-/* when active=false, transition --mask-r to a large value for a circular fade-out */
-
-/* SVG spinner */
-color: #19c8b9; /* @primary-color mint teal */
-animation: spin 1s linear infinite;
-@keyframes spin {
-    to {
-        transform: rotate(360deg);
-    }
-}
-
-/* dash animation on the inner circle */
-animation: dash 1.5s ease-in-out infinite;
-@keyframes dash {
-    0% {
-        stroke-dasharray: 1, 150;
-        stroke-dashoffset: 0;
-    }
-    50% {
-        stroke-dasharray: 90, 150;
-        stroke-dashoffset: -35;
-    }
-    100% {
-        stroke-dasharray: 90, 150;
-        stroke-dashoffset: -124;
-    }
-}
-```
-
-> 按钮 inline 的 loading 斜纹（`-45deg` mint 条纹 28.28px）属于 Button 组件，不要与 `<Loading>` 全屏遮罩混为一谈。
+反馈进度与等待状态的组件：Progress、Skeleton、BackTop 的精确取值
 
 ## Progress（Button loading 同款青色斜纹）
 

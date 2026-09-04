@@ -1,51 +1,6 @@
 # Feedback — pixel spec
 
-Exact values for the components that report progress or pending state: Loading, Progress, Skeleton and BackTop.
-
-## Loading (full-screen mask)
-
-Source: `src/components/Loading/loading.module.less`. **The project uses no GSAP / MotionPath** — everything is plain CSS plus SVG `stroke-dasharray`.
-
-```css
-/* container */
-position: absolute; /* not fixed — bounded by the nearest positioned ancestor */
-inset: 0;
-background: black; /* not #f8f8f0 */
-overflow: hidden;
-
-/* reveal mask (radius ramps up as it disappears) */
---mask-r: 0;
-mask: radial-gradient(circle at center, transparent var(--mask-r), black calc(var(--mask-r) + 1px));
-/* when active=false, transition --mask-r to a large value for a circular fade-out */
-
-/* SVG spinner */
-color: #19c8b9; /* @primary-color mint teal */
-animation: spin 1s linear infinite;
-@keyframes spin {
-    to {
-        transform: rotate(360deg);
-    }
-}
-
-/* dash animation on the inner circle */
-animation: dash 1.5s ease-in-out infinite;
-@keyframes dash {
-    0% {
-        stroke-dasharray: 1, 150;
-        stroke-dashoffset: 0;
-    }
-    50% {
-        stroke-dasharray: 90, 150;
-        stroke-dashoffset: -35;
-    }
-    100% {
-        stroke-dasharray: 90, 150;
-        stroke-dashoffset: -124;
-    }
-}
-```
-
-> The inline loading stripes on buttons (`-45deg` mint stripes, 28.28px) belong to the Button component — do not confuse them with the full-screen `<Loading>` mask.
+Exact values for the components that report progress or pending state: Progress, Skeleton and BackTop.
 
 ## Progress (Button-loading teal stripes)
 

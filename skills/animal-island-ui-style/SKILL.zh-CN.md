@@ -9,7 +9,7 @@
 
 ## 正文对照
 
-animal-island-ui 是采用原创治愈系海岛风格设计的 React + TypeScript 组件库 —— 30 个组件、零运行时依赖、CC BY-NC 4.0（仅限非商业使用）
+animal-island-ui 是采用原创治愈系海岛风格设计的 React + TypeScript 组件库 —— 31 个组件、零运行时依赖、CC BY-NC 4.0（仅限非商业使用）
 
 源码与设计规范定义：https://github.com/guokaigdg/animal-island-ui
 
@@ -53,7 +53,7 @@ props 参考按大类分组在 `references/components/` 下（props、合法取�
 | 表单控件 | Input, Switch, Checkbox, Radio, Select | [form-controls.md](references/components/form-controls.md) |
 | 表单容器 | Form (+ FormItem, useForm) | [Form.md](references/components/Form.md) |
 | 浮层 | Modal, Drawer, Tooltip | [overlays.md](references/components/overlays.md) |
-| 反馈 | Loading, Progress, Skeleton, BackTop | [feedback.md](references/components/feedback.md) |
+| 反馈 | Progress, Skeleton, BackTop | [feedback.md](references/components/feedback.md) |
 | 通知 | Notification（命令式 API） | [Notification.md](references/components/Notification.md) |
 | 数据展示 | Table, CodeBlock, Tag | [data-display.md](references/components/data-display.md) |
 | 装饰 | Footer, Divider, Cursor, Typewriter | [decorative.md](references/components/decorative.md) |

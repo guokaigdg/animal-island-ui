@@ -145,7 +145,7 @@ export const CATALOG: CatalogRow[] = [
     {
         category: 'Feedback',
         color: 'app-orange',
-        components: ['Loading', 'Progress', 'Skeleton', 'BackTop'],
+        components: ['Progress', 'Skeleton', 'BackTop'],
         reference: 'feedback.md',
     },
     { category: 'Notification', color: 'app-red', components: ['Notification'], reference: 'Notification.md' },

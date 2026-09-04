@@ -2,7 +2,7 @@
  * a11y 烟雾测试 —— 全组件 axe-core 自动检查
  * --------------------------------------------------------------------------
  * 设计目的：
- *   作为 33 个组件的"无障碍基线设施"，用 axe-core 跑一轮 WCAG 2.1 AA 自动化
+ *   作为 32 个组件的"无障碍基线设施"，用 axe-core 跑一轮 WCAG 2.1 AA 自动化
  *   规则，把"我应该写 aria-label 但忘了"这类问题在 CI 里拦下来。
  *
  * 入口策略：
@@ -12,9 +12,9 @@
  *     节点设为 document.body，否则 portal 输出（挂在 body 上、容器外）扫不到
  *
  * 不并入 npm run ci：
- *   33 个组件首次跑一定会有几十条违规（多是需要补 aria-label/aria-labelledby
+ *   32 个组件首次跑一定会有几十条违规（多是需要补 aria-label/aria-labelledby
  *   的契约缺口），目前单独跑 `npm run test:a11y`，等 Tier 1 契约层在
- *   33 个组件测试里就近补完后，再视情况并入 ci。
+ *   32 个组件测试里就近补完后，再视情况并入 ci。
  *
  * 已知规则差异（在 axeOptions 中关闭）：
  *   - color-contrast          jsdom 不计算样式，永远不通过
@@ -27,18 +27,11 @@
  *   - html-lang-valid         同上
  *   - meta-viewport           N/A
  */
-import { afterEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, describe, expect, it } from 'vitest';
 import { cleanup, render, type RenderResult } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import axe from 'axe-core';
 import React from 'react';
-
-// Loading 内部用 GSAP + SVG MotionPath，jsdom 不实现 SVGElement.getBBox，
-// 真实环境下 startAnimation 会拿到一个空函数。a11y 烟雾只关心渲染后的 DOM 结构，
-// 不关心动画，所以直接 mock 掉。
-vi.mock('@/components/Loading/island/script.js', () => ({
-    startAnimation: vi.fn(),
-}));
 
 import { Button } from '@/components/Button';
 import { Card } from '@/components/Card';
@@ -56,7 +49,6 @@ import { Form, FormItem } from '@/components/Form';
 import { Icon } from '@/components/Icon';
 import { Image } from '@/components/Image';
 import { Input } from '@/components/Input';
-import { Loading } from '@/components/Loading';
 import { Modal } from '@/components/Modal';
 import { Notification } from '@/components/Notification';
 import { Progress } from '@/components/Progress';
@@ -377,11 +369,6 @@ describe('a11y smoke / 全组件 axe-core 自动检查', () => {
             />
         );
         await expectNoA11yViolations(containerOf(r), 'Table');
-    });
-
-    it('Loading (纯装饰)', async () => {
-        const r = render(<Loading active />);
-        await expectNoA11yViolations(containerOf(r), 'Loading');
     });
 
     it('Image (带 alt)', async () => {

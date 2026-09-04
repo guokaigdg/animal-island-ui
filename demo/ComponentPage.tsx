@@ -8,7 +8,6 @@ import RadioDemo from './components/Radio';
 import TooltipDemo from './components/Tooltip';
 import TitleDemo from './components/Title';
 import CodeBlockDemo from './components/CodeBlock';
-import LoadingDemo from './components/Loading/LoadingDemo';
 import TableDemo from './components/Table/TableDemo';
 import PaginationDemo from './components/Pagination';
 import DrawerDemo from './components/Drawer/DrawerDemo';
@@ -67,7 +66,6 @@ const PAGES: Record<string, React.FC> = {
     tooltip: TooltipDemo,
     title: TitleDemo,
     codeblock: CodeBlockDemo,
-    loading: LoadingDemo,
     table: TableDemo,
     pagination: PaginationDemo,
     tag: TagDemo,

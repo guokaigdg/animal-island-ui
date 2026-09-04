@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback, Suspense, lazy } from 'react';
-import { Cursor, Loading } from '../src';
+import { Cursor } from '../src';
 import '../src/styles/index.less';
 import './fonts.css';
 import HomePage from './HomePage';
@@ -44,7 +44,7 @@ interface MenuItem {
 // Menu config — 5 categories by function:
 //   基础      → 无状态/纯展示 (Title, Button, Divider, Icon, Tag, Cursor, CodeBlock, Footer)
 //   表单      → 数据录入/校验 (Input, Switch, Select, Checkbox, Radio, Form)
-//   反馈      → 浮层/状态/异步反馈 (Notification, Modal, Drawer, Tooltip, Loading, Progress)
+//   反馈      → 浮层/状态/异步反馈 (Notification, Modal, Drawer, Tooltip, Progress)
 //   数据展示  → 容器/列表/排版 (Card, Collapse, Tabs, Table, Typewriter)
 //   主题  → 业务复合/主题专属 (Countdown)
 // ============================================
@@ -90,7 +90,6 @@ const MENU_ITEMS: MenuItem[] = [
             { key: 'modal', label: 'Modal 弹窗' },
             { key: 'drawer', label: 'Drawer 抽屉' },
             { key: 'tooltip', label: 'Tooltip 气泡提示' },
-            { key: 'loading', label: 'Loading 加载' },
             { key: 'progress', label: 'Progress 进度条' },
             { key: 'skeleton', label: 'Skeleton 骨架屏' },
             { key: 'backtop', label: 'BackTop 返回顶部', isNew: true },
@@ -286,8 +285,6 @@ const App: React.FC = () => {
     const { hash, navigate } = useHash();
     const isMobile = useIsMobile();
     const [drawerOpen, setDrawerOpen] = useState(false);
-    const [loadingActive, setLoadingActive] = useState(false);
-    const [loadingMounted, setLoadingMounted] = useState(false);
     const mainRef = React.useRef<HTMLElement>(null);
 
     const activeKey = hash.startsWith('/') && hash.length > 1 ? hash.slice(1) : 'home';
@@ -308,19 +305,6 @@ const App: React.FC = () => {
         (path: string) => {
             navigate(path);
             setDrawerOpen(false);
-        },
-        [navigate]
-    );
-
-    // 首页跳转到组件页时显示 2s Loading 覆盖层
-    const handleHomeNavigate = useCallback(
-        (path: string) => {
-            setLoadingMounted(true);
-            setLoadingActive(true);
-            navigate(path);
-            // 2s 后开始关闭，再多留 1.5s 给关闭扩散动画后卸载
-            window.setTimeout(() => setLoadingActive(false), 2000);
-            window.setTimeout(() => setLoadingMounted(false), 3500);
         },
         [navigate]
     );
@@ -346,7 +330,7 @@ const App: React.FC = () => {
                         justifyContent: 'center',
                     }}
                 >
-                    <HomePage onNavigate={handleHomeNavigate} />
+                    <HomePage onNavigate={handleNavigate} />
                 </div>
             ) : (
                 /* Component page — with sidebar */
@@ -461,19 +445,6 @@ const App: React.FC = () => {
                             <ComponentPage activeKey={activeKey} />
                         </Suspense>
                     </main>
-                </div>
-            )}
-            {/* 首页跳转组件页的过场 Loading，全屏覆盖 */}
-            {loadingMounted && (
-                <div
-                    style={{
-                        position: 'fixed',
-                        inset: 0,
-                        zIndex: 9999,
-                        pointerEvents: loadingActive ? 'auto' : 'none',
-                    }}
-                >
-                    <Loading active={loadingActive} />
                 </div>
             )}
         </Cursor>

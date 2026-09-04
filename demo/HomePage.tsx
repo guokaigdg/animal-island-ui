@@ -317,7 +317,7 @@ const features = [
     {
         icon: 'placeholder-flowers.svg',
         title: '30+ 个组件',
-        desc: 'Button / Input / Switch / Modal / Form / Table / Title / Tooltip / Typewriter / Card / Collapse / Cursor / Divider / Footer / Icon / Checkbox / Select / DatePicker / TimePicker / Tabs / CodeBlock / Loading / Radio / Tag / Notification / Progress',
+        desc: 'Button / Input / Switch / Modal / Form / Table / Title / Tooltip / Typewriter / Card / Collapse / Cursor / Divider / Footer / Icon / Checkbox / Select / DatePicker / TimePicker / Tabs / CodeBlock / Radio / Tag / Notification / Progress',
     },
     {
         icon: 'placeholder-scenery.svg',
@@ -387,7 +387,6 @@ const components = [
     { key: 'footer', name: 'Footer', desc: '页脚组件' },
     { key: 'countdown', name: 'Countdown', desc: '活动与任务倒计时，支持天/时/分/秒' },
     { key: 'codeblock', name: 'CodeBlock', desc: '代码语法高亮组件' },
-    { key: 'loading', name: 'Loading', desc: '动物主题小岛加载动画' },
     { key: 'image', name: 'Image', desc: '白色衬板图片，支持懒加载 / 点击预览' },
     { key: 'carousel', name: 'Carousel', desc: '自动播放、箭头/圆点与键盘导航' },
     {
