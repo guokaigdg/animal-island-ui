@@ -83,10 +83,11 @@ const FeatureCard: React.FC<{ feature: (typeof features)[0] }> = ({ feature }) =
             onMouseLeave={() => setHovered(false)}
         >
             <img
-                src={new URL(`./img/island-phone/${feature.icon}`, import.meta.url).href}
+                src={new URL(`./img/${feature.icon}`, import.meta.url).href}
                 style={{
                     width: 42,
                     height: 42,
+                    borderRadius: 10,
                     transform: hovered ? 'scale(1.1) rotate(-4deg)' : 'scale(1) rotate(0deg)',
                     transition: 'transform 0.3s ease',
                     animation: hovered ? 'iconBounce 0.4s ease forwards' : 'none',
@@ -309,22 +310,22 @@ const S = {
 // ============================================
 const features = [
     {
-        icon: 'island1.svg',
-        title: 'Animal风格',
+        icon: 'placeholder-island.svg',
+        title: '治愈系风格',
         desc: 'SVG 有机形状裁切，3D 按压按钮，温暖质朴的自然 UI 质感',
     },
     {
-        icon: 'Property-Shopping.svg',
+        icon: 'placeholder-flowers.svg',
         title: '30+ 个组件',
         desc: 'Button / Input / Switch / Modal / Form / Table / Title / Tooltip / Typewriter / Card / Collapse / Cursor / Divider / Time / Phone / Footer / Icon / Checkbox / Select / DatePicker / TimePicker / Tabs / CodeBlock / Loading / Radio / InvitationCard / Wallet / Tag / Notification / Progress',
     },
     {
-        icon: 'Property-Camera.svg',
+        icon: 'placeholder-scenery.svg',
         title: '主题定制',
         desc: '40+ CSS 自定义属性，运行时换肤无需重新构建',
     },
     {
-        icon: 'Property-Recipes.svg',
+        icon: 'placeholder-island.svg',
         title: '开箱即用',
         desc: 'ESM + CJS 双格式输出，TypeScript 类型声明完整',
     },
@@ -428,8 +429,8 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                     {isMobile && (
                         <div style={{ textAlign: 'center' }}>
                             <img
-                                src={new URL('./img/animal_icon.png', import.meta.url).href}
-                                style={{ width: 180, height: 112 }}
+                                src={new URL('./img/placeholder-island.svg', import.meta.url).href}
+                                style={{ width: 180, height: 112, borderRadius: 12 }}
                                 alt="logo"
                                 decoding="async"
                             />
@@ -448,7 +449,7 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                         </h1>
                         <Typewriter speed={60}>
                             <p style={{ ...S.heroSubtitle, fontSize: isMobile ? 14 : 17 }}>
-                                Animal 风格的 React 组件库，基于 TypeScript + Vite 构建，让 Web 应用充满温暖质感
+                                治愈系海岛风格的 React 组件库，基于 TypeScript + Vite 构建，让 Web 应用充满温暖质感
                             </p>
                         </Typewriter>
                         <div style={{ ...S.heroActions, justifyContent: isMobile ? 'center' : 'flex-start' }}>
@@ -460,8 +461,8 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                     {!isMobile && (
                         <div style={{ textAlign: 'center' }}>
                             <img
-                                src={new URL('./img/animal_icon.png', import.meta.url).href}
-                                style={{ width: 320, height: 200 }}
+                                src={new URL('./img/placeholder-island.svg', import.meta.url).href}
+                                style={{ width: 320, height: 200, borderRadius: 16 }}
                                 alt="logo"
                                 decoding="async"
                             />

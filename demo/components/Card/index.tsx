@@ -68,9 +68,7 @@ const CardDemo: React.FC = () => (
                 </Card>
                 <Card style={{ maxWidth: 560, width: '100%' }}>
                     <p>
-                        在a game company 3DS《Animal Island: New Leaf》和《Animal Island: Happy Home
-                        Designer》中製作的「我的設計」QR
-                        Code，以智慧型裝置讀取就能通過狸端機入口站下載至《集合啦！療癒系海島》。
+                        长文本卡片示例：卡片组件适合展示一段介绍文字、列表内容或图文混排信息，内容过长时会自动换行并保持内边距一致。
                     </p>
                 </Card>
             </div>

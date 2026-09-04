@@ -118,12 +118,14 @@
 .option:hover::before {
     content: '';
     position: absolute;
-    left: -22px;
+    left: -14px;
     top: 50%;
     transform: translateY(-50%);
-    width: 35px;
-    height: 35px;
-    background: url('../../assets/img/cursor/select-cursor.svg') no-repeat center/contain;
+    width: 0;
+    height: 0;
+    border-top: 7px solid transparent;
+    border-bottom: 7px solid transparent;
+    border-left: 10px solid #f5a623;
     animation: cursorSlideIn 0.5s ease-out forwards;
 }
 

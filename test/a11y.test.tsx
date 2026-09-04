@@ -152,7 +152,7 @@ describe('a11y smoke / 全组件 axe-core 自动检查', () => {
 
     it('Icon (无 aria-label 应有 violation，提示需要补)', async () => {
         // 故意不传 aria-label：第一次跑会暴露"图标裸用没名字"问题
-        const r = render(<Icon name="icon-camera" />);
+        const r = render(<Icon name="page" />);
         await expectNoA11yViolations(containerOf(r), 'Icon');
     });
 
@@ -201,7 +201,9 @@ describe('a11y smoke / 全组件 axe-core 自动检查', () => {
     });
 
     it('Collapse (有 question 文案)', async () => {
-        const r = render(<Collapse question="什么是动物之森？" answer="一款 a game company Switch 模拟经营游戏。" />);
+        const r = render(
+            <Collapse question="什么是治愈系海岛风格？" answer="一种温暖质朴、以自然色系为主的 UI 设计风格。" />
+        );
         await expectNoA11yViolations(containerOf(r), 'Collapse');
     });
 

@@ -11,8 +11,8 @@ description: >
 
 # animal-island-ui style
 
-animal-island-ui is a React + TypeScript component library inspired by a game company's
-"a cozy island-style UI" interface — 30 components, zero runtime dependencies,
+animal-island-ui is a React + TypeScript component library with an original
+cozy island-style design — 30 components, zero runtime dependencies,
 CC BY-NC 4.0 (non-commercial use only).
 
 Source & canonical design definition: https://github.com/guokaigdg/animal-island-ui

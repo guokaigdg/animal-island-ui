@@ -1,9 +1,9 @@
 import React from 'react';
 import { Carousel } from '../../../src';
 import { ApiRow, ApiTable, CodeBlock, DemoTag, labelStyle, sectionStyle, sectionTitleStyle } from '../../tools';
-import island from '../../img/xjbdao.jpg';
-import flowers from '../../img/flower.jpg';
-import home from '../../img/home_bg.webp';
+import island from '../../img/placeholder-island.svg';
+import flowers from '../../img/placeholder-flowers.svg';
+import home from '../../img/placeholder-scenery.svg';
 
 const CAROUSEL_API: ApiRow[] = [
     { prop: 'children', desc: '每个直接子元素为一张', type: 'ReactNode', defaultVal: '-', required: true },

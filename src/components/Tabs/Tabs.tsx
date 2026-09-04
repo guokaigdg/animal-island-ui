@@ -1,6 +1,5 @@
 import React, { useState, useId, useRef, useCallback } from 'react';
 import styles from './tabs.module.less';
-import leafIcon from '../../assets/img/icons/icon-leaf.png';
 
 export interface TabItem {
     key: string;
@@ -15,6 +14,7 @@ export interface TabsProps {
     onChange?: (key: string) => void;
     className?: string;
     style?: React.CSSProperties;
+    /** @deprecated 叶子装饰已移除，该参数不再生效 */
     leafAnimation?: boolean;
     shadow?: boolean;
     /** 无可见标题时给 tablist 一个无障碍标签 */
@@ -28,7 +28,6 @@ export const Tabs: React.FC<TabsProps> = ({
     onChange,
     className,
     style,
-    leafAnimation = true,
     shadow = true,
     'aria-label': ariaLabel,
 }) => {
@@ -113,13 +112,6 @@ export const Tabs: React.FC<TabsProps> = ({
                                 {isActive ? '●' : '○'}
                             </span>
                             <span className={styles.tabLabel}>{item.label}</span>
-                            {isActive && (
-                                <img
-                                    src={leafIcon}
-                                    alt=""
-                                    className={`${styles.tabLeaf} ${leafAnimation ? '' : styles.tabLeafStatic}`}
-                                />
-                            )}
                         </button>
                     );
                 })}

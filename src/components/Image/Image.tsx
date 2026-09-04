@@ -132,7 +132,7 @@ export const Image: React.FC<ImageProps> = ({
                 role="img"
                 aria-label={alt || '图片加载失败'}
             >
-                <Icon name="icon-camera" size={32} />
+                <Icon name="page" size={32} />
                 <span>图片加载失败</span>
             </span>
         );

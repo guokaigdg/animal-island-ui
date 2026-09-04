@@ -23,8 +23,8 @@ export const QUICK_STEPS: QuickStep[] = [
     },
     {
         title: '正常提需求',
-        desc: '无需记住任何指令。描述里出现「动物之森风格」「animal island 风格」或指定用 animal-island-ui 搭页面时，代理会自动加载技能。',
-        code: `# 对话里直接说即可\n用 animal-island-ui 做一个岛民档案页：头像卡、里程进度、装备清单\n做一个动物之森风格的单文件 HTML 落地页，不要构建步骤`,
+        desc: '无需记住任何指令。描述里出现「治愈系海岛风格」「animal island 风格」或指定用 animal-island-ui 搭页面时，代理会自动加载技能。',
+        code: `# 对话里直接说即可\n用 animal-island-ui 做一个居民档案页：头像卡、里程进度、装备清单\n做一个治愈系海岛风格的单文件 HTML 落地页，不要构建步骤`,
     },
     {
         title: '按规则验收',

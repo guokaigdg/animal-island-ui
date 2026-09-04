@@ -40,13 +40,13 @@ The **sidebar and page background images** (`home_bg.svg`, `content_bg_pc.jpg`, 
 
 ```
 Pixel-perfect UI screenshot of "animal-island-ui" React component library website,
-a cozy island-style UI a game company Switch life-sim game aesthetic,
+a cozy island-style life-sim game aesthetic,
 
 Interface details:
 - Warm parchment background rgb(247,243,223), NEVER pure white
 - Pill-shaped buttons (border-radius 50px); the **primary** action button has a 3D
   pixel-stack bottom shadow in warm taupe #bdaea0 (5px tall) and presses down on
-  click like a a game company game button. Secondary (default / dashed) buttons sit
+  click like a game console button. Secondary (default / dashed) buttons sit
   flatter, with only a soft 2px elevation shadow.
 - Organic blob-shaped modal dialog with irregular soft SVG silhouette
 - Ribbon-banner section headings (Title component): swallowtail clip-path ends like a

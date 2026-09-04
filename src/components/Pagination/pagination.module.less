@@ -205,16 +205,18 @@
     }
 }
 
-// hover 出现治愈海岛手指光标（同 Select option:hover::before），浮在弹窗外侧不遮文字
+// hover 出现三角箭头指示（同 Select option:hover::before），浮在弹窗外侧不遮文字
 .sizeOption:hover::before {
     content: '';
     position: absolute;
-    left: -22px;
+    left: -14px;
     top: 50%;
     transform: translateY(-50%);
-    width: 35px;
-    height: 35px;
-    background: url('../../assets/img/cursor/select-cursor.svg') no-repeat center / contain;
+    width: 0;
+    height: 0;
+    border-top: 7px solid transparent;
+    border-bottom: 7px solid transparent;
+    border-left: 10px solid #f5a623;
     animation: cursor-slide-in 0.5s ease-out forwards;
 }
 

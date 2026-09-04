@@ -133,12 +133,12 @@ const S = {
         overflow: 'hidden',
         fontFamily:
             "Nunito, 'Noto Sans SC', 'Zen Maru Gothic', -apple-system, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif",
-        background: `url(${new URL('./img/content_bg_pc.jpg', import.meta.url).href}) center / auto repeat`,
+        background: 'linear-gradient(180deg, #fdf8ec 0%, #f7ecd8 100%)',
     } as React.CSSProperties,
     sidebar: {
         width: 220,
         minWidth: 220,
-        background: `url(${new URL('./img/menu_bg.svg', import.meta.url).href}) center/cover no-repeat`,
+        background: 'linear-gradient(160deg, #e8f5d0 0%, #d3ecc8 50%, #bfe3f2 100%)',
         display: 'flex',
         flexDirection: 'column',
         overflow: 'hidden',
@@ -149,8 +149,7 @@ const S = {
         height: 'calc(100dvh - 20px)',
     } as React.CSSProperties,
     homeBg: {
-        background: `url(${new URL('./img/home_bg.webp', import.meta.url).href}) 0 0 / auto repeat, #7DC395`,
-        animation: 'bgScroll 80s linear infinite',
+        background: 'linear-gradient(180deg, #9fd8a8 0%, #7DC395 60%, #bfe3c4 100%)',
     } as React.CSSProperties,
     sidebarHeader: {
         padding: '20px 20px 12px',
@@ -219,11 +218,11 @@ const SidebarContent: React.FC<{
     <>
         <div style={S.sidebarHeader} onClick={() => onNavigate('/')}>
             <img
-                src={new URL('./img/island-phone/island1.svg', import.meta.url).href}
-                style={{ width: 24, height: 24, marginRight: 8 }}
+                src={new URL('./img/placeholder-island.svg', import.meta.url).href}
+                style={{ width: 24, height: 24, marginRight: 8, borderRadius: 6 }}
                 alt="island"
             />
-            集合啦！Animal
+            Island UI
         </div>
         <nav style={S.menuList}>
             {MENU_ITEMS.map((item) => {
@@ -468,24 +467,6 @@ const App: React.FC = () => {
                             <ComponentPage activeKey={activeKey} />
                         </Suspense>
                     </main>
-
-                    {!isMobile && (
-                        <img
-                            src={new URL('./img/guide-bg-line.webp', import.meta.url).href}
-                            alt=""
-                            loading="lazy"
-                            decoding="async"
-                            style={{
-                                position: 'fixed',
-                                left: 220,
-                                right: 0,
-                                bottom: 0,
-                                width: 'calc(100% - 220px)',
-                                pointerEvents: 'none',
-                                zIndex: 0,
-                            }}
-                        />
-                    )}
                 </div>
             )}
             {/* 首页跳转组件页的过场 Loading，全屏覆盖 */}

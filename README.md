@@ -1,10 +1,7 @@
 # 🏝 Animal-Island-UI
 
 <div align="center">
-    <img src="docs/img/readme-home.png" alt="animal-island-ui" style="border-radius: 12px; width: 40%; display: block; margin: 0 auto;" />
-</div>
-<div align="center">
-A React UI component library inspired by a cozy island-style UI
+A React UI component library with a cozy island-style design
 </div>
 <br/>
 <div align="center">
@@ -32,9 +29,9 @@ A React UI component library inspired by a cozy island-style UI
 
 ## Introduction
 
-This project is a lightweight UI component library built with React + TypeScript. The design style is inspired by a game company's "a cozy island-style UI" game interface, created for personal front-end technical practice and component development learning.
+This project is a lightweight UI component library built with React + TypeScript. It features an original, cozy island-style design language, created for personal front-end technical practice and component development learning.
 
-All visual elements, layouts, icons, and animations are independently designed and implemented, without directly using any official a game company art materials, code, or resource files.
+All visual elements, layouts, icons, and animations are independently designed and implemented from scratch.
 
 ## 🎉 Vue Version
 
@@ -123,112 +120,6 @@ npm run build
 npm run build:demo
 ```
 
-## Usage Cases
-
-<table>
-<tr valign="top">
-  <td align="center" width="33%">
-    <br/>
-    <img src="docs/img/animal-island-new-tab.png" alt="animal-island-new-tab" style="border-radius: 8px; width: 90%; display: block; margin: 8px auto 0;" />
-    <br/><a href="https://ashleycry.github.io/AnimalIslandNewTab/">Animal Island New Tab</a><br/><sub>a cozy island-style UI style new tab page</sub>
-  </td>
-  <td align="center" width="33%">
-    <br/>
-    <img src="docs/img/ac-site-template.png" alt="ac-site-template" style="border-radius: 8px; width: 90%; display: block; margin: 8px auto 0;" />
-    <br/><a href="https://github.com/yunxinz/ac-site-template">ac-site-template</a><br/><sub>a cozy island-style UI themed personal website template</sub>
-  </td>
-  <td align="center" width="33%">
-    <br/>
-    <img src="docs/img/hi-kid.png" alt="HiKid" style="border-radius: 8px; width: 90%; display: block; margin: 8px auto 0;" />
-    <br/><a href="https://github.com/xiaochong/hi-kid">HiKid</a><br/><sub>English learning app for children</sub>
-  </td>
-</tr>
-<tr valign="top">
-  <td align="center" width="33%">
-    <br/>
-    <img src="docs/img/android-ui.png" alt="android-ui" style="border-radius: 8px; width: 90%; display: block; margin: 8px auto 0;" />
-    <br/><a href="https://github.com/liuyuhong0324/AnimalIslandUI">AnimalIslandUI</a><br/><sub>a cozy island-style UI style Android UI library</sub>
-  </td>
-  <td align="center" width="33%">
-    <br/>
-    <img src="docs/img/itbug-shop.png" alt="ItbugShop" style="border-radius: 8px; width: 90%; display: block; margin: 8px auto 0;" />
-    <br/><a href="https://itbug.shop/">ItbugShop</a><br/><sub>Liang Diandian's Blog</sub>
-  </td>
-  <td align="center" width="33%">
-    <br/>
-    <img src="docs/img/KidsMathQuest.jpeg" alt="KidsMathQuest" style="border-radius: 8px; width: 90%; display: block; margin: 8px auto 0;" />
-    <br/><a href="https://github.com/bk4ice/KidsMathQuest">KidsMathQuest</a><br/><sub>Math practice for elementary school</sub>
-  </td>
-</tr>
-<tr valign="top">
-  <td align="center" width="33%">
-    <br/>
-    <img src="docs/img/flutter-ui.jpeg" alt="animal_island_flutter" style="border-radius: 8px; width: 90%; display: block; margin: 8px auto 0;" />
-    <br/><a href="https://github.com/ohmangocat/animal_island_flutter">animal_island_flutter</a><br/><sub>a cozy island-style UI style Flutter UI library</sub>
-  </td>
-  <td align="center" width="33%">
-    <br/>
-    <img src="docs/img/case-animal-blog.png" alt="animal-island-blog" style="border-radius: 8px; width: 90%; display: block; margin: 8px auto 0;" />
-    <br/><a href="https://github.com/guokaigdg/animal-island-blog">animal-island-blog</a><br/><sub>a cozy island-style UI style blog</sub>
-  </td>
-  <td align="center" width="33%">
-    <br/>
-    <img src="docs/img/island-life-journal.png" alt="island-life-journal" style="border-radius: 8px; width: 90%; display: block; margin: 8px auto 0;" />
-    <br/><a href="https://github.com/TIUCSIB/animal-island-blog">Island Life Journal</a><br/><sub>Island Life Photo Journal</sub>
-  </td>
-</tr>
-<tr>
-  <td align="center" width="33%">
-    <br/>
-    <img src="docs/img/island-themed-BGM-Player.png" alt="island-themed-BGM-Player" style="border-radius: 8px; width: 90%; display: block; margin: 8px auto 0;" />
-    <br/><a href="https://github.com/skyboooox/island-themed-Player">a cozy island-style UI BGM Player</a><br/><sub>ambience clock + hourly music</sub>
-  </td>
-  <td align="center" width="33%">
-    <br/>
-    <img src="docs/img/animal-island-ui-taro-port.png" alt="animal-island-ui-taro-port" style="border-radius: 8px; width: 90%; display: block; margin: 8px auto 0;" />
-    <br/><a href="https://github.com/Gospelion/animal-island-ui-taro-port">animal-island-ui-taro-port</a><br/><sub>Taro & WeChat Mini Program</sub>
-  </td>
-  <td align="center" width="33%">
-    <br/>
-    <img src="docs/img/portal-os-preview.png" alt="portal-os" style="border-radius: 8px; width: 90%; display: block; margin: 8px auto 0;" />
-    <br/><a href="https://github.com/guowenju/portal-os">portal-os</a><br/><sub>Animal desktop blog</sub>
-  </td>
-</tr>
-<tr>
-  <td align="center" width="33%">
-    <br/>
-    <img src="docs/img/awesome-splatoon3.png" alt="Awesome-splatoon3" style="border-radius: 8px; width: 90%; display: block; margin: 8px auto 0;" />
-    <br/><a href="https://github.com/961853266hyt/awesome-splatoon3">Awesome-splatoon3</a><br/><sub>Splatoon 3 resource station</sub>
-  </td>
-  <td align="center" width="33%">
-    <br/>
-    <img src="docs/img/callai.png" alt="callai" style="border-radius: 8px; width: 90%; display: block; margin: 8px auto 0;" />
-    <br/><a href="https://github.com/YuniqueUnic/callai">callai</a><br/><sub>Cozy AI window-warming alarm (Tauri desktop + CLI)</sub>
-  </td>
-  <td align="center" width="33%">
-    <br/>
-    <img src="docs/img/acorn.png" alt="Acorn" style="border-radius: 8px; width: 90%; display: block; margin: 8px auto 0;" />
-    <br/><a href="https://github.com/Mystic-Stars/acorn-theme">Acorn</a><br/><sub>Acorn Astro Theme</sub>
-  </td>
-</tr>
-<tr>
-  <td align="center" width="33%">
-    <br/>
-    <img src="docs/img/resident-test.png" alt="resident-test" style="border-radius: 8px; width: 90%; display: block; margin: 8px auto 0;" />
-    <br/><a href="http://39.106.95.74:7765/api/file-links/f/17b0da9ffc5b/resident-test-v2.html">resident-test</a><br/><sub>无人岛性格测试</sub>
-  </td>
-  <td align="center" width="33%">
-    <br/>
-    <img src="docs/img/animal-island-uniapp.png" alt="animal-island-uniapp" style="border-radius: 8px; width: 90%; display: block; margin: 8px auto 0;" />
-    <br/><a href="https://leepule.github.io/animal-island-uniapp/#/">animal-island-uniapp</a><br/><sub>a cozy island-style UI style uni-app UI library</sub>
-  </td>
-  <td align="center" width="33%">
-    <br/>
-  </td>
-</tr>
-
-</table>
-
 ## Notes
 
 - This project is intended for personal learning, research, and non-commercial demonstration only. Any form of commercial use, resale, or profit-making activities is prohibited.
@@ -237,9 +128,8 @@ npm run build:demo
 
 ## Copyright and Disclaimer
 
-- This project is not an official a game company product and has no association, authorization, or cooperation with a game company
-- The game name included in the project name is only a descriptive reference to the style and does not constitute trademark use or brand association.
-- All interface styles are merely design inspiration references and do not constitute reproduction or infringement of the original work.
+- This is an independently created open-source project. It is not an official product of any game company and has no association, authorization, or cooperation with any company or its products.
+- All visual assets (icons, illustrations, animations) in this repository are original works created for this project.
 - If the copyright holder believes that related content is suspected of infringement, they can contact via email, and I will make rectifications or deletions immediately.
 
 ## Contact

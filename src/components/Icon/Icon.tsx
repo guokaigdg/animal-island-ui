@@ -1,17 +1,7 @@
 import React from 'react';
 import styles from './icon.module.less';
 
-export type IconName =
-    | 'icon-miles'
-    | 'icon-camera'
-    | 'icon-chat'
-    | 'icon-encyclopedia'
-    | 'icon-design'
-    | 'icon-diy'
-    | 'icon-helicopter'
-    | 'icon-map'
-    | 'icon-shopping'
-    | 'icon-variant';
+export type IconName = 'icon-left' | 'icon-right' | 'location' | 'page' | 'wifi';
 
 export interface IconProps {
     /** 内置具名图标。与 src 二选一 */
@@ -48,14 +38,9 @@ export const Icon: React.FC<IconProps> = ({ name, src, size = 24, className, sty
 };
 
 export const ICON_LIST = [
-    { name: 'icon-miles', label: 'IslandMiles' },
-    { name: 'icon-camera', label: 'Camera' },
-    { name: 'icon-chat', label: 'Chat' },
-    { name: 'icon-encyclopedia', label: 'Encyclopedia' },
-    { name: 'icon-design', label: 'Design' },
-    { name: 'icon-diy', label: 'DIY' },
-    { name: 'icon-helicopter', label: 'Helicopter' },
-    { name: 'icon-map', label: 'Map' },
-    { name: 'icon-shopping', label: 'Shopping' },
-    { name: 'icon-variant', label: 'Variant' },
+    { name: 'icon-left', label: 'Left' },
+    { name: 'icon-right', label: 'Right' },
+    { name: 'location', label: 'Location' },
+    { name: 'page', label: 'Page' },
+    { name: 'wifi', label: 'WiFi' },
 ] as const satisfies ReadonlyArray<{ name: IconName; label: string }>;

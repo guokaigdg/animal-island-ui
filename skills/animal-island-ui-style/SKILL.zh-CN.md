@@ -9,7 +9,7 @@
 
 ## 正文对照
 
-animal-island-ui 是受任天堂《治愈系海岛风格》界面启发的 React + TypeScript 组件库 —— 30 个组件、零运行时依赖、CC BY-NC 4.0（仅限非商业使用）
+animal-island-ui 是采用原创治愈系海岛风格设计的 React + TypeScript 组件库 —— 30 个组件、零运行时依赖、CC BY-NC 4.0（仅限非商业使用）
 
 源码与设计规范定义：https://github.com/guokaigdg/animal-island-ui
 

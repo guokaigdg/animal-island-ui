@@ -6,7 +6,6 @@ export type DividerType =
     | 'line-teal'
     | 'line-white'
     | 'line-yellow'
-    | 'wave-yellow'
     | 'dashed-brown'
     | 'dashed-teal'
     | 'dashed-white'
