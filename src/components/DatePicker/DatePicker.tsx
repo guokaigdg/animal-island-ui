@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect, useId, useRef, useState } from 'react';
 import styles from './date-picker.module.less';
-import iconLeft from '../../assets/img/icons/icon-left.svg';
-import iconRight from '../../assets/img/icons/icon-right.svg';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 export type DatePickerSize = 'small' | 'middle' | 'large';
 
@@ -53,30 +52,6 @@ export interface DatePickerProps {
 
 const WEEKDAYS = ['日', '一', '二', '三', '四', '五', '六'];
 const MONTHS = ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'];
-
-const ChevronLeft = (
-    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden>
-        <path
-            d="M7.5 2.5L4 6l3.5 3.5"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-        />
-    </svg>
-);
-
-const ChevronRight = (
-    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden>
-        <path
-            d="M4.5 2.5L8 6l-3.5 3.5"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-        />
-    </svg>
-);
 
 const pad = (n: number) => `${n}`.padStart(2, '0');
 
@@ -645,7 +620,11 @@ export const DatePicker: React.FC<DatePickerProps> = ({
                                                             onClick={() => shiftView(-1, 0)}
                                                             onMouseDown={(e) => e.preventDefault()}
                                                         >
-                                                            <img src={iconLeft} className={styles.navIcon} alt="" />
+                                                            <ChevronLeft
+                                                                className={styles.navIcon}
+                                                                size={16}
+                                                                aria-hidden="true"
+                                                            />
                                                         </button>
                                                     )}
                                                     {idx === 0 && (
@@ -656,7 +635,11 @@ export const DatePicker: React.FC<DatePickerProps> = ({
                                                             onClick={() => shiftView(0, -1)}
                                                             onMouseDown={(e) => e.preventDefault()}
                                                         >
-                                                            {ChevronLeft}
+                                                            <ChevronLeft
+                                                                size={12}
+                                                                strokeWidth={1.5}
+                                                                aria-hidden="true"
+                                                            />
                                                         </button>
                                                     )}
                                                 </div>
@@ -672,7 +655,11 @@ export const DatePicker: React.FC<DatePickerProps> = ({
                                                             onClick={() => shiftView(0, 1)}
                                                             onMouseDown={(e) => e.preventDefault()}
                                                         >
-                                                            {ChevronRight}
+                                                            <ChevronRight
+                                                                size={12}
+                                                                strokeWidth={1.5}
+                                                                aria-hidden="true"
+                                                            />
                                                         </button>
                                                     )}
                                                     {idx === 1 && (
@@ -683,7 +670,11 @@ export const DatePicker: React.FC<DatePickerProps> = ({
                                                             onClick={() => shiftView(1, 0)}
                                                             onMouseDown={(e) => e.preventDefault()}
                                                         >
-                                                            <img src={iconRight} className={styles.navIcon} alt="" />
+                                                            <ChevronRight
+                                                                className={styles.navIcon}
+                                                                size={16}
+                                                                aria-hidden="true"
+                                                            />
                                                         </button>
                                                     )}
                                                 </div>
@@ -715,7 +706,7 @@ export const DatePicker: React.FC<DatePickerProps> = ({
                                         onClick={() => (mode === 'year' ? shiftView(-10, 0) : shiftView(-1, 0))}
                                         onMouseDown={(e) => e.preventDefault()}
                                     >
-                                        <img src={iconLeft} className={styles.navIcon} alt="" />
+                                        <ChevronLeft className={styles.navIcon} size={16} aria-hidden="true" />
                                     </button>
                                     {mode === 'date' && (
                                         <button
@@ -779,7 +770,7 @@ export const DatePicker: React.FC<DatePickerProps> = ({
                                         onClick={() => (mode === 'year' ? shiftView(10, 0) : shiftView(1, 0))}
                                         onMouseDown={(e) => e.preventDefault()}
                                     >
-                                        <img src={iconRight} className={styles.navIcon} alt="" />
+                                        <ChevronRight className={styles.navIcon} size={16} aria-hidden="true" />
                                     </button>
                                 </div>
                             </div>

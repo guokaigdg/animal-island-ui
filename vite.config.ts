@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react';
 import libAssetsPlugin from '@laynezh/vite-plugin-lib-assets';
 import { resolve, dirname, join, posix } from 'path';
 import { fileURLToPath } from 'url';
-import { readdirSync, rmdirSync, statSync, cpSync, unlinkSync, readFileSync, writeFileSync } from 'fs';
+import { readdirSync, rmdirSync, statSync, unlinkSync, readFileSync, writeFileSync } from 'fs';
 import type { PreRenderedAsset } from 'rollup';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -88,26 +88,6 @@ function stripWoffFallbackPlugin(): Plugin {
                 if (asset.type === 'asset' && /\.woff$/i.test(key)) {
                     delete bundle[key];
                 }
-            }
-        },
-    };
-}
-
-/**
- * 把 488 个 item PNG 原样拷贝到 dist/items/，作为子路径资源发布。
- * 消费者按需 `import url from 'animal-island-ui/items/item-001.png'` 引用，
- * 只有被 import 的那几张才会进消费者 bundle，未引用的不打包。
- */
-function copyItemAssetsPlugin(): Plugin {
-    return {
-        name: 'copy-item-assets',
-        closeBundle() {
-            const from = resolve(__dirname, 'src/assets/img/icons/items');
-            const to = resolve(__dirname, 'dist/items');
-            try {
-                cpSync(from, to, { recursive: true });
-            } catch {
-                /* noop */
             }
         },
     };
@@ -308,7 +288,6 @@ export default defineConfig({
         }),
         injectImportedCssPlugin(),
         emitGlobalStyleEntryPlugin(),
-        copyItemAssetsPlugin(),
         pruneEmptyDirsPlugin('dist'),
     ],
     resolve: {
@@ -336,7 +315,7 @@ export default defineConfig({
             entry: resolve(__dirname, 'src/index.ts'),
         },
         rollupOptions: {
-            external: ['react', 'react-dom', 'react/jsx-runtime', 'classnames'],
+            external: ['react', 'react-dom', 'react/jsx-runtime', 'classnames', 'lucide-react'],
             // 多输出：
             //  - ES：preserveModules 保持源码目录结构 → 消费者可按组件 tree-shake，
             //        CSS 随 cssCodeSplit 按组件拆分，配合 injectImportedCssPlugin 自动回填 import

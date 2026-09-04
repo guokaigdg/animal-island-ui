@@ -1,4 +1,5 @@
 import React from 'react';
+import { Heart, Star, Sun, Umbrella } from 'lucide-react';
 import { Icon, ICON_LIST } from '../../../src';
 import { ApiTable, ApiRow, sectionStyle, sectionTitleStyle, DemoTag, CodeBlock, labelStyle } from '../../tools';
 import customImage from '../../img/placeholder-island.svg';
@@ -6,13 +7,19 @@ import customImage from '../../img/placeholder-island.svg';
 const ICON_API: ApiRow[] = [
     {
         prop: 'name',
-        desc: '内置图标名称（与 src 二选一）',
+        desc: '内置语义图标名（与 icon / src 三选一），映射到 lucide 图标',
         type: 'IconName',
         defaultVal: '-',
     },
     {
+        prop: 'icon',
+        desc: '任意 lucide-react 图标组件（与 name / src 三选一），优先级高于 name',
+        type: 'LucideIcon',
+        defaultVal: '-',
+    },
+    {
         prop: 'src',
-        desc: '自定义图标资源 URL（与 name 二选一），由消费者自行 import 传入',
+        desc: '自定义图片资源 URL（与 name / icon 三选一），用于彩色位图素材',
         type: 'string',
         defaultVal: '-',
     },
@@ -21,6 +28,18 @@ const ICON_API: ApiRow[] = [
         desc: '图标尺寸',
         type: 'number | string',
         defaultVal: '24',
+    },
+    {
+        prop: 'color',
+        desc: '描边颜色（lucide 模式）',
+        type: 'string',
+        defaultVal: 'currentColor',
+    },
+    {
+        prop: 'strokeWidth',
+        desc: '描边粗细（lucide 模式）',
+        type: 'number | string',
+        defaultVal: '2',
     },
     {
         prop: 'bounce',
@@ -45,15 +64,29 @@ const ICON_API: ApiRow[] = [
 const IconDemo: React.FC = () => (
     <div style={sectionStyle}>
         <div style={sectionTitleStyle}>
-            Icon <DemoTag>built-in icons</DemoTag>
+            Icon <DemoTag>lucide icons</DemoTag>
         </div>
-        <div style={labelStyle}>基础用法</div>
+        <div style={labelStyle}>基础用法（name 内置语义名）</div>
         <div style={{ display: 'flex', gap: 20, flexWrap: 'wrap' as const, alignItems: 'center' }}>
             <Icon name="icon-left" size={32} />
             <Icon name="icon-right" size={32} />
             <Icon name="location" size={32} />
             <Icon name="page" size={32} />
             <Icon name="wifi" size={32} />
+            <Icon name="icon-shopping" size={32} />
+            <Icon name="icon-chat" size={32} />
+            <Icon name="icon-map" size={32} />
+            <Icon name="icon-camera" size={32} />
+        </div>
+        <div style={labelStyle}>
+            icon 模式：lucide-react 的任意图标（<a href="https://lucide.dev/icons/">lucide.dev/icons</a>）
+        </div>
+        <div style={{ display: 'flex', gap: 20, flexWrap: 'wrap' as const, alignItems: 'center' }}>
+            <Icon icon={Heart} size={32} color="#e05260" />
+            <Icon icon={Star} size={32} color="#f5b942" />
+            <Icon icon={Sun} size={32} color="#f59e2d" />
+            <Icon icon={Umbrella} size={32} color="#5aa9c4" />
+            <Icon icon={Heart} size={32} color="#e05260" strokeWidth={3.5} />
         </div>
         <div style={labelStyle}>size 尺寸</div>
         <div style={{ display: 'flex', gap: 20, alignItems: 'center' }}>
@@ -117,31 +150,21 @@ const IconDemo: React.FC = () => (
         </div>
         <CodeBlock
             code={`import { Icon } from 'animal-island-ui';
+import { Heart } from 'lucide-react';
 import myIcon from './my-icon.svg';
 
 export default function App() {
-    return <Icon src={myIcon} size={48} />;
-}`}
-        />
-        <CodeBlock
-            code={`import React from 'react';
-import { Icon } from 'animal-island-ui';
-import myIcon from './my-icon.svg';
-
-const App = () => {
     return (
-        <div>
-            {/* 基础用法 */}
+        <>
+            {/* 内置语义名 */}
             <Icon name="wifi" size={32} />
-            {/* 弹跳动画 */}
-            <Icon name="location" size={48} bounce />
+            {/* 任意 lucide 图标 */}
+            <Icon icon={Heart} size={32} color="#e05260" strokeWidth={3} />
             {/* 自定义图片 */}
             <Icon src={myIcon} size={48} />
-        </div>
+        </>
     );
-};
-
-export default App;`}
+}`}
         />
         <ApiTable rows={ICON_API} />
     </div>

@@ -18,9 +18,7 @@ build logic without preserving the following breaks consumer tree-shaking:
   `import "./x.css"` (ES) / `require("./x.css")` (CJS) statements back into the emitted JavaScript, so importing a
   component pulls in exactly its styles. Do not turn `cssCodeSplit` off.
 - **Assets stay external** — `@laynezh/vite-plugin-lib-assets` (`outputPath: 'files'`, `limit: 0`) writes fonts and
-  images to `dist/files/` instead of letting library mode inline them, and `copyItemAssetsPlugin` copies every item PNG
-  from `src/assets/img/icons/items/` to `dist/items/` so consumers can reference `animal-island-ui/items/*`
-  individually.
+  images to `dist/files/` instead of letting library mode inline them.
 - **Global stylesheet entry** — `emitGlobalStyleEntryPlugin` aggregates `dist/index.css` (what `animal-island-ui/style`
   resolves to) and prunes orphaned files from `dist/files/`. After changing a component's CSS, confirm those styles
   still appear in `dist/index.css`.

@@ -89,14 +89,17 @@ box-shadow: 0 5px 0 0 #c94444; /* error-active */
 
 ## Icon
 
-Monochrome SVG icon library, 10 built-in icons — `icon-miles`, `icon-camera`, `icon-chat`, `icon-encyclopedia`, `icon-design`, `icon-diy`, `icon-helicopter`, `icon-map`, `icon-shopping`, `icon-variant` (the runtime `ICON_LIST` export is authoritative). Accepts `name` (one of the built-in names) or `src` (any image URL; Wallet uses it internally to load the coin-bag PNG).
+Vector icon component built on [lucide-react](https://lucide.dev/icons/). 13 built-in semantic names — `icon-left`, `icon-right`, `location`, `page`, `wifi`, `icon-shopping`, `icon-chat`, `icon-variant`, `icon-encyclopedia`, `icon-design`, `icon-map`, `icon-diy`, `icon-camera` (the runtime `ICON_LIST` export is authoritative). Three rendering modes:
+
+- `name` — one of the built-in semantic names (maps to a lucide icon component)
+- `icon` — any `lucide-react` icon component, e.g. `<Icon icon={Heart} />` (takes precedence over `name`)
+- `src` — any image URL for colorful raster assets; renders a `<span>` with `background-image`
 
 ```css
 .icon {
     display: inline-block;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: contain;
+    flex-shrink: 0;
+    vertical-align: middle;
 }
 
 /* optional hover bounce (`bounce` prop) */
@@ -110,7 +113,7 @@ Monochrome SVG icon library, 10 built-in icons — `icon-miles`, `icon-camera`, 
 }
 ```
 
-> Usage: `<Icon name="icon-camera" size={32} />`. `size` defaults to `24` and is applied as inline `width`/`height` (number = px, string = any CSS length). The component renders a `<span>` whose icon is a `background-image`: `name` maps to a class carrying the built-in SVG, while `src` sets `background-image: url(...)` inline for arbitrary sources. There is no `color` prop — the built-in icons are fixed monochrome assets.
+> Usage: `<Icon name="wifi" size={32} />` or `<Icon icon={Heart} size={32} />`. `size` defaults to `24` and is applied as inline `width`/`height` (number = px, string = any CSS length). Lucide icons are stroke-based SVGs: `color` sets the stroke color (defaults to `currentColor`), `strokeWidth` sets the stroke weight (defaults to `2`). Icons without an `aria-label` are marked `aria-hidden="true"` as decorative; passing `aria-label` also sets `role="img"` so the label becomes the accessible name.
 
 ## Typewriter
 

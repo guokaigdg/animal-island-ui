@@ -60,7 +60,7 @@ type WalletSize = 'small' | 'medium' | 'large';
 
 interface WalletProps {
     value?: number | string; // default '00,000' — numbers auto-formatted with thousandSeparator
-    icon?: React.ReactNode; // default built-in Island bag PNG (item-022.png)
+    icon?: React.ReactNode; // default lucide PiggyBank glyph (brown #7a4a21, strokeWidth 2.2)
     size?: WalletSize; // default 'medium'
     thousandSeparator?: string; // default ',' — pass '' to disable grouping
     className?: string;
@@ -79,4 +79,4 @@ interface WalletProps {
 >
 > **Value formatting:** `number` → thousand-grouped with `thousandSeparator`; `string` → rendered as-is; `undefined`/`null` → `00,000`. Negative numbers prefix `-`.
 >
-> **`icon` replaces the entire bag slot** (a single ReactNode in an absolutely-positioned 50×50 px container). Default is the built-in `assets/img/icons/items/item-022.png` rendered via the `Icon` component's hidden `src` prop.
+> **`icon` replaces the entire bag slot** (a single ReactNode in an absolutely-positioned 50×50 px container). Default is the lucide `PiggyBank` icon rendered via `<Icon icon={PiggyBank} size="80%" color="#7a4a21" strokeWidth={2.2} />`.

@@ -9,7 +9,7 @@
 - **双格式输出** —— ES 输出到 `dist/es/`，CJS 输出到 `dist/cjs/`，两者都开 `preserveModules: true` 与 `preserveModulesRoot: 'src'`，消费者才能按组件 tree-shake，未使用组件的字体与图片也不会进入他们的产物包。不要关掉 `preserveModules`。
 - **external 不打包** —— `react`、`react-dom`、`react/jsx-runtime`、`classnames` 永不被打进产物，它们是 peerDependencies。
 - **`cssCodeSplit: true` + `injectImportedCssPlugin`** —— 组件 CSS 按模块拆分，插件把 `import "./x.css"`（ES）/ `require("./x.css")`（CJS）回填进产出的 JavaScript，消费者 import 一个组件就只带进它自己的样式。不要关掉 `cssCodeSplit`。
-- **资源不内联** —— `@laynezh/vite-plugin-lib-assets`（`outputPath: 'files'`、`limit: 0`）把字体与图片写到 `dist/files/`，而不是让 library mode 强制内联；`copyItemAssetsPlugin` 把 `src/assets/img/icons/items/` 下所有 item PNG 拷到 `dist/items/`，消费者才能单独引用 `animal-island-ui/items/*`。
+- **资源不内联** —— `@laynezh/vite-plugin-lib-assets`（`outputPath: 'files'`、`limit: 0`）把字体与图片写到 `dist/files/`，而不是让 library mode 强制内联。
 - **全局样式入口** —— `emitGlobalStyleEntryPlugin` 聚合出 `dist/index.css`（即 `animal-island-ui/style` 指向的文件），并清理 `dist/files/` 里的孤儿资源。改完某个组件的 CSS 后，确认这些样式仍出现在 `dist/index.css` 里。
 - **字体只留 woff2** —— `stripWoffFallbackPlugin` 删掉与 woff2 一起产出的 woff 备份，字体体积降低约 40%。
 - `pruneEmptyDirsPlugin('dist')` 清理上述步骤留下的空目录。

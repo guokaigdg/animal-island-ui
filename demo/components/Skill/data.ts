@@ -216,7 +216,7 @@ export const RULE_GROUPS: RuleGroup[] = [
         icon: 'icon-camera',
         color: 'app-teal',
         rules: [
-            '图标一律用 <Icon name="..." />（内置 10 个）—— 禁止 emoji、Unicode 符号、手写 SVG、第三方图标字体。',
+            '图标一律用 <Icon name="..." />（内置 13 个）或 <Icon icon={...} />（任一 lucide 图标）—— 禁止 emoji、Unicode 符号、手写 SVG、第三方图标字体。',
             '动效使用 cubic-bezier(0.4, 0, 0.2, 1)，时长 0.15–0.35s。',
         ],
     },

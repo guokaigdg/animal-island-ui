@@ -1,8 +1,10 @@
+// Icon — 基于 lucide-react 的矢量图标（https://lucide.dev/icons/）
+// name / icon 模式渲染 lucide SVG 组件；src 模式渲染 backgroundImage span
+
 .icon {
     display: inline-block;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: contain;
+    flex-shrink: 0;
+    vertical-align: middle;
 }
 
 .icon-bounce {
@@ -25,24 +27,21 @@
     }
 }
 
-.icon-left {
-    background-image: url('../../assets/img/icons/icon-left.svg');
-}
-
-.icon-right {
-    background-image: url('../../assets/img/icons/icon-right.svg');
-}
-
-.location {
-    background-image: url('../../assets/img/icons/location.svg');
-}
-
-.page {
-    background-image: url('../../assets/img/icons/page.svg');
-}
-
-.wifi {
-    background-image: url('../../assets/img/icons/wifi.svg');
+/* 具名图标的语义挂载点：默认继承 currentColor，供消费者按名定制样式 */
+.icon-left,
+.icon-right,
+.location,
+.page,
+.wifi,
+.icon-shopping,
+.icon-chat,
+.icon-variant,
+.icon-encyclopedia,
+.icon-design,
+.icon-map,
+.icon-diy,
+.icon-camera {
+    color: currentColor;
 }
 
 .iconList {

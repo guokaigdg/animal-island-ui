@@ -230,19 +230,15 @@ letter-spacing: 1px;
 
 **应用数据结构（`src/components/Phone/Phone.tsx`）：**
 
-| id           | iconClass        | 背景色    | offset | hasNewMessage |
-| ------------ | ---------------- | --------- | ------ | ------------- |
-| camera       | iconCamera       | `#B77DEE` |        | ✓             |
-| app          | iconApp          | `#889DF0` | ✓      |               |
-| encyclopedia | iconEncyclopedia | `#F7CD67` |        |               |
-| diy          | iconDiy          | `#E59266` |        |               |
-| shopping     | iconDesign       | `#F8A6B2` |        |               |
-| variant      | iconMap          | `#82D5BB` |        | ✓             |
-| design       | iconVariant      | `#8AC68A` |        |               |
-| map          | iconHelicopter   | `#FC736D` |        |               |
-| chat         | iconChat         | `#D1DA49` |        |               |
+| id       | iconName    | 背景色    | offset | hasNewMessage |
+| -------- | ----------- | --------- | ------ | ------------- |
+| location | location    | `#B77DEE` |        | ✓             |
+| browser  | page        | `#889DF0` | ✓      |               |
+| network  | wifi        | `#F7CD67` |        |               |
+| back     | icon-left   | `#E59266` |        |               |
+| forward  | icon-right  | `#82D5BB` |        |               |
 
-每个 iconClass 都绑定一个 `background-image: url('./img/icon-*.svg')`，`iconApp` 特殊使用 `background-size: 100% auto`（其他是 `70% auto`）。可用图标资源：`icon-miles/camera/chat/encyclopedia/design/diy/helicopter/map/shopping/variant.svg`，以及状态图标 `wifi.svg` / `location.svg` / `page.svg`。
+每个 App 渲染 `<Icon name={iconName} size="100%" style={{ color: '#fff' }} />` —— 彩色底块上的白色 lucide 描边图标。13 个内置 `IconName`（或通过 `iconStyle.color` 传任意 lucide 图标色）都可直接从应用数据中替换。
 
 **小红点（新消息）：**
 
@@ -259,23 +255,13 @@ letter-spacing: 1px;
 }
 ```
 
-**底部状态图标：**
+**顶部与底部状态图标（lucide）：**
 
 ```css
-.iconWifi {
-    width: 79px;
-    height: 29px;
-    background: url('./img/wifi.svg') center/contain no-repeat;
-}
-.iconLocation {
-    width: 36px;
-    height: 36px;
-    background: url('./img/location.svg') center/contain no-repeat;
-}
-.iconPage {
-    width: 65px;
-    height: 32px;
-    background: url('./img/page.svg') center/contain no-repeat;
+.statusIcon {
+    display: inline-block;
+    flex-shrink: 0;
+    color: currentColor;
 }
 .pageIndicator {
     display: flex;
@@ -408,4 +394,4 @@ letter-spacing: 1px;
 
 > 数字格式化（JS 逻辑，不是 CSS）：`value` 为 `number` 时按千分位插入 `thousandSeparator`（默认 `,`，传 `""` 关闭）；`string` 原样展示；`undefined` / `null` 显示 `00,000`。
 >
-> 默认钱袋图标是内置 `assets/img/icons/items/item-022.png`（治愈海岛风格钱袋），通过 `icon` prop 传任意 `ReactNode` 可替换。注意：内部使用了 `<Icon src={bagIcon} />` 的隐藏 `src` 入参（Icon 既支持 `name` 走 ICON_LIST，也支持 `src` 走任意图源）。
+> 默认图标为 lucide 的 `PiggyBank`，通过 `<Icon icon={PiggyBank} size="80%" color="#7a4a21" strokeWidth={2.2} />` 渲染，通过 `icon` prop 传任意 `ReactNode` 可替换。

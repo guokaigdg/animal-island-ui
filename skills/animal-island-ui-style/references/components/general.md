@@ -33,37 +33,46 @@ interface ButtonProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>
 ## Icon (+ `ICON_LIST`)
 
 ```ts
+import { Heart, type LucideIcon } from 'lucide-react';
+
 type IconName =
-    | 'icon-miles'
-    | 'icon-camera'
+    | 'icon-left'
+    | 'icon-right'
+    | 'location'
+    | 'page'
+    | 'wifi'
+    | 'icon-shopping'
     | 'icon-chat'
+    | 'icon-variant'
     | 'icon-encyclopedia'
     | 'icon-design'
-    | 'icon-diy'
-    | 'icon-helicopter'
     | 'icon-map'
-    | 'icon-shopping'
-    | 'icon-variant';
+    | 'icon-diy'
+    | 'icon-camera';
 
 interface IconProps {
-    name: IconName; // REQUIRED — one of the 10 built-in SVG icons
+    name?: IconName; // one of the 13 built-in semantic names (lucide icons)
+    icon?: LucideIcon; // any lucide-react icon component — takes precedence over `name`
+    src?: string; // any image URL for raster assets — renders a background-image span
     size?: number | string; // default 24 — applied to width & height
+    color?: string; // lucide stroke color, default currentColor
+    strokeWidth?: number | string; // lucide stroke weight, default 2
     className?: string;
     style?: React.CSSProperties;
     bounce?: boolean; // default false — adds hover bounce animation
 }
 
-// Runtime catalogue for dynamic rendering / pickers (length = 10):
+// Runtime catalogue for dynamic rendering / pickers (length = 13):
 declare const ICON_LIST: { name: IconName; label: string }[];
 ```
 
 ```tsx
-<Icon name="icon-camera" size={32} />
-<Icon name="icon-chat" bounce />
+<Icon name="wifi" size={32} />
+<Icon icon={Heart} size={32} color="#c44" />
 {ICON_LIST.map(({ name, label }) => <Icon key={name} name={name} />)}
 ```
 
-Icons render as a `<span>` with a background-image SVG. Use `size` (number = px, string = any CSS length) — do NOT wrap in a sized div.
+Built on [lucide-react](https://lucide.dev/icons/) — stroke-based SVGs that scale cleanly. Use `size` (number = px, string = any CSS length); do NOT wrap in a sized div.
 
 ## Typewriter
 

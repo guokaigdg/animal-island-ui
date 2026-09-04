@@ -101,5 +101,8 @@
         "animal-island-ui",
         "nature"
     ],
-    "license": "CC-BY-NC-4.0"
+    "license": "CC-BY-NC-4.0",
+    "dependencies": {
+        "lucide-react": "^1.40.0"
+    }
 }

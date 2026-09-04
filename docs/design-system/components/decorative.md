@@ -230,19 +230,15 @@ letter-spacing: 1px;
 
 **App data structure (`src/components/Phone/Phone.tsx`):**
 
-| id           | iconClass        | background | offset | hasNewMessage |
-| ------------ | ---------------- | ---------- | ------ | ------------- |
-| camera       | iconCamera       | `#B77DEE`  |        | ✓             |
-| app          | iconApp          | `#889DF0`  | ✓      |               |
-| encyclopedia | iconEncyclopedia | `#F7CD67`  |        |               |
-| diy          | iconDiy          | `#E59266`  |        |               |
-| shopping     | iconDesign       | `#F8A6B2`  |        |               |
-| variant      | iconMap          | `#82D5BB`  |        | ✓             |
-| design       | iconVariant      | `#8AC68A`  |        |               |
-| map          | iconHelicopter   | `#FC736D`  |        |               |
-| chat         | iconChat         | `#D1DA49`  |        |               |
+| id       | iconName    | background | offset | hasNewMessage |
+| -------- | ----------- | ---------- | ------ | ------------- |
+| location | location    | `#B77DEE`  |        | ✓             |
+| browser  | page        | `#889DF0`  | ✓      |               |
+| network  | wifi        | `#F7CD67`  |        |               |
+| back     | icon-left   | `#E59266`  |        |               |
+| forward  | icon-right  | `#82D5BB`  |        |               |
 
-Every iconClass binds a `background-image: url('./img/icon-*.svg')`; `iconApp` is special in using `background-size: 100% auto` (the others use `70% auto`). Available icon assets: `icon-miles/camera/chat/encyclopedia/design/diy/helicopter/map/shopping/variant.svg`, plus the status icons `wifi.svg` / `location.svg` / `page.svg`.
+Each app renders `<Icon name={iconName} size="100%" style={{ color: '#fff' }} />` — lucide stroke icons in white on the colored tile. Any of the 13 built-in `IconName` values (or an arbitrary lucide icon via `iconStyle.color`) can be swapped in from the app data alone.
 
 **Badge (new message):**
 
@@ -259,23 +255,13 @@ Every iconClass binds a `background-image: url('./img/icon-*.svg')`; `iconApp` i
 }
 ```
 
-**Bottom status icons:**
+**Bottom & top status icons (lucide):**
 
 ```css
-.iconWifi {
-    width: 79px;
-    height: 29px;
-    background: url('./img/wifi.svg') center/contain no-repeat;
-}
-.iconLocation {
-    width: 36px;
-    height: 36px;
-    background: url('./img/location.svg') center/contain no-repeat;
-}
-.iconPage {
-    width: 65px;
-    height: 32px;
-    background: url('./img/page.svg') center/contain no-repeat;
+.statusIcon {
+    display: inline-block;
+    flex-shrink: 0;
+    color: currentColor;
 }
 .pageIndicator {
     display: flex;
@@ -408,4 +394,4 @@ Source: `src/components/Wallet/Wallet.tsx` + `wallet.module.less`. **An amount d
 
 > Number formatting (JS logic, not CSS): when `value` is a `number`, `thousandSeparator` is inserted every three digits (default `,`, pass `""` to disable); a `string` is displayed as-is; `undefined` / `null` renders `00,000`.
 >
-> The default bag icon is the built-in `assets/img/icons/items/item-022.png` (an island-style money bag) and can be replaced by passing any `ReactNode` through the `icon` prop. Note that internally it uses the hidden `src` parameter of `<Icon src={bagIcon} />` (Icon supports both `name`, which goes through ICON_LIST, and `src`, which accepts any image source).
+> The default icon is the lucide `PiggyBank` glyph rendered via `<Icon icon={PiggyBank} size="80%" color="#7a4a21" strokeWidth={2.2} />` and can be replaced by passing any `ReactNode` through the `icon` prop.
