@@ -48,3 +48,14 @@ coverage/
 *.tmp
 *.temp
 .npmrc
+
+# Images — copyright policy: this repository stays image-free (use CSS/SVG instead)
+*.png
+*.jpg
+*.jpeg
+*.webp
+*.gif
+*.ico
+*.bmp
+*.tif
+*.tiff

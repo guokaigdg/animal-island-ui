@@ -7,6 +7,18 @@
 
 set -e
 
+#  版权政策: 仓库保持零位图文件(图片一律用 CSS/原创 SVG 替代)
+BLOCKED=$(git diff --cached --name-only --diff-filter=ACR | grep -iE '\.(png|jpe?g|webp|gif|ico|bmp|tiff?)$' || true)
+if [ -n "$BLOCKED" ]; then
+    echo ""
+    echo "❌ 检测到位图文件提交(版权整改政策: 本仓库保持零图片):"
+    echo "$BLOCKED" | sed 's/^/     /'
+    echo "   如需图形, 请使用 CSS 渐变或原创 SVG。"
+    echo "   紧急绕过(不推荐): git commit --no-verify"
+    echo ""
+    exit 1
+fi
+
 echo "                                                                                      "
 echo "                                                                                      "
 echo "  ▄▄▄  ▄▄  ▄▄ ▄▄ ▄▄   ▄▄  ▄▄▄  ▄▄      ▄▄  ▄▄▄▄ ▄▄     ▄▄▄  ▄▄  ▄▄ ▄▄▄▄      ▄▄ ▄▄ ▄▄ "

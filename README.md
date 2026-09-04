@@ -33,6 +33,16 @@ This project is a lightweight UI component library built with React + TypeScript
 
 All visual elements, layouts, icons, and animations are independently designed and implemented from scratch.
 
+## ⚠️ Git History Rewritten — Re-clone Required
+
+In September 2026, the entire git history of this repository was rewritten to remove content that infringed Nintendo's copyright (per a DMCA takedown notice). All previous commits, tags, and releases were replaced with a clean history.
+
+**If you cloned or forked this repository before the rewrite:**
+
+- Do NOT pull or merge — doing so would reintroduce the removed content into your copy.
+- Delete your old clone/fork, then re-clone or re-fork from this repository.
+- Only pull requests based on the new history can be accepted.
+
 ## Preview
 
 - Online Preview (PC) [animal-island-ui-pc](https://guokaigdg.github.io/animal-island-ui/#/)
