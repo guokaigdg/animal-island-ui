@@ -66,7 +66,7 @@ const MENU_ITEMS: MenuItem[] = [
             // { key: 'divider-comp', label: 'Divider 分割线' },
             // { key: 'icon', label: 'Icon 图标' },
             { key: 'tag', label: 'Tag 标签' },
-            // { key: 'cursor', label: 'Cursor 光标' },
+            { key: 'cursor', label: 'Cursor 光标' },
             { key: 'codeblock', label: 'CodeBlock 代码高亮' },
             // { key: 'footer', label: 'Footer 页脚' },
         ],
@@ -239,6 +239,7 @@ const SidebarContent: React.FC<{
                             {item.children.map((child) => (
                                 <div
                                     key={child.key}
+                                    className={child.key === 'cursor' ? 'demo-raindrop-hover' : undefined}
                                     style={S.menuItem(activeKey === child.key)}
                                     onClick={() => onNavigate(`/${child.key}`)}
                                     onMouseEnter={(e) => {
@@ -322,6 +323,16 @@ const App: React.FC = () => {
                 @keyframes menuBadgePulse {
                     0%, 100% { transform: scale(1); }
                     50% { transform: scale(1.08); }
+                }
+                /* 体验彩蛋：hover 侧边栏 Cursor 菜单项 → 蓝色雨滴光标（与 type="raindrop" 一致） */
+                .demo-raindrop-hover:hover,
+                .demo-raindrop-hover:hover * {
+                    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Cpath d='M16 6s-9 12-9 16a9 9 0 0 0 18 0c0-4-9-16-9-16z' fill='%2374ccff' stroke='%232e86ab' stroke-width='1.5'/%3E%3Cellipse cx='12.5' cy='19' rx='2' ry='3.2' fill='%23dff4ff' transform='rotate(-18 12.5 19)'/%3E%3C/svg%3E") 16 6, default !important;
+                }
+                /* 体验彩蛋：Cursor 演示页展示区 ambient 雨滴光标（预览框内部保留各自演示的光标） */
+                div.demo-raindrop-zone,
+                .demo-raindrop-zone *:not(.animal-cursor, .animal-cursor *) {
+                    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Cpath d='M16 6s-9 12-9 16a9 9 0 0 0 18 0c0-4-9-16-9-16z' fill='%2374ccff' stroke='%232e86ab' stroke-width='1.5'/%3E%3Cellipse cx='12.5' cy='19' rx='2' ry='3.2' fill='%23dff4ff' transform='rotate(-18 12.5 19)'/%3E%3C/svg%3E") 16 6, default !important;
                 }
             `}</style>
             {isHomePage ? (

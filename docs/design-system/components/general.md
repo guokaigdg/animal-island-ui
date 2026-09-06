@@ -147,23 +147,35 @@ Props:
 <Cursor>
     <App /> {/* every element inside this subtree switches to the game finger cursor */}
 </Cursor>
+
+<Cursor type="raindrop">
+    <App /> {/* raindrop cursor instead */}
+</Cursor>
 ```
 
-The stylesheet is **plain CSS** (`cursor.css`, not a CSS module) with two modes selected by the `forceAll` prop (default `true`); the root `<div>` carries `animal-cursor` plus a mode class:
+The stylesheet is **plain CSS** (`cursor.css`, not a CSS module) with two style variants selected by the `type` prop (`'default'` game finger arrow — 28×28 inline SVG, hotspot `6 4`; `'raindrop'` blue water drop — 32×32 inline SVG with a lighter highlight ellipse, hotspot `16 6`) and two modes selected by the `forceAll` prop (default `true`); the root `<div>` carries `animal-cursor` plus a mode class (`animal-cursor--raindrop` is appended for the drop):
 
 ```css
 /* force mode (default, forceAll={true}): every descendant gets the custom cursor */
 .animal-cursor--force,
 .animal-cursor--force * {
     cursor:
-        url('../../assets/img/cursor/cursor-icon.png') 4 0,
-        url(data:image/png;base64,…) 4 0, /* inlined base64 fallback of the same PNG */
+        url("data:image/svg+xml,…arrow…") 6 4,
+        default !important;
+}
+
+/* raindrop force: double class switches the URL + hotspot */
+.animal-cursor--force.animal-cursor--raindrop,
+.animal-cursor--force.animal-cursor--raindrop * {
+    cursor:
+        url("data:image/svg+xml,…drop…") 16 6,
         default !important;
 }
 
 /* scoped mode (forceAll={false}): only the container shows the custom cursor …
    (double-class selector so a scoped Cursor nested inside a force Cursor still wins) */
-.animal-cursor.animal-cursor--scoped { cursor: url(…) 4 0, url(data:…) 4 0, default !important; }
+.animal-cursor.animal-cursor--scoped { cursor: url(…) 6 0, default !important; }
+.animal-cursor.animal-cursor--scoped.animal-cursor--raindrop { cursor: url(…) 16 6, default !important; }
 
 /* … while descendants fall back to browser semantics */
 .animal-cursor--scoped *,

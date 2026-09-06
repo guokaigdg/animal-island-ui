@@ -14,6 +14,12 @@ import {
 
 const CURSOR_API: ApiRow[] = [
     {
+        prop: 'type',
+        desc: '光标风格：default 手指箭头（默认）/ raindrop 蓝色雨滴',
+        type: `'default' | 'raindrop'`,
+        defaultVal: "'default'",
+    },
+    {
         prop: 'forceAll',
         desc: '是否对所有后代元素强制覆盖光标。true 全覆盖；false 仅容器自身设置自定义光标，交互元素保留 pointer/text/not-allowed',
         type: 'boolean',
@@ -30,19 +36,26 @@ const CURSOR_API: ApiRow[] = [
 ];
 
 const CursorDemo: React.FC = () => (
-    <div style={sectionStyle}>
+    <div className="demo-raindrop-zone" style={sectionStyle}>
         <div style={sectionTitleStyle}>
             Cursor <DemoTag>光标</DemoTag>
         </div>
         <p style={labelStyle}>
-            Cursor 组件通过 CSS cursor 属性将子元素的鼠标光标替换为自定义手指图标。 默认 <code>forceAll=true</code>
+            Cursor 组件通过 CSS cursor 属性将子元素的鼠标光标替换为自定义图标，提供 <code>default</code>
+            （手指箭头）与 <code>raindrop</code>（蓝色雨滴）两种风格。 默认 <code>forceAll=true</code>
             全覆盖所有后代；设置 <code>forceAll=false</code> 可保留 a/button 的 pointer 和输入框的 text 语义。
         </p>
         <div style={demoBodyStyle}>
-            <div style={labelStyle}>forceAll=true（默认）：全覆盖</div>
+            <div style={labelStyle}>type="default"（默认）：手指箭头</div>
             <Cursor>
                 <div style={{ ...demoDashedBoxStyle, padding: 24, textAlign: 'center' }}>
                     鼠标移入此区域将显示自定义光标
+                </div>
+            </Cursor>
+            <div style={labelStyle}>type="raindrop"：蓝色雨滴</div>
+            <Cursor type="raindrop">
+                <div style={{ ...demoDashedBoxStyle, padding: 24, textAlign: 'center' }}>
+                    鼠标移入此区域将显示雨滴光标
                 </div>
             </Cursor>
             <div style={labelStyle}>forceAll=false：保留原生光标语义</div>
@@ -86,9 +99,14 @@ import { Cursor } from 'animal-island-ui';
 const App = () => {
     return (
         <div>
-            {/* 默认 forceAll=true：全覆盖所有后代 */}
+            {/* 默认：手指箭头，forceAll=true 全覆盖所有后代 */}
             <Cursor>
                 <div>鼠标移入此区域将显示自定义光标</div>
+            </Cursor>
+
+            {/* type="raindrop"：蓝色雨滴光标 */}
+            <Cursor type="raindrop">
+                <div>鼠标移入此区域将显示雨滴光标</div>
             </Cursor>
 
             {/* forceAll=false：保留交互语义（a/button 仍是 pointer，input 仍是 text） */}

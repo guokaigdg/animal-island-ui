@@ -29,7 +29,7 @@ export { Collapse } from './components/Collapse';
 export type { CollapseProps } from './components/Collapse';
 
 export { Cursor } from './components/Cursor';
-export type { CursorProps } from './components/Cursor';
+export type { CursorProps, CursorType } from './components/Cursor';
 
 export { Divider } from './components/Divider';
 export type { DividerProps } from './components/Divider';

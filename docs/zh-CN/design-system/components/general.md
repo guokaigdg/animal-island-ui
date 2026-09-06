@@ -145,25 +145,37 @@ Props：
 
 ```tsx
 <Cursor>
-    <App /> {/* 此范围内所有元素变为游戏手指光标 */}
+    <App /> {/* 此范围内所有元素变为手指光标 */}
+</Cursor>
+
+<Cursor type="raindrop">
+    <App /> {/* 改为雨滴光标 */}
 </Cursor>
 ```
 
-样式文件为 **普通 CSS**（`cursor.css`，非 module），由 `forceAll` prop（默认 `true`）选择两种模式；根 `<div>` 挂 `animal-cursor` 加一个模式 class：
+样式文件为 **普通 CSS**（`cursor.css`，非 module）：`type` prop（默认 `'default'`）选择两种风格 —— `'default'` 手指箭头（28×28 内联 SVG，hotspot `6 4`）、`'raindrop'` 蓝色雨滴（32×32 内联 SVG，带浅色高光椭圆，hotspot `16 6`）；`forceAll` prop（默认 `true`）选择两种模式。根 `<div>` 挂 `animal-cursor` 加一个模式 class（雨滴风格额外追加 `animal-cursor--raindrop`）：
 
 ```css
 /* force 模式（默认，forceAll={true}）：所有后代都使用自定义光标 */
 .animal-cursor--force,
 .animal-cursor--force * {
     cursor:
-        url('../../assets/img/cursor/cursor-icon.png') 4 0,
-        url(data:image/png;base64,…) 4 0, /* 同图 base64 内联 fallback */
+        url("data:image/svg+xml,…箭头…") 6 4,
+        default !important;
+}
+
+/* 雨滴 force：双类切换 URL 与 hotspot */
+.animal-cursor--force.animal-cursor--raindrop,
+.animal-cursor--force.animal-cursor--raindrop * {
+    cursor:
+        url("data:image/svg+xml,…水滴…") 16 6,
         default !important;
 }
 
 /* scoped 模式（forceAll={false}）：仅容器本身显示自定义光标 …
    （双类选择器保证嵌套在 force Cursor 内部的 scoped Cursor 仍能胜出） */
-.animal-cursor.animal-cursor--scoped { cursor: url(…) 4 0, url(data:…) 4 0, default !important; }
+.animal-cursor.animal-cursor--scoped { cursor: url(…) 6 4, default !important; }
+.animal-cursor.animal-cursor--scoped.animal-cursor--raindrop { cursor: url(…) 16 6, default !important; }
 
 /* … 后代回退浏览器默认语义 */
 .animal-cursor--scoped *,

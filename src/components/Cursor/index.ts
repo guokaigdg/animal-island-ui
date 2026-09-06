@@ -1,2 +1,2 @@
 export { Cursor } from './Cursor';
-export type { CursorProps } from './Cursor';
+export type { CursorProps, CursorType } from './Cursor';
