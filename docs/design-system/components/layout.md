@@ -269,7 +269,9 @@ Each tile is an inline SVG (encoded into the CSS — no external image file) sta
 </g>
 ```
 
-- `dots`: green wallpaper — two offset polka-dot layers (28px big dots, 14px small dots) over `#bfe3bf`.
+- `default`: cream wallpaper `rgb(247, 243, 223)` with beige dots — same palette as Card `pattern-default`.
+- `dots-dark-green`: green wallpaper — two offset polka-dot layers (28px big dots, 14px small dots) over `#bfe3bf`.
+- 12 `dots-*` Card-palette wallpapers — `dots-pink` `#fde4e8` / `dots-purple` `#f0e8ff` / `dots-blue` `#e8edff` / `dots-yellow` `#fff8e0` / `dots-orange` `#fff0e8` / `dots-teal` `#e8faf5` / `dots-green` `#e8f5e8` / `dots-red` `#ffe8e8` / `dots-lime-green` `#f5f8e0` / `dots-yellow-green` `#fffde8` / `dots-brown` `#f5f0e0` / `dots-warm-peach-pink` `#fff0e8` — pastel bases with two dot layers tinted by the same color family (values 1:1 with the matching Card `pattern-*` class, minus its border). No built-in text color — set it yourself if you place content directly on the wallpaper.
 - `sprinkles`: doughnut frosting `#fdf3e3` scattered with cylindrical candy sprinkles in 6 colors (pink `#f8a6b2` / yellow `#f5d04a` / blue `#8ecae6` / green `#95d5b2` / orange `#f4a261` / purple `#c9a7f5`). Each sprinkle is a capsule 13–18px long × ~4.5px thick — rounded ends, highlight shading, rotated at scattered angles. Three mutually-prime SVG tiles (190×170, 230×195, 255×215) yield a combined repeat period of ~220000×280000px — beyond any screen, so the scatter reads as random with no visible repetition.
 - Content (children) renders above the pattern; size the element via `style` (`height` / `min-height`) — it has no built-in fixed height.
 

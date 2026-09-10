@@ -46,7 +46,7 @@ export const PAGE_INFO: Record<string, { title: string; desc: string }> = {
     },
     background: {
         title: 'Background 背景',
-        desc: '装饰背景组件 — 波点 / 圆柱形彩色针糖两种图案壁纸，随机散落无图片资源，可作为整页或区块背景，内容渲染在图案之上',
+        desc: '装饰背景组件 — 奶油/深绿波点、彩色针糖 + 12 色 Card pattern 底色壁纸，零图片资源，可作为整页或区块背景，内容渲染在图案之上',
     },
     icon: {
         title: 'Icon 图标',

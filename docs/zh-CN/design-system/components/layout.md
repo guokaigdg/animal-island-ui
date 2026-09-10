@@ -268,7 +268,9 @@ interface CarouselProps extends Omit<HTMLAttributes<HTMLElement>, 'onChange'> {
 </g>
 ```
 
-- `dots`：绿色系壁纸 —— 两层错位波点（28px 大点、14px 小点）铺在 `#bfe3bf` 纯色底上。
+- `default`：奶油色壁纸 `rgb(247, 243, 223)` + 米棕波点 —— 与 Card `pattern-default` 同配色。
+- `dots-dark-green`：绿色系壁纸 —— 两层错位波点（28px 大点、14px 小点）铺在 `#bfe3bf` 纯色底上。
+- 12 色 `dots-*` 底色对应 Card `pattern-*` 系列的壁纸 —— `dots-pink` `#fde4e8` / `dots-purple` `#f0e8ff` / `dots-blue` `#e8edff` / `dots-yellow` `#fff8e0` / `dots-orange` `#fff0e8` / `dots-teal` `#e8faf5` / `dots-green` `#e8f5e8` / `dots-red` `#ffe8e8` / `dots-lime-green` `#f5f8e0` / `dots-yellow-green` `#fffde8` / `dots-brown` `#f5f0e0` / `dots-warm-peach-pink` `#fff0e8` —— 粉彩底 + 同色系两层波点（底色取值与对应 Card `pattern-*` 类 1:1 一致，去掉描边）。不内置文字色 —— 直接在壁纸上放内容时请自行设置。
 - `sprinkles`：甜甜圈糖霜底 `#fdf3e3`，撒 6 色圆柱形糖针（粉 `#f8a6b2` / 黄 `#f5d04a` / 蓝 `#8ecae6` / 绿 `#95d5b2` / 橙 `#f4a261` / 紫 `#c9a7f5`）。每根糖针是 13–18px 长、约 4.5px 粗的胶囊 —— 两端圆润、带高光受光、随机角度散落。三层互质 SVG tile（190×170、230×195、255×215）合计重复周期约 220000×280000px —— 远超任何屏幕，散落效果视觉上等同随机、无可感知重复。
 - 内容（children）渲染在图案之上；组件无固定高度，通过 `style`（`height` / `min-height`）控制尺寸。
 
