@@ -89,10 +89,10 @@ box-shadow: 0 5px 0 0 #c94444; /* error-active */
 
 ## Icon
 
-基于 [lucide-react](https://lucide.dev/icons/) 的矢量图标组件，13 个内置语义名 —— `icon-left`、`icon-right`、`location`、`page`、`wifi`、`icon-shopping`、`icon-chat`、`icon-variant`、`icon-encyclopedia`、`icon-design`、`icon-map`、`icon-diy`、`icon-camera`（以运行时 `ICON_LIST` 导出为准）。三种渲染模式：
+组件库内置**可爱图标集**（共 101 个，来自 `src/components/Icon/src/`，每个也作为组件导出，如 `HeartIcon`；以运行时 `ICON_LIST` 导出为准）的 SVG 图标组件。三种渲染模式：
 
-- `name` —— 内置语义名之一（映射到 lucide 图标组件）
-- `icon` —— 任意 `lucide-react` 图标组件，如 `<Icon icon={Heart} />`（优先级高于 `name`）
+- `name` —— 101 个内置图标名之一，帕斯卡命名，如 `<Icon name="Heart" />`（由 `IconName` 类型约束）
+- `icon` —— 任意内置图标组件，如 `<Icon icon={HeartIcon} />`（优先级高于 `name`）
 - `src` —— 任意图片 URL，适合彩色位图素材；渲染为带 `background-image` 的 `<span>`
 
 ```css
@@ -113,7 +113,7 @@ box-shadow: 0 5px 0 0 #c94444; /* error-active */
 }
 ```
 
-> 用法：`<Icon name="wifi" size={32} />` 或 `<Icon icon={Heart} size={32} />`。`size` 默认 `24`，以内联 `width`/`height` 应用（number 为 px，string 为任意 CSS 长度）。lucide 图标为描边风 SVG：`color` 设置描边色（默认 `currentColor`），`strokeWidth` 设置描边粗细（默认 `2`）。未传 `aria-label` 的图标默认 `aria-hidden="true"`（装饰性）；传入 `aria-label` 时同时设置 `role="img"`，使标签成为可访问名。
+> 用法：`<Icon name="Heart" size={32} />` 或 `<Icon icon={HeartIcon} size={32} />`。`size` 默认 `24`，以内联 `width`/`height` 应用（number 为 px，string 为任意 CSS 长度），SVG 按 48×48 viewBox 渲染。`color` 映射到 SVG 的 `stroke`（默认沿用图标内置配色），`strokeWidth` 设置描边粗细（默认 `3.5`）；两者仅显式传入时才会覆盖内置默认值。未传 `aria-label` 的图标默认 `aria-hidden="true"`（装饰性）；传入 `aria-label` 时同时设置 `role="img"`，使标签成为可访问名。
 
 ## Typewriter
 

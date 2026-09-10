@@ -95,4 +95,4 @@ Check code against this list before submitting it. **Any ❌ that appears is a f
 
 16. **Icons come from the `<Icon>` component; no inline SVG, no Unicode symbols**
     - ❌ Writing raw Unicode symbols (✓ ✕ ✗ → ←), hard-coding `<svg>`, or pulling in a third-party icon library
-    - ✅ `<Icon name="icon-camera" size={24} />` using one of the 10 built-in icon names; when no icon matches, substitute a pure-CSS decorative element
+    - ✅ `<Icon name="Camera" size={24} />` using one of the 101 built-in icon names; when no icon matches, substitute a pure-CSS decorative element

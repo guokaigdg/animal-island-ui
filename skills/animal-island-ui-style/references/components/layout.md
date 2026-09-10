@@ -10,9 +10,7 @@ type CardType = 'default' | 'dashed';
 type CardColor =
     | 'default' | 'app-pink' | 'purple' | 'app-blue' | 'app-yellow' | 'app-orange' | 'app-teal'
     | 'app-green' | 'app-red' | 'lime-green' | 'yellow-green' | 'brown' | 'warm-peach-pink';
-
-// Decorative pattern overlay — 'none' plus the same 13 values as CardColor.
-type CardPattern = 'none' | CardColor;
+type CardPattern = 'none' | CardColor; // decorative overlay; same 13 values as CardColor
 
 interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
     type?: CardType; // default 'default'

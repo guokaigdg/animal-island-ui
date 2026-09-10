@@ -11,6 +11,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - 工具链：ESLint flat config + CI workflow + EditorConfig
 
+### Changed
+
+- `Icon` 组件改用内置可爱图标集（101 个），`name` 支持帕斯卡命名（如 `<Icon name="HeartIcon" />`），并移除 `lucide-react` 运行时依赖（运行时依赖归零）；库根同时导出全部 101 个图标组件
+- `DatePicker` 翻页箭头由 lucide 迁移为内联 SVG
+
 ## [1.9.0] - 2026-09-04
 
 ### Removed

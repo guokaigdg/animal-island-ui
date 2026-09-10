@@ -46,7 +46,7 @@ export default function App() {
                     </Button>
                 </Card>
             </main>
-            <Footer type="sea" />
+            <Footer />
         </Cursor>
     );
 }

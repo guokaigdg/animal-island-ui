@@ -92,8 +92,8 @@ values, defaults — copied from source):
 8. Fonts are Nunito + Noto Sans SC; weight never below 400; no monospace for UI text
    (CodeBlock excepted).
 9. Motion uses `cubic-bezier(0.4, 0, 0.2, 1)` over 0.15–0.35s.
-10. Icons come from `<Icon name="..." />` (10 built-in names) — never emoji, Unicode
-    symbols (✓ ✕ →), hand-rolled SVG, or third-party icon fonts.
+10. Icons come from `<Icon name="..." />` (101 built-in cute icon names) — never emoji, Unicode
+    symbols (✓ ✕ →), hand-rolled SVG, or third-party icon libraries.
 11. Select is controlled-only (`options` + `value` + `onChange` all required). Controlled
     `Input`/`Switch`/`Checkbox`/`Radio` need `onChange` too.
 12. Prefer library components over raw HTML: no visible native `<button>`, `<input>`,

@@ -37,6 +37,11 @@ A React UI component library with a cute style
 
 This project is a lightweight UI component library built with React + TypeScript. It features an original, cozy island-style design language, created for personal front-end technical practice and component development learning.All visual elements, layouts, icons, and animations are independently designed and implemented from scratch.
 
+## Preview
+
+- Online Preview (PC) [animal-island-ui-pc](https://guokaigdg.github.io/animal-island-ui/#/)
+- Online Preview (Mobile) [animal-island-ui-mobile](https://guokaigdg.github.io/animal-island-ui/#/)
+
 ## 🚀 Use AI to Generate animal-island-ui Pages (No Coding Needed)
 
 Non-developer and don't want to write code yourself? Use the

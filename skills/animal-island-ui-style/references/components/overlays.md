@@ -114,7 +114,7 @@ interface TooltipProps {
 ```tsx
 <Tooltip title="Save your island"><Button type="primary">Save</Button></Tooltip>
 <Tooltip title="More info" placement="right" trigger="click">
-  <Icon name="icon-chat" />
+  <Icon name="Chat" />
 </Tooltip>
 <Tooltip title="Game-style bubble" variant="island"><span>?</span></Tooltip>
 ```

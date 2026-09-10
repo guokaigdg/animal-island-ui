@@ -63,9 +63,9 @@ Interface details:
 - Nunito rounded font family (Google Fonts), weight 600-700, friendly chubby letterforms
 - Yellow focus highlight #ffcc00 on focused inputs (NOT blue)
 - Switch toggle with a flat circular handle (thin border, no outer shadow; the track carries an inset shadow only), track green #86d67a when ON
-- Collapse accordion with teal circle icon, leaf SVG decoration
+- Collapse accordion with teal circle icon, fish icon decoration
 - Countdown digit tiles: 900-weight tabular numerals on a cream gradient face, DD/HH/mm/ss tiles rolling odometer-style
-- Pastel parchment Table with dashed dotted row dividers and diagonal teal stripe hover
+- Pastel parchment Table with dashed dotted row dividers and solid light-teal hover
 - Soft warm Tooltip bubble with 8px diamond arrow, OR transparent island-bubble variant
 - Nature decorations: leaf SVG icons, illustrated ocean wave footer, forest tree silhouette
 - Diagonal stripe loading animation on active buttons

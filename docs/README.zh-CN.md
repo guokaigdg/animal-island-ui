@@ -36,6 +36,11 @@
 
 本项目是基于 React + TypeScript 实现的轻量 UI 组件库，采用原创的治愈系海岛风格设计语言，用于个人前端技术练习与组件化开发学习。所有视觉元素、布局、图标、动画均为本项目独立设计实现。
 
+## 预览
+
+- 在线预览 (PC 端) [animal-island-ui-pc](https://guokaigdg.github.io/animal-island-ui/#/)
+- 在线预览（移动端）[animal-island-ui-mobile](https://guokaigdg.github.io/animal-island-ui/#/)
+
 ## 🚀 用 AI 工具一键生成 animal-island-ui 风格页面（无需写代码）
 
 非研发人员，不想自己写代码？用[一键提示词](./one-click-prompt.md)即可，不需要 npm，不需要打包工具。
