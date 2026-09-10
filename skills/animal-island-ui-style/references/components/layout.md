@@ -48,6 +48,7 @@ interface TitleProps {
     children: React.ReactNode; // REQUIRED
     size?: TitleSize; // default 'middle'
     color?: TitleColor; // default 'default'
+    variant?: 'layer' | 'ribbon' | 'tab'; // default 'layer'
     className?: string;
     style?: React.CSSProperties;
 }
@@ -56,27 +57,25 @@ interface TitleProps {
 ```tsx
 <Title>Chapter One</Title>
 <Title size="large" color="app-yellow">Notification</Title>
+<Title variant="layer" color="app-blue">Layer note</Title>
+<Title variant="tab" color="lime-green">Corner tab</Title>
 ```
 
-Renders an island-style ribbon banner (swallowtail clip-path ends + fold-shadow triangles + raised front). Uses the same 13 island palette as `Card.color`; `size` scales the whole ribbon via `em` units (small 14px / middle 20px / large 28px base).
+Renders an island-style ribbon banner (swallowtail clip-path ends + fold-shadow triangles + raised front). Uses the same 13 island palette as `Card.color`; `size` scales the whole ribbon via `em` units (small 14px / middle 20px / large 28px base). `variant` picks a same-family decoration that shares the `--rf / --rb / --rk / --rt` palette: `layer` (default, double-layer note: back sheet offset upper-left), `ribbon` (banner), or `tab` (corner tab: 135° gradient corner cut + dark fold triangle); every `.color-*` override applies equally to all three.
 
-**Not supported:** no `level` (`h1..h6`) — renders as an inline-block `<div>`; no `bordered`; no `code` / `mark` / `underline` / `delete` modifiers (this is a decorative ribbon banner, NOT a generic typography-heading component).
+**Not supported:** no `level` (`h1..h6`) — renders as an inline-block `<div>`; no `bordered`; no `code` / `mark` / `underline` / `delete` modifiers (this is a decorative banner, NOT a generic typography-heading component).
 
 ## Divider
 
 ```ts
 type DividerType =
-    | 'line-brown'
-    | 'line-teal'
-    | 'line-white'
-    | 'line-yellow'
     | 'dashed-brown'
     | 'dashed-teal'
     | 'dashed-white'
     | 'dashed-yellow';
 
 interface DividerProps {
-    type?: DividerType; // default 'line-brown'
+    type?: DividerType; // default 'dashed-brown'
     className?: string;
     style?: React.CSSProperties;
 }

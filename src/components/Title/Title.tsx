@@ -19,6 +19,8 @@ export type TitleColor =
     | 'brown'
     | 'warm-peach-pink';
 
+export type TitleVariant = 'ribbon' | 'layer' | 'tab';
+
 export interface TitleProps {
     /** 标题内容 */
     children: React.ReactNode;
@@ -26,6 +28,8 @@ export interface TitleProps {
     size?: TitleSize;
     /** 配色，与 Card 同名色板 */
     color?: TitleColor;
+    /** 标题样式：layer 双层纸（默认）/ ribbon 飘带 / tab 折角便签 */
+    variant?: TitleVariant;
     /** 自定义类名 */
     className?: string;
     /** 自定义样式 */
@@ -56,12 +60,55 @@ const Ribbon: React.FC<{ children: React.ReactNode; fontSize: number; color?: Ti
     </span>
 );
 
-export const Title: React.FC<TitleProps> = ({ children, size = 'middle', color = 'default', className, style }) => {
+const Layer: React.FC<{ children: React.ReactNode; fontSize: number; color?: TitleColor }> = ({
+    children,
+    fontSize,
+    color,
+}) => (
+    <span
+        className={classNames(styles.layer, color && color !== 'default' && styles[`color-${color}`])}
+        style={{ fontSize: `${fontSize}px` }}
+    >
+        <span className={styles.layerFront}>{children}</span>
+    </span>
+);
+
+const Tab: React.FC<{ children: React.ReactNode; fontSize: number; color?: TitleColor }> = ({
+    children,
+    fontSize,
+    color,
+}) => (
+    <span
+        className={classNames(styles.tab, color && color !== 'default' && styles[`color-${color}`])}
+        style={{ fontSize: `${fontSize}px` }}
+    >
+        <span className={styles.tabText}>{children}</span>
+    </span>
+);
+
+const VARIANT_MAP: Record<
+    TitleVariant,
+    React.FC<{ children: React.ReactNode; fontSize: number; color?: TitleColor }>
+> = {
+    ribbon: Ribbon,
+    layer: Layer,
+    tab: Tab,
+};
+
+export const Title: React.FC<TitleProps> = ({
+    children,
+    size = 'middle',
+    color = 'default',
+    variant = 'layer',
+    className,
+    style,
+}) => {
+    const Body = VARIANT_MAP[variant];
     return (
         <span className={classNames(styles.title, className)} style={style}>
-            <Ribbon fontSize={SIZE_MAP[size]} color={color}>
+            <Body fontSize={SIZE_MAP[size]} color={color}>
                 {children}
-            </Ribbon>
+            </Body>
         </span>
     );
 };

@@ -20,6 +20,7 @@ const TITLE_API: ApiRow[] = [
         type: "'default' | 'app-pink' | 'purple' | 'app-blue' | 'app-yellow' | 'app-orange' | 'app-teal' | 'app-green' | 'app-red' | 'lime-green' | 'yellow-green' | 'brown' | 'warm-peach-pink'",
         defaultVal: "'default'",
     },
+    { prop: 'variant', desc: '标题样式', type: "'layer' | 'ribbon' | 'tab'", defaultVal: "'layer'" },
     { prop: 'className', desc: '自定义类名', type: 'string', defaultVal: '-' },
     { prop: 'style', desc: '自定义样式', type: 'React.CSSProperties', defaultVal: '-' },
 ];
@@ -70,12 +71,26 @@ const TitleDemo: React.FC = () => (
             Title <DemoTag>标题</DemoTag>
         </div>
 
-        <div style={labelStyle}>飘带标题</div>
-        <div style={bgGreen}>
-            <Title>斯普拉遁</Title>
+        <div style={labelStyle}>全部类型（随机取色）</div>
+        <div style={{ ...bgSky, display: 'flex', flexWrap: 'wrap', gap: '32px 50px' }}>
+            {(
+                [
+                    ['layer', '双层纸'],
+                    ['ribbon', '飘带类型'],
+                    ['tab', '折角便签'],
+                ] as const
+            ).map(([variant, text]) => (
+                <Title
+                    key={variant}
+                    variant={variant}
+                    color={COLOR_VARIANTS[Math.floor(Math.random() * COLOR_VARIANTS.length)][0]}
+                >
+                    {text}
+                </Title>
+            ))}
         </div>
 
-        <div style={labelStyle}>配色变体</div>
+        <div style={labelStyle}>配色变体（默认双层纸 Layer）</div>
         <div style={{ ...bgSand, display: 'flex', flexWrap: 'wrap', gap: '32px 50px' }}>
             {COLOR_VARIANTS.map(([color, label, ribbonColor]) => (
                 <div key={color} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 16 }}>
@@ -94,19 +109,22 @@ const TitleDemo: React.FC = () => (
             ))}
         </div>
 
-        <div style={labelStyle}>小尺寸</div>
-        <div style={bgCoral}>
-            <Title size="small">小标题</Title>
-        </div>
-
-        <div style={labelStyle}>中尺寸（默认）</div>
-        <div style={bgMint}>
-            <Title size="middle">中等标题</Title>
-        </div>
-
-        <div style={labelStyle}>大尺寸</div>
-        <div style={bgLavender}>
-            <Title size="large">大号标题</Title>
+        <div style={labelStyle}>尺寸</div>
+        <div style={{ display: 'flex', gap: 24, flexWrap: 'wrap' }}>
+            {(
+                [
+                    ['small', '小尺寸', bgCoral, '小标题'],
+                    ['middle', '中尺寸（默认）', bgMint, '中等标题'],
+                    ['large', '大尺寸', bgLavender, '大号标题'],
+                ] as ['small' | 'middle' | 'large', string, React.CSSProperties, string][]
+            ).map(([size, text, bg, title]) => (
+                <div key={size} style={{ flex: '1 1 200px', minWidth: 180 }}>
+                    <div style={labelStyle}>{text}</div>
+                    <div style={bg}>
+                        <Title size={size}>{title}</Title>
+                    </div>
+                </div>
+            ))}
         </div>
 
         <div style={labelStyle}>支持英文与表情</div>
@@ -114,15 +132,46 @@ const TitleDemo: React.FC = () => (
             <Title>🎮 LET&apos;S PLAY!</Title>
         </div>
 
+        <div style={labelStyle}>飘带标题（variant="ribbon"）</div>
+        <div style={bgGreen}>
+            <Title variant="ribbon">飘带类型</Title>
+        </div>
+
+        <div style={labelStyle}>双层纸 Layer</div>
+        <div style={bgGreen}>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '28px 40px' }}>
+                <Title variant="layer" color="app-yellow">
+                    蜂蜜阳光
+                </Title>
+                <Title variant="layer" color="app-blue">
+                    海风信箱
+                </Title>
+            </div>
+        </div>
+
+        <div style={labelStyle}>折角便签 Corner Tab</div>
+        <div style={bgLavender}>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '28px 40px' }}>
+                <Title variant="tab" color="lime-green">
+                    青柠苏打
+                </Title>
+                <Title variant="tab" color="brown">
+                    热可可
+                </Title>
+            </div>
+        </div>
+
         <CodeBlock
             code={`import { Title } from 'animal-island-ui';
 
 const App = () => (
     <>
-        <Title>斯普拉遁</Title>
+        <Title>飘带类型</Title>
         <Title size="small">小标题</Title>
         <Title size="large" color="app-pink">大号粉色</Title>
         <Title color="purple">紫色标题</Title>
+        <Title variant="layer" color="app-yellow">双层纸</Title>
+        <Title variant="tab" color="lime-green">折角便签</Title>
     </>
 );
 

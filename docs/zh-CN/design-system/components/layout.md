@@ -94,6 +94,64 @@ bottom: -0.4em;
 }
 ```
 
+### 变体 —— `variant` prop（`layer` | `ribbon` | `tab`，默认 `layer`）
+
+所有变体共用同一组 `--rf / --rb / --rk / --rt` 四变量，因此 13 套 `.color-*` 覆盖同样作用于 `layer` 与 `tab`。
+
+**`layer`（双层纸，double-layer note）** —— 背层纸片向左上错位露出，正面浮在上方：
+
+```css
+.layer {
+    display: inline-flex;
+    align-items: center;
+    height: 2.1em;
+    transition: transform 0.2s ease;
+}
+.layer:hover { transform: scale(1.06); }
+.layer::before { /* 背层纸片 */
+    left: -0.26em; top: -0.3em; right: 0.65em; bottom: 0;
+    background: var(--rb);
+    border-radius: 0.35em;
+    z-index: 0;
+}
+.layerFront { /* 正面 */
+    position: relative; z-index: 1;
+    display: inline-flex; align-items: center; justify-content: center;
+    height: 2.1em; padding: 0 1.55em;
+    border-radius: 0.35em;
+    color: var(--rt); background: var(--rf);
+    box-shadow: 0 0.1em 0.16em rgba(0, 0, 0, 0.08);
+    letter-spacing: 0.04em; font-weight: 900; white-space: nowrap;
+    text-shadow: 0 0.05em 0.1em rgba(0, 0, 0, 0.12);
+}
+```
+
+**`tab`（折角便签，corner tab）** —— 135° 渐变切掉右下角，配深色三角折瓣：
+
+```css
+.tab {
+    display: inline-flex; align-items: center; justify-content: center;
+    height: 2em; padding: 0 1.5em;
+    border-radius: 0.32em;
+    color: var(--rt);
+    background: linear-gradient(135deg, transparent 0.9em, var(--rf) 0.9em);
+    filter: drop-shadow(0 0.1em 0.16em rgba(0, 0, 0, 0.08));
+    transition: transform 0.2s ease;
+}
+.tab:hover { transform: scale(1.06); }
+.tab::after { /* 折角三角 */
+    content: '';
+    position: absolute; right: 0; bottom: 0;
+    border-width: 0 0 0.9em 0.9em;
+    border-color: transparent transparent var(--rk) transparent;
+}
+.tabText {
+    position: relative; z-index: 2;
+    letter-spacing: 0.04em; font-weight: 900; white-space: nowrap;
+    text-shadow: 0 0.05em 0.1em rgba(0, 0, 0, 0.12);
+}
+```
+
 ## Carousel（淡入淡出轮播）
 
 源码：`src/components/Carousel/Carousel.tsx` + `carousel.module.less`。

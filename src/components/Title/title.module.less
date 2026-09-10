@@ -115,6 +115,107 @@
 }
 
 // ============================================
+// Layer 双层纸（错位叠层）
+// 背层纸片向左上错位露出，正面浮在上方
+// ============================================
+.layer {
+    // 默认绿色配色，与 Ribbon 一致
+    --rf: #27d039; // front 正面
+    --rb: #20992a; // back  背层
+    --rk: #115017; // fold  折角
+    --rt: #fff; // text  文字
+
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    height: 2.1em;
+    transition: transform 0.2s ease;
+}
+
+.layer::before {
+    content: '';
+    position: absolute;
+    left: -0.26em;
+    top: -0.3em;
+    right: 0.65em;
+    bottom: 0;
+    background: var(--rb);
+    border-radius: 0.35em;
+    z-index: 0;
+}
+
+.layerFront {
+    position: relative;
+    z-index: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 2.1em;
+    padding: 0 1.55em;
+    border-radius: 0.35em;
+    color: var(--rt);
+    background: var(--rf);
+    box-shadow: 0 0.1em 0.16em rgba(0, 0, 0, 0.08);
+    letter-spacing: 0.04em;
+    font-weight: 900;
+    white-space: nowrap;
+    text-shadow: 0 0.05em 0.1em rgba(0, 0, 0, 0.12);
+}
+
+.layer:hover {
+    transform: scale(1.06);
+}
+
+// ============================================
+// Tab 折角便签（折角）
+// 135° 渐变切掉右下角 + 深色三角折瓣
+// ============================================
+.tab {
+    // 默认绿色配色，与 Ribbon 一致
+    --rf: #27d039; // front 正面
+    --rb: #20992a; // back  背层
+    --rk: #115017; // fold  折角
+    --rt: #fff; // text  文字
+
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 2em;
+    padding: 0 1.5em;
+    border-radius: 0.32em;
+    color: var(--rt);
+    background: linear-gradient(135deg, transparent 0.9em, var(--rf) 0.9em);
+    filter: drop-shadow(0 0.1em 0.16em rgba(0, 0, 0, 0.08));
+    transition: transform 0.2s ease;
+}
+
+.tab::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 0 0.9em 0.9em;
+    border-color: transparent transparent var(--rk) transparent;
+}
+
+.tabText {
+    position: relative;
+    z-index: 2;
+    letter-spacing: 0.04em;
+    font-weight: 900;
+    white-space: nowrap;
+    text-shadow: 0 0.05em 0.1em rgba(0, 0, 0, 0.12);
+}
+
+.tab:hover {
+    transform: scale(1.06);
+}
+
+// ============================================
 // Color variants — 与 Card 同名色板
 // 每种颜色覆盖 --rf(正面) --rb(燕尾) --rk(折角) --rt(文字)
 // ============================================
