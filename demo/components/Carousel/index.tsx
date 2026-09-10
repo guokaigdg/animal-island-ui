@@ -1,9 +1,9 @@
 import React from 'react';
 import { Carousel } from '../../../src';
 import { ApiRow, ApiTable, CodeBlock, DemoTag, labelStyle, sectionStyle, sectionTitleStyle } from '../../tools';
-import hillsideTown from '../../assets/photos/hillside-town.jpg';
-import sunnyField from '../../assets/photos/sunny-field.jpg';
-import forestCreek from '../../assets/photos/forest-creek.jpg';
+import hillsideTown from '../../assets/images/hillside-town.jpg';
+import sunnyField from '../../assets/images/sunny-field.jpg';
+import lakeMorning from '../../assets/images/lake-morning.jpg';
 
 const CAROUSEL_API: ApiRow[] = [
     { prop: 'children', desc: '每个直接子元素为一张', type: 'ReactNode', defaultVal: '-', required: true },
@@ -21,7 +21,7 @@ const CAROUSEL_API: ApiRow[] = [
 const slides = [
     { src: hillsideTown, title: '山坡小筑', desc: '沿坡而建的小镇，屋顶连成一片暖色。' },
     { src: sunnyField, title: '阳光田野', desc: '风掠过田野，草浪一层层推向天边。' },
-    { src: forestCreek, title: '林间溪流', desc: '溪水绕过青石，树影在水面上摇晃。' },
+    { src: lakeMorning, title: '晨光湖面', desc: '湖面倒映天光，晨雾如薄纱浮在水上。' },
 ];
 
 const CarouselDemo: React.FC = () => (

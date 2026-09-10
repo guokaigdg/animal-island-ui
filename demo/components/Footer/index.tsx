@@ -18,8 +18,8 @@ const FooterDemo: React.FC = () => {
                 Footer <DemoTag>底部装饰</DemoTag>
             </div>
             <div style={labelStyle}>
-                Footer 组件 — 由全部 101 个内置 Icon 组成的连续图标链，紧贴相连、按容器宽度循环铺满，图标大小同
-                Icon 默认 24px。
+                Footer 组件 — 由全部 101 个内置 Icon 组成的连续图标链，紧贴相连、按容器宽度循环铺满，图标大小同 Icon
+                默认 24px。
             </div>
 
             <div style={{ ...demoBodyStyle, padding: '40px 0' }}>
@@ -77,7 +77,12 @@ const App = () => (
 
 const FOOTER_API: ApiRow[] = [
     { prop: 'size', desc: '图标大小（px），同 Icon 默认 24', type: 'number', defaultVal: '24' },
-    { prop: 'name', desc: '指定单一图标名（共 101 个）；传入时整条链仅用该图标相连铺满', type: 'IconName', defaultVal: '-' },
+    {
+        prop: 'name',
+        desc: '指定单一图标名（共 101 个）；传入时整条链仅用该图标相连铺满',
+        type: 'IconName',
+        defaultVal: '-',
+    },
     { prop: 'className', desc: '自定义类名', type: 'string', defaultVal: '-' },
     { prop: 'style', desc: '自定义样式', type: 'CSSProperties', defaultVal: '-' },
 ];

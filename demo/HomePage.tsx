@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Card, Button, Typewriter } from '../src';
+import { Card, Button, Typewriter, Icon } from '../src';
+import type { IconName } from '../src';
 import { islandGradient, flowersGradient, sceneryGradient, coralGradient, mintGradient } from './gradients';
 import { useIsMobile } from './tools';
 
@@ -76,6 +77,8 @@ const FeatureCard: React.FC<{ feature: (typeof features)[0] }> = ({ feature }) =
         <Card
             style={{
                 ...S.featureCard,
+                position: 'relative',
+                zIndex: 999,
                 transform: hovered ? 'translateY(-4px)' : 'none',
                 boxShadow: hovered ? '0 8px 24px rgba(114, 93, 66, 0.15)' : 'none',
                 transition: 'all 0.3s ease',
@@ -113,19 +116,82 @@ const FeatureCard: React.FC<{ feature: (typeof features)[0] }> = ({ feature }) =
 // ============================================
 // Styles
 // ============================================
+// 首页背景装饰：低透明度 Icon 平铺壁纸
+const BG_ICONS: IconName[] = [
+    'Heart',
+    'Star',
+    'Sun',
+    'Moon',
+    'Cloud',
+    'Rainbow',
+    'Flower',
+    'Butterfly',
+    'Leaf',
+    'Tree',
+    'Mushroom',
+    'Bird',
+    'Fish',
+    'Sailboat',
+    'Balloon',
+    'Icecream',
+    'Coffee',
+    'Music',
+    'Snowflake',
+    'Gift',
+    'Rocket',
+    'Bear',
+    'Cat',
+    'Rabbit',
+    'Frog',
+    'Owl',
+    'Penguin',
+    'Apple',
+    'Cherry',
+    'Lemon',
+    'Cactus',
+    'Home',
+    'Camera',
+    'Bell',
+    'Globe',
+    'Key',
+    'Search',
+    'Settings',
+    'Mail',
+    'Phone',
+    'Umbrella',
+    'Download',
+    'Wifi',
+    'Headphones',
+    'Donut',
+    'Strawberry',
+    'Watermelon',
+    'Ladybug',
+    'Bee',
+    'Snail',
+    'Dog',
+    'Fox',
+    'Bicycle',
+    'Car',
+    'Train',
+];
 const S = {
     page: {
         width: '100%',
         minHeight: '100vh',
         overflowY: 'auto',
         overflowX: 'hidden',
-        // 波点壁纸铺在滚动容器上 + fixed：滚动时背景固定，任何滚动位置都不丢失
-        background: `
-            radial-gradient(circle, rgba(90, 160, 105, 0.4) 1.5px, transparent 1.5px) 0 0 / 28px 28px,
-            radial-gradient(circle, rgba(110, 180, 125, 0.3) 1px, transparent 1px) 7px 7px / 14px 14px,
-            #88c9a1
-        `,
-        backgroundAttachment: 'fixed',
+        position: 'relative',
+        // 首页壁纸：图案由低透明度 Icon 背景层提供，此处置纯色底
+        background: '#88c9a1',
+    } as React.CSSProperties,
+
+    // 背景装饰层：各种 Icon 随机散落（固定种子定位 + 轻微旋转，漂浮动画在图标上）；fixed 铺满全屏，滚动时保持不动
+    bgIcons: {
+        position: 'fixed',
+        inset: 0,
+        overflow: 'hidden',
+        pointerEvents: 'none',
+        zIndex: 0,
     } as React.CSSProperties,
 
     // Hero（背景由 page 容器统一提供）
@@ -137,6 +203,7 @@ const S = {
         minHeight: '100vh',
         padding: '60px 40px 40px',
         position: 'relative',
+        zIndex: 1,
     } as React.CSSProperties,
     heroContent: {
         display: 'grid',
@@ -206,6 +273,8 @@ const S = {
         padding: '48px 40px',
         maxWidth: 960,
         margin: '0 auto',
+        position: 'relative',
+        zIndex: 999,
     } as React.CSSProperties,
     sectionTitle: {
         fontFamily:
@@ -298,6 +367,8 @@ const S = {
         fontSize: 12,
         color: '#7c5734',
         marginTop: 32,
+        position: 'relative',
+        zIndex: 999,
     } as React.CSSProperties,
     footerLinks: {
         display: 'flex',
@@ -368,7 +439,7 @@ const components = [
     { key: 'loading', name: 'Loading', desc: '全屏落雪，结束渐变消失' },
     { key: 'card', name: 'Card', desc: '默认/标题两种卡片风格' },
     { key: 'codeblock', name: 'CodeBlock', desc: '代码语法高亮组件' },
-    { key: 'background', name: 'Background', desc: '波点 / 圆柱形彩色针糖装饰背景' },
+    { key: 'background', name: 'Background', desc: '奶油/深绿波点 + 彩色针糖 + 12 色 Card pattern 底色壁纸' },
     { key: 'image', name: 'Image', desc: '白色衬板图片，支持懒加载 / 点击预览' },
     { key: 'carousel', name: 'Carousel', desc: '自动播放、箭头/圆点与键盘导航' },
 ];
@@ -395,8 +466,85 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
         }
     };
 
+    // 超大 Icon：随机挑 8–12 个，位置随机摆放，通过拒绝采样避免互相重叠
+    const [giants] = useState(() => {
+        const count = 5 + Math.floor(Math.random() * 4);
+        const vw = window.innerWidth;
+        const vh = window.innerHeight;
+        const placed: Array<{
+            left: number;
+            top: number;
+            size: number;
+            name: (typeof BG_ICONS)[number];
+            rotate: number;
+            cx: number;
+            cy: number;
+        }> = [];
+        const used = new Set<string>();
+        let guard = 0;
+        while (placed.length < count && guard < 2000) {
+            guard++;
+            const size = 380 + Math.random() * 140;
+            const left = 4 + Math.random() * 92;
+            const top = 4 + Math.random() * 92;
+            const cx = (left / 100) * vw;
+            const cy = (top / 100) * vh;
+            const ok = placed.every((p) => Math.hypot(cx - p.cx, cy - p.cy) >= (size + p.size) / 2 + 20);
+            if (ok) {
+                let name: (typeof BG_ICONS)[number] = BG_ICONS[Math.floor(Math.random() * BG_ICONS.length)];
+                let nameGuard = 0;
+                while (used.has(name) && nameGuard < 200) {
+                    name = BG_ICONS[Math.floor(Math.random() * BG_ICONS.length)];
+                    nameGuard++;
+                }
+                used.add(name);
+                placed.push({
+                    name,
+                    left,
+                    top,
+                    rotate: -14 + Math.random() * 28,
+                    size,
+                    cx,
+                    cy,
+                });
+            }
+        }
+        return placed;
+    });
+
     return (
         <div ref={pageRef} style={{ ...S.page, overflow: 'auto' }} onScroll={handleScroll}>
+            {/* 背景壁纸：各种 Icon 低透明度平铺 + 漂浮动效，作为整页装饰 */}
+            <style>{`
+                @keyframes iconFloat {
+                    0%, 100% { transform: translateY(0); }
+                    50% { transform: translateY(-8px); }
+                }
+            `}</style>
+            <div aria-hidden style={S.bgIcons}>
+                {/* 超大 Icon：每次进入随机几个、超级大，作为背景装饰 */}
+                {giants.map((g, i) => (
+                    <div
+                        key={`giant-${i}`}
+                        style={{
+                            position: 'absolute',
+                            left: `${g.left}%`,
+                            top: `${g.top}%`,
+                            transform: `translate(-50%, -50%) rotate(${g.rotate}deg)`,
+                        }}
+                    >
+                        <Icon
+                            name={g.name}
+                            size={g.size}
+                            color="#ffffff"
+                            style={{
+                                opacity: 0.58,
+                                animation: `iconFloat ${5.5 + (i % 3)}s ease-in-out ${-i * 1.2}s infinite`,
+                            }}
+                        />
+                    </div>
+                ))}
+            </div>
             {/* Hero */}
             <div style={{ ...S.hero }}>
                 <div style={isMobile ? S.heroContentMobile : S.heroContent}>
@@ -429,7 +577,7 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                         </Typewriter>
                         {/* 暂时隐藏：恢复时去掉 display: 'none' */}
                         <div style={{ ...S.heroActions, justifyContent: isMobile ? 'center' : 'flex-start' }}>
-                            <Button type="primary" size="large" onClick={() => onNavigate?.('/input')}>
+                            <Button type="primary" size="large" onClick={() => onNavigate?.('/icon')}>
                                 开始使用 →
                             </Button>
                         </div>

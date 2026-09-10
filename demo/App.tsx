@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useCallback, Suspense, lazy } from 'react';
 import { Cursor } from '../src';
 import '../src/styles/index.less';
+import backgroundStyles from '../src/components/Background/background.module.less';
 import './fonts.css';
 import HomePage from './HomePage';
 import { PAGE_INFO } from './pageInfo';
 import { useIsMobile } from './tools';
+import logo from './assets/logo.png';
 
 // Lazy-load ComponentPage so homepage does not pull in every demo on initial load
 const ComponentPage = lazy(() => import('./ComponentPage'));
@@ -50,25 +52,25 @@ interface MenuItem {
 // ============================================
 const MENU_ITEMS: MenuItem[] = [
     // 隐藏：暂不展示，恢复时取消注释
-    // {
-    //     key: 'cat-guide',
-    //     label: '── 指南 ──',
-    //     children: [{ key: 'skill', label: 'Skill 介绍', isNew: true }],
-    // },
+    {
+        key: 'cat-guide',
+        label: '── 指南 ──',
+        children: [{ key: 'skill', label: 'Skill 介绍', isNew: true }],
+    },
     {
         key: 'cat-basic',
         label: '── 基础 ──',
         children: [
             // 隐藏：暂不展示，恢复时取消注释
-            // { key: 'title', label: 'Title 标题', isNew: true },
-            // { key: 'button', label: 'Button 按钮' },
-            // { key: 'divider-comp', label: 'Divider 分割线' },
-            // { key: 'icon', label: 'Icon 图标' },
+            { key: 'title', label: 'Title 标题', isNew: true },
+            { key: 'button', label: 'Button 按钮' },
+            { key: 'divider-comp', label: 'Divider 分割线' },
+            { key: 'icon', label: 'Icon 图标', isNew: true },
             { key: 'tag', label: 'Tag 标签' },
             { key: 'cursor', label: 'Cursor 光标' },
             { key: 'codeblock', label: 'CodeBlock 代码高亮' },
             { key: 'background', label: 'Background 背景', isNew: true },
-            // { key: 'footer', label: 'Footer 页脚' },
+            { key: 'footer', label: 'Footer 页脚' },
         ],
     },
     {
@@ -78,7 +80,7 @@ const MENU_ITEMS: MenuItem[] = [
             { key: 'input', label: 'Input 输入框' },
             { key: 'switch', label: 'Switch 开关' },
             // 隐藏：暂不展示，恢复时取消注释
-            // { key: 'select', label: 'Select 选择器' },
+            { key: 'select', label: 'Select 选择器' },
             { key: 'date-picker', label: 'DatePicker 日期选择' },
             { key: 'time-picker', label: 'TimePicker 时间选择' },
             { key: 'checkbox', label: 'Checkbox 多选框' },
@@ -95,8 +97,8 @@ const MENU_ITEMS: MenuItem[] = [
             // { key: 'modal', label: 'Modal 弹窗' },
             { key: 'drawer', label: 'Drawer 抽屉' },
             { key: 'loading', label: 'Loading 加载' },
-            // { key: 'tooltip', label: 'Tooltip 气泡提示' },
-            // { key: 'progress', label: 'Progress 进度条' },
+            { key: 'tooltip', label: 'Tooltip 气泡提示' },
+            { key: 'progress', label: 'Progress 进度条' },
             { key: 'skeleton', label: 'Skeleton 骨架屏' },
             { key: 'backtop', label: 'BackTop 返回顶部' },
         ],
@@ -107,22 +109,17 @@ const MENU_ITEMS: MenuItem[] = [
         children: [
             { key: 'card', label: 'Card 卡片' },
             // 隐藏：暂不展示，恢复时取消注释
-            // { key: 'collapse', label: 'Collapse 折叠面板' },
-            // { key: 'tabs', label: 'Tabs 标签页' },
-            // { key: 'table', label: 'Table 表格' },
+            { key: 'collapse', label: 'Collapse 折叠面板' },
+            { key: 'tabs', label: 'Tabs 标签页' },
+            { key: 'table', label: 'Table 表格' },
             { key: 'pagination', label: 'Pagination 分页', isNew: true },
-            // { key: 'typewriter', label: 'Typewriter 打字机' },
-            // { key: 'image', label: 'Image 图片' },
+            { key: 'typewriter', label: 'Typewriter 打字机' },
+            { key: 'image', label: 'Image 图片' },
             { key: 'carousel', label: 'Carousel 轮播图', isNew: true },
-            // { key: 'time', label: 'Time 时钟' },
+            { key: 'time', label: 'Time 时钟' },
+            { key: 'countdown', label: 'Countdown 倒计时', isNew: true },
         ],
     },
-    // 隐藏：暂不展示，恢复时取消注释
-    // {
-    //     key: 'cat-animal',
-    //     label: '── 主题 ──',
-    //     children: [{ key: 'countdown', label: 'Countdown 倒计时', isNew: true }],
-    // },
 ];
 
 // ============================================
@@ -225,6 +222,11 @@ const SidebarContent: React.FC<{
 }> = ({ activeKey, onNavigate }) => (
     <>
         <div style={S.sidebarHeader} onClick={() => onNavigate('/')}>
+            <img
+                src={logo}
+                alt="Animal Island UI logo"
+                style={{ width: 25, height: 25, borderRadius: 8, marginRight: 8 }}
+            />
             Animal Island UI
         </div>
         <nav style={S.menuList}>
@@ -248,7 +250,15 @@ const SidebarContent: React.FC<{
                                     key={child.key}
                                     className={child.key === 'cursor' ? 'demo-raindrop-hover' : undefined}
                                     style={S.menuItem(activeKey === child.key)}
-                                    onClick={() => onNavigate(`/${child.key}`)}
+                                    onClick={() => {
+                                        onNavigate(`/${child.key}`);
+                                        // 彩蛋：点击 Background 菜单项 → 整页壁纸切换为 sprinkles（彩色针糖）
+                                        if (child.key === 'background') {
+                                            window.dispatchEvent(
+                                                new CustomEvent('demo-bg-easter-egg', { detail: 'sprinkles' })
+                                            );
+                                        }
+                                    }}
                                     onMouseEnter={(e) => {
                                         if (activeKey !== child.key) e.currentTarget.style.background = '#d6dff0';
                                     }}
@@ -301,6 +311,36 @@ const App: React.FC = () => {
     const activeKey = hash.startsWith('/') && hash.length > 1 ? hash.slice(1) : 'home';
     const isHomePage = activeKey === 'home';
 
+    // 彩蛋：整页壁纸切换（Background 预览块 / 菜单项 hover、点击触发）
+    // 覆盖层方案：默认壁纸常驻，彩蛋壁纸以 opacity 淡入淡出覆盖，避免背景硬切闪烁
+    const [pageBg, setPageBg] = useState<string | null>(null);
+    const [eggOn, setEggOn] = useState(false);
+    const eggTimer = React.useRef<number | undefined>(undefined);
+
+    const fadeOutEgg = useCallback(() => {
+        setEggOn(false);
+        window.clearTimeout(eggTimer.current);
+        eggTimer.current = window.setTimeout(() => setPageBg(null), 480);
+    }, []);
+
+    useEffect(() => {
+        const onEgg = (e: Event) => {
+            const type = (e as CustomEvent<string>).detail;
+            if (type === 'reset') {
+                fadeOutEgg();
+            } else {
+                window.clearTimeout(eggTimer.current);
+                setPageBg(type);
+                setEggOn(true);
+            }
+        };
+        window.addEventListener('demo-bg-easter-egg', onEgg);
+        return () => {
+            window.removeEventListener('demo-bg-easter-egg', onEgg);
+            window.clearTimeout(eggTimer.current);
+        };
+    }, [fadeOutEgg]);
+
     // Close drawer when switching to desktop
     useEffect(() => {
         if (!isMobile) setDrawerOpen(false);
@@ -311,6 +351,11 @@ const App: React.FC = () => {
         setDrawerOpen(false);
         mainRef.current?.scrollTo({ top: 0 });
     }, [activeKey]);
+
+    // 彩蛋壁纸：离开 Background 页时淡出还原（页内保留，供菜单点击 / 预览块 hover 彩蛋使用）
+    useEffect(() => {
+        if (activeKey !== 'background') fadeOutEgg();
+    }, [activeKey, fadeOutEgg]);
 
     const handleNavigate = useCallback(
         (path: string) => {
@@ -354,10 +399,22 @@ const App: React.FC = () => {
                 </div>
             ) : (
                 /* Component page — with sidebar */
-                <div style={S.layout}>
+                <div style={{ ...S.layout, position: 'relative' }}>
+                    {/* 彩蛋壁纸覆盖层：opacity 淡入淡出，覆盖默认绿波点壁纸 */}
+                    <div
+                        aria-hidden
+                        className={pageBg ? backgroundStyles[`bg-${pageBg}`] : undefined}
+                        style={{
+                            position: 'absolute',
+                            inset: 0,
+                            opacity: eggOn ? 1 : 0,
+                            transition: 'opacity 0.45s ease',
+                            pointerEvents: 'none',
+                        }}
+                    />
                     {/* Desktop sidebar */}
                     {!isMobile && (
-                        <aside style={S.sidebar}>
+                        <aside style={{ ...S.sidebar, position: 'relative' }}>
                             <SidebarContent activeKey={activeKey} onNavigate={handleNavigate} />
                         </aside>
                     )}

@@ -24,18 +24,18 @@ const CHECKBOX_API: ApiRow[] = [
 ];
 
 const islandOptions = [
-    { label: '🌊 海滩', value: 'beach' },
-    { label: '🌳 森林', value: 'forest' },
-    { label: '🌸 花园', value: 'garden' },
-    { label: '🏡 村庄', value: 'village' },
+    { label: '海滩', value: 'beach' },
+    { label: '森林', value: 'forest' },
+    { label: '花园', value: 'garden' },
+    { label: '村庄', value: 'village' },
 ];
 
 const critterOptions = [
-    { label: '🦋 蝴蝶', value: 'butterfly' },
-    { label: '🐟 鲈鱼', value: 'bass' },
-    { label: '🦀 螃蟹', value: 'crab', disabled: true },
-    { label: '🐛 毛毛虫', value: 'caterpillar' },
-    { label: '🌊 水母', value: 'jellyfish' },
+    { label: '蝴蝶', value: 'butterfly' },
+    { label: '鲈鱼', value: 'bass' },
+    { label: '螃蟹', value: 'crab', disabled: true },
+    { label: '毛毛虫', value: 'caterpillar' },
+    { label: '水母', value: 'jellyfish' },
 ];
 
 const CheckboxDemo: React.FC = () => {
@@ -100,9 +100,9 @@ const CheckboxDemo: React.FC = () => {
 import { Checkbox } from 'animal-island-ui';
 
 const options = [
-    { label: '🌊 海滩', value: 'beach' },
-    { label: '🌳 森林', value: 'forest' },
-    { label: '🌸 花园', value: 'garden' },
+    { label: '海滩', value: 'beach' },
+    { label: '森林', value: 'forest' },
+    { label: '花园', value: 'garden' },
 ];
 
 const App = () => {

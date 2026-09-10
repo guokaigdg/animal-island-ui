@@ -73,10 +73,10 @@ const App = () => {
                 const App = () => {
                     return (
                         <div>
-                            {/* sea 类型（默认） */}
-                            <Footer type="sea" />
-                            {/* tree 类型 */}
-                            <Footer type="tree" />
+                            {/* 默认 size=24，101 个图标循环铺满 */}
+                            <Footer />
+                            {/* 自定义图标大小 */}
+                            <Footer size={36} />
                         </div>
                     );
                 };

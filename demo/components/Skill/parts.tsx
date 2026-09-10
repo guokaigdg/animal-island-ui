@@ -95,7 +95,7 @@ export const RuleCard: React.FC<{ group: RuleGroup }> = ({ group }) => (
     </Card>
 );
 
-/** 单个令牌色板 —— 读取页面上该变量的真实计算值 */
+/** 单个令牌色卡 —— 读取页面上该变量的真实计算值 */
 const Swatch: React.FC<{ token: string }> = ({ token }) => {
     const [value, setValue] = React.useState('');
 
@@ -106,8 +106,10 @@ const Swatch: React.FC<{ token: string }> = ({ token }) => {
     return (
         <div className={styles.swatch}>
             <div className={styles.swatchChip} style={{ background: `var(${token})` }} />
-            <code className={styles.swatchName}>{token.replace('--animal-', '')}</code>
-            <code className={styles.swatchValue}>{value || '—'}</code>
+            <div className={styles.swatchMeta}>
+                <code className={styles.swatchName}>{token.replace('--animal-', '')}</code>
+                <code className={styles.swatchValue}>{value || '—'}</code>
+            </div>
         </div>
     );
 };
