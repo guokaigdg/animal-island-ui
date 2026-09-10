@@ -308,9 +308,9 @@ font-size: 18px; font-weight: 700;
 box-shadow: 0 2px 4px rgba(25, 200, 185, 0.3);
 /* expanded */ transform: rotate(180deg);
 
-/* leaf decoration */
-opacity: 0.5;
-/* expanded */ opacity: 1; transform: rotate(45deg);
+/* fish icon decoration (Icon name="Fish", color currentColor) */
+opacity: 1; /* same brightness by default and when expanded */
+/* expanded */ transform: rotate(45deg);
 
 /* question text */
 font-size: 16px; font-weight: 600; line-height: 1.4;

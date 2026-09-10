@@ -2,9 +2,9 @@
 
 承载内容展示的组件：Table、Pagination、CodeBlock、Tag 的精确取值
 
-## Table（虚线行分隔，条纹 hover）
+## Table（虚线行分隔，纯色 hover）
 
-源码：`src/components/Table/table.module.less`。**外壳无实线 border**；行分隔靠 `::after` 的 dashed 横线实现；hover 行是对角青色条纹。
+源码：`src/components/Table/table.module.less`。**外壳无实线 border**；行分隔靠 `::after` 的 dashed 横线实现；hover 行是纯色浅青背景。
 
 ```css
 /* outer wrapper */
@@ -38,10 +38,9 @@ line-height: 1.6;
 /* striped even rows */
 background: rgba(248, 248, 240, 0.6); /* not rgba(247,243,223,0.5) */
 
-/* row hover — diagonal teal stripes + inner rounded clip */
-background: repeating-linear-gradient(-45deg, rgba(25, 200, 185, 0.6) 0 10px, rgba(14, 196, 182, 0.6) 10px 20px);
-background-size: 28.28px 28.28px;
-clip-path: inset(0 0 0 0 round 30px);
+/* row hover — 纯色浅青 + 内圆角裁剪 */
+background: #d6f0ea;
+border-radius: 30px;
 color: #3d2e1e;
 
 /* empty state */

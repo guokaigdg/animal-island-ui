@@ -85,16 +85,9 @@
         );
     }
 
-    // hover 条纹保持半透明（透明度 0.5），深棕文字无需换色即可读，避免字色切换闪烁
+    // hover 背景为纯色浅青，深棕文字无需换色即可读，避免字色切换闪烁
     &:hover {
-        background-image: repeating-linear-gradient(
-            -45deg,
-            rgba(25, 200, 185, 0.5),
-            rgba(25, 200, 185, 0.5) 10px,
-            rgba(14, 196, 182, 0.5) 10px,
-            rgba(14, 196, 182, 0.5) 20px
-        );
-        background-size: 28.28px 28.28px;
+        background-color: #d6f0ea;
         border-radius: 30px;
 
         &::after {
@@ -113,14 +106,7 @@
     background: rgba(248, 248, 240, 0.6);
 
     &:hover {
-        background-image: repeating-linear-gradient(
-            -45deg,
-            rgba(25, 200, 185, 0.5),
-            rgba(25, 200, 185, 0.5) 10px,
-            rgba(14, 196, 182, 0.5) 10px,
-            rgba(14, 196, 182, 0.5) 20px
-        );
-        background-size: 28.28px 28.28px;
+        background-color: #d6f0ea;
         border-radius: 30px;
 
         &::after {

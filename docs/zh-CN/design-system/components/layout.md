@@ -307,9 +307,9 @@ font-size: 18px; font-weight: 700;
 box-shadow: 0 2px 4px rgba(25, 200, 185, 0.3);
 /* 展开时 */ transform: rotate(180deg);
 
-/* 叶子装饰 */
-opacity: 0.5;
-/* 展开时 */ opacity: 1; transform: rotate(45deg);
+/* 鱼图标装饰（Icon name="Fish"，color currentColor） */
+opacity: 1; /* 默认与展开亮度一致 */
+/* expanded */ transform: rotate(45deg);
 
 /* 问题文字 */
 font-size: 16px; font-weight: 600; line-height: 1.4;

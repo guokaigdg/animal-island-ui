@@ -2,9 +2,9 @@
 
 Exact values for the components that present content: Table, Pagination, CodeBlock and Tag.
 
-## Table (dashed row rules, striped hover)
+## Table (dashed row rules, solid hover)
 
-Source: `src/components/Table/table.module.less`. **The shell has no solid border**; row separators are dashed rules drawn with `::after`; the hover row is a diagonal teal stripe.
+Source: `src/components/Table/table.module.less`. **The shell has no solid border**; row separators are dashed rules drawn with `::after`; the hover row is a solid light-teal background.
 
 ```css
 /* outer wrapper */
@@ -38,10 +38,9 @@ line-height: 1.6;
 /* striped even rows */
 background: rgba(248, 248, 240, 0.6); /* not rgba(247,243,223,0.5) */
 
-/* row hover — diagonal teal stripes + inner rounded clip */
-background: repeating-linear-gradient(-45deg, rgba(25, 200, 185, 0.6) 0 10px, rgba(14, 196, 182, 0.6) 10px 20px);
-background-size: 28.28px 28.28px;
-clip-path: inset(0 0 0 0 round 30px);
+/* row hover — solid light-teal + inner rounded clip */
+background: #d6f0ea;
+border-radius: 30px;
 color: #3d2e1e;
 
 /* empty state */
