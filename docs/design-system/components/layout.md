@@ -203,37 +203,39 @@ Example:
 ## Divider
 
 ```tsx
-<Divider type="line-brown" />  // default
-<Divider type="line-teal" />
-<Divider type="line-white" />
-<Divider type="line-yellow" />
+<Divider type="dashed-brown" />  // default
+<Divider type="dashed-teal" />
+<Divider type="dashed-white" />
+<Divider type="dashed-yellow" />
 ```
 
 ```less
 .divider {
     width: 100%;
     height: 12px;
-    /* default type=line-brown */
-    background: conic-gradient(from -45deg at 50% 100%, #b08d57 90deg, #0000 0) center / 12px 100%;
+    /* default type=dashed-brown */
+    background: linear-gradient(to right, #c4b89e 50%, transparent 50%) center / 12px 2px repeat-x;
 }
-.line-teal {
-    background: conic-gradient(from -45deg at 50% 100%, #19c8b9 90deg, #0000 0) center / 12px 100%;
+.dashed-teal {
+    background: linear-gradient(to right, #19c8b9 50%, transparent 50%) center / 12px 2px repeat-x;
 }
-.line-white {
-    background: conic-gradient(from -45deg at 50% 100%, #ffffff 90deg, #0000 0) center / 12px 100%;
+.dashed-white {
+    background: linear-gradient(to right, #ffffff 50%, transparent 50%) center / 12px 2px repeat-x;
 }
-.line-yellow {
-    background: conic-gradient(from -45deg at 50% 100%, #f5d04a 90deg, #0000 0) center / 12px 100%;
+.dashed-yellow {
+    background: linear-gradient(to right, #f5d04a 50%, transparent 50%) center / 12px 2px repeat-x;
 }
 ```
 
-Pure CSS, no image assets: `line-*` types draw a triangular zigzag band with a 12px `conic-gradient` tile; `dashed-*` types draw a 2px dashed rule via `linear-gradient` (12px rhythm, 50% on / 50% off).
+Pure CSS, no image assets: `dashed-*` types draw a 2px dashed rule via `linear-gradient` (12px rhythm, 50% on / 50% off).
 
 ## Background (pattern wallpaper)
 
 ```tsx
-<Background type="dots" />        // default
-<Background type="sprinkles" />
+<Background />                             // default — cream polka dots
+<Background type="dots-dark-green" />      // deep-green polka dots
+<Background type="sprinkles" />            // cylindrical candy sprinkles
+<Background type="dots-blue" />            // pastel polka wallpaper on Card pattern base
 ```
 
 ```less
@@ -241,13 +243,22 @@ Pure CSS, no image assets: `line-*` types draw a triangular zigzag band with a 1
     position: relative;
     width: 100%;
     min-height: 100%;
-    /* default type=dots: two offset dot layers + solid base */
+}
+/* palettes are 1:1 with Card colors; dots- prefix = polka wallpaper naming */
+.bg-default {
+    background:
+        radial-gradient(circle, rgba(196, 184, 158, 0.15) 1.5px, transparent 1.5px) 0 0 / 28px 28px,
+        radial-gradient(circle, rgba(196, 184, 158, 0.1) 1px, transparent 1px) 7px 7px / 14px 14px,
+        rgb(247, 243, 223);
+}
+.bg-dots-dark-green {
+    /* two offset dot layers + solid base */
     background:
         radial-gradient(circle, rgba(90, 160, 90, 0.22) 1.5px, transparent 1.5px) 0 0 / 28px 28px,
         radial-gradient(circle, rgba(140, 200, 140, 0.15) 1px, transparent 1px) 7px 7px / 14px 14px,
         #bfe3bf;
 }
-.sprinkles {
+.bg-sprinkles {
     /* capsule sprinkles: rounded rect (rx = half thickness) + shared highlight
        gradient = cylinder shading; three mutually-prime inline-SVG tiles
        (190×170 / 230×195 / 255×215, 6 capsules each) give a combined repeat

@@ -86,27 +86,30 @@ interface DividerProps {
 <Divider type="dashed-teal" />
 ```
 
-Height fixed at 12px. Purely decorative band drawn with CSS gradients only (conic-gradient zigzag for `line-*`, linear-gradient dashes for `dashed-*`) — no image assets. No `orientation` / `dashed` / `plain` / children — for a vertical separator, use a CSS `border-left` on adjacent elements.
+Height fixed at 12px. Purely decorative dashed rule drawn with `linear-gradient` (12px rhythm, 50% on / 50% off) — no image assets. No `orientation` / `dashed` / `plain` / children — for a vertical separator, use a CSS `border-left` on adjacent elements.
 
 ## Background
 
 ```ts
-type BackgroundType = 'dots' | 'sprinkles';
+type BackgroundType = 'default' | 'dots-dark-green' | 'sprinkles'
+    | 'dots-pink' | 'dots-purple' | 'dots-blue' | 'dots-yellow' | 'dots-orange' | 'dots-teal'
+    | 'dots-green' | 'dots-red' | 'dots-lime-green' | 'dots-yellow-green' | 'dots-brown' | 'dots-warm-peach-pink';
 
 interface BackgroundProps extends React.HTMLAttributes<HTMLDivElement> {
-    type?: BackgroundType; // default 'dots'
+    type?: BackgroundType; // default 'default'
     children?: React.ReactNode;
 }
 ```
 
 ```tsx
-<Background type="dots" style={{ height: 200 }} />
+<Background style={{ height: 200 }} />
+<Background type="dots-dark-green" style={{ height: 200 }} />
 <Background type="sprinkles" style={{ minHeight: 200, padding: 24 }}>
     <p>Content renders above the pattern</p>
 </Background>
 ```
 
-Full-bleed decorative wallpaper with zero image assets: `dots` is a two-layer offset polka-dot pattern on green `#bfe3bf`; `sprinkles` scatters 6-color cylindrical candy sprinkles (capsule rods with highlight shading) on frosting `#fdf3e3` — three mutually-prime inline-SVG tiles make the scatter read as random with no visible repeat. No fixed height — set `height` / `min-height` via `style`.
+Full-bleed decorative wallpaper with zero image assets: `default` is cream `rgb(247,243,223)` with beige polka dots; `dots-dark-green` is a two-layer offset polka-dot pattern on green `#bfe3bf`; `sprinkles` scatters 6-color cylindrical candy sprinkles (capsule rods with highlight shading) on frosting `#fdf3e3` — three mutually-prime inline-SVG tiles make the scatter read as random with no visible repeat; the other 12 `dots-*` types are pastel polka wallpapers whose base color matches Card's `pattern-*` series (`dots-pink`, `dots-purple`, `dots-blue`, `dots-yellow`, `dots-orange`, `dots-teal`, `dots-green`, `dots-red`, `dots-lime-green`, `dots-yellow-green`, `dots-brown`, `dots-warm-peach-pink`). No fixed height — set `height` / `min-height` via `style`.
 
 ## Collapse
 

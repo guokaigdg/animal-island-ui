@@ -4,7 +4,7 @@ import { Divider } from './Divider';
 import styles from './divider.module.less';
 
 describe('Divider', () => {
-    it('默认 type=line-brown：仅应用基础 divider 类（line-brown 由默认背景实现）', () => {
+    it('默认 type=dashed-brown：仅应用基础 divider 类（dashed-brown 由默认背景实现）', () => {
         const { container } = render(<Divider />);
         const root = container.firstChild as HTMLElement;
         expect(root).toHaveClass(styles.divider);

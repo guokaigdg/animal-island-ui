@@ -1,15 +1,7 @@
 import React from 'react';
 import styles from './divider.module.less';
 
-export type DividerType =
-    | 'line-brown'
-    | 'line-teal'
-    | 'line-white'
-    | 'line-yellow'
-    | 'dashed-brown'
-    | 'dashed-teal'
-    | 'dashed-white'
-    | 'dashed-yellow';
+export type DividerType = 'dashed-brown' | 'dashed-teal' | 'dashed-white' | 'dashed-yellow';
 
 export interface DividerProps {
     /** 分隔线类型 */
@@ -20,7 +12,7 @@ export interface DividerProps {
     style?: React.CSSProperties;
 }
 
-export const Divider: React.FC<DividerProps> = ({ type = 'line-brown', className, style }) => {
+export const Divider: React.FC<DividerProps> = ({ type = 'dashed-brown', className, style }) => {
     const cls = [styles.divider, styles[type], className].filter(Boolean).join(' ');
     return <div className={cls} style={style} />;
 };

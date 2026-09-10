@@ -203,37 +203,39 @@ interface CarouselProps extends Omit<HTMLAttributes<HTMLElement>, 'onChange'> {
 ## Divider
 
 ```tsx
-<Divider type="line-brown" />  // 默认
-<Divider type="line-teal" />
-<Divider type="line-white" />
-<Divider type="line-yellow" />
+<Divider type="dashed-brown" />  // 默认
+<Divider type="dashed-teal" />
+<Divider type="dashed-white" />
+<Divider type="dashed-yellow" />
 ```
 
 ```less
 .divider {
     width: 100%;
     height: 12px;
-    /* 默认 type=line-brown */
-    background: conic-gradient(from -45deg at 50% 100%, #b08d57 90deg, #0000 0) center / 12px 100%;
+    /* 默认 type=dashed-brown */
+    background: linear-gradient(to right, #c4b89e 50%, transparent 50%) center / 12px 2px repeat-x;
 }
-.line-teal {
-    background: conic-gradient(from -45deg at 50% 100%, #19c8b9 90deg, #0000 0) center / 12px 100%;
+.dashed-teal {
+    background: linear-gradient(to right, #19c8b9 50%, transparent 50%) center / 12px 2px repeat-x;
 }
-.line-white {
-    background: conic-gradient(from -45deg at 50% 100%, #ffffff 90deg, #0000 0) center / 12px 100%;
+.dashed-white {
+    background: linear-gradient(to right, #ffffff 50%, transparent 50%) center / 12px 2px repeat-x;
 }
-.line-yellow {
-    background: conic-gradient(from -45deg at 50% 100%, #f5d04a 90deg, #0000 0) center / 12px 100%;
+.dashed-yellow {
+    background: linear-gradient(to right, #f5d04a 50%, transparent 50%) center / 12px 2px repeat-x;
 }
 ```
 
-纯 CSS 实现，无图片资源：`line-*` 用 12px `conic-gradient` tile 画出三角锯齿带；`dashed-*` 用 `linear-gradient` 画 2px 破折线（12px 节奏，50% 实 / 50% 空）。
+纯 CSS 实现，无图片资源：`dashed-*` 用 `linear-gradient` 画 2px 破折线（12px 节奏，50% 实 / 50% 空）。
 
 ## Background（图案壁纸）
 
 ```tsx
-<Background type="dots" />        // 默认
-<Background type="sprinkles" />
+<Background />                             // 默认 —— 奶油色波点
+<Background type="dots-dark-green" />      // 深绿波点
+<Background type="sprinkles" />            // 圆柱形彩色针糖
+<Background type="dots-blue" />            // 底色对应 Card pattern-* 系列的粉彩波点壁纸
 ```
 
 ```less
@@ -241,13 +243,22 @@ interface CarouselProps extends Omit<HTMLAttributes<HTMLElement>, 'onChange'> {
     position: relative;
     width: 100%;
     min-height: 100%;
-    /* 默认 type=dots：两层错位圆点 + 纯色底 */
+}
+/* 配色与 Card 1:1 对应；dots- 前缀仅区分波点壁纸命名 */
+.bg-default {
+    background:
+        radial-gradient(circle, rgba(196, 184, 158, 0.15) 1.5px, transparent 1.5px) 0 0 / 28px 28px,
+        radial-gradient(circle, rgba(196, 184, 158, 0.1) 1px, transparent 1px) 7px 7px / 14px 14px,
+        rgb(247, 243, 223);
+}
+.bg-dots-dark-green {
+    /* 两层错位圆点 + 纯色底 */
     background:
         radial-gradient(circle, rgba(90, 160, 90, 0.22) 1.5px, transparent 1.5px) 0 0 / 28px 28px,
         radial-gradient(circle, rgba(140, 200, 140, 0.15) 1px, transparent 1px) 7px 7px / 14px 14px,
         #bfe3bf;
 }
-.sprinkles {
+.bg-sprinkles {
     /* 圆柱形糖针：圆角矩形（rx = 厚度一半）+ 共享高光渐变模拟圆柱受光；
        三层互质内联 SVG tile（190×170 / 230×195 / 255×215，各 6 根糖针），
        合计重复周期约 220000×280000px，远超任何屏幕，视觉上随机散落 */
