@@ -5,21 +5,19 @@ Props/types below are copied from the library source. In an npm-installed projec
 ## Footer
 
 ```ts
-type FooterType = 'sea' | 'tree';
-
 interface FooterProps {
-    type?: FooterType; // default 'tree'
-    seamless?: boolean; // default true (无缝拼接背景循环平铺)
+    size?: number; // default 24 — icon size, same as Icon component
+    name?: IconName; // optional single icon; chain just that one icon, else the full 101-icon list
     className?: string;
     style?: React.CSSProperties;
 }
 ```
 
 ```tsx
-<Footer />                        {/* forest silhouette, 80px tall — default */}
-<Footer type="sea" />             {/* ocean wave */}
-<Footer type="sea" seamless />    {/* ocean wave with seamless horizontal tiling */}
+<Footer />          {/* 101-icon chain, 24px each, fills container width */}
+<Footer size={36} />{/* custom icon size */}
+<Footer name="Heart" />{/* single icon chained */}
 ```
 
-> `style` accepts layout properties only (margin / position). Don't try to recolor via `backgroundColor` — the asset is a fixed PNG/SVG.
+Renders a continuous chain of icons, tightly adjacent (flex items with no gap), repeating to fill the container width via `ResizeObserver`. Default sequence is all 101 built-in icons; pass `name` (an `IconName`) to chain a single icon instead. `size` defaults to 24px, matching the `Icon` component default.
 

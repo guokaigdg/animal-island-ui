@@ -18,40 +18,33 @@ const FooterDemo: React.FC = () => {
                 Footer <DemoTag>底部装饰</DemoTag>
             </div>
             <div style={labelStyle}>
-                Footer 组件 — 页面底部装饰图片，支持 sea（海）和 tree（树）两种类型，seamless
-                默认为开启，背景无缝循环拼接；可显式传 false 关闭。
+                Footer 组件 — 由全部 101 个内置 Icon 组成的连续图标链，紧贴相连、按容器宽度循环铺满，图标大小同
+                Icon 默认 24px。
             </div>
 
             <div style={{ ...demoBodyStyle, padding: '40px 0' }}>
-                <div style={labelStyle}>tree 类型（默认）</div>
                 <FooterComponent />
             </div>
+
+            <div style={labelStyle}>自定义图标大小</div>
             <div style={{ ...demoBodyStyle, padding: '40px 0' }}>
-                <div style={labelStyle}>sea 类型</div>
-                <FooterComponent type="sea" />
+                <FooterComponent size={36} />
             </div>
 
+            <div style={labelStyle}>单一图标相连</div>
             <div style={{ ...demoBodyStyle, padding: '40px 0' }}>
-                <div style={labelStyle}>seamless 状态对比</div>
-                <div style={compareBoxStyle}>
-                    <div style={compareRowStyle}>
-                        <div style={compareLabelStyle}>
-                            开启 (默认) <code style={codePillStyle}>seamless</code>
-                        </div>
-                        <div style={compareColStyle}>
-                            <FooterComponent type="tree" />
-                            <FooterComponent type="sea" />
-                        </div>
-                    </div>
-                    <div style={compareRowStyle}>
-                        <div style={compareLabelStyle}>
-                            关闭 <code style={codePillStyle}>seamless={'{false}'}</code>
-                        </div>
-                        <div style={compareColStyle}>
-                            <FooterComponent type="tree" seamless={false} />
-                            <FooterComponent type="sea" seamless={false} />
-                        </div>
-                    </div>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 15 }}>
+                    <FooterComponent name="Heart" />
+                    <FooterComponent name="Flower" />
+                    <FooterComponent name="Star" />
+                    <FooterComponent name="Moon" />
+                    <FooterComponent name="Sun" />
+                    <FooterComponent name="Cloud" />
+                    <FooterComponent name="Rainbow" />
+                    <FooterComponent name="Butterfly" />
+                    <FooterComponent name="Fish" />
+                    <FooterComponent name="Sailboat" />
+                    <FooterComponent name="Umbrella" />
                 </div>
             </div>
 
@@ -61,9 +54,19 @@ import { Footer } from 'animal-island-ui';
 
 const App = () => (
     <div>
-        <Footer />                          {/* 默认 type=tree, seamless=true */}
-        <Footer type="sea" />                {/* 换 sea 类型,seamless 仍默认 true */}
-        <Footer type="sea" seamless={false} />{/* 显式关闭无缝拼接 */}
+        <Footer />                    {/* 默认 size=24，101 个图标循环铺满 */}
+        <Footer size={36} />          {/* 自定义图标大小 */}
+        <Footer name="Heart" />       {/* 单一图标相连 */}
+        <Footer name="Flower" />      {/* 单一图标相连 */}
+        <Footer name="Star" />        {/* 单一图标相连 */}
+        <Footer name="Moon" />        {/* 单一图标相连 */}
+        <Footer name="Sun" />         {/* 单一图标相连 */}
+        <Footer name="Cloud" />       {/* 单一图标相连 */}
+        <Footer name="Rainbow" />     {/* 单一图标相连 */}
+        <Footer name="Butterfly" />   {/* 单一图标相连 */}
+        <Footer name="Fish" />        {/* 单一图标相连 */}
+        <Footer name="Sailboat" />    {/* 单一图标相连 */}
+        <Footer name="Umbrella" />    {/* 单一图标相连 */}
     </div>
 );`}
             />
@@ -72,44 +75,9 @@ const App = () => (
     );
 };
 
-const compareBoxStyle: React.CSSProperties = {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: 32,
-};
-
-const compareRowStyle: React.CSSProperties = {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: 12,
-};
-
-const compareColStyle: React.CSSProperties = {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: 16,
-};
-
-const compareLabelStyle: React.CSSProperties = {
-    display: 'flex',
-    alignItems: 'center',
-    gap: 8,
-    fontSize: 13,
-    color: '#6e5b3e',
-};
-
-const codePillStyle: React.CSSProperties = {
-    background: '#fff5d6',
-    color: '#8a6a25',
-    padding: '1px 8px',
-    borderRadius: 4,
-    fontSize: 12,
-    fontFamily: 'ui-monospace, SFMono-Regular, monospace',
-};
-
 const FOOTER_API: ApiRow[] = [
-    { prop: 'type', desc: 'Footer 类型', type: "'sea' | 'tree'", defaultVal: "'tree'" },
-    { prop: 'seamless', desc: '是否无缝拼接（背景循环平铺）', type: 'boolean', defaultVal: 'true' },
+    { prop: 'size', desc: '图标大小（px），同 Icon 默认 24', type: 'number', defaultVal: '24' },
+    { prop: 'name', desc: '指定单一图标名（共 101 个）；传入时整条链仅用该图标相连铺满', type: 'IconName', defaultVal: '-' },
     { prop: 'className', desc: '自定义类名', type: 'string', defaultVal: '-' },
     { prop: 'style', desc: '自定义样式', type: 'CSSProperties', defaultVal: '-' },
 ];
