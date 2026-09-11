@@ -229,21 +229,23 @@
     background: #0ec4b6;
     border: 4px solid #4de2da;
     color: #fff;
-    background-image: repeating-linear-gradient(-45deg, #0ec4b6, #0ec4b6 10px, #01b0a7 10px, #01b0a7 20px);
-    background-size: 28.28px 28.28px;
-    animation: animal-btn-loading 1s linear infinite;
+
+    .btn-loading-icon {
+        animation: animal-btn-spin 2.5s linear infinite;
+    }
+}
+
+// 逆时针旋转动画
+@keyframes animal-btn-spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(-360deg);
+    }
 }
 
 .btn-icon {
     display: inline-flex;
     align-items: center;
-}
-
-@keyframes animal-btn-loading {
-    0% {
-        background-position: 0 0;
-    }
-    100% {
-        background-position: -28.28px 0;
-    }
 }

@@ -65,6 +65,13 @@ describe('Button', () => {
         expect(screen.queryByTestId('ic')).not.toBeInTheDocument();
     });
 
+    it('loading 时渲染逆时针旋转的 Refresh 图标', () => {
+        const { container, rerender } = render(<Button>x</Button>);
+        expect(container.querySelector(`.${styles['btn-loading-icon']}`)).toBeNull();
+        rerender(<Button loading>x</Button>);
+        expect(container.querySelector(`.${styles['btn-loading-icon']}`)).toBeInTheDocument();
+    });
+
     // ---------- 补充测试 ----------
 
     it('无 icon 时不渲染 btn-icon span', () => {

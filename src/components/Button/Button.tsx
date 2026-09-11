@@ -1,4 +1,5 @@
 import React from 'react';
+import { Icon } from '../Icon';
 import styles from './button.module.less';
 
 export type ButtonType = 'primary' | 'default' | 'dashed' | 'text' | 'link';
@@ -56,7 +57,13 @@ export const Button: React.FC<ButtonProps> = ({
 
     return (
         <button type={htmlType} className={classNames} disabled={disabled} {...rest}>
-            {icon && !loading && <span className={styles['btn-icon']}>{icon}</span>}
+            {loading ? (
+                <span className={styles['btn-icon']} aria-hidden>
+                    <Icon name="Donut" size={28} color="currentColor" className={styles['btn-loading-icon']} />
+                </span>
+            ) : (
+                icon && <span className={styles['btn-icon']}>{icon}</span>
+            )}
             {children && <span>{children}</span>}
         </button>
     );
