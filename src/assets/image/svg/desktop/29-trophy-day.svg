@@ -1,0 +1,788 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2560" height="1440" viewBox="0 0 2560 1440" role="img" aria-label="Trophy Day">
+<defs>
+<g id="i-star"><path d="M24 6 L29 18 L42 19 L32 28 L35 41 L24 34 L13 41 L16 28 L6 19 L19 18 Z" fill="#E9C46A"/>
+<circle cx="20" cy="22" r="1.3" fill="#2A2A2A"/>
+<circle cx="28" cy="22" r="1.3" fill="#2A2A2A"/></g>
+<g id="i-thumbs-up"><rect x="7" y="21" width="7" height="17" rx="2" fill="#2A9D8F"/>
+<path d="M16 38 L 16 23 L 23 12 C 25 9.5 27.5 11 26.5 14 L 24.5 20 L 33 20 C 36.5 20 38 22.5 37 25.5 L 34 35 C 33.3 37 31.8 38 29.5 38 Z" fill="#E9C46A"/></g>
+<g id="i-trophy"><path d="M14 12 C 6 12 6 22 14 22" stroke="#2A2A2A" stroke-width="3" fill="none"/>
+<path d="M34 12 C 42 12 42 22 34 22" stroke="#2A2A2A" stroke-width="3" fill="none"/>
+<path d="M14 7 L 34 7 L 34 17 C 34 25 29 29 24 29 C 19 29 14 25 14 17 Z" fill="#E9C46A"/>
+<path d="M24 29 L 24 37" stroke="#2A2A2A" stroke-width="3"/>
+<rect x="15" y="37" width="18" height="4.5" rx="2" fill="#8B5E3C"/>
+<path d="M24 11 L 25.3 14 L 28.5 14.2 L 26 16.5 L 27 19.8 L 24 18 L 21 19.8 L 22 16.5 L 19.5 14.2 L 22.7 14 Z" fill="#E76F51"/></g>
+<pattern id="dots" width="132.5" height="132.5" patternUnits="userSpaceOnUse"><circle cx="66.2" cy="66.2" r="5" fill="#E4D6A4" opacity="0.27"/></pattern>
+</defs>
+<rect width="2560" height="1440" fill="#F7EED3"/>
+<rect width="2560" height="1440" fill="url(#dots)"/>
+<g>
+<use href="#i-trophy" transform="translate(-530.0 -530.0) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(-397.5 -397.5) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(-397.5 -530.0) rotate(25.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(-530.0 -397.5) rotate(10.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(-265.0 -530.0) rotate(10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(-132.5 -397.5) rotate(-10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(-132.5 -530.0) rotate(10.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(-265.0 -397.5) rotate(10.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(0.0 -530.0) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(132.5 -397.5) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(132.5 -530.0) rotate(-10.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(0.0 -397.5) rotate(-10.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(265.0 -530.0) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(397.5 -397.5) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(397.5 -530.0) rotate(5.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(265.0 -397.5) rotate(-10.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(530.0 -530.0) rotate(10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(662.5 -397.5) rotate(10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(662.5 -530.0) rotate(-5.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(530.0 -397.5) rotate(-15.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(795.0 -530.0) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(927.5 -397.5) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(927.5 -530.0) rotate(0.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(795.0 -397.5) rotate(25.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(1060.0 -530.0) rotate(10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(1192.5 -397.5) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(1192.5 -530.0) rotate(15.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(1060.0 -397.5) rotate(25.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(1325.0 -530.0) rotate(-10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(1457.5 -397.5) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(1457.5 -530.0) rotate(0.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(1325.0 -397.5) rotate(-15.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(1590.0 -530.0) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(1722.5 -397.5) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(1722.5 -530.0) rotate(-5.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(1590.0 -397.5) rotate(5.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(1855.0 -530.0) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(1987.5 -397.5) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(1987.5 -530.0) rotate(20.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(1855.0 -397.5) rotate(-15.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(2120.0 -530.0) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(2252.5 -397.5) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(2252.5 -530.0) rotate(20.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(2120.0 -397.5) rotate(-20.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(2385.0 -530.0) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(2517.5 -397.5) rotate(-10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(2517.5 -530.0) rotate(5.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(2385.0 -397.5) rotate(-20.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(2650.0 -530.0) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(2782.5 -397.5) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(2782.5 -530.0) rotate(15.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(2650.0 -397.5) rotate(-15.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(2915.0 -530.0) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(3047.5 -397.5) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(3047.5 -530.0) rotate(25.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(2915.0 -397.5) rotate(-10.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(3180.0 -530.0) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(3312.5 -397.5) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(3312.5 -530.0) rotate(10.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(3180.0 -397.5) rotate(5.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(3445.0 -530.0) rotate(10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(3577.5 -397.5) rotate(-10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(3577.5 -530.0) rotate(10.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(3445.0 -397.5) rotate(20.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(-530.0 -265.0) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(-397.5 -132.5) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(-397.5 -265.0) rotate(0.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(-530.0 -132.5) rotate(-20.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(-265.0 -265.0) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(-132.5 -132.5) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(-132.5 -265.0) rotate(-15.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(-265.0 -132.5) rotate(-20.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(0.0 -265.0) rotate(10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(132.5 -132.5) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(132.5 -265.0) rotate(10.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(0.0 -132.5) rotate(-15.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(265.0 -265.0) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(397.5 -132.5) rotate(10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(397.5 -265.0) rotate(0.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(265.0 -132.5) rotate(10.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(530.0 -265.0) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(662.5 -132.5) rotate(10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(662.5 -265.0) rotate(10.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(530.0 -132.5) rotate(-5.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(795.0 -265.0) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(927.5 -132.5) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(927.5 -265.0) rotate(-15.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(795.0 -132.5) rotate(-10.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(1060.0 -265.0) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(1192.5 -132.5) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(1192.5 -265.0) rotate(-20.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(1060.0 -132.5) rotate(10.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(1325.0 -265.0) rotate(10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(1457.5 -132.5) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(1457.5 -265.0) rotate(25.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(1325.0 -132.5) rotate(10.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(1590.0 -265.0) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(1722.5 -132.5) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(1722.5 -265.0) rotate(0.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(1590.0 -132.5) rotate(-15.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(1855.0 -265.0) rotate(10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(1987.5 -132.5) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(1987.5 -265.0) rotate(0.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(1855.0 -132.5) rotate(-20.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(2120.0 -265.0) rotate(-10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(2252.5 -132.5) rotate(-10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(2252.5 -265.0) rotate(10.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(2120.0 -132.5) rotate(15.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(2385.0 -265.0) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(2517.5 -132.5) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(2517.5 -265.0) rotate(15.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(2385.0 -132.5) rotate(-20.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(2650.0 -265.0) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(2782.5 -132.5) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(2782.5 -265.0) rotate(-20.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(2650.0 -132.5) rotate(-10.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(2915.0 -265.0) rotate(-10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(3047.5 -132.5) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(3047.5 -265.0) rotate(5.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(2915.0 -132.5) rotate(5.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(3180.0 -265.0) rotate(10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(3312.5 -132.5) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(3312.5 -265.0) rotate(-20.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(3180.0 -132.5) rotate(0.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(3445.0 -265.0) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(3577.5 -132.5) rotate(10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(3577.5 -265.0) rotate(20.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(3445.0 -132.5) rotate(-20.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(-530.0 0.0) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(-397.5 132.5) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(-397.5 0.0) rotate(-25.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(-530.0 132.5) rotate(-25.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(-265.0 0.0) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(-132.5 132.5) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(-132.5 0.0) rotate(0.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(-265.0 132.5) rotate(15.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(0.0 0.0) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(132.5 132.5) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(132.5 0.0) rotate(25.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(0.0 132.5) rotate(15.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(265.0 0.0) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(397.5 132.5) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(397.5 0.0) rotate(-15.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(265.0 132.5) rotate(-25.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(530.0 0.0) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(662.5 132.5) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(662.5 0.0) rotate(-15.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(530.0 132.5) rotate(20.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(795.0 0.0) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(927.5 132.5) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(927.5 0.0) rotate(20.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(795.0 132.5) rotate(0.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(1060.0 0.0) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(1192.5 132.5) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(1192.5 0.0) rotate(-15.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(1060.0 132.5) rotate(5.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(1325.0 0.0) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(1457.5 132.5) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(1457.5 0.0) rotate(25.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(1325.0 132.5) rotate(15.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(1590.0 0.0) rotate(10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(1722.5 132.5) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(1722.5 0.0) rotate(20.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(1590.0 132.5) rotate(-5.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(1855.0 0.0) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(1987.5 132.5) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(1987.5 0.0) rotate(5.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(1855.0 132.5) rotate(15.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(2120.0 0.0) rotate(-10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(2252.5 132.5) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(2252.5 0.0) rotate(-5.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(2120.0 132.5) rotate(-20.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(2385.0 0.0) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(2517.5 132.5) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(2517.5 0.0) rotate(-20.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(2385.0 132.5) rotate(0.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(2650.0 0.0) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(2782.5 132.5) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(2782.5 0.0) rotate(-15.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(2650.0 132.5) rotate(-15.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(2915.0 0.0) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(3047.5 132.5) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(3047.5 0.0) rotate(15.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(2915.0 132.5) rotate(-10.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(3180.0 0.0) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(3312.5 132.5) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(3312.5 0.0) rotate(15.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(3180.0 132.5) rotate(-15.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(3445.0 0.0) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(3577.5 132.5) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(3577.5 0.0) rotate(20.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(3445.0 132.5) rotate(0.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(-530.0 265.0) rotate(10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(-397.5 397.5) rotate(-10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(-397.5 265.0) rotate(-20.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(-530.0 397.5) rotate(-10.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(-265.0 265.0) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(-132.5 397.5) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(-132.5 265.0) rotate(5.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(-265.0 397.5) rotate(20.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(0.0 265.0) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(132.5 397.5) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(132.5 265.0) rotate(10.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(0.0 397.5) rotate(-5.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(265.0 265.0) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(397.5 397.5) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(397.5 265.0) rotate(5.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(265.0 397.5) rotate(-5.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(530.0 265.0) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(662.5 397.5) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(662.5 265.0) rotate(-5.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(530.0 397.5) rotate(-5.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(795.0 265.0) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(927.5 397.5) rotate(10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(927.5 265.0) rotate(-5.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(795.0 397.5) rotate(20.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(1060.0 265.0) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(1192.5 397.5) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(1192.5 265.0) rotate(0.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(1060.0 397.5) rotate(-10.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(1325.0 265.0) rotate(10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(1457.5 397.5) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(1457.5 265.0) rotate(5.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(1325.0 397.5) rotate(-20.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(1590.0 265.0) rotate(10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(1722.5 397.5) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(1722.5 265.0) rotate(20.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(1590.0 397.5) rotate(-15.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(1855.0 265.0) rotate(10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(1987.5 397.5) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(1987.5 265.0) rotate(10.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(1855.0 397.5) rotate(5.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(2120.0 265.0) rotate(-10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(2252.5 397.5) rotate(10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(2252.5 265.0) rotate(0.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(2120.0 397.5) rotate(-10.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(2385.0 265.0) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(2517.5 397.5) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(2517.5 265.0) rotate(-15.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(2385.0 397.5) rotate(10.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(2650.0 265.0) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(2782.5 397.5) rotate(10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(2782.5 265.0) rotate(25.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(2650.0 397.5) rotate(15.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(2915.0 265.0) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(3047.5 397.5) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(3047.5 265.0) rotate(25.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(2915.0 397.5) rotate(20.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(3180.0 265.0) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(3312.5 397.5) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(3312.5 265.0) rotate(-5.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(3180.0 397.5) rotate(-15.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(3445.0 265.0) rotate(10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(3577.5 397.5) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(3577.5 265.0) rotate(20.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(3445.0 397.5) rotate(-25.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(-530.0 530.0) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(-397.5 662.5) rotate(-10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(-397.5 530.0) rotate(-10.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(-530.0 662.5) rotate(-15.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(-265.0 530.0) rotate(-10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(-132.5 662.5) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(-132.5 530.0) rotate(0.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(-265.0 662.5) rotate(25.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(0.0 530.0) rotate(10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(132.5 662.5) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(132.5 530.0) rotate(-20.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(0.0 662.5) rotate(5.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(265.0 530.0) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(397.5 662.5) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(397.5 530.0) rotate(20.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(265.0 662.5) rotate(-15.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(530.0 530.0) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(662.5 662.5) rotate(10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(662.5 530.0) rotate(5.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(530.0 662.5) rotate(10.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(795.0 530.0) rotate(-10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(927.5 662.5) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(927.5 530.0) rotate(0.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(795.0 662.5) rotate(-15.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(1060.0 530.0) rotate(-10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(1192.5 662.5) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(1192.5 530.0) rotate(10.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(1060.0 662.5) rotate(15.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(1325.0 530.0) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(1457.5 662.5) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(1457.5 530.0) rotate(15.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(1325.0 662.5) rotate(-20.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(1590.0 530.0) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(1722.5 662.5) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(1722.5 530.0) rotate(25.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(1590.0 662.5) rotate(5.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(1855.0 530.0) rotate(-10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(1987.5 662.5) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(1987.5 530.0) rotate(-25.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(1855.0 662.5) rotate(15.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(2120.0 530.0) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(2252.5 662.5) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(2252.5 530.0) rotate(-10.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(2120.0 662.5) rotate(15.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(2385.0 530.0) rotate(10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(2517.5 662.5) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(2517.5 530.0) rotate(20.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(2385.0 662.5) rotate(-5.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(2650.0 530.0) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(2782.5 662.5) rotate(10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(2782.5 530.0) rotate(-20.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(2650.0 662.5) rotate(20.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(2915.0 530.0) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(3047.5 662.5) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(3047.5 530.0) rotate(-20.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(2915.0 662.5) rotate(-25.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(3180.0 530.0) rotate(-10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(3312.5 662.5) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(3312.5 530.0) rotate(-20.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(3180.0 662.5) rotate(-20.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(3445.0 530.0) rotate(10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(3577.5 662.5) rotate(-10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(3577.5 530.0) rotate(5.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(3445.0 662.5) rotate(5.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(-530.0 795.0) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(-397.5 927.5) rotate(10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(-397.5 795.0) rotate(10.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(-530.0 927.5) rotate(-15.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(-265.0 795.0) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(-132.5 927.5) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(-132.5 795.0) rotate(25.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(-265.0 927.5) rotate(5.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(0.0 795.0) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(132.5 927.5) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(132.5 795.0) rotate(-20.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(0.0 927.5) rotate(15.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(265.0 795.0) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(397.5 927.5) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(397.5 795.0) rotate(25.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(265.0 927.5) rotate(-5.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(530.0 795.0) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(662.5 927.5) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(662.5 795.0) rotate(10.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(530.0 927.5) rotate(5.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(795.0 795.0) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(927.5 927.5) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(927.5 795.0) rotate(-15.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(795.0 927.5) rotate(-5.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(1060.0 795.0) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(1192.5 927.5) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(1192.5 795.0) rotate(-10.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(1060.0 927.5) rotate(-15.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(1325.0 795.0) rotate(10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(1457.5 927.5) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(1457.5 795.0) rotate(10.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(1325.0 927.5) rotate(-15.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(1590.0 795.0) rotate(-10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(1722.5 927.5) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(1722.5 795.0) rotate(-15.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(1590.0 927.5) rotate(-10.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(1855.0 795.0) rotate(10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(1987.5 927.5) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(1987.5 795.0) rotate(-25.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(1855.0 927.5) rotate(-5.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(2120.0 795.0) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(2252.5 927.5) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(2252.5 795.0) rotate(10.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(2120.0 927.5) rotate(-5.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(2385.0 795.0) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(2517.5 927.5) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(2517.5 795.0) rotate(0.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(2385.0 927.5) rotate(20.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(2650.0 795.0) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(2782.5 927.5) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(2782.5 795.0) rotate(-15.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(2650.0 927.5) rotate(-15.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(2915.0 795.0) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(3047.5 927.5) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(3047.5 795.0) rotate(-20.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(2915.0 927.5) rotate(20.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(3180.0 795.0) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(3312.5 927.5) rotate(-10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(3312.5 795.0) rotate(0.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(3180.0 927.5) rotate(-15.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(3445.0 795.0) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(3577.5 927.5) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(3577.5 795.0) rotate(-20.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(3445.0 927.5) rotate(10.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(-530.0 1060.0) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(-397.5 1192.5) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(-397.5 1060.0) rotate(15.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(-530.0 1192.5) rotate(15.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(-265.0 1060.0) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(-132.5 1192.5) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(-132.5 1060.0) rotate(-15.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(-265.0 1192.5) rotate(-15.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(0.0 1060.0) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(132.5 1192.5) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(132.5 1060.0) rotate(10.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(0.0 1192.5) rotate(-5.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(265.0 1060.0) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(397.5 1192.5) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(397.5 1060.0) rotate(0.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(265.0 1192.5) rotate(25.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(530.0 1060.0) rotate(-10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(662.5 1192.5) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(662.5 1060.0) rotate(-25.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(530.0 1192.5) rotate(-5.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(795.0 1060.0) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(927.5 1192.5) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(927.5 1060.0) rotate(-20.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(795.0 1192.5) rotate(15.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(1060.0 1060.0) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(1192.5 1192.5) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(1192.5 1060.0) rotate(5.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(1060.0 1192.5) rotate(-20.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(1325.0 1060.0) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(1457.5 1192.5) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(1457.5 1060.0) rotate(-5.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(1325.0 1192.5) rotate(-15.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(1590.0 1060.0) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(1722.5 1192.5) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(1722.5 1060.0) rotate(20.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(1590.0 1192.5) rotate(15.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(1855.0 1060.0) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(1987.5 1192.5) rotate(-10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(1987.5 1060.0) rotate(-20.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(1855.0 1192.5) rotate(-5.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(2120.0 1060.0) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(2252.5 1192.5) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(2252.5 1060.0) rotate(10.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(2120.0 1192.5) rotate(0.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(2385.0 1060.0) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(2517.5 1192.5) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(2517.5 1060.0) rotate(-5.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(2385.0 1192.5) rotate(5.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(2650.0 1060.0) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(2782.5 1192.5) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(2782.5 1060.0) rotate(-20.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(2650.0 1192.5) rotate(-25.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(2915.0 1060.0) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(3047.5 1192.5) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(3047.5 1060.0) rotate(0.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(2915.0 1192.5) rotate(0.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(3180.0 1060.0) rotate(-10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(3312.5 1192.5) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(3312.5 1060.0) rotate(-15.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(3180.0 1192.5) rotate(-20.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(3445.0 1060.0) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(3577.5 1192.5) rotate(-10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(3577.5 1060.0) rotate(0.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(3445.0 1192.5) rotate(-25.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(-530.0 1325.0) rotate(-10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(-397.5 1457.5) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(-397.5 1325.0) rotate(20.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(-530.0 1457.5) rotate(10.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(-265.0 1325.0) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(-132.5 1457.5) rotate(10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(-132.5 1325.0) rotate(5.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(-265.0 1457.5) rotate(10.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(0.0 1325.0) rotate(-10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(132.5 1457.5) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(132.5 1325.0) rotate(0.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(0.0 1457.5) rotate(-10.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(265.0 1325.0) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(397.5 1457.5) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(397.5 1325.0) rotate(5.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(265.0 1457.5) rotate(5.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(530.0 1325.0) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(662.5 1457.5) rotate(-10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(662.5 1325.0) rotate(-25.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(530.0 1457.5) rotate(-10.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(795.0 1325.0) rotate(10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(927.5 1457.5) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(927.5 1325.0) rotate(20.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(795.0 1457.5) rotate(-5.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(1060.0 1325.0) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(1192.5 1457.5) rotate(10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(1192.5 1325.0) rotate(10.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(1060.0 1457.5) rotate(10.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(1325.0 1325.0) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(1457.5 1457.5) rotate(10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(1457.5 1325.0) rotate(20.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(1325.0 1457.5) rotate(15.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(1590.0 1325.0) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(1722.5 1457.5) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(1722.5 1325.0) rotate(0.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(1590.0 1457.5) rotate(0.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(1855.0 1325.0) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(1987.5 1457.5) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(1987.5 1325.0) rotate(-10.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(1855.0 1457.5) rotate(-20.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(2120.0 1325.0) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(2252.5 1457.5) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(2252.5 1325.0) rotate(-10.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(2120.0 1457.5) rotate(15.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(2385.0 1325.0) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(2517.5 1457.5) rotate(-10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(2517.5 1325.0) rotate(15.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(2385.0 1457.5) rotate(-15.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(2650.0 1325.0) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(2782.5 1457.5) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(2782.5 1325.0) rotate(-10.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(2650.0 1457.5) rotate(15.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(2915.0 1325.0) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(3047.5 1457.5) rotate(10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(3047.5 1325.0) rotate(0.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(2915.0 1457.5) rotate(0.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(3180.0 1325.0) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(3312.5 1457.5) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(3312.5 1325.0) rotate(15.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(3180.0 1457.5) rotate(10.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(3445.0 1325.0) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(3577.5 1457.5) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(3577.5 1325.0) rotate(-25.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(3445.0 1457.5) rotate(-25.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(-530.0 1590.0) rotate(-10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(-397.5 1722.5) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(-397.5 1590.0) rotate(-5.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(-530.0 1722.5) rotate(-10.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(-265.0 1590.0) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(-132.5 1722.5) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(-132.5 1590.0) rotate(-10.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(-265.0 1722.5) rotate(20.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(0.0 1590.0) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(132.5 1722.5) rotate(10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(132.5 1590.0) rotate(-10.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(0.0 1722.5) rotate(-20.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(265.0 1590.0) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(397.5 1722.5) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(397.5 1590.0) rotate(-20.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(265.0 1722.5) rotate(25.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(530.0 1590.0) rotate(10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(662.5 1722.5) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(662.5 1590.0) rotate(20.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(530.0 1722.5) rotate(-20.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(795.0 1590.0) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(927.5 1722.5) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(927.5 1590.0) rotate(20.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(795.0 1722.5) rotate(-20.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(1060.0 1590.0) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(1192.5 1722.5) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(1192.5 1590.0) rotate(-15.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(1060.0 1722.5) rotate(-20.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(1325.0 1590.0) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(1457.5 1722.5) rotate(10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(1457.5 1590.0) rotate(-5.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(1325.0 1722.5) rotate(-10.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(1590.0 1590.0) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(1722.5 1722.5) rotate(-10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(1722.5 1590.0) rotate(-20.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(1590.0 1722.5) rotate(-20.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(1855.0 1590.0) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(1987.5 1722.5) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(1987.5 1590.0) rotate(-10.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(1855.0 1722.5) rotate(20.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(2120.0 1590.0) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(2252.5 1722.5) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(2252.5 1590.0) rotate(-20.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(2120.0 1722.5) rotate(-15.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(2385.0 1590.0) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(2517.5 1722.5) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(2517.5 1590.0) rotate(-25.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(2385.0 1722.5) rotate(-20.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(2650.0 1590.0) rotate(10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(2782.5 1722.5) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(2782.5 1590.0) rotate(-10.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(2650.0 1722.5) rotate(-15.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(2915.0 1590.0) rotate(10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(3047.5 1722.5) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(3047.5 1590.0) rotate(-10.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(2915.0 1722.5) rotate(-5.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(3180.0 1590.0) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(3312.5 1722.5) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(3312.5 1590.0) rotate(25.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(3180.0 1722.5) rotate(15.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(3445.0 1590.0) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(3577.5 1722.5) rotate(-10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(3577.5 1590.0) rotate(25.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(3445.0 1722.5) rotate(20.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(-530.0 1855.0) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(-397.5 1987.5) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(-397.5 1855.0) rotate(-15.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(-530.0 1987.5) rotate(-25.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(-265.0 1855.0) rotate(10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(-132.5 1987.5) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(-132.5 1855.0) rotate(-15.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(-265.0 1987.5) rotate(20.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(0.0 1855.0) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(132.5 1987.5) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(132.5 1855.0) rotate(10.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(0.0 1987.5) rotate(-5.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(265.0 1855.0) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(397.5 1987.5) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(397.5 1855.0) rotate(-25.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(265.0 1987.5) rotate(10.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(530.0 1855.0) rotate(-10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(662.5 1987.5) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(662.5 1855.0) rotate(0.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(530.0 1987.5) rotate(-10.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(795.0 1855.0) rotate(-10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(927.5 1987.5) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(927.5 1855.0) rotate(-5.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(795.0 1987.5) rotate(-20.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(1060.0 1855.0) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(1192.5 1987.5) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(1192.5 1855.0) rotate(0.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(1060.0 1987.5) rotate(5.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(1325.0 1855.0) rotate(-10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(1457.5 1987.5) rotate(-10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(1457.5 1855.0) rotate(10.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(1325.0 1987.5) rotate(15.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(1590.0 1855.0) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(1722.5 1987.5) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(1722.5 1855.0) rotate(15.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(1590.0 1987.5) rotate(-20.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(1855.0 1855.0) rotate(10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(1987.5 1987.5) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(1987.5 1855.0) rotate(-25.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(1855.0 1987.5) rotate(5.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(2120.0 1855.0) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(2252.5 1987.5) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(2252.5 1855.0) rotate(-20.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(2120.0 1987.5) rotate(20.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(2385.0 1855.0) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(2517.5 1987.5) rotate(-10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(2517.5 1855.0) rotate(-5.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(2385.0 1987.5) rotate(-10.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(2650.0 1855.0) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(2782.5 1987.5) rotate(10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(2782.5 1855.0) rotate(-15.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(2650.0 1987.5) rotate(5.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(2915.0 1855.0) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(3047.5 1987.5) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(3047.5 1855.0) rotate(0.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(2915.0 1987.5) rotate(15.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(3180.0 1855.0) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(3312.5 1987.5) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(3312.5 1855.0) rotate(-10.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(3180.0 1987.5) rotate(0.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(3445.0 1855.0) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(3577.5 1987.5) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(3577.5 1855.0) rotate(20.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(3445.0 1987.5) rotate(10.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(-530.0 2120.0) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(-397.5 2252.5) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(-397.5 2120.0) rotate(-5.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(-530.0 2252.5) rotate(10.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(-265.0 2120.0) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(-132.5 2252.5) rotate(-10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(-132.5 2120.0) rotate(0.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(-265.0 2252.5) rotate(25.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(0.0 2120.0) rotate(-10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(132.5 2252.5) rotate(10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(132.5 2120.0) rotate(-10.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(0.0 2252.5) rotate(-5.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(265.0 2120.0) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(397.5 2252.5) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(397.5 2120.0) rotate(10.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(265.0 2252.5) rotate(-10.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(530.0 2120.0) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(662.5 2252.5) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(662.5 2120.0) rotate(-15.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(530.0 2252.5) rotate(15.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(795.0 2120.0) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(927.5 2252.5) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(927.5 2120.0) rotate(20.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(795.0 2252.5) rotate(-15.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(1060.0 2120.0) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(1192.5 2252.5) rotate(10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(1192.5 2120.0) rotate(15.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(1060.0 2252.5) rotate(-10.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(1325.0 2120.0) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(1457.5 2252.5) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(1457.5 2120.0) rotate(-20.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(1325.0 2252.5) rotate(0.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(1590.0 2120.0) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(1722.5 2252.5) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(1722.5 2120.0) rotate(10.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(1590.0 2252.5) rotate(20.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(1855.0 2120.0) rotate(-10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(1987.5 2252.5) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(1987.5 2120.0) rotate(-20.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(1855.0 2252.5) rotate(25.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(2120.0 2120.0) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(2252.5 2252.5) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(2252.5 2120.0) rotate(15.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(2120.0 2252.5) rotate(-5.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(2385.0 2120.0) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(2517.5 2252.5) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(2517.5 2120.0) rotate(0.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(2385.0 2252.5) rotate(-25.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(2650.0 2120.0) rotate(10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(2782.5 2252.5) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(2782.5 2120.0) rotate(-5.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(2650.0 2252.5) rotate(5.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(2915.0 2120.0) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(3047.5 2252.5) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(3047.5 2120.0) rotate(20.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(2915.0 2252.5) rotate(-25.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(3180.0 2120.0) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(3312.5 2252.5) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(3312.5 2120.0) rotate(-15.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(3180.0 2252.5) rotate(5.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(3445.0 2120.0) rotate(10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(3577.5 2252.5) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(3577.5 2120.0) rotate(15.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(3445.0 2252.5) rotate(-10.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(-530.0 2385.0) rotate(10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(-397.5 2517.5) rotate(10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(-397.5 2385.0) rotate(-20.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(-530.0 2517.5) rotate(0.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(-265.0 2385.0) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(-132.5 2517.5) rotate(10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(-132.5 2385.0) rotate(-5.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(-265.0 2517.5) rotate(-15.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(0.0 2385.0) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(132.5 2517.5) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(132.5 2385.0) rotate(15.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(0.0 2517.5) rotate(-15.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(265.0 2385.0) rotate(10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(397.5 2517.5) rotate(-10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(397.5 2385.0) rotate(20.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(265.0 2517.5) rotate(-20.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(530.0 2385.0) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(662.5 2517.5) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(662.5 2385.0) rotate(15.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(530.0 2517.5) rotate(5.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(795.0 2385.0) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(927.5 2517.5) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(927.5 2385.0) rotate(-20.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(795.0 2517.5) rotate(-20.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(1060.0 2385.0) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(1192.5 2517.5) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(1192.5 2385.0) rotate(20.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(1060.0 2517.5) rotate(15.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(1325.0 2385.0) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(1457.5 2517.5) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(1457.5 2385.0) rotate(-10.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(1325.0 2517.5) rotate(-25.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(1590.0 2385.0) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(1722.5 2517.5) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(1722.5 2385.0) rotate(-20.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(1590.0 2517.5) rotate(20.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(1855.0 2385.0) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(1987.5 2517.5) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(1987.5 2385.0) rotate(-15.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(1855.0 2517.5) rotate(-20.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(2120.0 2385.0) rotate(-10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(2252.5 2517.5) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(2252.5 2385.0) rotate(-15.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(2120.0 2517.5) rotate(15.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(2385.0 2385.0) rotate(10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(2517.5 2517.5) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(2517.5 2385.0) rotate(20.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(2385.0 2517.5) rotate(20.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(2650.0 2385.0) rotate(-10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(2782.5 2517.5) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(2782.5 2385.0) rotate(-25.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(2650.0 2517.5) rotate(-20.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(2915.0 2385.0) rotate(10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(3047.5 2517.5) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(3047.5 2385.0) rotate(10.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(2915.0 2517.5) rotate(-15.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(3180.0 2385.0) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(3312.5 2517.5) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(3312.5 2385.0) rotate(10.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(3180.0 2517.5) rotate(-10.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-trophy" transform="translate(3445.0 2385.0) rotate(10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-thumbs-up" transform="translate(3577.5 2517.5) rotate(-10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-star" transform="translate(3577.5 2385.0) rotate(-15.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+<use href="#i-star" transform="translate(3445.0 2517.5) rotate(-15.0) scale(0.8125) translate(-24 -24)" opacity="0.5"/>
+</g>
+</svg>

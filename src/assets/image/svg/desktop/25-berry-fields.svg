@@ -1,0 +1,412 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2560" height="1440" viewBox="0 0 2560 1440" role="img" aria-label="Berry Fields">
+<defs>
+<g id="i-heart"><path d="M24 40 C 8 30 4 18 12 12 C 18 8 22 12 24 16 C 26 12 30 8 36 12 C 44 18 40 30 24 40 Z" fill="#E76F51"/>
+<circle cx="18" cy="20" r="1.5" fill="#2A2A2A"/>
+<circle cx="30" cy="20" r="1.5" fill="#2A2A2A"/></g>
+<g id="i-strawberry"><path d="M24 16 C 13 16 8 23 12 31 C 15 37 20 41 24 42 C 28 41 33 37 36 31 C 40 23 35 16 24 16 Z" fill="#E76F51"/>
+<path d="M14 17 L 18 9 L 22 15 L 24 7 L 26 15 L 30 9 L 34 17 Z" fill="#588157"/>
+<circle cx="18" cy="24" r="1.2" fill="#E9C46A"/>
+<circle cx="24" cy="26" r="1.2" fill="#E9C46A"/>
+<circle cx="30" cy="24" r="1.2" fill="#E9C46A"/>
+<circle cx="21" cy="32" r="1.2" fill="#E9C46A"/>
+<circle cx="27" cy="32" r="1.2" fill="#E9C46A"/>
+<circle cx="24" cy="37" r="1.2" fill="#E9C46A"/></g>
+<g id="i-watermelon"><path d="M7 16 A 17 17 0 0 0 41 16 Z" fill="#588157"/>
+<path d="M11 16 A 13 13 0 0 0 37 16 Z" fill="#FAEDCD"/>
+<path d="M13.5 16 A 10.5 10.5 0 0 0 34.5 16 Z" fill="#E76F51"/>
+<circle cx="19" cy="22" r="1.3" fill="#2A2A2A"/>
+<circle cx="24" cy="25" r="1.3" fill="#2A2A2A"/>
+<circle cx="29" cy="22" r="1.3" fill="#2A2A2A"/>
+<circle cx="21.5" cy="29" r="1.3" fill="#2A2A2A"/>
+<circle cx="26.5" cy="29" r="1.3" fill="#2A2A2A"/></g>
+<pattern id="dots" width="132.5" height="132.5" patternUnits="userSpaceOnUse"><circle cx="66.2" cy="66.2" r="5" fill="#F0C7C2" opacity="0.27"/></pattern>
+</defs>
+<rect width="2560" height="1440" fill="#FBE9E7"/>
+<rect width="2560" height="1440" fill="url(#dots)"/>
+<g>
+<use href="#i-strawberry" transform="translate(-530.0 -530.0) rotate(10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(-397.5 -397.5) rotate(-25.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-watermelon" transform="translate(-265.0 -530.0) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(-132.5 -397.5) rotate(-20.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-strawberry" transform="translate(0.0 -530.0) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(132.5 -397.5) rotate(5.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-watermelon" transform="translate(265.0 -530.0) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(397.5 -397.5) rotate(20.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-strawberry" transform="translate(530.0 -530.0) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(662.5 -397.5) rotate(5.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-watermelon" transform="translate(795.0 -530.0) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(927.5 -397.5) rotate(0.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-strawberry" transform="translate(1060.0 -530.0) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(1192.5 -397.5) rotate(5.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-watermelon" transform="translate(1325.0 -530.0) rotate(10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(1457.5 -397.5) rotate(20.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-strawberry" transform="translate(1590.0 -530.0) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(1722.5 -397.5) rotate(-25.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-watermelon" transform="translate(1855.0 -530.0) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(1987.5 -397.5) rotate(5.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-strawberry" transform="translate(2120.0 -530.0) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(2252.5 -397.5) rotate(-20.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-watermelon" transform="translate(2385.0 -530.0) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(2517.5 -397.5) rotate(-20.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-strawberry" transform="translate(2650.0 -530.0) rotate(-10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(2782.5 -397.5) rotate(-15.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-watermelon" transform="translate(2915.0 -530.0) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(3047.5 -397.5) rotate(10.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-strawberry" transform="translate(3180.0 -530.0) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(3312.5 -397.5) rotate(5.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-watermelon" transform="translate(3445.0 -530.0) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(3577.5 -397.5) rotate(-20.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-watermelon" transform="translate(-530.0 -265.0) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(-397.5 -132.5) rotate(-20.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-strawberry" transform="translate(-265.0 -265.0) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(-132.5 -132.5) rotate(5.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-watermelon" transform="translate(0.0 -265.0) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(132.5 -132.5) rotate(-15.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-strawberry" transform="translate(265.0 -265.0) rotate(-10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(397.5 -132.5) rotate(-5.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-watermelon" transform="translate(530.0 -265.0) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(662.5 -132.5) rotate(0.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-strawberry" transform="translate(795.0 -265.0) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(927.5 -132.5) rotate(15.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-watermelon" transform="translate(1060.0 -265.0) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(1192.5 -132.5) rotate(15.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-strawberry" transform="translate(1325.0 -265.0) rotate(-10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(1457.5 -132.5) rotate(0.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-watermelon" transform="translate(1590.0 -265.0) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(1722.5 -132.5) rotate(-10.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-strawberry" transform="translate(1855.0 -265.0) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(1987.5 -132.5) rotate(-15.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-watermelon" transform="translate(2120.0 -265.0) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(2252.5 -132.5) rotate(10.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-strawberry" transform="translate(2385.0 -265.0) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(2517.5 -132.5) rotate(0.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-watermelon" transform="translate(2650.0 -265.0) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(2782.5 -132.5) rotate(-20.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-strawberry" transform="translate(2915.0 -265.0) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(3047.5 -132.5) rotate(-5.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-watermelon" transform="translate(3180.0 -265.0) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(3312.5 -132.5) rotate(-10.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-strawberry" transform="translate(3445.0 -265.0) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(3577.5 -132.5) rotate(-5.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-strawberry" transform="translate(-530.0 0.0) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(-397.5 132.5) rotate(-20.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-watermelon" transform="translate(-265.0 0.0) rotate(10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(-132.5 132.5) rotate(5.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-strawberry" transform="translate(0.0 0.0) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(132.5 132.5) rotate(15.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-watermelon" transform="translate(265.0 0.0) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(397.5 132.5) rotate(-15.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-strawberry" transform="translate(530.0 0.0) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(662.5 132.5) rotate(15.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-watermelon" transform="translate(795.0 0.0) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(927.5 132.5) rotate(-20.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-strawberry" transform="translate(1060.0 0.0) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(1192.5 132.5) rotate(25.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-watermelon" transform="translate(1325.0 0.0) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(1457.5 132.5) rotate(20.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-strawberry" transform="translate(1590.0 0.0) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(1722.5 132.5) rotate(-15.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-watermelon" transform="translate(1855.0 0.0) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(1987.5 132.5) rotate(-15.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-strawberry" transform="translate(2120.0 0.0) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(2252.5 132.5) rotate(-15.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-watermelon" transform="translate(2385.0 0.0) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(2517.5 132.5) rotate(20.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-strawberry" transform="translate(2650.0 0.0) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(2782.5 132.5) rotate(-20.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-watermelon" transform="translate(2915.0 0.0) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(3047.5 132.5) rotate(10.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-strawberry" transform="translate(3180.0 0.0) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(3312.5 132.5) rotate(5.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-watermelon" transform="translate(3445.0 0.0) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(3577.5 132.5) rotate(-15.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-watermelon" transform="translate(-530.0 265.0) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(-397.5 397.5) rotate(20.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-strawberry" transform="translate(-265.0 265.0) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(-132.5 397.5) rotate(15.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-watermelon" transform="translate(0.0 265.0) rotate(10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(132.5 397.5) rotate(15.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-strawberry" transform="translate(265.0 265.0) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(397.5 397.5) rotate(-10.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-watermelon" transform="translate(530.0 265.0) rotate(10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(662.5 397.5) rotate(-5.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-strawberry" transform="translate(795.0 265.0) rotate(10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(927.5 397.5) rotate(10.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-watermelon" transform="translate(1060.0 265.0) rotate(-10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(1192.5 397.5) rotate(0.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-strawberry" transform="translate(1325.0 265.0) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(1457.5 397.5) rotate(5.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-watermelon" transform="translate(1590.0 265.0) rotate(-10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(1722.5 397.5) rotate(10.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-strawberry" transform="translate(1855.0 265.0) rotate(-10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(1987.5 397.5) rotate(0.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-watermelon" transform="translate(2120.0 265.0) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(2252.5 397.5) rotate(-10.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-strawberry" transform="translate(2385.0 265.0) rotate(10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(2517.5 397.5) rotate(0.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-watermelon" transform="translate(2650.0 265.0) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(2782.5 397.5) rotate(-5.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-strawberry" transform="translate(2915.0 265.0) rotate(-10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(3047.5 397.5) rotate(-15.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-watermelon" transform="translate(3180.0 265.0) rotate(-10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(3312.5 397.5) rotate(15.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-strawberry" transform="translate(3445.0 265.0) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(3577.5 397.5) rotate(-25.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-strawberry" transform="translate(-530.0 530.0) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(-397.5 662.5) rotate(20.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-watermelon" transform="translate(-265.0 530.0) rotate(-10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(-132.5 662.5) rotate(5.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-strawberry" transform="translate(0.0 530.0) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(132.5 662.5) rotate(15.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-watermelon" transform="translate(265.0 530.0) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(397.5 662.5) rotate(-20.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-strawberry" transform="translate(530.0 530.0) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(662.5 662.5) rotate(0.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-watermelon" transform="translate(795.0 530.0) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(927.5 662.5) rotate(0.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-strawberry" transform="translate(1060.0 530.0) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(1192.5 662.5) rotate(-5.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-watermelon" transform="translate(1325.0 530.0) rotate(-10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(1457.5 662.5) rotate(15.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-strawberry" transform="translate(1590.0 530.0) rotate(10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(1722.5 662.5) rotate(0.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-watermelon" transform="translate(1855.0 530.0) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(1987.5 662.5) rotate(-20.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-strawberry" transform="translate(2120.0 530.0) rotate(10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(2252.5 662.5) rotate(20.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-watermelon" transform="translate(2385.0 530.0) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(2517.5 662.5) rotate(20.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-strawberry" transform="translate(2650.0 530.0) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(2782.5 662.5) rotate(-15.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-watermelon" transform="translate(2915.0 530.0) rotate(10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(3047.5 662.5) rotate(-20.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-strawberry" transform="translate(3180.0 530.0) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(3312.5 662.5) rotate(20.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-watermelon" transform="translate(3445.0 530.0) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(3577.5 662.5) rotate(-25.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-watermelon" transform="translate(-530.0 795.0) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(-397.5 927.5) rotate(-10.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-strawberry" transform="translate(-265.0 795.0) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(-132.5 927.5) rotate(20.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-watermelon" transform="translate(0.0 795.0) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(132.5 927.5) rotate(5.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-strawberry" transform="translate(265.0 795.0) rotate(-10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(397.5 927.5) rotate(10.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-watermelon" transform="translate(530.0 795.0) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(662.5 927.5) rotate(0.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-strawberry" transform="translate(795.0 795.0) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(927.5 927.5) rotate(5.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-watermelon" transform="translate(1060.0 795.0) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(1192.5 927.5) rotate(25.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-strawberry" transform="translate(1325.0 795.0) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(1457.5 927.5) rotate(-10.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-watermelon" transform="translate(1590.0 795.0) rotate(-10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(1722.5 927.5) rotate(-10.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-strawberry" transform="translate(1855.0 795.0) rotate(-10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(1987.5 927.5) rotate(25.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-watermelon" transform="translate(2120.0 795.0) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(2252.5 927.5) rotate(-15.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-strawberry" transform="translate(2385.0 795.0) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(2517.5 927.5) rotate(-15.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-watermelon" transform="translate(2650.0 795.0) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(2782.5 927.5) rotate(10.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-strawberry" transform="translate(2915.0 795.0) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(3047.5 927.5) rotate(15.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-watermelon" transform="translate(3180.0 795.0) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(3312.5 927.5) rotate(-10.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-strawberry" transform="translate(3445.0 795.0) rotate(10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(3577.5 927.5) rotate(15.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-strawberry" transform="translate(-530.0 1060.0) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(-397.5 1192.5) rotate(25.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-watermelon" transform="translate(-265.0 1060.0) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(-132.5 1192.5) rotate(15.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-strawberry" transform="translate(0.0 1060.0) rotate(-10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(132.5 1192.5) rotate(-10.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-watermelon" transform="translate(265.0 1060.0) rotate(10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(397.5 1192.5) rotate(-5.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-strawberry" transform="translate(530.0 1060.0) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(662.5 1192.5) rotate(15.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-watermelon" transform="translate(795.0 1060.0) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(927.5 1192.5) rotate(-15.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-strawberry" transform="translate(1060.0 1060.0) rotate(-10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(1192.5 1192.5) rotate(20.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-watermelon" transform="translate(1325.0 1060.0) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(1457.5 1192.5) rotate(5.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-strawberry" transform="translate(1590.0 1060.0) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(1722.5 1192.5) rotate(-10.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-watermelon" transform="translate(1855.0 1060.0) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(1987.5 1192.5) rotate(-20.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-strawberry" transform="translate(2120.0 1060.0) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(2252.5 1192.5) rotate(20.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-watermelon" transform="translate(2385.0 1060.0) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(2517.5 1192.5) rotate(5.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-strawberry" transform="translate(2650.0 1060.0) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(2782.5 1192.5) rotate(0.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-watermelon" transform="translate(2915.0 1060.0) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(3047.5 1192.5) rotate(-15.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-strawberry" transform="translate(3180.0 1060.0) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(3312.5 1192.5) rotate(-20.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-watermelon" transform="translate(3445.0 1060.0) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(3577.5 1192.5) rotate(5.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-watermelon" transform="translate(-530.0 1325.0) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(-397.5 1457.5) rotate(15.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-strawberry" transform="translate(-265.0 1325.0) rotate(-10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(-132.5 1457.5) rotate(-10.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-watermelon" transform="translate(0.0 1325.0) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(132.5 1457.5) rotate(-5.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-strawberry" transform="translate(265.0 1325.0) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(397.5 1457.5) rotate(-25.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-watermelon" transform="translate(530.0 1325.0) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(662.5 1457.5) rotate(-5.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-strawberry" transform="translate(795.0 1325.0) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(927.5 1457.5) rotate(0.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-watermelon" transform="translate(1060.0 1325.0) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(1192.5 1457.5) rotate(5.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-strawberry" transform="translate(1325.0 1325.0) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(1457.5 1457.5) rotate(0.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-watermelon" transform="translate(1590.0 1325.0) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(1722.5 1457.5) rotate(-10.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-strawberry" transform="translate(1855.0 1325.0) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(1987.5 1457.5) rotate(-15.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-watermelon" transform="translate(2120.0 1325.0) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(2252.5 1457.5) rotate(10.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-strawberry" transform="translate(2385.0 1325.0) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(2517.5 1457.5) rotate(-15.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-watermelon" transform="translate(2650.0 1325.0) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(2782.5 1457.5) rotate(5.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-strawberry" transform="translate(2915.0 1325.0) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(3047.5 1457.5) rotate(0.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-watermelon" transform="translate(3180.0 1325.0) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(3312.5 1457.5) rotate(-5.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-strawberry" transform="translate(3445.0 1325.0) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(3577.5 1457.5) rotate(15.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-strawberry" transform="translate(-530.0 1590.0) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(-397.5 1722.5) rotate(-5.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-watermelon" transform="translate(-265.0 1590.0) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(-132.5 1722.5) rotate(25.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-strawberry" transform="translate(0.0 1590.0) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(132.5 1722.5) rotate(5.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-watermelon" transform="translate(265.0 1590.0) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(397.5 1722.5) rotate(-20.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-strawberry" transform="translate(530.0 1590.0) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(662.5 1722.5) rotate(-10.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-watermelon" transform="translate(795.0 1590.0) rotate(-10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(927.5 1722.5) rotate(15.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-strawberry" transform="translate(1060.0 1590.0) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(1192.5 1722.5) rotate(-10.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-watermelon" transform="translate(1325.0 1590.0) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(1457.5 1722.5) rotate(-15.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-strawberry" transform="translate(1590.0 1590.0) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(1722.5 1722.5) rotate(-5.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-watermelon" transform="translate(1855.0 1590.0) rotate(10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(1987.5 1722.5) rotate(10.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-strawberry" transform="translate(2120.0 1590.0) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(2252.5 1722.5) rotate(-15.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-watermelon" transform="translate(2385.0 1590.0) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(2517.5 1722.5) rotate(5.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-strawberry" transform="translate(2650.0 1590.0) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(2782.5 1722.5) rotate(0.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-watermelon" transform="translate(2915.0 1590.0) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(3047.5 1722.5) rotate(15.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-strawberry" transform="translate(3180.0 1590.0) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(3312.5 1722.5) rotate(-20.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-watermelon" transform="translate(3445.0 1590.0) rotate(-10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(3577.5 1722.5) rotate(20.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-watermelon" transform="translate(-530.0 1855.0) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(-397.5 1987.5) rotate(-20.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-strawberry" transform="translate(-265.0 1855.0) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(-132.5 1987.5) rotate(-5.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-watermelon" transform="translate(0.0 1855.0) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(132.5 1987.5) rotate(20.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-strawberry" transform="translate(265.0 1855.0) rotate(-10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(397.5 1987.5) rotate(10.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-watermelon" transform="translate(530.0 1855.0) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(662.5 1987.5) rotate(10.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-strawberry" transform="translate(795.0 1855.0) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(927.5 1987.5) rotate(25.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-watermelon" transform="translate(1060.0 1855.0) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(1192.5 1987.5) rotate(15.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-strawberry" transform="translate(1325.0 1855.0) rotate(-10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(1457.5 1987.5) rotate(10.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-watermelon" transform="translate(1590.0 1855.0) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(1722.5 1987.5) rotate(-25.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-strawberry" transform="translate(1855.0 1855.0) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(1987.5 1987.5) rotate(-10.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-watermelon" transform="translate(2120.0 1855.0) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(2252.5 1987.5) rotate(0.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-strawberry" transform="translate(2385.0 1855.0) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(2517.5 1987.5) rotate(5.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-watermelon" transform="translate(2650.0 1855.0) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(2782.5 1987.5) rotate(5.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-strawberry" transform="translate(2915.0 1855.0) rotate(-10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(3047.5 1987.5) rotate(-5.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-watermelon" transform="translate(3180.0 1855.0) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(3312.5 1987.5) rotate(15.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-strawberry" transform="translate(3445.0 1855.0) rotate(10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(3577.5 1987.5) rotate(10.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-strawberry" transform="translate(-530.0 2120.0) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(-397.5 2252.5) rotate(-5.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-watermelon" transform="translate(-265.0 2120.0) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(-132.5 2252.5) rotate(-25.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-strawberry" transform="translate(0.0 2120.0) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(132.5 2252.5) rotate(-20.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-watermelon" transform="translate(265.0 2120.0) rotate(-10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(397.5 2252.5) rotate(20.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-strawberry" transform="translate(530.0 2120.0) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(662.5 2252.5) rotate(-15.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-watermelon" transform="translate(795.0 2120.0) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(927.5 2252.5) rotate(5.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-strawberry" transform="translate(1060.0 2120.0) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(1192.5 2252.5) rotate(5.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-watermelon" transform="translate(1325.0 2120.0) rotate(10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(1457.5 2252.5) rotate(0.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-strawberry" transform="translate(1590.0 2120.0) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(1722.5 2252.5) rotate(-20.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-watermelon" transform="translate(1855.0 2120.0) rotate(-10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(1987.5 2252.5) rotate(25.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-strawberry" transform="translate(2120.0 2120.0) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(2252.5 2252.5) rotate(5.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-watermelon" transform="translate(2385.0 2120.0) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(2517.5 2252.5) rotate(-15.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-strawberry" transform="translate(2650.0 2120.0) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(2782.5 2252.5) rotate(20.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-watermelon" transform="translate(2915.0 2120.0) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(3047.5 2252.5) rotate(-25.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-strawberry" transform="translate(3180.0 2120.0) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(3312.5 2252.5) rotate(5.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-watermelon" transform="translate(3445.0 2120.0) rotate(-10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(3577.5 2252.5) rotate(5.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-watermelon" transform="translate(-530.0 2385.0) rotate(10.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(-397.5 2517.5) rotate(20.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-strawberry" transform="translate(-265.0 2385.0) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(-132.5 2517.5) rotate(0.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-watermelon" transform="translate(0.0 2385.0) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(132.5 2517.5) rotate(-15.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-strawberry" transform="translate(265.0 2385.0) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(397.5 2517.5) rotate(15.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-watermelon" transform="translate(530.0 2385.0) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(662.5 2517.5) rotate(20.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-strawberry" transform="translate(795.0 2385.0) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(927.5 2517.5) rotate(-5.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-watermelon" transform="translate(1060.0 2385.0) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(1192.5 2517.5) rotate(-5.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-strawberry" transform="translate(1325.0 2385.0) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(1457.5 2517.5) rotate(10.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-watermelon" transform="translate(1590.0 2385.0) rotate(5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(1722.5 2517.5) rotate(-25.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-strawberry" transform="translate(1855.0 2385.0) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(1987.5 2517.5) rotate(10.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-watermelon" transform="translate(2120.0 2385.0) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(2252.5 2517.5) rotate(0.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-strawberry" transform="translate(2385.0 2385.0) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(2517.5 2517.5) rotate(5.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-watermelon" transform="translate(2650.0 2385.0) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(2782.5 2517.5) rotate(-20.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-strawberry" transform="translate(2915.0 2385.0) rotate(-5.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(3047.5 2517.5) rotate(-5.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-watermelon" transform="translate(3180.0 2385.0) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(3312.5 2517.5) rotate(-5.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-strawberry" transform="translate(3445.0 2385.0) rotate(0.0) scale(3.1875) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(3577.5 2517.5) rotate(5.0) scale(0.8125) translate(-24 -24)" opacity="0.45"/>
+</g>
+</svg>
