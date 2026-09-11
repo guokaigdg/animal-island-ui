@@ -2,9 +2,9 @@ import React from 'react';
 
 /**
  * 进度条组件支持的尺寸
- *  - small:  12px 高度
- *  - middle: 20px 高度（默认）
- *  - large:  28px 高度
+ *  - small:  14px 高度
+ *  - middle: 24px 高度（默认）
+ *  - large:  32px 高度
  */
 export type ProgressSize = 'small' | 'middle' | 'large';
 
@@ -16,6 +16,15 @@ export type ProgressSize = 'small' | 'middle' | 'large';
  */
 export type ProgressInfoPosition = 'inside' | 'right' | 'top';
 
+/**
+ * 进度条 fill 背景场景图
+ *  - sweet-corner: 甜点店角（默认）
+ *  - forest-grove: 森林树丛
+ *  - starry-camp:  星空露营
+ *  - coffee-break: 咖啡时光
+ */
+export type ProgressVariant = 'sweet-corner' | 'forest-grove' | 'starry-camp' | 'coffee-break';
+
 export interface ProgressProps {
     /** 当前百分比，0–100 */
     percent: number;
@@ -25,6 +34,8 @@ export interface ProgressProps {
     showInfo?: boolean;
     /** 百分比文字位置 */
     infoPosition?: ProgressInfoPosition;
+    /** fill 背景场景图（默认 sweet-corner） */
+    variant?: ProgressVariant;
     /** 自定义文字格式化（默认 `${percent}%`） */
     infoFormat?: (percent: number) => React.ReactNode;
     /** 进度条 fill 宽度动画时长（秒），0 = 不动画；不影响斜纹滚动 */

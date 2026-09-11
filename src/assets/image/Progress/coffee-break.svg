@@ -1,0 +1,429 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2560" height="1440" viewBox="0 0 2560 1440" role="img" aria-label="Coffee Break">
+<defs>
+<g id="i-clock"><circle cx="24" cy="24" r="18" fill="#2A9D8F"/>
+<path d="M24 24 L24 13" stroke="#FFFFFF" stroke-width="3"/>
+<path d="M24 24 L33 28" stroke="#FFFFFF" stroke-width="3"/>
+<circle cx="24" cy="24" r="2" fill="#2A2A2A"/></g>
+<g id="i-coffee"><path d="M10 22 L10 36 C 10 40 14 42 18 42 L28 42 C 32 42 36 40 36 36 L36 22 Z" fill="#8B5E3C"/>
+<path d="M36 26 C 42 26 42 34 36 34" fill="#8B5E3C"/>
+<path d="M16 10 C 16 14 20 14 20 18" stroke="#2A2A2A" stroke-width="2"/>
+<path d="M22 10 C 22 14 26 14 26 18" stroke="#2A2A2A" stroke-width="2"/>
+<path d="M28 10 C 28 14 32 14 32 18" stroke="#2A2A2A" stroke-width="2"/></g>
+<g id="i-heart"><path d="M24 40 C 8 30 4 18 12 12 C 18 8 22 12 24 16 C 26 12 30 8 36 12 C 44 18 40 30 24 40 Z" fill="#E76F51"/>
+<circle cx="18" cy="20" r="1.5" fill="#2A2A2A"/>
+<circle cx="30" cy="20" r="1.5" fill="#2A2A2A"/></g>
+<pattern id="dots" width="125.0" height="125.0" patternUnits="userSpaceOnUse"><circle cx="62.5" cy="62.5" r="5" fill="#E0C9A8" opacity="0.27"/></pattern>
+</defs>
+<rect width="2560" height="1440" fill="#F3E5D0"/>
+<rect width="2560" height="1440" fill="url(#dots)"/>
+<g>
+<use href="#i-coffee" transform="translate(-500.0 -500.0) rotate(-5.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(-375.0 -375.0) rotate(20.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-clock" transform="translate(-250.0 -500.0) rotate(5.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(-125.0 -375.0) rotate(-15.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-coffee" transform="translate(0.0 -500.0) rotate(0.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(125.0 -375.0) rotate(0.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-clock" transform="translate(250.0 -500.0) rotate(-5.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(375.0 -375.0) rotate(15.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-coffee" transform="translate(500.0 -500.0) rotate(5.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(625.0 -375.0) rotate(-15.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-clock" transform="translate(750.0 -500.0) rotate(-5.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(875.0 -375.0) rotate(-20.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-coffee" transform="translate(1000.0 -500.0) rotate(5.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(1125.0 -375.0) rotate(25.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-clock" transform="translate(1250.0 -500.0) rotate(0.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(1375.0 -375.0) rotate(-5.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-coffee" transform="translate(1500.0 -500.0) rotate(5.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(1625.0 -375.0) rotate(-10.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-clock" transform="translate(1750.0 -500.0) rotate(-5.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(1875.0 -375.0) rotate(15.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-coffee" transform="translate(2000.0 -500.0) rotate(0.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(2125.0 -375.0) rotate(-5.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-clock" transform="translate(2250.0 -500.0) rotate(-10.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(2375.0 -375.0) rotate(5.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-coffee" transform="translate(2500.0 -500.0) rotate(5.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(2625.0 -375.0) rotate(-20.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-clock" transform="translate(2750.0 -500.0) rotate(-10.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(2875.0 -375.0) rotate(-25.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-coffee" transform="translate(3000.0 -500.0) rotate(-5.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(3125.0 -375.0) rotate(-20.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-clock" transform="translate(3250.0 -500.0) rotate(10.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(3375.0 -375.0) rotate(-15.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-coffee" transform="translate(3500.0 -500.0) rotate(-5.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(3625.0 -375.0) rotate(-10.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-clock" transform="translate(-500.0 -250.0) rotate(0.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(-375.0 -125.0) rotate(-10.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-coffee" transform="translate(-250.0 -250.0) rotate(0.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(-125.0 -125.0) rotate(-25.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-clock" transform="translate(0.0 -250.0) rotate(5.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(125.0 -125.0) rotate(10.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-coffee" transform="translate(250.0 -250.0) rotate(-10.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(375.0 -125.0) rotate(10.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-clock" transform="translate(500.0 -250.0) rotate(-5.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(625.0 -125.0) rotate(-10.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-coffee" transform="translate(750.0 -250.0) rotate(-5.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(875.0 -125.0) rotate(20.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-clock" transform="translate(1000.0 -250.0) rotate(-10.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(1125.0 -125.0) rotate(0.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-coffee" transform="translate(1250.0 -250.0) rotate(-5.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(1375.0 -125.0) rotate(20.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-clock" transform="translate(1500.0 -250.0) rotate(5.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(1625.0 -125.0) rotate(-5.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-coffee" transform="translate(1750.0 -250.0) rotate(5.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(1875.0 -125.0) rotate(10.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-clock" transform="translate(2000.0 -250.0) rotate(10.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(2125.0 -125.0) rotate(-25.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-coffee" transform="translate(2250.0 -250.0) rotate(10.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(2375.0 -125.0) rotate(15.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-clock" transform="translate(2500.0 -250.0) rotate(-10.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(2625.0 -125.0) rotate(10.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-coffee" transform="translate(2750.0 -250.0) rotate(0.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(2875.0 -125.0) rotate(-10.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-clock" transform="translate(3000.0 -250.0) rotate(10.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(3125.0 -125.0) rotate(15.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-coffee" transform="translate(3250.0 -250.0) rotate(-5.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(3375.0 -125.0) rotate(-15.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-clock" transform="translate(3500.0 -250.0) rotate(10.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(3625.0 -125.0) rotate(20.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-coffee" transform="translate(-500.0 0.0) rotate(0.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(-375.0 125.0) rotate(25.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-clock" transform="translate(-250.0 0.0) rotate(-5.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(-125.0 125.0) rotate(15.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-coffee" transform="translate(0.0 0.0) rotate(5.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(125.0 125.0) rotate(10.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-clock" transform="translate(250.0 0.0) rotate(-5.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(375.0 125.0) rotate(20.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-coffee" transform="translate(500.0 0.0) rotate(-5.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(625.0 125.0) rotate(-5.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-clock" transform="translate(750.0 0.0) rotate(-5.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(875.0 125.0) rotate(10.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-coffee" transform="translate(1000.0 0.0) rotate(0.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(1125.0 125.0) rotate(-15.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-clock" transform="translate(1250.0 0.0) rotate(-5.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(1375.0 125.0) rotate(0.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-coffee" transform="translate(1500.0 0.0) rotate(0.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(1625.0 125.0) rotate(5.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-clock" transform="translate(1750.0 0.0) rotate(10.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(1875.0 125.0) rotate(10.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-coffee" transform="translate(2000.0 0.0) rotate(-5.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(2125.0 125.0) rotate(-10.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-clock" transform="translate(2250.0 0.0) rotate(0.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(2375.0 125.0) rotate(-15.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-coffee" transform="translate(2500.0 0.0) rotate(5.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(2625.0 125.0) rotate(-10.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-clock" transform="translate(2750.0 0.0) rotate(0.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(2875.0 125.0) rotate(-15.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-coffee" transform="translate(3000.0 0.0) rotate(5.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(3125.0 125.0) rotate(0.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-clock" transform="translate(3250.0 0.0) rotate(0.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(3375.0 125.0) rotate(-5.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-coffee" transform="translate(3500.0 0.0) rotate(0.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(3625.0 125.0) rotate(20.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-clock" transform="translate(-500.0 250.0) rotate(-10.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(-375.0 375.0) rotate(-20.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-coffee" transform="translate(-250.0 250.0) rotate(-10.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(-125.0 375.0) rotate(-5.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-clock" transform="translate(0.0 250.0) rotate(0.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(125.0 375.0) rotate(5.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-coffee" transform="translate(250.0 250.0) rotate(-5.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(375.0 375.0) rotate(10.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-clock" transform="translate(500.0 250.0) rotate(5.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(625.0 375.0) rotate(10.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-coffee" transform="translate(750.0 250.0) rotate(0.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(875.0 375.0) rotate(-5.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-clock" transform="translate(1000.0 250.0) rotate(-10.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(1125.0 375.0) rotate(10.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-coffee" transform="translate(1250.0 250.0) rotate(0.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(1375.0 375.0) rotate(10.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-clock" transform="translate(1500.0 250.0) rotate(-5.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(1625.0 375.0) rotate(15.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-coffee" transform="translate(1750.0 250.0) rotate(-5.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(1875.0 375.0) rotate(20.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-clock" transform="translate(2000.0 250.0) rotate(0.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(2125.0 375.0) rotate(-20.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-coffee" transform="translate(2250.0 250.0) rotate(5.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(2375.0 375.0) rotate(-5.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-clock" transform="translate(2500.0 250.0) rotate(-5.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(2625.0 375.0) rotate(-25.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-coffee" transform="translate(2750.0 250.0) rotate(5.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(2875.0 375.0) rotate(-5.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-clock" transform="translate(3000.0 250.0) rotate(10.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(3125.0 375.0) rotate(0.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-coffee" transform="translate(3250.0 250.0) rotate(10.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(3375.0 375.0) rotate(-10.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-clock" transform="translate(3500.0 250.0) rotate(0.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(3625.0 375.0) rotate(10.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-coffee" transform="translate(-500.0 500.0) rotate(-5.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(-375.0 625.0) rotate(5.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-clock" transform="translate(-250.0 500.0) rotate(5.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(-125.0 625.0) rotate(10.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-coffee" transform="translate(0.0 500.0) rotate(0.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(125.0 625.0) rotate(10.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-clock" transform="translate(250.0 500.0) rotate(10.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(375.0 625.0) rotate(-25.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-coffee" transform="translate(500.0 500.0) rotate(-5.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(625.0 625.0) rotate(5.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-clock" transform="translate(750.0 500.0) rotate(5.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(875.0 625.0) rotate(-20.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-coffee" transform="translate(1000.0 500.0) rotate(0.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(1125.0 625.0) rotate(-5.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-clock" transform="translate(1250.0 500.0) rotate(5.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(1375.0 625.0) rotate(5.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-coffee" transform="translate(1500.0 500.0) rotate(5.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(1625.0 625.0) rotate(20.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-clock" transform="translate(1750.0 500.0) rotate(5.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(1875.0 625.0) rotate(15.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-coffee" transform="translate(2000.0 500.0) rotate(-5.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(2125.0 625.0) rotate(10.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-clock" transform="translate(2250.0 500.0) rotate(0.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(2375.0 625.0) rotate(20.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-coffee" transform="translate(2500.0 500.0) rotate(5.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(2625.0 625.0) rotate(5.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-clock" transform="translate(2750.0 500.0) rotate(5.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(2875.0 625.0) rotate(20.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-coffee" transform="translate(3000.0 500.0) rotate(5.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(3125.0 625.0) rotate(15.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-clock" transform="translate(3250.0 500.0) rotate(5.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(3375.0 625.0) rotate(-5.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-coffee" transform="translate(3500.0 500.0) rotate(0.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(3625.0 625.0) rotate(-10.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-clock" transform="translate(-500.0 750.0) rotate(0.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(-375.0 875.0) rotate(-5.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-coffee" transform="translate(-250.0 750.0) rotate(0.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(-125.0 875.0) rotate(-20.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-clock" transform="translate(0.0 750.0) rotate(0.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(125.0 875.0) rotate(5.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-coffee" transform="translate(250.0 750.0) rotate(-5.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(375.0 875.0) rotate(20.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-clock" transform="translate(500.0 750.0) rotate(5.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(625.0 875.0) rotate(5.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-coffee" transform="translate(750.0 750.0) rotate(-10.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(875.0 875.0) rotate(-15.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-clock" transform="translate(1000.0 750.0) rotate(-5.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(1125.0 875.0) rotate(-25.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-coffee" transform="translate(1250.0 750.0) rotate(5.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(1375.0 875.0) rotate(5.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-clock" transform="translate(1500.0 750.0) rotate(0.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(1625.0 875.0) rotate(-25.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-coffee" transform="translate(1750.0 750.0) rotate(5.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(1875.0 875.0) rotate(-20.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-clock" transform="translate(2000.0 750.0) rotate(0.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(2125.0 875.0) rotate(20.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-coffee" transform="translate(2250.0 750.0) rotate(-5.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(2375.0 875.0) rotate(20.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-clock" transform="translate(2500.0 750.0) rotate(0.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(2625.0 875.0) rotate(-25.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-coffee" transform="translate(2750.0 750.0) rotate(-10.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(2875.0 875.0) rotate(-20.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-clock" transform="translate(3000.0 750.0) rotate(-5.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(3125.0 875.0) rotate(-20.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-coffee" transform="translate(3250.0 750.0) rotate(5.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(3375.0 875.0) rotate(5.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-clock" transform="translate(3500.0 750.0) rotate(5.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(3625.0 875.0) rotate(-25.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-coffee" transform="translate(-500.0 1000.0) rotate(5.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(-375.0 1125.0) rotate(-5.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-clock" transform="translate(-250.0 1000.0) rotate(5.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(-125.0 1125.0) rotate(-10.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-coffee" transform="translate(0.0 1000.0) rotate(-5.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(125.0 1125.0) rotate(-25.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-clock" transform="translate(250.0 1000.0) rotate(-5.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(375.0 1125.0) rotate(10.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-coffee" transform="translate(500.0 1000.0) rotate(5.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(625.0 1125.0) rotate(10.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-clock" transform="translate(750.0 1000.0) rotate(10.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(875.0 1125.0) rotate(-20.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-coffee" transform="translate(1000.0 1000.0) rotate(-5.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(1125.0 1125.0) rotate(25.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-clock" transform="translate(1250.0 1000.0) rotate(0.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(1375.0 1125.0) rotate(-25.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-coffee" transform="translate(1500.0 1000.0) rotate(0.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(1625.0 1125.0) rotate(15.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-clock" transform="translate(1750.0 1000.0) rotate(10.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(1875.0 1125.0) rotate(0.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-coffee" transform="translate(2000.0 1000.0) rotate(0.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(2125.0 1125.0) rotate(25.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-clock" transform="translate(2250.0 1000.0) rotate(5.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(2375.0 1125.0) rotate(-10.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-coffee" transform="translate(2500.0 1000.0) rotate(0.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(2625.0 1125.0) rotate(-20.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-clock" transform="translate(2750.0 1000.0) rotate(-5.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(2875.0 1125.0) rotate(15.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-coffee" transform="translate(3000.0 1000.0) rotate(0.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(3125.0 1125.0) rotate(0.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-clock" transform="translate(3250.0 1000.0) rotate(0.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(3375.0 1125.0) rotate(-10.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-coffee" transform="translate(3500.0 1000.0) rotate(0.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(3625.0 1125.0) rotate(0.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-clock" transform="translate(-500.0 1250.0) rotate(-5.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(-375.0 1375.0) rotate(0.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-coffee" transform="translate(-250.0 1250.0) rotate(0.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(-125.0 1375.0) rotate(-5.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-clock" transform="translate(0.0 1250.0) rotate(-5.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(125.0 1375.0) rotate(20.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-coffee" transform="translate(250.0 1250.0) rotate(10.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(375.0 1375.0) rotate(-25.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-clock" transform="translate(500.0 1250.0) rotate(-5.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(625.0 1375.0) rotate(5.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-coffee" transform="translate(750.0 1250.0) rotate(-5.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(875.0 1375.0) rotate(0.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-clock" transform="translate(1000.0 1250.0) rotate(-10.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(1125.0 1375.0) rotate(25.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-coffee" transform="translate(1250.0 1250.0) rotate(10.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(1375.0 1375.0) rotate(-15.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-clock" transform="translate(1500.0 1250.0) rotate(0.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(1625.0 1375.0) rotate(15.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-coffee" transform="translate(1750.0 1250.0) rotate(-5.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(1875.0 1375.0) rotate(0.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-clock" transform="translate(2000.0 1250.0) rotate(0.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(2125.0 1375.0) rotate(25.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-coffee" transform="translate(2250.0 1250.0) rotate(10.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(2375.0 1375.0) rotate(-15.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-clock" transform="translate(2500.0 1250.0) rotate(0.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(2625.0 1375.0) rotate(-15.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-coffee" transform="translate(2750.0 1250.0) rotate(0.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(2875.0 1375.0) rotate(-20.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-clock" transform="translate(3000.0 1250.0) rotate(-5.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(3125.0 1375.0) rotate(20.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-coffee" transform="translate(3250.0 1250.0) rotate(0.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(3375.0 1375.0) rotate(-10.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-clock" transform="translate(3500.0 1250.0) rotate(0.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(3625.0 1375.0) rotate(0.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-coffee" transform="translate(-500.0 1500.0) rotate(0.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(-375.0 1625.0) rotate(-15.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-clock" transform="translate(-250.0 1500.0) rotate(-5.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(-125.0 1625.0) rotate(-10.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-coffee" transform="translate(0.0 1500.0) rotate(0.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(125.0 1625.0) rotate(0.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-clock" transform="translate(250.0 1500.0) rotate(-5.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(375.0 1625.0) rotate(-10.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-coffee" transform="translate(500.0 1500.0) rotate(-5.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(625.0 1625.0) rotate(-20.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-clock" transform="translate(750.0 1500.0) rotate(0.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(875.0 1625.0) rotate(10.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-coffee" transform="translate(1000.0 1500.0) rotate(-5.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(1125.0 1625.0) rotate(5.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-clock" transform="translate(1250.0 1500.0) rotate(5.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(1375.0 1625.0) rotate(0.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-coffee" transform="translate(1500.0 1500.0) rotate(-10.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(1625.0 1625.0) rotate(-15.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-clock" transform="translate(1750.0 1500.0) rotate(10.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(1875.0 1625.0) rotate(5.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-coffee" transform="translate(2000.0 1500.0) rotate(-5.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(2125.0 1625.0) rotate(0.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-clock" transform="translate(2250.0 1500.0) rotate(-5.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(2375.0 1625.0) rotate(20.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-coffee" transform="translate(2500.0 1500.0) rotate(-10.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(2625.0 1625.0) rotate(-5.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-clock" transform="translate(2750.0 1500.0) rotate(-5.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(2875.0 1625.0) rotate(5.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-coffee" transform="translate(3000.0 1500.0) rotate(5.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(3125.0 1625.0) rotate(-25.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-clock" transform="translate(3250.0 1500.0) rotate(-10.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(3375.0 1625.0) rotate(25.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-coffee" transform="translate(3500.0 1500.0) rotate(-10.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(3625.0 1625.0) rotate(-10.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-clock" transform="translate(-500.0 1750.0) rotate(0.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(-375.0 1875.0) rotate(15.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-coffee" transform="translate(-250.0 1750.0) rotate(5.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(-125.0 1875.0) rotate(10.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-clock" transform="translate(0.0 1750.0) rotate(0.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(125.0 1875.0) rotate(0.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-coffee" transform="translate(250.0 1750.0) rotate(-5.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(375.0 1875.0) rotate(15.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-clock" transform="translate(500.0 1750.0) rotate(0.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(625.0 1875.0) rotate(0.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-coffee" transform="translate(750.0 1750.0) rotate(5.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(875.0 1875.0) rotate(-15.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-clock" transform="translate(1000.0 1750.0) rotate(5.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(1125.0 1875.0) rotate(15.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-coffee" transform="translate(1250.0 1750.0) rotate(0.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(1375.0 1875.0) rotate(-15.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-clock" transform="translate(1500.0 1750.0) rotate(-5.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(1625.0 1875.0) rotate(-25.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-coffee" transform="translate(1750.0 1750.0) rotate(-5.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(1875.0 1875.0) rotate(20.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-clock" transform="translate(2000.0 1750.0) rotate(-10.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(2125.0 1875.0) rotate(-10.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-coffee" transform="translate(2250.0 1750.0) rotate(-10.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(2375.0 1875.0) rotate(-15.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-clock" transform="translate(2500.0 1750.0) rotate(0.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(2625.0 1875.0) rotate(-10.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-coffee" transform="translate(2750.0 1750.0) rotate(10.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(2875.0 1875.0) rotate(25.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-clock" transform="translate(3000.0 1750.0) rotate(-5.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(3125.0 1875.0) rotate(-15.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-coffee" transform="translate(3250.0 1750.0) rotate(10.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(3375.0 1875.0) rotate(10.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-clock" transform="translate(3500.0 1750.0) rotate(0.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(3625.0 1875.0) rotate(-25.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-coffee" transform="translate(-500.0 2000.0) rotate(5.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(-375.0 2125.0) rotate(-10.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-clock" transform="translate(-250.0 2000.0) rotate(10.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(-125.0 2125.0) rotate(10.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-coffee" transform="translate(0.0 2000.0) rotate(10.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(125.0 2125.0) rotate(0.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-clock" transform="translate(250.0 2000.0) rotate(-5.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(375.0 2125.0) rotate(-5.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-coffee" transform="translate(500.0 2000.0) rotate(5.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(625.0 2125.0) rotate(-25.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-clock" transform="translate(750.0 2000.0) rotate(10.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(875.0 2125.0) rotate(-10.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-coffee" transform="translate(1000.0 2000.0) rotate(-5.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(1125.0 2125.0) rotate(0.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-clock" transform="translate(1250.0 2000.0) rotate(5.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(1375.0 2125.0) rotate(-25.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-coffee" transform="translate(1500.0 2000.0) rotate(-5.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(1625.0 2125.0) rotate(0.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-clock" transform="translate(1750.0 2000.0) rotate(5.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(1875.0 2125.0) rotate(-20.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-coffee" transform="translate(2000.0 2000.0) rotate(10.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(2125.0 2125.0) rotate(-15.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-clock" transform="translate(2250.0 2000.0) rotate(-5.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(2375.0 2125.0) rotate(-25.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-coffee" transform="translate(2500.0 2000.0) rotate(-5.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(2625.0 2125.0) rotate(15.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-clock" transform="translate(2750.0 2000.0) rotate(0.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(2875.0 2125.0) rotate(-20.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-coffee" transform="translate(3000.0 2000.0) rotate(0.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(3125.0 2125.0) rotate(10.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-clock" transform="translate(3250.0 2000.0) rotate(0.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(3375.0 2125.0) rotate(-25.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-coffee" transform="translate(3500.0 2000.0) rotate(-5.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(3625.0 2125.0) rotate(-10.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-clock" transform="translate(-500.0 2250.0) rotate(-5.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(-375.0 2375.0) rotate(-5.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-coffee" transform="translate(-250.0 2250.0) rotate(-5.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(-125.0 2375.0) rotate(0.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-clock" transform="translate(0.0 2250.0) rotate(0.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(125.0 2375.0) rotate(-10.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-coffee" transform="translate(250.0 2250.0) rotate(5.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(375.0 2375.0) rotate(10.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-clock" transform="translate(500.0 2250.0) rotate(0.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(625.0 2375.0) rotate(15.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-coffee" transform="translate(750.0 2250.0) rotate(0.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(875.0 2375.0) rotate(15.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-clock" transform="translate(1000.0 2250.0) rotate(-5.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(1125.0 2375.0) rotate(-20.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-coffee" transform="translate(1250.0 2250.0) rotate(-10.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(1375.0 2375.0) rotate(0.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-clock" transform="translate(1500.0 2250.0) rotate(-10.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(1625.0 2375.0) rotate(15.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-coffee" transform="translate(1750.0 2250.0) rotate(5.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(1875.0 2375.0) rotate(20.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-clock" transform="translate(2000.0 2250.0) rotate(-5.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(2125.0 2375.0) rotate(15.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-coffee" transform="translate(2250.0 2250.0) rotate(5.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(2375.0 2375.0) rotate(10.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-clock" transform="translate(2500.0 2250.0) rotate(0.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(2625.0 2375.0) rotate(-25.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-coffee" transform="translate(2750.0 2250.0) rotate(-5.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(2875.0 2375.0) rotate(20.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-clock" transform="translate(3000.0 2250.0) rotate(5.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(3125.0 2375.0) rotate(10.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-coffee" transform="translate(3250.0 2250.0) rotate(5.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(3375.0 2375.0) rotate(-5.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+<use href="#i-clock" transform="translate(3500.0 2250.0) rotate(5.0) scale(3.1250) translate(-24 -24)"/>
+<use href="#i-heart" transform="translate(3625.0 2375.0) rotate(20.0) scale(0.7708) translate(-24 -24)" opacity="0.45"/>
+</g>
+</svg>

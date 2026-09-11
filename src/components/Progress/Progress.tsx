@@ -1,7 +1,18 @@
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import classNames from 'classnames';
-import { ProgressSize, ProgressProps } from './types';
+import { ProgressSize, ProgressProps, ProgressVariant } from './types';
 import styles from './progress.module.less';
+import sweetCorner from '../../assets/image/Progress/sweet-corner.svg';
+import forestGrove from '../../assets/image/Progress/forest-grove.svg';
+import starryCamp from '../../assets/image/Progress/starry-camp.svg';
+import coffeeBreak from '../../assets/image/Progress/coffee-break.svg';
+
+const VARIANT_BG: Record<ProgressVariant, string> = {
+    'sweet-corner': sweetCorner,
+    'forest-grove': forestGrove,
+    'starry-camp': starryCamp,
+    'coffee-break': coffeeBreak,
+};
 
 const SIZE_CLASS: Record<ProgressSize, string> = {
     small: styles['size-small']!,
@@ -15,6 +26,7 @@ const INSIDE_MIN_FILL = 18;
 export const Progress: React.FC<ProgressProps> = ({
     percent,
     size = 'middle',
+    variant = 'sweet-corner',
     showInfo = true,
     infoPosition = 'inside',
     infoFormat,
@@ -34,9 +46,32 @@ export const Progress: React.FC<ProgressProps> = ({
         return `${Math.round(safePercent)}%`;
     }, [infoFormat, safePercent]);
 
+    // track 宽度（px）：图片按整条轨道宽度铺满（取上部），fill 只显示左侧进度宽的部分 = 从左揭开
+    const trackRef = useRef<HTMLDivElement | null>(null);
+    const [trackW, setTrackW] = useState(0);
+    useEffect(() => {
+        const el = trackRef.current;
+        if (!el) return;
+        if (typeof ResizeObserver === 'undefined') {
+            setTrackW(el.clientWidth);
+            return;
+        }
+        const ro = new ResizeObserver((entries) => {
+            setTrackW(entries[0]?.contentRect?.width ?? el.clientWidth);
+        });
+        ro.observe(el);
+        setTrackW(el.clientWidth);
+        return () => ro.disconnect();
+    }, []);
+
     const inlineFillStyle: React.CSSProperties = {
         width: `${safePercent}%`,
         transitionDuration: `${duration}s`,
+        // 图片宽度固定为整条轨道宽度（取上部，不拉伸变形）；fill 自身 overflow hidden 按进度宽度裁剪左侧 = 从左揭开
+        backgroundImage: `url(${VARIANT_BG[variant]})`,
+        backgroundRepeat: 'no-repeat',
+        backgroundPosition: 'left top',
+        backgroundSize: trackW > 0 ? `${trackW}px auto` : '100% auto',
     };
 
     // inside 模式：fill 过窄时把文字退到 track 末端右侧（避免白色文字落在沙土色 track 上看不清）
@@ -65,7 +100,7 @@ export const Progress: React.FC<ProgressProps> = ({
             {infoPosition === 'top' ? (
                 <div className={bodyCls}>
                     {showInfo && <div className={classNames(styles.info, styles.top)}>{renderedInfo}</div>}
-                    <div className={trackCls}>
+                    <div className={trackCls} ref={trackRef}>
                         <div className={fillCls} style={inlineFillStyle}>
                             {infoInsideVisible && <span className={styles.infoInside}>{renderedInfo}</span>}
                         </div>
@@ -78,7 +113,7 @@ export const Progress: React.FC<ProgressProps> = ({
                 </div>
             ) : (
                 <div className={styles.row}>
-                    <div className={trackCls}>
+                    <div className={trackCls} ref={trackRef}>
                         <div className={fillCls} style={inlineFillStyle}>
                             {infoInsideVisible && <span className={styles.infoInside}>{renderedInfo}</span>}
                         </div>

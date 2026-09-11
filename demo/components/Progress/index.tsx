@@ -57,6 +57,12 @@ const PROGRESS_API: ApiRow[] = [
     { prop: 'size', desc: '尺寸', type: `'small' | 'middle' | 'large'`, defaultVal: "'middle'" },
     { prop: 'showInfo', desc: '是否显示百分比文字', type: 'boolean', defaultVal: 'true' },
     { prop: 'infoPosition', desc: '百分比文字位置', type: `'inside' | 'right' | 'top'`, defaultVal: "'inside'" },
+    {
+        prop: 'variant',
+        desc: 'fill 背景场景图（当前进度区域显示该场景，从左揭开）',
+        type: `'sweet-corner' | 'forest-grove' | 'starry-camp' | 'coffee-break'`,
+        defaultVal: "'sweet-corner'",
+    },
     { prop: 'infoFormat', desc: '自定义文字格式化', type: '(percent: number) => ReactNode', defaultVal: '${percent}%' },
     { prop: 'duration', desc: 'fill 宽度动画时长(秒),0 = 不动画;不影响斜纹滚动', type: 'number', defaultVal: '0.6' },
     { prop: 'className', desc: '自定义类名', type: 'string', defaultVal: '-' },
@@ -111,6 +117,15 @@ const ProgressDemo: React.FC = () => {
                     <Progress percent={50} size="small" />
                     <Progress percent={50} size="middle" />
                     <Progress percent={50} size="large" />
+                </div>
+
+                {/* ---- 2.5 背景场景图 ---- */}
+                <div style={labelStyle}>variant — fill 背景场景图（当前进度区域显示场景，从左揭开）</div>
+                <div style={S.barRow}>
+                    <Progress percent={70} variant="sweet-corner" infoPosition="right" />
+                    <Progress percent={70} variant="forest-grove" infoPosition="right" />
+                    <Progress percent={70} variant="starry-camp" infoPosition="right" />
+                    <Progress percent={70} variant="coffee-break" infoPosition="right" />
                 </div>
 
                 {/* ---- 3. 文字位置 ---- */}
@@ -203,9 +218,7 @@ const ProgressDemo: React.FC = () => {
                 {/* ---- 7. 无文字 ---- */}
                 <div style={labelStyle}>showInfo=false — 只渲染条,不带文字</div>
                 <div style={S.barRow}>
-                    <Progress percent={33} showInfo={false} size="small" />
-                    <Progress percent={66} showInfo={false} size="middle" />
-                    <Progress percent={100} showInfo={false} size="large" />
+                    <Progress percent={66} showInfo={false} />
                 </div>
             </div>
 
@@ -223,6 +236,9 @@ const App = () => {
             {/* 尺寸 */}
             <Progress percent={50} size="small" />
             <Progress percent={50} size="large" />
+
+            {/* fill 背景场景图（sweet-corner 默认） */}
+            <Progress percent={50} variant="forest-grove" />
 
             {/* 文字位置 */}
             <Progress percent={pct} infoPosition="inside" />

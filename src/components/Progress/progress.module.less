@@ -1,12 +1,10 @@
 // ============================================
 // Progress — Animal Island Style
-// 进度条，fill 复用 Button loading 的 -45° 斜纹动画
+// 进度条，fill（当前进度）背景为 sweet-corner.svg 场景图（组件内联注入）
 // ============================================
 
 // ---------- Tokens (avoid importing variables.less in module CSS) ----------
-@stripe-bg: #0ec4b6;
-@stripe-bg-2: #01b0a7;
-@stripe-size: 10px; // 与 Button loading 保持一致（10px 单段 + 10px 双段 = 20px 周期）
+@stripe-bg: #0ec4b6; // fill 底色兜底（背景图加载前）
 
 @track-bg: #f8f8f0;
 @track-border: #e8dcc8;
@@ -80,19 +78,19 @@
 }
 
 .track.size-small {
-    height: 12px;
+    height: 14px;
     border-width: 1.5px;
 }
 
 .track.size-middle {
-    height: 20px;
+    height: 24px;
 }
 
 .track.size-large {
-    height: 28px;
+    height: 32px;
 }
 
-// ---------- Fill (Button loading 风格斜纹) ----------
+// ---------- Fill (当前进度：sweet-corner.svg 场景图铺满，由 Progress.tsx 内联背景注入) ----------
 .fill {
     position: absolute;
     top: 0;
@@ -100,17 +98,8 @@
     bottom: 0;
     width: 0;
     border-radius: 999px;
-    background: @stripe-bg;
-    background-image: repeating-linear-gradient(
-        -45deg,
-        @stripe-bg 0,
-        @stripe-bg @stripe-size,
-        @stripe-bg-2 @stripe-size,
-        @stripe-bg-2 (@stripe-size * 2)
-    );
-    // 28.28px = 10px * √2(条纹沿水平方向投影的步进)，与 Button loading 完全一致
-    background-size: 28.28px 28.28px;
-    animation: animal-progress-stripe 1s linear infinite;
+    // 底色兜底；实际背景图（sweet-corner.svg，cover 铺满）由组件内联样式注入，替换原 -45° 条纹
+    background-color: @stripe-bg;
     transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
     overflow: hidden;
     display: flex;
@@ -121,15 +110,6 @@
 
 .fill.noTransition {
     transition: none;
-}
-
-@keyframes animal-progress-stripe {
-    0% {
-        background-position: 0 0;
-    }
-    100% {
-        background-position: -28.28px 0;
-    }
 }
 
 // ---------- Info text (inside fill) ----------
@@ -161,6 +141,5 @@
 @media (prefers-reduced-motion: reduce) {
     .fill {
         transition: none;
-        animation: none;
     }
 }

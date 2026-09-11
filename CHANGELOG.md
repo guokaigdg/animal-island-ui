@@ -5,16 +5,24 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [1.11.0] - 2026-09-11
 
 ### Added
 
+- `Background` 组件扩展为 16 种图案类型（含 `grid`、`sprinkles` 及 13 种 `dots-*`）
 - 工具链：ESLint flat config + CI workflow + EditorConfig
 
 ### Changed
 
+- `Divider` 移除锯齿线 `line-*` 变体，仅保留虚线 `dashed-*`（破坏性变更）
 - `Icon` 组件改用内置可爱图标集（101 个），`name` 支持帕斯卡命名（如 `<Icon name="HeartIcon" />`），并移除 `lucide-react` 运行时依赖（运行时依赖归零）；库根同时导出全部 101 个图标组件
 - `DatePicker` 翻页箭头由 lucide 迁移为内联 SVG
+- `Collapse` 展开装饰 SVG 改用 `Fish` 图标
+- `Input` / `Table` 样式细节优化
+
+### Removed
+
+- `Divider` 移除 `line-*` 变体（破坏性变更）
 
 ## [1.9.0] - 2026-09-04
 
