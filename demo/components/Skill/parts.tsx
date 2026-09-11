@@ -51,7 +51,7 @@ export const ScenarioCard: React.FC<{ scenario: Scenario }> = ({ scenario }) => 
         <p className={`${styles.cardDesc} ${styles.scenarioDesc}`}>{scenario.desc}</p>
         <div className={styles.agentRow}>
             {scenario.agents.map((agent) => (
-                <Tag key={agent} size="small" variant="outlined">
+                <Tag key={agent} size="small" variant="outlined" className={styles.pathChip}>
                     {agent}
                 </Tag>
             ))}

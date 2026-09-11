@@ -484,7 +484,7 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
         let guard = 0;
         while (placed.length < count && guard < 2000) {
             guard++;
-            const size = 380 + Math.random() * 140;
+            const size = 430 + Math.random() * 160;
             const left = 4 + Math.random() * 92;
             const top = 4 + Math.random() * 92;
             const cx = (left / 100) * vw;
@@ -538,7 +538,7 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                             size={g.size}
                             color="#ffffff"
                             style={{
-                                opacity: 0.58,
+                                opacity: 0.68, // Home Icon 透明度
                                 animation: `iconFloat ${5.5 + (i % 3)}s ease-in-out ${-i * 1.2}s infinite`,
                             }}
                         />
