@@ -37,6 +37,95 @@
         0 -6px 16px -6px rgba(0, 0, 0, 0.03);
 }
 
+// stamp：邮票变体。奶油底纸 + 四周齿孔 + 半色调网点。
+// 齿孔做法：四条边各一条「带半圆缺口」的贴边条带（radial-gradient 平铺），
+// 四条条带用 mask-composite: intersect 求交集，得到四边都有齿孔的邮票外形。
+// 孔径 10px、孔距 16px 恒定，任意宽高比都不变形
+// （曾用 240×176 固定 SVG 以 100% 100% 拉伸，宽高比不同时齿孔会被拉成椭圆，已弃用）。
+// 注：不要改回「实心基底 − 四条孔带」的 subtract 写法——mask-composite 的算子列表
+// 只会逐层作用于过渡，Chrome 下其余边会回退成叠加，导致只有第一条边出现齿孔。
+.variant-stamp {
+    // 齿孔参数：孔半径 5px（孔径 10px）、孔距 16px——与真实邮票冲孔比例一致
+    @hole: 5px;
+    @pitch: 16px;
+
+    border: none;
+    padding: 14px; // 齿孔内侧照片内缩，对应真实邮票留白边
+    background: #fbfaf5; // 邮票底纸暖白
+    border-radius: 0;
+    box-shadow: none;
+
+    // 上/下/左/右四条贴边条带：条带只在本边挖半圆缺口，其余为实心，四者求交 = 四边齿孔
+    -webkit-mask-image:
+        radial-gradient(circle @hole at 50% 0, transparent 96%, #000),
+        radial-gradient(circle @hole at 50% 100%, transparent 96%, #000),
+        radial-gradient(circle @hole at 0 50%, transparent 96%, #000),
+        radial-gradient(circle @hole at 100% 50%, transparent 96%, #000);
+    -webkit-mask-position:
+        50% 0,
+        50% 100%,
+        0 50%,
+        100% 50%;
+    -webkit-mask-size:
+        @pitch 100%,
+        @pitch 100%,
+        100% @pitch,
+        100% @pitch;
+    -webkit-mask-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
+    -webkit-mask-composite: source-in, source-in, source-in, source-in; // 旧 Safari：source-in = 交集
+    mask-image:
+        radial-gradient(circle @hole at 50% 0, transparent 96%, #000),
+        radial-gradient(circle @hole at 50% 100%, transparent 96%, #000),
+        radial-gradient(circle @hole at 0 50%, transparent 96%, #000),
+        radial-gradient(circle @hole at 100% 50%, transparent 96%, #000);
+    mask-position:
+        50% 0,
+        50% 100%,
+        0 50%,
+        100% 50%;
+    mask-size:
+        @pitch 100%,
+        @pitch 100%,
+        100% @pitch,
+        100% @pitch;
+    mask-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
+    mask-composite: intersect, intersect, intersect, intersect;
+
+    // 阴影用 filter 的 drop-shadow（mask 会裁剪 box-shadow），双层阴影还原原版邮票浮起质感
+    filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.35)) drop-shadow(0 16px 26px rgba(0, 0, 0, 0.45));
+
+    // 照片印刷质感：轻微降饱和 + 提对比（原版 .stamp-photo 同款）
+    .img {
+        filter: saturate(0.93) contrast(1.03);
+    }
+}
+
+// 邮票照片上的半色调网点印刷质感
+.variant-stamp::after {
+    content: '';
+    position: absolute;
+    inset: 14px;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.13;
+    background-image: radial-gradient(circle, rgba(18, 18, 28, 0.6) 0.6px, transparent 0.75px);
+    background-size: 4px 4px;
+}
+
+// ---------- 邮票文字覆盖层（仅 variant='stamp' 且传入对应 prop 时渲染） ----------
+// 年份：右上角，白字 + 暗阴影，印在照片上
+.variant-stamp .stamp-year {
+    position: absolute;
+    right: 19px;
+    top: 18px;
+    z-index: 2;
+    font-size: 8px;
+    letter-spacing: 0.18em;
+    color: rgba(255, 255, 255, 0.88);
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.55);
+    pointer-events: none;
+}
+
 .img {
     display: block;
     width: 100%;

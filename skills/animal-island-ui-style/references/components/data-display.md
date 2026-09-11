@@ -157,21 +157,7 @@ Notes:
 ## Image
 
 ```ts
-type ImageColor =
-    | 'white'
-    | 'default'
-    | 'app-pink'
-    | 'purple'
-    | 'app-blue'
-    | 'app-yellow'
-    | 'app-orange'
-    | 'app-teal'
-    | 'app-green'
-    | 'app-red'
-    | 'lime-green'
-    | 'yellow-green'
-    | 'brown'
-    | 'warm-peach-pink';
+type ImageColor = 'white' | 'default' | 'app-pink' | 'purple' | 'app-blue' | 'app-yellow' | 'app-orange' | 'app-teal' | 'app-green' | 'app-red' | 'lime-green' | 'yellow-green' | 'brown' | 'warm-peach-pink';
 
 interface ImageProps extends Omit<React.ImgHTMLAttributes<HTMLImageElement>, 'src' | 'alt' | 'width' | 'height' | 'onLoad' | 'onError'> {
     src: string; // REQUIRED
@@ -179,6 +165,8 @@ interface ImageProps extends Omit<React.ImgHTMLAttributes<HTMLImageElement>, 'sr
     width?: number | string;
     height?: number | string;
     color?: ImageColor; // default 'white' — plain #fff; others are the Card pattern base colours (pastel, no dots)
+    variant?: 'default' | 'bordered' | 'stamp'; // default 'default' — frame treatment; 'stamp' = postage-stamp border, perforated on all 4 edges (cream paper + halftone)
+    stampYear?: string; // variant='stamp' only — issue year (e.g. "2026"), top-right on the photo
     lazy?: boolean; // default false — maps to native loading="lazy"
     preview?: boolean; // default true — click opens a lightbox (ESC / mask / close button)
     onLoad?: (e: React.SyntheticEvent<HTMLImageElement>) => void;
@@ -193,6 +181,10 @@ interface ImageProps extends Omit<React.ImgHTMLAttributes<HTMLImageElement>, 'sr
 <Image src="/photo.png" alt="懒加载" lazy />
 <Image src="/photo.png" alt="预览" width={200} height={130} preview />
 <Image src="/broken.png" alt="失败" width={140} height={140} />
+{/* 邮票类型：四周齿孔 + 暖白底纸；可选 stampYear 印发行年份 */}
+<Image src="/photo.png" alt="邮票（带年份）" width={240} height={176} variant="stamp" stampYear="2026" />
+{/* 仅齿孔边框，不印文字 */}
+<Image src="/photo.png" alt="纯邮票边框" width={240} height={176} variant="stamp" />
 ```
 
 > Renders a `<img>` in a fixed mat frame (`#fff` plain background for `color="white"`; every other `color` is the Card `pattern` base colour — soft pastel, no dotted overlay — 12px padding so the image sits inset, 8px rounded corners, `0 8px 14px 0 rgba(0,0,0,0.08)` shadow, no border, `overflow: hidden` + `line-height: 0`). `width`/`height` apply to the frame while the image fills it at 100%. The image stays hidden (`opacity: 0`) until `onLoad` fades it in; on error it renders a built-in placeholder (`role="img"` + `aria-label`). With `preview` (on by default), the frame becomes a `<button>` and clicking opens a portaled lightbox (`role="dialog"` + `aria-modal`, name from `alt`) — close via ESC, the mask, or the top-right close button; focus is moved to the close button on open and restored on close.

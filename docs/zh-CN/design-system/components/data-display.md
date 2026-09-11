@@ -395,6 +395,31 @@ tab-size: 4;
 .image-warm-peach-pink { background: #fff0e8; color: #8a4a2a; }
 ```
 
+**相框变体**（`variant` prop，默认 `'default'`）。三种相框共用同一 `.image` 外壳：
+
+- `default` — 无内边距、透明底、12px 圆角、分层卡片大阴影。
+- `bordered` — 柔和阴影 + 小圆角，配合上方 `color` 浅色底色。
+- `stamp` — **邮票相框**：暖白底纸 `#fbfaf5`、14px 内缩、四边齿孔、淡半色调网点（`::after`，4px 径向渐变网格，`opacity: 0.13`）与轻微降饱和。阴影用 `filter: drop-shadow` 实现（`mask` 会裁掉 `box-shadow`），悬浮时邮票上浮（`translateY(-9px) scale(1.03)`）。
+  齿孔由四条边的贴边条带构成——每边一条 `radial-gradient` 平铺，孔半径 5px / 孔距 16px（任意宽高比不变形）——再用 `mask-composite: intersect` 求交，因此**四条边**都有齿孔。不要改回「实心基底 − 四条孔带」的 `subtract` 写法：合成算子列表只会逐层作用于过渡，Chrome 下其余边会回退成叠加，导致只有第一条边出现齿孔。
+
+年份为可选文字覆盖层，仅在传入 `stampYear` 时渲染（`pointer-events: none`、`z-index: 2`，位于网点之上）：
+
+```less
+// 年份 — 右上角照片上，白字 + 暗阴影
+.variant-stamp .stamp-year { position:absolute; right:19px; top:18px; font-size:8px; letter-spacing:.18em; color:rgba(255,255,255,.88); text-shadow:0 1px 3px rgba(0,0,0,.55); }
+```
+
+```ts
+// 邮票 prop（仅 variant='stamp' 生效，可选）
+stampYear?: string; // 发行年份，如「2026」 — 右上角照片上
+```
+
+```tsx
+<Image src="/photo.jpg" alt="邮票（带年份）" width={240} height={176} variant="stamp" stampYear="2026" />
+// 仅齿孔边框、不印文字
+<Image src="/photo.jpg" alt="纯邮票边框" width={240} height={176} variant="stamp" />
+```
+
 **大图预览**（点击放大，`preview` prop，**默认开启**）。相框升格为 `<button type="button">`（原生支持 Enter / Space，`cursor: zoom-in`）；弹层经 Portal 挂到 `document.body`，避开祖先 `transform` 造成的定位上下文：
 
 ```less

@@ -395,6 +395,31 @@ Source: `src/components/Image/image.module.less`. **Mat frame**: `#fff` backgrou
 .image-warm-peach-pink { background: #fff0e8; color: #8a4a2a; }
 ```
 
+**Frame variants** (`variant` prop, default `'default'`). Three frame treatments share the same `.image` wrapper:
+
+- `default` — no padding, transparent background, 12px radius, layered card shadow (the "big shadow" look).
+- `bordered` — soft shadow + small radius; pairs with the `color` pastel backgrounds above.
+- `stamp` — **postage-stamp frame**: cream paper `#fbfaf5`, 14px inset, 4-edge perforated border, faint halftone print texture (`::after`, `radial-gradient` 4px grid, `opacity: 0.13`) and a slight photo desaturation. The shadow is rendered via `filter: drop-shadow` (a `mask` clips `box-shadow`), and hover lifts the stamp (`translateY(-9px) scale(1.03)`).
+  The perforation is built from four edge strips — one `radial-gradient` tile per edge, hole radius 5px / pitch 16px (constant at any aspect ratio) — combined with `mask-composite: intersect`, so **all four edges** are scalloped. Do **not** switch back to the "solid base − 4 hole strips" `subtract` form: the compositing operator list only steps through the layers, so Chrome falls back to `add` on the remaining edges and only the first edge shows perforations.
+
+The year is an opt-in text overlay, rendered only when `stampYear` is supplied (`pointer-events: none`, `z-index: 2` above the halftone):
+
+```less
+// 年份 — 右上角照片上，白字 + 暗阴影
+.variant-stamp .stamp-year { position:absolute; right:19px; top:18px; font-size:8px; letter-spacing:.18em; color:rgba(255,255,255,.88); text-shadow:0 1px 3px rgba(0,0,0,.55); }
+```
+
+```ts
+// 邮票 prop（仅 variant='stamp' 生效，可选）
+stampYear?: string; // 发行年份，如「2026」 — 右上角照片上
+```
+
+```tsx
+<Image src="/photo.jpg" alt="邮票（带年份）" width={240} height={176} variant="stamp" stampYear="2026" />
+// 仅齿孔边框、不印文字
+<Image src="/photo.jpg" alt="纯邮票边框" width={240} height={176} variant="stamp" />
+```
+
 **Preview lightbox** (click-to-zoom, `preview` prop — **on by default**). The frame is promoted to a `<button type="button">` (native Enter/Space support, `cursor: zoom-in`); the overlay is portaled to `document.body` so it escapes any ancestor `transform` stacking context:
 
 ```less

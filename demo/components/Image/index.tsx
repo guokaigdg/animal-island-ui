@@ -39,9 +39,15 @@ const IMAGE_API: ApiRow[] = [
     },
     {
         prop: 'variant',
-        desc: "相框类型：'default' 卡片大阴影+大圆角（默认），'bordered' 柔和阴影+小圆角",
-        type: `'default' | 'bordered'`,
+        desc: "相框类型：'default' 卡片大阴影+大圆角（默认），'bordered' 柔和阴影+小圆角，'stamp' 邮票齿孔边框",
+        type: `'default' | 'bordered' | 'stamp'`,
         defaultVal: "'default'",
+    },
+    {
+        prop: 'stampYear',
+        desc: "邮票类型（variant='stamp'）下的发行年份，印在右上角照片上（如「2026」）",
+        type: 'string',
+        defaultVal: '-',
     },
     { prop: 'lazy', desc: '是否启用懒加载', type: 'boolean', defaultVal: 'false' },
     {
@@ -59,7 +65,7 @@ const IMAGE_API: ApiRow[] = [
 const ImageDemo: React.FC = () => (
     <div style={sectionStyle}>
         <div style={sectionTitleStyle}>
-            Image <DemoTag>11 props</DemoTag>
+            Image <DemoTag>13 props</DemoTag>
         </div>
 
         {/* 点击预览 */}
@@ -81,6 +87,22 @@ const ImageDemo: React.FC = () => (
             <div style={{ textAlign: 'center' }}>
                 <Image src={pick(2)} alt="边框类型" width={330} height={200} variant="bordered" />
                 <div style={{ fontSize: 12, color: '#a0936e', marginTop: 6 }}>bordered（边框）</div>
+            </div>
+        </div>
+
+        {/* 邮票类型 */}
+        <div style={labelStyle}>
+            邮票类型（variant=&quot;stamp&quot;）— 四周齿孔 + 暖白底纸 + 半色调网点；可选
+            <code style={{ color: '#a09080' }}>stampYear</code> 在右上角印发行年份
+        </div>
+        <div style={{ display: 'flex', gap: 16, alignItems: 'center', flexWrap: 'wrap' }}>
+            <div style={{ textAlign: 'center' }}>
+                <Image src={pick(1)} alt="邮票（带年份）" width={210} height={154} variant="stamp" stampYear="2026" />
+                <div style={{ fontSize: 12, color: '#a0936e', marginTop: 6 }}>带年份</div>
+            </div>
+            <div style={{ textAlign: 'center' }}>
+                <Image src={pick(2)} alt="纯邮票边框" width={210} height={154} variant="stamp" />
+                <div style={{ fontSize: 12, color: '#a0936e', marginTop: 6 }}>仅齿孔边框（无文字）</div>
             </div>
         </div>
 
@@ -132,6 +154,11 @@ const App = () => {
             {/* 相框类型：default（默认，大阴影） / bordered（边框，原样式） */}
             <Image src="/photo.png" alt="默认类型" width={200} height={150} variant="default" />
             <Image src="/photo.png" alt="边框类型" width={200} height={150} variant="bordered" />
+
+            {/* 邮票类型：四周齿孔 + 暖白底纸，可选 stampYear 印发行年份 */}
+            <Image src="/photo.png" alt="邮票（带年份）" width={210} height={154} variant="stamp" stampYear="2026" />
+            {/* 仅齿孔边框，不印文字 */}
+            <Image src="/photo.png" alt="纯邮票边框" width={210} height={154} variant="stamp" />
 
             {/* 懒加载 */}
             <Image src="/photo.png" alt="懒加载" width={240} height={150} lazy />

@@ -46,6 +46,13 @@ describe('Image', () => {
         expect(def.firstChild).not.toHaveClass(styles['image-default']);
     });
 
+    it('stamp 变体应用邮票齿孔类，且不叠加色板背景', () => {
+        const { container } = render(<Image src="photo.png" alt="x" variant="stamp" color="app-pink" />);
+        expect(container.firstChild).toHaveClass(styles['variant-stamp']);
+        expect(container.firstChild).not.toHaveClass(styles['image-app-pink']);
+        expect(container.firstChild).not.toHaveClass(styles['variant-default']);
+    });
+
     it('lazy 映射为原生 loading="lazy"', () => {
         render(<Image src="photo.png" alt="x" lazy />);
         expect(screen.getByRole('img')).toHaveAttribute('loading', 'lazy');

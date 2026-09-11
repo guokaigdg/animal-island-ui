@@ -34,8 +34,10 @@ export interface ImageProps extends Omit<
     height?: number | string;
     /** 背景颜色（Card pattern 同款底色，无花纹；'white' 为纯白，默认 white；仅 variant='bordered' 时生效） */
     color?: ImageColor;
-    /** 相框类型：'default' 卡片大阴影+大圆角（默认），'bordered' 边框柔和阴影+小圆角 */
-    variant?: 'default' | 'bordered';
+    /** 相框类型：'default' 卡片大阴影+大圆角（默认），'bordered' 边框柔和阴影+小圆角，'stamp' 邮票齿孔边框 */
+    variant?: 'default' | 'bordered' | 'stamp';
+    /** 邮票类型（variant='stamp'）下的发行年份，如「2026」，印在右上角照片上；留空不显示 */
+    stampYear?: string;
     /** 是否启用懒加载 */
     lazy?: boolean;
     /** 点击图片弹出大图预览 */
@@ -55,6 +57,7 @@ export const Image: React.FC<ImageProps> = ({
     variant = 'default',
     lazy = false,
     preview = true,
+    stampYear,
     className,
     style,
     onLoad,
@@ -144,6 +147,7 @@ export const Image: React.FC<ImageProps> = ({
     const frameCls = classNames(
         styles.image,
         variant === 'default' && styles['variant-default'],
+        variant === 'stamp' && styles['variant-stamp'],
         variant === 'bordered' && color !== 'white' && styles[`image-${color}`],
         loaded && styles.loaded,
         preview && styles.preview,
@@ -163,12 +167,16 @@ export const Image: React.FC<ImageProps> = ({
         />
     );
 
+    // 邮票文字覆盖层：仅 variant='stamp' 且传入 stampYear 时渲染，印在照片右上角
+    const stampExtra = variant === 'stamp' && stampYear && <span className={styles['stamp-year']}>{stampYear}</span>;
+
     // 点击预览：相框升格为按钮（原生支持 Enter / Space），预览弹层经 Portal 挂到 body
     if (preview) {
         return (
             <>
                 <button type="button" className={frameCls} style={frameStyle} onClick={openPreview}>
                     {content}
+                    {stampExtra}
                 </button>
                 {createPortal(
                     previewOpen ? (
@@ -202,6 +210,7 @@ export const Image: React.FC<ImageProps> = ({
     return (
         <span className={frameCls} style={frameStyle}>
             {content}
+            {stampExtra}
         </span>
     );
 };
