@@ -10,6 +10,29 @@ describe('Modal', () => {
         expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
     });
 
+    it('默认使用常规圆角矩形，无 game 变体类', () => {
+        render(
+            <Modal open typewriter={false}>
+                content
+            </Modal>
+        );
+        const dialog = screen.getByRole('dialog');
+        expect(dialog.className).not.toContain('modalGame');
+        const clipped = dialog.querySelector('[class*="gameClipped"]');
+        expect(clipped).toBeNull();
+    });
+
+    it('variant="game" 应用异形外框类', () => {
+        render(
+            <Modal open variant="game" typewriter={false}>
+                content
+            </Modal>
+        );
+        const dialog = screen.getByRole('dialog');
+        expect(dialog.className).toContain('modalGame');
+        expect(dialog.querySelector('[class*="gameClipped"]')).not.toBeNull();
+    });
+
     it('open=true 通过 portal 渲染到 body 且包含 role="dialog"', () => {
         render(
             <Modal open title="标题" typewriter={false}>

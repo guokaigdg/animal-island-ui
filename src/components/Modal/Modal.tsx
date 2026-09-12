@@ -33,9 +33,13 @@ const ClipDef: React.FC = () => (
     </svg>
 );
 
+export type ModalVariant = 'default' | 'game';
+
 export interface ModalProps {
     /** 是否可见 */
     open: boolean;
+    /** 弹窗类型: default 常规圆角矩形, game 异形自然外框。默认 default */
+    variant?: ModalVariant;
     /** 标题 */
     title?: React.ReactNode;
     /** 宽度 */
@@ -61,6 +65,7 @@ export interface ModalProps {
 
 export const Modal: React.FC<ModalProps> = ({
     open,
+    variant = 'default',
     title,
     width = 520,
     maskClosable = true,
@@ -175,7 +180,9 @@ export const Modal: React.FC<ModalProps> = ({
             <div className={styles.mask} style={maskStyle} onClick={handleMaskClick}>
                 <div
                     ref={dialogRef}
-                    className={[styles.modal, className].filter(Boolean).join(' ')}
+                    className={[styles.modal, variant === 'game' ? styles.modalGame : '', className]
+                        .filter(Boolean)
+                        .join(' ')}
                     style={{ width }}
                     onClick={handleContentClick}
                     role="dialog"
@@ -184,8 +191,12 @@ export const Modal: React.FC<ModalProps> = ({
                     aria-describedby={bodyId}
                     tabIndex={-1}
                 >
-                    <ClipDef />
-                    <div className={styles.modalClipped}>
+                    {variant === 'game' && <ClipDef />}
+                    <div
+                        className={[styles.modalClipped, variant === 'game' ? styles.gameClipped : '']
+                            .filter(Boolean)
+                            .join(' ')}
+                    >
                         {title && (
                             <div className={styles.header}>
                                 {title && (

@@ -19,6 +19,12 @@ const MODAL_API: ApiRow[] = [
         defaultVal: '-',
         required: true,
     },
+    {
+        prop: 'variant',
+        desc: '弹窗类型: default 常规圆角矩形, game 异形自然外框',
+        type: "'default' | 'game'",
+        defaultVal: "'default'",
+    },
     { prop: 'title', desc: '标题', type: 'ReactNode', defaultVal: '-' },
     { prop: 'width', desc: '宽度', type: 'number | string', defaultVal: '520' },
     {
@@ -83,12 +89,19 @@ const ModalDemo: React.FC = () => {
     const [noTypewriterOpen, setNoTypewriterOpen] = useState(false);
     const [lightMaskOpen, setLightMaskOpen] = useState(false);
     const [darkMaskOpen, setDarkMaskOpen] = useState(false);
+    const [gameOpen, setGameOpen] = useState(false);
     return (
         <div style={sectionStyle}>
             <div style={sectionTitleStyle}>
                 Modal <DemoTag>弹窗</DemoTag>
             </div>
             <div style={demoBodyStyle}>
+                <div style={labelStyle}>异形弹窗 (game)</div>
+                <div style={S.row}>
+                    <Button type="primary" onClick={() => setGameOpen(true)}>
+                        异形 Modal
+                    </Button>
+                </div>
                 <div style={labelStyle}>基础弹窗</div>
                 <div style={S.row}>
                     <Button type="primary" onClick={() => setModalOpen(true)}>
@@ -116,6 +129,23 @@ const ModalDemo: React.FC = () => {
                 </div>
             </div>
             <Modal open={modalOpen} onClose={() => setModalOpen(false)} onOk={() => setModalOpen(false)}>
+                <div
+                    style={{
+                        textAlign: 'center',
+                        width: '100%',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        gap: 8,
+                    }}
+                >
+                    <span>
+                        钓到<span style={{ color: '#FD9303' }}>石头</span>了!
+                    </span>
+                    <span>竟然连这种都能钓起来...</span>
+                </div>
+            </Modal>
+            <Modal variant="game" open={gameOpen} onClose={() => setGameOpen(false)} onOk={() => setGameOpen(false)}>
                 <div
                     style={{
                         textAlign: 'center',
@@ -193,6 +223,11 @@ const App = () => {
             <Button type="primary" onClick={() => setOpen(true)}>打开 Modal</Button>
             <Modal open={open} onClose={() => setOpen(false)} onOk={() => setOpen(false)}>
                 Modal 内容
+            </Modal>
+
+            {/* 异形弹窗 */}
+            <Modal variant="game" open={open} onClose={() => setOpen(false)}>
+                异形弹窗内容
             </Modal>
 
             {/* 带标题 */}

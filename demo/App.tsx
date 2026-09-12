@@ -94,7 +94,7 @@ const MENU_ITEMS: MenuItem[] = [
         children: [
             { key: 'notification', label: 'Notification 通知' },
             // 隐藏：暂不展示，恢复时取消注释
-            // { key: 'modal', label: 'Modal 弹窗' },
+            { key: 'modal', label: 'Modal 弹窗' },
             { key: 'drawer', label: 'Drawer 抽屉' },
             { key: 'loading', label: 'Loading 加载' },
             { key: 'tooltip', label: 'Tooltip 气泡提示' },
