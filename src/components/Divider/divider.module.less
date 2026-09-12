@@ -8,14 +8,62 @@
     background: linear-gradient(to right, #c4b89e 50%, transparent 50%) center / 12px 2px repeat-x;
 }
 
-.dashed-teal {
-    background: linear-gradient(to right, #19c8b9 50%, transparent 50%) center / 12px 2px repeat-x;
+// thin — 1px 实心细线
+.thin {
+    height: 1px;
+    background: #e8dec7;
 }
 
-.dashed-white {
-    background: linear-gradient(to right, #ffffff 50%, transparent 50%) center / 12px 2px repeat-x;
+// hairline — 1px 细密虚线（6px 节奏）
+.hairline {
+    height: 1px;
+    background: linear-gradient(to right, #d5c3a2 50%, transparent 50%) center / 6px 1px repeat-x;
 }
 
-.dashed-yellow {
-    background: linear-gradient(to right, #f5d04a 50%, transparent 50%) center / 12px 2px repeat-x;
+// wave-yellow — 黄色波浪线（内联 SVG data-URI，40px 周期，round 线帽）
+.wave-yellow {
+    height: 14px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 14' preserveAspectRatio='none'%3E%3Cpath d='M0 7 Q10 0 20 7 T40 7' fill='none' stroke='%23f5d04a' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: repeat-x;
+    background-size: 40px 14px;
+    background-position: center;
+}
+
+// squiggle — 主题青色波浪线（内联 SVG data-URI，120px 固定宽度平铺，首尾水平衔接无缝）
+.squiggle {
+    height: 10px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 10'%3E%3Cpath d='M0 2.5 C 30 2.5, 30 7.5, 60 7.5 C 90 7.5, 90 2.5, 120 2.5' fill='none' stroke='%2319c8b9' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: repeat-x;
+    background-size: 120px 10px;
+    background-position: center;
+}
+
+// iconDivider — 单图标相连分割线：图标 + 连接线循环铺满（复用 Footer 循环拼接思路）
+.iconDivider {
+    display: flex;
+    width: 100%;
+    overflow: hidden;
+    align-items: center;
+    min-height: 20px;
+}
+
+.iconCycle {
+    display: flex;
+    flex: 0 0 auto;
+    align-items: center;
+}
+
+// 图标间距：容纳连接线的空隙，连接线在其中水平居中（两侧留白，视觉位于两图标中间）
+.iconGap {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.iconLine {
+    flex: 0 0 auto;
+    width: 4px;
+    height: 2px;
+    background: #c4b89e;
 }

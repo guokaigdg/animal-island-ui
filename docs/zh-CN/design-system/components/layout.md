@@ -204,9 +204,11 @@ interface CarouselProps extends Omit<HTMLAttributes<HTMLElement>, 'onChange'> {
 
 ```tsx
 <Divider type="dashed-brown" />  // 默认
-<Divider type="dashed-teal" />
-<Divider type="dashed-white" />
-<Divider type="dashed-yellow" />
+<Divider type="thin" />        // 1px 实线 #e8dec7
+<Divider type="hairline" />    // 1px 细密虚线 #d5c3a2
+<Divider type="wave-yellow" /> // 黄色波浪线 #f5d04a
+<Divider type="squiggle" />    // 主题青色无缝波浪线 #19c8b9
+<Divider icon="Fish" />        // 单图标相连分割线
 ```
 
 ```less
@@ -216,18 +218,33 @@ interface CarouselProps extends Omit<HTMLAttributes<HTMLElement>, 'onChange'> {
     /* 默认 type=dashed-brown */
     background: linear-gradient(to right, #c4b89e 50%, transparent 50%) center / 12px 2px repeat-x;
 }
-.dashed-teal {
-    background: linear-gradient(to right, #19c8b9 50%, transparent 50%) center / 12px 2px repeat-x;
+.thin {
+    height: 1px;
+    background: #e8dec7;
 }
-.dashed-white {
-    background: linear-gradient(to right, #ffffff 50%, transparent 50%) center / 12px 2px repeat-x;
+.hairline {
+    height: 1px;
+    background: linear-gradient(to right, #d5c3a2 50%, transparent 50%) center / 6px 1px repeat-x;
 }
-.dashed-yellow {
-    background: linear-gradient(to right, #f5d04a 50%, transparent 50%) center / 12px 2px repeat-x;
+.wave-yellow {
+    height: 14px;
+    background-image: url("data:image/svg+xml,...波浪路径...");
+    background-repeat: repeat-x;
+    background-size: 40px 14px;
+    background-position: center;
+}
+.squiggle {
+    height: 10px;
+    background-image: url("data:image/svg+xml,...波浪路径...");
+    background-repeat: repeat-x;
+    background-size: 120px 10px;
+    background-position: center;
 }
 ```
 
-纯 CSS 实现，无图片资源：`dashed-*` 用 `linear-gradient` 画 2px 破折线（12px 节奏，50% 实 / 50% 空）。
+纯 CSS 实现，无图片资源：`dashed-*` 用 `linear-gradient` 画 2px 破折线（12px 节奏，50% 实 / 50% 空）；`thin` 为 `#e8dec7` 的 1px 实心细线；`hairline` 为 `#d5c3a2` 的 1px 细密虚线（6px 节奏）；`wave-yellow` 用内联 SVG data-URI 画黄色（#f5d04a）重复波浪线（40px 周期，±7px 振幅，圆头线帽）；`squiggle` 用内联 SVG data-URI 画主题青色（#19c8b9）波浪线，固定 120px 宽度平铺（`repeat-x`，viewport 0 0 120 10），首尾同高且切线水平，随容器变宽无缝衔接、不拉伸变形。
+
+传入 `icon`（IconName，如 `'Fish'`）时切换为图标相连模式（与 Footer 单图标链同思路）：flex 行重复 `[图标][空隙]` 单元铺满整行，由 `iconSize`（默认 24）与 `iconGap`（默认 8）控制。每个空隙内放一根 4×2px 棕色短连接条，水平居中，视觉上正好位于相邻两图标中间；最后一个图标不跟连接条，分割线两端都以图标收尾；周期数通过 ResizeObserver 随宽度变化实时重算。
 
 ## Background（图案壁纸）
 

@@ -204,30 +204,16 @@ Example:
 
 ```tsx
 <Divider type="dashed-brown" />  // default
-<Divider type="dashed-teal" />
-<Divider type="dashed-white" />
-<Divider type="dashed-yellow" />
+<Divider type="thin" />        // 1px solid #e8dec7
+<Divider type="hairline" />    // 1px dense-dashed #d5c3a2
+<Divider type="wave-yellow" /> // yellow wavy line, #f5d04a
+<Divider type="squiggle" />    // theme-teal seamless squiggle, #19c8b9
+<Divider icon="Fish" />        // single-icon connected divider
 ```
 
-```less
-.divider {
-    width: 100%;
-    height: 12px;
-    /* default type=dashed-brown */
-    background: linear-gradient(to right, #c4b89e 50%, transparent 50%) center / 12px 2px repeat-x;
-}
-.dashed-teal {
-    background: linear-gradient(to right, #19c8b9 50%, transparent 50%) center / 12px 2px repeat-x;
-}
-.dashed-white {
-    background: linear-gradient(to right, #ffffff 50%, transparent 50%) center / 12px 2px repeat-x;
-}
-.dashed-yellow {
-    background: linear-gradient(to right, #f5d04a 50%, transparent 50%) center / 12px 2px repeat-x;
-}
-```
+Pure CSS, no image assets: `dashed-*` types draw a 2px dashed rule via `linear-gradient` (12px rhythm, 50% on / 50% off); `thin` is a 1px solid hairline in `#e8dec7`; `hairline` is a 1px dense dashed rule in `#d5c3a2` (6px rhythm); `wave-yellow` draws a yellow (#f5d04a) repeating wavy line via an inline SVG data-URI (40px period, ±7px amplitude, round line-cap); `squiggle` draws a theme-teal (#19c8b9) squiggle tiled at a fixed 120px width (`repeat-x`, viewBox 0 0 120 10). Its ends meet at the same height with a horizontal tangent, so tiles join seamlessly without stretching as the container widens.
 
-Pure CSS, no image assets: `dashed-*` types draw a 2px dashed rule via `linear-gradient` (12px rhythm, 50% on / 50% off).
+When `icon` is set (an `IconName`, e.g. `'Fish'`), the divider switches to icon-connected mode (same tiling idea as Footer's single-icon chain): a `flex` row repeats `[icon][gap]` units to fill the width, controlled by `iconSize` (default 24) and `iconGap` (default 8). Each gap holds a short 4×2px brown connector bar, horizontally centered so it sits visually between the two neighboring icons; the last icon ends the row without a trailing connector, so both ends of the divider are icons. Cycle count is recalculated on resize via `ResizeObserver`.
 
 ## Background (pattern wallpaper)
 
