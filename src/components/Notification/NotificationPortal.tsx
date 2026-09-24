@@ -150,7 +150,7 @@ const destroy = (key?: string): void => {
 };
 
 /**
- * 命令式 Notification,沿用 antd 风格静态方法。
+ * 命令式 Notification，静态方法。
  *
  * - `Notification.open(config)` / `Notification.success(config)` / `.info(config)` / `.warning(config)` / `.error(config)`
  * - `config` 可以是字符串(仅 message)或完整对象

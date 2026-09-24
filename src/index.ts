@@ -146,3 +146,15 @@ export type { TimeProps } from './components/Time';
 
 export { Carousel } from './components/Carousel';
 export type { CarouselProps } from './components/Carousel';
+
+export { Upload } from './components/Upload';
+export type {
+    UploadProps,
+    UploadFile,
+    UploadFileStatus,
+    UploadListType,
+    UploadCustomRequestOptions,
+    UploadChangeParam,
+    UploadShowUploadList,
+    UploadOnChange,
+} from './components/Upload';

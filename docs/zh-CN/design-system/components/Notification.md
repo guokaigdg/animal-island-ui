@@ -1,7 +1,7 @@
 # Notification
 
 源码：`src/components/Notification/NotificationPortal.tsx`（命令式 API + 全局 store + 容器） + `Notification.tsx`（单条视图） + `notification.module.less`。
-**命令式组件**（类似 antd）：无 `<Notification>` JSX 元素，全部通过 `Notification.open / .success / .info / .warning / .error / .destroy` 触发；首次调用时在 `document.body` 挂一个根容器（`data-animal-notification-root`），后续 `useSyncExternalStore` 订阅 store 变化。SSR 安全（typeof document 守卫）。
+**命令式组件**：无 `<Notification>` JSX 元素，全部通过 `Notification.open / .success / .info / .warning / .error / .destroy` 触发；首次调用时在 `document.body` 挂一个根容器（`data-animal-notification-root`），后续 `useSyncExternalStore` 订阅 store 变化。SSR 安全（typeof document 守卫）。
 
 ## 命令式 API
 

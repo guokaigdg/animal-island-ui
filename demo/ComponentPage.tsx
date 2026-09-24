@@ -12,6 +12,7 @@ import TableDemo from './components/Table/TableDemo';
 import PaginationDemo from './components/Pagination';
 import DrawerDemo from './components/Drawer/DrawerDemo';
 import FormDemo from './components/Form';
+import UploadDemo from './components/Upload';
 import TagDemo from './components/Tag';
 import NotificationDemo from './components/Notification';
 import ProgressDemo from './components/Progress';
@@ -77,6 +78,7 @@ const PAGES: Record<string, React.FC> = {
     progress: ProgressDemo,
     loading: LoadingDemo,
     form: FormDemo,
+    upload: UploadDemo,
     skeleton: SkeletonDemo,
     backtop: BackTopDemo,
     image: ImageDemo,
