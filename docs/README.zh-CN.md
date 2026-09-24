@@ -7,24 +7,18 @@
 <br/>
 
 <div align="center">
-需要图标？使用 **naive-icons** → <a href="https://github.com/guokaigdg/naive-icons">github.com/guokaigdg/naive-icons</a>
-</div>
-<br/>
-
-<div align="center">
 一款可爱风格的 React UI 组件库
 </div>
 <br/>
 <div align="center">
     <a href="https://github.com/guokaigdg/animal-island-ui/stargazers"><img src="https://img.shields.io/github/stars/guokaigdg/animal-island-ui?style=flat-square" alt="Stars"></a>
     <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-orange.svg?style=flat-square" alt="License: MIT"></a>
-    <a href="LICENSE"><img src="https://img.shields.io/npm/dm/animal-island-ui.svg?style=flat-square" alt=""></a>
-    <a href="https://github.com/guokaigdg/animal-island-ui/releases"><img src="https://img.shields.io/github/v/tag/guokaigdg/animal-island-ui?label=version&style=flat-square" alt="Version"></a>
+    <a href="https://www.npmjs.com/package/animal-island-ui"><img src="https://img.shields.io/npm/dm/animal-island-ui.svg?style=flat-square" alt="Weekly downloads"></a>
+    <a href="https://www.npmjs.com/package/animal-island-ui"><img src="https://img.shields.io/npm/v/animal-island-ui?label=version&style=flat-square" alt="Version"></a>
     <a href="https://atomgit.com/guokaigdg/animal-island-ui"><img alt="AtomGit Star" src="https://atomgit.com/guokaigdg/animal-island-ui/star/badge.svg"></a>
     <br/>
     <a href="../coverage/badges/coverage.json"><img src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/guokaigdg/animal-island-ui/main/coverage/badges/coverage.json&style=flat-square" alt="Coverage"></a>
-    <img src="https://img.shields.io/badge/tests-516%20✓-brightgreen?style=flat-square" alt="Tests">
-    <img src="https://img.shields.io/badge/components-34-blue?style=flat-square" alt="Components">
+    <img src="https://img.shields.io/badge/components-35-blue?style=flat-square" alt="Components">
     <img src="https://img.shields.io/badge/a11y-WAI--ARIA%20APG-brightgreen?style=flat-square" alt="Accessibility">
 </div>
 <br/>
@@ -40,12 +34,11 @@
 
 ## 介绍
 
-本项目是基于 React + TypeScript 实现的轻量 UI 组件库，采用原创的治愈系海岛风格设计语言，用于个人前端技术练习与组件化开发学习。所有视觉元素、布局、图标、动画均为本项目独立设计实现。
+本项目是基于 React + TypeScript 实现的轻量 UI 组件库，采用原创的治愈系海岛风格设计语言。所有视觉元素、布局、图标、动画均为本项目独立设计实现。
 
 ## 预览
 
-- 在线预览 (PC 端) [animal-island-ui-pc](https://guokaigdg.github.io/animal-island-ui/#/)
-- 在线预览（移动端）[animal-island-ui-mobile](https://guokaigdg.github.io/animal-island-ui/#/)
+- 在线预览：[animal-island-ui](https://guokaigdg.github.io/animal-island-ui/#/)
 
 ## 图标
 
@@ -132,33 +125,19 @@ npm run build
 npm run build:demo
 ```
 
-## 注意事项
+## 许可与免责声明
 
-- 本项目为开源项目，采用 MIT 协议发布 —— 可自由使用、修改与分发，包括商业用途（见 [LICENSE](../LICENSE) 文件）。
-- 与任何游戏公司及其产品无关联、授权或合作关系。
-- 使用本组件库产生的任何风险由使用者自行承担。
-
-## 版权与免责声明
-
+- 本项目基于 **MIT 协议**发布 —— 可自由使用、复制、修改、合并、发布、分发、再许可及出售本软件副本，包括商业用途（完整文本见 [LICENSE](../LICENSE) 文件）。须在所有副本或实质部分中保留上述版权声明与本许可声明。
+- 本软件按「原样」提供，不附带任何担保；作者不对其使用产生的任何索赔、损失或其他责任负责，使用本组件库产生的任何风险由使用者自行承担。
 - 本项目为独立创作的开源项目，并非任何游戏公司的官方产品，与任何公司及其产品无关联、授权或合作关系。
 - 本仓库内所有视觉素材（图标、插画、动画）均为本项目原创作品。
-- 若版权方认为相关内容存在侵权嫌疑，可通过邮箱联系，本人将在第一时间进行整改或删除处理。
 
 ## 联系方式
 
-如有问题或版权相关沟通，请通过 Issue 或邮件联系。
+如有问题，欢迎提交 GitHub [Issue](https://github.com/guokaigdg/animal-island-ui/issues)。
 
 ## 给小岛续续航
 
 如果这个项目对你有帮助，不妨请开发者的猫吃个罐罐——喵星人才是小岛运转的真正燃料
 
 [赞助小岛](https://guokaigdg.github.io/home/payment.html)
-
-## License
-
-**MIT License** — 完整文本见 [LICENSE](../LICENSE) 文件。
-
-- **授权范围**：可自由使用、复制、修改、合并、发布、分发、再许可及出售本软件副本。
-- **无限制**：包括商业产品中的使用。
-- **保留要求**：须在所有副本或实质部分中保留上述版权声明与本许可声明。
-- 本软件按「原样」提供，不附带任何担保；作者不对其使用产生的任何索赔、损失或其他责任负责。

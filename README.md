@@ -13,13 +13,12 @@ A React UI component library with a cute style
 <div align="center">
     <a href="https://github.com/guokaigdg/animal-island-ui/stargazers"><img src="https://img.shields.io/github/stars/guokaigdg/animal-island-ui?style=flat-square" alt="Stars"></a>
     <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-orange.svg?style=flat-square" alt="License: MIT"></a>
-    <a href="LICENSE"><img src="https://img.shields.io/npm/dm/animal-island-ui.svg?style=flat-square" alt=""></a>
-    <a href="https://github.com/guokaigdg/animal-island-ui/releases"><img src="https://img.shields.io/github/v/tag/guokaigdg/animal-island-ui?label=version&style=flat-square" alt="Version"></a>
+    <a href="https://www.npmjs.com/package/animal-island-ui"><img src="https://img.shields.io/npm/dm/animal-island-ui.svg?style=flat-square" alt="Weekly downloads"></a>
+    <a href="https://www.npmjs.com/package/animal-island-ui"><img src="https://img.shields.io/npm/v/animal-island-ui?label=version&style=flat-square" alt="Version"></a>
     <a href="https://atomgit.com/guokaigdg/animal-island-ui"><img alt="AtomGit Star" src="https://atomgit.com/guokaigdg/animal-island-ui/star/badge.svg"></a>
     <br/>
     <a href="./coverage/badges/coverage.json"><img src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/guokaigdg/animal-island-ui/main/coverage/badges/coverage.json&style=flat-square" alt="Coverage"></a>
-    <img src="https://img.shields.io/badge/tests-516%20✓-brightgreen?style=flat-square" alt="Tests">
-    <img src="https://img.shields.io/badge/components-34-blue?style=flat-square" alt="Components">
+    <img src="https://img.shields.io/badge/components-35-blue?style=flat-square" alt="Components">
     <img src="https://img.shields.io/badge/a11y-WAI--ARIA%20APG-brightgreen?style=flat-square" alt="Accessibility">
 </div>
 <br/>
@@ -36,12 +35,11 @@ A React UI component library with a cute style
 
 ## Introduction
 
-This project is a lightweight UI component library built with React + TypeScript. It features an original, cozy island-style design language, created for personal front-end technical practice and component development learning.All visual elements, layouts, icons, and animations are independently designed and implemented from scratch.
+This project is a lightweight UI component library built with React + TypeScript. It features an original, cozy island-style design language. All visual elements, layouts, icons, and animations are independently designed and implemented from scratch.
 
 ## Preview
 
-- Online Preview (PC) [animal-island-ui-pc](https://guokaigdg.github.io/animal-island-ui/#/)
-- Online Preview (Mobile) [animal-island-ui-mobile](https://guokaigdg.github.io/animal-island-ui/#/)
+- Online Preview: [animal-island-ui](https://guokaigdg.github.io/animal-island-ui/#/)
 
 ## Icons
 
@@ -129,32 +127,19 @@ npm run build
 npm run build:demo
 ```
 
-## Notes
+## License & Disclaimer
 
-- This project is open-source and distributed under the MIT License — free to use, modify, and distribute, including for commercial purposes (see the [LICENSE](LICENSE) file).
-- Users are solely responsible for any risks arising from the use of this component library.
-
-## Copyright and Disclaimer
-
+- Distributed under the **MIT License** — free to use, copy, modify, merge, publish, distribute, sublicense, and sell copies of the Software, including in commercial products (see the [LICENSE](LICENSE) file for the full text). The copyright notice and this permission notice must be included in all copies or substantial portions of the Software.
+- The Software is provided "AS IS", without warranty of any kind; the authors are not liable for any claims, damages, or other liability arising from its use. Users are solely responsible for any risks arising from the use of this component library.
 - This is an independently created open-source project. It is not an official product of any game company and has no association, authorization, or cooperation with any company or its products.
 - All visual assets (icons, illustrations, animations) in this repository are original works created for this project.
-- If the copyright holder believes that related content is suspected of infringement, they can contact via email, and I will make rectifications or deletions immediately.
 
 ## Contact
 
-For any questions or copyright-related communications, please contact via Issue or email.
+For any questions, please open a GitHub [Issue](https://github.com/guokaigdg/animal-island-ui/issues).
 
 ## Keep the Island Running
 
 If this project has been helpful to you, consider buying the developer's cat a can of tuna — meowsters are the real fuel that keeps the island running.
 
 [Sponsor this Island](https://guokaigdg.github.io/home/payment.html)
-
-## License
-
-**MIT License** — see the [LICENSE](LICENSE) file for the full text.
-
-- **Permission granted**: to use, copy, modify, merge, publish, distribute, sublicense, and sell copies of the Software.
-- **No restriction**: including use in commercial products or projects.
-- **Attribution**: the above copyright notice and this permission notice must be included in all copies or substantial portions of the Software.
-- The Software is provided "AS IS", without warranty of any kind; the authors are not liable for any claims, damages, or other liability arising from its use.
