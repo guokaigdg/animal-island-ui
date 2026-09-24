@@ -248,9 +248,9 @@ const FormDemo: React.FC = () => {
                     <FormItem label="爱好" name="hobby">
                         <Checkbox
                             options={[
-                                { label: '🎣 钓鱼', value: 'fish' },
-                                { label: '🪵 砍树', value: 'wood' },
-                                { label: '⛏️ 挖矿', value: 'mine' },
+                                { label: '钓鱼', value: 'fish' },
+                                { label: '砍树', value: 'wood' },
+                                { label: '挖矿', value: 'mine' },
                             ]}
                         />
                     </FormItem>
@@ -307,9 +307,9 @@ const FormDemo: React.FC = () => {
                     <FormItem label="你是？" name="radio">
                         <Radio
                             options={[
-                                { label: '🐱 猫', value: 'cat' },
-                                { label: '🐶 狗', value: 'dog' },
-                                { label: '🐰 兔子', value: 'rabbit' },
+                                { label: '猫', value: 'cat' },
+                                { label: '狗', value: 'dog' },
+                                { label: '兔子', value: 'rabbit' },
                             ]}
                         />
                     </FormItem>

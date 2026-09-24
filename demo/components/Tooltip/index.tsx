@@ -251,7 +251,7 @@ const TooltipDemo: React.FC = () => {
                                 <br />
                                 第二行文字
                                 <br />
-                                第三行文字 🍃
+                                第三行文字
                             </>
                         }
                         placement="top"
@@ -259,7 +259,7 @@ const TooltipDemo: React.FC = () => {
                         <Button size="small">多行 JSX</Button>
                     </Tooltip>
 
-                    <Tooltip title={'第一行\n第二行\n第三行 🌿'} placement="top">
+                    <Tooltip title={'第一行\n第二行\n第三行'} placement="top">
                         <Button size="small">换行符 \n</Button>
                     </Tooltip>
 
@@ -318,7 +318,7 @@ const App = () => {
                         <br />
                         第二行
                         <br />
-                        第三行 🍃
+                        第三行
                     </>
                 }
             >

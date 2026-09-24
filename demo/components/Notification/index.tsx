@@ -1,4 +1,5 @@
 import React from 'react';
+import { FlowerIcon } from 'naive-icons';
 import { Button, Notification, type NotificationPosition } from '../../../src';
 import {
     CodeBlock,
@@ -108,7 +109,7 @@ const NotificationDemo: React.FC = () => {
                 <DemoTag>6 positions</DemoTag>
             </div>
             <p style={{ ...labelStyle, marginBottom: 12, color: '#7c5734' }}>
-                Notification 沿用 antd 风格的命令式 API — 在任意位置调用 <code>Notification.success(...)</code>{' '}
+                Notification 采用命令式 API — 在任意位置调用 <code>Notification.success(...)</code>{' '}
                 即可触发,组件会自动挂到 body 根容器。
             </p>
 
@@ -256,7 +257,7 @@ const NotificationDemo: React.FC = () => {
                             Notification.info({
                                 message: '自定义 icon',
                                 description: '替换默认 type 图标',
-                                icon: <span style={{ fontSize: 18 }}>🌿</span>,
+                                icon: <FlowerIcon size={18} />,
                             })
                         }
                     >

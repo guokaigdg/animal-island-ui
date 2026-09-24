@@ -138,9 +138,9 @@ const TitleDemo: React.FC = () => (
             ))}
         </div>
 
-        <div style={labelStyle}>支持英文与表情</div>
+        <div style={labelStyle}>支持英文文案</div>
         <div style={bgSky}>
-            <Title>🎮 LET&apos;S PLAY!</Title>
+            <Title>LET&apos;S PLAY!</Title>
         </div>
 
         <div style={labelStyle}>飘带标题 Ribbon</div>

@@ -69,7 +69,7 @@ const SwitchDemo: React.FC = () => {
                 <div style={labelStyle}>checkedChildren / unCheckedChildren 自定义文案</div>
                 <div style={{ display: 'flex', gap: 16, alignItems: 'center' }}>
                     <Switch defaultChecked checkedChildren="开" unCheckedChildren="关" />
-                    <Switch defaultChecked checkedChildren="☀️" unCheckedChildren="🌙" />
+                    <Switch defaultChecked checkedChildren="开" unCheckedChildren="关" />
                 </div>
                 <div style={labelStyle}>size 尺寸</div>
                 <div style={{ display: 'flex', gap: 16, alignItems: 'center' }}>

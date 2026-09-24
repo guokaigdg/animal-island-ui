@@ -1,4 +1,5 @@
 import React from 'react';
+import { SearchIcon, StarIcon } from 'naive-icons';
 import { Button } from '../../../src';
 import {
     labelStyle,
@@ -118,10 +119,10 @@ const ButtonDemo: React.FC = () => (
             </div>
             <div style={labelStyle}>icon 图标按钮</div>
             <div style={S.row}>
-                <Button type="primary" icon={<span>🔍</span>}>
+                <Button type="primary" icon={<SearchIcon />}>
                     搜索
                 </Button>
-                <Button icon={<span>⭐</span>}>收藏</Button>
+                <Button icon={<StarIcon />}>收藏</Button>
                 <Button type="dashed" icon={<span>＋</span>}>
                     新增
                 </Button>
@@ -175,7 +176,7 @@ const App = () => {
             {/* Large */}
             <Button type="primary" size="large">Large</Button>
             {/* Icon */}
-            <Button type="primary" icon={<span>🔍</span>}>搜索</Button>
+            <Button type="primary" icon={<SearchIcon />}>搜索</Button>
             {/* Block */}
             <Button type="primary" block>Block</Button>
         </div>
