@@ -50,7 +50,7 @@ export const PAGE_INFO: Record<string, { title: string; desc: string }> = {
     },
     icon: {
         title: 'Icon 图标',
-        desc: '图标组件 — 包含 101 个可爱图标，支持自定义尺寸，手绘特有的笨拙感，有些图标还带着一对小眼睛和微笑。全部图标为原创作品，个人与商业项目均可自由使用。',
+        desc: '图标组件 — naive-icons 手绘 SVG 图标库，125 个可爱图标，支持自定义尺寸与描边颜色。全部图标为原创作品，个人与商业项目均可自由使用。',
     },
     select: {
         title: 'Select 选择器',

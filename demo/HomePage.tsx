@@ -9,7 +9,9 @@ type NaiveIcon = React.FC<{ size?: number | string; color?: string; style?: Reac
 /** 按图标名解析 naive-icons 图标组件（如 'Heart' → HeartIcon） */
 function resolveIcon(name: string): NaiveIcon | null {
     const Cmp = (Icons as Record<string, unknown>)[`${name}Icon`];
-    return typeof Cmp === 'function' ? (Cmp as NaiveIcon) : null;
+    // naive-icons 1.1.0 起组件由 forwardRef 创建（返回 {$$typeof, render} 对象而非函数）；
+    // 兼容两种形态，避免 `typeof === 'function'` 判定失败导致图标不渲染
+    return Cmp !== null && Cmp !== undefined ? (Cmp as NaiveIcon) : null;
 }
 
 // ============================================

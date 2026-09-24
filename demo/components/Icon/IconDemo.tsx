@@ -17,9 +17,9 @@ type IconComponent = React.ForwardRefExoticComponent<
         React.RefAttributes<SVGSVGElement>
 >;
 
-/** naive-icons 所有图标组件，按导出顺序排列（共 116 个） */
+/** naive-icons 所有图标组件，按导出顺序排列 */
 const ALL_ICONS: IconComponent[] = (Object.entries(Icons) as Array<[string, unknown]>)
-    .filter(([, value]) => typeof value === 'function')
+    .filter(([, value]) => typeof value === 'function' || (value !== null && typeof value === 'object'))
     .map(([, value]) => value as IconComponent);
 
 const ZH_NAMES: Record<string, string> = {
@@ -34,6 +34,7 @@ const ZH_NAMES: Record<string, string> = {
     Bear: '小熊',
     Bee: '蜜蜂',
     Bell: '铃铛',
+    Basketball: '篮球',
     Bicycle: '自行车',
     Bird: '小鸟',
     Book: '书本',
@@ -65,6 +66,7 @@ const ZH_NAMES: Record<string, string> = {
     CreditCard: '信用卡',
     Dog: '小狗',
     Donut: '甜甜圈',
+    Dumbbell: '哑铃',
     Download: '下载',
     Edit: '编辑',
     Ellipsis: '省略号',
@@ -108,6 +110,7 @@ const ZH_NAMES: Record<string, string> = {
     Penguin: '企鹅',
     Phone: '电话',
     Play: '播放',
+    Pause: '暂停',
     Plus: '加号',
     Rabbit: '兔子',
     Rainbow: '彩虹',
@@ -137,6 +140,7 @@ const ZH_NAMES: Record<string, string> = {
     Upload: '上传',
     User: '用户',
     Video: '视频',
+    WaterCup: '水杯',
     Watermelon: '西瓜',
     Wifi: '无线',
 };
@@ -176,7 +180,7 @@ const IconDemo: React.FC = () => (
             >
                 naive-icons
             </a>
-            —— 手绘 naive folk art 风格的 SVG 图标库，116 个原创图标，为 React 与 TypeScript 打造。请先安装依赖：
+            —— 手绘 naive folk art 风格的 SVG 图标库，150+ 个原创图标，为 React 与 TypeScript 打造。请先安装依赖：
         </div>
 
         <div style={{ marginBottom: 12 }}>
@@ -222,7 +226,7 @@ const IconDemo: React.FC = () => (
             <Icons.BulbIcon size={32} color="#e9c46a" strokeWidth={3} />
         </div>
 
-        <div style={labelStyle}>全部图标（共 {ALL_ICONS.length} 个）</div>
+        <div style={labelStyle}>全部图标</div>
         <div
             style={{
                 border: '1px solid #e8e2d6',
