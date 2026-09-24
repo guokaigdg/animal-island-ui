@@ -597,7 +597,7 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                         </Typewriter>
                         {/* 暂时隐藏：恢复时去掉 display: 'none' */}
                         <div style={{ ...S.heroActions, justifyContent: isMobile ? 'center' : 'flex-start' }}>
-                            <Button type="primary" size="large" onClick={() => onNavigate?.('/title')}>
+                            <Button type="primary" size="large" onClick={() => onNavigate?.('/skill')}>
                                 开始使用 →
                             </Button>
                         </div>
