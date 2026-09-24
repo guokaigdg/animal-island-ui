@@ -1,7 +1,7 @@
 # Notification
 
 Source: `src/components/Notification/NotificationPortal.tsx` (imperative API + global store + container) + `Notification.tsx` (single-item view) + `notification.module.less`.
-**An imperative component** (like antd): there is no `<Notification>` JSX element — everything is triggered through `Notification.open / .success / .info / .warning / .error / .destroy`. The first call mounts a root container on `document.body` (`data-animal-notification-root`); afterwards `useSyncExternalStore` subscribes to store changes. SSR-safe (guarded by `typeof document`).
+**An imperative component**: there is no `<Notification>` JSX element — everything is triggered through `Notification.open / .success / .info / .warning / .error / .destroy`. The first call mounts a root container on `document.body` (`data-animal-notification-root`); afterwards `useSyncExternalStore` subscribes to store changes. SSR-safe (guarded by `typeof document`).
 
 ## Imperative API
 

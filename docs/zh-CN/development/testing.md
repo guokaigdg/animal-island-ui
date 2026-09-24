@@ -37,7 +37,7 @@
 
 ## 命令式组件
 
-带 antd 风格命令式 API 的组件（Notification）没有可渲染的 JSX 元素，`render(<Notification />)` 断言不了任何东西。改为触发它，然后等待容器出现：
+带命令式 API 的组件（Notification）没有可渲染的 JSX 元素，`render(<Notification />)` 断言不了任何东西。改为触发它，然后等待容器出现：
 
 ```tsx
 act(() => Notification.success('x'));

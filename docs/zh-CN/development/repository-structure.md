@@ -2,10 +2,10 @@
 
 ## 项目简介
 
-animal-island-ui 是一套受《治愈系海岛风格》启发的 React + TypeScript UI 组件库，面向个人学习与非商业用途。设计语言核心：温暖大地色、大圆角 pill 形、游戏按键立体感、柔和动效、几何与有机形状并存 —— 定义见 [../design-system/](../design-system/)。
+animal-island-ui 是一套受《治愈系海岛风格》启发的 React + TypeScript UI 组件库，开源且采用 MIT 协议。设计语言核心：温暖大地色、大圆角 pill 形、游戏按键立体感、柔和动效、几何与有机形状并存 —— 定义见 [../design-system/](../design-system/)。
 
 - 仓库：https://github.com/guokaigdg/animal-island-ui
-- License：CC BY-NC 4.0（禁止商业使用）—— 见 `LICENSE`
+- License：MIT —— 见 `LICENSE`
 - 当前版本：见 `package.json`
 - 组件清单：以 `src/index.ts` 为准；`src/components/` 下每个含有同名 `<Name>.tsx` 的目录算一个组件
 

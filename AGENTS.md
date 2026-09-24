@@ -3,7 +3,7 @@
 animal-island-ui is a React 18 + TypeScript 5.7 component library (30 components, Less
 Modules, Vite 7 library build, Vitest 4) inspired by a cozy island-style UI.
 One runtime dependency: `naive-icons` (the icon set); everything else is a peerDependency
-or devDependency. CC BY-NC 4.0 (non-commercial).
+or devDependency. MIT License.
 
 This file is the entry point for coding agents. It routes; the referenced docs hold the
 detail. Keep it lean — add new rules to the docs below, not here.

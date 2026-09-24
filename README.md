@@ -12,7 +12,7 @@ A React UI component library with a cute style
 <br/>
 <div align="center">
     <a href="https://github.com/guokaigdg/animal-island-ui/stargazers"><img src="https://img.shields.io/github/stars/guokaigdg/animal-island-ui?style=flat-square" alt="Stars"></a>
-    <a href="LICENSE"><img src="https://img.shields.io/badge/license-CC--BY--NC--4.0-orange.svg?style=flat-square" alt="License: CC BY-NC 4.0"></a>
+    <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-orange.svg?style=flat-square" alt="License: MIT"></a>
     <a href="LICENSE"><img src="https://img.shields.io/npm/dm/animal-island-ui.svg?style=flat-square" alt=""></a>
     <a href="https://github.com/guokaigdg/animal-island-ui/releases"><img src="https://img.shields.io/github/v/tag/guokaigdg/animal-island-ui?label=version&style=flat-square" alt="Version"></a>
     <a href="https://atomgit.com/guokaigdg/animal-island-ui"><img alt="AtomGit Star" src="https://atomgit.com/guokaigdg/animal-island-ui/star/badge.svg"></a>
@@ -131,8 +131,7 @@ npm run build:demo
 
 ## Notes
 
-- This project is intended for personal learning, research, and non-commercial demonstration only. Any form of commercial use, resale, or profit-making activities is prohibited.
-- Not to be used in any commercial product, enterprise project, external service, or paid template.
+- This project is open-source and distributed under the MIT License — free to use, modify, and distribute, including for commercial purposes (see the [LICENSE](LICENSE) file).
 - Users are solely responsible for any risks arising from the use of this component library.
 
 ## Copyright and Disclaimer
@@ -153,9 +152,9 @@ If this project has been helpful to you, consider buying the developer's cat a c
 
 ## License
 
-**Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)** — see the [LICENSE](LICENSE) file for the full text.
+**MIT License** — see the [LICENSE](LICENSE) file for the full text.
 
-- **Commercial use**: **PROHIBITED**.
-- **Permitted (non-commercial)**: personal learning, research, evaluation, testing, and non-commercial display.
-- **Attribution required**: must retain the original copyright notice and license declaration.
-- The author is not responsible for any legal issues or losses caused by the use of this library.
+- **Permission granted**: to use, copy, modify, merge, publish, distribute, sublicense, and sell copies of the Software.
+- **No restriction**: including use in commercial products or projects.
+- **Attribution**: the above copyright notice and this permission notice must be included in all copies or substantial portions of the Software.
+- The Software is provided "AS IS", without warranty of any kind; the authors are not liable for any claims, damages, or other liability arising from its use.

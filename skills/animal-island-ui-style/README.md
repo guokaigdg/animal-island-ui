@@ -42,5 +42,5 @@ in the repository.
 
 ## License
 
-The library and this skill are CC BY-NC 4.0 — non-commercial use only. See the
+The library and this skill are MIT-licensed. See the
 [repository LICENSE](https://github.com/guokaigdg/animal-island-ui/blob/main/LICENSE).

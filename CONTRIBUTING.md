@@ -18,4 +18,4 @@ npm run dev        # demo dev server
 npm run ci         # must pass before any PR
 ```
 
-License: CC BY-NC 4.0 — non-commercial use only (see [LICENSE](LICENSE)).
+License: MIT (see [LICENSE](LICENSE)).

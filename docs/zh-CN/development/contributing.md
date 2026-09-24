@@ -64,4 +64,4 @@ npm run build:demo
 
 ## 许可证
 
-贡献的代码采用本仓库的许可证 CC BY-NC 4.0（见 `LICENSE`）。禁止商业使用。
+贡献的代码采用本仓库的许可证 MIT（见 `LICENSE`）。

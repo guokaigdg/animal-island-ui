@@ -69,5 +69,4 @@ The full script list is in [repository-structure.md](./repository-structure.md).
 
 ## License
 
-Contributions are licensed under CC BY-NC 4.0, the license of this repository (see `LICENSE`). Commercial use is not
-permitted.
+Contributions are licensed under the MIT License, the license of this repository (see `LICENSE`).

@@ -49,7 +49,7 @@ violations against WCAG 2.1 AA. Adding a component means adding a case there.
 
 ## Imperative Components
 
-Components with an antd-style imperative API (Notification) have no JSX element to render, so
+Components with an imperative API (Notification) have no JSX element to render, so
 `render(<Notification />)` asserts nothing. Trigger them and wait for the container instead:
 
 ```tsx

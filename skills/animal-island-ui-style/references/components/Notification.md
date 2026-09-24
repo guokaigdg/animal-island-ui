@@ -2,7 +2,7 @@
 
 Props/types below are copied from the library source. In an npm-installed project, the installed package's TypeScript declarations (`dist/types/index.d.ts`) are the ground truth — prefer exploring them when in doubt.
 
-Notification is **NOT a JSX component** — it's a static-method API (à la antd). Calling `Notification.success({...})` mounts a portal under `document.body`, renders the toast, and auto-unmounts after `duration` seconds. There is no `<Notification>` element to put in your tree.
+Notification is **NOT a JSX component** — it's a static-method API. Calling `Notification.success({...})` mounts a portal under `document.body`, renders the toast, and auto-unmounts after `duration` seconds. There is no `<Notification>` element to put in your tree.
 
 ## Types
 

@@ -112,7 +112,8 @@ const SkillDemo: React.FC = () => (
 
         <Section title="许可证" tags={['License']} dashed>
             <p className={styles.lead}>
-                本组件库与该技能均为 CC BY-NC 4.0 —— 仅限非商业使用。完整条款见仓库 LICENSE 文件。
+                本组件库与该技能均采用 MIT License —— 可自由使用、修改与分发，包括商业用途。完整条款见仓库 LICENSE
+                文件。
             </p>
         </Section>
     </div>

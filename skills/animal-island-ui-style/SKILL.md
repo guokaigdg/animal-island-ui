@@ -13,7 +13,7 @@ description: >
 
 animal-island-ui is a React + TypeScript component library with an original
 cozy island-style design — 35 components, a single runtime dependency (`naive-icons`
-for icons), CC BY-NC 4.0 (non-commercial use only).
+for icons), MIT License.
 
 Source & canonical design definition: https://github.com/guokaigdg/animal-island-ui
 

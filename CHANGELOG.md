@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.0.0] - 2026-09-24
+
+### Changed
+
+- **许可证由 CC BY-NC 4.0 变更为 MIT**：移除非商业使用限制，允许用户自由用于个人及商业用途
+- **`naive-icons` 升级至 `1.2.0`**：新增 9 个图标，并修复组件改为 `forwardRef` 后图标不渲染的问题
+- `Progress` 的 `variant` 改为可选项：不传时使用纯色填充，传时显示场景图
+
+### Added
+
+- `Upload` 上传组件：text / picture-card 两种列表形态，点击与拖拽触发，`beforeUpload` 拦截、`maxCount`、`customRequest` / `action` 真实上传，内置预览灯箱
+
 ## [1.13.0] - 2026-09-16
 
 ### Changed
@@ -12,6 +24,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **图标迁移至 `naive-icons`**（破坏性变更）：内置 `Icon` 组件与 101 个私有图标移除，库改用独立的 [naive-icons](https://github.com/guokaigdg/naive-icons) 图标包；`naive-icons` 成为唯一运行时依赖，`Icon` 相关 API 迁移至该包
 - `Divider` 的 `icon` prop 由图标名改为接收 React 图标元素（如 `<FishIcon />`）
 - `Button` / `Collapse` / `Image` 内置装饰图标迁移至 `naive-icons`
+- `naive-icons` 升级至 `1.1.0`：新增 15 个图标（箭头、折叠、复制、菜单、外链等），Demo Icon 页同步适配并补齐中文名
+- `naive-icons` 升级至 `1.2.0`：新增 9 个图标（篮球、哑铃、谷歌浏览器、山、帐篷、暂停、停止、咖啡杯、水杯），修复主页与 Icon 页因组件改为 `forwardRef` 导致的图标不渲染问题
+- `Title` 默认变体由 `layer` 改为 `ribbon`（飘带、默认）
 
 ### Added
 

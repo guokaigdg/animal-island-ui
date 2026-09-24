@@ -2,13 +2,13 @@
 
 ## Project
 
-animal-island-ui is a React + TypeScript UI component library inspired by _a cozy island-style UI_, aimed at
-personal learning and non-commercial use. Its design language is warm earth tones, large pill-shaped radii, tactile
+animal-island-ui is a React + TypeScript UI component library inspired by _a cozy island-style UI_, released as
+open-source software under the MIT License. Its design language is warm earth tones, large pill-shaped radii, tactile
 game-button depth, soft motion, and a mix of geometric and organic shapes — see
 [../design-system/](../design-system/) for the definition.
 
 - Repository: https://github.com/guokaigdg/animal-island-ui
-- License: CC BY-NC 4.0 (commercial use prohibited) — see `LICENSE`
+- License: MIT — see `LICENSE`
 - Current version: see `package.json`
 - Component list: `src/index.ts` is the source of truth; every component under `src/components/` with a matching
   `<Name>.tsx` counts as one
