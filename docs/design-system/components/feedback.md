@@ -2,10 +2,10 @@
 
 Exact values for the components that report progress or pending state: Progress, Skeleton and BackTop.
 
-## Progress (scene-image fill on dotted track)
+## Progress (scene or solid fill on dotted track)
 
 Source: `src/components/Progress/Progress.tsx` (controlled rendering + aria wiring) + `types.ts` (type definitions) + `progress.module.less`.
-**A JSX component** (not imperative): `percent` is passed in controlled and animates smoothly from 0 to the target value. The track is a cream dotted pill with an inner shadow; the fill is a scene image (`sweet-corner.svg` by default) injected inline at `background-size` equal to the full track width so the scene spans the whole bar. The label always sits right of the bar.
+**A JSX component** (not imperative): `percent` is passed in controlled and animates smoothly from 0 to the target value. The track is a cream dotted pill with an inner shadow; when a `variant` is passed the fill is a scene image (`sweet-corner.svg`, `forest-grove.svg`, …) injected inline at `background-size` equal to the full track width so the scene spans the whole bar, while omitting `variant` falls back to a solid teal fill (`#19c8b9`). The label always sits right of the bar.
 
 **props**:
 ```ts
@@ -16,7 +16,7 @@ interface ProgressProps {
     percent: number;            // required, 0-100, auto-clamped; non-integers are rounded for aria
     size?: ProgressSize;        // small=14px / middle=24px / large=32px
     showInfo?: boolean;         // default true; label sits right of the bar
-    variant?: ProgressVariant;  // scene image for the fill; default 'sweet-corner'
+    variant?: ProgressVariant;  // scene image for the fill; omit to use solid #19c8b9
     infoFormat?: (p: number) => ReactNode; // default `${p}%`
     duration?: number;          // seconds; 0 disables the fill width animation; default 0.6
     className?: string;

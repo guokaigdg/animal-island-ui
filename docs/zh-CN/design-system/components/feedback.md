@@ -2,10 +2,10 @@
 
 反馈进度与等待状态的组件：Progress、Skeleton、BackTop 的精确取值
 
-## Progress（场景图 fill + 波点 track）
+## Progress（场景图或纯色 fill + 波点 track）
 
 源码：`src/components/Progress/Progress.tsx`（受控渲染 + aria 适配）+ `types.ts`（类型定义）+ `progress.module.less`。
-**JSX 组件**（非命令式）：`percent` 受控传入，从 0 平滑动画到目标值。track 是奶油色波点 pill 带内阴影、无边框；fill 是场景图（默认 `sweet-corner.svg`）由组件内联注入，`background-size` 等于整条轨道宽度，场景铺满整条轨道。百分比文字固定显示在进度条右侧。
+**JSX 组件**（非命令式）：`percent` 受控传入，从 0 平滑动画到目标值。track 是奶油色波点 pill 带内阴影、无边框；传 `variant` 时 fill 是场景图（`sweet-corner.svg`、`forest-grove.svg` …）由组件内联注入，`background-size` 等于整条轨道宽度，场景铺满整条轨道；未传 `variant` 时 fill 回退为纯青色（`#19c8b9`）。百分比文字固定显示在进度条右侧。
 
 **props**：
 ```ts
@@ -16,7 +16,7 @@ interface ProgressProps {
     percent: number;            // required, 0-100, auto-clamped; non-integers are rounded for aria
     size?: ProgressSize;        // small=14px / middle=24px / large=32px
     showInfo?: boolean;         // default true；文字显示在进度条右侧
-    variant?: ProgressVariant;  // fill 场景图；default 'sweet-corner'
+    variant?: ProgressVariant;  // fill 场景图；不传时用纯青色 #19c8b9
     infoFormat?: (p: number) => ReactNode; // default `${p}%`
     duration?: number;          // seconds; 0 disables the fill width animation; default 0.6
     className?: string;

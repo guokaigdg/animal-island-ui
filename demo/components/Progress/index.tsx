@@ -59,9 +59,9 @@ const PROGRESS_API: ApiRow[] = [
     { prop: 'showInfo', desc: '是否显示百分比文字（显示在进度条右侧）', type: 'boolean', defaultVal: 'true' },
     {
         prop: 'variant',
-        desc: 'fill 背景场景图（当前进度区域显示该场景，从左揭开）',
+        desc: 'fill 背景场景图（传时当前进度区域显示该场景，从左揭开；不传为纯色 #19c8b9）',
         type: `'sweet-corner' | 'forest-grove' | 'starry-camp' | 'coffee-break'`,
-        defaultVal: "'sweet-corner'",
+        defaultVal: '-（不传纯色 fill）',
     },
     { prop: 'infoFormat', desc: '自定义文字格式化', type: '(percent: number) => ReactNode', defaultVal: '${percent}%' },
     { prop: 'duration', desc: 'fill 宽度动画时长(秒),0 = 不动画', type: 'number', defaultVal: '0.6' },
@@ -224,7 +224,7 @@ const App = () => {
             <Progress percent={50} size="small" />
             <Progress percent={50} size="large" />
 
-            {/* fill 背景场景图（sweet-corner 默认） */}
+            {/* fill 背景场景图（传 variant 时生效；不传为纯色） */}
             <Progress percent={50} variant="forest-grove" />
 
             {/* 自定义格式化 (例如: 5/10 任务) */}

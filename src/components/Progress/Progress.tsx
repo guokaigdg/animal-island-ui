@@ -23,7 +23,7 @@ const SIZE_CLASS: Record<ProgressSize, string> = {
 export const Progress: React.FC<ProgressProps> = ({
     percent,
     size = 'middle',
-    variant = 'sweet-corner',
+    variant,
     showInfo = true,
     infoFormat,
     duration = 0.6,
@@ -63,11 +63,15 @@ export const Progress: React.FC<ProgressProps> = ({
     const inlineFillStyle: React.CSSProperties = {
         width: `${safePercent}%`,
         transitionDuration: `${duration}s`,
-        // 图片宽度固定为整条轨道宽度（取上部，不拉伸变形）；fill 自身 overflow hidden 按进度宽度裁剪左侧 = 从左揭开
-        backgroundImage: `url(${VARIANT_BG[variant]})`,
-        backgroundRepeat: 'no-repeat',
-        backgroundPosition: 'left top',
-        backgroundSize: trackW > 0 ? `${trackW}px auto` : '100% auto',
+        // 传入 variant 时用场景图铺满（从左揭开）；未传时用纯色 fill
+        ...(variant
+            ? {
+                  backgroundImage: `url(${VARIANT_BG[variant]})`,
+                  backgroundRepeat: 'no-repeat',
+                  backgroundPosition: 'left top',
+                  backgroundSize: trackW > 0 ? `${trackW}px auto` : '100% auto',
+              }
+            : { backgroundColor: '#19c8b9' }),
     };
 
     // 百分比文字固定显示在进度条右侧

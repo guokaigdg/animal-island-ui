@@ -24,7 +24,7 @@ export interface ProgressProps {
     size?: ProgressSize;
     /** 是否显示百分比文字（显示在进度条右侧） */
     showInfo?: boolean;
-    /** fill 背景场景图（默认 sweet-corner） */
+    /** fill 背景场景图；不传时为纯色 fill（`#19c8b9`） */
     variant?: ProgressVariant;
     /** 自定义文字格式化（默认 `${percent}%`） */
     infoFormat?: (percent: number) => React.ReactNode;
