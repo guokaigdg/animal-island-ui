@@ -13,7 +13,6 @@ interface CalendarEvent {
     end?: string | Dayjs;           // omit for a single day; set it for a continuous multi-day bar
     color?: CalendarColor;          // default 'teal'
     showTime?: boolean;             // default false — shows the start HH:mm on the first slice
-    data?: unknown;                 // free-form payload for your own lookups
 }
 
 interface CalendarProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'defaultValue' | 'onChange'> {
@@ -56,6 +55,6 @@ entirely outside the 42-day grid are neither rendered nor counted. `value` is a 
 date arithmetic runs on dayjs (see [ADR 0005](https://github.com/guokaigdg/animal-island-ui/blob/main/docs/adr/0005-dayjs-as-the-date-layer.md)).
 `width` defaults to filling the parent; the baseline rhythm is tuned to a 750px panel (antd's full calendar card).
 There is no size prop: the panel measures its own box and derives the rhythm from it
-(`--animal-calendar-scale` = width / 640, clamped to 0.6…2), so a wider panel gets taller rows and larger type.
+(`--animal-calendar-scale` = width / 750, clamped to 0.6…2), so a wider panel gets taller rows and larger type.
 Cells are `role="gridcell"` with the roving tabindex: arrows move the cursor (crossing a month boundary flips the panel),
 Enter/Space selects, PageUp/PageDown flip months, and `draggableEvents` adds click-and-drag creation via `onEventCreate`.

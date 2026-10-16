@@ -2,7 +2,7 @@
 
 Props/types below are copied from the library source. In an npm-installed project, the installed package's TypeScript declarations (`dist/types/index.d.ts`) are the ground truth — prefer exploring them when in doubt.
 
-Covers: Table, Pagination, CodeBlock, Tag, Badge, Calendar.
+Covers: Table, Pagination, CodeBlock, Tag, Badge.
 
 ## Table
 
