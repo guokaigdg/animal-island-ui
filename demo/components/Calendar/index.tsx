@@ -47,6 +47,10 @@ const S = {
         marginBottom: 20,
         background: '#faf8f3',
     } as React.CSSProperties,
+    /* 把容器收到面板的实际宽度（约 antd full 日历卡片），避免卡片右侧留一大片空地 */
+    calendarBox: {
+        maxWidth: 780,
+    } as React.CSSProperties,
     statusLine: {
         marginBottom: 8,
         fontSize: 13,
@@ -91,7 +95,7 @@ const CalendarDemo: React.FC = () => {
                 Calendar <DemoTag>基础用法</DemoTag>
             </div>
             <div style={labelStyle}>基础</div>
-            <div style={S.demoBox}>
+            <div style={{ ...S.demoBox, ...S.calendarBox }}>
                 <Calendar defaultValue="2026-08-10" events={islandEvents} />
             </div>
 
@@ -99,7 +103,7 @@ const CalendarDemo: React.FC = () => {
             <div style={S.statusLine}>
                 当前选中: <span style={{ color: '#19c8b9', fontWeight: 600 }}>{date}</span>
             </div>
-            <div style={S.demoBox}>
+            <div style={{ ...S.demoBox, ...S.calendarBox }}>
                 <Calendar value={date} panelValue={panel} onChange={setDate} onPanelChange={setPanel} />
             </div>
 
@@ -112,7 +116,7 @@ const CalendarDemo: React.FC = () => {
                         : '在日期上按住并横向拖动'}
                 </span>
             </div>
-            <div style={S.demoBox}>
+            <div style={{ ...S.demoBox, ...S.calendarBox }}>
                 <Calendar
                     defaultValue="2026-08-10"
                     events={[...islandEvents, ...created]}
