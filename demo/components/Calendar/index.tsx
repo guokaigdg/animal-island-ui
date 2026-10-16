@@ -1,6 +1,15 @@
 import React, { useState } from 'react';
 import { Calendar, type CalendarEvent } from '../../../src';
-import { ApiTable, ApiRow, CodeBlock, DemoTag, labelStyle, sectionStyle, sectionTitleStyle } from '../../tools';
+import {
+    ApiTable,
+    ApiRow,
+    CodeBlock,
+    DemoTag,
+    labelStyle,
+    sectionStyle,
+    sectionTitleStyle,
+    useIsMobile,
+} from '../../tools';
 
 const CALENDAR_API: ApiRow[] = [
     {
@@ -63,19 +72,12 @@ const EVENT_API: ApiRow[] = [
 ];
 
 const S = {
-    row: {
-        display: 'flex',
-        gap: 20,
-        flexWrap: 'wrap',
-        alignItems: 'flex-start',
-    } as React.CSSProperties,
     demoBox: {
         padding: 16,
         borderRadius: 18,
         fontWeight: 500,
         marginBottom: 20,
         background: '#faf8f3',
-        maxWidth: 560,
     } as React.CSSProperties,
     statusLine: {
         marginBottom: 8,
@@ -97,6 +99,7 @@ const workEvents: CalendarEvent[] = [
 ];
 
 const CalendarDemo: React.FC = () => {
+    const isMobile = useIsMobile();
     const [date, setDate] = useState('2026-08-10');
     const [panel, setPanel] = useState('2026-08');
     const [created, setCreated] = useState<{ start: string; end: string }[]>([]);
@@ -106,19 +109,13 @@ const CalendarDemo: React.FC = () => {
             <div style={sectionTitleStyle}>
                 Calendar <DemoTag>基础用法</DemoTag>
             </div>
-            <div style={labelStyle}>三种尺寸（small / middle / large）</div>
-            <div style={S.row}>
-                <Calendar size="small" panelValue="2026-08" defaultValue="2026-08-10" width={360} />
-                <Calendar size="middle" panelValue="2026-08" defaultValue="2026-08-10" width={440} />
-                <Calendar size="large" panelValue="2026-08" defaultValue="2026-08-10" width={520} />
-            </div>
-
-            <div style={labelStyle}>中等尺寸 + 事项（默认）</div>
+            <div style={labelStyle}>基础</div>
             <div style={S.demoBox}>
                 <Calendar
                     panelValue="2026-08"
                     defaultValue="2026-08-10"
-                    events={[{ title: '版本发布', start: '2026-08-20' }]}
+                    width={isMobile ? '100%' : 900}
+                    events={workEvents}
                 />
             </div>
 

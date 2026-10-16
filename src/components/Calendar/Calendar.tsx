@@ -1,9 +1,7 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import dayjs, { type Dayjs } from 'dayjs';
 import { CalendarIcon, ChevronLeftIcon, ChevronRightIcon } from 'naive-icons';
 import styles from './calendar.module.less';
-
-export type CalendarSize = 'small' | 'middle' | 'large';
 
 export type CalendarColor = 'teal' | 'amber' | 'coral' | 'green' | 'purple';
 
@@ -62,9 +60,7 @@ export interface CalendarProps extends Omit<React.HTMLAttributes<HTMLDivElement>
     draggableEvents?: boolean;
     /** 拖拽创建事项结束回调 */
     onEventCreate?: (start: string, end: string) => void;
-    /** 尺寸：控制单元格高度、字号与事项密度，默认 middle */
-    size?: CalendarSize;
-    /** 面板宽度；默认铺满父容器，传数值按 px 处理 */
+    /** 面板宽度，默认铺满父容器（数值按 px 处理）。行高、字号与事项密度都由实际宽度推导 */
     width?: number | string;
     /** 面板是否展示「今天」按钮，默认 true */
     showToday?: boolean;
@@ -90,17 +86,26 @@ const COLS = 7;
 /** 日期网格的行数（6 周） */
 const CELL_ROWS = GRID_CELLS / COLS;
 /*
- * 尺寸表：与 calendar.module.less 的 @cell-height / @event-row-height / @day-number-size / 表头高度保持同步。
- * numberBand = 日期圆高度 + 上下留白，事项条从它下方开始排。
+ * 布局基准：面板宽度 640px 时的度量，与 calendar.module.less 里的同名常量一一对应
+ * （表头 32 / 单元格 86 / 日期数字带 32 / 事项行 23）。组件按自身宽度算出缩放系数，
+ * 事项条的纵向位置就是「基准值 × 系数」；CSS 那边用同一系数推导行高。
  */
-const SIZE_METRICS: Record<CalendarSize, { cellHeight: number; numberBand: number; eventRow: number; header: number }> =
-    {
-        // numberBand 取 32：日期圆 28px 上下各留 2px，随后接第一条事项行；
-        // 两条事项行（32 + 2 × 20/23/26）都留在单元格内，不会压到下一周的日期
-        small: { cellHeight: 74, numberBand: 32, eventRow: 20, header: 28 },
-        middle: { cellHeight: 86, numberBand: 32, eventRow: 23, header: 32 },
-        large: { cellHeight: 100, numberBand: 32, eventRow: 26, header: 32 },
-    };
+const LAYOUT_BASE = {
+    /** 基准面板宽度 */
+    width: 640,
+    /** 星期表头高度 */
+    header: 32,
+    /** 单元格高度 */
+    cellHeight: 86,
+    /** 单元格内「日期圆 + 上下留白」占用的高度，事项条从它下方开始排 */
+    numberBand: 32,
+    /** 单条事项行的高度 */
+    eventRow: 23,
+};
+
+/** 缩放系数的上下限，避免极窄或极宽容器把面板拉变形 */
+const MIN_SCALE = 0.6;
+const MAX_SCALE = 2;
 /** 每个单元格最多平铺 2 条事项，多出的折叠成 +N */
 const MAX_EVENT_ROWS = 2;
 
@@ -254,7 +259,6 @@ export const Calendar: React.FC<CalendarProps> = ({
     showEventTime = true,
     draggableEvents = false,
     onEventCreate,
-    size = 'middle',
     width,
     showToday = true,
     showYearSwitch = true,
@@ -286,7 +290,30 @@ export const Calendar: React.FC<CalendarProps> = ({
     const monthKey = viewMonth.format('YYYY-MM');
     const gridStart = gridStartOf(viewMonth);
     const selectedKey = selectedValue ?? '';
-    const metrics = SIZE_METRICS[size];
+    const wrapperRef = useRef<HTMLDivElement>(null);
+    /** 面板实际宽度：优先用显式 width，否则量自身盒子，量不到时退回基准宽度 */
+    const [measuredWidth, setMeasuredWidth] = useState(0);
+
+    useEffect(() => {
+        const node = wrapperRef.current;
+        if (!node || typeof ResizeObserver === 'undefined') return;
+        const observer = new ResizeObserver((entries) => {
+            const next = entries[0]?.contentRect.width ?? 0;
+            if (next > 0) setMeasuredWidth(next);
+        });
+        observer.observe(node);
+        return () => observer.disconnect();
+    }, []);
+
+    const numericWidth = typeof width === 'number' ? width : 0;
+    const effectiveWidth = numericWidth || measuredWidth || LAYOUT_BASE.width;
+    const scale = Math.min(MAX_SCALE, Math.max(MIN_SCALE, effectiveWidth / LAYOUT_BASE.width));
+    const metrics = {
+        header: LAYOUT_BASE.header * scale,
+        cellHeight: LAYOUT_BASE.cellHeight * scale,
+        numberBand: LAYOUT_BASE.numberBand * scale,
+        eventRow: LAYOUT_BASE.eventRow * scale,
+    };
 
     // 受控 value 变化后，把 roving tabindex 的光标同步到新的选中日期
     useEffect(() => {
@@ -545,13 +572,14 @@ export const Calendar: React.FC<CalendarProps> = ({
         Array.from({ length: COLS }, (_, col) => gridStart.add(row * COLS + col, 'day'))
     );
 
-    const calendarClass = [styles.calendar, styles[`calendar-${size}`], className].filter(Boolean).join(' ');
+    const calendarClass = [styles.calendar, className].filter(Boolean).join(' ');
 
     return (
         <div
+            ref={wrapperRef}
             className={calendarClass}
             data-draggable={draggableEvents ? 'true' : undefined}
-            style={{ width, ...style }}
+            style={{ width, '--animal-calendar-scale': scale, ...style } as React.CSSProperties}
             {...rest}
         >
             {showHeader && (

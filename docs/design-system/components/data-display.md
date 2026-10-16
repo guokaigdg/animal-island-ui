@@ -734,7 +734,9 @@ Source: `src/components/Calendar/calendar.module.less`. A **standalone** month c
 permanent, so the shell is a cream card rather than a positioned popover. It reuses DatePicker's visual language —
 `#fffdf7` card, `#e8dcc8` 1.5px border, 20px radius, day circles — and adds an event band under each week's dates.
 
-**Shell, sizes and header.** `size` picks the row of metrics; `width` sets the panel width (default: fill the parent).
+**Shell and header.** The panel has no size tiers: it measures its own box (`ResizeObserver`, or the numeric `width`
+prop when given) and derives every metric from it. `--animal-calendar-scale` = actual width / 640, clamped to
+`0.6 … 2`, and the whole rhythm is `baseline × scale`:
 
 | Property | small | middle | large |
 | -------- | ----- | ------ | ----- |
@@ -746,21 +748,17 @@ permanent, so the shell is a cream card rather than a positioned popover. It reu
 
 
 ```css
-.calendar {                       /* fixed accent trio (DatePicker's teal) + the metrics every size overrides */
+.calendar {                       /* fixed accent trio (DatePicker's teal); every metric is baseline × scale */
     --animal-calendar-accent: #19c8b9;
     --animal-calendar-accent-soft: rgba(25, 200, 185, 0.14);
     --animal-calendar-accent-tint: #e6f9f6;
-    --animal-calendar-cell-height: 86px;
-    --animal-calendar-row-height: 23px;
-    --animal-calendar-bar-height: 17px;
-    font-size: 28px;              /* one knob: the day circle diameter */
+    --animal-calendar-header-height: calc(32px * var(--animal-calendar-scale, 1));
+    --animal-calendar-number-size: calc(28px * var(--animal-calendar-scale, 1));
+    --animal-calendar-cell-height: calc(86px * var(--animal-calendar-scale, 1));
+    --animal-calendar-row-height: calc(23px * var(--animal-calendar-scale, 1));
+    --animal-calendar-bar-height: calc(17px * var(--animal-calendar-scale, 1));
+    font-size: calc(13px * var(--animal-calendar-scale, 1));   /* the day number */
 }
-/* small / middle / large only change circle size, cell height and event density */
-.calendar-small  { --…-cell-height: 74px;  --…-row-height: 20px; --…-bar-height: 16px; font-size: 25px;
-                   /* header 28px; day number 12px; event 10px; +N 9px */ }
-.calendar-middle { --…-cell-height: 86px;  --…-row-height: 23px; --…-bar-height: 17px; font-size: 28px; }
-.calendar-large  { --…-cell-height: 100px; --…-row-height: 26px; --…-bar-height: 19px; font-size: 32px;
-                   /* day number 15px; event 12px */ }
 
 .body   { position: relative; padding-bottom: calc(var(--animal-calendar-row-height) * 2 + 6px);
           border: 1.5px solid #e8dcc8; border-radius: 20px; background: #fffdf7;
@@ -802,11 +800,12 @@ layout and a grid placement would be ignored.
 ```css
 .eventsLayer { position: absolute; inset: 0; pointer-events: none; }
 .event { position: absolute;
-         top: var(--animal-calendar-bar-top);      /* header + week × cell-height + 32px number band + row × row-height */
+         top: calc(var(--animal-calendar-bar-top) + var(--animal-calendar-row-height) / 2);
          left: var(--animal-calendar-bar-left);    /* (100% / 7) × column + 4px — the same 4px gutter as .cell */
          width: var(--animal-calendar-bar-width);  /* (100% / 7) × span − 8px */
-         height: var(--animal-calendar-bar-height); margin: 3px 0; padding: 0 6px;
-         border-radius: 10px; font-size: 11px; font-weight: 600;
+         height: var(--animal-calendar-bar-height); margin: 0; padding: 0 6px;
+         transform: translateY(-50%);   /* top points at the row start; this centres the bar in it */
+         border-radius: 10px; font-size: calc(11px * var(--animal-calendar-scale, 1)); font-weight: 600;
          line-height: var(--animal-calendar-bar-height); overflow: hidden; white-space: nowrap; }
 /* a span bar only keeps a 1px gutter at the seams, so consecutive weeks read as one strip */
 .event[data-span='true']  { margin-left: 1px; margin-right: 1px; border-radius: 6px; }
@@ -815,9 +814,8 @@ layout and a grid placement would be ignored.
 /* 5 palettes: teal #e0f7f4/#17756d · amber #fff3d1/#8a6a08 · coral #ffe7de/#a44b32
    · green #eaf6db/#4a7a1d · purple #f0eafb/#6849b8, each with a matching 45% border */
 .event[data-preview='true'] { border-style: dashed; }   /* drag-to-create preview */
-.eventTime  { display: inline; margin-right: 4px; font-size: 11px; color: #9f927d; font-variant-numeric: tabular-nums; }
-.eventTitle { display: inline; font-size: 11px; font-weight: 600; }
-/* the inner spans declare their own font-size: without it they would inherit the calendar's day-number size */
+.eventTime  { display: inline; margin-right: 4px; color: #9f927d; font-variant-numeric: tabular-nums; }
+.eventTitle { display: inline; font-weight: 600; }
 ```
 
 **Layout rules.** A multi-day event is cut at week boundaries, so every bar occupies 1–7 columns and never wraps; the

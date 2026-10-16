@@ -47,29 +47,38 @@ describe('Calendar', () => {
             expect(cell('2026-08-10')).not.toHaveAttribute('aria-selected');
         });
 
-        it('size 落到尺寸类上，并驱动事项条的定位度量', () => {
-            // 7/26 是视图第一格：表头 + 0 × 单元格 + 日期数字带，正好读出表头与数字带之和
-            const { container, rerender } = render(
-                <Calendar panelValue="2026-08" size="small" events={[{ title: '晨会', start: '2026-07-26' }]} />
+        it('面板按自身宽度推导缩放系数，事项条随之定位', () => {
+            // 7/26 是视图第一格：top = 表头 + 0 × 单元格 + 日期数字带
+            const { container } = render(
+                <Calendar panelValue="2026-08" width={640} events={[{ title: '晨会', start: '2026-07-26' }]} />
             );
             const root = container.firstElementChild as HTMLElement;
-            const top = () =>
+            // 640 正好是基准宽度，系数为 1，表头 32 + 数字带 32
+            expect(root.style.getPropertyValue('--animal-calendar-scale')).toBe('1');
+            expect(
                 (container.querySelector('[data-color]') as HTMLElement).style.getPropertyValue(
                     '--animal-calendar-bar-top'
-                );
-            expect(root.className).toContain('calendar-small');
-            expect(top()).toBe('60px');
+                )
+            ).toBe('64px');
+        });
 
-            rerender(<Calendar panelValue="2026-08" size="large" events={[{ title: '晨会', start: '2026-07-26' }]} />);
-            expect(root.className).toContain('calendar-large');
-            expect(top()).toBe('64px');
+        it('系数随宽度线性放大，并被上下限夹住', () => {
+            const { container, rerender } = render(<Calendar panelValue="2026-08" width={960} />);
+            const root = container.firstElementChild as HTMLElement;
+            expect(root.style.getPropertyValue('--animal-calendar-scale')).toBe('1.5');
+
+            rerender(<Calendar panelValue="2026-08" width={320} />);
+            expect(root.style.getPropertyValue('--animal-calendar-scale')).toBe('0.6');
+
+            rerender(<Calendar panelValue="2026-08" width={4000} />);
+            expect(root.style.getPropertyValue('--animal-calendar-scale')).toBe('2');
         });
 
         it('width 设面板宽度，且不覆盖调用方传入的 style.width', () => {
-            const { container, rerender } = render(<Calendar panelValue="2026-08" width={360} />);
-            expect(container.firstElementChild).toHaveStyle({ width: '360px' });
+            const { container, rerender } = render(<Calendar panelValue="2026-08" width={900} />);
+            expect(container.firstElementChild).toHaveStyle({ width: '900px' });
 
-            rerender(<Calendar panelValue="2026-08" width={360} style={{ width: 600 }} />);
+            rerender(<Calendar panelValue="2026-08" width={900} style={{ width: 600 }} />);
             expect(container.firstElementChild).toHaveStyle({ width: '600px' });
         });
 

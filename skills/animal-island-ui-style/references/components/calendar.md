@@ -24,8 +24,7 @@ interface CalendarCellInfo {
 }
 
 interface CalendarProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'defaultValue' | 'onChange'> {
-    size?: 'small' | 'middle' | 'large';   // default 'middle' — cell height, type size, event density
-    width?: number | string;        // default: fill the parent; numbers are px
+    width?: number | string;        // default: fill the parent; numbers are px and also drive the scale
     value?: string;                 // controlled selected date, YYYY-MM-DD
     defaultValue?: string;          // uncontrolled; defaults to today
     panelValue?: string;            // controlled visible month, YYYY-MM or YYYY-MM-DD
@@ -50,8 +49,7 @@ interface CalendarProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'defa
 
 ```tsx
 <Calendar
-    size="large"
-    width={560}
+    width={900}
     value={date}
     onChange={setDate}
     events={[
@@ -69,5 +67,7 @@ bar band anchored under each week's date numbers (two rows per week); a multi-da
 wraps), its first slice carries the `HH:mm` prefix, and a third same-day event folds into `+N` on the day cell. Events
 entirely outside the 42-day grid are neither rendered nor counted. `value` is a plain `YYYY-MM-DD` string and the
 date arithmetic runs on dayjs (see [ADR 0005](https://github.com/guokaigdg/animal-island-ui/blob/main/docs/adr/0005-dayjs-as-the-date-layer.md)).
+There is no size prop: the panel measures its own box and derives the rhythm from it
+(`--animal-calendar-scale` = width / 640, clamped to 0.6…2), so a wider panel gets taller rows and larger type.
 Cells are `role="gridcell"` with the roving tabindex: arrows move the cursor (crossing a month boundary flips the panel),
 Enter/Space selects, PageUp/PageDown flip months, and `draggableEvents` adds click-and-drag creation via `onEventCreate`.
