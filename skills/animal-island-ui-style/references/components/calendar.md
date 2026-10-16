@@ -25,12 +25,9 @@ interface CalendarProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'defa
     onChange?: (date: string) => void;
     onPanelChange?: (month: string) => void;   // 'YYYY-MM'
     events?: CalendarEvent[];       // default []
-    disabledDate?: (date: Date) => boolean;
     showEventTime?: boolean;        // default true — HH:mm prefix, shown once on an event's first slice
     draggableEvents?: boolean;      // default false — drag across days to create an event
     onEventCreate?: (start: string, end: string) => void;
-    showToday?: boolean;            // default true
-    showYearSwitch?: boolean;       // default true
     showHeader?: boolean;           // default true
     'aria-label'?: string; 'aria-labelledby'?: string;
     className?: string;

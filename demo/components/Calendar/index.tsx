@@ -26,7 +26,6 @@ const CALENDAR_API: ApiRow[] = [
     { prop: 'onChange', desc: '日期变化回调', type: '(date: string) => void', defaultVal: '-' },
     { prop: 'onPanelChange', desc: '面板月份变化回调', type: '(month: string) => void', defaultVal: '-' },
     { prop: 'events', desc: '事项列表，支持同日多条与跨日期连续条', type: 'CalendarEvent[]', defaultVal: '[]' },
-    { prop: 'disabledDate', desc: '禁用日期判断函数', type: '(date: Date) => boolean', defaultVal: '-' },
     { prop: 'showEventTime', desc: '是否展示事项起始时间（仅首段）', type: 'boolean', defaultVal: 'true' },
     { prop: 'draggableEvents', desc: '允许鼠标拖拽跨日期创建事项', type: 'boolean', defaultVal: 'false' },
     {
@@ -35,8 +34,6 @@ const CALENDAR_API: ApiRow[] = [
         type: '(start: string, end: string) => void',
         defaultVal: '-',
     },
-    { prop: 'showToday', desc: '面板展示「今天」按钮', type: 'boolean', defaultVal: 'true' },
-    { prop: 'showYearSwitch', desc: '面板展示上/下年切换', type: 'boolean', defaultVal: 'true' },
     { prop: 'showHeader', desc: '面板展示头部', type: 'boolean', defaultVal: 'true' },
 ];
 
@@ -73,8 +70,6 @@ const S = {
         color: '#a08060',
     } as React.CSSProperties,
 };
-
-const disableWeekend = (date: Date) => date.getDay() === 0 || date.getDay() === 6;
 
 const workEvents: CalendarEvent[] = [
     { title: '周会', start: '2026-08-10 09:30', showTime: true },
@@ -118,11 +113,6 @@ const CalendarDemo: React.FC = () => {
             <div style={labelStyle}>事项：同日多条、跨日期连续条、时间前缀</div>
             <div style={S.demoBox}>
                 <Calendar panelValue="2026-08" defaultValue="2026-08-10" events={workEvents} />
-            </div>
-
-            <div style={labelStyle}>禁用日期（周末不可选）与「今天」按钮开关</div>
-            <div style={S.demoBox}>
-                <Calendar panelValue="2026-08" disabledDate={disableWeekend} showToday={false} showYearSwitch={false} />
             </div>
 
             <div style={labelStyle}>拖拽跨日期创建事项（draggableEvents）</div>

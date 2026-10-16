@@ -36,8 +36,6 @@ export interface CalendarProps extends Omit<React.HTMLAttributes<HTMLDivElement>
     onPanelChange?: (month: string) => void;
     /** 事项列表，支持同一天多条与跨日期连续条 */
     events?: CalendarEvent[];
-    /** 禁用日期判断函数，返回 true 的日期不可选、不可拖拽创建 */
-    disabledDate?: (date: Date) => boolean;
     /** 是否在事项条上展示起始时间，默认 true */
     showEventTime?: boolean;
     /** 是否允许鼠标拖拽跨日期创建事项（松手时通过 onEventCreate 回调） */
@@ -46,10 +44,6 @@ export interface CalendarProps extends Omit<React.HTMLAttributes<HTMLDivElement>
     onEventCreate?: (start: string, end: string) => void;
     /** 面板宽度，默认铺满父容器（数值按 px 处理）。行高、字号与事项密度都由实际宽度推导 */
     width?: number | string;
-    /** 面板是否展示「今天」按钮，默认 true */
-    showToday?: boolean;
-    /** 面板是否展示上/下年切换按钮，默认 true */
-    showYearSwitch?: boolean;
     /** 面板头部是否展示「年份 月份」标签，默认 true */
     showHeader?: boolean;
     /** 无可见标题时给面板一个无障碍标签 */
@@ -237,13 +231,10 @@ export const Calendar: React.FC<CalendarProps> = ({
     onChange,
     onPanelChange,
     events = [],
-    disabledDate,
     showEventTime = true,
     draggableEvents = false,
     onEventCreate,
     width,
-    showToday = true,
-    showYearSwitch = true,
     showHeader = true,
     'aria-label': ariaLabel,
     'aria-labelledby': ariaLabelledBy,
@@ -338,7 +329,6 @@ export const Calendar: React.FC<CalendarProps> = ({
 
     const selectDate = useCallback(
         (date: Dayjs) => {
-            if (disabledDate?.(date.toDate())) return;
             const next = toDateKey(date);
             setFocusDate(date);
             if (!isControlled) setInnerValue(next);
@@ -351,7 +341,7 @@ export const Calendar: React.FC<CalendarProps> = ({
                 onPanelChange?.(month.format('YYYY-MM'));
             }
         },
-        [disabledDate, isControlled, onChange, isPanelControlled, panelValue, innerPanel, onPanelChange]
+        [isControlled, onChange, isPanelControlled, panelValue, innerPanel, onPanelChange]
     );
 
     const dragPreview = useMemo(() => {
@@ -449,7 +439,7 @@ export const Calendar: React.FC<CalendarProps> = ({
 
     const startDragAt = (index: number) => {
         const date = gridStart.add(index, 'day');
-        if (!draggableEvents || disabledDate?.(date.toDate())) return;
+        if (!draggableEvents) return;
         setDragging(true);
         setDragAnchor(date);
         setDragHead(date);
@@ -457,9 +447,7 @@ export const Calendar: React.FC<CalendarProps> = ({
 
     const extendDragAt = (index: number) => {
         if (!dragging) return;
-        const date = gridStart.add(index, 'day');
-        if (disabledDate?.(date.toDate())) return;
-        setDragHead(date);
+        setDragHead(gridStart.add(index, 'day'));
     };
 
     const finishDrag = () => {
@@ -496,7 +484,6 @@ export const Calendar: React.FC<CalendarProps> = ({
     const renderCell = (cell: Dayjs, index: number) => {
         const cellKey = toDateKey(cell);
         const outside = cell.month() !== viewMonth.month();
-        const disabled = disabledDate?.(cell.toDate()) === true;
         const selected = cellKey === selectedKey;
         const isToday = cell.isSame(today, 'day');
         const extra = overflowCounts[index];
@@ -511,7 +498,6 @@ export const Calendar: React.FC<CalendarProps> = ({
                 role="gridcell"
                 tabIndex={isFocusable ? 0 : -1}
                 aria-selected={selected || undefined}
-                aria-disabled={disabled || undefined}
                 aria-label={label}
                 data-date={cellKey}
                 className={[
@@ -519,7 +505,6 @@ export const Calendar: React.FC<CalendarProps> = ({
                     outside && styles.cellOutside,
                     selected && styles.cellSelected,
                     isToday && styles.cellToday,
-                    disabled && styles.cellDisabled,
                 ]
                     .filter(Boolean)
                     .join(' ')}
@@ -558,16 +543,14 @@ export const Calendar: React.FC<CalendarProps> = ({
             {showHeader && (
                 <div className={styles.header}>
                     <div className={styles.headerGroup}>
-                        {showYearSwitch && (
-                            <button
-                                type="button"
-                                className={styles.navBtn}
-                                aria-label="上一年"
-                                onClick={() => shiftYear(-1)}
-                            >
-                                <ChevronLeftIcon className={styles.navIcon} size={14} strokeWidth={2.6} />
-                            </button>
-                        )}
+                        <button
+                            type="button"
+                            className={styles.navBtn}
+                            aria-label="上一年"
+                            onClick={() => shiftYear(-1)}
+                        >
+                            <ChevronLeftIcon className={styles.navIcon} size={14} strokeWidth={2.6} />
+                        </button>
                         <button
                             type="button"
                             className={styles.navBtn}
@@ -582,11 +565,9 @@ export const Calendar: React.FC<CalendarProps> = ({
                         {viewMonth.year()}年{viewMonth.month() + 1}月
                     </span>
                     <div className={styles.headerGroup}>
-                        {showToday && (
-                            <button type="button" className={styles.todayBtn} onClick={() => selectDate(today)}>
-                                今天
-                            </button>
-                        )}
+                        <button type="button" className={styles.todayBtn} onClick={() => selectDate(today)}>
+                            今天
+                        </button>
                         <button
                             type="button"
                             className={styles.navBtn}
@@ -595,16 +576,14 @@ export const Calendar: React.FC<CalendarProps> = ({
                         >
                             <ChevronRightIcon className={styles.navIcon} size={16} strokeWidth={2.6} />
                         </button>
-                        {showYearSwitch && (
-                            <button
-                                type="button"
-                                className={styles.navBtn}
-                                aria-label="下一年"
-                                onClick={() => shiftYear(1)}
-                            >
-                                <ChevronRightIcon className={styles.navIcon} size={14} strokeWidth={2.6} />
-                            </button>
-                        )}
+                        <button
+                            type="button"
+                            className={styles.navBtn}
+                            aria-label="下一年"
+                            onClick={() => shiftYear(1)}
+                        >
+                            <ChevronRightIcon className={styles.navIcon} size={14} strokeWidth={2.6} />
+                        </button>
                     </div>
                 </div>
             )}

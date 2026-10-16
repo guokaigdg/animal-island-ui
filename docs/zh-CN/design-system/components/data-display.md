@@ -781,7 +781,6 @@ interface CountUpProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'prefi
 .cellToday   .dayNumber { box-shadow: inset 0 0 0 1.5px var(--animal-calendar-accent);
                           color: var(--animal-calendar-accent); font-weight: 700; }
 .cellSelected .dayNumber { background: var(--animal-calendar-accent); box-shadow: none; color: #fff; font-weight: 700; }
-.cellDisabled .dayNumber { color: #d4c9b4; }
 .more  { padding: 1px 5px; border-radius: 8px; font-size: 10px; font-weight: 700;   /* +N 折叠 */
          background: var(--animal-calendar-accent-soft); color: var(--animal-calendar-accent); }
 ```

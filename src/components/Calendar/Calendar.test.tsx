@@ -82,26 +82,10 @@ describe('Calendar', () => {
             expect(container.firstElementChild).toHaveStyle({ width: '600px' });
         });
 
-        it('showHeader=false 隐藏头部，showYearSwitch=false 隐藏年切换', () => {
-            const { container, rerender } = render(<Calendar panelValue="2026-08" showHeader={false} />);
+        it('showHeader=false 隐藏头部', () => {
+            const { container } = render(<Calendar panelValue="2026-08" showHeader={false} />);
             expect(container.querySelector('[aria-label="上个月"]')).toBeNull();
-
-            rerender(<Calendar panelValue="2026-08" showYearSwitch={false} />);
-            expect(screen.queryByLabelText('上一年')).not.toBeInTheDocument();
-            expect(screen.getByLabelText('上个月')).toBeInTheDocument();
-        });
-
-        it('showToday=false 隐藏「今天」按钮', () => {
-            render(<Calendar panelValue="2026-08" showToday={false} />);
             expect(screen.queryByText('今天')).not.toBeInTheDocument();
-        });
-
-        it('disabledDate 标记不可选日期', () => {
-            render(
-                <Calendar panelValue="2026-08" disabledDate={(date) => date.getDay() === 0 || date.getDay() === 6} />
-            );
-            expect(cell('2026-08-08')).toHaveAttribute('aria-disabled', 'true');
-            expect(cell('2026-08-10')).not.toHaveAttribute('aria-disabled');
         });
     });
 
@@ -319,14 +303,6 @@ describe('Calendar', () => {
             await user.click(cell('2026-09-01'));
             expect(onPanelChange).toHaveBeenCalledWith('2026-09');
         });
-
-        it('点击禁用日期不触发 onChange', async () => {
-            const user = setup();
-            const onChange = vi.fn();
-            render(<Calendar panelValue="2026-08" onChange={onChange} disabledDate={() => true} />);
-            await user.click(cell('2026-08-10'));
-            expect(onChange).not.toHaveBeenCalled();
-        });
     });
 
     describe('keyboard', () => {
@@ -382,22 +358,6 @@ describe('Calendar', () => {
             expect(screen.getByText('2026年8月')).toBeInTheDocument();
             expect(onPanelChange).toHaveBeenLastCalledWith('2026-08');
         });
-
-        it('禁用日期不会被键盘选中', () => {
-            const onChange = vi.fn();
-            render(
-                <Calendar
-                    panelValue="2026-08"
-                    defaultValue="2026-08-10"
-                    onChange={onChange}
-                    disabledDate={(date) => date.getDate() === 11}
-                />
-            );
-            const grid = screen.getByRole('grid');
-            fireEvent.keyDown(grid, { key: 'ArrowRight' });
-            fireEvent.keyDown(grid, { key: 'Enter' });
-            expect(onChange).not.toHaveBeenCalled();
-        });
     });
 
     describe('drag to create', () => {
@@ -444,15 +404,6 @@ describe('Calendar', () => {
             fireEvent.pointerUp(cell('2026-08-14'));
             expect(onEventCreate).not.toHaveBeenCalled();
             expect(onChange).not.toHaveBeenCalled();
-        });
-
-        it('禁用日期不参与拖拽预览', () => {
-            render(<Calendar panelValue="2026-08" draggableEvents disabledDate={(date) => date.getDate() === 11} />);
-            fireEvent.mouseDown(cell('2026-08-10'));
-            fireEvent.mouseEnter(cell('2026-08-11'));
-            expect(document.querySelector('[data-preview="true"]')?.getAttribute('style')).toContain(
-                '--animal-calendar-bar-width: calc((100% / 7) * 1 - 8px)'
-            );
         });
 
         it('视图外的事项不参与渲染，也不计入 +N 与格子提示', () => {

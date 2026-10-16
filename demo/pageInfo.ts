@@ -66,7 +66,7 @@ export const PAGE_INFO: Record<string, { title: string; desc: string }> = {
     },
     calendar: {
         title: 'Calendar 日历',
-        desc: '日历组件（轻量月面板）— 事项通知与跨日期连续条、自定义事项/日期渲染、拖拽跨日期创建事项、禁用日期、受控/非受控与键盘导航',
+        desc: '日历组件（轻量月面板）— 事项通知与跨日期连续条、拖拽跨日期创建事项、受控/非受控与键盘导航',
     },
     tabs: {
         title: 'Tabs 标签页',

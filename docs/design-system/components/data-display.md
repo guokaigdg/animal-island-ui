@@ -789,7 +789,6 @@ side gutter the event bars use, so a bar and the day circle above it sit on one 
 .cellToday   .dayNumber { box-shadow: inset 0 0 0 1.5px var(--animal-calendar-accent);
                           color: var(--animal-calendar-accent); font-weight: 700; }
 .cellSelected .dayNumber { background: var(--animal-calendar-accent); box-shadow: none; color: #fff; font-weight: 700; }
-.cellDisabled .dayNumber { color: #d4c9b4; }
 .more  { padding: 1px 5px; border-radius: 8px; font-size: 10px; font-weight: 700;   /* the +N fold */
          background: var(--animal-calendar-accent-soft); color: var(--animal-calendar-accent); }
 ```

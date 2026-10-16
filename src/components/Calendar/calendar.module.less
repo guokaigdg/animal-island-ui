@@ -181,12 +181,6 @@
     cursor: crosshair;
 }
 
-.cellDisabled,
-.cellDisabled:hover {
-    background: transparent;
-    cursor: not-allowed;
-}
-
 /* 日期数字：固定圆形，位置与叠加层解耦，悬停/选中直接换色。
    字号随面板缩放（.calendar 上已按宽度设好），描边与背景仍挂在圆上 */
 .dayNumber {
@@ -223,13 +217,6 @@
     box-shadow: none;
     color: #fff;
     font-weight: 700;
-}
-
-.cellDisabled .dayNumber,
-.cellDisabled:hover .dayNumber {
-    background: transparent;
-    box-shadow: none;
-    color: #d4c9b4;
 }
 
 /* 事项折叠提示：超过 2 条时展示 +N */
