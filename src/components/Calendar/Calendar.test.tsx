@@ -96,20 +96,6 @@ describe('Calendar', () => {
             expect(screen.queryByText('今天')).not.toBeInTheDocument();
         });
 
-        it('cellRender 自定义日期内容，返回 null 时不渲染', () => {
-            render(
-                <Calendar
-                    panelValue="2026-08"
-                    defaultValue="2026-08-10"
-                    cellRender={({ date, originNode }) =>
-                        date === '2026-08-10' ? <em data-testid="custom-cell">{originNode}★</em> : null
-                    }
-                />
-            );
-            expect(screen.getByTestId('custom-cell')).toHaveTextContent('10★');
-            expect(cell('2026-08-11').textContent).toBe('');
-        });
-
         it('disabledDate 标记不可选日期', () => {
             render(
                 <Calendar panelValue="2026-08" disabledDate={(date) => date.getDay() === 0 || date.getDay() === 6} />
@@ -237,18 +223,6 @@ describe('Calendar', () => {
             expect(bars[0].textContent).toBe('08:00团建');
             expect(bars[1].textContent).toBe('团建');
             expect(bars[2].textContent).toBe('团建');
-        });
-
-        it('eventRender 自定义事项内容（默认文案不再渲染）', () => {
-            render(
-                <Calendar
-                    panelValue="2026-08"
-                    events={[{ title: '晨会', start: '2026-08-10' }]}
-                    eventRender={(event) => <span data-testid="custom-event">{event.data as string}</span>}
-                />
-            );
-            expect(screen.getByTestId('custom-event')).toBeInTheDocument();
-            expect(screen.queryByText('晨会')).not.toBeInTheDocument();
         });
 
         it('跨天事项不让同周日期整行折叠', () => {

@@ -738,12 +738,13 @@ permanent, so the shell is a cream card rather than a positioned popover. It reu
 prop when given) and derives every metric from it. `--animal-calendar-scale` = actual width / 640, clamped to
 `0.6 … 2`, and the whole rhythm is `baseline × scale`:
 
-| Property | small | middle | large |
-| -------- | ----- | ------ | ----- |
-| cell height | 74px | 86px | 100px |
-| day circle (and root `font-size`) | 25px | 28px | 32px |
-| day number / event / `+N` font | 12 / 10 / 9px | 13 / 11 / 10px | 15 / 12 / 10px |
-| event row / bar height | 20 / 16px | 23 / 17px | 26 / 19px |
+| Metric | Baseline at 640px | At 900px (scale 1.406) |
+| ------ | ----------------- | ---------------------- |
+| header height | 32px | 45px |
+| cell height | 86px | 121px |
+| day circle (and day-number font) | 28px (13px) | 39px (18px) |
+| event row / bar height | 23 / 17px | 32 / 24px |
+| event font | 11px | 15px |
 
 
 

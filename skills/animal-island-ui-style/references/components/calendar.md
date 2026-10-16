@@ -13,14 +13,7 @@ interface CalendarEvent {
     end?: string | Dayjs;           // omit for a single day; set it for a continuous multi-day bar
     color?: CalendarColor;          // default 'teal'
     showTime?: boolean;             // default false — shows the start HH:mm on the first slice
-    data?: unknown;                 // passed back to eventRender untouched
-}
-
-interface CalendarCellInfo {
-    type: 'date';                   // month panel only in this lightweight build
-    date: string;                   // YYYY-MM-DD
-    events: CalendarEvent[];        // every event passing through this day
-    originNode: React.ReactNode;    // the built-in day number
+    data?: unknown;                 // free-form payload for your own lookups
 }
 
 interface CalendarProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'defaultValue' | 'onChange'> {
@@ -32,8 +25,6 @@ interface CalendarProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'defa
     onChange?: (date: string) => void;
     onPanelChange?: (month: string) => void;   // 'YYYY-MM'
     events?: CalendarEvent[];       // default []
-    eventRender?: (event: CalendarEvent) => React.ReactNode;   // null hides the event
-    cellRender?: (info: CalendarCellInfo) => React.ReactNode;  // null hides the day number
     disabledDate?: (date: Date) => boolean;
     showEventTime?: boolean;        // default true — HH:mm prefix, shown once on an event's first slice
     draggableEvents?: boolean;      // default false — drag across days to create an event

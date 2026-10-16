@@ -26,18 +26,6 @@ const CALENDAR_API: ApiRow[] = [
     { prop: 'onChange', desc: '日期变化回调', type: '(date: string) => void', defaultVal: '-' },
     { prop: 'onPanelChange', desc: '面板月份变化回调', type: '(month: string) => void', defaultVal: '-' },
     { prop: 'events', desc: '事项列表，支持同日多条与跨日期连续条', type: 'CalendarEvent[]', defaultVal: '[]' },
-    {
-        prop: 'eventRender',
-        desc: '自定义事项内容，返回 null 时不渲染',
-        type: '(event: CalendarEvent) => ReactNode',
-        defaultVal: '-',
-    },
-    {
-        prop: 'cellRender',
-        desc: '自定义日期数字，返回 null 时不渲染；info 含 date / events / originNode',
-        type: '(info: CalendarCellInfo) => ReactNode',
-        defaultVal: '-',
-    },
     { prop: 'disabledDate', desc: '禁用日期判断函数', type: '(date: Date) => boolean', defaultVal: '-' },
     { prop: 'showEventTime', desc: '是否展示事项起始时间（仅首段）', type: 'boolean', defaultVal: 'true' },
     { prop: 'draggableEvents', desc: '允许鼠标拖拽跨日期创建事项', type: 'boolean', defaultVal: 'false' },
@@ -130,19 +118,6 @@ const CalendarDemo: React.FC = () => {
             <div style={labelStyle}>事项：同日多条、跨日期连续条、时间前缀</div>
             <div style={S.demoBox}>
                 <Calendar panelValue="2026-08" defaultValue="2026-08-10" events={workEvents} />
-            </div>
-
-            <div style={labelStyle}>自定义事项内容（eventRender）与日期数字（cellRender）</div>
-            <div style={S.demoBox}>
-                <Calendar
-                    panelValue="2026-08"
-                    defaultValue="2026-08-10"
-                    events={workEvents}
-                    eventRender={(event) => <strong>#{String(event.title)}</strong>}
-                    cellRender={({ date: cellDate, originNode }) =>
-                        cellDate === '2026-08-10' ? <em style={{ color: '#e05a5a' }}>{originNode}</em> : originNode
-                    }
-                />
             </div>
 
             <div style={labelStyle}>禁用日期（周末不可选）与「今天」按钮开关</div>

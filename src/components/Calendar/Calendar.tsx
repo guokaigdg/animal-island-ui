@@ -21,18 +21,6 @@ export interface CalendarEvent {
     data?: unknown;
 }
 
-/** 单元格渲染回调的上下文 */
-export interface CalendarCellInfo {
-    /** 当前单元格类型，轻量版只支持 date */
-    type: 'date';
-    /** 单元格日期，YYYY-MM-DD */
-    date: string;
-    /** 该日所有事项（含跨天经过的事项） */
-    events: CalendarEvent[];
-    /** 默认渲染的日期数字节点；返回它即保留默认外观 */
-    originNode: React.ReactNode;
-}
-
 export interface CalendarProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'defaultValue' | 'onChange'> {
     /** 当前选中日期（受控），YYYY-MM-DD */
     value?: string;
@@ -48,10 +36,6 @@ export interface CalendarProps extends Omit<React.HTMLAttributes<HTMLDivElement>
     onPanelChange?: (month: string) => void;
     /** 事项列表，支持同一天多条与跨日期连续条 */
     events?: CalendarEvent[];
-    /** 自定义事项内容，返回 null 时不渲染该事项 */
-    eventRender?: (event: CalendarEvent) => React.ReactNode;
-    /** 自定义日期数字，返回 null 时不渲染 */
-    cellRender?: (info: CalendarCellInfo) => React.ReactNode;
     /** 禁用日期判断函数，返回 true 的日期不可选、不可拖拽创建 */
     disabledDate?: (date: Date) => boolean;
     /** 是否在事项条上展示起始时间，默认 true */
@@ -253,8 +237,6 @@ export const Calendar: React.FC<CalendarProps> = ({
     onChange,
     onPanelChange,
     events = [],
-    eventRender,
-    cellRender,
     disabledDate,
     showEventTime = true,
     draggableEvents = false,
@@ -552,16 +534,7 @@ export const Calendar: React.FC<CalendarProps> = ({
                 onMouseEnter={() => extendDragAt(index)}
             >
                 <span className={styles.cellInner}>
-                    <span className={styles.dayNumber}>
-                        {cellRender
-                            ? cellRender({
-                                  type: 'date',
-                                  date: cellKey,
-                                  events: dayEvents,
-                                  originNode: cell.date(),
-                              })
-                            : cell.date()}
-                    </span>
+                    <span className={styles.dayNumber}>{cell.date()}</span>
                     {extra > 0 && <span className={styles.more}>+{extra}</span>}
                 </span>
             </td>
@@ -664,9 +637,7 @@ export const Calendar: React.FC<CalendarProps> = ({
                 {overlaySegments.length > 0 && (
                     <div className={styles.eventsLayer} aria-hidden>
                         {overlaySegments.map((segment, i) => {
-                            const custom = eventRender?.(segment.event);
-                            const content = custom ?? eventLabel(segment.event, !segment.continuation, showEventTime);
-                            if (content === null || content === undefined) return null;
+                            const content = eventLabel(segment.event, !segment.continuation, showEventTime);
                             const col = (segment.index % COLS) + 1;
                             const colSpan = segment.span;
                             const palette = segment.event.color ?? 'teal';
