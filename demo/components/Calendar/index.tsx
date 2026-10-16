@@ -119,7 +119,7 @@ const CalendarDemo: React.FC = () => {
             <div style={{ ...S.demoBox, ...S.calendarBox }}>
                 <Calendar
                     defaultValue="2026-08-10"
-                    events={[...islandEvents, ...created]}
+                    events={created}
                     draggableEvents
                     onEventCreate={handleEventCreate}
                 />
