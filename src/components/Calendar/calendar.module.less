@@ -4,9 +4,11 @@
 // ============================================
 
 /* 单元格与事项行的固定尺寸：表格行高与事项条的 --animal-calendar-bar-top 都依赖它们。
-   改动时必须同步 Calendar.tsx 顶部的 CELL_HEIGHT / DAY_NUMBER_BAND / EVENT_ROW_HEIGHT / HEADER_HEIGHT */
-@cell-height: 76px;
-@event-row-height: 26px;
+   改动时必须同步 Calendar.tsx 的 SIZE_METRICS（cellHeight / numberBand / eventRow / header） */
+@cell-height: 86px;
+@event-row-height: 23px;
+@event-bar-height: 17px;
+@day-number-size: 28px;
 
 .calendar {
     --animal-calendar-accent: #19c8b9;
@@ -14,12 +16,69 @@
     --animal-calendar-accent-tint: #e6f9f6;
     --animal-calendar-cell-height: @cell-height;
     --animal-calendar-row-height: @event-row-height;
+    --animal-calendar-bar-height: @event-bar-height;
 
     display: block;
     width: 100%;
     font-family: var(--animal-font-family, 'Nunito', 'Noto Sans SC', sans-serif);
+    font-size: @day-number-size;
     user-select: none;
     -webkit-user-select: none;
+}
+
+/* ---------- 尺寸 ----------
+   small / middle / large 只调三件事：日期圆直径（含字号）、单元格高度、事项行高度。
+   其余留白都由这几个值推导，因此三种尺寸的观感一致、只是疏密不同。
+   改动时必须同步 Calendar.tsx 的 SIZE_METRICS。 */
+.calendar-small {
+    --animal-calendar-cell-height: 74px;
+    --animal-calendar-row-height: 20px;
+    --animal-calendar-bar-height: 16px;
+
+    font-size: 25px;
+
+    .weekCell {
+        height: 28px;
+        font-size: 11px;
+    }
+
+    .dayNumber {
+        font-size: 12px;
+    }
+
+    .event {
+        font-size: 10px;
+    }
+
+    .more {
+        font-size: 9px;
+    }
+}
+
+.calendar-middle {
+    --animal-calendar-cell-height: 86px;
+    --animal-calendar-row-height: 23px;
+    --animal-calendar-bar-height: 17px;
+
+    font-size: 28px;
+}
+
+.calendar-large {
+    --animal-calendar-cell-height: 100px;
+    --animal-calendar-row-height: 26px;
+    --animal-calendar-bar-height: 19px;
+
+    font-size: 32px;
+
+    .dayNumber {
+        font-size: 15px;
+    }
+
+    .event,
+    .eventTime,
+    .eventTitle {
+        font-size: 12px;
+    }
 }
 
 /* 主题色：与 DatePicker 的范围选中色系保持一致 */
@@ -167,9 +226,11 @@
 }
 
 .cell {
-    position: relative;
+    /* 日期数字与事项条都以格子的内容盒为准（左右各 4px），
+       这样 7 列网格里的跨天条与日期圆共用同一条轨道，接缝处才能连成一条 */
     height: @cell-height;
-    padding: 0;
+    padding: 0 4px;
+    box-sizing: border-box;
     vertical-align: top;
     border-radius: 12px;
     cursor: pointer;
@@ -205,23 +266,17 @@
     cursor: not-allowed;
 }
 
-.cellInner {
-    display: block;
-}
-
-/* 日期数字：固定 28×28 圆形，位置与叠加层解耦，悬停/选中直接换色 */
+/* 日期数字：固定圆形，位置与叠加层解耦，悬停/选中直接换色 */
 .dayNumber {
-    display: flex;
-    width: 28px;
-    height: 28px;
-    margin: 4px 0 0 4px;
-    align-items: center;
-    justify-content: center;
+    display: block;
+    width: @day-number-size;
+    height: @day-number-size;
     border-radius: 50%;
     color: #725d42;
     font-size: 13px;
     font-weight: 500;
-    line-height: 1;
+    line-height: @day-number-size;
+    text-align: center;
     transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -258,7 +313,6 @@
 /* 事项折叠提示：超过 2 条时展示 +N */
 .more {
     display: block;
-    margin: 0 4px;
     padding: 1px 5px;
     border-radius: 8px;
     background: var(--animal-calendar-accent-soft);
@@ -269,28 +323,32 @@
     text-align: center;
 }
 
-/* 事项叠加层：与日期网格共用 7 列轨道，跨天事项横跨多列形成连续条。
-   层覆盖整个日期区，每条事项通过 --animal-calendar-bar-top 落在所属周的
-   日期数字下方（见 .event），因此事项始终紧贴对应的那一周，而不是掉到卡片底部。 */
-/* --animal-calendar-bar-top 由组件按「周行 + 事项行」算好后内联下发：
-   第 r 周第 k 条事项 = 表头 32px + r × @cell-height + 日期数字 34px + k × @event-row-height。
-   层高度覆盖整个卡片内容区（表头 + 6 行日期 + 2 行事项），因此每条事项都紧贴自己的那一周。 */
+/* 事项叠加层：绝对定位覆盖整个日期区，列宽 = 表格 7 等分列的宽度。
+   left / width / top 都由组件算好后内联下发：
+     left  = 列序 × 列宽 + 4px（与日期圆同一条内容轨道）
+     width = 跨列数 × 列宽 - 8px
+     top   = 表头 + 周序 × 单元格高 + 日期数字带 + 事项行 × 行高
+   之所以用算好的像素值而不是 grid-column：事项条是绝对定位元素，
+   已脱离网格布局，写 grid-column 不会生效。 */
 .eventsLayer {
+    --animal-calendar-col-width: calc(100% / 7);
+
     position: absolute;
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
     pointer-events: none;
 }
 
 .event {
     position: absolute;
     top: var(--animal-calendar-bar-top, 0);
-    height: 20px;
-    margin: 0 4px;
+    left: var(--animal-calendar-bar-left, 0);
+    width: var(--animal-calendar-bar-width, 0);
+    height: var(--animal-calendar-bar-height, 17px);
+    /* 上下留白把相邻两条事项分开 */
+    margin: 3px 0;
     padding: 0 6px;
     overflow: hidden;
     border: 1px solid var(--animal-calendar-accent-soft);
@@ -299,16 +357,27 @@
     color: #725d42;
     font-size: 11px;
     font-weight: 600;
-    line-height: 18px;
-    text-overflow: ellipsis;
+    /* 行高与条高一致，单行垂直居中；文字溢出交给内部 span 做省略号 */
+    line-height: var(--animal-calendar-bar-height, 17px);
     white-space: nowrap;
 }
 
-/* 跨天条：收掉接缝处的圆角与留白，视觉上连成一条 */
+/* 事项文案：单行省略，避免长标题把条撑破；字号必须显式声明，
+   否则会从 .calendar 继承到面积极大的日期字号 */
+.eventTitle,
+.eventTime {
+    display: inline;
+    font-size: 11px;
+}
+
+/* 跨天条：接缝处的空档收窄到 1px（只够分开圆角），视觉上连成一条 */
 .event[data-span='true'] {
+    margin-right: 1px;
+    margin-left: 1px;
     border-radius: 6px;
 }
 
+/* 整周条的两端贴齐网格边缘，不再往内缩 */
 .event[data-start='true'] {
     margin-left: 0;
 }

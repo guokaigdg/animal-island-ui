@@ -3,6 +3,8 @@ import dayjs, { type Dayjs } from 'dayjs';
 import { CalendarIcon, ChevronLeftIcon, ChevronRightIcon } from 'naive-icons';
 import styles from './calendar.module.less';
 
+export type CalendarSize = 'small' | 'middle' | 'large';
+
 export type CalendarColor = 'teal' | 'amber' | 'coral' | 'green' | 'purple';
 
 /** 日历事项：同一天用同一个日期，跨天传不同的 start / end */
@@ -60,6 +62,8 @@ export interface CalendarProps extends Omit<React.HTMLAttributes<HTMLDivElement>
     draggableEvents?: boolean;
     /** 拖拽创建事项结束回调 */
     onEventCreate?: (start: string, end: string) => void;
+    /** 尺寸：控制单元格高度、字号与事项密度，默认 middle */
+    size?: CalendarSize;
     /** 主题色，默认 teal（与 DatePicker 选中色一致） */
     theme?: CalendarColor;
     /** 面板是否展示「今天」按钮，默认 true */
@@ -85,15 +89,18 @@ const GRID_CELLS = 42;
 const COLS = 7;
 /** 日期网格的行数（6 周） */
 const CELL_ROWS = GRID_CELLS / COLS;
-/* 以下常量与 calendar.module.less 的 @cell-height / @event-row-height / 表头高度保持同步 */
-/** 单元格高度 */
-const CELL_HEIGHT = 76;
-/** 单元格内「日期数字 + 上下留白」占用的高度，事项条从它下方开始 */
-const DAY_NUMBER_BAND = 34;
-/** 单条事项行的高度 */
-const EVENT_ROW_HEIGHT = 26;
-/** 星期表头高度 */
-const HEADER_HEIGHT = 32;
+/*
+ * 尺寸表：与 calendar.module.less 的 @cell-height / @event-row-height / @day-number-size / 表头高度保持同步。
+ * numberBand = 日期圆高度 + 上下留白，事项条从它下方开始排。
+ */
+const SIZE_METRICS: Record<CalendarSize, { cellHeight: number; numberBand: number; eventRow: number; header: number }> =
+    {
+        // numberBand 取 32：日期圆 28px 上下各留 2px，随后接第一条事项行；
+        // 两条事项行（32 + 2 × 20/23/26）都留在单元格内，不会压到下一周的日期
+        small: { cellHeight: 74, numberBand: 32, eventRow: 20, header: 28 },
+        middle: { cellHeight: 86, numberBand: 32, eventRow: 23, header: 32 },
+        large: { cellHeight: 100, numberBand: 32, eventRow: 26, header: 32 },
+    };
 /** 每个单元格最多平铺 2 条事项，多出的折叠成 +N */
 const MAX_EVENT_ROWS = 2;
 
@@ -247,6 +254,7 @@ export const Calendar: React.FC<CalendarProps> = ({
     showEventTime = true,
     draggableEvents = false,
     onEventCreate,
+    size = 'middle',
     theme = 'teal',
     showToday = true,
     showYearSwitch = true,
@@ -278,6 +286,7 @@ export const Calendar: React.FC<CalendarProps> = ({
     const monthKey = viewMonth.format('YYYY-MM');
     const gridStart = gridStartOf(viewMonth);
     const selectedKey = selectedValue ?? '';
+    const metrics = SIZE_METRICS[size];
 
     // 受控 value 变化后，把 roving tabindex 的光标同步到新的选中日期
     useEffect(() => {
@@ -536,7 +545,7 @@ export const Calendar: React.FC<CalendarProps> = ({
         Array.from({ length: COLS }, (_, col) => gridStart.add(row * COLS + col, 'day'))
     );
 
-    const calendarClass = [styles.calendar, className].filter(Boolean).join(' ');
+    const calendarClass = [styles.calendar, styles[`calendar-${size}`], className].filter(Boolean).join(' ');
 
     return (
         <div
@@ -644,14 +653,15 @@ export const Calendar: React.FC<CalendarProps> = ({
                                     data-preview={segment.event.data === PREVIEW_FLAG ? 'true' : undefined}
                                     className={styles.event}
                                     style={{
-                                        gridColumn: `${col} / span ${colSpan}`,
-                                        // 事项条绝对定位到所属周的日期数字下方（与叠加层网格共用列轨道）
+                                        // 事项条绝对定位到所属周的日期数字下方，横向与日期圆共用一条内容轨道
                                         ['--animal-calendar-bar-top' as string]: `${
-                                            HEADER_HEIGHT +
-                                            (segment.index / COLS) * CELL_HEIGHT +
-                                            DAY_NUMBER_BAND +
-                                            segment.row * EVENT_ROW_HEIGHT
+                                            metrics.header +
+                                            (segment.index / COLS) * metrics.cellHeight +
+                                            metrics.numberBand +
+                                            segment.row * metrics.eventRow
                                         }px`,
+                                        ['--animal-calendar-bar-left' as string]: `calc((100% / 7) * ${col - 1} + 4px)`,
+                                        ['--animal-calendar-bar-width' as string]: `calc((100% / 7) * ${colSpan} - 8px)`,
                                     }}
                                 >
                                     {content}
