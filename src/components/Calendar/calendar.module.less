@@ -3,6 +3,8 @@
 // 轻量月面板：容器与 DatePicker 同源（奶油卡片 + 青绿主色）
 // ============================================
 
+/* 强调色固定为 DatePicker 的选中色（青绿）。组件不提供主题切换：
+   其他组件也只有语义化的 color / type，没有整套换色开关 */
 /* 单元格与事项行的固定尺寸：表格行高与事项条的 --animal-calendar-bar-top 都依赖它们。
    改动时必须同步 Calendar.tsx 的 SIZE_METRICS（cellHeight / numberBand / eventRow / header） */
 @cell-height: 86px;
@@ -79,37 +81,6 @@
     .eventTitle {
         font-size: 12px;
     }
-}
-
-/* 主题色：与 DatePicker 的范围选中色系保持一致 */
-.calendar[data-theme='teal'] {
-    --animal-calendar-accent: #19c8b9;
-    --animal-calendar-accent-soft: rgba(25, 200, 185, 0.14);
-    --animal-calendar-accent-tint: #e6f9f6;
-}
-
-.calendar[data-theme='amber'] {
-    --animal-calendar-accent: #ffc107;
-    --animal-calendar-accent-soft: rgba(255, 193, 7, 0.2);
-    --animal-calendar-accent-tint: #fff3cd;
-}
-
-.calendar[data-theme='coral'] {
-    --animal-calendar-accent: #ff8a65;
-    --animal-calendar-accent-soft: rgba(255, 138, 101, 0.18);
-    --animal-calendar-accent-tint: #ffebe4;
-}
-
-.calendar[data-theme='green'] {
-    --animal-calendar-accent: #6fba2c;
-    --animal-calendar-accent-soft: rgba(111, 186, 44, 0.16);
-    --animal-calendar-accent-tint: #eef7e2;
-}
-
-.calendar[data-theme='purple'] {
-    --animal-calendar-accent: #9b7fe0;
-    --animal-calendar-accent-soft: rgba(155, 127, 224, 0.16);
-    --animal-calendar-accent-tint: #f0eafb;
 }
 
 /* 头部：上/下月导航 + 年月标签 + 今天 */

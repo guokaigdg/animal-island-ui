@@ -733,7 +733,7 @@ interface CountUpProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'prefi
 **外壳、尺寸与头部：**
 
 ```css
-.calendar {                       /* 主题三色 + 各尺寸都会覆盖的度量值 */
+.calendar {                       /* 固定强调色三件套（DatePicker 的青绿）+ 各尺寸都会覆盖的度量值 */
     --animal-calendar-accent: #19c8b9;
     --animal-calendar-accent-soft: rgba(25, 200, 185, 0.14);
     --animal-calendar-accent-tint: #e6f9f6;

@@ -737,7 +737,7 @@ permanent, so the shell is a cream card rather than a positioned popover. It reu
 **Shell, sizes and header:**
 
 ```css
-.calendar {                       /* accent trio + the metrics every size overrides */
+.calendar {                       /* fixed accent trio (DatePicker's teal) + the metrics every size overrides */
     --animal-calendar-accent: #19c8b9;
     --animal-calendar-accent-soft: rgba(25, 200, 185, 0.14);
     --animal-calendar-accent-tint: #e6f9f6;

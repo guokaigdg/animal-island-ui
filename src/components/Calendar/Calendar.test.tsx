@@ -47,11 +47,6 @@ describe('Calendar', () => {
             expect(cell('2026-08-10')).not.toHaveAttribute('aria-selected');
         });
 
-        it('theme 落到 data-theme 上', () => {
-            const { container } = render(<Calendar panelValue="2026-08" theme="amber" />);
-            expect(container.firstElementChild).toHaveAttribute('data-theme', 'amber');
-        });
-
         it('showHeader=false 隐藏头部，showYearSwitch=false 隐藏年切换', () => {
             const { container, rerender } = render(<Calendar panelValue="2026-08" showHeader={false} />);
             expect(container.querySelector('[aria-label="上个月"]')).toBeNull();

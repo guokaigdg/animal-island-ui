@@ -37,7 +37,6 @@ interface CalendarProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'defa
     showEventTime?: boolean;        // default true — HH:mm prefix, shown once on an event's first slice
     draggableEvents?: boolean;      // default false — drag across days to create an event
     onEventCreate?: (start: string, end: string) => void;
-    theme?: CalendarColor;          // default 'teal'
     showToday?: boolean;            // default true
     showYearSwitch?: boolean;       // default true
     showHeader?: boolean;           // default true
@@ -61,7 +60,7 @@ interface CalendarProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'defa
 ```
 
 Standalone month calendar (no popup, month panel only — no week/year modes). The panel is a permanent cream card in the
-DatePicker visual language: 6×7 always-full date grid, month/year navigation, optional `今天`. Events render as bars in a
+DatePicker visual language, with DatePicker's teal selection accent: 6×7 always-full date grid, month/year navigation, optional `今天`. Events render as bars in a
 bar band anchored under each week's date numbers (two rows per week); a multi-day event is cut at week boundaries (never
 wraps), its first slice carries the `HH:mm` prefix, and a third same-day event folds into `+N` on the day cell. Events
 entirely outside the 42-day grid are neither rendered nor counted. `value` is a plain `YYYY-MM-DD` string and the

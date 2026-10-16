@@ -31,7 +31,6 @@ const CALENDAR_API: ApiRow[] = [
         type: '(start: string, end: string) => void',
         defaultVal: '-',
     },
-    { prop: 'theme', desc: '主题色', type: `'teal' | 'amber' | 'coral' | 'green' | 'purple'`, defaultVal: "'teal'" },
     { prop: 'showToday', desc: '面板展示「今天」按钮', type: 'boolean', defaultVal: 'true' },
     { prop: 'showYearSwitch', desc: '面板展示上/下年切换', type: 'boolean', defaultVal: 'true' },
     { prop: 'showHeader', desc: '面板展示头部', type: 'boolean', defaultVal: 'true' },
@@ -105,16 +104,6 @@ const CalendarDemo: React.FC = () => {
             <div style={labelStyle}>事项：同日多条、跨日期连续条、时间前缀</div>
             <div style={S.demoBox}>
                 <Calendar panelValue="2026-08" defaultValue="2026-08-10" events={workEvents} />
-            </div>
-
-            <div style={labelStyle}>主题色</div>
-            <div style={S.demoBox}>
-                <Calendar
-                    panelValue="2026-08"
-                    theme="coral"
-                    defaultValue="2026-08-10"
-                    events={[{ title: '版本发布', start: '2026-08-20' }]}
-                />
             </div>
 
             <div style={labelStyle}>自定义事项内容（eventRender）与日期数字（cellRender）</div>

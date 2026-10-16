@@ -64,8 +64,6 @@ export interface CalendarProps extends Omit<React.HTMLAttributes<HTMLDivElement>
     onEventCreate?: (start: string, end: string) => void;
     /** 尺寸：控制单元格高度、字号与事项密度，默认 middle */
     size?: CalendarSize;
-    /** 主题色，默认 teal（与 DatePicker 选中色一致） */
-    theme?: CalendarColor;
     /** 面板是否展示「今天」按钮，默认 true */
     showToday?: boolean;
     /** 面板是否展示上/下年切换按钮，默认 true */
@@ -255,7 +253,6 @@ export const Calendar: React.FC<CalendarProps> = ({
     draggableEvents = false,
     onEventCreate,
     size = 'middle',
-    theme = 'teal',
     showToday = true,
     showYearSwitch = true,
     showHeader = true,
@@ -357,9 +354,9 @@ export const Calendar: React.FC<CalendarProps> = ({
         if (!dragPreview) return events;
         return [
             ...events,
-            { title: '', start: dragPreview.from, end: dragPreview.to, color: theme, data: PREVIEW_FLAG },
+            { title: '', start: dragPreview.from, end: dragPreview.to, color: 'teal', data: PREVIEW_FLAG },
         ];
-    }, [events, dragPreview, theme]);
+    }, [events, dragPreview]);
 
     const layout = useMemo(
         () => layoutEvents(layoutEventsSource, gridStart, today.startOf('day')),
@@ -548,13 +545,7 @@ export const Calendar: React.FC<CalendarProps> = ({
     const calendarClass = [styles.calendar, styles[`calendar-${size}`], className].filter(Boolean).join(' ');
 
     return (
-        <div
-            className={calendarClass}
-            data-theme={theme}
-            data-draggable={draggableEvents ? 'true' : undefined}
-            style={style}
-            {...rest}
-        >
+        <div className={calendarClass} data-draggable={draggableEvents ? 'true' : undefined} style={style} {...rest}>
             {showHeader && (
                 <div className={styles.header}>
                     <div className={styles.headerGroup}>
@@ -642,7 +633,7 @@ export const Calendar: React.FC<CalendarProps> = ({
                             if (content === null || content === undefined) return null;
                             const col = (segment.index % COLS) + 1;
                             const colSpan = segment.span;
-                            const palette = segment.event.color ?? theme;
+                            const palette = segment.event.color ?? 'teal';
                             return (
                                 <div
                                     key={`${monthKey}-evt-${segment.index}-${segment.row}-${i}`}
