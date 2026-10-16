@@ -2,7 +2,7 @@
 
 Props/types below are copied from the library source. In an npm-installed project, the installed package's TypeScript declarations (`dist/types/index.d.ts`) are the ground truth — prefer exploring them when in doubt.
 
-Covers: Table, Pagination, CodeBlock, Tag, Badge.
+Covers: Table, Pagination, CodeBlock, Tag, Badge, Calendar.
 
 ## Table
 
@@ -159,4 +159,3 @@ interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement> {
 ```
 
 Notes: colours are the shared Card / Tag palette — there is **no** free-form CSS colour prop. The indicator is a `<sup>` pinned to the wrapped element's top-right corner over a 2px cream ring; omit `children` for a standalone badge (ring, shadow and offset are dropped). Hidden when `count` is empty (`null` / `undefined` / blank string) or `0` / `"0"` without `showZero`; `dot` with a zero value is hidden too, but `dot` without a `count` still shows. Numbers and numeric strings are capped at `overflowCount` (default 99 → `99+`); the true value stays in the native `title` (an explicit `title` prop overrides it) and a ReactNode `count` is never capped. **Shape follows content length**: 1–2 characters render as a true circle (`1`–`99`, a lone `新`, `A`, `AB`) because the box is pinned to `width == height`; 3+ characters stay a pill (`100`, `99+`, `999+`), as do 2 full-width characters (`热更`) and any ReactNode `count` — without that pin the horizontal padding makes a two-digit badge wider than it is tall. Sizes: `medium` 20px / `small` 16px, with the type sized to the ring's inner cavity rather than the outer box — 10px / 9px, since the 2px cream ring leaves only 16px / 12px of usable diameter; `dot` is a fixed 10px box. It is a passive display element (`<span>` wrapper) — no `onClick`, no interactive states.
-

@@ -52,12 +52,13 @@ props 参考按大类分组在 `references/components/` 下（props、合法取�
 | 布局 | Card, Title, Divider, Collapse, Tabs | [layout.md](references/components/layout.md) |
 | 表单控件 | Input, Switch, Checkbox, Radio, Rate, Select | [form-controls.md](references/components/form-controls.md) |
 | 上传 | Upload | [upload.md](references/components/upload.md) |
-| 日期时间 | DatePicker, TimePicker, Calendar | [date-time.md](references/components/date-time.md) |
+| 日期时间 | DatePicker, TimePicker | [date-time.md](references/components/date-time.md) |
 | 表单容器 | Form (+ FormItem, useForm) | [Form.md](references/components/Form.md) |
 | 浮层 | Modal, Drawer, Tooltip | [overlays.md](references/components/overlays.md) |
 | 反馈 | Progress, Skeleton, BackTop, Loading, Countdown, Time | [feedback.md](references/components/feedback.md) |
 | 通知 | Notification（命令式 API） | [Notification.md](references/components/Notification.md) |
 | 数据展示 | Table, CodeBlock, Tag, Badge, Pagination | [data-display.md](references/components/data-display.md) |
+| 日历 | Calendar | [calendar.md](references/components/calendar.md) |
 | 计分滚动 | CountUp | [CountUp.md](references/components/CountUp.md) |
 | 媒体 | Image, Avatar, Carousel | [media.md](references/components/media.md) |
 | 装饰 | Footer, Divider, Cursor, Typewriter, Background | [decorative.md](references/components/decorative.md) |

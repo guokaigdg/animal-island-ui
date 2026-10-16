@@ -68,12 +68,13 @@ values, defaults — copied from source):
 | Layout | Card, Title, Divider, Collapse, Tabs | [layout.md](references/components/layout.md) |
 | Form controls | Input, Switch, Checkbox, Radio, Rate, Select | [form-controls.md](references/components/form-controls.md) |
 | Upload | Upload | [upload.md](references/components/upload.md) |
-| Date & time | DatePicker, TimePicker, Calendar | [date-time.md](references/components/date-time.md) |
+| Date & time | DatePicker, TimePicker | [date-time.md](references/components/date-time.md) |
 | Form container | Form (+ FormItem, useForm) | [Form.md](references/components/Form.md) |
 | Overlays | Modal, Drawer, Tooltip | [overlays.md](references/components/overlays.md) |
 | Feedback | Progress, Skeleton, BackTop, Loading, Countdown, Time | [feedback.md](references/components/feedback.md) |
 | Notification | Notification (imperative API) | [Notification.md](references/components/Notification.md) |
 | Data display | Table, CodeBlock, Tag, Badge, Pagination | [data-display.md](references/components/data-display.md) |
+| Calendar | Calendar | [calendar.md](references/components/calendar.md) |
 | Count-up score | CountUp | [CountUp.md](references/components/CountUp.md) |
 | Media | Image, Avatar, Carousel | [media.md](references/components/media.md) |
 | Decorative | Footer, Divider, Cursor, Typewriter, Background | [decorative.md](references/components/decorative.md) |
