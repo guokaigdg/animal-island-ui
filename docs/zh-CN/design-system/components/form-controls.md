@@ -623,6 +623,69 @@ hover 背景加深为 `#e5a200`。起止端点使用 `#ffb400`，配 `#fff` 白�
 高亮 `[开始, 悬停]`，悬停日期作为潜在终点；悬停早于开始日期的日期时反向高亮 `[悬停, 开始]`，把悬停日期作为新的
 潜在起点（点击即重置开始日期）。与主流范围选择器的交互模型一致。
 
+
+## Calendar（月面板，事项条可跨日期）
+
+源码：`src/components/Calendar/calendar.module.less`。**独立**的月历（不是弹出面板）：月份面板常驻，所以外壳是一张奶油卡片而不是定位浮层。视觉沿用 DatePicker —— `#fffdf7` 卡片、`#e8dcc8` 1.5px 描边、20px 圆角、圆形日期格 —— 并在日期网格下方增加两条事项带。
+
+**外壳与头部：**
+
+```css
+.calendar {                       /* 主题开关；'teal' 即 DatePicker 的选中色 */
+    --animal-calendar-accent: #19c8b9;
+    --animal-calendar-accent-soft: rgba(25, 200, 185, 0.14);
+    --animal-calendar-accent-tint: #e6f9f6;
+    --animal-calendar-cell-height: 76px;
+}
+/* amber #ffc107 / coral #ff8a65 / green #6fba2c / purple #9b7fe0 暴露同样三个值 */
+.body   { position: relative; border: 1.5px solid #e8dcc8; border-radius: 20px; background: #fffdf7;
+          box-shadow: 0 6px 18px rgba(61, 52, 40, 0.12); }
+.monthLabel { padding: 4px 12px; border-radius: 12px; background: #fffbe7; /* 与 DatePicker 的导航标签同款胶囊 */
+              color: #725d42; font-size: 15px; font-weight: 700; }
+.navBtn { width: 28px; height: 28px; border-radius: 10px; color: #a0936e;   /* 14px / 16px 箭头 */
+          /* hover */ background: var(--animal-calendar-accent-tint); color: var(--animal-calendar-accent); }
+.todayBtn { padding: 4px 12px; border-radius: 10px; color: #8a7b66; font-size: 13px; font-weight: 700;
+            /* hover */ background: rgba(114, 93, 66, 0.1); color: #725d42; }
+```
+
+**日期网格** —— 单个 `<table role="grid">`，7 列 × 6 周（恒定 42 格，含上下月日期并置灰）。每个单元格高度固定为 `--animal-calendar-cell-height`：
+
+```css
+.weekCell { height: 32px; color: #a09080; font-size: 12px; font-weight: 700; letter-spacing: 0.04em; }
+.cell     { height: 76px; border-radius: 12px; vertical-align: top; cursor: pointer; }
+.cell:hover           { background: #f4f0e4; }                      /* 整个单元格，不只是数字 */
+.cell:focus-visible   { outline: 2px solid var(--animal-calendar-accent); outline-offset: -2px; }
+.cellSelected         { background: var(--animal-calendar-accent-tint); }
+.dayNumber            { width: 28px; height: 28px; margin: 4px 0 0 4px; border-radius: 50%;   /* 28px 圆 */
+                        color: #725d42; font-size: 13px; font-weight: 500; }
+.cellOutside .dayNumber { color: #c4b89e; font-weight: 400; }
+.cellToday   .dayNumber { box-shadow: inset 0 0 0 1.5px var(--animal-calendar-accent);
+                          color: var(--animal-calendar-accent); font-weight: 700; }
+.cellSelected .dayNumber { background: var(--animal-calendar-accent); box-shadow: none; color: #fff; font-weight: 700; }
+.cellDisabled .dayNumber { color: #d4c9b4; }
+.more  { padding: 1px 5px; border-radius: 8px; font-size: 10px; font-weight: 700;   /* +N 折叠 */
+         background: var(--animal-calendar-accent-soft); color: var(--animal-calendar-accent); }
+```
+
+**事项带** —— 事项层与日期网格共用同一套 7 列轨道，因此任意宽度下事项条都与日期对齐。事项层绝对定位覆盖整张卡片，每条事项通过 `--animal-calendar-bar-top` 定位（`32px 表头 + 周序 × 76px + 34px 日期数字带 + 事项行 × 26px`），所以事项始终落在**自己那一周**的日期数字下方，而不是全部堆到卡片底部。每周可并排 2 条：
+
+```css
+.eventsLayer { position: absolute; inset: 0; display: grid; pointer-events: none;
+               grid-template-columns: repeat(7, 1fr); }
+.event { position: absolute; top: var(--animal-calendar-bar-top, 0);
+         height: 20px; margin: 0 4px; padding: 0 6px; border-radius: 10px; font-size: 11px; font-weight: 600;
+         line-height: 18px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+/* 跨天条在接缝处去掉圆角与外侧留白，视觉上连成一条 */
+.event[data-span='true']  { border-radius: 6px; }
+.event[data-start='true'] { margin-left: 0; }
+.event[data-end='true']   { margin-right: 0; }
+/* 5 套配色：teal #e0f7f4/#17756d · amber #fff3d1/#8a6a08 · coral #ffe7de/#a44b32
+   · green #eaf6db/#4a7a1d · purple #f0eafb/#6849b8，各配 45% 同色描边 */
+.event[data-preview='true'] { border-style: dashed; }   /* 拖拽创建预览 */
+.eventTime { margin-right: 4px; color: #9f927d; font-variant-numeric: tabular-nums; }
+```
+
+**布局规则。** 跨天事项在周边界处切断，因此每条最多占 1–7 列、永不换行；周内首段带 `HH:mm` 前缀，续接段只保留标题。每个周行最多并排 2 条（2 条事项行），同一天第 3 条折叠为日期格上的 `+N`，不撑高行高。完全落在 42 格视图之外的事项既不渲染也不计数 —— `+N` 与日期格的 `aria-label` 只描述屏幕上真正可见的内容。表格自身不再留底部内边距；由 `.body` 在下方预留 `calc(2 × 26px + 6px)` 容纳第二条事项行。`prefers-reduced-motion` 下移除 `.cell` / `.dayNumber` / `.navBtn` / `.todayBtn` 的过渡。
 ## TimePicker
 
 时间弹出选择器；值为纯 `HH:mm:ss` 字符串。挂钟时间不依附于某个日历日期，因此面板完全不需要日期库（见 [ADR 0005](../../adr/0005-dayjs-as-the-date-layer.md)）。触发区沿用 Input 视觉规格（奶油胶囊、

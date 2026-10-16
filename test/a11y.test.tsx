@@ -44,6 +44,7 @@ import { Cursor } from '@/components/Cursor';
 import { Countdown } from '@/components/Countdown';
 import { CountUp } from '@/components/CountUp';
 import { Time } from '@/components/Time';
+import { Calendar } from '@/components/Calendar';
 import { DatePicker } from '@/components/DatePicker';
 import { Divider } from '@/components/Divider';
 import { Loading } from '@/components/Loading';
@@ -331,6 +332,21 @@ describe('a11y smoke / 全组件 axe-core 自动检查', () => {
     it('TimePicker (带 aria-label，展开面板)', async () => {
         const r = render(<TimePicker aria-label="选择时间" open />);
         await expectNoA11yViolations(containerOf(r), 'TimePicker');
+    });
+
+    it('Calendar (带 aria-label，月面板与事项)', async () => {
+        const r = render(
+            <Calendar
+                aria-label="日程日历"
+                defaultValue="2026-08-10"
+                panelValue="2026-08"
+                events={[
+                    { title: '晨会', start: '2026-08-10' },
+                    { title: '海岛团建', start: '2026-08-12', end: '2026-08-18', color: 'amber' },
+                ]}
+            />
+        );
+        await expectNoA11yViolations(containerOf(r), 'Calendar');
     });
 
     it('Form (FormItem + label)', async () => {

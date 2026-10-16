@@ -49,6 +49,9 @@ export type { DatePickerProps, DatePickerSize, DatePickerStatus, DatePickerValue
 export { TimePicker } from './components/TimePicker';
 export type { TimePickerProps, TimePickerSize, TimePickerStatus, TimePart } from './components/TimePicker';
 
+export { Calendar } from './components/Calendar';
+export type { CalendarProps, CalendarEvent, CalendarCellInfo, CalendarColor } from './components/Calendar';
+
 export { Tabs } from './components/Tabs';
 export type { TabsProps, TabItem } from './components/Tabs';
 

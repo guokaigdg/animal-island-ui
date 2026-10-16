@@ -64,6 +64,10 @@ export const PAGE_INFO: Record<string, { title: string; desc: string }> = {
         title: 'TimePicker 时间选择',
         desc: '时间选择组件 — 时/分/秒三列滚选，此刻/确定快捷操作，支持受控/非受控、自定义格式、时/分/秒步进、allowClear 清空与键盘导航',
     },
+    calendar: {
+        title: 'Calendar 日历',
+        desc: '日历组件（轻量月面板）— 事项通知与跨日期连续条、自定义事项/日期渲染、拖拽跨日期创建事项、禁用日期、受控/非受控与键盘导航',
+    },
     tabs: {
         title: 'Tabs 标签页',
         desc: '标签页组件 — 支持受控/非受控模式切换',

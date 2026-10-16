@@ -34,6 +34,7 @@ import TypewriterDemo from './components/Typewriter';
 import DividerDemo from './components/Divider';
 import BackgroundDemo from './components/Background';
 import SelectDemo from './components/Select';
+import CalendarDemo from './components/Calendar';
 import DatePickerDemo from './components/DatePicker';
 import TimePickerDemo from './components/TimePicker';
 import CountdownDemo from './components/Countdown';
@@ -69,6 +70,7 @@ const PAGES: Record<string, React.FC> = {
     select: SelectDemo,
     'date-picker': DatePickerDemo,
     'time-picker': TimePickerDemo,
+    calendar: CalendarDemo,
     tabs: TabsDemo,
     checkbox: CheckboxDemo,
     radio: RadioDemo,

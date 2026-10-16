@@ -12,7 +12,7 @@ description: >
 # animal-island-ui style
 
 animal-island-ui is a React + TypeScript component library with an original
-cozy island-style design — 39 components, two runtime dependencies (`naive-icons`
+cozy island-style design — 40 components, two runtime dependencies (`naive-icons`
 for icons, `dayjs` for dates), MIT License.
 
 Source & canonical design definition: https://github.com/guokaigdg/animal-island-ui
@@ -68,7 +68,7 @@ values, defaults — copied from source):
 | Layout | Card, Title, Divider, Collapse, Tabs | [layout.md](references/components/layout.md) |
 | Form controls | Input, Switch, Checkbox, Radio, Rate, Select | [form-controls.md](references/components/form-controls.md) |
 | Upload | Upload | [upload.md](references/components/upload.md) |
-| Date & time pickers | DatePicker, TimePicker | [date-time.md](references/components/date-time.md) |
+| Date & time | DatePicker, TimePicker, Calendar | [date-time.md](references/components/date-time.md) |
 | Form container | Form (+ FormItem, useForm) | [Form.md](references/components/Form.md) |
 | Overlays | Modal, Drawer, Tooltip | [overlays.md](references/components/overlays.md) |
 | Feedback | Progress, Skeleton, BackTop, Loading, Countdown, Time | [feedback.md](references/components/feedback.md) |

@@ -1,0 +1,373 @@
+// ============================================
+// Calendar — Animal Island Style
+// 轻量月面板：容器与 DatePicker 同源（奶油卡片 + 青绿主色）
+// ============================================
+
+/* 单元格与事项行的固定尺寸：表格行高与事项条的 --animal-calendar-bar-top 都依赖它们。
+   改动时必须同步 Calendar.tsx 顶部的 CELL_HEIGHT / DAY_NUMBER_BAND / EVENT_ROW_HEIGHT / HEADER_HEIGHT */
+@cell-height: 76px;
+@event-row-height: 26px;
+
+.calendar {
+    --animal-calendar-accent: #19c8b9;
+    --animal-calendar-accent-soft: rgba(25, 200, 185, 0.14);
+    --animal-calendar-accent-tint: #e6f9f6;
+    --animal-calendar-cell-height: @cell-height;
+    --animal-calendar-row-height: @event-row-height;
+
+    display: block;
+    width: 100%;
+    font-family: var(--animal-font-family, 'Nunito', 'Noto Sans SC', sans-serif);
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+/* 主题色：与 DatePicker 的范围选中色系保持一致 */
+.calendar[data-theme='teal'] {
+    --animal-calendar-accent: #19c8b9;
+    --animal-calendar-accent-soft: rgba(25, 200, 185, 0.14);
+    --animal-calendar-accent-tint: #e6f9f6;
+}
+
+.calendar[data-theme='amber'] {
+    --animal-calendar-accent: #ffc107;
+    --animal-calendar-accent-soft: rgba(255, 193, 7, 0.2);
+    --animal-calendar-accent-tint: #fff3cd;
+}
+
+.calendar[data-theme='coral'] {
+    --animal-calendar-accent: #ff8a65;
+    --animal-calendar-accent-soft: rgba(255, 138, 101, 0.18);
+    --animal-calendar-accent-tint: #ffebe4;
+}
+
+.calendar[data-theme='green'] {
+    --animal-calendar-accent: #6fba2c;
+    --animal-calendar-accent-soft: rgba(111, 186, 44, 0.16);
+    --animal-calendar-accent-tint: #eef7e2;
+}
+
+.calendar[data-theme='purple'] {
+    --animal-calendar-accent: #9b7fe0;
+    --animal-calendar-accent-soft: rgba(155, 127, 224, 0.16);
+    --animal-calendar-accent-tint: #f0eafb;
+}
+
+/* 头部：上/下月导航 + 年月标签 + 今天 */
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.headerGroup {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+}
+
+.navBtn {
+    display: flex;
+    width: 28px;
+    height: 28px;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-radius: 10px;
+    background: transparent;
+    color: #a0936e;
+    cursor: pointer;
+    transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.navBtn:hover {
+    background: var(--animal-calendar-accent-tint);
+    color: var(--animal-calendar-accent);
+}
+
+.navBtn:focus-visible {
+    outline: 2px solid var(--animal-calendar-accent);
+    outline-offset: 1px;
+}
+
+.navIcon {
+    display: block;
+    flex-shrink: 0;
+}
+
+.monthLabel {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 12px;
+    border-radius: 12px;
+    background: #fffbe7;
+    color: #725d42;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+}
+
+.monthIcon {
+    display: block;
+    flex-shrink: 0;
+    color: var(--animal-calendar-accent);
+}
+
+.todayBtn {
+    margin-right: 2px;
+    padding: 4px 12px;
+    border: none;
+    border-radius: 10px;
+    background: transparent;
+    color: #8a7b66;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.todayBtn:hover {
+    background: rgba(114, 93, 66, 0.1);
+    color: #725d42;
+}
+
+.todayBtn:focus-visible {
+    outline: 2px solid var(--animal-calendar-accent);
+    outline-offset: 1px;
+}
+
+/* 面板：奶油卡片，与 DatePicker 弹出面板同款描边与圆角 */
+.body {
+    position: relative;
+    /* 下方为 2 行事项带预留高度（表格自身只占 6 行日期） */
+    padding-bottom: calc(@event-row-height * 2 + 6px);
+    border: 1.5px solid #e8dcc8;
+    border-radius: 20px;
+    background: #fffdf7;
+    box-shadow: 0 6px 18px rgba(61, 52, 40, 0.12);
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+.weekCell {
+    height: 32px;
+    color: #a09080;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-align: center;
+}
+
+.cell {
+    position: relative;
+    height: @cell-height;
+    padding: 0;
+    vertical-align: top;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.cell:hover {
+    background: #f4f0e4;
+}
+
+.cell:focus-visible {
+    outline: 2px solid var(--animal-calendar-accent);
+    outline-offset: -2px;
+}
+
+.cellOutside {
+    cursor: pointer;
+}
+
+.cellSelected,
+.cellSelected:hover {
+    background: var(--animal-calendar-accent-tint);
+}
+
+/* 开启拖拽创建后，日期格改用十字光标提示可拖拽 */
+.calendar[data-draggable='true'] .cell {
+    cursor: crosshair;
+}
+
+.cellDisabled,
+.cellDisabled:hover {
+    background: transparent;
+    cursor: not-allowed;
+}
+
+.cellInner {
+    display: block;
+}
+
+/* 日期数字：固定 28×28 圆形，位置与叠加层解耦，悬停/选中直接换色 */
+.dayNumber {
+    display: flex;
+    width: 28px;
+    height: 28px;
+    margin: 4px 0 0 4px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    color: #725d42;
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1;
+    transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.cell:hover .dayNumber {
+    color: var(--animal-calendar-accent);
+}
+
+.cellOutside .dayNumber {
+    color: #c4b89e;
+    font-weight: 400;
+}
+
+.cellToday .dayNumber {
+    box-shadow: inset 0 0 0 1.5px var(--animal-calendar-accent);
+    color: var(--animal-calendar-accent);
+    font-weight: 700;
+}
+
+.cellSelected .dayNumber,
+.cellSelected:hover .dayNumber {
+    background: var(--animal-calendar-accent);
+    box-shadow: none;
+    color: #fff;
+    font-weight: 700;
+}
+
+.cellDisabled .dayNumber,
+.cellDisabled:hover .dayNumber {
+    background: transparent;
+    box-shadow: none;
+    color: #d4c9b4;
+}
+
+/* 事项折叠提示：超过 2 条时展示 +N */
+.more {
+    display: block;
+    margin: 0 4px;
+    padding: 1px 5px;
+    border-radius: 8px;
+    background: var(--animal-calendar-accent-soft);
+    color: var(--animal-calendar-accent);
+    font-size: 10px;
+    font-weight: 700;
+    line-height: 1.5;
+    text-align: center;
+}
+
+/* 事项叠加层：与日期网格共用 7 列轨道，跨天事项横跨多列形成连续条。
+   层覆盖整个日期区，每条事项通过 --animal-calendar-bar-top 落在所属周的
+   日期数字下方（见 .event），因此事项始终紧贴对应的那一周，而不是掉到卡片底部。 */
+/* --animal-calendar-bar-top 由组件按「周行 + 事项行」算好后内联下发：
+   第 r 周第 k 条事项 = 表头 32px + r × @cell-height + 日期数字 34px + k × @event-row-height。
+   层高度覆盖整个卡片内容区（表头 + 6 行日期 + 2 行事项），因此每条事项都紧贴自己的那一周。 */
+.eventsLayer {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    pointer-events: none;
+}
+
+.event {
+    position: absolute;
+    top: var(--animal-calendar-bar-top, 0);
+    height: 20px;
+    margin: 0 4px;
+    padding: 0 6px;
+    overflow: hidden;
+    border: 1px solid var(--animal-calendar-accent-soft);
+    border-radius: 10px;
+    background: var(--animal-calendar-accent-soft);
+    color: #725d42;
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 18px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* 跨天条：收掉接缝处的圆角与留白，视觉上连成一条 */
+.event[data-span='true'] {
+    border-radius: 6px;
+}
+
+.event[data-start='true'] {
+    margin-left: 0;
+}
+
+.event[data-end='true'] {
+    margin-right: 0;
+}
+
+.eventTime {
+    margin-right: 4px;
+    color: #9f927d;
+    font-variant-numeric: tabular-nums;
+}
+
+.eventTitle {
+    font-weight: 600;
+}
+
+/* 事项配色：实色圆点色系，保留一件一色 */
+.event[data-color='teal'] {
+    border-color: rgba(25, 200, 185, 0.45);
+    background: #e0f7f4;
+    color: #17756d;
+}
+
+.event[data-color='amber'] {
+    border-color: rgba(255, 193, 7, 0.5);
+    background: #fff3d1;
+    color: #8a6a08;
+}
+
+.event[data-color='coral'] {
+    border-color: rgba(255, 138, 101, 0.5);
+    background: #ffe7de;
+    color: #a44b32;
+}
+
+.event[data-color='green'] {
+    border-color: rgba(111, 186, 44, 0.5);
+    background: #eaf6db;
+    color: #4a7a1d;
+}
+
+.event[data-color='purple'] {
+    border-color: rgba(155, 127, 224, 0.5);
+    background: #f0eafb;
+    color: #6849b8;
+}
+
+/* 拖拽创建预览条：虚线描边区别于已有事项 */
+.event[data-preview='true'] {
+    border-style: dashed;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .cell,
+    .dayNumber,
+    .navBtn,
+    .todayBtn {
+        transition: none;
+    }
+}

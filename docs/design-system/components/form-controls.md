@@ -633,6 +633,82 @@ the old range highlight gives way: hovering a later date highlights `[start, hov
 pending end; hovering an earlier date highlights `[hover, start]` in reverse, marking the hovered date as the new
 pending start (clicking it resets the start). This follows the mainstream range-picker interaction model.
 
+
+## Calendar (month panel, event bars that span days)
+
+Source: `src/components/Calendar/calendar.module.less`. A **standalone** month calendar (not a popup): the month panel is
+permanent, so the shell is a cream card rather than a positioned popover. It reuses DatePicker's visual language —
+`#fffdf7` card, `#e8dcc8` 1.5px border, 20px radius, day circles — and adds a two-row event band under the date grid.
+
+**Shell and header:**
+
+```css
+.calendar {                       /* the theme knobs; 'teal' is the DatePicker selection colour */
+    --animal-calendar-accent: #19c8b9;
+    --animal-calendar-accent-soft: rgba(25, 200, 185, 0.14);
+    --animal-calendar-accent-tint: #e6f9f6;
+    --animal-calendar-cell-height: 76px;
+}
+/* amber #ffc107 / coral #ff8a65 / green #6fba2c / purple #9b7fe0 expose the same three values */
+.body   { position: relative; border: 1.5px solid #e8dcc8; border-radius: 20px; background: #fffdf7;
+          box-shadow: 0 6px 18px rgba(61, 52, 40, 0.12); }
+.monthLabel { padding: 4px 12px; border-radius: 12px; background: #fffbe7; /* same chip as the DatePicker nav label */
+              color: #725d42; font-size: 15px; font-weight: 700; }
+.navBtn { width: 28px; height: 28px; border-radius: 10px; color: #a0936e;   /* 14px / 16px chevrons */
+          /* hover */ background: var(--animal-calendar-accent-tint); color: var(--animal-calendar-accent); }
+.todayBtn { padding: 4px 12px; border-radius: 10px; color: #8a7b66; font-size: 13px; font-weight: 700;
+            /* hover */ background: rgba(114, 93, 66, 0.1); color: #725d42; }
+```
+
+**Date grid** — one `<table role="grid">`, 7 columns × 6 weeks (42 cells, always full; leading/trailing days of the
+neighbouring months included but dimmed). Each cell is exactly `--animal-calendar-cell-height` tall:
+
+```css
+.weekCell { height: 32px; color: #a09080; font-size: 12px; font-weight: 700; letter-spacing: 0.04em; }
+.cell     { height: 76px; border-radius: 12px; vertical-align: top; cursor: pointer; }
+.cell:hover           { background: #f4f0e4; }                      /* the whole cell, not just the number */
+.cell:focus-visible   { outline: 2px solid var(--animal-calendar-accent); outline-offset: -2px; }
+.cellSelected         { background: var(--animal-calendar-accent-tint); }
+.dayNumber            { width: 28px; height: 28px; margin: 4px 0 0 4px; border-radius: 50%;   /* 28px circle */
+                        color: #725d42; font-size: 13px; font-weight: 500; }
+.cellOutside .dayNumber { color: #c4b89e; font-weight: 400; }
+.cellToday   .dayNumber { box-shadow: inset 0 0 0 1.5px var(--animal-calendar-accent);
+                          color: var(--animal-calendar-accent); font-weight: 700; }
+.cellSelected .dayNumber { background: var(--animal-calendar-accent); box-shadow: none; color: #fff; font-weight: 700; }
+.cellDisabled .dayNumber { color: #d4c9b4; }
+.more  { padding: 1px 5px; border-radius: 8px; font-size: 10px; font-weight: 700;   /* the +N fold */
+         background: var(--animal-calendar-accent-soft); color: var(--animal-calendar-accent); }
+```
+
+**Event band** — the event layer shares the date grid's seven column tracks, so a bar lines up with its days at any
+width. It is absolutely positioned over the whole card and each bar is placed by `--animal-calendar-bar-top`
+(`32px header + week × 76px + 34px day-number band + event row × 26px`), which keeps every bar directly under its own
+week's date numbers rather than in one band at the card bottom. Two event rows fit per week:
+
+```css
+.eventsLayer { position: absolute; inset: 0; display: grid; pointer-events: none;
+               grid-template-columns: repeat(7, 1fr); }
+.event { position: absolute; top: var(--animal-calendar-bar-top, 0);
+         height: 20px; margin: 0 4px; padding: 0 6px; border-radius: 10px; font-size: 11px; font-weight: 600;
+         line-height: 18px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+/* a multi-day bar drops the radius and the outer gutter at the seams so it reads as one strip */
+.event[data-span='true']  { border-radius: 6px; }
+.event[data-start='true'] { margin-left: 0; }
+.event[data-end='true']   { margin-right: 0; }
+/* 5 palettes: teal #e0f7f4/#17756d · amber #fff3d1/#8a6a08 · coral #ffe7de/#a44b32
+   · green #eaf6db/#4a7a1d · purple #f0eafb/#6849b8, each with a matching 45% border */
+.event[data-preview='true'] { border-style: dashed; }   /* drag-to-create preview */
+.eventTime { margin-right: 4px; color: #9f927d; font-variant-numeric: tabular-nums; }
+```
+
+**Layout rules.** A multi-day event is cut at week boundaries, so every bar occupies 1–7 columns and never wraps; the
+week-internal first slice carries the `HH:mm` prefix, continuation slices carry the title only. Each week row can host
+2 bars (2 event rows); a third same-day event folds into `+N` on the day cell instead of pushing the row taller. Events
+that fall entirely outside the 42-day grid are neither rendered nor counted — the `+N` tally and the cell's `aria-label`
+both describe only what is on screen.
+The table keeps no bottom padding of its own; `.body` reserves
+`calc(2 × 26px + 6px)` below it for the second event row. `prefers-reduced-motion` drops the `.cell` / `.dayNumber` /
+`.navBtn` / `.todayBtn` transitions.
 ## TimePicker
 
 Time popup selector; value is a plain `HH:mm:ss` string. A wall-clock time is not attached to a calendar date, so the
