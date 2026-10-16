@@ -17,8 +17,6 @@ export interface CalendarEvent {
     color?: CalendarColor;
     /** 是否在事项条首段展示起始时间 HH:mm（跨周续接段不重复展示） */
     showTime?: boolean;
-    /** 挂载在事项上的业务数据，渲染回调里原样取回 */
-    data?: unknown;
 }
 
 export interface CalendarProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'defaultValue' | 'onChange'> {
@@ -26,13 +24,13 @@ export interface CalendarProps extends Omit<React.HTMLAttributes<HTMLDivElement>
     value?: string;
     /** 默认选中日期（非受控），YYYY-MM-DD；不传时默认选中今天 */
     defaultValue?: string;
-    /** 面板当前展示的月份（受控），YYYY-MM 或 YYYY-MM-DD */
+    /** 面板当前展示的月份（受控），YYYY-MM 或 YYYY-MM-DD；传入后必须配合 onPanelChange 回写，否则面板无法翻月 */
     panelValue?: string;
     /** 默认展示的月份（非受控），YYYY-MM 或 YYYY-MM-DD；不传时跟随选中值 / 今天 */
     defaultPanelValue?: string;
     /** 日期变化回调（点选单元格或点击「今天」时触发） */
     onChange?: (date: string) => void;
-    /** 面板月份变化回调（切换上/下月、上/下年时触发） */
+    /** 面板月份变化回调（切换上/下月、上/下年、光标跨月时触发）；受控 panelValue 下必须回写 */
     onPanelChange?: (month: string) => void;
     /** 事项列表，支持同一天多条与跨日期连续条 */
     events?: CalendarEvent[];
@@ -72,15 +70,15 @@ const CELL_ROWS = GRID_CELLS / COLS;
  */
 const LAYOUT_BASE = {
     /** 基准面板宽度 */
-    width: 640,
+    width: 750,
     /** 星期表头高度 */
     header: 32,
     /** 单元格高度 */
-    cellHeight: 86,
+    cellHeight: 104,
     /** 单元格内「日期圆 + 上下留白」占用的高度，事项条从它下方开始排 */
-    numberBand: 32,
+    numberBand: 38,
     /** 单条事项行的高度 */
-    eventRow: 19,
+    eventRow: 22,
 };
 
 /** 缩放系数的上下限，避免极窄或极宽容器把面板拉变形 */
@@ -90,9 +88,6 @@ const MAX_SCALE = 2;
 const MAX_EVENT_ROWS = 2;
 
 const toDateKey = (date: Dayjs) => date.format('YYYY-MM-DD');
-
-/** 拖拽预览事项的标记，只用于渲染时区分「已有事项」与「正在拖拽的临时条」 */
-const PREVIEW_FLAG = '__animal-calendar-preview__';
 
 /** 解析字符串 / dayjs 输入，非法输入返回 null */
 const parseDate = (value: string | Dayjs | null | undefined): Dayjs | null => {
@@ -305,7 +300,8 @@ export const Calendar: React.FC<CalendarProps> = ({
 
     const goToMonth = useCallback(
         (month: Dayjs, focus?: Dayjs) => {
-            if (isPanelControlled) setInnerPanel(month);
+            // 非受控时面板自己翻月；受控时只通知父级，由父级回写 panelValue
+            if (!isPanelControlled) setInnerPanel(month);
             onPanelChange?.(month.format('YYYY-MM'));
             if (focus) setFocusDate(focus);
         },
@@ -353,14 +349,16 @@ export const Calendar: React.FC<CalendarProps> = ({
         return { from, to };
     }, [dragging, dragAnchor, dragHead]);
 
-    // 拖拽预览以临时事项的形式参与同一套布局，因此跨天条会自动避开已有事项
-    const layoutEventsSource = useMemo<CalendarEvent[]>(() => {
-        if (!dragPreview) return events;
-        return [
-            ...events,
-            { title: '', start: dragPreview.from, end: dragPreview.to, color: 'teal', data: PREVIEW_FLAG },
-        ];
-    }, [events, dragPreview]);
+    // 拖拽预览以临时事项的形式参与同一套布局，因此跨天条会自动避开已有事项。
+    // 预览条的引用固定在一个 memo 里，渲染时用它比对即可区分预览与真实事项。
+    const previewEvent = useMemo<CalendarEvent | null>(
+        () => (dragPreview ? { title: '', start: dragPreview.from, end: dragPreview.to, color: 'teal' } : null),
+        [dragPreview]
+    );
+    const layoutEventsSource = useMemo<CalendarEvent[]>(
+        () => (previewEvent ? [...events, previewEvent] : events),
+        [events, previewEvent]
+    );
 
     const layout = useMemo(
         () => layoutEvents(layoutEventsSource, gridStart, today.startOf('day')),
@@ -395,7 +393,6 @@ export const Calendar: React.FC<CalendarProps> = ({
     const overflowCounts = useMemo(() => {
         const drawn = new Array<number>(GRID_CELLS).fill(0);
         for (const segment of layout.segments) {
-            if (segment.event.data === PREVIEW_FLAG) continue;
             for (let i = 0; i < segment.span; i += 1) {
                 const at = segment.index + i;
                 if (at < GRID_CELLS) drawn[at] += 1;
@@ -629,7 +626,7 @@ export const Calendar: React.FC<CalendarProps> = ({
                                     data-span={segment.span > 1 ? 'true' : undefined}
                                     data-start={segment.index % COLS === 0 ? 'true' : undefined}
                                     data-end={segment.endIndex % COLS === COLS - 1 ? 'true' : undefined}
-                                    data-preview={segment.event.data === PREVIEW_FLAG ? 'true' : undefined}
+                                    data-preview={segment.event === previewEvent ? 'true' : undefined}
                                     className={styles.event}
                                     style={{
                                         // 事项条绝对定位到所属周的日期数字下方，横向与日期圆共用一条内容轨道。

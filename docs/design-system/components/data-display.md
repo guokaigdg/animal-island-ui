@@ -735,20 +735,21 @@ permanent, so the shell is a cream card rather than a positioned popover. It reu
 `#fffdf7` card, `#e8dcc8` 1.5px border, 20px radius, day circles — and adds an event band under each week's dates.
 
 **Shell and header.** The panel has no size tiers: it measures its own box (`ResizeObserver`, or the numeric `width`
-prop when given) and derives every metric from it. `--animal-calendar-scale` = actual width / 640, clamped to
-`0.6 … 2`, and the whole rhythm is `baseline × scale`:
+prop when given) and derives every metric from it. `--animal-calendar-scale` = actual width / **750** (the baseline is
+tuned to match antd's full calendar card, measured at 751px wide / 107px cells / 116px rows / 14px day digits), clamped
+to `0.6 … 2`, and the whole rhythm is `baseline × scale`:
 
-| Metric | Baseline at 640px | At 900px (scale 1.41) |
-| ------ | ----------------- | --------------------- |
-| header height | 32px | 45px |
-| cell height | 86px | 121px |
-| day circle | 28px | 39px |
-| event row / bar height | 19 / 17px | 27 / 24px |
-| event font | 11px | 16px |
+| Metric | Baseline at 750px | At 1000px (scale 1.33) |
+| ------ | ----------------- | ---------------------- |
+| header height | 32px | 43px |
+| cell height | 104px | 139px |
+| day circle | 28px | 37px |
+| event row / bar height | 22 / 17px | 29 / 23px |
+| event font | 11px | 15px |
 
 The day-number font stays at **13px** at every width — the circle grows with the panel, the digit inside it does not,
 because a scaled-up digit overflows the circle. The cell must also fit the number band plus both event rows
-(`32 + 19 × 2 = 70 ≤ 86`), which is what keeps a busy week from bleeding into the next one.
+(`38 + 22 × 2 = 82 ≤ 104`), which is what keeps a busy week from bleeding into the next one.
 
 
 
@@ -759,8 +760,8 @@ because a scaled-up digit overflows the circle. The cell must also fit the numbe
     --animal-calendar-accent-tint: #e6f9f6;
     --animal-calendar-header-height: calc(32px * var(--animal-calendar-scale, 1));
     --animal-calendar-number-size: calc(28px * var(--animal-calendar-scale, 1));
-    --animal-calendar-cell-height: calc(86px * var(--animal-calendar-scale, 1));
-    --animal-calendar-row-height: calc(19px * var(--animal-calendar-scale, 1));
+    --animal-calendar-cell-height: calc(104px * var(--animal-calendar-scale, 1));
+    --animal-calendar-row-height: calc(22px * var(--animal-calendar-scale, 1));
     --animal-calendar-bar-height: calc(17px * var(--animal-calendar-scale, 1));
 }
 

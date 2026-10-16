@@ -1,23 +1,8 @@
 import React, { useState } from 'react';
 import { Calendar, type CalendarEvent } from '../../../src';
-import {
-    ApiTable,
-    ApiRow,
-    CodeBlock,
-    DemoTag,
-    labelStyle,
-    sectionStyle,
-    sectionTitleStyle,
-    useIsMobile,
-} from '../../tools';
+import { ApiTable, ApiRow, CodeBlock, DemoTag, labelStyle, sectionStyle, sectionTitleStyle } from '../../tools';
 
 const CALENDAR_API: ApiRow[] = [
-    {
-        prop: 'size',
-        desc: '尺寸：控制单元格高度、字号与事项密度',
-        type: `'small' | 'middle' | 'large'`,
-        defaultVal: "'middle'",
-    },
     { prop: 'width', desc: '面板宽度，默认铺满父容器（数值按 px 处理）', type: 'number | string', defaultVal: '-' },
     { prop: 'value', desc: '当前选中日期（受控），YYYY-MM-DD', type: 'string', defaultVal: '-' },
     { prop: 'defaultValue', desc: '默认选中日期（非受控），YYYY-MM-DD', type: 'string', defaultVal: '今天' },
@@ -53,7 +38,6 @@ const EVENT_API: ApiRow[] = [
     },
     { prop: 'color', desc: '颜色', type: `'teal' | 'amber' | 'coral' | 'green' | 'purple'`, defaultVal: "'teal'" },
     { prop: 'showTime', desc: '是否展示起始时间', type: 'boolean', defaultVal: 'false' },
-    { prop: 'data', desc: '业务数据，渲染回调里原样取回', type: 'unknown', defaultVal: '-' },
 ];
 
 const S = {
@@ -63,6 +47,9 @@ const S = {
         fontWeight: 500,
         marginBottom: 20,
         background: '#faf8f3',
+        /* 面板固定 750px（对齐 antd full 日历的卡片宽度），容器窄时让它自己缩 */
+        maxWidth: '100%',
+        overflowX: 'auto',
     } as React.CSSProperties,
     statusLine: {
         marginBottom: 8,
@@ -71,18 +58,17 @@ const S = {
     } as React.CSSProperties,
 };
 
-const workEvents: CalendarEvent[] = [
-    { title: '周会', start: '2026-08-10 09:30', showTime: true },
-    { title: '需求评审', start: '2026-08-10 14:00', showTime: true, color: 'purple' },
-    { title: '海岛团建', start: '2026-08-12', end: '2026-08-18', color: 'amber' },
-    { title: '版本发布', start: '2026-08-20', color: 'coral' },
-    { title: '用户访谈', start: '2026-08-24 10:00', showTime: true, color: 'green' },
-    { title: '设计走查', start: '2026-08-24' },
-    { title: '月度复盘', start: '2026-08-24' },
+const islandEvents: CalendarEvent[] = [
+    { title: '每日签到', start: '2026-08-10 09:30', showTime: true },
+    { title: '开荒新岛', start: '2026-08-10 14:00', showTime: true, color: 'green' },
+    { title: '海岛丰收祭', start: '2026-08-12', end: '2026-08-18', color: 'amber' },
+    { title: '钓鱼大赛', start: '2026-08-20', color: 'coral' },
+    { title: '篝火晚会', start: '2026-08-24 20:00', showTime: true, color: 'purple' },
+    { title: '摘果子', start: '2026-08-24' },
+    { title: '浇花', start: '2026-08-24' },
 ];
 
 const CalendarDemo: React.FC = () => {
-    const isMobile = useIsMobile();
     const [date, setDate] = useState('2026-08-10');
     const [panel, setPanel] = useState('2026-08');
     const [created, setCreated] = useState<{ start: string; end: string }[]>([]);
@@ -94,25 +80,27 @@ const CalendarDemo: React.FC = () => {
             </div>
             <div style={labelStyle}>基础</div>
             <div style={S.demoBox}>
-                <Calendar
-                    panelValue="2026-08"
-                    defaultValue="2026-08-10"
-                    width={isMobile ? '100%' : 900}
-                    events={workEvents}
-                />
+                <Calendar defaultValue="2026-08-10" width={750} events={islandEvents} />
             </div>
 
             <div style={labelStyle}>受控模式：点击日期选中</div>
             <div style={S.statusLine}>
                 当前选中: <span style={{ color: '#19c8b9', fontWeight: 600 }}>{date}</span>
+                {'　'}面板月份: <span style={{ color: '#19c8b9', fontWeight: 600 }}>{panel}</span>
             </div>
             <div style={S.demoBox}>
-                <Calendar value={date} panelValue={panel} onChange={setDate} onPanelChange={setPanel} />
+                <Calendar value={date} panelValue={panel} onChange={setDate} onPanelChange={setPanel} width={750} />
             </div>
 
-            <div style={labelStyle}>事项：同日多条、跨日期连续条、时间前缀</div>
+            <div style={labelStyle}>隐藏头部与时间前缀（showHeader / showEventTime）</div>
             <div style={S.demoBox}>
-                <Calendar panelValue="2026-08" defaultValue="2026-08-10" events={workEvents} />
+                <Calendar
+                    defaultValue="2026-08-10"
+                    width={750}
+                    showHeader={false}
+                    showEventTime={false}
+                    events={islandEvents}
+                />
             </div>
 
             <div style={labelStyle}>拖拽跨日期创建事项（draggableEvents）</div>
@@ -126,8 +114,8 @@ const CalendarDemo: React.FC = () => {
             </div>
             <div style={S.demoBox}>
                 <Calendar
-                    panelValue="2026-08"
                     defaultValue="2026-08-10"
+                    width={750}
                     draggableEvents
                     onEventCreate={(start, end) => setCreated((prev) => [...prev, { start, end }])}
                 />
@@ -137,8 +125,8 @@ const CalendarDemo: React.FC = () => {
                 code={`import { Calendar } from 'animal-island-ui';
 
 const events = [
-    { title: '周会', start: '2026-08-10 09:30', showTime: true },
-    { title: '海岛团建', start: '2026-08-12', end: '2026-08-18', color: 'amber' },
+    { title: '每日签到', start: '2026-08-10 09:30', showTime: true },
+    { title: '海岛丰收祭', start: '2026-08-12', end: '2026-08-18', color: 'amber' },
 ];
 
 const App = () => (

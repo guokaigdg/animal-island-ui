@@ -11,8 +11,9 @@
  * （= 实际宽度 / 基准宽度 640），下面所有度量都是「基准值 × 系数」。
  * 因此面板变大时行高、事项条、字号一起跟着放大，不需要 size 档位。
  *
- * 硬约束：单元格高度必须容得下「日期数字带 32 + 2 条事项行 19 × 2 = 70 ≤ 86」，
+ * 硬约束：单元格高度必须容得下「日期数字带 38 + 2 条事项行 22 × 2 = 82 ≤ 104」，
  * 否则同一周的第 2 条事项条会越出格子、盖住下一周的日期数字。
+ * 基准值对齐 antd 的 full 日历（该示例 751px 宽 / 107px 格 / 116px 行 / 数字 14px）。
  * 基准宽度下的取值改动时必须同步 Calendar.tsx 的 LAYOUT_BASE。
  */
 @base-scale: var(--animal-calendar-scale, 1);
@@ -24,8 +25,8 @@
     --animal-calendar-accent-tint: #e6f9f6;
     --animal-calendar-header-height: calc(32px * @base-scale);
     --animal-calendar-number-size: calc(@number-size * @base-scale);
-    --animal-calendar-cell-height: calc(86px * @base-scale);
-    --animal-calendar-row-height: calc(19px * @base-scale);
+    --animal-calendar-cell-height: calc(104px * @base-scale);
+    --animal-calendar-row-height: calc(22px * @base-scale);
     --animal-calendar-bar-height: calc(17px * @base-scale);
 
     display: block;

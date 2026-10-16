@@ -20,10 +20,10 @@ interface CalendarProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'defa
     width?: number | string;        // default: fill the parent; numbers are px and also drive the scale
     value?: string;                 // controlled selected date, YYYY-MM-DD
     defaultValue?: string;          // uncontrolled; defaults to today
-    panelValue?: string;            // controlled visible month, YYYY-MM or YYYY-MM-DD
+    panelValue?: string;            // controlled visible month; pair it with onPanelChange or the panel cannot flip
     defaultPanelValue?: string;     // uncontrolled visible month
     onChange?: (date: string) => void;
-    onPanelChange?: (month: string) => void;   // 'YYYY-MM'
+    onPanelChange?: (month: string) => void;   // 'YYYY-MM' — required to write back when panelValue is controlled
     events?: CalendarEvent[];       // default []
     showEventTime?: boolean;        // default true — HH:mm prefix, shown once on an event's first slice
     draggableEvents?: boolean;      // default false — drag across days to create an event
@@ -55,6 +55,7 @@ bar band anchored under each week's date numbers (two rows per week); a multi-da
 wraps), its first slice carries the `HH:mm` prefix, and a third same-day event folds into `+N` on the day cell. Events
 entirely outside the 42-day grid are neither rendered nor counted. `value` is a plain `YYYY-MM-DD` string and the
 date arithmetic runs on dayjs (see [ADR 0005](https://github.com/guokaigdg/animal-island-ui/blob/main/docs/adr/0005-dayjs-as-the-date-layer.md)).
+`width` defaults to filling the parent; the baseline rhythm is tuned to a 750px panel (antd's full calendar card).
 There is no size prop: the panel measures its own box and derives the rhythm from it
 (`--animal-calendar-scale` = width / 640, clamped to 0.6…2), so a wider panel gets taller rows and larger type.
 Cells are `role="gridcell"` with the roving tabindex: arrows move the cursor (crossing a month boundary flips the panel),

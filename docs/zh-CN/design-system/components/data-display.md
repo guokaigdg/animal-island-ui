@@ -730,18 +730,18 @@ interface CountUpProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'prefi
 
 源码：`src/components/Calendar/calendar.module.less`。**独立**的月历（不是弹出面板）：月份面板常驻，所以外壳是一张奶油卡片而不是定位浮层。视觉沿用 DatePicker —— `#fffdf7` 卡片、`#e8dcc8` 1.5px 描边、20px 圆角、圆形日期格 —— 并在每一周的日期下方增加事项带。
 
-**外壳与头部。** 面板没有尺寸档位：它测量自身盒子（`ResizeObserver`，或直接取数值型 `width`），再由宽度推导所有度量。`--animal-calendar-scale` = 实际宽度 / 640，夹在 `0.6 … 2`，整套节奏都是 `基准值 × 系数`：
+**外壳与头部。** 面板没有尺寸档位：它测量自身盒子（`ResizeObserver`，或直接取数值型 `width`），再由宽度推导所有度量。`--animal-calendar-scale` = 实际宽度 / **750**（基准对齐 antd 的 full 日历卡片：实测 751px 宽 / 107px 格 / 116px 行 / 日期数字 14px），夹在 `0.6 … 2`，整套节奏都是 `基准值 × 系数`：
 
-| 度量 | 640px 基准 | 900px（系数 1.41） |
+| 度量 | 750px 基准 | 1000px（系数 1.33） |
 | ---- | ---------- | ------------------- |
-| 表头高度 | 32px | 45px |
-| 单元格高度 | 86px | 121px |
-| 日期圆 | 28px | 39px |
-| 事项行 / 事项条高度 | 19 / 17px | 27 / 24px |
-| 事项字号 | 11px | 16px |
+| 表头高度 | 32px | 43px |
+| 单元格高度 | 104px | 139px |
+| 日期圆 | 28px | 37px |
+| 事项行 / 事项条高度 | 22 / 17px | 29 / 23px |
+| 事项字号 | 11px | 15px |
 
 日期数字字号恒为 **13px** —— 随面板放大的是圆，不是圆里的数字（数字跟着放大会溢出圆外）。单元格还必须容得下
-「日期数字带 + 2 条事项行」（`32 + 19 × 2 = 70 ≤ 86`），这正是忙的那一周不会压到下一周的原因。
+「日期数字带 + 2 条事项行」（`38 + 22 × 2 = 82 ≤ 104`），这正是忙的那一周不会压到下一周的原因。
 
 
 
@@ -752,8 +752,8 @@ interface CountUpProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'prefi
     --animal-calendar-accent-tint: #e6f9f6;
     --animal-calendar-header-height: calc(32px * var(--animal-calendar-scale, 1));
     --animal-calendar-number-size: calc(28px * var(--animal-calendar-scale, 1));
-    --animal-calendar-cell-height: calc(86px * var(--animal-calendar-scale, 1));
-    --animal-calendar-row-height: calc(19px * var(--animal-calendar-scale, 1));
+    --animal-calendar-cell-height: calc(104px * var(--animal-calendar-scale, 1));
+    --animal-calendar-row-height: calc(22px * var(--animal-calendar-scale, 1));
     --animal-calendar-bar-height: calc(17px * var(--animal-calendar-scale, 1));
 }
 

@@ -50,20 +50,20 @@ describe('Calendar', () => {
         it('面板按自身宽度推导缩放系数，事项条随之定位', () => {
             // 7/26 是视图第一格：top = 表头 + 0 × 单元格 + 日期数字带
             const { container } = render(
-                <Calendar panelValue="2026-08" width={640} events={[{ title: '晨会', start: '2026-07-26' }]} />
+                <Calendar panelValue="2026-08" width={750} events={[{ title: '晨会', start: '2026-07-26' }]} />
             );
             const root = container.firstElementChild as HTMLElement;
-            // 640 正好是基准宽度，系数为 1；top = 表头 32 + 周序 0 + 数字带 32 + 半行 9.5
+            // 750 正好是基准宽度，系数为 1；top = 表头 32 + 周序 0 + 数字带 38 + 半行 11
             expect(root.style.getPropertyValue('--animal-calendar-scale')).toBe('1');
             expect(
                 (container.querySelector('[data-color]') as HTMLElement).style.getPropertyValue(
                     '--animal-calendar-bar-top'
                 )
-            ).toBe('73.5px');
+            ).toBe('81px');
         });
 
         it('系数随宽度线性放大，并被上下限夹住', () => {
-            const { container, rerender } = render(<Calendar panelValue="2026-08" width={960} />);
+            const { container, rerender } = render(<Calendar panelValue="2026-08" width={1125} />);
             const root = container.firstElementChild as HTMLElement;
             expect(root.style.getPropertyValue('--animal-calendar-scale')).toBe('1.5');
 
@@ -75,12 +75,12 @@ describe('Calendar', () => {
         });
 
         it('同一周的第 2 条事项仍落在单元格内，不压到下一周', () => {
-            // 回归：日期数字带 + 2 条事项行必须塞得进单元格（32 + 19 × 2 = 70 ≤ 86），
+            // 回归：日期数字带 + 2 条事项行必须塞得进单元格（38 + 22 × 2 = 82 ≤ 104），
             // 否则第 2 行事项条会盖住下一周的日期数字
             render(
                 <Calendar
                     panelValue="2026-08"
-                    width={640}
+                    width={750}
                     events={[
                         { title: 'A', start: '2026-08-03' },
                         { title: 'B', start: '2026-08-03' },
@@ -90,11 +90,11 @@ describe('Calendar', () => {
             const tops = [...document.querySelectorAll('[data-color]')].map((bar) =>
                 Number.parseFloat((bar as HTMLElement).style.getPropertyValue('--animal-calendar-bar-top'))
             );
-            // 8/3 落在视图第 2 周：top = 表头 32 + 1 × 86 + 数字带 32 + (行序 + 0.5) × 19
-            expect(tops).toEqual([159.5, 178.5]);
-            // 最后一条的条底（top + 半行 + 半个条高）仍在单元格高 86 之内
-            const lastRowBottom = 32 + 1 * 86 + 32 + 1.5 * 19 + 17 / 2;
-            expect(lastRowBottom).toBeLessThan(32 + 2 * 86);
+            // 8/3 落在视图第 2 周：top = 表头 32 + 1 × 104 + 数字带 38 + (行序 + 0.5) × 22
+            expect(tops).toEqual([185, 207]);
+            // 最后一条的条底（top + 半行 + 半个条高）仍在单元格高 104 之内
+            const lastRowBottom = 32 + 1 * 104 + 38 + 1.5 * 22 + 17 / 2;
+            expect(lastRowBottom).toBeLessThan(32 + 2 * 104);
         });
 
         it('width 设面板宽度，且不覆盖调用方传入的 style.width', () => {
@@ -282,6 +282,24 @@ describe('Calendar', () => {
             expect(onChange).toHaveBeenCalledWith(today.format('YYYY-MM-DD'));
             expect(screen.getByText(`${today.year()}年${today.month() + 1}月`)).toBeInTheDocument();
             expect(cell(today.format('YYYY-MM-DD'))).toHaveAttribute('aria-selected', 'true');
+        });
+
+        it('非受控面板自己翻月（上/下月与上/下年）', async () => {
+            // 回归：goToMonth 曾在受控分支才写内部状态，导致不传 panelValue 时箭头点不动
+            const user = setup();
+            render(<Calendar defaultPanelValue="2026-08" defaultValue="2026-08-10" />);
+
+            await user.click(screen.getByLabelText('下个月'));
+            expect(screen.getByText('2026年9月')).toBeInTheDocument();
+
+            await user.click(screen.getByLabelText('下一年'));
+            expect(screen.getByText('2027年9月')).toBeInTheDocument();
+
+            await user.click(screen.getByLabelText('上个月'));
+            expect(screen.getByText('2027年8月')).toBeInTheDocument();
+
+            await user.click(screen.getByLabelText('上一年'));
+            expect(screen.getByText('2026年8月')).toBeInTheDocument();
         });
 
         it('受控面板下「今天」只更新 value，面板月份由父级决定', async () => {
