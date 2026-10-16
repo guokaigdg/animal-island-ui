@@ -258,6 +258,11 @@ export const Calendar: React.FC<CalendarProps> = ({
     const gridStart = gridStartOf(viewMonth);
     const selectedKey = selectedValue ?? '';
     const wrapperRef = useRef<HTMLDivElement>(null);
+    /**
+     * 方向键 / PageUp / PageDown 之后需要把 DOM 焦点搬到新的光标格子。
+     * 用 ref 标记「这次是键盘移动」，避免首次渲染或程序化赋值时抢焦点。
+     */
+    const pendingFocusRef = useRef(false);
     /** 面板实际宽度：优先用显式 width，否则量自身盒子，量不到时退回基准宽度 */
     const [measuredWidth, setMeasuredWidth] = useState(0);
 
@@ -288,9 +293,16 @@ export const Calendar: React.FC<CalendarProps> = ({
         if (next) setFocusDate(next);
     }, [selectedValue]);
 
-    // 受控且与当前视图不在同一个月时，跟随 value 切换面板月份
+    /*
+     * 非受控时，只有「选中值本身发生变化」才把视图跟过去（受控面板由 panelValue 决定，这里不动）。
+     * 必须用上一次的选中值做对比：箭头翻月会让 monthKey 改变而 selectedValue 不变，
+     * 若无条件按 selectedValue 同步，就会把刚翻过去的月份又拽回来。
+     */
+    const lastSelectedRef = useRef(selectedValue);
     useEffect(() => {
-        if (!isPanelControlled) return;
+        if (lastSelectedRef.current === selectedValue) return;
+        lastSelectedRef.current = selectedValue;
+        if (isPanelControlled) return;
         const next = parseDate(selectedValue);
         if (next && next.format('YYYY-MM') !== monthKey) setInnerPanel(next);
     }, [isPanelControlled, selectedValue, monthKey]);
@@ -306,6 +318,14 @@ export const Calendar: React.FC<CalendarProps> = ({
     );
 
     // 上下月：同时把键盘光标带到目标月的同一天
+    // 光标变化后（且确实来自键盘移动）把焦点交到对应格子，保持 roving tabindex 与真实焦点一致
+    useEffect(() => {
+        if (!pendingFocusRef.current) return;
+        pendingFocusRef.current = false;
+        const node = wrapperRef.current?.querySelector<HTMLElement>(`[data-date="${focusKey}"]`);
+        node?.focus();
+    }, [focusKey, monthKey]);
+
     const shiftMonth = useCallback(
         (delta: number) => {
             const next = viewMonth.add(delta, 'month').date(1);
@@ -328,15 +348,14 @@ export const Calendar: React.FC<CalendarProps> = ({
             setFocusDate(date);
             if (!isControlled) setInnerValue(next);
             onChange?.(next);
-            // 选中的日期不在当前视图时，面板跟随翻月（跨月拖拽 / 程序化赋值也适用）
-            const current = isPanelControlled ? parseMonthValue(panelValue) : innerPanel;
-            if (current && date.format('YYYY-MM') !== current.format('YYYY-MM')) {
+            // 选中的日期不在当前视图时，面板跟随翻月（点选上下月补位格 / 跨月拖拽都适用）
+            if (date.format('YYYY-MM') !== monthKey) {
                 const month = date.date(1);
                 if (!isPanelControlled) setInnerPanel(month);
                 onPanelChange?.(month.format('YYYY-MM'));
             }
         },
-        [isControlled, onChange, isPanelControlled, panelValue, innerPanel, onPanelChange]
+        [isControlled, onChange, isPanelControlled, monthKey, onPanelChange]
     );
 
     const dragPreview = useMemo(() => {
@@ -402,6 +421,7 @@ export const Calendar: React.FC<CalendarProps> = ({
         const { key } = event;
         if (key === 'PageUp' || key === 'PageDown') {
             event.preventDefault();
+            pendingFocusRef.current = true;
             shiftMonth(key === 'PageUp' ? -1 : 1);
             return;
         }
@@ -418,9 +438,10 @@ export const Calendar: React.FC<CalendarProps> = ({
         if (delta !== 0) {
             event.preventDefault();
             const next = focusDate.add(delta, 'day');
+            pendingFocusRef.current = true;
             setFocusDate(next);
-            // 光标移出当前月份视图时，面板跟随翻月
-            if (cellIndexOf(next, gridStart) !== cellIndexOf(focusDate, gridStart)) {
+            // 光标移到别的月份时，面板跟随翻月（同月内的移动不动面板）
+            if (!next.isSame(viewMonth, 'month')) {
                 const month = next.date(1);
                 if (!isPanelControlled) setInnerPanel(month);
                 onPanelChange?.(month.format('YYYY-MM'));
@@ -504,12 +525,6 @@ export const Calendar: React.FC<CalendarProps> = ({
                 ]
                     .filter(Boolean)
                     .join(' ')}
-                onKeyDown={(event) => {
-                    if (event.key === 'Enter' || event.key === ' ') {
-                        event.preventDefault();
-                        selectDate(cell);
-                    }
-                }}
                 onClick={() => selectDate(cell)}
                 onMouseDown={() => startDragAt(index)}
                 onMouseEnter={() => extendDragAt(index)}

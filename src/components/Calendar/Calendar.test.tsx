@@ -1,11 +1,28 @@
 import { describe, it, expect, vi } from 'vitest';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import dayjs from 'dayjs';
 import { Calendar } from './Calendar';
 import { setup } from '@test/utils';
 import { ControlledHost } from '@test/components';
+import styles from './calendar.module.less';
 
 const cell = (date: string) => document.querySelector(`[data-date="${date}"]`) as HTMLElement;
+
+/** 用 userEvent 走一遍真实指针拖拽：按下 → 经过中间格子 → 在终点抬起 */
+const drag = async (user: ReturnType<typeof setup>, from: string, to: string) => {
+    const dates = [...document.querySelectorAll('[data-date]')].map((node) => (node as HTMLElement).dataset.date!);
+    const fromIndex = dates.indexOf(from);
+    const toIndex = dates.indexOf(to);
+    const step = fromIndex <= toIndex ? 1 : -1;
+    const path: string[] = [];
+    for (let i = fromIndex; i !== toIndex + step; i += step) path.push(dates[i]);
+
+    await user.pointer([
+        { target: cell(path[0]), keys: '[MouseLeft>]' },
+        ...path.slice(1).map((date) => ({ target: cell(date) })),
+        { target: cell(path[path.length - 1]), keys: '[/MouseLeft]' },
+    ]);
+};
 
 describe('Calendar', () => {
     describe('rendering', () => {
@@ -222,7 +239,7 @@ describe('Calendar', () => {
                 />
             );
             const bars = Array.from(document.querySelectorAll('[data-span="true"]')).filter((node) =>
-                node.className.includes('_event_')
+                node.classList.contains(styles.event)
             ) as HTMLElement[];
             expect(bars).toHaveLength(3);
             // 三个片段里只有首段带时间，续接段只保留标题
@@ -357,98 +374,139 @@ describe('Calendar', () => {
             expect(cell('2026-08-10')).toHaveAttribute('tabindex', '0');
         });
 
-        it('方向键移动光标并同步选中可聚焦态', () => {
+        it('方向键移动光标并同步选中可聚焦态', async () => {
+            const user = setup();
             render(<Calendar panelValue="2026-08" defaultValue="2026-08-10" />);
-            const grid = screen.getByRole('grid');
-            fireEvent.keyDown(grid, { key: 'ArrowRight' });
+            cell('2026-08-10').focus();
+
+            await user.keyboard('{ArrowRight}');
             expect(cell('2026-08-11')).toHaveAttribute('tabindex', '0');
-            fireEvent.keyDown(grid, { key: 'ArrowDown' });
+            await user.keyboard('{ArrowDown}');
             expect(cell('2026-08-18')).toHaveAttribute('tabindex', '0');
-            fireEvent.keyDown(grid, { key: 'ArrowUp' });
+            await user.keyboard('{ArrowUp}');
             expect(cell('2026-08-11')).toHaveAttribute('tabindex', '0');
-            fireEvent.keyDown(grid, { key: 'ArrowLeft' });
+            await user.keyboard('{ArrowLeft}');
             expect(cell('2026-08-10')).toHaveAttribute('tabindex', '0');
         });
 
-        it('Enter / 空格选中当前光标日期', () => {
+        it('方向键移动后 DOM 焦点跟着走，Enter 选中新光标所在日期', async () => {
+            // 回归：此前只改 tabIndex 不搬焦点，第二次 Enter 会落在旧格子上
+            const user = setup();
             const onChange = vi.fn();
             render(<Calendar panelValue="2026-08" defaultValue="2026-08-10" onChange={onChange} />);
-            const grid = screen.getByRole('grid');
-            fireEvent.keyDown(grid, { key: 'ArrowRight' });
-            fireEvent.keyDown(grid, { key: 'Enter' });
+            cell('2026-08-10').focus();
+
+            await user.keyboard('{ArrowRight}');
+            expect(document.activeElement).toBe(cell('2026-08-11'));
+
+            await user.keyboard('{Enter}');
             expect(onChange).toHaveBeenLastCalledWith('2026-08-11');
-            fireEvent.keyDown(grid, { key: 'ArrowRight' });
-            fireEvent.keyDown(grid, { key: ' ' });
+
+            await user.keyboard('{ArrowDown}');
+            expect(document.activeElement).toBe(cell('2026-08-18'));
+            await user.keyboard('{Enter}');
+            expect(onChange).toHaveBeenLastCalledWith('2026-08-18');
+        });
+
+        it('Enter / 空格选中当前光标日期，且每次按键只回调一次', async () => {
+            // 回归：格子与容器的 keydown 曾各触发一次选中
+            const user = setup();
+            const onChange = vi.fn();
+            render(<Calendar panelValue="2026-08" defaultValue="2026-08-10" onChange={onChange} />);
+            cell('2026-08-10').focus();
+
+            await user.keyboard('{ArrowRight}');
+            await user.keyboard('{Enter}');
+            expect(onChange).toHaveBeenCalledTimes(1);
+            expect(onChange).toHaveBeenLastCalledWith('2026-08-11');
+
+            await user.keyboard('{ArrowRight}');
+            await user.keyboard(' ');
+            expect(onChange).toHaveBeenCalledTimes(2);
             expect(onChange).toHaveBeenLastCalledWith('2026-08-12');
         });
 
-        it('方向键越出当前视图时面板跟随翻月', () => {
+        it('月内移动光标不翻月', async () => {
+            // 回归：此前比较格子下标，几乎每次方向键都会触发 onPanelChange
+            const user = setup();
+            const onPanelChange = vi.fn();
+            render(<Calendar panelValue="2026-08" defaultValue="2026-08-10" onPanelChange={onPanelChange} />);
+            cell('2026-08-10').focus();
+
+            await user.keyboard('{ArrowRight}');
+            await user.keyboard('{ArrowDown}');
+            await user.keyboard('{ArrowLeft}');
+            expect(onPanelChange).not.toHaveBeenCalled();
+        });
+
+        it('光标跨到别月时面板跟随翻月', async () => {
+            const user = setup();
             const onPanelChange = vi.fn();
             render(<Calendar panelValue="2026-08" defaultValue="2026-08-31" onPanelChange={onPanelChange} />);
-            fireEvent.keyDown(screen.getByRole('grid'), { key: 'ArrowRight' });
+            cell('2026-08-31').focus();
+
+            await user.keyboard('{ArrowRight}');
             expect(onPanelChange).toHaveBeenCalledWith('2026-09');
         });
 
-        it('PageUp / PageDown 翻月', () => {
+        it('PageUp / PageDown 翻月', async () => {
+            const user = setup();
             const onPanelChange = vi.fn();
             render(
                 <ControlledHost<string, string> initial="2026-08" onChange={onPanelChange}>
                     {({ value, onChange: setValue }) => <Calendar panelValue={value} onPanelChange={setValue} />}
                 </ControlledHost>
             );
-            const grid = screen.getByRole('grid');
-            fireEvent.keyDown(grid, { key: 'PageDown' });
+            cell('2026-08-10').focus();
+
+            await user.keyboard('{PageDown}');
             expect(screen.getByText('2026年9月')).toBeInTheDocument();
-            fireEvent.keyDown(grid, { key: 'PageUp' });
+            await user.keyboard('{PageUp}');
             expect(screen.getByText('2026年8月')).toBeInTheDocument();
             expect(onPanelChange).toHaveBeenLastCalledWith('2026-08');
         });
     });
 
     describe('drag to create', () => {
-        it('默认关闭拖拽：按下并跨格不会创建事项', () => {
+        it('默认关闭拖拽：按下并跨格不会创建事项', async () => {
+            const user = setup();
             const onEventCreate = vi.fn();
             render(<Calendar panelValue="2026-08" onEventCreate={onEventCreate} />);
-            fireEvent.mouseDown(cell('2026-08-10'));
-            fireEvent.mouseEnter(cell('2026-08-12'));
-            fireEvent.pointerUp(cell('2026-08-14'));
+            await drag(user, '2026-08-10', '2026-08-13');
             expect(onEventCreate).not.toHaveBeenCalled();
         });
 
-        it('开启 draggableEvents 后跨格拖拽回调起止日期', () => {
+        it('开启 draggableEvents 后跨格拖拽回调起止日期', async () => {
+            const user = setup();
             const onEventCreate = vi.fn();
             render(<Calendar panelValue="2026-08" draggableEvents onEventCreate={onEventCreate} />);
-            fireEvent.mouseDown(cell('2026-08-10'));
-            fireEvent.mouseEnter(cell('2026-08-12'));
-            fireEvent.pointerUp(cell('2026-08-12'));
+            await drag(user, '2026-08-10', '2026-08-12');
             expect(onEventCreate).toHaveBeenCalledWith('2026-08-10', '2026-08-12');
         });
 
-        it('反向拖拽按时间先后输出起止日期', () => {
+        it('反向拖拽按时间先后输出起止日期', async () => {
+            const user = setup();
             const onEventCreate = vi.fn();
             render(<Calendar panelValue="2026-08" draggableEvents onEventCreate={onEventCreate} />);
-            fireEvent.mouseDown(cell('2026-08-14'));
-            fireEvent.mouseEnter(cell('2026-08-11'));
-            fireEvent.pointerUp(cell('2026-08-11'));
+            await drag(user, '2026-08-14', '2026-08-11');
             expect(onEventCreate).toHaveBeenCalledWith('2026-08-11', '2026-08-14');
         });
 
-        it('拖拽预览渲染为虚线事项条', () => {
+        it('拖拽预览渲染为虚线事项条', async () => {
+            const user = setup();
             render(<Calendar panelValue="2026-08" draggableEvents />);
-            fireEvent.mouseDown(cell('2026-08-10'));
-            fireEvent.mouseEnter(cell('2026-08-12'));
-            const preview = document.querySelector('[data-preview="true"]');
-            expect(preview).toBeInTheDocument();
+            await user.pointer([{ target: cell('2026-08-10'), keys: '[MouseLeft>]' }, { target: cell('2026-08-12') }]);
+            expect(document.querySelector('[data-preview="true"]')).toBeInTheDocument();
         });
 
-        it('单击不创建事项，只切换选中', () => {
+        it('单击不创建事项，只切换选中', async () => {
+            const user = setup();
             const onEventCreate = vi.fn();
             const onChange = vi.fn();
             render(<Calendar panelValue="2026-08" draggableEvents onEventCreate={onEventCreate} onChange={onChange} />);
-            fireEvent.mouseDown(cell('2026-08-10'));
-            fireEvent.pointerUp(cell('2026-08-14'));
+            await user.click(cell('2026-08-10'));
             expect(onEventCreate).not.toHaveBeenCalled();
-            expect(onChange).not.toHaveBeenCalled();
+            expect(onChange).toHaveBeenCalledWith('2026-08-10');
         });
 
         it('视图外的事项不参与渲染，也不计入 +N 与格子提示', () => {
