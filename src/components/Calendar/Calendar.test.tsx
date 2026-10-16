@@ -47,6 +47,32 @@ describe('Calendar', () => {
             expect(cell('2026-08-10')).not.toHaveAttribute('aria-selected');
         });
 
+        it('size 落到尺寸类上，并驱动事项条的定位度量', () => {
+            // 7/26 是视图第一格：表头 + 0 × 单元格 + 日期数字带，正好读出表头与数字带之和
+            const { container, rerender } = render(
+                <Calendar panelValue="2026-08" size="small" events={[{ title: '晨会', start: '2026-07-26' }]} />
+            );
+            const root = container.firstElementChild as HTMLElement;
+            const top = () =>
+                (container.querySelector('[data-color]') as HTMLElement).style.getPropertyValue(
+                    '--animal-calendar-bar-top'
+                );
+            expect(root.className).toContain('calendar-small');
+            expect(top()).toBe('60px');
+
+            rerender(<Calendar panelValue="2026-08" size="large" events={[{ title: '晨会', start: '2026-07-26' }]} />);
+            expect(root.className).toContain('calendar-large');
+            expect(top()).toBe('64px');
+        });
+
+        it('width 设面板宽度，且不覆盖调用方传入的 style.width', () => {
+            const { container, rerender } = render(<Calendar panelValue="2026-08" width={360} />);
+            expect(container.firstElementChild).toHaveStyle({ width: '360px' });
+
+            rerender(<Calendar panelValue="2026-08" width={360} style={{ width: 600 }} />);
+            expect(container.firstElementChild).toHaveStyle({ width: '600px' });
+        });
+
         it('showHeader=false 隐藏头部，showYearSwitch=false 隐藏年切换', () => {
             const { container, rerender } = render(<Calendar panelValue="2026-08" showHeader={false} />);
             expect(container.querySelector('[aria-label="上个月"]')).toBeNull();

@@ -24,6 +24,8 @@ interface CalendarCellInfo {
 }
 
 interface CalendarProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'defaultValue' | 'onChange'> {
+    size?: 'small' | 'middle' | 'large';   // default 'middle' — cell height, type size, event density
+    width?: number | string;        // default: fill the parent; numbers are px
     value?: string;                 // controlled selected date, YYYY-MM-DD
     defaultValue?: string;          // uncontrolled; defaults to today
     panelValue?: string;            // controlled visible month, YYYY-MM or YYYY-MM-DD
@@ -48,6 +50,8 @@ interface CalendarProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'defa
 
 ```tsx
 <Calendar
+    size="large"
+    width={560}
     value={date}
     onChange={setDate}
     events={[

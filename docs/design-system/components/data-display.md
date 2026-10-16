@@ -734,7 +734,16 @@ Source: `src/components/Calendar/calendar.module.less`. A **standalone** month c
 permanent, so the shell is a cream card rather than a positioned popover. It reuses DatePicker's visual language —
 `#fffdf7` card, `#e8dcc8` 1.5px border, 20px radius, day circles — and adds an event band under each week's dates.
 
-**Shell, sizes and header:**
+**Shell, sizes and header.** `size` picks the row of metrics; `width` sets the panel width (default: fill the parent).
+
+| Property | small | middle | large |
+| -------- | ----- | ------ | ----- |
+| cell height | 74px | 86px | 100px |
+| day circle (and root `font-size`) | 25px | 28px | 32px |
+| day number / event / `+N` font | 12 / 10 / 9px | 13 / 11 / 10px | 15 / 12 / 10px |
+| event row / bar height | 20 / 16px | 23 / 17px | 26 / 19px |
+
+
 
 ```css
 .calendar {                       /* fixed accent trio (DatePicker's teal) + the metrics every size overrides */

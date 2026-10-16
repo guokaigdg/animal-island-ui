@@ -3,6 +3,13 @@ import { Calendar, type CalendarEvent } from '../../../src';
 import { ApiTable, ApiRow, CodeBlock, DemoTag, labelStyle, sectionStyle, sectionTitleStyle } from '../../tools';
 
 const CALENDAR_API: ApiRow[] = [
+    {
+        prop: 'size',
+        desc: '尺寸：控制单元格高度、字号与事项密度',
+        type: `'small' | 'middle' | 'large'`,
+        defaultVal: "'middle'",
+    },
+    { prop: 'width', desc: '面板宽度，默认铺满父容器（数值按 px 处理）', type: 'number | string', defaultVal: '-' },
     { prop: 'value', desc: '当前选中日期（受控），YYYY-MM-DD', type: 'string', defaultVal: '-' },
     { prop: 'defaultValue', desc: '默认选中日期（非受控），YYYY-MM-DD', type: 'string', defaultVal: '今天' },
     { prop: 'panelValue', desc: '面板展示月份（受控），YYYY-MM 或 YYYY-MM-DD', type: 'string', defaultVal: '-' },
@@ -56,6 +63,12 @@ const EVENT_API: ApiRow[] = [
 ];
 
 const S = {
+    row: {
+        display: 'flex',
+        gap: 20,
+        flexWrap: 'wrap',
+        alignItems: 'flex-start',
+    } as React.CSSProperties,
     demoBox: {
         padding: 16,
         borderRadius: 18,
@@ -93,6 +106,22 @@ const CalendarDemo: React.FC = () => {
             <div style={sectionTitleStyle}>
                 Calendar <DemoTag>基础用法</DemoTag>
             </div>
+            <div style={labelStyle}>三种尺寸（small / middle / large）</div>
+            <div style={S.row}>
+                <Calendar size="small" panelValue="2026-08" defaultValue="2026-08-10" width={360} />
+                <Calendar size="middle" panelValue="2026-08" defaultValue="2026-08-10" width={440} />
+                <Calendar size="large" panelValue="2026-08" defaultValue="2026-08-10" width={520} />
+            </div>
+
+            <div style={labelStyle}>中等尺寸 + 事项（默认）</div>
+            <div style={S.demoBox}>
+                <Calendar
+                    panelValue="2026-08"
+                    defaultValue="2026-08-10"
+                    events={[{ title: '版本发布', start: '2026-08-20' }]}
+                />
+            </div>
+
             <div style={labelStyle}>受控模式：点击日期选中</div>
             <div style={S.statusLine}>
                 当前选中: <span style={{ color: '#19c8b9', fontWeight: 600 }}>{date}</span>

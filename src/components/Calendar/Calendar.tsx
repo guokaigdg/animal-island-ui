@@ -64,6 +64,8 @@ export interface CalendarProps extends Omit<React.HTMLAttributes<HTMLDivElement>
     onEventCreate?: (start: string, end: string) => void;
     /** 尺寸：控制单元格高度、字号与事项密度，默认 middle */
     size?: CalendarSize;
+    /** 面板宽度；默认铺满父容器，传数值按 px 处理 */
+    width?: number | string;
     /** 面板是否展示「今天」按钮，默认 true */
     showToday?: boolean;
     /** 面板是否展示上/下年切换按钮，默认 true */
@@ -253,6 +255,7 @@ export const Calendar: React.FC<CalendarProps> = ({
     draggableEvents = false,
     onEventCreate,
     size = 'middle',
+    width,
     showToday = true,
     showYearSwitch = true,
     showHeader = true,
@@ -545,7 +548,12 @@ export const Calendar: React.FC<CalendarProps> = ({
     const calendarClass = [styles.calendar, styles[`calendar-${size}`], className].filter(Boolean).join(' ');
 
     return (
-        <div className={calendarClass} data-draggable={draggableEvents ? 'true' : undefined} style={style} {...rest}>
+        <div
+            className={calendarClass}
+            data-draggable={draggableEvents ? 'true' : undefined}
+            style={{ width, ...style }}
+            {...rest}
+        >
             {showHeader && (
                 <div className={styles.header}>
                     <div className={styles.headerGroup}>
@@ -644,7 +652,8 @@ export const Calendar: React.FC<CalendarProps> = ({
                                     data-preview={segment.event.data === PREVIEW_FLAG ? 'true' : undefined}
                                     className={styles.event}
                                     style={{
-                                        // 事项条绝对定位到所属周的日期数字下方，横向与日期圆共用一条内容轨道
+                                        // 事项条绝对定位到所属周的日期数字下方，横向与日期圆共用一条内容轨道。
+                                        // segment.index / COLS 得到的整数部分是周序，小数部分是日期圆在格内的高度占比
                                         ['--animal-calendar-bar-top' as string]: `${
                                             metrics.header +
                                             (segment.index / COLS) * metrics.cellHeight +

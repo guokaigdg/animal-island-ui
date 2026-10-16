@@ -730,7 +730,16 @@ interface CountUpProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'prefi
 
 源码：`src/components/Calendar/calendar.module.less`。**独立**的月历（不是弹出面板）：月份面板常驻，所以外壳是一张奶油卡片而不是定位浮层。视觉沿用 DatePicker —— `#fffdf7` 卡片、`#e8dcc8` 1.5px 描边、20px 圆角、圆形日期格 —— 并在每一周的日期下方增加事项带。
 
-**外壳、尺寸与头部：**
+**外壳、尺寸与头部。** `size` 选择下面这一行度量，`width` 设置面板宽度（默认铺满父容器）。
+
+| 属性 | small | middle | large |
+| ---- | ----- | ------ | ----- |
+| 单元格高度 | 74px | 86px | 100px |
+| 日期圆（即根 `font-size`） | 25px | 28px | 32px |
+| 日期数字 / 事项 / `+N` 字号 | 12 / 10 / 9px | 13 / 11 / 10px | 15 / 12 / 10px |
+| 事项行 / 事项条高度 | 20 / 16px | 23 / 17px | 26 / 19px |
+
+
 
 ```css
 .calendar {                       /* 固定强调色三件套（DatePicker 的青绿）+ 各尺寸都会覆盖的度量值 */
