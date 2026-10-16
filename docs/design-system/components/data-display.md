@@ -738,13 +738,17 @@ permanent, so the shell is a cream card rather than a positioned popover. It reu
 prop when given) and derives every metric from it. `--animal-calendar-scale` = actual width / 640, clamped to
 `0.6 … 2`, and the whole rhythm is `baseline × scale`:
 
-| Metric | Baseline at 640px | At 900px (scale 1.406) |
-| ------ | ----------------- | ---------------------- |
+| Metric | Baseline at 640px | At 900px (scale 1.41) |
+| ------ | ----------------- | --------------------- |
 | header height | 32px | 45px |
 | cell height | 86px | 121px |
-| day circle (and day-number font) | 28px (13px) | 39px (18px) |
-| event row / bar height | 23 / 17px | 32 / 24px |
-| event font | 11px | 15px |
+| day circle | 28px | 39px |
+| event row / bar height | 19 / 17px | 27 / 24px |
+| event font | 11px | 16px |
+
+The day-number font stays at **13px** at every width — the circle grows with the panel, the digit inside it does not,
+because a scaled-up digit overflows the circle. The cell must also fit the number band plus both event rows
+(`32 + 19 × 2 = 70 ≤ 86`), which is what keeps a busy week from bleeding into the next one.
 
 
 
@@ -756,9 +760,8 @@ prop when given) and derives every metric from it. `--animal-calendar-scale` = a
     --animal-calendar-header-height: calc(32px * var(--animal-calendar-scale, 1));
     --animal-calendar-number-size: calc(28px * var(--animal-calendar-scale, 1));
     --animal-calendar-cell-height: calc(86px * var(--animal-calendar-scale, 1));
-    --animal-calendar-row-height: calc(23px * var(--animal-calendar-scale, 1));
+    --animal-calendar-row-height: calc(19px * var(--animal-calendar-scale, 1));
     --animal-calendar-bar-height: calc(17px * var(--animal-calendar-scale, 1));
-    font-size: calc(13px * var(--animal-calendar-scale, 1));   /* the day number */
 }
 
 .body   { position: relative; padding-bottom: calc(var(--animal-calendar-row-height) * 2 + 6px);
@@ -784,7 +787,7 @@ side gutter the event bars use, so a bar and the day circle above it sit on one 
 .cell:focus-visible   { outline: 2px solid var(--animal-calendar-accent); outline-offset: -2px; }
 .cellSelected         { background: var(--animal-calendar-accent-tint); }
 .dayNumber            { width: 1em; height: 1em; border-radius: 50%; line-height: 1em; text-align: center;
-                        color: #725d42; font-size: 13px; font-weight: 500; }
+                        color: #725d42; font-size: 13px; font-weight: 500; }   /* fixed: the circle scales, the digit does not */
 .cellOutside .dayNumber { color: #c4b89e; font-weight: 400; }
 .cellToday   .dayNumber { box-shadow: inset 0 0 0 1.5px var(--animal-calendar-accent);
                           color: var(--animal-calendar-accent); font-weight: 700; }
@@ -800,7 +803,7 @@ layout and a grid placement would be ignored.
 ```css
 .eventsLayer { position: absolute; inset: 0; pointer-events: none; }
 .event { position: absolute;
-         top: calc(var(--animal-calendar-bar-top) + var(--animal-calendar-row-height) / 2);
+         top: var(--animal-calendar-bar-top);   /* header + week × cell + number band + row × row-height + half a row */
          left: var(--animal-calendar-bar-left);    /* (100% / 7) × column + 4px — the same 4px gutter as .cell */
          width: var(--animal-calendar-bar-width);  /* (100% / 7) × span − 8px */
          height: var(--animal-calendar-bar-height); margin: 0; padding: 0 6px;

@@ -732,13 +732,16 @@ interface CountUpProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'prefi
 
 **外壳与头部。** 面板没有尺寸档位：它测量自身盒子（`ResizeObserver`，或直接取数值型 `width`），再由宽度推导所有度量。`--animal-calendar-scale` = 实际宽度 / 640，夹在 `0.6 … 2`，整套节奏都是 `基准值 × 系数`：
 
-| 度量 | 640px 基准 | 900px（系数 1.406） |
+| 度量 | 640px 基准 | 900px（系数 1.41） |
 | ---- | ---------- | ------------------- |
 | 表头高度 | 32px | 45px |
 | 单元格高度 | 86px | 121px |
-| 日期圆（及日期数字字号） | 28px（13px） | 39px（18px） |
-| 事项行 / 事项条高度 | 23 / 17px | 32 / 24px |
-| 事项字号 | 11px | 15px |
+| 日期圆 | 28px | 39px |
+| 事项行 / 事项条高度 | 19 / 17px | 27 / 24px |
+| 事项字号 | 11px | 16px |
+
+日期数字字号恒为 **13px** —— 随面板放大的是圆，不是圆里的数字（数字跟着放大会溢出圆外）。单元格还必须容得下
+「日期数字带 + 2 条事项行」（`32 + 19 × 2 = 70 ≤ 86`），这正是忙的那一周不会压到下一周的原因。
 
 
 
@@ -750,9 +753,8 @@ interface CountUpProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'prefi
     --animal-calendar-header-height: calc(32px * var(--animal-calendar-scale, 1));
     --animal-calendar-number-size: calc(28px * var(--animal-calendar-scale, 1));
     --animal-calendar-cell-height: calc(86px * var(--animal-calendar-scale, 1));
-    --animal-calendar-row-height: calc(23px * var(--animal-calendar-scale, 1));
+    --animal-calendar-row-height: calc(19px * var(--animal-calendar-scale, 1));
     --animal-calendar-bar-height: calc(17px * var(--animal-calendar-scale, 1));
-    font-size: calc(13px * var(--animal-calendar-scale, 1));   /* 日期数字 */
 }
 
 .body   { position: relative; padding-bottom: calc(var(--animal-calendar-row-height) * 2 + 6px);
@@ -790,7 +792,7 @@ interface CountUpProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'prefi
 ```css
 .eventsLayer { position: absolute; inset: 0; pointer-events: none; }
 .event { position: absolute;
-         top: calc(var(--animal-calendar-bar-top) + var(--animal-calendar-row-height) / 2);
+         top: var(--animal-calendar-bar-top);   /* 表头 + 周序 × 单元格 + 日期数字带 + 事项行序 × 行高 + 半行 */
          left: var(--animal-calendar-bar-left);    /* (100% / 7) × 列序 + 4px —— 与 .cell 同一个 4px 内边距 */
          width: var(--animal-calendar-bar-width);  /* (100% / 7) × 跨列数 − 8px */
          height: var(--animal-calendar-bar-height); margin: 0; padding: 0 6px;

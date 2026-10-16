@@ -53,13 +53,13 @@ describe('Calendar', () => {
                 <Calendar panelValue="2026-08" width={640} events={[{ title: '晨会', start: '2026-07-26' }]} />
             );
             const root = container.firstElementChild as HTMLElement;
-            // 640 正好是基准宽度，系数为 1，表头 32 + 数字带 32
+            // 640 正好是基准宽度，系数为 1；top = 表头 32 + 周序 0 + 数字带 32 + 半行 9.5
             expect(root.style.getPropertyValue('--animal-calendar-scale')).toBe('1');
             expect(
                 (container.querySelector('[data-color]') as HTMLElement).style.getPropertyValue(
                     '--animal-calendar-bar-top'
                 )
-            ).toBe('64px');
+            ).toBe('73.5px');
         });
 
         it('系数随宽度线性放大，并被上下限夹住', () => {
@@ -72,6 +72,29 @@ describe('Calendar', () => {
 
             rerender(<Calendar panelValue="2026-08" width={4000} />);
             expect(root.style.getPropertyValue('--animal-calendar-scale')).toBe('2');
+        });
+
+        it('同一周的第 2 条事项仍落在单元格内，不压到下一周', () => {
+            // 回归：日期数字带 + 2 条事项行必须塞得进单元格（32 + 19 × 2 = 70 ≤ 86），
+            // 否则第 2 行事项条会盖住下一周的日期数字
+            render(
+                <Calendar
+                    panelValue="2026-08"
+                    width={640}
+                    events={[
+                        { title: 'A', start: '2026-08-03' },
+                        { title: 'B', start: '2026-08-03' },
+                    ]}
+                />
+            );
+            const tops = [...document.querySelectorAll('[data-color]')].map((bar) =>
+                Number.parseFloat((bar as HTMLElement).style.getPropertyValue('--animal-calendar-bar-top'))
+            );
+            // 8/3 落在视图第 2 周：top = 表头 32 + 1 × 86 + 数字带 32 + (行序 + 0.5) × 19
+            expect(tops).toEqual([159.5, 178.5]);
+            // 最后一条的条底（top + 半行 + 半个条高）仍在单元格高 86 之内
+            const lastRowBottom = 32 + 1 * 86 + 32 + 1.5 * 19 + 17 / 2;
+            expect(lastRowBottom).toBeLessThan(32 + 2 * 86);
         });
 
         it('width 设面板宽度，且不覆盖调用方传入的 style.width', () => {

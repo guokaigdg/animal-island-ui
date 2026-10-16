@@ -10,6 +10,9 @@
  * 面板尺寸完全由宽度推导：组件测量自身宽度后下发 --animal-calendar-scale
  * （= 实际宽度 / 基准宽度 640），下面所有度量都是「基准值 × 系数」。
  * 因此面板变大时行高、事项条、字号一起跟着放大，不需要 size 档位。
+ *
+ * 硬约束：单元格高度必须容得下「日期数字带 32 + 2 条事项行 19 × 2 = 70 ≤ 86」，
+ * 否则同一周的第 2 条事项条会越出格子、盖住下一周的日期数字。
  * 基准宽度下的取值改动时必须同步 Calendar.tsx 的 LAYOUT_BASE。
  */
 @base-scale: var(--animal-calendar-scale, 1);
@@ -22,13 +25,12 @@
     --animal-calendar-header-height: calc(32px * @base-scale);
     --animal-calendar-number-size: calc(@number-size * @base-scale);
     --animal-calendar-cell-height: calc(86px * @base-scale);
-    --animal-calendar-row-height: calc(23px * @base-scale);
+    --animal-calendar-row-height: calc(19px * @base-scale);
     --animal-calendar-bar-height: calc(17px * @base-scale);
 
     display: block;
     width: 100%;
     font-family: var(--animal-font-family, 'Nunito', 'Noto Sans SC', sans-serif);
-    font-size: calc(13px * @base-scale);
     user-select: none;
     -webkit-user-select: none;
 }
@@ -189,7 +191,8 @@
     height: var(--animal-calendar-number-size);
     border-radius: 50%;
     color: #725d42;
-    font-size: inherit;
+    /* 字号固定 13px：日期圆直径会随面板放大，但数字本身再放大就会溢出圆外 */
+    font-size: 13px;
     font-weight: 500;
     line-height: var(--animal-calendar-number-size);
     text-align: center;
@@ -265,7 +268,7 @@
     border-radius: 10px;
     background: var(--animal-calendar-accent-soft);
     color: #725d42;
-    /* 字号随面板缩放（.calendar 上按宽度设好），固定 11px 会让大面板显得字太小 */
+    /* 字号随面板缩放，固定 11px 会让大面板显得字太小 */
     font-size: calc(11px * @base-scale);
     font-weight: 600;
     /* 行高与条高一致，单行垂直居中；文字溢出交给内部 span 做省略号 */
