@@ -28,7 +28,6 @@ interface CalendarProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'defa
     showEventTime?: boolean;        // default true — HH:mm prefix, shown once on an event's first slice
     draggableEvents?: boolean;      // default false — drag across days to create an event
     onEventCreate?: (start: string, end: string) => void;
-    showHeader?: boolean;           // default true
     'aria-label'?: string; 'aria-labelledby'?: string;
     className?: string;
     style?: React.CSSProperties;

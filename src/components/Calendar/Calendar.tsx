@@ -42,8 +42,6 @@ export interface CalendarProps extends Omit<React.HTMLAttributes<HTMLDivElement>
     onEventCreate?: (start: string, end: string) => void;
     /** 面板宽度，默认铺满父容器（数值按 px 处理）。行高、字号与事项密度都由实际宽度推导 */
     width?: number | string;
-    /** 面板头部是否展示「年份 月份」标签，默认 true */
-    showHeader?: boolean;
     /** 无可见标题时给面板一个无障碍标签 */
     'aria-label'?: string;
     /** 关联外部可见 label 的 id */
@@ -232,7 +230,6 @@ export const Calendar: React.FC<CalendarProps> = ({
     draggableEvents = false,
     onEventCreate,
     width,
-    showHeader = true,
     'aria-label': ariaLabel,
     'aria-labelledby': ariaLabelledBy,
     className,
@@ -539,53 +536,31 @@ export const Calendar: React.FC<CalendarProps> = ({
             style={{ width, '--animal-calendar-scale': scale, ...style } as React.CSSProperties}
             {...rest}
         >
-            {showHeader && (
-                <div className={styles.header}>
-                    <div className={styles.headerGroup}>
-                        <button
-                            type="button"
-                            className={styles.navBtn}
-                            aria-label="上一年"
-                            onClick={() => shiftYear(-1)}
-                        >
-                            <ChevronLeftIcon className={styles.navIcon} size={14} strokeWidth={2.6} />
-                        </button>
-                        <button
-                            type="button"
-                            className={styles.navBtn}
-                            aria-label="上个月"
-                            onClick={() => shiftMonth(-1)}
-                        >
-                            <ChevronLeftIcon className={styles.navIcon} size={16} strokeWidth={2.6} />
-                        </button>
-                    </div>
-                    <span className={styles.monthLabel}>
-                        <CalendarIcon className={styles.monthIcon} size={16} strokeWidth={2.4} />
-                        {viewMonth.year()}年{viewMonth.month() + 1}月
-                    </span>
-                    <div className={styles.headerGroup}>
-                        <button type="button" className={styles.todayBtn} onClick={() => selectDate(today)}>
-                            今天
-                        </button>
-                        <button
-                            type="button"
-                            className={styles.navBtn}
-                            aria-label="下个月"
-                            onClick={() => shiftMonth(1)}
-                        >
-                            <ChevronRightIcon className={styles.navIcon} size={16} strokeWidth={2.6} />
-                        </button>
-                        <button
-                            type="button"
-                            className={styles.navBtn}
-                            aria-label="下一年"
-                            onClick={() => shiftYear(1)}
-                        >
-                            <ChevronRightIcon className={styles.navIcon} size={14} strokeWidth={2.6} />
-                        </button>
-                    </div>
+            <div className={styles.header}>
+                <div className={styles.headerGroup}>
+                    <button type="button" className={styles.navBtn} aria-label="上一年" onClick={() => shiftYear(-1)}>
+                        <ChevronLeftIcon className={styles.navIcon} size={14} strokeWidth={2.6} />
+                    </button>
+                    <button type="button" className={styles.navBtn} aria-label="上个月" onClick={() => shiftMonth(-1)}>
+                        <ChevronLeftIcon className={styles.navIcon} size={16} strokeWidth={2.6} />
+                    </button>
                 </div>
-            )}
+                <span className={styles.monthLabel}>
+                    <CalendarIcon className={styles.monthIcon} size={16} strokeWidth={2.4} />
+                    {viewMonth.year()}年{viewMonth.month() + 1}月
+                </span>
+                <div className={styles.headerGroup}>
+                    <button type="button" className={styles.todayBtn} onClick={() => selectDate(today)}>
+                        今天
+                    </button>
+                    <button type="button" className={styles.navBtn} aria-label="下个月" onClick={() => shiftMonth(1)}>
+                        <ChevronRightIcon className={styles.navIcon} size={16} strokeWidth={2.6} />
+                    </button>
+                    <button type="button" className={styles.navBtn} aria-label="下一年" onClick={() => shiftYear(1)}>
+                        <ChevronRightIcon className={styles.navIcon} size={14} strokeWidth={2.6} />
+                    </button>
+                </div>
+            </div>
             <div
                 className={styles.body}
                 onKeyDown={handleKeyDown}

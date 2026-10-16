@@ -19,7 +19,6 @@ const CALENDAR_API: ApiRow[] = [
         type: '(start: string, end: string) => void',
         defaultVal: '-',
     },
-    { prop: 'showHeader', desc: '面板展示头部', type: 'boolean', defaultVal: 'true' },
 ];
 
 const EVENT_API: ApiRow[] = [
@@ -47,9 +46,6 @@ const S = {
         fontWeight: 500,
         marginBottom: 20,
         background: '#faf8f3',
-        /* 面板固定 750px（对齐 antd full 日历的卡片宽度），容器窄时让它自己缩 */
-        maxWidth: '100%',
-        overflowX: 'auto',
     } as React.CSSProperties,
     statusLine: {
         marginBottom: 8,
@@ -68,10 +64,26 @@ const islandEvents: CalendarEvent[] = [
     { title: '浇花', start: '2026-08-24' },
 ];
 
+/** 拖拽新建的事项按「事件一 / 事件二 …」依次命名 */
+const CREATED_NAMES = ['事件一', '事件二', '事件三', '事件四', '事件五'];
+const CREATED_COLORS = ['teal', 'amber', 'coral', 'green', 'purple'] as const;
+
 const CalendarDemo: React.FC = () => {
     const [date, setDate] = useState('2026-08-10');
     const [panel, setPanel] = useState('2026-08');
-    const [created, setCreated] = useState<{ start: string; end: string }[]>([]);
+    const [created, setCreated] = useState<CalendarEvent[]>([]);
+
+    const handleEventCreate = (start: string, end: string) => {
+        setCreated((prev) => [
+            ...prev,
+            {
+                title: CREATED_NAMES[prev.length % CREATED_NAMES.length],
+                start,
+                end,
+                color: CREATED_COLORS[prev.length % CREATED_COLORS.length],
+            },
+        ]);
+    };
 
     return (
         <div style={sectionStyle}>
@@ -80,27 +92,15 @@ const CalendarDemo: React.FC = () => {
             </div>
             <div style={labelStyle}>基础</div>
             <div style={S.demoBox}>
-                <Calendar defaultValue="2026-08-10" width={750} events={islandEvents} />
+                <Calendar defaultValue="2026-08-10" events={islandEvents} />
             </div>
 
             <div style={labelStyle}>受控模式：点击日期选中</div>
             <div style={S.statusLine}>
                 当前选中: <span style={{ color: '#19c8b9', fontWeight: 600 }}>{date}</span>
-                {'　'}面板月份: <span style={{ color: '#19c8b9', fontWeight: 600 }}>{panel}</span>
             </div>
             <div style={S.demoBox}>
-                <Calendar value={date} panelValue={panel} onChange={setDate} onPanelChange={setPanel} width={750} />
-            </div>
-
-            <div style={labelStyle}>隐藏头部与时间前缀（showHeader / showEventTime）</div>
-            <div style={S.demoBox}>
-                <Calendar
-                    defaultValue="2026-08-10"
-                    width={750}
-                    showHeader={false}
-                    showEventTime={false}
-                    events={islandEvents}
-                />
+                <Calendar value={date} panelValue={panel} onChange={setDate} onPanelChange={setPanel} />
             </div>
 
             <div style={labelStyle}>拖拽跨日期创建事项（draggableEvents）</div>
@@ -108,16 +108,16 @@ const CalendarDemo: React.FC = () => {
                 新建事项:{' '}
                 <span style={{ color: '#19c8b9', fontWeight: 600 }}>
                     {created.length > 0
-                        ? created.map((item) => `${item.start} ~ ${item.end}`).join('，')
+                        ? created.map((item) => `${String(item.title)}（${item.start} ~ ${item.end}）`).join('，')
                         : '在日期上按住并横向拖动'}
                 </span>
             </div>
             <div style={S.demoBox}>
                 <Calendar
                     defaultValue="2026-08-10"
-                    width={750}
+                    events={[...islandEvents, ...created]}
                     draggableEvents
-                    onEventCreate={(start, end) => setCreated((prev) => [...prev, { start, end }])}
+                    onEventCreate={handleEventCreate}
                 />
             </div>
 

@@ -105,10 +105,14 @@ describe('Calendar', () => {
             expect(container.firstElementChild).toHaveStyle({ width: '600px' });
         });
 
-        it('showHeader=false 隐藏头部', () => {
-            const { container } = render(<Calendar panelValue="2026-08" showHeader={false} />);
-            expect(container.querySelector('[aria-label="上个月"]')).toBeNull();
-            expect(screen.queryByText('今天')).not.toBeInTheDocument();
+        it('头部常显：年月标签、年/月箭头与「今天」都在', () => {
+            render(<Calendar panelValue="2026-08" />);
+            expect(screen.getByText('2026年8月')).toBeInTheDocument();
+            expect(screen.getByLabelText('上一年')).toBeInTheDocument();
+            expect(screen.getByLabelText('上个月')).toBeInTheDocument();
+            expect(screen.getByLabelText('下个月')).toBeInTheDocument();
+            expect(screen.getByLabelText('下一年')).toBeInTheDocument();
+            expect(screen.getByText('今天')).toBeInTheDocument();
         });
     });
 
