@@ -23,15 +23,16 @@
     display: block;
     width: 100%;
     font-family: var(--animal-font-family, 'Nunito', 'Noto Sans SC', sans-serif);
+    /* 日期圆直径固定 28px，这里只作为日期数字字号的基准值 */
     font-size: @day-number-size;
     user-select: none;
     -webkit-user-select: none;
 }
 
 /* ---------- 尺寸 ----------
-   small / middle / large 只调三件事：日期圆直径（含字号）、单元格高度、事项行高度。
-   其余留白都由这几个值推导，因此三种尺寸的观感一致、只是疏密不同。
-   改动时必须同步 Calendar.tsx 的 SIZE_METRICS。 */
+   small / middle / large 只调三件事：日期数字字号、单元格高度、事项行与事项条高度
+   （日期圆直径固定 28px，字号变化让数字在圆内保持居中）。这三种尺寸的留白都由
+   上述值推导，因此观感一致、只是疏密不同。改动时必须同步 Calendar.tsx 的 SIZE_METRICS。 */
 .calendar-small {
     --animal-calendar-cell-height: 74px;
     --animal-calendar-row-height: 20px;
