@@ -36,10 +36,11 @@ const TimeDemo: React.FC = () => (
             code={`import { Time } from 'animal-island-ui';
 
 <Time />
-<Time className="my-time" aria-label="岛屿时间" />
-
-/* 自定义外观由使用方提供 */
-.my-time {
+<Time className="my-time" aria-label="岛屿时间" />`}
+        />
+        <div style={labelStyle}>自定义样式由使用方在 CSS 中提供</div>
+        <CodeBlock
+            code={`.my-time {
     background: linear-gradient(180deg, #fffdf4 0%, #e6f9f6 100%);
     border: 2px dashed var(--animal-primary-color, #19c8b9);
     border-radius: 24px;
