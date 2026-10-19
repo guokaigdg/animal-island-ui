@@ -28,10 +28,9 @@ const TimeDemo: React.FC = () => (
         <style>{`
             .my-time {
                 --animal-text-color: #fffdf4;
-                --animal-text-color-secondary: #7a5a2a;
-                --animal-text-color-disabled: #c4a97a;
-                --animal-primary-color: #0f4c46;
-                --animal-primary-color-bg: #ffe9b8;
+                --animal-text-color-disabled: #e0bd75;
+                --animal-primary-color: #ffd166;
+                --animal-primary-color-bg: #3d2a17;
                 --animal-font-family: 'Noto Sans SC', 'Nunito', sans-serif;
                 --animal-font-size-sm: 15px;
 
@@ -55,10 +54,9 @@ const TimeDemo: React.FC = () => (
             code={`.my-time {
     /* 覆盖 Time 使用的设计变量：时钟/日期颜色、日期字号、字体 */
     --animal-text-color: #fffdf4;
-    --animal-text-color-secondary: #7a5a2a;
-    --animal-text-color-disabled: #c4a97a;
-    --animal-primary-color: #0f4c46;
-    --animal-primary-color-bg: #ffe9b8;
+    --animal-text-color-disabled: #e0bd75;
+    --animal-primary-color: #ffd166;
+    --animal-primary-color-bg: #3d2a17;
     --animal-font-family: 'Noto Sans SC', 'Nunito', sans-serif;
     --animal-font-size-sm: 15px;
 
