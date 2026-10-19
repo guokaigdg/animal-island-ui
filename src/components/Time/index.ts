@@ -1,2 +1,2 @@
 export { Time } from './Time';
-export type { TimeProps } from './Time';
+export type { TimeProps, TimeLocale } from './Time';

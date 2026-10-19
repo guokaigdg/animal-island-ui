@@ -330,10 +330,18 @@ The default variant is a white 20px-radius panel with a warm border and soft ele
 
 Source: `src/components/Time/Time.tsx` + `time.module.less`.
 
-A zero-config live clock card: a large `HH:MM` readout on top refreshed from `new Date()` every second, and a date capsule below showing the weekday and `Mon DD`. All native `div` attributes (`className`, `style`, `aria-*`…) pass through to the root.
+A live clock card: a large `HH:MM` readout on top refreshed from `new Date()` every second, and a date capsule below showing the weekday and the month-day. The weekday and month-day are both rendered through dayjs format templates, so they can be re-shaped or localized; all native `div` attributes (`className`, `style`, `aria-*`…) pass through to the root.
 
 ```ts
-type TimeProps = React.HTMLAttributes<HTMLDivElement>;
+export type TimeLocale = 'en' | 'zh-cn';
+
+export interface TimeProps extends React.HTMLAttributes<HTMLDivElement> {
+    weekdayFormat?: string; // default 'dddd'
+    dateFormat?: string;    // default 'MMM D'; 'M月D日' when locale is 'zh-cn'
+    locale?: TimeLocale;    // default 'en'
+}
 ```
 
-The card is a vertically stacked inline-flex panel — background `var(--animal-bg-color)`, 20px radius, `--animal-shadow-sm` elevation, no border — fading in over `--animal-motion-duration-slow` on mount. The clock is 40px / 800 weight / `var(--animal-text-color)` with tabular numerals and 1px letter-spacing; the colon blinks every second (`step-end`, opacity 0 at 50%). The date capsule is a 999px-radius pill on `var(--animal-primary-color-bg)` holding the uppercase weekday in `var(--animal-primary-color)` (800 weight, 1px letter-spacing), a `·` separator in the disabled tone, and the month-day in `var(--animal-text-color-secondary)` (700 weight). The root uses `role="timer"` with `aria-live="off"` so the per-second refresh never interrupts screen readers.
+Both formats take dayjs **core** tokens (`dddd` / `ddd` / `MMM` / `M` / `D` / `YYYY` …); plugin-owned tokens do not expand. `zh-cn` is registered at module scope inside the component — the bundled dayjs instance cannot see a host app's locale imports, so this is what makes `locale="zh-cn"` work with no extra setup. Formatting runs on a per-instance clone (`dayjs(now).locale(locale)`), never a global `dayjs.locale()` call, so the library changes no process-wide state.
+
+The card is a vertically stacked inline-flex panel — background `var(--animal-bg-color)`, 20px radius, `--animal-shadow-sm` elevation, no border — fading in over `--animal-motion-duration-slow` on mount. The clock is 44px / 900 weight / `var(--animal-text-color)` with tabular numerals and 1px letter-spacing; the colon blinks every second (`step-end`, opacity 0 at 50%). The date capsule is a 999px-radius pill on `var(--animal-primary-color-bg)` holding the uppercase weekday in `var(--animal-primary-color)` (800 weight, 1px letter-spacing), a `·` separator in the disabled tone, and the month-day in `var(--animal-text-color-secondary)` (700 weight). The root uses `role="timer"` with `aria-live="off"` so the per-second refresh never interrupts screen readers.

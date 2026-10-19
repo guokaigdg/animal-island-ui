@@ -330,10 +330,18 @@ interface CountdownProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange'
 
 源码：`src/components/Time/Time.tsx` + `time.module.less`。
 
-零配置的实时时钟卡片：上方是大号 `HH:MM` 时间，每秒从 `new Date()` 刷新一次；下方胶囊显示星期与 `Mon DD`。其余 `div` 原生属性（`className`、`style`、`aria-*`…）全部透传到根节点。
+实时时钟卡片：上方是大号 `HH:MM` 时间，每秒从 `new Date()` 刷新一次；下方胶囊显示星期与月日。星期与月日都通过 dayjs 格式模板渲染，可改形状也可切换语言；其余 `div` 原生属性（`className`、`style`、`aria-*`…）全部透传到根节点。
 
 ```ts
-type TimeProps = React.HTMLAttributes<HTMLDivElement>;
+export type TimeLocale = 'en' | 'zh-cn';
+
+export interface TimeProps extends React.HTMLAttributes<HTMLDivElement> {
+    weekdayFormat?: string; // 默认 'dddd'
+    dateFormat?: string;    // 默认 'MMM D'；locale 为 'zh-cn' 时默认 'M月D日'
+    locale?: TimeLocale;    // 默认 'en'
+}
 ```
 
-卡片为纵向堆叠的 inline-flex 面板 —— 背景为 `var(--animal-bg-color)`、20px 圆角、`--animal-shadow-sm` 柔和投影、无边框，挂载时以 `--animal-motion-duration-slow` 淡入。时钟为 40px / 800 字重 / `var(--animal-text-color)`，等宽数字、1px 字距；冒号按秒闪烁（`step-end`，50% 处透明度为 0）。日期胶囊为 `var(--animal-primary-color-bg)` 底、999px 圆角的药丸形，内含大写星期（`var(--animal-primary-color)`、800 字重、1px 字距）、`·` 分隔点（禁用色调）与月日（`var(--animal-text-color-secondary)`、700 字重）。根节点使用 `role="timer"` 与 `aria-live="off"`，每秒刷新不打断读屏软件。
+两个格式都支持 dayjs **核心** token（`dddd` / `ddd` / `MMM` / `M` / `D` / `YYYY`…），插件 token 不会展开。`zh-cn` 在组件模块内注册 —— 打包进本包的 dayjs 实例看不到宿主应用的 locale 导入，所以这一步让 `locale="zh-cn"` 开箱即用。格式化都在实例副本上进行（`dayjs(now).locale(locale)`），从不调用全局 `dayjs.locale()`，因此不会改动进程级状态。
+
+卡片为纵向堆叠的 inline-flex 面板 —— 背景为 `var(--animal-bg-color)`、20px 圆角、`--animal-shadow-sm` 柔和投影、无边框，挂载时以 `--animal-motion-duration-slow` 淡入。时钟为 44px / 900 字重 / `var(--animal-text-color)`，等宽数字、1px 字距；冒号按秒闪烁（`step-end`，50% 处透明度为 0）。日期胶囊为 `var(--animal-primary-color-bg)` 底、999px 圆角的药丸形，内含大写星期（`var(--animal-primary-color)`、800 字重、1px 字距）、`·` 分隔点（禁用色调）与月日（`var(--animal-text-color-secondary)`、700 字重）。根节点使用 `role="timer"` 与 `aria-live="off"`，每秒刷新不打断读屏软件。

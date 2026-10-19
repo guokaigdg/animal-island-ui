@@ -168,12 +168,20 @@ The remaining time never drops below zero and `onFinish` fires once. Without a `
 ## Time
 
 ```ts
-type TimeProps = React.HTMLAttributes<HTMLDivElement>;
+type TimeLocale = 'en' | 'zh-cn';
+
+interface TimeProps extends React.HTMLAttributes<HTMLDivElement> {
+    weekdayFormat?: string; // default 'dddd'
+    dateFormat?: string; // default 'MMM D'; 'M月D日' when locale is 'zh-cn'
+    locale?: TimeLocale; // default 'en'
+}
 ```
 
 ```tsx
 <Time />
+<Time locale="zh-cn" />
+<Time weekdayFormat="ddd" dateFormat="YYYY/MM/DD" />
 <Time className="island-clock" aria-label="岛屿时间" />
 ```
 
-Zero-config live clock card: a large `HH:MM` readout on top refreshed from `new Date()` every second, weekday + `Mon DD` in a date capsule below. Borderless panel on `var(--animal-bg-color)` with 20px radius and `--animal-shadow-sm` elevation, fading in on mount; clock 44px 900 tabular in `var(--animal-text-color)` with a blinking colon; the capsule is a 999px pill on `var(--animal-primary-color-bg)` with an uppercase `var(--animal-primary-color)` weekday. The root is `role="timer"` with `aria-live="off"` so the per-second refresh stays silent to screen readers.
+Live clock card: a large `HH:MM` readout on top refreshed from `new Date()` every second, weekday + month-day in a date capsule below. `weekdayFormat` / `dateFormat` accept dayjs core tokens (`dddd` / `ddd` / `MMM` / `M` / `D` / `YYYY`…); plugin-owned tokens do not expand. `locale="zh-cn"` is built in and needs no import. Borderless panel on `var(--animal-bg-color)` with 20px radius and `--animal-shadow-sm` elevation, fading in on mount; clock 44px 900 tabular in `var(--animal-text-color)` with a blinking colon; the capsule is a 999px pill on `var(--animal-primary-color-bg)` with an uppercase `var(--animal-primary-color)` weekday. The root is `role="timer"` with `aria-live="off"` so the per-second refresh stays silent to screen readers.

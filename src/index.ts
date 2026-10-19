@@ -167,7 +167,7 @@ export type {
 } from './components/CountUp';
 
 export { Time } from './components/Time';
-export type { TimeProps } from './components/Time';
+export type { TimeProps, TimeLocale } from './components/Time';
 
 export { Carousel } from './components/Carousel';
 export type { CarouselProps } from './components/Carousel';

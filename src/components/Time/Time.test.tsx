@@ -23,6 +23,23 @@ describe('Time', () => {
         expect(screen.getByText(':')).toBeInTheDocument();
     });
 
+    it('locale="zh-cn" 渲染中文星期与月日', () => {
+        render(<Time locale="zh-cn" />);
+        expect(screen.getByText('星期一')).toBeInTheDocument();
+        expect(screen.getByText('6月8日')).toBeInTheDocument();
+    });
+
+    it('weekdayFormat / dateFormat 按 dayjs token 输出', () => {
+        render(<Time weekdayFormat="ddd" dateFormat="YYYY/MM/DD" />);
+        expect(screen.getByText('Mon')).toBeInTheDocument();
+        expect(screen.getByText('2026/06/08')).toBeInTheDocument();
+    });
+
+    it('自定义 dateFormat 与 zh-cn 语言组合', () => {
+        render(<Time locale="zh-cn" dateFormat="YYYY年M月D日" />);
+        expect(screen.getByText('2026年6月8日')).toBeInTheDocument();
+    });
+
     it('每秒刷新，跨分钟后更新显示', () => {
         const { container } = render(<Time />);
         act(() => vi.advanceTimersByTime(60_000));

@@ -52,13 +52,18 @@ do date arithmetic, parsing, formatting and comparison in `src/`:
   at the top of the module that needs it. `customParseFormat` is required to parse
   `value` / `defaultValue` in strict mode, which is what turns an impossible date such as
   `2026-02-30` into a rejected value instead of a silent roll-over to March 2.
-- **Locale stays untouched.** The library never calls `dayjs.locale(...)`. Setting a
-  locale is process-wide state that belongs to the host application, and mutating it from
-  inside a component would change how the consumer's own dayjs code behaves.
+- **Locale stays untouched.** The library never calls `dayjs.locale(...)` to switch the
+  active locale. That is process-wide state belonging to the host application, and
+  mutating it from inside a component would change how the consumer's own dayjs code
+  behaves. A component that needs a locale takes it as a prop and formats on a clone —
+  `Time` picks the locale object per instance. Locale data is loaded by importing the
+  locale module, which registers it without activating it.
 - **Wall-clock values stay out of it.** `TimePicker` holds a `{ h, m, s }` wall-clock
-  value and `Time` renders the current wall clock. Neither does date arithmetic, and
-  neither imports dayjs: attaching a calendar date to a bare time is what creates
-  daylight-saving bugs, not what fixes them.
+  value and `Time` renders the current wall clock; neither does date arithmetic.
+  `TimePicker` does not import dayjs, and `Time` imports it only to name its weekday and
+  month (`dddd` / `MMM`, locale-aware) — the `HH:MM` readout itself is still plain `Date`.
+  Attaching a calendar date to a bare time is what creates daylight-saving bugs, not what
+  fixes them.
 
 A further runtime dependency still requires its own record. This one is deliberately
 narrow: it licenses a date library, not a general loosening of the rule.
@@ -74,11 +79,12 @@ narrow: it licenses a date library, not a general loosening of the rule.
   already understands weeks, months and locales.
 - `dayjs`'s locale registry is mutable state **inside the bundled module instance**; it
   is not shared with a host application's independently imported `dayjs`. The library
-  never calls `dayjs.locale()`, which keeps the bundled instance deterministic (its
+  never sets the active locale, which keeps the bundled instance deterministic (its
   default `en`) — and means a host-level `dayjs.locale(...)` call does not change
-  locale-sensitive `DatePicker` output such as `ddd`. A future component that needs a
-  locale must take it as a prop and format through a local instance instead of reaching
-  for global state.
+  locale-sensitive output: `DatePicker`'s `ddd` stays English, and `Time` formats with
+  the `locale` prop it is given. `Time` ships the `zh-cn` locale data so
+  `locale="zh-cn"` works out of the box, since the host cannot import a locale into the
+  bundled instance it does not own.
 - Date formatting in `DatePicker` follows **core** dayjs tokens. The previously documented
   subset (`YYYY` / `MM` / `DD` / `M` / `D`) still renders identically; further core tokens
   such as `HH` / `mm` / `ss` / `ddd` now interpolate instead of passing through as literal
