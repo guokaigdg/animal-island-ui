@@ -19,7 +19,7 @@ const API: ApiRow[] = [
         prop: 'icon',
         desc: '自定义装饰图标，null / false 隐藏',
         type: 'ReactNode',
-        defaultVal: 'InboxIcon / SearchIcon',
+        defaultVal: 'NoDataIcon / SearchIcon',
     },
     { prop: 'extra / children', desc: '操作区，extra 优先；推荐复用 Button', type: 'ReactNode', defaultVal: '-' },
     { prop: 'bordered', desc: '奶油背景与沙色虚线边框', type: 'boolean', defaultVal: 'false' },

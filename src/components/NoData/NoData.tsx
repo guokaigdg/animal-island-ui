@@ -1,5 +1,5 @@
 import React from 'react';
-import { InboxIcon, SearchIcon } from 'naive-icons';
+import { NoDataIcon, SearchIcon } from 'naive-icons';
 import styles from './no-data.module.less';
 
 /** 空态尺寸，适用于表格单元、卡片与整块内容区。 */
@@ -27,13 +27,13 @@ export interface NoDataProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 
     bordered?: boolean;
 }
 
-/** 空收纳盒与搜索图标直接采用 naive-icons 的原生造型和配色。 */
+/** 空纸箱与搜索图标直接采用 naive-icons 的原生造型和配色。 */
 const NoDataArtwork: React.FC<{ variant: NoDataVariant }> = ({ variant }) => {
     // 保留图标库内部的粗描边与实色填充，不覆盖 SVG 子节点或额外叠加底托。
     return variant === 'search' ? (
         <SearchIcon className={styles.sceneIcon} />
     ) : (
-        <InboxIcon className={styles.sceneIcon} />
+        <NoDataIcon className={styles.sceneIcon} />
     );
 };
 
