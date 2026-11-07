@@ -276,6 +276,20 @@ function emitGlobalStyleEntryPlugin(): Plugin {
     };
 }
 
+/**
+ * 需要保持 external 的 peer 依赖。
+ *
+ * 关键：**必须覆盖子路径入口**。Rollup 的 `external` 传字符串数组时只做精确匹配，
+ * `react-dom/client`、`react/jsx-runtime` 这类子路径一旦漏掉就会被打进产物。
+ * 被打进去的旧版 `react-dom/client` 会去写消费者 react-dom 的
+ * `__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED.usingClientEntryPoint`，
+ * 而 React 19 已移除该字段 → 消费方调用 `Notification.success()` 时直接抛
+ * `TypeError: Cannot set properties of undefined (setting 'usingClientEntryPoint')`（issue #78）。
+ *
+ * 用函数匹配整个包名空间，以后新增任何子路径入口都不会再漏。
+ */
+export const isPeerDependency = (id: string): boolean => /^(react|react-dom|classnames)(\/|$)/.test(id);
+
 export default defineConfig({
     plugins: [
         react(),
@@ -315,7 +329,8 @@ export default defineConfig({
             entry: resolve(__dirname, 'src/index.ts'),
         },
         rollupOptions: {
-            external: ['react', 'react-dom', 'react/jsx-runtime', 'classnames'],
+            // peer 依赖（含子路径入口）保持 external，详见 isPeerDependency 的注释。
+            external: isPeerDependency,
             // 多输出：
             //  - ES：preserveModules 保持源码目录结构 → 消费者可按组件 tree-shake，
             //        CSS 随 cssCodeSplit 按组件拆分，配合 injectImportedCssPlugin 自动回填 import

@@ -21,6 +21,8 @@ Vite library mode 的默认行为与此背道而驰：它每种格式只产出�
 
 两者都设置 `preserveModules: true` 与 `preserveModulesRoot: 'src'`，因此每个源码模块对应一个产物文件，消费者的打包器可以丢掉从未 import 的组件 —— 连同它们的字体与图片。`cssCodeSplit: true` 让样式表沿同样的边界拆分。peer 包保持 external（见 [ADR 0001](0001-zero-runtime-dependencies.md)）。
 
+external 由**判定函数**而非字面量列表决定：`isPeerDependency` 匹配 `react`、`react-dom`、`classnames` **及其全部子路径入口**（`react-dom/client`、`react/jsx-runtime` 等）。Rollup 的 `external` 数组只做字面量匹配，一旦漏掉某个子路径导入，它就会被**打进产物**而不是 external 掉。被打进去的 `react-dom/client` 会去写**消费者** react-dom 的 `__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED.usingClientEntryPoint` —— 而 React 19 已移除该字段 —— 于是 React 19 项目里调用 `Notification.success()` 会抛 `TypeError: Cannot set properties of undefined`（issue #78）。`npm run check:bundle` 会在任何 peer 依赖（或那个已被移除的内部字段）重新出现在 `dist/` 时让构建失败。
+
 `vite.config.ts` 里的六个插件让这套安排产出一个可用的包 —— 五个定义在该文件内，外加一个第三方插件：
 
 - `strip-woff-fallback`（`stripWoffFallbackPlugin`）—— 改写 `@fontsource` 的 CSS，去掉 `woff` 兜底的 `url()`，并从产物中删除因此变成孤儿的 `.woff` 资源。本库面向的浏览器全都支持 `woff2`，产出的资源目录因此缩小约 40%。以 `enforce: 'pre'` 运行，确保改写发生在资源被收集之前。
@@ -36,7 +38,7 @@ Vite library mode 的默认行为与此背道而驰：它每种格式只产出�
 
 - 消费者只为自己 import 的东西付出体积代价，两种模块格式皆然。使用老式打包器的 CJS 消费者拿到的也是逐文件产物，而不是一整块。
 - 不想要逐组件 CSS 的消费者，仍可以用一次 import 拿到完整样式。
-- **永远不要关掉 `preserveModules` 或 `cssCodeSplit`。** 任一改动都会把产物塌缩成单体，悄无声息地让每一个消费者退回到「打包整个组件库」。重新开启资源内联或缩短 externals 列表，后果相同。
+- **永远不要关掉 `preserveModules` 或 `cssCodeSplit`。** 任一改动都会把产物塌缩成单体，悄无声息地让每一个消费者退回到「打包整个组件库」。重新开启资源内联或收窄 externals 判定函数，后果相同 —— peer 依赖一旦进了 `dist/`，就会遮蔽消费者自己那份并在运行时炸掉。
 - 构建的正确性依赖插件顺序。`strip-woff-fallback` 必须早于资源收集；聚合与拷贝类插件运行在 `closeBundle`，即 CSS 写盘之后。
 - `dist/files/` 的孤儿清理，是扫描产出的 JS 与 CSS 中形如 `files/<name>` 的字面量引用。路径在运行时拼出来的资源不会被找到，因而会被删除；资源必须静态 import，或从 CSS 中引用。
 - 改完某个组件的样式后，确认这些规则仍出现在 `dist/index.css` 里 —— 聚合过程走的是产出的文件树，一个不再被产出的样式表会无声无息地从全局入口里消失。

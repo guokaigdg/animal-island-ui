@@ -21,6 +21,8 @@ Two Rollup outputs are produced, both preserving the source module graph:
 
 Both set `preserveModules: true` and `preserveModulesRoot: 'src'`, so one output file exists per source module and a consumer's bundler can drop the components it never imports — including their fonts and images. `cssCodeSplit: true` splits stylesheets along the same boundaries. Peer packages stay external (see [ADR 0001](0001-zero-runtime-dependencies.md)).
 
+Externals are matched by a predicate, not a literal list: `isPeerDependency` matches `react`, `react-dom` and `classnames` **together with every sub-path entry point** (`react-dom/client`, `react/jsx-runtime`, …). Rollup's `external` array matches literal strings only, so a sub-path import that is not spelled out gets bundled instead of externalised. The bundled `react-dom/client` then writes `__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED.usingClientEntryPoint` on the **consumer's** react-dom — a field React 19 removed — so `Notification.success()` throws `TypeError: Cannot set properties of undefined` in a React 19 app (issue #78). `npm run check:bundle` fails the build if any peer dependency (or the removed internal field) reappears in `dist/`.
+
 Six plugins in `vite.config.ts` make this arrangement produce a usable package — five defined in that file, plus one third-party plugin:
 
 - `strip-woff-fallback` (`stripWoffFallbackPlugin`) — rewrites `@fontsource` CSS to drop the `woff` fallback `url()`, and deletes the now-orphaned `.woff` assets from the bundle. Every browser the library targets supports `woff2`; the emitted asset directory shrinks by roughly 40%. Runs with `enforce: 'pre'` so the rewrite happens before assets are collected.
@@ -36,7 +38,7 @@ Six plugins in `vite.config.ts` make this arrangement produce a usable package �
 
 - Consumers pay only for what they import, in both module formats. CJS consumers on older bundlers get per-file output rather than one monolith.
 - Full styles remain available in one import for consumers who do not want per-component CSS.
-- **Never disable `preserveModules` or `cssCodeSplit`.** Either change collapses the output into a monolith and silently reverts every consumer to shipping the whole library. The same applies to re-enabling asset inlining or shortening the externals list.
+- **Never disable `preserveModules` or `cssCodeSplit`.** Either change collapses the output into a monolith and silently reverts every consumer to shipping the whole library. The same applies to re-enabling asset inlining or narrowing the externals matcher — a peer dependency that ends up inside `dist/` shadows the consumer's own copy and breaks them at runtime.
 - Build correctness depends on plugin ordering. `strip-woff-fallback` must precede asset collection, and the aggregation and copy plugins run in `closeBundle`, after CSS has been written to disk.
 - Orphan cleanup in `dist/files/` scans emitted JS and CSS for literal `files/<name>` references. An asset whose path is assembled at runtime would not be found and would be deleted; assets must be statically imported or referenced from CSS.
 - After changing a component's styles, confirm those rules still appear in `dist/index.css` — the aggregation walks the emitted tree, so a stylesheet that stops being emitted disappears from the global entry without error.
