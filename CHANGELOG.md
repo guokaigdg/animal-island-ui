@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.0.3] - 2026-11-07
+
+### Fixed
+
+- `Calendar` / `CodeBlock` / `Tooltip` 适配 React 19 的类型变更：`ReactElement.props` 的默认类型由 `any` 改为 `unknown`、`useRef` 删掉了无参重载。运行时行为不变（`useRef()` 与 `useRef(undefined)` 等价）
+- CI 补上组件库构建与产物守卫：demo 是从 `src/` 引组件的，此前 GitHub CI 从未构建过组件库，产物层面的问题（比如 peer 依赖被子路径入口带着打进 `dist/`）在 CI 里根本看不见
+- CI 的测试矩阵加上 React 版本维度，React 18 / 19 分别跑测试与类型检查
+
 ## [3.0.2] - 2026-11-07
 
 ### Fixed
