@@ -32,12 +32,13 @@ jobs:
             - run: npm run lint
 
     test:
-        name: Test (Node ${{ matrix.node }})
+        name: Test (Node ${{ matrix.node }}, React ${{ matrix.react }})
         runs-on: ubuntu-latest
         strategy:
             fail-fast: false
             matrix:
                 node: [20, 22]
+                react: ['18', '19']
         steps:
             - uses: actions/checkout@v4
 
@@ -47,7 +48,21 @@ jobs:
                   cache: npm
 
             - run: npm ci
+
+            # peer 范围是 >=18，React 18 / 19 两个大版本都要跑测试 ——
+            # 少了 React 19 这一档，React 19 下的崩溃就会像 issue #78 那样
+            # 一直漏到用户报障才被发现。
+            # --no-save 只换 node_modules 里的运行时，不动 package.json / lock。
+            - name: Use React ${{ matrix.react }}
+              if: matrix.react == '19'
+              run: npm install --no-save react@19 react-dom@19 @types/react@19 @types/react-dom@19
+
             - run: npm run test:run
+
+            # 类型检查也必须跟着 React 版本跑 —— React 19 的类型有实质变更
+            # （ReactElement.props 默认类型 any → unknown、useRef 删掉无参重载），
+            # 只在 React 18 的类型下检查，这些断裂会整个漏过去。
+            - run: npm run typecheck
 
     build:
         name: Build
@@ -62,6 +77,12 @@ jobs:
                   cache: npm
 
             - run: npm ci
+
+            # CI 里必须真的构建组件库：demo 是从 src/ 引组件的，只跑 build:demo 的话
+            # 产物层面的问题（比如 peer 依赖被子路径入口带着打进 dist）在 CI 里根本看不见。
+            - run: npm run build
+            - run: npm run check:bundle
+
             - run: npm run build:demo
             - uses: actions/upload-artifact@v4
               with:
