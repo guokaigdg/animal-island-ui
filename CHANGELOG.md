@@ -5,6 +5,23 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.0.1] - 2026-11-07
+
+### Changed
+
+- `naive-icons` 升级至 `1.14.0`（图标数 202 → **709**，**无破坏性变更，旧图标全部保留**）：
+    - 新增 508 枚图标，分类从 11 个扩到 18 个（新增建筑场所 / 设备硬件 / 健康医疗 / 工具 / 金融 / 办公 / 运动）
+    - `user` / `user-plus` / `user-minus` / `users` 改为无五官画风，16px 下不再糊成黑点
+    - `donut` 糖屑加粗且相邻不同色
+    - `no-data` 图标的 React 版与 `svg/` 目录同步为同一图形（此前两版不一致，自 naive-icons 1.13.0 起上游已修复）
+- `NoData` 空态改用 naive-icons 原生的 `NoDataIcon`（`default` / `simple` 变体），`search` 变体仍用 `SearchIcon`
+- `Button` 的 loading 图标不再覆写描边色（`color="currentColor"`），跟随图标库原生配色，描边回归墨色后在青绿底上更清晰
+- ADR 0005 的运行时依赖版本同步为 `^1.14.0`
+
+### Fixed
+
+- demo 图标页补齐 709 枚图标的中文名（此前仅覆盖 201 枚），并改用 naive-icons 官方导出的 `IconComponent` 类型
+
 ## [3.0.0] - 2026-11-01
 
 ### Added
