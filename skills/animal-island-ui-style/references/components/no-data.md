@@ -44,7 +44,7 @@ export interface NoDataProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 
 <NoData size="small" variant="simple" icon={null} title="No matches" />
 ```
 
-- Default uses the original naive-icons NoDataIcon (open cardboard box); search uses SearchIcon and simple uses a smaller NoDataIcon. Original solid colors and rounded ink strokes are preserved. No badge, background shape, rotation, shadow or SVG fill/stroke overrides are added.
+- Default uses the original naive-icons NoDataIcon (open cardboard box with a deep-blue inner wall); search uses SearchIcon and simple uses a smaller NoDataIcon. Original solid colors and rounded ink strokes are preserved. No badge, background shape, rotation, shadow or SVG fill/stroke overrides are added.
 - Default icon areas are 64/96/120px square for small/medium/large; simple and custom icons use 32/52/64px square areas. Custom icons retain their own colors without a tile.
 - Title inherits `--animal-text-color`; description uses `--animal-text-color-secondary` and the bordered surface uses `--animal-bg-color`. Use the `icon` slot for a different icon or its supported color props.
 - `undefined` uses the default title/icon; explicit null or false hides it. `extra` takes precedence over children, including null/false.

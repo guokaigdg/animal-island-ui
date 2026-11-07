@@ -35,12 +35,12 @@ const NoDataDemo: React.FC = () => {
         <div>
             <NoDataAppearanceDemo />
             <section style={sectionStyle}>
-                <div style={sectionTitleStyle}>基础空态</div>
+                <div style={{ ...sectionTitleStyle, marginBottom: 20 }}>基础空态</div>
                 <NoData description="这里还没有记录，新的故事可以从现在开始。" />
                 <CodeBlock code={`<NoData description="这里还没有记录，新的故事可以从现在开始。" />`} />
             </section>
             <section style={sectionStyle}>
-                <div style={sectionTitleStyle}>搜索无结果与恢复</div>
+                <div style={{ ...sectionTitleStyle, marginBottom: 20 }}>搜索无结果与恢复</div>
                 <Input
                     aria-label="搜索岛屿"
                     placeholder="搜索岛屿名称"
@@ -70,7 +70,7 @@ const NoDataDemo: React.FC = () => {
                 />
             </section>
             <section style={sectionStyle}>
-                <div style={sectionTitleStyle}>表格内的简洁空态</div>
+                <div style={{ ...sectionTitleStyle, marginBottom: 20 }}>表格内的简洁空态</div>
                 <Table
                     columns={[{ title: '岛屿手账', dataIndex: 'name' }]}
                     dataSource={created ? [{ key: '1', name: '第一篇海岛手账' }] : []}
@@ -95,7 +95,7 @@ const NoDataDemo: React.FC = () => {
                 />
             </section>
             <section style={sectionStyle}>
-                <div style={sectionTitleStyle}>尺寸与自定义内容</div>
+                <div style={{ ...sectionTitleStyle, marginBottom: 20 }}>尺寸与自定义内容</div>
                 <div
                     style={{
                         display: 'grid',
@@ -111,8 +111,14 @@ const NoDataDemo: React.FC = () => {
                     icon={<FolderIcon color="currentColor" />}
                     title="收藏夹还是空的"
                     description="遇到喜欢的内容时，记得收藏到这里。"
+                    style={{ marginTop: 24 }}
                 />
-                <NoData icon={null} title="仅文字提示" description="图标、标题、说明和操作区都可以单独配置。" />
+                <NoData
+                    icon={null}
+                    title="仅文字提示"
+                    description="图标、标题、说明和操作区都可以单独配置。"
+                    style={{ marginTop: 24 }}
+                />
                 <CodeBlock
                     code={`<NoData size="large" bordered icon={<FolderIcon color="currentColor" />}
     title="收藏夹还是空的" description="遇到喜欢的内容时，记得收藏到这里。" />

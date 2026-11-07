@@ -60,7 +60,7 @@
     },
     "dependencies": {
         "dayjs": "^1.11.23",
-        "naive-icons": "^1.11.0"
+        "naive-icons": "^1.14.0"
     },
     "engines": {
         "node": ">=18"

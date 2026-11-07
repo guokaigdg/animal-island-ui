@@ -59,7 +59,7 @@ export const Button: React.FC<ButtonProps> = ({
         <button type={htmlType} className={classNames} disabled={disabled} {...rest}>
             {loading ? (
                 <span className={styles['btn-icon']} aria-hidden>
-                    <DonutIcon size={28} color="currentColor" className={styles['btn-loading-icon']} />
+                    <DonutIcon size={28} className={styles['btn-loading-icon']} />
                 </span>
             ) : (
                 icon && <span className={styles['btn-icon']}>{icon}</span>

@@ -4,7 +4,7 @@
 
 # 变体与结构
 
-`default` 直接使用 naive-icons 的 NoDataIcon：敞开的棕色纸箱，奶白内壁搭配橙色胶带。`search` 使用原生 SearchIcon，保留青绿镜片、白色中心与墨色手柄，默认标题为“没有找到相关结果”。`simple` 使用较小的 NoDataIcon。其他变体默认标题为“暂无数据”。保留图标原有的 48×48 造型、按比例缩放的 3.5 单位圆角墨色描边与实色调色板；不叠加徽章、背景形状、旋转、改色或阴影。全部图形对辅助技术隐藏。
+`default` 直接使用 naive-icons 的 NoDataIcon：敞开的棕色纸箱，深蓝内壁搭配奶白标签。`search` 使用原生 SearchIcon，保留青绿镜片、白色中心与墨色手柄，默认标题为“没有找到相关结果”。`simple` 使用较小的 NoDataIcon。其他变体默认标题为“暂无数据”。保留图标原有的 48×48 造型、按比例缩放的 3.5 单位圆角墨色描边与实色调色板；不叠加徽章、背景形状、旋转、改色或阴影。全部图形对辅助技术隐藏。
 
 内容顺序为图形、标题、可选说明、可选操作区。title/icon 为 undefined 时采用默认值，null/false 隐藏。extra 优先于 children。bordered 添加 1.5px 沙色虚线、20px 圆角与 `var(--animal-bg-color, #faf8f1)` 主题背景；默认关闭，便于放入已有卡片。
 

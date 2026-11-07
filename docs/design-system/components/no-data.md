@@ -4,7 +4,7 @@ Source: `src/components/NoData/`. Reusable empty-content presentation, using the
 
 # Variants and anatomy
 
-`default` uses NoDataIcon, an open brown cardboard box with cream interior and an orange tape strip, directly from naive-icons. `search` uses SearchIcon with its original teal lens, white center and ink handle; its default title is “没有找到相关结果”. `simple` uses a smaller NoDataIcon. The other variants default to “暂无数据”. Icons retain their original 48×48 geometry, proportional 3.5-unit rounded ink strokes and solid palette; no badge, background shape, rotation, recoloring or shadow is added. All artwork is hidden from assistive technology.
+`default` uses NoDataIcon, an open brown cardboard box with a deep-blue inner wall and a cream label, directly from naive-icons. `search` uses SearchIcon with its original teal lens, white center and ink handle; its default title is “没有找到相关结果”. `simple` uses a smaller NoDataIcon. The other variants default to “暂无数据”. Icons retain their original 48×48 geometry, proportional 3.5-unit rounded ink strokes and solid palette; no badge, background shape, rotation, recoloring or shadow is added. All artwork is hidden from assistive technology.
 
 Content order is artwork, title, optional description and optional action area. Undefined title/icon uses the defaults; null/false hides it. Extra content takes precedence over children. The bordered option adds a 1.5px dashed sand outline, 20px radius and themed `var(--animal-bg-color, #faf8f1)` background; it defaults off so empty states can sit inside existing cards.
 

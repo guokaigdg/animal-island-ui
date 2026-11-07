@@ -20,7 +20,7 @@ ADR 0001 给出的退路是「内置一份实现进 `src/`」，但这对日期�
 ```json
 "dependencies": {
     "dayjs": "^1.11.23",
-    "naive-icons": "^1.6.0"
+    "naive-icons": "^1.14.0"
 }
 ```
 

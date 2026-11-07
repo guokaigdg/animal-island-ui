@@ -36,7 +36,7 @@ do date arithmetic, parsing, formatting and comparison in `src/`:
 ```json
 "dependencies": {
     "dayjs": "^1.11.23",
-    "naive-icons": "^1.6.0"
+    "naive-icons": "^1.14.0"
 }
 ```
 
