@@ -5,6 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.0.2] - 2026-11-07
+
+### Fixed
+
+- **修复 React 19 下调用 `Notification` 报 `TypeError: Cannot set properties of undefined (setting 'usingClientEntryPoint')`**（[issue #78](https://github.com/guokaigdg/animal-island-ui/issues/78)）
+    - 根因：构建时 `rollupOptions.external` 只列了 `react` / `react-dom` / `react/jsx-runtime` / `classnames` 四个**字面量**，而 Rollup 的数组匹配是精确匹配 —— `react-dom/client` 这个**子路径入口**没被 external 住，于是旧版 `react-dom/client` 被打进产物。它会去写**消费者** react-dom 的 `__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED.usingClientEntryPoint`，而 React 19 已移除该字段 → 调用即崩
+    - 修复：`external` 改为判定函数 `isPeerDependency`，覆盖 `react` / `react-dom` / `classnames` 的**全部子路径入口**，以后新增任何子路径都不会再漏
+    - 新增 `npm run check:bundle` 产物守卫并接入 `npm run ci`：一旦有 peer 依赖（或那个已被 React 移除的内部字段）重新出现在 `dist/`，构建直接失败
+
 ## [3.0.1] - 2026-11-07
 
 ### Changed
