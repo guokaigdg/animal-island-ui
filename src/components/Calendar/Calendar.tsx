@@ -250,7 +250,8 @@ const textOf = (node: React.ReactNode): string => {
     if (typeof node === 'string') return node;
     if (typeof node === 'number') return String(node);
     if (Array.isArray(node)) return node.map(textOf).join('');
-    if (React.isValidElement(node)) return textOf(node.props.children as React.ReactNode);
+    // React 19 的 ReactElement.props 默认类型是 unknown（18 是 any），要用泛型把 props 收窄回来
+    if (React.isValidElement<{ children?: React.ReactNode }>(node)) return textOf(node.props.children);
     return '';
 };
 
