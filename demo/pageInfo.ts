@@ -170,6 +170,6 @@ export const PAGE_INFO: Record<string, { title: string; desc: string }> = {
     },
     skill: {
         title: 'Skill 介绍',
-        desc: '项目配套的 animal-island-ui-style 技能 — 可安装到 AI 编码代理（Claude Code / Codex / Cursor），教模型按治愈系海岛风格搭建 React 页面或单文件 HTML',
+        desc: '项目配套的 animal-island-ui-style 技能 — 可安装到 AI 编码代理（Claude Code / Codex / Cursor），教模型按治愈系海岛风格搭建 React 页面或单文件 HTML · 从首页「开始使用」进入时会先盖一层圆形展开 Loading',
     },
 };
