@@ -1,4 +1,5 @@
 import { act, render, screen } from '@testing-library/react';
+import { renderToString } from 'react-dom/server';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { Loading } from './Loading';
 import styles from './loading.module.less';
@@ -46,6 +47,32 @@ describe('Loading', () => {
             expect(container.firstChild).toBeNull();
         });
 
+        it('首帧即渲染遮罩，不等 effect（避免底层内容闪一下）', () => {
+            // 用服务端渲染取「首次渲染」的输出：effect 在这里不会跑，
+            // 若遮罩靠 effect 才置位，这段 HTML 里就没有它
+            const html = renderToString(<Loading tip="正在加载" />);
+            expect(html).toContain('role="status"');
+            expect(html).toContain('正在加载');
+        });
+
+        it('circle 形态没有进入淡入动画（首帧即完全不透明）', () => {
+            render(<Loading type="circle" />);
+            const status = screen.getByRole('status');
+            // 淡入的那 0.2s 遮罩是透明的，底下已经铺好的内容会透出来
+            expect(getComputedStyle(status).animationName).toBe('none');
+            expect(getComputedStyle(status).opacity).toBe('1');
+        });
+
+        it('delay>0 时首帧不渲染，等延迟到了再出现', () => {
+            const html = renderToString(<Loading delay={300} />);
+            expect(html).not.toContain('role="status"');
+        });
+
+        it('active=false 时服务端渲染同样为空', () => {
+            const html = renderToString(<Loading active={false} />);
+            expect(html).not.toContain('role="status"');
+        });
+
         it('zIndex 默认 3000，可通过 prop 覆盖', () => {
             const { container, rerender } = render(<Loading />);
             expect(container.firstChild).toHaveStyle({ zIndex: '3000' });
@@ -57,6 +84,134 @@ describe('Loading', () => {
             const { container } = render(<Loading className="custom-class" data-scope="snow" />);
             expect(container.firstChild).toHaveClass('custom-class');
             expect(container.firstChild).toHaveAttribute('data-scope', 'snow');
+        });
+
+        it('style 与组件内建样式合并（zIndex 不会被传入的 style 覆盖掉）', () => {
+            const { container } = render(<Loading style={{ backgroundColor: 'red' }} />);
+            const root = container.firstChild as HTMLElement;
+            expect(root.style.zIndex).toBe('3000');
+            expect(root.style.backgroundColor).toBe('red');
+        });
+    });
+
+    describe('圆形展开形态', () => {
+        it('type=circle 渲染帆船场景，不渲染雪花层', () => {
+            const { container } = render(<Loading type="circle" />);
+            expect(container.querySelector(`.${styles.snow}`)).toBeNull();
+            expect(container.querySelector(`.${styles.sailboatScene}`)).toBeInTheDocument();
+            expect(container.querySelector('svg')).toBeInTheDocument();
+        });
+
+        it('默认形态仍是落雪', () => {
+            const { container } = render(<Loading />);
+            expect(container.querySelector(`.${styles.snow}`)).toBeInTheDocument();
+            expect(container.querySelector(`.${styles.sailboatScene}`)).toBeNull();
+            expect(container.firstChild).toHaveClass(styles.loading);
+        });
+
+        it('帆船场景为装饰性内容，aria-hidden', () => {
+            const { container } = render(<Loading type="circle" />);
+            const scene = container.querySelector(`.${styles.sailboatScene}`) as HTMLElement;
+            expect(scene).toHaveAttribute('aria-hidden', 'true');
+        });
+
+        it('circle 形态下 tip 仍然渲染在根元素内', () => {
+            render(<Loading type="circle" tip="正在驶向岛屿…" />);
+            expect(screen.getByText('正在驶向岛屿…')).toHaveClass(styles.tip);
+            expect(screen.queryByText('加载中')).not.toBeInTheDocument();
+        });
+
+        it('circle 形态的波浪层铺满画布宽度所需的份数（4 段平铺）', () => {
+            const { container } = render(<Loading type="circle" />);
+            const uses = container.querySelectorAll('svg use');
+            expect(uses).toHaveLength(4);
+        });
+
+        it('帆船停在右下角（离右 20px、离下 30px）', () => {
+            const { container } = render(<Loading type="circle" />);
+            const scene = container.querySelector(`.${styles.sailboatScene}`) as HTMLElement;
+            const cs = getComputedStyle(scene);
+            expect(cs.position).toBe('absolute');
+            expect(cs.right).toBe('20px');
+            expect(cs.bottom).toBe('30px');
+        });
+
+        it('showBoat=false 时不渲染帆船，但保留遮罩与提示文字', () => {
+            const { container } = render(<Loading type="circle" showBoat={false} tip="加载中" />);
+            expect(container.querySelector(`.${styles.sailboatScene}`)).toBeNull();
+            expect(container.querySelector('svg')).toBeNull();
+            expect(screen.getByText('加载中')).toHaveClass(styles.tip);
+        });
+
+        it('showBoat=false 不影响圆形展开：active→false 仍加 masking 类', () => {
+            vi.useFakeTimers();
+            const { rerender } = render(<Loading type="circle" showBoat={false} />);
+            rerender(<Loading type="circle" showBoat={false} active={false} />);
+            const status = screen.getByRole('status');
+            expect(status).toHaveClass(styles.masking);
+            expect(status).not.toHaveClass(styles.exiting);
+            vi.useRealTimers();
+        });
+
+        it('多个实例的 <use> 引用目标互不相同（不会串扰）', () => {
+            const { container } = render(
+                <>
+                    <Loading type="circle" />
+                    <Loading type="circle" />
+                </>
+            );
+            const ids = Array.from(container.querySelectorAll('svg use')).map((u) => u.getAttribute('href'));
+            // 同一实例的 4 段平铺共用一个引用目标，两个实例各一个 —— 目标不同才不会互相覆盖
+            expect(ids).toHaveLength(8);
+            expect(new Set(ids).size).toBe(2);
+        });
+    });
+
+    describe('圆形扩散展开', () => {
+        afterEach(() => {
+            vi.useRealTimers();
+        });
+
+        it('active→false 后加 masking 类而非 exiting 类', () => {
+            vi.useFakeTimers();
+            const { rerender } = render(<Loading type="circle" />);
+            rerender(<Loading type="circle" active={false} />);
+            const status = screen.getByRole('status');
+            expect(status).toHaveClass(styles.masking);
+            expect(status).not.toHaveClass(styles.exiting);
+        });
+
+        it('遮罩半径写成内联 CSS 变量，过渡时长取自 fadeDuration', () => {
+            vi.useFakeTimers();
+            const { rerender } = render(<Loading type="circle" fadeDuration={1.2} />);
+            rerender(<Loading type="circle" fadeDuration={1.2} active={false} />);
+            const status = screen.getByRole('status') as HTMLElement;
+            expect(status.style.getPropertyValue('--animal-loading-mask-duration')).toBe('1.2s');
+            expect(parseFloat(status.style.getPropertyValue('--animal-loading-mask-r'))).toBeGreaterThan(0);
+        });
+
+        it('展开走完后卸载', () => {
+            vi.useFakeTimers();
+            const { rerender } = render(<Loading type="circle" fadeDuration={0.6} />);
+            rerender(<Loading type="circle" fadeDuration={0.6} active={false} />);
+            expect(screen.getByRole('status')).toBeInTheDocument();
+            act(() => vi.advanceTimersByTime(600));
+            expect(screen.queryByRole('status')).toBeNull();
+        });
+
+        it('展开途中恢复 active：遮罩半径归零，下次关闭仍能重新展开', () => {
+            vi.useFakeTimers();
+            const { rerender } = render(<Loading type="circle" fadeDuration={0.6} />);
+            rerender(<Loading type="circle" fadeDuration={0.6} active={false} />);
+            act(() => vi.advanceTimersByTime(300));
+            rerender(<Loading type="circle" fadeDuration={0.6} active />);
+            const status = screen.getByRole('status') as HTMLElement;
+            expect(status).not.toHaveClass(styles.masking);
+            expect(status.style.getPropertyValue('--animal-loading-mask-r')).toBe('0px');
+
+            // 再次关闭时半径要重新写成目标值，而不是停留在 0
+            rerender(<Loading type="circle" fadeDuration={0.6} active={false} />);
+            expect(parseFloat(status.style.getPropertyValue('--animal-loading-mask-r'))).toBeGreaterThan(0);
         });
     });
 

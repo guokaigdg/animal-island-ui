@@ -122,7 +122,7 @@ export const PAGE_INFO: Record<string, { title: string; desc: string }> = {
     },
     loading: {
         title: 'Loading 加载',
-        desc: '全屏落雪加载指示器 — 50 片随机雪花旋转飘落 + 暗角夜空，中央提示文字、delay 防闪烁，结束时渐变消失',
+        desc: '全屏加载指示器 — type="snow" 是 50 片随机雪花旋转飘落 + 暗角夜空，type="circle" 关闭时圆形扩散展开、右下角一艘帆船随波逐流',
     },
     form: {
         title: 'Form 表单',

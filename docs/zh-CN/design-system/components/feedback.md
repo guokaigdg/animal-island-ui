@@ -100,18 +100,25 @@ interface ProgressProps {
 
 海浪复用 `src/internal/Wave.tsx` 与 `wave.module.less`：128px 波长，6s / 9s 匀速反向循环，透明度 0.28 / 0.48；第二层顶部偏移 20%、相位偏移 -32px。同时提供 `-webkit-mask` / `mask` 及对应的位置声明，兼容需要前缀的 WebKit 引擎。固定纹理波长配合 transform 位移，fill 宽度仍对应真实百分比。轨道最小宽度为 0，可适配 Upload 的 84px 图片卡片。
 
-## Loading（全屏落雪）
+## Loading（全屏落雪 / 圆形扩散展开）
 
-源码：`src/components/Loading/Loading.tsx` + `types.ts` + `loading.module.less`。
-全屏夜空落雪：50 片白色圆点雪花（1–6px 随机尺寸与位置）从视口上方旋转飘落，每片拥有独立的 6–12s 线性时长与负延迟，首屏即刻铺满。`active` 变为 false 时整体按 `fadeDuration` 秒渐变消失，随后卸载。
+源码：`src/components/Loading/Loading.tsx` + `Sailboat.tsx` + `types.ts` + `loading.module.less` + `sailboat.module.less`。
+同一个全屏外壳，由 `type` 选择两种形态：
+
+- `type="snow"`（默认）——全屏夜空落雪：50 片白色圆点雪花（1–6px 随机尺寸与位置）从视口上方旋转飘落，每片拥有独立的 6–12s 线性时长与负延迟，首屏即刻铺满。`active` 变为 false 时整体按 `fadeDuration` 秒渐变消失，随后卸载。
+- `type="circle"` —— `active` 变为 false 时不是淡出，而是**从中心开出不断扩大的透明圆孔**，把遮罩一圈圈展开，露出底层内容。右下角有一艘驶在横向流动海面上的帆船（naive-icons 的 `sailboat`，MIT），船身随波浮沉摇曳，底下的波浪线持续侧向滚动；传 `showBoat={false}` 可以去掉帆船，只留遮罩背景。
 
 **props**：
 ```ts
+type LoadingType = 'snow' | 'circle';
+
 interface LoadingProps extends React.HTMLAttributes<HTMLDivElement> {
+    type?: LoadingType;     // default 'snow'; 'circle' swaps the scene and the exit animation
+    showBoat?: boolean;     // default true; 'circle' only — false leaves just the masked backdrop
     active?: boolean;       // true/false toggles the screen; default true; false → fade out then unmount
     tip?: React.ReactNode;  // centred caption over the snowfall; falls back to a visually-hidden 加载中
     delay?: number;         // ms before the screen appears; default 0; re-arms on every active→true transition
-    fadeDuration?: number;  // fade-out duration in seconds; default 0.6
+    fadeDuration?: number;  // fade-out duration in seconds; default 0.6; for 'circle' it drives the circle expansion
     zIndex?: number;        // default 3000 (above Notification's 2000)
 }
 ```
@@ -126,6 +133,9 @@ interface LoadingProps extends React.HTMLAttributes<HTMLDivElement> {
     opacity: 1;
     transition: opacity 0.25s cubic-bezier(0.4, 0, 0.2, 1);
     animation: animal-loading-fade-in 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.loading.circle {                     /* circle variant: no enter fade */
+    animation: none;
 }
 .loading.exiting {                    /* fade-out state */
     opacity: 0;
@@ -174,11 +184,78 @@ interface LoadingProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 ```
 
+**圆形形态（`type="circle"`）：**
+
+场景是图标自带的 48×48 viewBox，停在**右下角**（离右 20px、离下 30px，宽 120px）。波浪保持 naive-icons 的原始长度 —— 和船身一样宽 —— 并向侧向滚动。
+
+```css
+.sailboatScene {
+    position: absolute;
+    right: 20px;
+    bottom: 30px;
+    width: 120px;
+    max-width: 40vw;
+}
+```
+
+`tip` 仍然居中于视口（复用公共的 `.tip` 规则），因此提示文字与船身不会打架。
+
+**波浪（侧向滚动，无接缝）：**
+```css
+.waveTrack {
+    animation: animal-sailboat-wave 4s linear infinite;
+}
+@keyframes animal-sailboat-wave {
+    from { transform: translateX(0); }
+    to   { transform: translateX(var(--animal-sailboat-wave-scroll, 28.73px)); }  /* px = SVG user units here */
+}
+```
+naive-icons 的波浪路径横跨 4.85 → 43.15，分成 4 段完全等长的 9.575，因此波形每 38.3 重复一次。路径整体平移 −4.85 让第 0 份正好从画布原点起画，再按 38.3 铺开（偏移 −81.45 / −43.15 / −4.85 / 33.45）。每个周期滚动 **28.74** 单位 —— 即一个可见窗口的宽度；滚动距离由 TS 常量通过内联 `--animal-sailboat-wave-scroll` 下发，两处数字不会对不上。
+
+**缩短的波浪**：只露出中间 3 个波形周期 —— 居中的 28.74 单位窗口，比 32.56 单位的船身窄一截。这个窗口是普通的 SVG **clipPath**（硬切，不做渐变）。线宽同步收细到 **1.9** —— naive-icons 的 2.5 是按 38.3 单位的整条波浪定的，波浪变短后不收细就会变成一条粗带子。
+
+波浪整组比图标原本的位置**下沉 1.2 个单位**（船底在 y=39.32，波峰在 41.24），船身与水面之间因此留出一道空隙。
+
+**船身缩小**：船组按 **0.8** 缩放，支点取船底中心 (24, 39.32) —— 船底留在原处贴着水面，只是船变小了。波浪层完全不受影响，长度、线宽、位置都保持原样。
+
+**船身（浮沉与摇曳）：**
+```css
+.boat {
+    animation: animal-sailboat-bob 1s ease-in-out infinite alternate;
+}
+@keyframes animal-sailboat-bob {
+    from { transform: translateY(0) rotate(0deg); }
+    to   { transform: translateY(-2px) rotate(1deg); }
+}
+```
+`alternate` 等价于 GSAP 的 `yoyo: true`：船身 1 秒内升起并侧倾，再缓缓荡回。
+
+**圆形展开（退出）：**
+```css
+@property --animal-loading-mask-r {   /* registered → the radius can be transitioned */
+    syntax: '<length>'; inherits: false; initial-value: 0px;
+}
+.masking {
+    -webkit-mask-image: radial-gradient(circle at center,
+        transparent var(--animal-loading-mask-r),
+        black calc(var(--animal-loading-mask-r) + 1px));
+    mask-image: radial-gradient(circle at center,
+        transparent var(--animal-loading-mask-r),
+        black calc(var(--animal-loading-mask-r) + 1px));
+    transition: --animal-loading-mask-r var(--animal-loading-mask-duration, 0.6s) linear;
+    pointer-events: none;
+}
+```
+最终半径为 `ceil(hypot(width, height) / 2) + 50` —— 必须完全覆盖到最远角的对角线，否则四角会残留遮罩。它以内联自定义属性的形式写在根元素上，且**在 `masking` 类挂上之后**才写入，因此半径一定是从 0 开始过渡。展开途中恢复 `active` 会把半径归零，下次关闭仍能重新展开。
+
 **关键交互细节：**
+- **首帧**：`shown` 的初值直接由 `active && delay === 0` 推导，遮罩在第一帧就在，而不是等 effect 跑完才出现。`circle` 形态另外去掉了进入淡入（`animation: none`）—— 全屏遮罩从透明淡入的那 0.2s 会把底下已经铺好的内容透出来，恰恰是页面级 Loading 要避免的那种闪屏。
 - **退出时序**：`active` → false 时落雪保持挂载并加 `exiting` 类（opacity → 0、`pointer-events: none`），`fadeDuration * 1000` 毫秒计时结束后卸载。淡出途中恢复 `active` 会取消计时器并立即回到不透明。
+- **退出时序（circle）**：`active` → false 时加的是 `masking` 类而非 `exiting` —— 屏幕由中心向外扩大的透明圆孔展开，而不是淡出，`fadeDuration` 此时就是圆形展开的时长。两种形态用同一个计时器卸载。
+- `type` 只切换场景与退出动画 —— `active` / `tip` / `delay` / `fadeDuration` / `zIndex` 两种形态行为一致。
 - `delay` 在每次 `active` 切换为 `true` 时重新计时，加载快速结束时雪花屏不会闪烁。
-- a11y：根元素带 `role="status"`；落雪包裹层与暗角均 `aria-hidden`；无 `tip` 时用视觉隐藏的 `加载中` span 提供可读内容。
-- `prefers-reduced-motion: reduce` 暂停飘落与进入动画；opacity 渐隐不属于位移运动，予以保留。落雪是**暂停而非移除**——`animation: none` 会让 50 片雪花全部退回静止位置 `top: -30px`（视口上方），只剩一块夜空底；纯落雪无 `tip` 时没有任何可见元素，看起来就是黑屏。由于每片雪花本就带**负延迟**（从周期中段起步），暂停会把每片冻结在下落途中的随机高度，开启「减弱动态效果」的用户看到的是一张铺满视口的静态雪景。
+- a11y：根元素带 `role="status"`；落雪包裹层与暗角均 `aria-hidden`，帆船场景同样 `aria-hidden`；无 `tip` 时用视觉隐藏的 `加载中` span 提供可读内容。
+- `prefers-reduced-motion: reduce` 暂停飘落与进入动画；opacity 渐隐不属于位移运动，予以保留。落雪是**暂停而非移除**——`animation: none` 会让 50 片雪花全部退回静止位置 `top: -30px`（视口上方），只剩一块夜空底；纯落雪无 `tip` 时没有任何可见元素，看起来就是黑屏。由于每片雪花本就带**负延迟**（从周期中段起步），暂停会把每片冻结在下落途中的随机高度，开启「减弱动态效果」的用户看到的是一张铺满视口的静态雪景。帆船的波浪与浮沉同样只暂停不移除 —— 波浪的静止位置本就在画布内，暂停后是一幅静止的海景。
 
 ## Skeleton（流光占位）
 

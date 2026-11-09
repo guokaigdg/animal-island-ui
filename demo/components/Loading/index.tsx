@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Loading, Button } from '../../../src';
+import { Loading, LoadingType, Button } from '../../../src';
 import {
     CodeBlock,
     ApiTable,
@@ -12,16 +12,35 @@ import {
 } from '../../tools';
 
 const LOADING_API: ApiRow[] = [
+    {
+        prop: 'type',
+        desc: '加载屏形态：snow 全屏落雪 / circle 圆形扩散展开',
+        type: "'snow' | 'circle'",
+        defaultVal: "'snow'",
+    },
+    {
+        prop: 'showBoat',
+        desc: 'circle 形态下是否显示帆船；false 时只留遮罩背景',
+        type: 'boolean',
+        defaultVal: 'true',
+    },
     { prop: 'active', desc: 'true / false 控制开启关闭；false 时落雪渐变消失', type: 'boolean', defaultVal: 'true' },
-    { prop: 'tip', desc: '落雪中央提示文字', type: 'ReactNode', defaultVal: '-' },
+    { prop: 'tip', desc: '中央提示文字', type: 'ReactNode', defaultVal: '-' },
     { prop: 'delay', desc: '延迟显示时间（毫秒），避免加载快速结束时闪烁', type: 'number', defaultVal: '0' },
-    { prop: 'fadeDuration', desc: '渐变消失时长（秒）', type: 'number', defaultVal: '0.6' },
+    {
+        prop: 'fadeDuration',
+        desc: '渐变消失时长（秒）；circle 下为圆形扩散展开的时长',
+        type: 'number',
+        defaultVal: '0.6',
+    },
     { prop: 'zIndex', desc: '全屏层级（默认 3000，高于 Notification 的 2000）', type: 'number', defaultVal: '3000' },
     { prop: 'className / style / aria-*', desc: '透传到根元素', type: '-', defaultVal: '-' },
 ];
 
 const LoadingDemo: React.FC = () => {
     const [active, setActive] = useState(false);
+    const [type, setType] = useState<LoadingType>('snow');
+    const [showBoat, setShowBoat] = useState(true);
     const [tip, setTip] = useState<string | undefined>();
     const [delay, setDelay] = useState(0);
     const timerRef = useRef<number>(undefined);
@@ -29,10 +48,12 @@ const LoadingDemo: React.FC = () => {
     useEffect(() => () => window.clearTimeout(timerRef.current), []);
 
     // 播放一次：2.4s 后自动关闭，随后落雪渐变消失
-    const play = (opts?: { tip?: string; delay?: number }) => {
+    const play = (opts?: { tip?: string; delay?: number; type?: LoadingType; showBoat?: boolean }) => {
         window.clearTimeout(timerRef.current);
         setTip(opts?.tip);
         setDelay(opts?.delay ?? 0);
+        setType(opts?.type ?? 'snow');
+        setShowBoat(opts?.showBoat ?? true);
         setActive(true);
         timerRef.current = window.setTimeout(() => setActive(false), 2400);
     };
@@ -40,9 +61,22 @@ const LoadingDemo: React.FC = () => {
     return (
         <div style={sectionStyle}>
             <div style={sectionTitleStyle}>
-                Loading <DemoTag>全屏落雪</DemoTag> <DemoTag>渐变消失</DemoTag>
+                Loading <DemoTag>全屏落雪</DemoTag> <DemoTag>圆形扩散展开</DemoTag> <DemoTag>渐变消失</DemoTag>
             </div>
             <div style={demoBodyStyle}>
+                <div style={labelStyle}>
+                    形态切换 — type='snow' 是全屏落雪，type='circle'
+                    关闭时从中心圆形扩散展开，右下角有一艘随波逐流的帆船
+                </div>
+                <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginBottom: 20 }}>
+                    <Button onClick={() => play({ type: 'snow' })}>落雪型</Button>
+                    <Button onClick={() => play({ type: 'circle' })}>圆形展开型</Button>
+                    <Button onClick={() => play({ type: 'circle', tip: '正在驶向岛屿…' })}>
+                        圆形展开型 · 带提示文字
+                    </Button>
+                    <Button onClick={() => play({ type: 'circle', showBoat: false })}>圆形展开型 · 不显示帆船</Button>
+                </div>
+
                 <div style={labelStyle}>基础播放 — 点击后全屏落雪覆盖 2.4s，结束时渐变消失</div>
                 <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginBottom: 20 }}>
                     <Button onClick={() => play()}>纯落雪</Button>
@@ -60,6 +94,7 @@ const LoadingDemo: React.FC = () => {
                             window.clearTimeout(timerRef.current);
                             setTip('无 delay');
                             setDelay(0);
+                            setType('snow');
                             setActive(true);
                             timerRef.current = window.setTimeout(() => setActive(false), 600);
                         }}
@@ -71,6 +106,7 @@ const LoadingDemo: React.FC = () => {
                             window.clearTimeout(timerRef.current);
                             setTip('delay 300ms');
                             setDelay(300);
+                            setType('snow');
                             setActive(true);
                             timerRef.current = window.setTimeout(() => setActive(false), 600);
                         }}
@@ -83,8 +119,14 @@ const LoadingDemo: React.FC = () => {
             <CodeBlock
                 code={`import { Loading } from 'animal-island-ui';
 
-// active 受控：true 开启落雪，false 渐变消失
+// 全屏落雪（默认形态）
 <Loading active={active} />
+
+// 圆形扩散展开，右下角带一艘帆船
+<Loading active={active} type="circle" tip="正在驶向岛屿…" />
+
+// 只要圆形展开，不要帆船
+<Loading active={active} type="circle" showBoat={false} />
 
 // 中央提示文字
 <Loading active={active} tip="正在连接岛屿…" />
@@ -99,6 +141,8 @@ const LoadingDemo: React.FC = () => {
 
             <Loading
                 active={active}
+                type={type}
+                showBoat={showBoat}
                 tip={tip}
                 delay={delay}
                 fadeDuration={tip === '慢速渐隐' ? 1.2 : 0.6}

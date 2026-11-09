@@ -2,7 +2,16 @@
 // Loading — Animal Island Style
 // 全屏夜晚落雪：50 片随机大小的白色雪花从屏幕顶端旋转飘落，
 // 加载结束时整体渐变消失
+// 另有帆船形态：帆船随波逐流，关闭时圆形扩散展开
 // ============================================
+
+// 圆形扩散展开的半径。未注册的 CSS 自定义属性无法被 transition 插值，
+// 只能离散跳变 —— 这里必须注册为 <length> 才能做出扩散动画
+@property --animal-loading-mask-r {
+    syntax: '<length>';
+    inherits: false;
+    initial-value: 0px;
+}
 
 // ---------- Tokens (avoid importing variables.less in module CSS) ----------
 @night-sky: #0b101a; // 夜空深蓝屏底
@@ -21,9 +30,32 @@
     animation: animal-loading-fade-in 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+// 圆形形态不加淡入：全屏遮罩从透明淡入的那 0.2s 会把底下的内容透出来，
+// 而圆形形态恰恰是「内容已在下面铺好、靠圆形扩散揭开」用的 —— 必须一上来就完全不透明
+.loading.circle {
+    animation: none;
+}
+
 // 渐变消失：整体淡出并放行点击
 .loading.exiting {
     opacity: 0;
+    pointer-events: none;
+}
+
+// 圆形扩散展开：从中心开出透明圆孔，露出底层内容。
+// 遮罩本身不做过渡，过渡的是 --animal-loading-mask-r 这个半径变量
+.masking {
+    -webkit-mask-image: radial-gradient(
+        circle at center,
+        transparent var(--animal-loading-mask-r),
+        black calc(var(--animal-loading-mask-r) + 1px)
+    );
+    mask-image: radial-gradient(
+        circle at center,
+        transparent var(--animal-loading-mask-r),
+        black calc(var(--animal-loading-mask-r) + 1px)
+    );
+    transition: --animal-loading-mask-r var(--animal-loading-mask-duration, 0.6s) linear;
     pointer-events: none;
 }
 
@@ -31,6 +63,16 @@
     from {
         opacity: 0;
     }
+}
+
+// ---------- 帆船形态 ----------
+// 帆船停在右下角，与原版 Loading 的插画位置一致（离右 20px，离下 30px）
+.sailboatScene {
+    position: absolute;
+    right: 20px;
+    bottom: 30px;
+    width: 120px;
+    max-width: 40vw;
 }
 
 // ---------- 雪花层（aria-hidden 包裹层） ----------

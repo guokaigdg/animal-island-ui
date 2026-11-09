@@ -50,31 +50,41 @@ Notes:
 
 ## Loading
 
-Fullscreen night-sky snowfall over a `#0b101a` base: 50 white round flakes (1–6px, randomly sized and positioned) fall from above the viewport while rotating, each with its own 6–12s linear duration and a negative delay so the screen is instantly filled. A centre vignette adds depth; the optional `tip` floats centred in cream white. When `active` turns false the whole screen fades out over `fadeDuration` seconds, then unmounts.
+Two fullscreen variants over the same `#0b101a` night-sky base, chosen by `type`:
+
+- `'snow'` (default) — 50 white round flakes (1–6px, randomly sized and positioned) fall from above the viewport while rotating, each with its own 6–12s linear duration and a negative delay so the screen is instantly filled. A centre vignette adds depth; the optional `tip` floats centred in cream white. When `active` turns false the whole screen fades out over `fadeDuration` seconds, then unmounts.
+- `'circle'` — when `active` turns false the screen is erased by an expanding transparent circle from the centre instead of fading. A sailboat (naive-icons `sailboat`, MIT) rides a scrolling sea in the bottom-right corner: the hull bobs and rocks while the wave line scrolls sideways. `showBoat={false}` drops the boat and keeps just the masked backdrop.
 
 ```ts
+type LoadingType = 'snow' | 'circle';
+
 interface LoadingProps extends React.HTMLAttributes<HTMLDivElement> {
+    type?: LoadingType; // default 'snow'; 'circle' swaps the scene and the exit animation
+    showBoat?: boolean; // default true; 'circle' only — false leaves just the masked backdrop
     active?: boolean; // true/false toggles the screen; default true; false → fade out then unmount
     tip?: React.ReactNode; // centred caption; falls back to a visually-hidden 加载中
     delay?: number; // ms before the screen appears; default 0; re-arms on every active→true transition
-    fadeDuration?: number; // fade-out duration in seconds; default 0.6
+    fadeDuration?: number; // fade-out duration in seconds; default 0.6; for 'circle' it drives the circle expansion
     zIndex?: number; // default 3000 (above Notification's 2000)
 }
 ```
 
 ```tsx
 <Loading active={active} />
-<Loading active={active} tip="正在连接岛屿…" />
+<Loading active={active} type="circle" tip="正在驶向岛屿…" />
+<Loading active={active} type="circle" showBoat={false} />
 <Loading active={active} delay={300} />
 <Loading active={active} fadeDuration={1.2} zIndex={5000} />
 ```
 
 Notes:
 
-- **Exit sequence**: `active` → false keeps the screen mounted with an `exiting` class (opacity → 0, `pointer-events: none`); a `fadeDuration * 1000` ms timer then unmounts it. Restoring `active` mid-fade cancels the timer and snaps back to opaque instantly.
+- **First frame**: `shown` starts from `active && delay === 0`, so the screen is in the first paint; the `circle` variant also drops the enter fade (`animation: none`) — a fullscreen mask fading in from transparent would show the content underneath for those 0.2s.
+- **Exit sequence**: `active` → false keeps the screen mounted with an `exiting` class (opacity → 0, `pointer-events: none`); a `fadeDuration * 1000` ms timer then unmounts it. Restoring `active` mid-fade cancels the timer and snaps back to opaque instantly. For `'circle'` the class is `masking` instead: a registered `--animal-loading-mask-r` custom property transitions from 0 to `ceil(hypot(w, h) / 2) + 50` and a radial mask punches that hole out of the screen. The radius must be written *after* the class is applied so it always transitions from 0, and restoring `active` resets it to 0.
 - **`delay` prevents flash**: the timer re-arms on every `active` → `true` transition, so a 600ms load with `delay={300}` barely flickers.
 - **Flakes are generated once per mount** (`useMemo`): random size 1–6px, `left` 0–100%, duration 6–12s, and a *negative* delay that starts each flake mid-cycle so the first frame is already full of snow instead of waiting up to 10s.
-- **A11y**: the root carries `role="status"`; the snowfall wrapper and vignette are `aria-hidden`; without `tip`, a visually-hidden `加载中` span provides the accessible content. Under `prefers-reduced-motion: reduce` the snowfall is **paused rather than removed** — never use `animation: none` here: the flakes' only source of visibility is the animation and their static position is `top: -30px`, above the viewport, so removing it leaves a bare black backdrop. The built-in negative `animation-delay` is what makes pausing useful: each flake freezes at a random point along its fall, producing a static snow scene that fills the viewport. The opacity fade is kept since it is not motion.
+- **Sailboat scene**: one SVG in the icon's own 48×48 viewBox, parked in the **bottom-right corner** (20px from the right, 30px from the bottom, 120px wide) just like the illustration in the original island Loading. The wave is shortened to the middle 3 wave periods (a 28.74 unit window centred on the canvas, narrower than the 32.56 unit hull) and its stroke thinned to 1.9 to keep it a line rather than a band; the window is a plain SVG clipPath — a hard cut, no fade. The wave group sits 1.2 units lower than the icon's own artwork so a gap opens between the hull and the water. The path is shifted by −4.85 so copy 0 starts at the canvas origin, then tiled every 38.3 (the wave's full period) into 4 copies; the scroll covers one window width per 4s and the distance is passed down as the inline `--animal-sailboat-wave-scroll` custom property so the LESS and the TypeScript constant cannot drift apart. The boat group is scaled to 0.8 about its hull bottom centre (24, 39.32) so the boat shrinks while the wave keeps its length, stroke and position. The boat bobs and rocks over 1s with `alternate` (GSAP's `yoyo`). Every instance gets its own `<defs>` id, so several Loading screens can coexist without the waves crossing over.
+- **A11y**: the root carries `role="status"`; the snowfall wrapper, the vignette and the sailboat scene are `aria-hidden`; without `tip`, a visually-hidden `加载中` span provides the accessible content. Under `prefers-reduced-motion: reduce` the snowfall is **paused rather than removed** — never use `animation: none` here: the flakes' only source of visibility is the animation and their static position is `top: -30px`, above the viewport, so removing it leaves a bare black backdrop. The built-in negative `animation-delay` is what makes pausing useful: each flake freezes at a random point along its fall, producing a static snow scene that fills the viewport. The opacity fade is kept since it is not motion. The sailboat's wave and bob are paused the same way — the wave rests inside the canvas, so a still seascape remains.
 
 ## Skeleton
 

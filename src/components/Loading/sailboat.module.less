@@ -1,0 +1,48 @@
+// ============================================
+// Sailboat — 帆船随波逐流
+// 图形取自 naive-icons 的 sailboat（MIT），波浪层单独铺开做横向滚动
+// ============================================
+
+.svg {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+// 船身浮沉：上下轻移并微微摇曳
+.boat {
+    animation: animal-sailboat-bob 1s ease-in-out infinite alternate;
+}
+
+// 波浪层：整条路径横移一个可见窗口的宽度（28.74 user units），与起点无缝衔接
+.waveTrack {
+    animation: animal-sailboat-wave 4s linear infinite;
+}
+
+@keyframes animal-sailboat-bob {
+    from {
+        transform: translateY(0) rotate(0deg);
+    }
+    to {
+        transform: translateY(-2px) rotate(1deg);
+    }
+}
+
+@keyframes animal-sailboat-wave {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(var(--animal-sailboat-wave-scroll, 28.73px));
+    }
+}
+
+// ---------- Reduced motion ----------
+// 暂停而不是移除：波浪路径的静止位置就在画布内，`animation: none` 只是让水停住，
+// 船仍在原位 —— 画面不会塌成空白
+@media (prefers-reduced-motion: reduce) {
+    .boat,
+    .waveTrack {
+        animation: none;
+    }
+}

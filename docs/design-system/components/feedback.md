@@ -100,18 +100,25 @@ The small dot layer carries over from the old wallpaper track — 14px grid, 7px
 
 Waves reuse `src/internal/Wave.tsx` and `wave.module.less`: 128px wavelength, opposing linear 6s / 9s loops, opacity 0.28 / 0.48; the second layer starts 20% lower with a -32px phase offset. Both `-webkit-mask` / `mask` and their position declarations are provided for prefixed WebKit engines. Fixed-width masks translate while the fill width still represents the actual percentage. The track minimum width is 0 to fit Upload’s 84px picture cards.
 
-## Loading (fullscreen falling snow)
+## Loading (fullscreen falling snow / circular expansion)
 
-Source: `src/components/Loading/Loading.tsx` + `types.ts` + `loading.module.less`.
-A fullscreen night-sky snowfall: 50 white round flakes (1–6px, randomly sized and positioned) fall from above the viewport while rotating, each with its own 6–12s linear duration and a negative delay so the screen is instantly filled. When `active` turns false the whole screen fades out over `fadeDuration` seconds, then unmounts.
+Source: `src/components/Loading/Loading.tsx` + `Sailboat.tsx` + `types.ts` + `loading.module.less` + `sailboat.module.less`.
+One fullscreen shell, two variants selected by `type`:
+
+- `type="snow"` (default) — a night-sky snowfall: 50 white round flakes (1–6px, randomly sized and positioned) fall from above the viewport while rotating, each with its own 6–12s linear duration and a negative delay so the screen is instantly filled. When `active` turns false the whole screen fades out over `fadeDuration` seconds, then unmounts.
+- `type="circle"` — the screen is **erased by an expanding circle** from the centre when `active` turns false, exposing the content underneath, instead of fading out. A sailboat (naive-icons `sailboat`, MIT) rides a scrolling sea in the bottom-right corner — the hull bobs and rocks while the wave line scrolls sideways. Pass `showBoat={false}` to drop the boat and keep just the masked backdrop.
 
 **props**:
 ```ts
+type LoadingType = 'snow' | 'circle';
+
 interface LoadingProps extends React.HTMLAttributes<HTMLDivElement> {
+    type?: LoadingType;     // default 'snow'; 'circle' swaps the scene and the exit animation
+    showBoat?: boolean;     // default true; 'circle' only — false leaves just the masked backdrop
     active?: boolean;       // true/false toggles the screen; default true; false → fade out then unmount
     tip?: React.ReactNode;  // centred caption over the snowfall; falls back to a visually-hidden 加载中
     delay?: number;         // ms before the screen appears; default 0; re-arms on every active→true transition
-    fadeDuration?: number;  // fade-out duration in seconds; default 0.6
+    fadeDuration?: number;  // fade-out duration in seconds; default 0.6; for 'circle' it drives the circle expansion
     zIndex?: number;        // default 3000 (above Notification's 2000)
 }
 ```
@@ -126,6 +133,9 @@ interface LoadingProps extends React.HTMLAttributes<HTMLDivElement> {
     opacity: 1;
     transition: opacity 0.25s cubic-bezier(0.4, 0, 0.2, 1);
     animation: animal-loading-fade-in 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.loading.circle {                     /* circle variant: no enter fade */
+    animation: none;
 }
 .loading.exiting {                    /* fade-out state */
     opacity: 0;
@@ -174,11 +184,78 @@ interface LoadingProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 ```
 
+**Circle variant (`type="circle"`):**
+
+The scene is one SVG in the icon's own 48×48 viewBox, parked in the **bottom-right corner** (20px from the right, 30px from the bottom, 120px wide). The wave keeps the naive-icons length — as wide as the boat itself — and scrolls sideways.
+
+```css
+.sailboatScene {
+    position: absolute;
+    right: 20px;
+    bottom: 30px;
+    width: 120px;
+    max-width: 40vw;
+}
+```
+
+The `tip` stays centred in the viewport (the shared `.tip` rule), so the caption and the boat never collide.
+
+**Wave (scrolls sideways, seamless):**
+```css
+.waveTrack {
+    animation: animal-sailboat-wave 4s linear infinite;
+}
+@keyframes animal-sailboat-wave {
+    from { transform: translateX(0); }
+    to   { transform: translateX(var(--animal-sailboat-wave-scroll, 28.73px)); }  /* px = SVG user units here */
+}
+```
+The naive-icons wave path spans 4.85 → 43.15 and is made of 4 identical segments of 9.575, so the wave form repeats every 38.3. The path is shifted by −4.85 so copy 0 starts at the canvas origin, then tiled every 38.3 (offsets −81.45 / −43.15 / −4.85 / 33.45). The scroll distance is one **28.74** unit window per cycle — the inline `--animal-sailboat-wave-scroll` custom property is set from the TypeScript constant so the two can never drift apart.
+
+**Shorter wave:** only the middle 3 wave periods are visible — a 28.74 unit window centred on the canvas, narrower than the 32.56 unit hull. The window is a plain SVG **clipPath** (a hard cut, no fade). The stroke is thinned to **1.9** to match: the naive-icons 2.5 was sized for the full 38.3 unit wave, and on a shorter wave it would turn into a thick band.
+
+The wave group sits **1.2 units lower** than the icon's own artwork (the hull ends at y=39.32, the wave crest at 41.24), so a visible gap opens between the hull and the water.
+
+**Smaller boat:** the boat group is scaled to **0.8** about its hull bottom centre (24, 39.32), so the hull stays on the waterline and only the boat shrinks. The wave layer is untouched — it keeps its own length, stroke and position.
+
+**Boat (bobs and rocks):**
+```css
+.boat {
+    animation: animal-sailboat-bob 1s ease-in-out infinite alternate;
+}
+@keyframes animal-sailboat-bob {
+    from { transform: translateY(0) rotate(0deg); }
+    to   { transform: translateY(-2px) rotate(1deg); }
+}
+```
+`alternate` is the CSS equivalent of GSAP's `yoyo: true`: the boat rises and tilts over one second, then eases back.
+
+**Circle expansion (exit):**
+```css
+@property --animal-loading-mask-r {   /* registered → the radius can be transitioned */
+    syntax: '<length>'; inherits: false; initial-value: 0px;
+}
+.masking {
+    -webkit-mask-image: radial-gradient(circle at center,
+        transparent var(--animal-loading-mask-r),
+        black calc(var(--animal-loading-mask-r) + 1px));
+    mask-image: radial-gradient(circle at center,
+        transparent var(--animal-loading-mask-r),
+        black calc(var(--animal-loading-mask-r) + 1px));
+    transition: --animal-loading-mask-r var(--animal-loading-mask-duration, 0.6s) linear;
+    pointer-events: none;
+}
+```
+The final radius is `ceil(hypot(width, height) / 2) + 50` — it has to cover the diagonal to the farthest corner, otherwise the corners stay masked. It is written as an inline custom property on the root **after** the `masking` class is applied, so the value always transitions from 0. Restoring `active` mid-expansion resets the radius to 0 so the next expansion animates again.
+
 **Key interaction details:**
+- **First frame**: `shown` is initialised from `active && delay === 0`, so the screen is in the very first paint instead of appearing one effect later. The `circle` variant additionally drops the enter fade (`animation: none`): a fullscreen mask fading in from transparent would show whatever sits underneath it during those 0.2s — exactly the flash a page-level Loading is meant to avoid.
 - **Exit sequence**: `active` → false keeps the screen mounted with the `exiting` class (opacity → 0, `pointer-events: none`), and unmounts after a `fadeDuration * 1000` ms timer. Restoring `active` mid-fade cancels the timer and snaps back to fully opaque instantly.
+- **Exit sequence (circle)**: `active` → false applies the `masking` class instead of `exiting`. The screen is erased by a growing transparent circle from the centre rather than fading, and `fadeDuration` becomes the expansion duration. Both variants unmount on the same timer.
+- `type` only swaps the scene and the exit animation — `active` / `tip` / `delay` / `fadeDuration` / `zIndex` behave identically for both.
 - `delay` re-arms on every `active` → `true` transition, so a fast load never flashes the screen.
-- a11y: the root carries `role="status"`; the snowfall wrapper and the vignette are `aria-hidden`; without `tip` a visually-hidden `加载中` span provides the accessible content.
-- `prefers-reduced-motion: reduce` pauses the snowfall and the enter animation; the opacity fade is kept since it is not motion. The snowfall is **paused, not removed** — `animation: none` would drop all 50 flakes back to their static `top: -30px` above the viewport, leaving nothing but the night-sky backdrop. Because each flake already carries a *negative* `animation-delay`, pausing freezes every one at a random point along its fall, so reduced-motion users get a static snow scene filling the viewport rather than a black screen.
+- a11y: the root carries `role="status"`; the snowfall wrapper and the vignette are `aria-hidden`, and so is the sailboat scene; without `tip` a visually-hidden `加载中` span provides the accessible content.
+- `prefers-reduced-motion: reduce` pauses the snowfall and the enter animation; the opacity fade is kept since it is not motion. The snowfall is **paused, not removed** — `animation: none` would drop all 50 flakes back to their static `top: -30px` above the viewport, leaving nothing but the night-sky backdrop. Because each flake already carries a *negative* `animation-delay`, pausing freezes every one at a random point along its fall, so reduced-motion users get a static snow scene filling the viewport rather than a black screen. The sailboat's wave and bob are paused the same way — the wave's resting position is already inside the canvas, so pausing freezes a still seascape.
 
 ## Skeleton (shimmer placeholder)
 
