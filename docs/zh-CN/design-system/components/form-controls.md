@@ -503,7 +503,7 @@ gap: var(--rate-gap); /* 按尺寸 4 / 6 / 8px */
 }
 
 .selectDropdown {
-    position: absolute; /* 偏移量由 JS 计算，并按视口方向翻转 */
+    position: absolute; /* 偏移量由 JS 计算，见下方 variant 说明 */
     padding: 12px 0;
     background: #ffeea0;
     border-radius: 28px;
@@ -537,6 +537,11 @@ gap: var(--rate-gap); /* 按尺寸 4 / 6 / 8px */
 ```
 
 > 完整交互行为：键盘 roving、按视口方向翻转下拉、点击外部关闭。开启 `showSearch` 时 `role="combobox"` 落在 trigger 内的 `<input>` 上（ARIA 1.2），而不是 trigger `<div>`；无匹配结果会渲染成一个禁用的 `role="option"`，保证 `listbox` 始终有合法子节点。
+>
+> **弹出方式（`variant`，默认 `'default'`）** —— 两种变体的面板样式完全一致，只有偏移量不同：
+>
+> - `'default'` —— 常规下拉：在触发区正下方展开、水平居中（`left: 50%` + `translateX(-50%)`），宽度随内容自适应（与 `'game'` 同宽，不拉伸到触发区宽度）。下方空间不足且上方更宽裕时翻到正上方（`bottom: 100%`、`margin-bottom: 6px`）。若按内容加宽后面板会越过视口左右边缘，则改为贴在该侧边缘，不再居中。
+> - `'game'` —— 俏皮的侧边气泡：贴在触发区侧边（右侧放不下时用 `right: 100%`）、垂直居中（`top: 50%`、`translateY(-50%)`），纵向空间不足时退回触发区下方/上方。这是 `variant` 出现前组件唯一的行为。
 
 ## DatePicker
 

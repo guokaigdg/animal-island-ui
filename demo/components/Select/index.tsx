@@ -18,6 +18,12 @@ const SELECT_API: ApiRow[] = [
     { prop: 'onChange', desc: '选中变化回调', type: '(key: string) => void', defaultVal: '-', required: true },
     { prop: 'placeholder', desc: '占位文本', type: 'string', defaultVal: '请选择' },
     { prop: 'disabled', desc: '禁用状态', type: 'boolean', defaultVal: 'false' },
+    {
+        prop: 'variant',
+        desc: '下拉弹出方式：default 常规正下方（空间不足翻到正上方）、game 贴触发区侧边',
+        type: `'default' | 'game'`,
+        defaultVal: "'default'",
+    },
     { prop: 'allowClear', desc: '允许一键清空', type: 'boolean', defaultVal: 'false' },
     { prop: 'onClear', desc: '清空回调', type: '() => void', defaultVal: '-' },
     { prop: 'clearAriaLabel', desc: '清除按钮的无障碍标签', type: 'string', defaultVal: "'清除'" },
@@ -67,6 +73,7 @@ const SelectDemo: React.FC = () => {
     const [value6, setValue6] = useState('fish3');
     const [value7, setValue7] = useState('flower4');
     const [value8, setValue8] = useState('');
+    const [value9, setValue9] = useState('fruit2');
     const fishOptions: SelectOption[] = [
         { key: 'fish1', label: '鲈鱼' },
         { key: 'fish2', label: '鲷鱼' },
@@ -94,6 +101,21 @@ const SelectDemo: React.FC = () => {
             <div style={sectionTitleStyle}>
                 Select <DemoTag>基础用法</DemoTag>
             </div>
+            <div style={labelStyle}>variant 弹出方式</div>
+            <div style={{ ...S.demoBox, display: 'flex', gap: 48, flexWrap: 'wrap', alignItems: 'center' }}>
+                <div>
+                    <DemoTag>default（默认）</DemoTag>
+                    <div style={{ marginTop: 10 }}>
+                        <Select options={fishOptions} value={value1} onChange={setValue1} />
+                    </div>
+                </div>
+                <div>
+                    <DemoTag>game</DemoTag>
+                    <div style={{ marginTop: 10 }}>
+                        <Select options={fruitOptions} value={value9} onChange={setValue9} variant="game" />
+                    </div>
+                </div>
+            </div>
             <div style={labelStyle}>默认状态</div>
             <div style={{ marginBottom: 8, fontSize: 13, color: '#a08060' }}>
                 当前选中:{' '}
@@ -107,7 +129,13 @@ const SelectDemo: React.FC = () => {
             <div style={labelStyle}>自定义占位文本</div>
             <div style={demoDashedBoxStyle}>
                 <Select options={flowerOptions} value={value2} onChange={setValue2} placeholder="请选择花朵" />
-                <Select options={fruitOptions} value={value4} onChange={setValue4} placeholder="请选择水果" />
+                <Select
+                    options={fruitOptions}
+                    value={value4}
+                    onChange={setValue4}
+                    placeholder="请选择水果"
+                    variant="game"
+                />
             </div>
             <div style={labelStyle}>禁用状态</div>
             <div style={S.demoBox}>
@@ -152,6 +180,8 @@ const App = () => {
             <Select options={options} value={value} onChange={setValue} allowClear onClear={() => {}} />
             {/* 输入关键字过滤（默认按 label 匹配，大小写不敏感） */}
             <Select options={options} value={value} onChange={setValue} showSearch placeholder="搜索" />
+            {/* 下拉弹出方式：default 常规正下方（默认）/ game 贴触发区侧边 */}
+            <Select options={options} value={value} onChange={setValue} variant="game" />
         </div>
     );
 };

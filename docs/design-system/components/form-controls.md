@@ -505,7 +505,7 @@ Controlled dropdown selector; click the trigger to open, and options support ↑
 }
 
 .selectDropdown {
-    position: absolute; /* offsets are computed in JS and flip against the viewport */
+    position: absolute; /* offsets are computed in JS, see the variant note below */
     padding: 12px 0;
     background: #ffeea0;
     border-radius: 28px;
@@ -539,6 +539,11 @@ Controlled dropdown selector; click the trigger to open, and options support ↑
 ```
 
 > Full interaction behavior: roving keyboard focus, viewport-aware dropdown flipping, and click-outside to close. With `showSearch` the trigger's `<input>` carries `role="combobox"` (ARIA 1.2) instead of the trigger `<div>`, and an empty result set renders as a disabled `role="option"` so the `listbox` always has a valid child.
+>
+> **Dropdown placement (`variant`, default `'default'`)** — the panel's own styling is identical in both variants; only the offsets change:
+>
+> - `'default'` — conventional dropdown: opens directly below the trigger, horizontally centred on it (`left: 50%` + `translateX(-50%)`), sized to its content (same width as `'game'`; it is not stretched to the trigger). Flips directly above (`bottom: 100%`, `margin-bottom: 6px`) when the space below is insufficient and the space above is larger. If the content-sized panel would cross a viewport edge, it is clamped to that edge instead of centring.
+> - `'game'` — the playful side popover: sits beside the trigger (`left: 100%` / `right: 100%` when there is no room to the right), vertically centered (`top: 50%`, `translateY(-50%)`), and falls back to below/above the trigger when there is not enough vertical space. This was the component's only behavior before `variant` existed.
 
 ## DatePicker
 

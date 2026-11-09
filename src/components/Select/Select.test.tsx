@@ -176,45 +176,63 @@ describe('Select', () => {
             return document.querySelector(`.${styles.dropdown}`) as HTMLElement;
         };
 
-        it('右侧空间不足时下拉贴左显示（right=100%）', async () => {
-            mockRect({ top: 200, right: 1900, bottom: 250, width: 100, height: 50 });
+        it('default：默认在触发区正下方居中展开，宽度按内容自适应', async () => {
+            render(<Select options={options} value="" onChange={() => {}} />);
+            const dropdown = await openAndGetDropdown();
+            expect(dropdown.style.top).toBe('100%');
+            expect(dropdown.style.marginTop).toBe('6px');
+            expect(dropdown.style.left).toBe('50%');
+            expect(dropdown.style.transform).toBe('translateX(-50%)');
+            expect(dropdown.style.minWidth).toBe('');
+        });
+
+        it('default：下方空间不足且上方更宽裕时翻到正上方', async () => {
+            // trigger 贴着视口底部：spaceBelow = 5 < 156，spaceAbove = 1900 > 5
+            mockRect({ top: 1900, right: 100, bottom: 1995, width: 100, height: 50 });
             mockViewport(2000, 2000);
             render(<Select options={options} value="" onChange={() => {}} />);
+            const dropdown = await openAndGetDropdown();
+            expect(dropdown.style.bottom).toBe('100%');
+            expect(dropdown.style.top).toBe('auto');
+            expect(dropdown.style.marginBottom).toBe('6px');
+        });
+
+        it('game：空间充足时贴在触发区右侧并垂直居中', async () => {
+            // beforeEach 已配：trigger 在中段、视口 2000x2000
+            render(<Select options={options} value="" onChange={() => {}} variant="game" />);
+            const dropdown = await openAndGetDropdown();
+            expect(dropdown.style.left).toBe('100%');
+            expect(dropdown.style.top).toBe('50%');
+            expect(dropdown.style.transform).toBe('translateY(-50%)');
+        });
+
+        it('game：右侧空间不足时下拉贴左显示（right=100%）', async () => {
+            mockRect({ top: 200, right: 1900, bottom: 250, width: 100, height: 50 });
+            mockViewport(2000, 2000);
+            render(<Select options={options} value="" onChange={() => {}} variant="game" />);
             const dropdown = await openAndGetDropdown();
             expect(dropdown.style.right).toBe('100%');
             expect(dropdown.style.left).toBe('auto');
         });
 
-        it('下方空间不足 + 上方空间更大 → 下拉往上弹（bottom=100%）', async () => {
+        it('game：下方空间不足 + 上方空间更大 → 下拉往上弹（bottom=100%）', async () => {
             // trigger 在视口底部，spaceBelow < dropdownHeight 且 spaceAbove > spaceBelow
             // dropdownHeight = 3*44 + 24 = 156
-            // spaceBelow = 2000 - 1800 = 200 (> 156, 其实不触发)，故让 dropdownHeight 更大
-            mockRect({ top: 100, right: 100, bottom: 1990, width: 100, height: 50 });
-            // 制造 spaceBelow 极小：rect.bottom 几乎贴底
-            mockRect({ top: 100, right: 100, bottom: 1995, width: 100, height: 50 });
+            mockRect({ top: 1900, right: 100, bottom: 1995, width: 100, height: 50 });
             mockViewport(2000, 2000);
-            render(<Select options={options} value="" onChange={() => {}} />);
+            render(<Select options={options} value="" onChange={() => {}} variant="game" />);
             const dropdown = await openAndGetDropdown();
-            // spaceBelow = 5 < 156, spaceAbove = 100 > 5 → 走 bottom=100%
             expect(dropdown.style.bottom).toBe('100%');
             expect(dropdown.style.top).toBe('auto');
         });
 
-        it('trigger 距视口顶部太近 → 强制从下方展开（marginTop=6）', async () => {
+        it('game：trigger 距视口顶部太近 → 强制从下方展开（marginTop=6）', async () => {
             mockRect({ top: 10, right: 100, bottom: 500, width: 100, height: 50 });
             mockViewport(2000, 2000);
-            render(<Select options={options} value="" onChange={() => {}} />);
+            render(<Select options={options} value="" onChange={() => {}} variant="game" />);
             const dropdown = await openAndGetDropdown();
             expect(dropdown.style.top).toBe('100%');
             expect(dropdown.style.marginTop).toBe('6px');
-        });
-
-        it('空间充足 → 默认垂直居中（top:50% translateY(-50%)）', async () => {
-            // beforeEach 已配：trigger 在中段、视口 2000x2000
-            render(<Select options={options} value="" onChange={() => {}} />);
-            const dropdown = await openAndGetDropdown();
-            expect(dropdown.style.top).toBe('50%');
-            expect(dropdown.style.transform).toBe('translateY(-50%)');
         });
     });
 

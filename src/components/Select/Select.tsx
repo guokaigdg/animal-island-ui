@@ -7,12 +7,16 @@ export type SelectOption = {
     label: string;
 };
 
+export type SelectVariant = 'default' | 'game';
+
 export interface SelectProps {
     options: SelectOption[];
     value: string;
     onChange: (key: string) => void;
     placeholder?: string;
     disabled?: boolean;
+    /** 下拉弹出方式：default 常规正下方展开（空间不足翻到正上方）；game 贴触发区侧边弹出 */
+    variant?: SelectVariant;
     /** 允许一键清空当前选中值 */
     allowClear?: boolean;
     /** 清空后的回调 */
@@ -41,6 +45,7 @@ export const Select: React.FC<SelectProps> = ({
     onChange,
     placeholder = '请选择',
     disabled = false,
+    variant = 'default',
     allowClear = false,
     onClear,
     clearAriaLabel = '清除',
@@ -62,6 +67,7 @@ export const Select: React.FC<SelectProps> = ({
     const [hovered, setHovered] = useState(false);
     const wrapperRef = useRef<HTMLDivElement>(null);
     const triggerRef = useRef<HTMLDivElement>(null);
+    const dropdownRef = useRef<HTMLDivElement>(null);
     const searchRef = useRef<HTMLInputElement>(null);
     const currentLabel = options.find((o) => o.key === value)?.label || placeholder;
     // 输入框在非搜索状态下的回显：有选中值显示 label，否则留空让 placeholder 生效
@@ -113,43 +119,59 @@ export const Select: React.FC<SelectProps> = ({
             const viewportWidth = window.innerWidth;
             const viewportHeight = window.innerHeight;
             const dropdownHeight = options.length * 44 + 24;
+            const spaceBelow = viewportHeight - rect.bottom;
+            const spaceAbove = rect.top;
 
             const newStyle: React.CSSProperties = {
                 position: 'absolute',
             };
 
-            if (rect.right + 200 > viewportWidth) {
-                newStyle.right = '100%';
-                newStyle.marginRight = '6px';
-                newStyle.left = 'auto';
+            if (variant === 'game') {
+                if (rect.right + 200 > viewportWidth) {
+                    newStyle.right = '100%';
+                    newStyle.marginRight = '6px';
+                    newStyle.left = 'auto';
+                } else {
+                    newStyle.left = '100%';
+                    newStyle.marginLeft = '6px';
+                    newStyle.right = 'auto';
+                }
+
+                if (spaceBelow < dropdownHeight && spaceAbove > spaceBelow) {
+                    newStyle.top = 'auto';
+                    newStyle.bottom = '100%';
+                    newStyle.marginBottom = '6px';
+                    delete newStyle.transform;
+                } else if (spaceBelow < dropdownHeight) {
+                    newStyle.top = '100%';
+                    newStyle.marginTop = '6px';
+                    newStyle.bottom = 'auto';
+                    delete newStyle.transform;
+                } else if (rect.top < dropdownHeight) {
+                    newStyle.top = '100%';
+                    newStyle.marginTop = '6px';
+                    newStyle.bottom = 'auto';
+                    delete newStyle.transform;
+                } else {
+                    newStyle.top = '50%';
+                    newStyle.transform = 'translateY(-50%)';
+                    newStyle.bottom = 'auto';
+                }
             } else {
-                newStyle.left = '100%';
-                newStyle.marginLeft = '6px';
+                // 面板宽度随内容变化且未知，用 50% + translateX(-50%) 实现相对触发区水平居中
+                newStyle.left = '50%';
                 newStyle.right = 'auto';
-            }
+                newStyle.transform = 'translateX(-50%)';
 
-            const spaceBelow = viewportHeight - rect.bottom;
-            const spaceAbove = rect.top;
-
-            if (spaceBelow < dropdownHeight && spaceAbove > spaceBelow) {
-                newStyle.top = 'auto';
-                newStyle.bottom = '100%';
-                newStyle.marginBottom = '6px';
-                delete newStyle.transform;
-            } else if (spaceBelow < dropdownHeight) {
-                newStyle.top = '100%';
-                newStyle.marginTop = '6px';
-                newStyle.bottom = 'auto';
-                delete newStyle.transform;
-            } else if (rect.top < dropdownHeight) {
-                newStyle.top = '100%';
-                newStyle.marginTop = '6px';
-                newStyle.bottom = 'auto';
-                delete newStyle.transform;
-            } else {
-                newStyle.top = '50%';
-                newStyle.transform = 'translateY(-50%)';
-                newStyle.bottom = 'auto';
+                if (spaceBelow < dropdownHeight && spaceAbove > spaceBelow) {
+                    newStyle.top = 'auto';
+                    newStyle.bottom = '100%';
+                    newStyle.marginBottom = '6px';
+                } else {
+                    newStyle.top = '100%';
+                    newStyle.bottom = 'auto';
+                    newStyle.marginTop = '6px';
+                }
             }
 
             setDropdownStyle(newStyle);
@@ -159,7 +181,18 @@ export const Select: React.FC<SelectProps> = ({
         } else if (!open) {
             setMounted(false);
         }
-    }, [open, options.length]);
+    }, [open, options.length, variant]);
+
+    // default 变体按内容宽度居中展开，挂载后确认没有越过视口左右边缘，越界就改为贴该侧对齐
+    useEffect(() => {
+        if (!open || !mounted || variant !== 'default' || !dropdownRef.current) return;
+        const rect = dropdownRef.current.getBoundingClientRect();
+        if (rect.left < 0) {
+            setDropdownStyle((prev) => ({ ...prev, left: 0, transform: 'none' }));
+        } else if (rect.right > window.innerWidth) {
+            setDropdownStyle((prev) => ({ ...prev, left: 'auto', right: 0, transform: 'none' }));
+        }
+    }, [open, mounted, variant]);
 
     // 输入框里显示 label 时（刚展开，或选中后 label 回填到已聚焦的输入框）只聚焦，不做全选，
     // 让回显文字保持未选中状态（不做高亮）
@@ -347,6 +380,7 @@ export const Select: React.FC<SelectProps> = ({
             </div>
             {open && mounted && (
                 <div
+                    ref={dropdownRef}
                     className={styles.dropdown}
                     style={dropdownStyle}
                     role="listbox"

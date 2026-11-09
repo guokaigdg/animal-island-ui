@@ -119,6 +119,7 @@ interface SelectProps {
     onChange: (key: string) => void; // REQUIRED
     placeholder?: string; // default '请选择'
     disabled?: boolean; // default false
+    variant?: 'default' | 'game'; // default 'default' — dropdown placement only, panel styling is identical
     allowClear?: boolean; // default false — show a clear button on hover while a value is selected
     onClear?: () => void; // fired after onChange('')
     clearAriaLabel?: string; // default '清除'
@@ -139,7 +140,8 @@ const [lang, setLang] = useState('zh');
 <Select value={lang} onChange={setLang} showSearch options={langs} placeholder="搜索语言" />
 ```
 
-- **Controlled only** — `value` / `onChange` required, no `defaultValue`. Dropdown auto-flips (top/bottom, left/right); click-outside closes. No `className` / `style` / `renderOption`; style via the descendant `.wrapper`.
+- **Controlled only** — `value` / `onChange` required, no `defaultValue`. Click-outside closes. No `className` / `style` / `renderOption`; style via the descendant `.wrapper`.
+- `variant` only changes where the panel opens: `'default'` is a conventional dropdown directly below the trigger, horizontally centred on it and content-sized; `'game'` is the playful side popover beside the trigger, vertically centered, falling back to below/above when short on vertical space. Panel styling and width are identical in both.
 - `allowClear` shows a clear button while hovering the Select (hidden by default, only when a value is selected); it clears through `onChange('')` and then calls `onClear`. `optionFilterProp` **defaults to `'label'`**, because a bare `key` is an identifier and matching on it would leave the label unsearchable; pass `optionFilterProp="key"` to search the key instead.
 - With `showSearch` the trigger's `<input>` carries `role="combobox"` (ARIA 1.2) and typing opens/filters the listbox; without it the trigger `<div>` keeps that role. Clicking inside the input while open keeps the listbox open, so a caret reposition does not discard the query.
 - `onSearch` fires on every query change, and once more with `''` when closing discards a non-empty query — a consumer that drives `options` from `onSearch` cannot be left holding a stale result set. An empty query filters nothing, so all options show.
