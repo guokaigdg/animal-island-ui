@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.0.4] - 2026-11-09
+
+### Added
+
+- `Loading` 新增 `type="circle"` 形态：关闭时不是淡出，而是从中心开出不断扩大的透明圆孔展开遮罩，露出底层内容；右下角停着一艘随波逐流的帆船（naive-icons 的 `sailboat`），`showBoat={false}` 可以只留遮罩背景
+- `Select` 新增 `variant` 属性：`default` 常规正下方展开（空间不足翻到正上方，并避开视口左右边缘），`game` 贴触发区侧边弹出
+
+### Fixed
+
+- `Loading` 首帧即渲染遮罩，不再等 effect 跑完才盖上去；`circle` 形态另外去掉进入淡入 —— 全屏遮罩从透明淡入的那 0.2s 会把底下已经铺好的内容透出来，正是页面级 Loading 要避免的那种闪屏
+
 ## [3.0.3] - 2026-11-07
 
 ### Fixed
