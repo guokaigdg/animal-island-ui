@@ -1,10 +1,16 @@
-import { describe, it, expect, vi } from 'vitest';
+import { beforeEach, describe, it, expect, vi } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { setup } from '@test/utils';
 import { Image } from './Image';
 import styles from './image.module.less';
 
 describe('Image', () => {
+    // 用 beforeEach 而不是 afterEach 清 body.overflow：RTL 的自动清理（卸载）会把
+    // overflow 还原成加锁前保存的值，而它跑在 afterEach 之后 —— afterEach 里清空会被覆盖。
+    beforeEach(() => {
+        document.body.style.overflow = '';
+    });
+
     it('渲染 img 并透传 src / alt', () => {
         render(<Image src="photo.png" alt="岛屿风景" />);
         const img = screen.getByRole('img', { name: '岛屿风景' });
@@ -118,6 +124,16 @@ describe('Image', () => {
         await user.click(screen.getByRole('button', { name: /预览图/ }));
         await user.click(screen.getByRole('dialog').parentElement as HTMLElement);
         expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+    });
+
+    it('preview：打开时锁住背景滚动，关闭后还原', async () => {
+        const user = setup();
+        document.body.style.overflow = 'scroll';
+        render(<Image src="photo.png" alt="预览图" preview />);
+        await user.click(screen.getByRole('button', { name: /预览图/ }));
+        expect(document.body.style.overflow).toBe('hidden');
+        await user.click(screen.getByRole('button', { name: '关闭预览' }));
+        expect(document.body.style.overflow).toBe('scroll');
     });
 
     it('preview：加载失败时不渲染预览按钮', () => {

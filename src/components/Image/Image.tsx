@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import classNames from 'classnames';
 import { ImageIcon } from 'naive-icons';
+import { lockBodyScroll, unlockBodyScroll } from '../../internal/scrollLock';
 import styles from './image.module.less';
 
 export type ImageColor =
@@ -109,7 +110,12 @@ export const Image: React.FC<ImageProps> = ({
             }
         };
         document.addEventListener('keydown', onKey);
-        return () => document.removeEventListener('keydown', onKey);
+        // 预览是全屏浮层，背景不该还能滚 —— 与 Modal / Drawer / Upload 共用同一把计数锁
+        lockBodyScroll();
+        return () => {
+            document.removeEventListener('keydown', onKey);
+            unlockBodyScroll();
+        };
     }, [previewOpen]);
 
     // 预览关闭后把焦点还给触发元素
