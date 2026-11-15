@@ -31,7 +31,7 @@ const SkillDemo: React.FC = () => {
 
     return (
         <>
-            <Loading type="circle" active={loading} tip="正在驶向岛屿…" />
+            <Loading type="circle" active={loading} />
             <div className={styles.page}>
                 <Section title="animal-island-ui-style" tags={['AI Skill', '可安装']}>
                     <p className={styles.lead}>

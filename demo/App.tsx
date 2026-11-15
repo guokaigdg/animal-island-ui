@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback, Suspense, lazy } from 'react';
-import { Cursor } from '../src';
+import { Cursor, Loading } from '../src';
 import '../src/styles/index.less';
 import backgroundStyles from '../src/components/Background/background.module.less';
 import bgSweetCorner from '../src/assets/image/sweet-corner.svg';
@@ -553,7 +553,7 @@ const App: React.FC = () => {
                             paddingTop: isMobile ? 68 : 32,
                         }}
                     >
-                        <Suspense fallback={null}>
+                        <Suspense fallback={<Loading type="circle" active />}>
                             <ComponentPage activeKey={activeKey} />
                         </Suspense>
                     </main>
