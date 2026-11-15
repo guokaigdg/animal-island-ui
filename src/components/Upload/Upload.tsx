@@ -3,6 +3,7 @@ import { UploadIcon, FileIcon, CheckIcon, CloseIcon, EyeIcon } from 'naive-icons
 import { Progress } from '../Progress';
 import type { ProgressProps } from '../Progress';
 import { Wave } from '../../internal/Wave';
+import { lockBodyScroll, unlockBodyScroll } from '../../internal/scrollLock';
 import styles from './upload.module.less';
 
 /** 单个文件的状态 */
@@ -302,15 +303,14 @@ export const Upload: React.FC<UploadProps> = ({
             }
         };
         document.addEventListener('keydown', onKey);
-        // 打开期间锁住背景滚动（关闭时恢复原值，避免覆盖消费方自己的样式）
-        const prevOverflow = document.body.style.overflow;
-        document.body.style.overflow = 'hidden';
+        // 打开期间锁住背景滚动（计数式，可与其他浮层共存）
+        lockBodyScroll();
         // 打开时把焦点移入弹层，关闭后归还给触发元素
         const opener = document.activeElement as HTMLElement | null;
         closeBtnRef.current?.focus();
         return () => {
             document.removeEventListener('keydown', onKey);
-            document.body.style.overflow = prevOverflow;
+            unlockBodyScroll();
             opener?.focus?.();
         };
     }, [previewTarget]);

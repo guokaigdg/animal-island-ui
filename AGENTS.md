@@ -115,5 +115,9 @@ if a file you touched is noticeably denser, most of what was added is restatemen
   (rationale in [docs/adr/](docs/adr/README.md)); never disable `preserveModules` / `cssCodeSplit`.
 - Conventional Commits; branch from `main`.
 - Docs are English-primary with Chinese mirrors under `docs/zh-CN/`.
+- **UI copy:** avoid unnecessary secondary labels and descriptions — let the layout do the
+  explaining.
+- **Bug fixes:** fix at the cause, reasoning from first principles and established best
+  practice; do not patch over the symptom.
 - For audit/optimization requests: report P0 (must-fix) vs suggestions and let the user
   decide — don't apply every suggestion unprompted.

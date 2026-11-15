@@ -3,6 +3,7 @@ import { createPortal } from 'react-dom';
 import { Button } from '../Button';
 import { Cursor } from '../Cursor';
 import { Typewriter } from '../Typewriter';
+import { lockBodyScroll, unlockBodyScroll } from '../../internal/scrollLock';
 import styles from './modal.module.less';
 
 const FOCUSABLE_SELECTOR = [
@@ -142,12 +143,9 @@ export const Modal: React.FC<ModalProps> = ({
 
     // 禁止滚动
     useEffect(() => {
-        if (open) {
-            document.body.style.overflow = 'hidden';
-        }
-        return () => {
-            document.body.style.overflow = '';
-        };
+        if (!open) return;
+        lockBodyScroll();
+        return unlockBodyScroll;
     }, [open]);
 
     const handleMaskClick = useCallback(() => {

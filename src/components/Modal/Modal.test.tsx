@@ -286,4 +286,22 @@ describe('Modal', () => {
             expect(getComputedStyle(body).userSelect).toBe('text');
         });
     });
+
+    it('关闭后恢复 body 原有的 overflow，而不是清空', () => {
+        // 消费方常给 body 设置 overflow，统一写入 '' 会把页面样式抹掉
+        document.body.style.overflow = 'auto';
+        const { rerender } = render(
+            <Modal open typewriter={false}>
+                content
+            </Modal>
+        );
+        expect(document.body.style.overflow).toBe('hidden');
+        rerender(
+            <Modal open={false} typewriter={false}>
+                content
+            </Modal>
+        );
+        expect(document.body.style.overflow).toBe('auto');
+        document.body.style.overflow = '';
+    });
 });

@@ -1,6 +1,7 @@
 import React, { useEffect, useCallback, useId, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { Cursor } from '../Cursor';
+import { lockBodyScroll, unlockBodyScroll } from '../../internal/scrollLock';
 import styles from './drawer.module.less';
 
 const FOCUSABLE_SELECTOR = [
@@ -133,13 +134,9 @@ export const Drawer: React.FC<DrawerProps> = ({
 
     // 禁止滚动：与 open 同步，关闭时立刻还原（参考中开关类即释放滚动）
     useEffect(() => {
-        if (open) {
-            document.body.style.overflow = 'hidden';
-            return () => {
-                document.body.style.overflow = '';
-            };
-        }
-        return undefined;
+        if (!open) return undefined;
+        lockBodyScroll();
+        return unlockBodyScroll;
     }, [open]);
 
     // 背景下沉景深效果：对 body 直接子元素中非 fixed 的内容施加 transform + borderRadius + overflow
