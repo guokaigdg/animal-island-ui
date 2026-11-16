@@ -5,6 +5,32 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.0.0] - 2026-11-17
+
+### Removed
+
+- **破坏性变更**：`Countdown` 移除 `endingAnimation` / `finishAnimation` 两个 prop，以及随之失效的 4 个公共类型导出 —— `CountdownBounceOptions`、`CountdownRippleOptions`、`CountdownEffectOptions`、`CountdownEndingAnimationOptions`（`CountdownShakeOptions` 保留）
+    - 结束与完成动画不再可配，分级提醒色与抖动动效不受影响
+    - 迁移：删掉这两个属性即可，其余 API 不变
+
+### Added
+
+- `Time` 新增 `variant="game"` 形态：`default` 是常规时钟卡片，`game` 是竖排 HUD —— 时钟 / 分隔线 / 月日 + 周几胶囊
+
+### Fixed
+
+- **修复整个包在纯 Node 与 SSR 环境下加载失败**（`ERR_UNKNOWN_FILE_EXTENSION`）
+    - 根因：组件 JS 此前带着 `import "./x.css"` 的样式副作用导入，Node 拒绝解析 CSS 文件，任何顺着模块图走的 SSR 打包器同样失败
+    - 修复：样式统一由 `animal-island-ui/style` 一个入口交付（`dist/index.css` 仍含全部 42 个组件的样式与 9 个字体）
+- **修复类型声明在 `moduleResolution: "node16"` / `"nodenext"` 下全部退化为 `any`**（[issue #79](https://github.com/guokaigdg/animal-island-ui/issues/79)）
+    - 根因：本包是 ESM，而 `tsc` 会把源码里的无扩展名、目录式说明符原样抄进 `.d.ts`，消费方的模块图解析失败后**所有导出都变成 `any`**，类型检查被静默关掉
+    - 修复：新增 `scripts/fix-dts-extensions.mjs`，构建后把说明符规范成 ESM 形式（`./Button` → `./Button.js`、`./components/Button` → `./components/Button/index.js`）
+    - 新增 `npm run check:types` 产物守卫并接入 `npm run ci` 与 `prepublishOnly`
+- 场景插画改为 `new URL(..., import.meta.url)` 字符串引用，发布产物里不再有 Node 解析不了的 SVG 依赖
+- `Modal` / `Drawer` / `Upload` / `Image` 大图预览共用同一个计数式 body 滚动锁，多个浮层叠加时不再互相解锁
+- 下线从未真正存在过的 `animal-island-ui/items/*` 子路径导出
+- `animal-island-ui/es/*` 子路径补上 `types` 条件，按路径深引入组件时同样拿得到类型
+
 ## [3.0.4] - 2026-11-09
 
 ### Added
