@@ -410,8 +410,6 @@ interface CountdownProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange'
     bordered?: boolean; // default false — draws the 1.5px digit-tile borders
     reminder?: boolean | readonly CountdownReminderRule[]; // default false
     shake?: boolean | number | CountdownShakeOptions; // default false
-    endingAnimation?: boolean | CountdownEndingAnimationOptions; // default false; true = last 5 seconds, every second
-    finishAnimation?: boolean | CountdownEffectOptions; // default false; one-shot completion effect
     onChange?: (remaining: number) => void;
     onFinish?: () => void;
 }
@@ -421,12 +419,9 @@ The default variant is a white 20px-radius panel with a warm border and soft ele
 
 `reminder` defaults to false. Set it to true for warm orange `#c77c34` at ≤60 seconds and the error token `var(--animal-error-color, #e05a5a)` at ≤10 seconds. An array of `{ seconds, color }` fully replaces these defaults; CSS colors and variables are accepted. Rules compare the ceiling-rounded displayed seconds: the smallest matching threshold wins regardless of order, with the first entry winning ties. Negative/non-finite thresholds and empty colors are ignored; an empty array disables reminders. Only digits, separators and enabled digit-tile borders change color (0.2s color transition); the prefix and panel retain their styling. Zero retains the matching reminder color; resetting outside all thresholds or disabling reminders restores the original color without changing timing or callbacks.
 
-`shake` keeps boolean/numeric shortcuts and adds options for thresholds, escalation, periods, displacement, rotation and easing. Shake acts on the inner digit group while bounce acts on its outer motion layer, composing their transforms. Only decoration restarts each cycle; digit strips stay mounted. Loop timers stop offscreen and on hidden pages; resetting or disabling cleans up effects. Reduced motion removes recurring motion, with optional completion fading or no feedback.
-
-`finishAnimation` retains its one-shot completion behavior and now accepts visual options. `endingAnimation` applies the same rebound and ripple effect to the last few seconds: true defaults to the last 5 seconds every second; an object configures thresholds, cadence and visuals. They can be enabled and styled independently; zero switches the recurring effect to the completion effect. Full parameters and pixel specs: [Countdown motion](countdown-motion.md).
+`shake` keeps boolean/numeric shortcuts and adds options for thresholds, escalation, periods, displacement, rotation and easing. It shakes the inner digit group only: the prefix, panel and layout stay still, and the rolling digits keep their own vertical transform. Loop timers stop offscreen and on hidden pages; resetting or disabling cleans up the effect. Reduced motion removes the shake. Full parameters and pixel specs: [Countdown motion](countdown-motion.md).
 
 ```tsx
-<Countdown value={deadline} reminder shake endingAnimation finishAnimation />
 <Countdown value={deadline} reminder />
 <Countdown value={deadline} reminder shake />
 <Countdown value={deadline} reminder shake={8} />

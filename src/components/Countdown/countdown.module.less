@@ -161,87 +161,8 @@
     }
 }
 
-// 回弹与抖动各占一层 transform，循环重播不会重挂数字条或打断内部滚动。
-.motion {
-    position: relative;
-    display: inline-flex;
-}
-.bouncing {
-    animation: animal-countdown-finish var(--countdown-bounce-duration) var(--countdown-effect-easing) both;
-    animation-play-state: var(--countdown-effect-play-state);
-}
-.bouncing.pulseOdd {
-    animation-name: animal-countdown-pulse-odd;
-}
-.bouncing.pulseEven {
-    animation-name: animal-countdown-pulse-even;
-}
-.ripple {
-    position: absolute;
-    inset: var(--countdown-ripple-offset);
-    border: var(--countdown-ripple-width) solid var(--countdown-ripple-color);
-    border-radius: var(--countdown-ripple-radius);
-    pointer-events: none;
-    opacity: 0;
-    animation: animal-countdown-ripple var(--countdown-ripple-duration) var(--countdown-effect-easing) both;
-    animation-play-state: var(--countdown-effect-play-state);
-}
-
-// 两个交替名称重启动画，关键帧共用一份定义，避免循环与归零的动作形状漂移。
-.countdown-bounce-frames() {
-    0%,
-    100% {
-        transform: translateY(0) scale(1);
-    }
-    30% {
-        transform: translateY(var(--countdown-press-offset)) scale(var(--countdown-press-scale));
-    }
-    65% {
-        transform: translateY(var(--countdown-pop-offset)) scale(var(--countdown-pop-scale));
-    }
-}
-@keyframes animal-countdown-finish {
-    .countdown-bounce-frames();
-}
-@keyframes animal-countdown-pulse-odd {
-    .countdown-bounce-frames();
-}
-@keyframes animal-countdown-pulse-even {
-    .countdown-bounce-frames();
-}
-
-@keyframes animal-countdown-ripple {
-    from {
-        opacity: var(--countdown-ripple-opacity);
-        transform: scale(var(--countdown-ripple-start-scale));
-    }
-    to {
-        opacity: 0;
-        transform: scale(var(--countdown-ripple-scale-x), var(--countdown-ripple-scale-y));
-    }
-}
-
-@keyframes animal-countdown-finish-fade {
-    from {
-        opacity: var(--countdown-fade-opacity);
-    }
-    to {
-        opacity: 1;
-    }
-}
-
 @media (prefers-reduced-motion: reduce) {
-    .shaking .group,
-    .ending .motion {
-        animation: none;
-    }
-    .ripple {
-        display: none;
-    }
-    .finishing .motion {
-        animation: animal-countdown-finish-fade var(--countdown-fade-duration) var(--countdown-effect-easing) both;
-    }
-    .finishing .noReducedMotion {
+    .shaking .group {
         animation: none;
     }
 }

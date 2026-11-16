@@ -54,7 +54,8 @@ export const labelStyle: React.CSSProperties = {
 export const textStyle: React.CSSProperties = {
     fontSize: 13,
     color: '#8a7b66',
-    margin: 0,
+    marginTop: 8,
+    marginBottom: 20,
 };
 
 export const demoBodyStyle: React.CSSProperties = {

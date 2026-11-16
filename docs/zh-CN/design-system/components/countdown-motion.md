@@ -1,41 +1,42 @@
-# Countdown 动效
+# Countdown 抖动
 
-源码：`src/components/Countdown/Countdown.tsx`、`motion.ts` 和 `countdown.module.less`。基础布局、数字滚动与颜色提醒仍见 [feedback.md](feedback.md)。包含默认值的完整嵌套声明见[公开动效参考](https://github.com/guokaigdg/animal-island-ui/blob/main/skills/animal-island-ui-style/references/components/countdown-motion.md)。
+源码：`src/components/Countdown/Countdown.tsx`、`motion.ts` 和 `countdown.module.less`。基础布局、数字滚动与颜色提醒仍见 [feedback.md](feedback.md)。包含默认值的完整嵌套声明见[公开抖动参考](https://github.com/guokaigdg/animal-island-ui/blob/main/skills/animal-island-ui-style/references/components/countdown-motion.md)。
 
-# 配置分组
+# 配置
 
 | 属性 | 约定 |
 | --- | --- |
-| `reminder` | 原有布尔值或 `{ seconds, color }[]`，控制数字、分隔符和已开启数字块边框的颜色。 |
-| `shake` | 兼容布尔值/秒数，或 `CountdownShakeOptions`：起始/加强阈值、普通/加强周期、位移、旋转和 CSS 缓动。 |
-| `endingAnimation` | 布尔值或 `CountdownEndingAnimationOptions`：最后几秒反复播放回弹和波纹，可配置完整视觉参数。 |
-| `finishAnimation` | 布尔值或 `CountdownEffectOptions`：正数倒计时归零时播放一次相同的可配置视觉效果。 |
+| `shake` | 布尔值、秒数或 `CountdownShakeOptions`：起始/加强阈值、普通/加强周期、位移、旋转和 CSS 缓动。 |
 
-四组默认均关闭，原有简写用法保持既有行为。`endingAnimation={true}` 在显示的最后 5 秒开始，每 1000ms 重复一次，直到归零。它不会自动开启抖动或归零收尾，按需组合属性。阈值使用向上取整后的显示秒数，不会提前触发，非正阈值关闭对应阶段。
+`shake` 默认关闭。传 `true` 时在最后 5 秒开始抖动、最后 3 秒加强；传数字时把起始阈值设为该秒数；传对象可逐项覆盖。阈值使用向上取整后的显示秒数，不会提前触发。非正的 `seconds` 关闭抖动，`urgentSeconds: 0` 关闭加强阶段。非有限数使用默认值；非负参数的负值钳制到零，旋转限制为 0–360，周期最小 16ms，数值上限 60000。CSS 缓动字符串支持变量，空字符串回退到默认令牌。
 
-# 默认视觉时序
+# 默认时序
 
-| 部分 | 默认值与可配置项 |
+| 阶段 | 默认值与可配置项 |
 | --- | --- |
-| 抖动 | 最后 5 秒：1000ms 周期、水平位移 ±1.5px、旋转 ±0.6°；最后 3 秒：650ms / ±2.5px / ±0.9°。抖动发生在周期前 30%。urgentSeconds 为零关闭加强阶段。 |
-| 回弹 | 默认开启，350ms。在 30% 处下压 1px、缩放至 0.94；65% 处上抬 2px、缩放至 1.05；结束恢复原位。时长、两个缩放比例和两个偏移均可配置。 |
-| 波纹 | 默认开启，2 道圆角轮廓，每道 600ms，错开 150ms。线宽 2px，外间距 5px，圆角 16px，透明度 0.45 淡出至零，缩放从 0.98 扩大到 (1.08, 1.35)。数量、时长、延迟、颜色、透明度、线宽、外间距、圆角和缩放均可配置。 |
-| 颜色 | 波纹自定义色优先，其次为当前提醒色，最后回退到 `--animal-primary-color`。数字仍独立使用颜色提醒配置。 |
-| 缓动 | `var(--animal-motion-ease, cubic-bezier(0.4, 0, 0.2, 1))`，抖动与回弹波纹可分别配置。 |
-| 保留时间 | 默认 900ms，自动延长以包含完整回弹、最后一道延迟波纹和减少动态效果时的淡入。循环间隔至少为该时间和 16ms。 |
+| 普通 | 最后 5 秒：1000ms 周期、水平位移 ±1.5px、旋转 ±0.6°。 |
+| 加强 | 最后 3 秒：650ms 周期、水平位移 ±2.5px、旋转 ±0.9°。 |
+| 节奏 | 抖动集中在每个周期的前 30%，剩余 70% 数字组回到静止。 |
+| 缓动 | `var(--animal-motion-ease, cubic-bezier(0.4, 0, 0.2, 1))`，可配置。 |
 
-每组效果均可独立设置 `bounce={false}` 或 `ripple={false}`。波纹数量取整并限制为 0–10，零表示不绘制。其余非有限数使用默认值；非负参数的负值钳制到零，透明度限制为 0–1，角度限制为 0–360。数值配置上限为 60000，带方向偏移允许到 -60000；原有数字式 shake 简写保留有限秒数的既有行为。这保证装饰节点和定时器值有界，不替换调用方传入的 CSS 颜色或缓动字符串。空 CSS 字符串回退到默认值。
+动画只作用于内部数字组。前缀、面板和周围布局保持不动，滚动数字条保留自身的纵向位移。
 
 # 状态与生命周期
 
-内部数字组负责抖动，外部 inline-flex 动效层负责回弹。波纹使用绝对定位 span，禁用鼠标事件，不占布局空间、不进入读屏内容。交替动画名称重启回弹，带轮次 key 的装饰重启波纹；原数字条 DOM 及其滚动进度保持不变。
+当向上取整后的剩余秒数大于零且不超过 `seconds` 时抖动生效；不超过 `urgentSeconds` 时进入加强阶段。离屏和页面隐藏时暂停 CSS 动画，恢复后接着播放，不补播错过的周期；真实截止时间继续准确推进。重置截止时间或关闭属性会立即移除效果。
 
-只有正数剩余秒数命中阈值时才循环。关闭或重置会移除当前循环动效；归零时清理循环，按独立配置开启一次性收尾。`onFinish` 仍只触发一次，完成后按计算出的保留时间移除装饰。初始已过期、归零后才开启动效均不补播；同时间戳 Date 对象属于同一轮。仅重建相同内容的配置对象不会重置循环节奏或完成定时器。
+# 减少动态效果
 
-离屏和页面隐藏时暂停 CSS 动画，并停止重复播放的定时器。重新可见时开始新一轮视觉反馈，不补播错过的轮次；真实截止时间继续准确推进。已经完成的一次性效果不会因回到页面而补播。
+`prefers-reduced-motion: reduce` 下完全移除抖动：倒计时保留颜色与滚动数字，但不再运动。任何选项都不会覆盖系统设置。
 
-# 减少动态效果与演示
+# 示例
 
-`prefers-reduced-motion: reduce` 下禁用抖动、循环回弹和全部波纹。归零默认用 250ms 的透明度 0.65→1 淡入替代；`reducedMotion: 'none'` 连淡入也关闭。淡入时长和透明度可配置，任何选项都不会强制覆盖系统设置开启空间运动。
-
-倒计时演示新增独立的**最后几秒持续回弹与波纹**区域，包含实时开关、主要数值/颜色控制、完整动态属性示例及嵌套参数 API 表。原颜色、抖动和归零示例保留。数字样式、奶油面板、间距和字体继续遵循原有 Countdown 设计。
+```tsx
+<Countdown value={deadline} reminder shake />
+<Countdown value={deadline} reminder shake={8} />
+<Countdown
+    value={deadline}
+    reminder={[{ seconds: 30, color: '#c77c34' }, { seconds: 8, color: '#e05a5a' }]}
+    shake={{ seconds: 8, urgentSeconds: 3, duration: 1000, urgentDuration: 650, distance: 1.5, urgentDistance: 2.5 }}
+/>
+```

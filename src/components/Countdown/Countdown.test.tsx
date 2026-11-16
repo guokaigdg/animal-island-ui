@@ -2,7 +2,7 @@ import { act, render, screen } from '@testing-library/react';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { Countdown } from './Countdown';
 import styles from './countdown.module.less';
-import { resolveEffect, resolveEnding, resolveShake } from './motion';
+import { resolveShake } from './motion';
 
 describe('Countdown', () => {
     beforeEach(() => {
@@ -156,174 +156,46 @@ describe('Countdown', () => {
         expect(screen.getByRole('timer')).not.toHaveClass(styles.shaking, styles.urgent);
     });
 
-    it('实际归零后由抖动切换到一次性完成动效，结束后清理', () => {
-        const onFinish = vi.fn();
-        render(<Countdown value={Date.now() + 1_000} shake finishAnimation onFinish={onFinish} />);
-        expect(screen.getByRole('timer')).toHaveClass(styles.shaking);
-        expect(screen.getByRole('timer')).not.toHaveClass(styles.finishing);
-        act(() => vi.advanceTimersByTime(1_000));
-        expect(screen.getByText('00:00:00')).toBeInTheDocument();
-        expect(screen.getByRole('timer')).not.toHaveClass(styles.shaking);
-        expect(screen.getByRole('timer')).toHaveClass(styles.finishing);
-        expect(onFinish).toHaveBeenCalledTimes(1);
-        act(() => vi.advanceTimersByTime(900));
-        expect(screen.getByRole('timer')).not.toHaveClass(styles.finishing);
-        expect(onFinish).toHaveBeenCalledTimes(1);
-    });
-
-    it('初始过期与默认关闭时不播放，结束后开启开关不补播', () => {
-        const { rerender } = render(<Countdown value={Date.now() - 1_000} finishAnimation />);
-        expect(screen.getByRole('timer')).not.toHaveClass(styles.finishing);
-        const deadline = Date.now() + 1_000;
-        rerender(<Countdown value={deadline} />);
-        act(() => vi.advanceTimersByTime(1_000));
-        expect(screen.getByRole('timer')).not.toHaveClass(styles.finishing);
-        rerender(<Countdown value={deadline} finishAnimation />);
-        expect(screen.getByRole('timer')).not.toHaveClass(styles.finishing);
-    });
-
-    it('关闭完成动效立即取消，重新开启不重播；新一轮归零可以再次播放', () => {
-        const deadline = Date.now() + 1_000;
-        const { rerender } = render(<Countdown value={deadline} finishAnimation />);
-        act(() => vi.advanceTimersByTime(1_000));
-        expect(screen.getByRole('timer')).toHaveClass(styles.finishing);
-        rerender(<Countdown value={deadline} finishAnimation={false} />);
-        expect(screen.getByRole('timer')).not.toHaveClass(styles.finishing);
-        rerender(<Countdown value={deadline} finishAnimation />);
-        expect(screen.getByRole('timer')).not.toHaveClass(styles.finishing);
-        rerender(<Countdown value={Date.now() + 1_000} finishAnimation />);
-        act(() => vi.advanceTimersByTime(1_000));
-        expect(screen.getByRole('timer')).toHaveClass(styles.finishing);
-    });
-
-    it('同值 Date 重建不重复完成回调，也不延长已开始的动效', () => {
+    it('同值 Date 重建不重复完成回调', () => {
         const deadline = Date.now() + 1_000;
         const onFinish = vi.fn();
-        const { rerender } = render(<Countdown value={new Date(deadline)} finishAnimation onFinish={onFinish} />);
+        const { rerender } = render(<Countdown value={new Date(deadline)} onFinish={onFinish} />);
         act(() => vi.advanceTimersByTime(1_000));
-        act(() => vi.advanceTimersByTime(300));
         // 父组件重渲染时常会构造新的 Date，但时间戳相同仍是同一轮倒计时。
-        rerender(<Countdown value={new Date(deadline)} finishAnimation onFinish={onFinish} />);
+        rerender(<Countdown value={new Date(deadline)} onFinish={onFinish} />);
         expect(onFinish).toHaveBeenCalledTimes(1);
-        expect(screen.getByRole('timer')).toHaveClass(styles.finishing);
-        act(() => vi.advanceTimersByTime(600));
-        expect(screen.getByRole('timer')).not.toHaveClass(styles.finishing);
     });
 
-    it('收尾过程中重新计时会取消旧动效并允许下一轮正常归零', () => {
+    it('收尾过程中重新计时允许下一轮正常归零', () => {
         const onFinish = vi.fn();
-        const { rerender } = render(<Countdown value={Date.now() + 1_000} finishAnimation onFinish={onFinish} />);
+        const { rerender } = render(<Countdown value={Date.now() + 1_000} onFinish={onFinish} />);
         act(() => vi.advanceTimersByTime(1_000));
-        expect(screen.getByRole('timer')).toHaveClass(styles.finishing);
-        rerender(<Countdown value={Date.now() + 2_000} finishAnimation onFinish={onFinish} />);
-        expect(screen.getByRole('timer')).not.toHaveClass(styles.finishing);
+        rerender(<Countdown value={Date.now() + 2_000} onFinish={onFinish} />);
         act(() => vi.advanceTimersByTime(2_000));
-        expect(screen.getByRole('timer')).toHaveClass(styles.finishing);
+        expect(screen.getByText('00:00:00')).toBeInTheDocument();
         expect(onFinish).toHaveBeenCalledTimes(2);
     });
 
-    it('最后几秒逐次回弹与波纹，数字条不重挂，归零切换为一次性反馈', () => {
-        const onFinish = vi.fn();
-        const { container } = render(
-            <Countdown value={Date.now() + 6_000} shake endingAnimation finishAnimation onFinish={onFinish} />
-        );
-        const strip = container.querySelector(`.${styles.digitStrip}`);
-        expect(screen.getByRole('timer')).not.toHaveClass(styles.ending);
-        act(() => vi.advanceTimersByTime(1_000));
-        expect(screen.getByRole('timer')).toHaveClass(styles.ending, styles.shaking);
-        expect(container.querySelectorAll(`.${styles.ripple}`)).toHaveLength(2);
-        const firstCycle = container.querySelector(`.${styles.motion}`)!.className;
-        act(() => vi.advanceTimersByTime(1_000));
-        expect(container.querySelector(`.${styles.motion}`)!.className).not.toBe(firstCycle);
-        expect(container.querySelector(`.${styles.digitStrip}`)).toBe(strip);
-        act(() => vi.advanceTimersByTime(4_000));
-        expect(screen.getByRole('timer')).not.toHaveClass(styles.ending, styles.shaking);
-        expect(screen.getByRole('timer')).toHaveClass(styles.finishing);
-        expect(onFinish).toHaveBeenCalledTimes(1);
-        act(() => vi.advanceTimersByTime(900));
-        expect(container.querySelectorAll(`.${styles.ripple}`)).toHaveLength(0);
-    });
-
-    it('循环间隔自动覆盖延迟波纹，避免下一轮截断前一轮', () => {
-        const { container } = render(
-            <Countdown
-                value={Date.now() + 3_000}
-                endingAnimation={{
-                    seconds: 3,
-                    interval: 100,
-                    duration: 100,
-                    bounce: false,
-                    ripple: { count: 3, duration: 200, delay: 300 },
-                    fadeDuration: 0,
-                }}
-            />
-        );
-        // 第三道波纹在 600ms 开始，800ms 才结束，要求的 100ms 间隔不能提前重启。
-        const firstCycle = container.querySelector(`.${styles.motion}`)!.className;
-        act(() => vi.advanceTimersByTime(799));
-        expect(container.querySelector(`.${styles.motion}`)!.className).toBe(firstCycle);
-        act(() => vi.advanceTimersByTime(1));
-        expect(container.querySelector(`.${styles.motion}`)!.className).not.toBe(firstCycle);
-    });
-
-    it('循环与归零配置分别生效，关闭循环不影响正常结束', () => {
-        const deadline = Date.now() + 2_000;
-        const onFinish = vi.fn();
-        const { container, rerender } = render(
-            <Countdown
-                value={deadline}
-                endingAnimation={{ bounce: false, ripple: { count: 3, color: '#b25770', width: 4 } }}
-                finishAnimation={{ ripple: false, bounce: { popScale: 1.12 } }}
-                onFinish={onFinish}
-            />
-        );
-        expect(container.querySelectorAll(`.${styles.ripple}`)).toHaveLength(3);
-        expect(screen.getByRole('timer').style.getPropertyValue('--countdown-ripple-color')).toBe('#b25770');
-        rerender(
-            <Countdown
-                value={deadline}
-                endingAnimation={false}
-                finishAnimation={{ ripple: false, bounce: { popScale: 1.12 } }}
-                onFinish={onFinish}
-            />
-        );
-        expect(container.querySelectorAll(`.${styles.ripple}`)).toHaveLength(0);
-        act(() => vi.advanceTimersByTime(2_000));
-        expect(screen.getByRole('timer')).toHaveClass(styles.finishing);
-        expect(screen.getByRole('timer').style.getPropertyValue('--countdown-pop-scale')).toBe('1.12');
-        expect(onFinish).toHaveBeenCalledTimes(1);
-    });
-
-    it('自定义抖动阈值与加强开关，重置到阈值外结束所有循环', () => {
+    it('自定义抖动阈值与加强开关，重置到阈值外结束抖动', () => {
         const { rerender } = render(
             <Countdown
                 value={Date.now() + 2_000}
                 shake={{ seconds: 8, urgentSeconds: 0, distance: 4, rotation: 2, duration: 1200 }}
-                endingAnimation={{ seconds: 8 }}
             />
         );
-        expect(screen.getByRole('timer')).toHaveClass(styles.shaking, styles.ending);
+        expect(screen.getByRole('timer')).toHaveClass(styles.shaking);
         expect(screen.getByRole('timer')).not.toHaveClass(styles.urgent);
         expect(screen.getByRole('timer').style.getPropertyValue('--countdown-shake-distance')).toBe('4px');
-        rerender(<Countdown value={Date.now() + 20_000} shake={{ seconds: 8 }} endingAnimation={{ seconds: 8 }} />);
-        expect(screen.getByRole('timer')).not.toHaveClass(styles.shaking, styles.ending);
+        rerender(<Countdown value={Date.now() + 20_000} shake={{ seconds: 8 }} />);
+        expect(screen.getByRole('timer')).not.toHaveClass(styles.shaking);
     });
 
-    it('无效配置有稳定回退，零幅度和独立关闭不会被默认值覆盖', () => {
+    it('无效配置有稳定回退，零幅度不会被默认值覆盖', () => {
         expect(resolveShake({ seconds: -1, distance: 0, rotation: 0, urgentSeconds: 0 })).toMatchObject({
             seconds: 0,
             distance: 0,
             rotation: 0,
             urgentSeconds: 0,
         });
-        expect(
-            resolveEffect({ duration: NaN, bounce: false, ripple: { count: 99, opacity: 2, width: -3 } })
-        ).toMatchObject({ bounce: false, count: 10, opacity: 1, width: 0 });
-        expect(resolveEffect({ ripple: false, bounce: { pressOffset: -4, popOffset: 0 } })).toMatchObject({
-            count: 0,
-            pressOffset: -4,
-            popOffset: 0,
-        });
-        expect(resolveEnding({ seconds: 0, interval: Infinity })).toMatchObject({ seconds: 0, interval: 1000 });
     });
 });

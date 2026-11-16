@@ -1,9 +1,6 @@
 import React, { useState } from 'react';
 import { CountdownReminderDemo } from './CountdownReminderDemo';
-import { CountdownShakeDemo } from './CountdownShakeDemo';
-import { CountdownFinishDemo } from './CountdownFinishDemo';
-import { CountdownMotionDemo } from './CountdownMotionDemo';
-import { Button, Countdown } from '../../../src';
+import { Button, Countdown, Notification } from '../../../src';
 import { ApiRow, ApiTable, CodeBlock, DemoTag, labelStyle, sectionStyle, sectionTitleStyle } from '../../tools';
 
 const COUNTDOWN_API: ApiRow[] = [
@@ -23,18 +20,6 @@ const COUNTDOWN_API: ApiRow[] = [
         prop: 'shake',
         desc: '兼容布尔值与秒数；对象自定义阈值、加强阶段、速度、幅度与缓动',
         type: 'boolean | number | CountdownShakeOptions',
-        defaultVal: 'false',
-    },
-    {
-        prop: 'endingAnimation',
-        desc: '最后几秒循环回弹与波纹，true 默认最后 5 秒每秒一次；对象自定义全部动效参数',
-        type: 'boolean | CountdownEndingAnimationOptions',
-        defaultVal: 'false',
-    },
-    {
-        prop: 'finishAnimation',
-        desc: '实际归零时播放一次，支持自定义回弹、波纹、时长和减少动态效果反馈',
-        type: 'boolean | CountdownEffectOptions',
         defaultVal: 'false',
     },
     { prop: 'onChange', desc: '剩余毫秒变化回调', type: '(remaining: number) => void', defaultVal: '-' },
@@ -81,13 +66,18 @@ const CountdownDemo: React.FC = () => {
             <Countdown
                 value={shortDeadline}
                 prefix={finished ? '已结束' : '商店关门还有'}
-                onFinish={() => setFinished(true)}
+                onFinish={() => {
+                    setFinished(true);
+                    Notification.success('倒计时结束，商店已关门');
+                }}
             />
             <div style={{ marginTop: 16 }}>
                 <Button size="small" onClick={restartShort}>
                     再来 10 秒
                 </Button>
             </div>
+
+            <CountdownReminderDemo />
 
             <div style={labelStyle}>尺寸</div>
             <div style={{ display: 'flex', gap: 14, flexWrap: 'wrap', alignItems: 'center' }}>
@@ -105,12 +95,14 @@ const CountdownDemo: React.FC = () => {
     prefix="活动结束还有"
     variant="island"
     onFinish={() => console.log('倒计时结束')}
-/>`}
+/>
+
+// 颜色提醒：默认 60 秒橙 / 10 秒红，数组可替换全部规则
+<Countdown value={deadline} reminder />
+
+// 最后 5 秒抖动，可与颜色提醒叠加
+<Countdown value={deadline} reminder shake />`}
             />
-            <CountdownReminderDemo />
-            <CountdownShakeDemo />
-            <CountdownFinishDemo />
-            <CountdownMotionDemo />
             <ApiTable rows={COUNTDOWN_API} />
         </div>
     );

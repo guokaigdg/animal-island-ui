@@ -157,10 +157,6 @@ export type {
     CountdownVariant,
     CountdownReminderRule,
     CountdownShakeOptions,
-    CountdownBounceOptions,
-    CountdownRippleOptions,
-    CountdownEffectOptions,
-    CountdownEndingAnimationOptions,
 } from './components/Countdown';
 
 export { CountUp } from './components/CountUp';
