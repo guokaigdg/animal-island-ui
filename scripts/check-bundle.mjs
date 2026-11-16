@@ -117,12 +117,61 @@ for (const out of ['es', 'cjs']) {
     if (existsSync(dir)) scanDir(dir, stale);
 }
 
-if (violations.length > 0 || stale.length > 0) {
-    console.error('[check:bundle] ✗ 产物里出现了不该被打包进去的 peer 依赖');
-    for (const v of violations) console.error(`  · ${v}`);
-    for (const s of stale) console.error(`  · ${s}（含 React 19 已移除的 ${needle}）`);
-    console.error('  → 修 vite.config.ts 的 rollupOptions.external，让 peer 依赖及其子路径保持 external');
+// 产物 JS 里不能出现文件式导入（.css / .less / .svg …）：
+// Node 解析 ESM / CJS 时不认这些扩展名，命中就直接抛 ERR_UNKNOWN_FILE_EXTENSION
+// 或把 CSS 当 JS 解析的 SyntaxError —— 整个包在纯 Node 里就加载不了（SSR 同样中招）。
+// 样式统一走 `animal-island-ui/style`，场景图用 new URL(..., import.meta.url) 引用。
+const fileImports = [];
+const scanFileImports = (dir) => {
+    let entries;
+    try {
+        entries = readdirSync(dir);
+    } catch {
+        return;
+    }
+    for (const entry of entries) {
+        const full = resolve(dir, entry);
+        let st;
+        try {
+            st = statSync(full);
+        } catch {
+            continue;
+        }
+        if (st.isDirectory()) scanFileImports(full);
+        else if (/\.(js|cjs|mjs)$/.test(entry)) {
+            let text;
+            try {
+                text = readFileSync(full, 'utf8');
+            } catch {
+                continue;
+            }
+            const re =
+                /(?:from\s*|import\s*|require\s*\(\s*)["'](\.[^"']+\.(?:css|less|sass|scss|svg|png|jpe?g|webp|gif))["']/g;
+            for (const m of text.matchAll(re)) {
+                fileImports.push(`${relative(ROOT, full)} → ${m[1]}`);
+            }
+        }
+    }
+};
+for (const out of ['es', 'cjs']) {
+    const dir = resolve(DIST, out);
+    if (existsSync(dir)) scanFileImports(dir);
+}
+
+if (violations.length > 0 || stale.length > 0 || fileImports.length > 0) {
+    if (violations.length > 0 || stale.length > 0) {
+        console.error('[check:bundle] ✗ 产物里出现了不该被打包进去的 peer 依赖');
+        for (const v of violations) console.error(`  · ${v}`);
+        for (const s of stale) console.error(`  · ${s}（含 React 19 已移除的 ${needle}）`);
+        console.error('  → 修 vite.config.ts 的 rollupOptions.external，让 peer 依赖及其子路径保持 external');
+    }
+    if (fileImports.length > 0) {
+        console.error('[check:bundle] ✗ 产物 JS 里出现了文件式导入，Node 加载不了');
+        for (const f of fileImports) console.error(`  · ${f}`);
+        console.error('  → 样式走 `animal-island-ui/style`；图片用 new URL(..., import.meta.url) 引用，不产生模块依赖');
+    }
     process.exit(1);
 }
 
 console.log('[check:bundle] ✓ 产物里没有被打包进去的 peer 依赖（react / react-dom / classnames）');
+console.log('[check:bundle] ✓ 产物 JS 里没有文件式导入（纯 Node / SSR 可加载）');

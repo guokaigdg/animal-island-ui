@@ -6,7 +6,7 @@ the choices below is recorded in [../adr/](../adr/); this page is the contract i
 
 ## Build Contract
 
-`vite.config.ts` registers six plugins on top of `@vitejs/plugin-react` to make per-component imports work. Changing
+`vite.config.ts` registers four plugins on top of `@vitejs/plugin-react` to make per-component imports work. Changing
 build logic without preserving the following breaks consumer tree-shaking:
 
 - **Dual output** — ES into `dist/es/` and CJS into `dist/cjs/`, both with `preserveModules: true` and
@@ -14,14 +14,26 @@ build logic without preserving the following breaks consumer tree-shaking:
   reach their bundle. Do not turn `preserveModules` off.
 - **Externals** — `react`, `react-dom`, `react/jsx-runtime`, and `classnames` are never bundled; they are
   peerDependencies.
-- **`cssCodeSplit: true` + `injectImportedCssPlugin`** — component CSS is split per module, and the plugin writes the
-  `import "./x.css"` (ES) / `require("./x.css")` (CJS) statements back into the emitted JavaScript, so importing a
-  component pulls in exactly its styles. Do not turn `cssCodeSplit` off.
+- **`cssCodeSplit: true`, one stylesheet** — component CSS is split per module and aggregated by
+  `emitGlobalStyleEntryPlugin` into `dist/index.css`, but the component JavaScript carries **no CSS import**. A
+  published `import "./x.css"` is a file-style import: Node refuses to parse it, so the package fails to load in
+  plain Node (`ERR_UNKNOWN_FILE_EXTENSION`) and in any SSR bundler that follows the import graph. Styles are
+  delivered through the single `animal-island-ui/style` entry instead. Do not turn `cssCodeSplit` off, and do not
+  reintroduce per-component CSS imports.
 - **Assets stay external** — `@laynezh/vite-plugin-lib-assets` (`outputPath: 'files'`, `limit: 0`) writes fonts and
   images to `dist/files/` instead of letting library mode inline them.
 - **Global stylesheet entry** — `emitGlobalStyleEntryPlugin` aggregates `dist/index.css` (what `animal-island-ui/style`
   resolves to) and prunes orphaned files from `dist/files/`. After changing a component's CSS, confirm those styles
   still appear in `dist/index.css`.
+- **Illustrations are strings, not modules** — the scene SVGs are referenced with
+  `new URL('./x.svg', import.meta.url).href`, never with `import`. An `import` would emit
+  `import x from "../../files/x.svg"` into the published JavaScript, which Node cannot resolve either. Vite's
+  library mode inlines such assets as data URIs (`shouldInline` returns `true` for `build.lib`), which is the only
+  form that survives the consumer's bundler. The four illustrations (~315 KB of SVG) therefore live inside the
+  JavaScript, roughly 20% larger as percent-encoded data URIs.
+- **No file-style imports in the output** — `npm run check:bundle` scans `dist/es` and `dist/cjs` for `import` /
+  `require` of `.css`, `.less`, `.svg`, `.png` and friends, and fails the build on any hit. The published JavaScript
+  must stay loadable by plain Node and by SSR bundlers.
 - **ESM-compatible declarations** — `scripts/fix-dts-extensions.mjs` rewrites the relative specifiers in
   `dist/types/` to their ESM form (`./Button` → `./Button.js`, `./components/Button` →
   `./components/Button/index.js`) and drops the style side-effect imports. The package is ESM
@@ -39,10 +51,11 @@ build logic without preserving the following breaks consumer tree-shaking:
 
 `package.json` is already wired for per-component consumption; keep it that way:
 
-- `exports` maps `.` to the ES/CJS/types triple, `./style` to `dist/index.css`, `./es/*` to the preserved ES modules,
-  and `./items/*` to the copied item assets.
+- `exports` maps `.` to the ES/CJS/types triple, `./style` to `dist/index.css`, and `./es/*` to the preserved ES
+  modules with a `types` condition pointing at `dist/types/*`, so a deep import keeps its types under every
+  `moduleResolution`.
 - `sideEffects: false` lets bundlers drop unused modules.
-- `files` limits the published tarball to the build output plus the top-level type shim and docs.
+- `files` limits the published tarball to the build output plus the README.
 - `dependencies` holds exactly two runtime dependencies, both pure and dependency-free:
   `naive-icons` (the icon set) and `dayjs` (the date layer, per
   [ADR 0005](../adr/0005-dayjs-as-the-date-layer.md)). Everything else third-party is a
@@ -53,7 +66,8 @@ build logic without preserving the following breaks consumer tree-shaking:
   shares neither locale nor plugins. `preserveModules` still drops it for consumers who
   import none. Do not add further runtime dependencies.
 
-`prepublishOnly` runs `npm run build`, so a publish always ships a fresh artifact.
+`prepublishOnly` runs `npm run build && npm run check:types`, so a publish always ships a fresh artifact and never
+ships declarations the ESM module graph cannot resolve.
 
 ## Badges
 

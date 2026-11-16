@@ -94,36 +94,6 @@ function stripWoffFallbackPlugin(): Plugin {
 }
 
 /**
- * cssCodeSplit + preserveModules 下，Vite 把每个组件 CSS 拆成独立文件，
- * 但默认不会在组件 JS 里写回样式引用，会留下样式孤儿。
- * 本插件读取每个 chunk 的 viteMetadata.importedCss，按相对路径以副作用形式
- * 注入对应 JS 顶部 —— 消费者 import/require 某组件即按需带上其 CSS。
- *
- * ES 输出用 `import "./x.css";`，CJS 输出用 `require("./x.css");`，按 output.format 区分。
- */
-function injectImportedCssPlugin(): Plugin {
-    return {
-        name: 'inject-imported-css',
-        generateBundle(options, bundle) {
-            const isCjs = options.format === 'cjs';
-            for (const file of Object.values(bundle)) {
-                if (file.type !== 'chunk') continue;
-                const css = file.viteMetadata?.importedCss;
-                if (!css || css.size === 0) continue;
-                const stmts = [...css]
-                    .map((cssFile) => {
-                        let rel = posix.relative(posix.dirname(file.fileName), cssFile);
-                        if (!rel.startsWith('.')) rel = './' + rel;
-                        return isCjs ? `require("${rel}");` : `import "${rel}";`;
-                    })
-                    .join('\n');
-                file.code = stmts + '\n' + file.code;
-            }
-        },
-    };
-}
-
-/**
  * 改写 CSS 文本中 url() 引用的相对路径：
  * Vite 产出的 CSS 总是相对源 CSS 自身位置（如 url(../../files/x.svg)），
  * 但 dist/index.css 位于 dist 根目录，需要把 "../" 前缀剥掉改成
@@ -300,7 +270,6 @@ export default defineConfig({
             name: '[name].[contenthash:8].[ext]',
             limit: 0,
         }),
-        injectImportedCssPlugin(),
         emitGlobalStyleEntryPlugin(),
         pruneEmptyDirsPlugin('dist'),
     ],
@@ -333,7 +302,7 @@ export default defineConfig({
             external: isPeerDependency,
             // 多输出：
             //  - ES：preserveModules 保持源码目录结构 → 消费者可按组件 tree-shake，
-            //        CSS 随 cssCodeSplit 按组件拆分，配合 injectImportedCssPlugin 自动回填 import
+            //        CSS 随 cssCodeSplit 按组件拆分，由 emitGlobalStyleEntryPlugin 聚合成 dist/index.css
             //  - CJS：同样 preserveModules（不再 inlineDynamicImports），保留逐组件文件，
             //        使 require 老式打包器也能摇掉未用组件及其字体/图片资源
             // Vite 要求所有 output 共享同一个 assetFileNames 模式，

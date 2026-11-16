@@ -4,8 +4,9 @@ import { Wave } from '../../internal/Wave';
 import { ProgressSize, ProgressProps, ProgressVariant } from './types';
 import styles from './progress.module.less';
 import { sweetCorner, coffeeBreak } from '../../assets/image/sceneImages';
-import forestGrove from '../../assets/image/forest-grove.svg';
-import starryCamp from '../../assets/image/starry-camp.svg';
+// 同 sceneImages：走 new URL 而不是 import，避免产物里出现 Node 解析不了的 SVG 依赖
+const forestGrove = new URL('../../assets/image/forest-grove.svg', import.meta.url).href;
+const starryCamp = new URL('../../assets/image/starry-camp.svg', import.meta.url).href;
 
 const VARIANT_BG: Record<ProgressVariant, string> = {
     'sweet-corner': sweetCorner,

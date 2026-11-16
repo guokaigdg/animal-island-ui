@@ -106,6 +106,6 @@ Game-style intro:
 
 - One `import 'animal-island-ui/style'` at the entry — never per component file.
 - No deep imports (`animal-island-ui/lib/...`, `animal-island-ui/src/...`); public surface is
-  the package root, `animal-island-ui/style`, and `animal-island-ui/items/*`.
+  the package root and `animal-island-ui/style`.
 - Import types from the package root (`import type { ButtonProps } from 'animal-island-ui'`).
 - All hard rules from [SKILL.md](../SKILL.md) apply.

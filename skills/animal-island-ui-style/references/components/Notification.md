@@ -107,4 +107,4 @@ setTimeout(() => open(100, 'success', 3), 600);
 - **`onClick` upgrades the toast to a button** (`role="button"`, `tabIndex={0}`) — Enter / Space trigger `onClick`. The close × button has its own `stopPropagation` so it won't fire `onClick` on the parent.
 - **Type determines default icon + accent color**: success = green `#6fba2c`, info = mint `#19c8b9`, warning = yellow `#f5c31c`, error = red `#e05a5a`. Pass `icon` to override.
 - **Lifecycle**: first call lazily creates a single React root on `document.body` (`data-animal-notification-root`); the root stays mounted between toasts and re-renders on every store change via `useSyncExternalStore`. There is exactly one root per page regardless of toast count.
-- **No CSS import required separately** — the root + per-type styles are bundled with the component. `import 'animal-island-ui/style'` is still required for the rest of the library.
+- **The global stylesheet covers it** — the notification root and the per-type rules are part of `animal-island-ui/style`; the component JavaScript carries no CSS import of its own. `import 'animal-island-ui/style'` is required for the whole library, the notification included.

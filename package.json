@@ -17,12 +17,10 @@
         "./es/*": {
             "types": "./dist/types/*",
             "default": "./dist/es/*"
-        },
-        "./items/*": "./dist/items/*"
+        }
     },
     "files": [
         "dist",
-        "items.d.ts",
         "README.md"
     ],
     "sideEffects": false,

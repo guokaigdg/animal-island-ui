@@ -2,7 +2,7 @@
 // 多个组件引用同一 URL，preserveModules 下避免同源资源被多个 chunk 重复 emit
 // （否则会触发 "emitted file ... overwrites a previously emitted file" 警告）。
 // 仅收录被多组件共用的资源；单组件独占的图片（如 forest-grove / starry-camp）保持直接 import。
-import sweetCorner from './sweet-corner.svg';
-import coffeeBreak from './coffee-break.svg';
-
-export { sweetCorner, coffeeBreak };
+// 用 new URL(..., import.meta.url) 而不是 import：前者只是字符串，不会产生模块依赖，
+// Node 加载本包时就不会去解析 SVG 文件。
+export const sweetCorner = new URL('./sweet-corner.svg', import.meta.url).href;
+export const coffeeBreak = new URL('./coffee-break.svg', import.meta.url).href;
