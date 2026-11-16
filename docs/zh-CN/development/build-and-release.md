@@ -11,6 +11,7 @@
 - **`cssCodeSplit: true` + `injectImportedCssPlugin`** —— 组件 CSS 按模块拆分，插件把 `import "./x.css"`（ES）/ `require("./x.css")`（CJS）回填进产出的 JavaScript，消费者 import 一个组件就只带进它自己的样式。不要关掉 `cssCodeSplit`。
 - **资源不内联** —— `@laynezh/vite-plugin-lib-assets`（`outputPath: 'files'`、`limit: 0`）把字体与图片写到 `dist/files/`，而不是让 library mode 强制内联。
 - **全局样式入口** —— `emitGlobalStyleEntryPlugin` 聚合出 `dist/index.css`（即 `animal-island-ui/style` 指向的文件），并清理 `dist/files/` 里的孤儿资源。改完某个组件的 CSS 后，确认这些样式仍出现在 `dist/index.css` 里。
+- **ESM 兼容的类型声明** —— `scripts/fix-dts-extensions.mjs` 把 `dist/types/` 里的相对说明符改写成 ESM 形式（`./Button` → `./Button.js`，`./components/Button` → `./components/Button/index.js`），并去掉样式副作用导入。本包是 ESM（`"type": "module"`），消费方用 `moduleResolution: "node16"` / `"nodenext"` 时无法解析 `tsc` 从源码原样抄来的无扩展名、目录式说明符 —— 模块图整体解析失败，**所有导出退化成 `any`**，消费方的类型检查被静默关掉（issue #79）。`npm run check:types` 会在 `dist/types/` 里仍有缺扩展名或指向不存在 `.d.ts` 的相对说明符时让构建失败。这与上面的 `rewriteCssAssetUrls` 是同一条纪律：让发布产物去适配本包自己的 exports 契约，而不是让消费方迁就我们的源码风格。
 - **字体只留 woff2** —— `stripWoffFallbackPlugin` 删掉与 woff2 一起产出的 woff 备份，字体体积降低约 40%。
 - `pruneEmptyDirsPlugin('dist')` 清理上述步骤留下的空目录。
 

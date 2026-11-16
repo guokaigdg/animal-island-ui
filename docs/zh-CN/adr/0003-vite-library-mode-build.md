@@ -12,7 +12,7 @@ Vite library mode 的默认行为与此背道而驰：它每种格式只产出�
 
 ## 决策
 
-以 `src/index.ts` 为入口，用 Vite library mode 构建，target 为 `es2020`。类型声明由 `tsc --project tsconfig.build.json --emitDeclarationOnly` 单独产出到 `dist/types/`。
+以 `src/index.ts` 为入口，用 Vite library mode 构建，target 为 `es2020`。类型声明由 `tsc --project tsconfig.build.json --emitDeclarationOnly` 单独产出到 `dist/types/`，再由 `scripts/fix-dts-extensions.mjs` 规范化（见下文 ESM 声明段落）。
 
 产出两份 Rollup output，都保留源码模块图：
 

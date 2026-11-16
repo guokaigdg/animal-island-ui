@@ -22,6 +22,15 @@ build logic without preserving the following breaks consumer tree-shaking:
 - **Global stylesheet entry** — `emitGlobalStyleEntryPlugin` aggregates `dist/index.css` (what `animal-island-ui/style`
   resolves to) and prunes orphaned files from `dist/files/`. After changing a component's CSS, confirm those styles
   still appear in `dist/index.css`.
+- **ESM-compatible declarations** — `scripts/fix-dts-extensions.mjs` rewrites the relative specifiers in
+  `dist/types/` to their ESM form (`./Button` → `./Button.js`, `./components/Button` →
+  `./components/Button/index.js`) and drops the style side-effect imports. The package is ESM
+  (`"type": "module"`), so a consumer on `moduleResolution: "node16"` / `"nodenext"` cannot resolve the
+  extensionless, directory-style specifiers `tsc` copies verbatim from the source — the whole module graph
+  fails to resolve and **every export degrades to `any`**, silently disabling the consumer's type checking
+  (issue #79). `npm run check:types` fails the build if any relative specifier in `dist/types/` still lacks an
+  explicit extension or points at a missing `.d.ts`. This is the same discipline as `rewriteCssAssetUrls` above:
+  the published artifact is normalised to the package's own export contract, not the other way round.
 - **woff2 only** — `stripWoffFallbackPlugin` removes the woff fallbacks emitted alongside the woff2 fonts, cutting
   roughly 40% of font weight.
 - `pruneEmptyDirsPlugin('dist')` cleans up directories left empty by the steps above.

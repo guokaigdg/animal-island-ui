@@ -12,7 +12,7 @@ Vite's library mode defaults work against this: it emits one flat artifact per f
 
 ## Decision
 
-Build with Vite in library mode from `src/index.ts`, targeting `es2020`. Type declarations are emitted separately by `tsc --project tsconfig.build.json --emitDeclarationOnly` into `dist/types/`.
+Build with Vite in library mode from `src/index.ts`, targeting `es2020`. Type declarations are emitted separately by `tsc --project tsconfig.build.json --emitDeclarationOnly` into `dist/types/`, then normalised by `scripts/fix-dts-extensions.mjs` (see the ESM declaration paragraph below).
 
 Two Rollup outputs are produced, both preserving the source module graph:
 

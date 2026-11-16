@@ -14,7 +14,10 @@
         },
         "./style": "./dist/index.css",
         "./dist/index.css": "./dist/index.css",
-        "./es/*": "./dist/es/*",
+        "./es/*": {
+            "types": "./dist/types/*",
+            "default": "./dist/es/*"
+        },
         "./items/*": "./dist/items/*"
     },
     "files": [
@@ -34,9 +37,9 @@
     "author": "guokaigdg",
     "scripts": {
         "dev": "vite",
-        "build": "vite build && tsc --project tsconfig.build.json --emitDeclarationOnly",
+        "build": "vite build && tsc --project tsconfig.build.json --emitDeclarationOnly && node scripts/fix-dts-extensions.mjs",
         "build:demo": "vite build --config vite.config.demo.ts",
-        "prepublishOnly": "npm run build",
+        "prepublishOnly": "npm run build && npm run check:types",
         "deploy": "npm run build:demo && gh-pages -d demo-dist",
         "test": "vitest",
         "test:run": "vitest run && vitest run --config vitest.a11y.config.ts",
@@ -45,12 +48,13 @@
         "badges": "node scripts/generate-coverage-badges.mjs",
         "check:docs": "node scripts/check-docs-sync.mjs",
         "check:bundle": "node scripts/check-bundle.mjs",
+        "check:types": "node scripts/check-dts-esm.mjs",
         "lint": "eslint .",
         "lint:fix": "eslint . --fix",
         "typecheck": "tsc --noEmit",
         "format": "prettier --write .",
         "format:check": "prettier --check .",
-        "ci": "npm run format:check && npm run check:docs && npm run lint && npm run typecheck && npm run test:run && npm run build && npm run check:bundle",
+        "ci": "npm run format:check && npm run check:docs && npm run lint && npm run typecheck && npm run test:run && npm run build && npm run check:bundle && npm run check:types",
         "setup:hooks": "git config core.hooksPath .githooks",
         "prepare": "npm run setup:hooks"
     },
