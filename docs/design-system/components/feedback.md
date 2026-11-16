@@ -436,8 +436,10 @@ A live clock card: a large `HH:MM` readout on top refreshed from `new Date()` ev
 
 ```ts
 export type TimeLocale = 'en' | 'zh-cn';
+export type TimeVariant = 'default' | 'game';
 
 export interface TimeProps extends React.HTMLAttributes<HTMLDivElement> {
+    variant?: TimeVariant;  // default 'default'; 'game' is the vertical HUD arrangement
     weekdayFormat?: string; // default 'dddd'
     dateFormat?: string;    // default 'MMM D'; 'M月D日' when locale is 'zh-cn'
     locale?: TimeLocale;    // default 'en'
@@ -446,4 +448,9 @@ export interface TimeProps extends React.HTMLAttributes<HTMLDivElement> {
 
 Both formats take dayjs **core** tokens (`dddd` / `ddd` / `MMM` / `M` / `D` / `YYYY` …); plugin-owned tokens do not expand. `zh-cn` is registered at module scope inside the component — the bundled dayjs instance cannot see a host app's locale imports, so this is what makes `locale="zh-cn"` work with no extra setup. Formatting runs on a per-instance clone (`dayjs(now).locale(locale)`), never a global `dayjs.locale()` call, so the library changes no process-wide state.
 
-The card is a vertically stacked inline-flex panel — background `var(--animal-bg-color)`, 20px radius, `--animal-shadow-sm` elevation, no border — fading in over `--animal-motion-duration-slow` on mount. The clock is 44px / 900 weight / `var(--animal-text-color)` with tabular numerals and 1px letter-spacing; the colon blinks every second (`step-end`, opacity 0 at 50%). The date capsule is a 999px-radius pill on `var(--animal-primary-color-bg)` holding the uppercase weekday in `var(--animal-primary-color)` (800 weight, 1px letter-spacing), a `·` separator in the disabled tone, and the month-day in `var(--animal-text-color-secondary)` (700 weight). The root uses `role="timer"` with `aria-live="off"` so the per-second refresh never interrupts screen readers.
+Two layouts share the same content rules (`weekdayFormat` / `dateFormat` / `locale` apply to both):
+
+- **`default`** — the card: clock on top, weekday + month-day in one date capsule below.
+- **`game`** — a bare vertical HUD: **no card at all** (transparent, no shadow, no radius), 50px padding, clock on top, a hairline divider 8px below it, then the month-day in plain text and the weekday in its own capsule. Ported from the original island app: clock 40px / 900 weight / 2px letter-spacing in `#8b7355` (the colon sits at `top: -0.08em`, margin `0 1px`), divider a 2px `rgba(159, 146, 125, 0.35)` rule spanning the content width plus 5px, month-day 22px / 800 weight / 2px letter-spacing in `#8b7355`, weekday a `#fffbe7` pill (15px / 900 weight, `line-height: 1`, `padding: 7px 16px 5px` — 27px tall, with 1px extra above so CJK ink lands on the optical centre, and no letter-spacing so the text stays horizontally centred) with `#8b7355` text. **These colours are literal, not `--animal-*` tokens** — they are the source's own values, so overriding the library's colour variables will not restyle this variant.
+
+The card is a vertically stacked inline-flex panel — background `var(--animal-bg-color)`, 20px radius, `--animal-shadow-sm` elevation, no border — fading in over `--animal-motion-duration-slow` on mount. The clock is 44px / 900 weight / `var(--animal-time-color, #8b7355)` with tabular numerals and 1px letter-spacing; the colon blinks every second (`step-end`, opacity 0 at 50%). The date capsule is a 999px-radius pill on `var(--animal-primary-color-bg)` holding the uppercase weekday in `var(--animal-primary-color)` (800 weight, 1px letter-spacing), a `·` separator in the disabled tone, and the month-day in `var(--animal-text-color-secondary)` (700 weight). The root uses `role="timer"` with `aria-live="off"` so the per-second refresh never interrupts screen readers.

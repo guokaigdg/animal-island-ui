@@ -3,6 +3,12 @@ import { Time } from '../../../src';
 import { ApiRow, ApiTable, CodeBlock, DemoTag, labelStyle, sectionStyle, sectionTitleStyle } from '../../tools';
 
 const TIME_API: ApiRow[] = [
+    {
+        prop: 'variant',
+        desc: '展示变体：default 时钟卡片 / game 竖排 HUD（时间 / 分割线 / 月日 + 周几）',
+        type: "'default' | 'game'",
+        defaultVal: "'default'",
+    },
     { prop: 'weekdayFormat', desc: '星期格式（dayjs 核心 token）', type: 'string', defaultVal: "'dddd'" },
     {
         prop: 'dateFormat',
@@ -30,6 +36,12 @@ const TimeDemo: React.FC = () => (
         <div style={labelStyle}>HUD 风格的实时时钟卡片，实时显示星期、月日与 HH:MM，每秒自动刷新。</div>
         <Time />
 
+        <div style={labelStyle}>variant="game" — 竖排 HUD：时间 / 分割线 / 月日 + 周几</div>
+        <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap', alignItems: 'flex-start' }}>
+            <Time variant="game" />
+            <Time variant="game" locale="zh-cn" />
+        </div>
+
         <div style={labelStyle}>中文日期：locale="zh-cn"（内置，无需额外注册）</div>
         <Time locale="zh-cn" />
 
@@ -44,6 +56,7 @@ const TimeDemo: React.FC = () => (
         </div>
         <style>{`
             .my-time {
+                --animal-time-color: #fffdf4;
                 --animal-text-color: #fffdf4;
                 --animal-text-color-disabled: #e0bd75;
                 --animal-primary-color: #ffd166;
@@ -63,6 +76,8 @@ const TimeDemo: React.FC = () => (
             code={`import { Time } from 'animal-island-ui';
 
 <Time />
+<Time variant="game" />
+<Time variant="game" locale="zh-cn" />
 <Time locale="zh-cn" />
 <Time weekdayFormat="ddd" dateFormat="YYYY/MM/DD" />
 <Time locale="zh-cn" weekdayFormat="ddd" dateFormat="YYYY年M月D日" />
@@ -71,7 +86,8 @@ const TimeDemo: React.FC = () => (
         <div style={labelStyle}>自定义样式由使用方在 CSS 中提供</div>
         <CodeBlock
             code={`.my-time {
-    /* 覆盖 Time 使用的设计变量：时钟/日期颜色、日期字号、字体 */
+    /* 覆盖 Time 使用的设计变量：时钟颜色、日期颜色、日期字号、字体 */
+    --animal-time-color: #fffdf4;
     --animal-text-color: #fffdf4;
     --animal-text-color-disabled: #e0bd75;
     --animal-primary-color: #ffd166;

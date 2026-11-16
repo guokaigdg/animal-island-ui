@@ -436,8 +436,10 @@ interface CountdownProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange'
 
 ```ts
 export type TimeLocale = 'en' | 'zh-cn';
+export type TimeVariant = 'default' | 'game';
 
 export interface TimeProps extends React.HTMLAttributes<HTMLDivElement> {
+    variant?: TimeVariant;  // 默认 'default'；'game' 为竖排 HUD 排布
     weekdayFormat?: string; // 默认 'dddd'
     dateFormat?: string;    // 默认 'MMM D'；locale 为 'zh-cn' 时默认 'M月D日'
     locale?: TimeLocale;    // 默认 'en'
@@ -446,4 +448,9 @@ export interface TimeProps extends React.HTMLAttributes<HTMLDivElement> {
 
 两个格式都支持 dayjs **核心** token（`dddd` / `ddd` / `MMM` / `M` / `D` / `YYYY`…），插件 token 不会展开。`zh-cn` 在组件模块内注册 —— 打包进本包的 dayjs 实例看不到宿主应用的 locale 导入，所以这一步让 `locale="zh-cn"` 开箱即用。格式化都在实例副本上进行（`dayjs(now).locale(locale)`），从不调用全局 `dayjs.locale()`，因此不会改动进程级状态。
 
-卡片为纵向堆叠的 inline-flex 面板 —— 背景为 `var(--animal-bg-color)`、20px 圆角、`--animal-shadow-sm` 柔和投影、无边框，挂载时以 `--animal-motion-duration-slow` 淡入。时钟为 44px / 900 字重 / `var(--animal-text-color)`，等宽数字、1px 字距；冒号按秒闪烁（`step-end`，50% 处透明度为 0）。日期胶囊为 `var(--animal-primary-color-bg)` 底、999px 圆角的药丸形，内含大写星期（`var(--animal-primary-color)`、800 字重、1px 字距）、`·` 分隔点（禁用色调）与月日（`var(--animal-text-color-secondary)`、700 字重）。根节点使用 `role="timer"` 与 `aria-live="off"`，每秒刷新不打断读屏软件。
+两种排布共用同一套内容规则（`weekdayFormat` / `dateFormat` / `locale` 对两者都生效）：
+
+- **`default`** —— 卡片：上方时间，下方一个日期胶囊装星期与月日。
+- **`game`** —— 裸的竖排 HUD：**完全没有卡片外壳**（透明、无投影、无圆角），内边距 50px，上方时间、其下 8px 处一条细分隔线，下方月日用纯文本、周几单独装胶囊。沿用原版的版式：时钟 40px / 900 字重 / 2px 字距、颜色 `#8b7355`（冒号用 `top: -0.08em`、左右各 1px）；分隔线是横贯内容宽度再多 5px 的 2px `rgba(159, 146, 125, 0.35)`；月日 22px / 800 字重 / 2px 字距、颜色 `#8b7355`；周几装在 `#fffbe7` 药丸里（15px / 900 字重、`line-height: 1`、`padding: 7px 16px 5px`，高 27px；上方多 1px 让中文墨迹落在视觉中心，且不设字距以保证水平居中）、文字 `#8b7355`。**这些颜色是字面值而非 `--animal-*` 令牌** —— 它们就是原版的取色，所以覆盖库里的颜色变量不会改变这个变体。
+
+卡片为纵向堆叠的 inline-flex 面板 —— 背景为 `var(--animal-bg-color)`、20px 圆角、`--animal-shadow-sm` 柔和投影、无边框，挂载时以 `--animal-motion-duration-slow` 淡入。时钟为 44px / 900 字重 / `var(--animal-time-color, #8b7355)`，等宽数字、1px 字距；冒号按秒闪烁（`step-end`，50% 处透明度为 0）。日期胶囊为 `var(--animal-primary-color-bg)` 底、999px 圆角的药丸形，内含大写星期（`var(--animal-primary-color)`、800 字重、1px 字距）、`·` 分隔点（禁用色调）与月日（`var(--animal-text-color-secondary)`、700 字重）。根节点使用 `role="timer"` 与 `aria-live="off"`，每秒刷新不打断读屏软件。

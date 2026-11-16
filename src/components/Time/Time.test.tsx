@@ -62,4 +62,46 @@ describe('Time', () => {
         expect(el).toHaveAccessibleName('岛屿时间');
         expect(el).toHaveAttribute('id', 'island-clock');
     });
+
+    describe('game 变体', () => {
+        it('渲染竖排 HUD：时间 / 分割线 / 月日 + 周几胶囊', () => {
+            const { container } = render(<Time variant="game" />);
+            expect(container.querySelector(`.${styles.clock}`)).toHaveTextContent('09:30');
+            expect(container.querySelector(`.${styles.divider}`)).toBeInTheDocument();
+            expect(screen.getByText('Jun 8')).toBeInTheDocument();
+            expect(screen.getByText('Monday')).toBeInTheDocument();
+        });
+
+        it('分割线是装饰性的，对读屏隐藏', () => {
+            const { container } = render(<Time variant="game" />);
+            expect(container.querySelector(`.${styles.divider}`)).toHaveAttribute('aria-hidden', 'true');
+        });
+
+        it('月日与周几分列，不走默认变体的单个日期胶囊', () => {
+            const { container } = render(<Time variant="game" />);
+            expect(container.querySelector(`.${styles.gameDate}`)).toBeInTheDocument();
+            expect(container.querySelector(`.${styles.gameMonthDay}`)).toHaveTextContent('Jun 8');
+            expect(container.querySelector(`.${styles.gameWeekday}`)).toHaveTextContent('Monday');
+            expect(container.querySelector(`.${styles.date}`)).toBeNull();
+        });
+
+        it('格式 token 与 locale 对 game 变体同样生效', () => {
+            render(<Time variant="game" locale="zh-cn" weekdayFormat="ddd" dateFormat="YYYY/MM/DD" />);
+            expect(screen.getByText('2026/06/08')).toBeInTheDocument();
+            expect(screen.getByText('周一')).toBeInTheDocument();
+        });
+
+        it('默认是 default 变体，没有分割线', () => {
+            const { container } = render(<Time />);
+            expect(container.querySelector(`.${styles.game}`)).toBeNull();
+            expect(container.querySelector(`.${styles.divider}`)).toBeNull();
+        });
+
+        it('保留 role=timer 与 aria-live=off，且 className 照常合并', () => {
+            render(<Time variant="game" className="my-game-time" />);
+            const el = screen.getByRole('timer');
+            expect(el).toHaveClass(styles.time, styles.game, 'my-game-time');
+            expect(el).toHaveAttribute('aria-live', 'off');
+        });
+    });
 });

@@ -169,8 +169,10 @@ See [countdown.md](countdown.md) for the full API, color reminders and final-sec
 
 ```ts
 type TimeLocale = 'en' | 'zh-cn';
+type TimeVariant = 'default' | 'game';
 
 interface TimeProps extends React.HTMLAttributes<HTMLDivElement> {
+    variant?: TimeVariant; // default 'default'; 'game' is the vertical HUD arrangement
     weekdayFormat?: string; // default 'dddd'
     dateFormat?: string; // default 'MMM D'; 'M月D日' when locale is 'zh-cn'
     locale?: TimeLocale; // default 'en'
@@ -179,9 +181,10 @@ interface TimeProps extends React.HTMLAttributes<HTMLDivElement> {
 
 ```tsx
 <Time />
+<Time variant="game" />
 <Time locale="zh-cn" />
 <Time weekdayFormat="ddd" dateFormat="YYYY/MM/DD" />
 <Time className="island-clock" aria-label="岛屿时间" />
 ```
 
-Live clock card: a large `HH:MM` readout on top refreshed from `new Date()` every second, weekday + month-day in a date capsule below. `weekdayFormat` / `dateFormat` accept dayjs core tokens (`dddd` / `ddd` / `MMM` / `M` / `D` / `YYYY`…); plugin-owned tokens do not expand. `locale="zh-cn"` is built in and needs no import. Borderless panel on `var(--animal-bg-color)` with 20px radius and `--animal-shadow-sm` elevation, fading in on mount; clock 44px 900 tabular in `var(--animal-text-color)` with a blinking colon; the capsule is a 999px pill on `var(--animal-primary-color-bg)` with an uppercase `var(--animal-primary-color)` weekday. The root is `role="timer"` with `aria-live="off"` so the per-second refresh stays silent to screen readers.
+Live clock card: a large `HH:MM` readout on top refreshed from `new Date()` every second, weekday + month-day in a date capsule below. `variant="game"` switches to a bare vertical HUD (no card shell, 50px padding) — clock 40px / 900 / `#8b7355`, a 2px `rgba(159,146,125,.35)` divider, then the month-day 22px / 800 in `#8b7355` and the weekday in a `#fffbe7` pill; the content rules (`weekdayFormat` / `dateFormat` / `locale`) apply to both layouts. The game variant's colours are literal values, not `--animal-*` tokens, so overriding the colour variables will not restyle it. `weekdayFormat` / `dateFormat` accept dayjs core tokens (`dddd` / `ddd` / `MMM` / `M` / `D` / `YYYY`…); plugin-owned tokens do not expand. `locale="zh-cn"` is built in and needs no import. Borderless panel on `var(--animal-bg-color)` with 20px radius and `--animal-shadow-sm` elevation, fading in on mount; clock 44px 900 tabular in `var(--animal-time-color, #8b7355)` with a blinking colon; the capsule is a 999px pill on `var(--animal-primary-color-bg)` with an uppercase `var(--animal-primary-color)` weekday. The root is `role="timer"` with `aria-live="off"` so the per-second refresh stays silent to screen readers.

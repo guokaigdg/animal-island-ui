@@ -8,7 +8,12 @@ import styles from './time.module.less';
 
 export type TimeLocale = 'en' | 'zh-cn';
 
+/** 展示变体：default 时钟卡片（时间 + 日期胶囊）/ game 时间-分割线-日期+周几的竖排 */
+export type TimeVariant = 'default' | 'game';
+
 export interface TimeProps extends React.HTMLAttributes<HTMLDivElement> {
+    /** 展示变体，默认 default；game 为竖排 HUD 结构 */
+    variant?: TimeVariant;
     /** 星期格式，支持 dayjs 核心 token（dddd / ddd / dd 等），默认 dddd */
     weekdayFormat?: string;
     /** 月日格式，支持 dayjs 核心 token（YYYY / MMM / M / D / dddd 等），默认 MMM D，zh-cn 下默认 M月D日 */
@@ -28,6 +33,7 @@ const pad = (value: number) => String(value).padStart(2, '0');
  * 下方主色胶囊显示星期与月日，挂载时淡入。星期与月日可分别用 dayjs format 定制。
  */
 export const Time: React.FC<TimeProps> = ({
+    variant = 'default',
     weekdayFormat = 'dddd',
     dateFormat,
     locale = 'en',
@@ -41,8 +47,28 @@ export const Time: React.FC<TimeProps> = ({
         return () => window.clearInterval(timer);
     }, []);
 
-    const classNames = [styles.time, className].filter(Boolean).join(' ');
+    const classNames = [styles.time, variant === 'game' && styles.game, className].filter(Boolean).join(' ');
     const local = locale === 'zh-cn' ? dayjs(now).locale(zhCn) : dayjs(now);
+    const weekday = local.format(weekdayFormat);
+    const monthDay = local.format(dateFormat ?? getDefaultDateFormat(locale));
+
+    // game 变体：竖排 HUD —— 时间 / 分割线 / 月日 + 周几胶囊
+    if (variant === 'game') {
+        return (
+            <div className={classNames} role="timer" aria-live="off" {...rest}>
+                <div className={styles.clock}>
+                    {pad(now.getHours())}
+                    <span className={styles.colon}>:</span>
+                    {pad(now.getMinutes())}
+                </div>
+                <div className={styles.divider} aria-hidden="true" />
+                <div className={styles.gameDate}>
+                    <span className={styles.gameMonthDay}>{monthDay}</span>
+                    <span className={styles.gameWeekday}>{weekday}</span>
+                </div>
+            </div>
+        );
+    }
 
     return (
         <div className={classNames} role="timer" aria-live="off" {...rest}>
@@ -52,11 +78,11 @@ export const Time: React.FC<TimeProps> = ({
                 {pad(now.getMinutes())}
             </div>
             <div className={styles.date}>
-                <span className={styles.weekday}>{local.format(weekdayFormat)}</span>
+                <span className={styles.weekday}>{weekday}</span>
                 <span className={styles.dot} aria-hidden="true">
                     ·
                 </span>
-                <span className={styles.monthDay}>{local.format(dateFormat ?? getDefaultDateFormat(locale))}</span>
+                <span className={styles.monthDay}>{monthDay}</span>
             </div>
         </div>
     );
