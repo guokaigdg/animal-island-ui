@@ -22,9 +22,11 @@ build logic without preserving the following breaks consumer tree-shaking:
   reintroduce per-component CSS imports.
 - **Assets stay external** — `@laynezh/vite-plugin-lib-assets` (`outputPath: 'files'`, `limit: 0`) writes fonts and
   images to `dist/files/` instead of letting library mode inline them.
-- **Global stylesheet entry** — `emitGlobalStyleEntryPlugin` aggregates `dist/index.css` (what `animal-island-ui/style`
-  resolves to) and prunes orphaned files from `dist/files/`. After changing a component's CSS, confirm those styles
-  still appear in `dist/index.css`.
+- **Global stylesheet entry** — `emitGlobalStyleEntryPlugin` aggregates every css chunk under `dist/es/` (module and
+  plain, e.g. `Cursor/cursor.css`) into `dist/index.css` (what `animal-island-ui/style` resolves to), then deletes the
+  consumed chunks — no JavaScript references them anymore, keeping them in the package would be dead weight. It also
+  prunes orphaned files from `dist/files/`. After changing a component's CSS, confirm those styles still appear in
+  `dist/index.css`.
 - **Illustrations are strings, not modules** — the scene SVGs are referenced with
   `new URL('./x.svg', import.meta.url).href`, never with `import`. An `import` would emit
   `import x from "../../files/x.svg"` into the published JavaScript, which Node cannot resolve either. Vite's

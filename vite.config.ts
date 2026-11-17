@@ -118,8 +118,10 @@ function rewriteCssAssetUrls(text: string, sourceCssRelPath: string): string {
  * 供 `animal-island-ui/style` 子路径一次性引入全量样式。
  * cssCodeSplit 模式下：
  *   - 全局变量/reset：dist/es/styles/index.css
- *   - 组件 CSS：dist/es/components/**\/*.module.css（CSS Modules 散落各组件目录）
+ *   - 组件 CSS：dist/es/components 下散落各组件目录的 .css（CSS Modules 与 Cursor 的 cursor.css 等普通 css）
  * 拼接顺序：全局 → 组件，保证组件样式可消费 :root CSS 变量。
+ * 已聚合的源 chunk 随即删除：没有任何 JS 再引用它们（样式只经 `animal-island-ui/style`
+ * 入口下发），留着只是包体积死重。
  */
 function emitGlobalStyleEntryPlugin(): Plugin {
     return {
@@ -143,8 +145,9 @@ function emitGlobalStyleEntryPlugin(): Plugin {
                 /* no global css emitted */
             }
 
-            // 2. 全部组件 CSS Modules（递归 dist/es/components/**/*.module.css）
-            const compDir = resolve(root, 'es/components');
+            // 2. 其余全部 css chunk（递归 dist/es/，含 components、internal、cursor.css 等普通 css；
+            //    es/styles/index.css 已在步骤 1 计入 seen，不会重复拼接）
+            const compDir = resolve(root, 'es');
             const walk = (dir: string): void => {
                 let entries: string[];
                 try {
@@ -162,7 +165,7 @@ function emitGlobalStyleEntryPlugin(): Plugin {
                     }
                     if (stat.isDirectory()) {
                         walk(full);
-                    } else if (full.endsWith('.module.css') && !seen.has(full)) {
+                    } else if (full.endsWith('.css') && !seen.has(full)) {
                         const text = rewriteCssAssetUrls(readFileSync(full, 'utf8'), posix.relative(root, full));
                         if (text.trim().length > 0) {
                             chunks.push(text);
@@ -176,6 +179,10 @@ function emitGlobalStyleEntryPlugin(): Plugin {
             if (chunks.length > 0) {
                 writeFileSync(resolve(root, 'index.css'), chunks.join('\n'));
             }
+
+            // 2.5 已聚合的源 css chunk 就地删除（含 es/styles/index.css）。
+            // 留下的空目录由其后的 pruneEmptyDirsPlugin 清理。
+            for (const file of seen) unlinkSync(file);
 
             // 3. 清理 dist/files/ 里未被任何 CSS url() 或 JS 静态 import 引用的孤儿资源。
             // libAssetsPlugin 会把 fontsource 字体、未被组件 CSS 实际用到的图片等

@@ -21,6 +21,7 @@
     },
     "files": [
         "dist",
+        "CHANGELOG.md",
         "README.md"
     ],
     "sideEffects": false,
