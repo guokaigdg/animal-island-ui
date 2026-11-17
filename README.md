@@ -1,55 +1,58 @@
-# Animal-Island-UI
-
-<br/>
-<div align="center">
-    <img src="./docs/img/logo.png" alt="animal-island-ui" style="border-radius: 24px; width: 200px; display: block; margin: 0 auto;" />
-</div>
+# Animal Island UI
 
 <div align="center">
-A cozy React UI component library
+    <img src="./docs/img/logo.png" alt="animal-island-ui" style="border-radius: 24px; width: 220px; display: block; margin: 0 auto;" />
 </div>
-<br/>
-<div align="center">
-    <a href="https://github.com/guokaigdg/animal-island-ui/stargazers"><img src="https://img.shields.io/github/stars/guokaigdg/animal-island-ui?style=flat-square" alt="Stars"></a>
+<p align="center">
     <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-orange.svg?style=flat-square" alt="License: MIT"></a>
     <a href="https://www.npmjs.com/package/animal-island-ui"><img src="https://img.shields.io/npm/dm/animal-island-ui.svg?style=flat-square" alt="Weekly downloads"></a>
     <a href="https://www.npmjs.com/package/animal-island-ui"><img src="https://img.shields.io/npm/v/animal-island-ui?label=version&style=flat-square" alt="Version"></a>
     <img src="https://img.shields.io/badge/a11y-WAI--ARIA%20APG-brightgreen?style=flat-square" alt="Accessibility">
     <br/>
-    <a href="./coverage/badges/coverage.json"><img src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/guokaigdg/animal-island-ui/main/coverage/badges/coverage.json&style=flat-square" alt="Coverage"></a>
-    <img src="https://img.shields.io/badge/components-42-blue?style=flat-square" alt="Components">
+    <img src="https://img.shields.io/badge/coverage-94.21%25-brightgreen?style=flat-square" alt="Coverage">
+    <img src="https://img.shields.io/badge/React-19-61dafb?style=flat-square&logo=react&logoColor=white" alt="React 19">
+    <img src="https://img.shields.io/badge/Next.js-14-0072b5?style=flat-square&logo=nextdotjs&logoColor=white" alt="Next.js 14">
+    <a href="https://github.com/guokaigdg/animal-island-ui/stargazers"><img src="https://img.shields.io/github/stars/guokaigdg/animal-island-ui?style=flat-square" alt="Stars"></a>
     <a href="https://atomgit.com/guokaigdg/animal-island-ui"><img alt="AtomGit Star" src="https://atomgit.com/guokaigdg/animal-island-ui/star/badge.svg"></a>
-    <a href="https://repolode.com/en/repo/guokaigdg/animal-island-ui" target="_blank" rel="noopener noreferrer"><img src="https://repolode.com/badge/guokaigdg/animal-island-ui" alt="Featured on Repolode"/></a>
-</div>
-<br/>
-<div align="center">
+</p>
+
+<p align="center">
     <a href="https://trendshift.io/repositories/34594?utm_source=trendshift-badge&amp;utm_medium=badge&amp;utm_campaign=badge-trendshift-34594" target="_blank" rel="noopener noreferrer"><img src="https://trendshift.io/api/badge/trendshift/repositories/34594/daily?language=TypeScript" alt="guokaigdg%2Fanimal-island-ui | Trendshift" width="250" height="55"/></a>
     <a href="https://hellogithub.com/repository/guokaigdg/animal-island-ui" target="_blank"><img src="https://api.hellogithub.com/v1/widgets/recommend.svg?rid=98ecff41d142466d8d72694a6fadf9e9&claim_uid=pyGqTPIRMdo7fBS&theme=neutral" alt="Featured｜HelloGitHub" style="width: 250px; height: 54px;" width="250" height="54" /></a>
     <a href="https://atomgit.com/guokaigdg/animal-island-ui"><img alt="AtomGit G-Star" src="https://atomgit.com/guokaigdg/animal-island-ui/star/new_badge.svg"></a>
-</div>
-
-<br/>
-<p align="center">
-    English | <a href="./docs/README.zh-CN.md">简体中文</a>
 </p>
 
-## Introduction
+<p align="center">
+    English | <a href="./docs/README.zh-CN.md">简体中文</a> | <a href="./docs/README.ja.md">日本語</a>
+</p>
 
-A lightweight React + TypeScript component library with an original, cozy island-style design language. Every visual element, layout, icon, and animation is crafted from scratch.
+<h2>
+    <img src="./docs/img/icons/bell.svg" width="20" height="24" alt="" align="absmiddle" />
+    Introduction
+</h2>
 
-Requires React and React DOM 18 or later; components use `useId`, which React 17 does not provide.
+A lightweight, cozy React + TypeScript UI component library with an original island-style design language. Every visual element, layout, icon, and animation is crafted from scratch.
 
-## Preview
+<h2>
+    <img src="./docs/img/icons/monitor.svg" width="20" height="24" alt="" align="absmiddle" />
+    Preview
+</h2>
 
 - Online Preview: [animal-island-ui](https://guokaigdg.github.io/animal-island-ui/#/)
 
-## Related
+<h2>
+    <img src="./docs/img/icons/git-branch.svg" width="20" height="24" alt="" align="absmiddle" />
+    Related
+</h2>
 
 - Icons (**naive-icons**): <https://github.com/guokaigdg/naive-icons>
 - Vue version (**animal-island-vue**): <https://github.com/guokaigdg/animal-island-vue>
 - WeChat Mini Program version (**animal-island-wx**): <https://github.com/lns567/animal-island-wx>
 
-## Use AI to Generate animal-island-ui Pages
+<h2>
+    <img src="./docs/img/icons/sparkles.svg" width="20" height="24" alt="" align="absmiddle" />
+    Use AI to Generate animal-island-ui Pages
+</h2>
 
 ### Option 1: Install the skill (recommended for AI coding agents)
 
@@ -72,13 +75,19 @@ Non-developer and don't want to write code yourself? Use the
 3. The AI asks what page you want — reply in one phrase (e.g. "personal blog", "product list", "FAQ").
 4. Save the `index.html` it returns and double-click to preview.
 
-## Installation
+<h2>
+    <img src="./docs/img/icons/download.svg" width="20" height="24" alt="" align="absmiddle" />
+    Installation
+</h2>
 
 ```bash
 npm install animal-island-ui
 ```
 
-## Quick Start
+<h2>
+    <img src="./docs/img/icons/rocket.svg" width="20" height="24" alt="" align="absmiddle" />
+    Quick Start
+</h2>
 
 > ⚠️ **Important**: Please make sure to import the styles with `import 'animal-island-ui/style'`, otherwise the components will have no styles or fonts!
 
@@ -96,7 +105,10 @@ function App() {
 }
 ```
 
-## Documentation
+<h2>
+    <img src="./docs/img/icons/copy.svg" width="20" height="24" alt="" align="absmiddle" />
+    Documentation
+</h2>
 
 Routed by audience and scenario (English primary; Chinese mirrors under [`docs/zh-CN/`](./docs/zh-CN/)):
 
@@ -111,7 +123,10 @@ Routed by audience and scenario (English primary; Chinese mirrors under [`docs/z
 | [`AGENTS.md`](./AGENTS.md)                                                    | Entry point for coding agents working in this repository.                                                                                                  |
 | [`CONTRIBUTING.md`](./CONTRIBUTING.md)                                        | Contributing guide.                                                                                                                                        |
 
-## Local Development
+<h2>
+    <img src="./docs/img/icons/terminal.svg" width="20" height="24" alt="" align="absmiddle" />
+    Local Development
+</h2>
 
 ```bash
 # Clone the repository
@@ -131,14 +146,20 @@ npm run build
 npm run build:demo
 ```
 
-## License & Disclaimer
+<h2>
+    <img src="./docs/img/icons/shield.svg" width="20" height="24" alt="" align="absmiddle" />
+    License & Disclaimer
+</h2>
 
 - Distributed under the **MIT License** — free to use, copy, modify, merge, publish, distribute, sublicense, and sell copies of the Software, including in commercial products (see the [LICENSE](LICENSE) file for the full text). The copyright notice and this permission notice must be included in all copies or substantial portions of the Software.
 - The Software is provided "AS IS", without warranty of any kind; the authors are not liable for any claims, damages, or other liability arising from its use. Users are solely responsible for any risks arising from the use of this component library.
 - This is an independently created open-source project. It is not an official product of any game company and has no association, authorization, or cooperation with any company or its products.
 - All visual assets (icons, illustrations, animations) in this repository are original works created for this project.
 
-## Support
+<h2>
+    <img src="./docs/img/icons/heart.svg" width="20" height="24" alt="" align="absmiddle" />
+    Support
+</h2>
 
 - The easiest way to support is to give it a star and share it. If you have ideas or suggestions about the project, feel free to open an [Issue](https://github.com/guokaigdg/animal-island-ui/issues) or submit a PR.
 

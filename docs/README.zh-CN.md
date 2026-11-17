@@ -1,56 +1,58 @@
-# Animal-Island-UI
+# Animal Island UI
 
-<br/>
 <div align="center">
-    <img src="img/logo.png" alt="animal-island-ui" style="border-radius: 24px; width: 200px; display: block; margin: 0 auto;" />    
+    <img src="img/logo.png" alt="animal-island-ui" style="border-radius: 24px; width: 220px; display: block; margin: 0 auto;" />
 </div>
-
-<div align="center">
-一款治愈系风格的 React UI 组件库
-</div>
-<br/>
-
-<div align="center">
-    <a href="https://github.com/guokaigdg/animal-island-ui/stargazers"><img src="https://img.shields.io/github/stars/guokaigdg/animal-island-ui?style=flat-square" alt="Stars"></a>
-    <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-orange.svg?style=flat-square" alt="License: MIT"></a>
+<p align="center">
+    <a href="../LICENSE"><img src="https://img.shields.io/badge/license-MIT-orange.svg?style=flat-square" alt="License: MIT"></a>
     <a href="https://www.npmjs.com/package/animal-island-ui"><img src="https://img.shields.io/npm/dm/animal-island-ui.svg?style=flat-square" alt="Weekly downloads"></a>
     <a href="https://www.npmjs.com/package/animal-island-ui"><img src="https://img.shields.io/npm/v/animal-island-ui?label=version&style=flat-square" alt="Version"></a>
     <img src="https://img.shields.io/badge/a11y-WAI--ARIA%20APG-brightgreen?style=flat-square" alt="Accessibility">
     <br/>
-    <a href="../coverage/badges/coverage.json"><img src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/guokaigdg/animal-island-ui/main/coverage/badges/coverage.json&style=flat-square" alt="Coverage"></a>
-    <img src="https://img.shields.io/badge/components-42-blue?style=flat-square" alt="Components">
+    <img src="https://img.shields.io/badge/coverage-94.21%25-brightgreen?style=flat-square" alt="Coverage">
+    <img src="https://img.shields.io/badge/React-19-61dafb?style=flat-square&logo=react&logoColor=white" alt="React 19">
+    <img src="https://img.shields.io/badge/Next.js-14-0072b5?style=flat-square&logo=nextdotjs&logoColor=white" alt="Next.js 14">
+    <a href="https://github.com/guokaigdg/animal-island-ui/stargazers"><img src="https://img.shields.io/github/stars/guokaigdg/animal-island-ui?style=flat-square" alt="Stars"></a>
     <a href="https://atomgit.com/guokaigdg/animal-island-ui"><img alt="AtomGit Star" src="https://atomgit.com/guokaigdg/animal-island-ui/star/badge.svg"></a>
-    <a href="https://repolode.com/en/repo/guokaigdg/animal-island-ui" target="_blank" rel="noopener noreferrer"><img src="https://repolode.com/badge/guokaigdg/animal-island-ui" alt="Featured on Repolode"/></a>
-</div>
+</p>
 
-<br/>
-<div align="center">
+<p align="center">
     <a href="https://trendshift.io/repositories/34594?utm_source=trendshift-badge&amp;utm_medium=badge&amp;utm_campaign=badge-trendshift-34594" target="_blank" rel="noopener noreferrer"><img src="https://trendshift.io/api/badge/trendshift/repositories/34594/daily?language=TypeScript" alt="guokaigdg%2Fanimal-island-ui | Trendshift" width="250" height="55"/></a>
     <a href="https://hellogithub.com/repository/guokaigdg/animal-island-ui" target="_blank"><img src="https://api.hellogithub.com/v1/widgets/recommend.svg?rid=98ecff41d142466d8d72694a6fadf9e9&claim_uid=pyGqTPIRMdo7fBS&theme=neutral" alt="Featured｜HelloGitHub" style="width: 250px; height: 54px;" width="250" height="54" /></a>
     <a href="https://atomgit.com/guokaigdg/animal-island-ui"><img alt="AtomGit G-Star" src="https://atomgit.com/guokaigdg/animal-island-ui/star/new_badge.svg"></a>
-</div>
-<br/>
-<p align="center">
-    <a href="../README.md">English</a> | 简体中文
 </p>
 
-## 介绍
+<p align="center">
+    <a href="../README.md">English</a> | 简体中文 | <a href="./README.ja.md">日本語</a>
+</p>
 
-基于 React + TypeScript 的轻量 UI 组件库，采用原创的治愈系海岛风格设计语言，所有视觉元素、布局、图标、动画均为独立设计实现。
+<h2>
+    <img src="img/icons/bell.svg" width="20" height="24" alt="" align="absmiddle" />
+    介绍
+</h2>
 
-要求 React 和 React DOM 18 及以上版本；组件使用 `useId`，不支持 React 17。
+一款轻量的治愈系 React + TypeScript UI 组件库，采用原创的海岛风格设计语言，所有视觉元素、布局、图标、动画均为独立设计实现。
 
-## 预览
+<h2>
+    <img src="img/icons/monitor.svg" width="20" height="24" alt="" align="absmiddle" />
+    预览
+</h2>
 
 - 在线预览：[animal-island-ui](https://guokaigdg.github.io/animal-island-ui/#/)
 
-## 相关
+<h2>
+    <img src="img/icons/git-branch.svg" width="20" height="24" alt="" align="absmiddle" />
+    相关
+</h2>
 
 - 图标（**naive-icons**）：<https://github.com/guokaigdg/naive-icons>
 - Vue 版本（**animal-island-vue**）：<https://github.com/guokaigdg/animal-island-vue>
 - 微信小程序版本（**animal-island-wx**）：<https://github.com/lns567/animal-island-wx>
 
-## 用 AI 工具生成 animal-island-ui 风格页面
+<h2>
+    <img src="img/icons/sparkles.svg" width="20" height="24" alt="" align="absmiddle" />
+    用 AI 工具生成 animal-island-ui 风格页面
+</h2>
 
 ### 方式一：安装 skill（AI 编程 Agent 推荐）
 
@@ -63,7 +65,8 @@ skills add guokaigdg/animal-island-ui
 
 ### 方式二：一键提示词（无需安装代码）
 
-非研发人员，不想自己写代码？用[一键提示词](./one-click-prompt.md)即可，不需要 npm，不需要打包工具。
+非研发人员，不想自己写代码？用
+[一键提示词](./one-click-prompt.md)即可，不需要 npm，不需要打包工具。
 
 **4 步使用：**
 
@@ -72,13 +75,19 @@ skills add guokaigdg/animal-island-ui
 3. AI 会反问做什么页面，用一句话回答即可（如「个人博客」「商品列表」「FAQ」）。
 4. 保存 AI 输出的 `index.html`，双击即可预览。
 
-## 安装
+<h2>
+    <img src="img/icons/download.svg" width="20" height="24" alt="" align="absmiddle" />
+    安装
+</h2>
 
 ```bash
 npm install animal-island-ui
 ```
 
-## 快速上手
+<h2>
+    <img src="img/icons/rocket.svg" width="20" height="24" alt="" align="absmiddle" />
+    快速上手
+</h2>
 
 > ⚠️ **重要**: 请务必导入样式文件 `import 'animal-island-ui/style'`，否则组件将没有样式与字体!
 
@@ -96,7 +105,10 @@ function App() {
 }
 ```
 
-## 文档
+<h2>
+    <img src="img/icons/copy.svg" width="20" height="24" alt="" align="absmiddle" />
+    文档
+</h2>
 
 按读者与场景路由（英文为主文档，中文镜像在 [`docs/zh-CN/`](./zh-CN/)）：
 
@@ -111,7 +123,10 @@ function App() {
 | [`AGENTS.md`](../AGENTS.md)                                                    | 在本仓库内工作的 coding agent 入口。                                                                                       |
 | [`CONTRIBUTING.md`](../CONTRIBUTING.md)                                        | 贡献指南。                                                                                                                 |
 
-## 本地开发
+<h2>
+    <img src="img/icons/terminal.svg" width="20" height="24" alt="" align="absmiddle" />
+    本地开发
+</h2>
 
 ```bash
 # 克隆仓库
@@ -131,14 +146,20 @@ npm run build
 npm run build:demo
 ```
 
-## 许可与免责声明
+<h2>
+    <img src="img/icons/shield.svg" width="20" height="24" alt="" align="absmiddle" />
+    许可与免责声明
+</h2>
 
 - 本项目基于 **MIT 协议**发布 —— 可自由使用、复制、修改、合并、发布、分发、再许可及出售本软件副本，包括商业用途（完整文本见 [LICENSE](../LICENSE) 文件）。须在所有副本或实质部分中保留上述版权声明与本许可声明。
 - 本软件按「原样」提供，不附带任何担保；作者不对其使用产生的任何索赔、损失或其他责任负责，使用本组件库产生的任何风险由使用者自行承担。
 - 本项目为独立创作的开源项目，并非任何游戏公司的官方产品，与任何公司及其产品无关联、授权或合作关系。
 - 本仓库内所有视觉素材（图标、插画、动画）均为本项目原创作品。
 
-## 支持
+<h2>
+    <img src="img/icons/heart.svg" width="20" height="24" alt="" align="absmiddle" />
+    支持
+</h2>
 
 - 最直接的支持就是点个赞、转发分享；如果对项目有想法或建议，欢迎提交 [Issue](https://github.com/guokaigdg/animal-island-ui/issues) 或 PR。
 

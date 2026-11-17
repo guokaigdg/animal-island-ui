@@ -17,7 +17,7 @@
  * Sync policy source of truth: AGENTS.md "Content that must be kept in sync".
  */
 import { readdirSync, readFileSync, existsSync, statSync } from 'node:fs';
-import { resolve, join, dirname, relative } from 'node:path';
+import { resolve, join, dirname, relative, basename } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -94,7 +94,9 @@ for (const file of listMarkdown(SKILL_COMPONENTS)) {
 }
 
 // ---------- 4. Translation parity: docs/ ↔ docs/zh-CN/ ----------
-const skipInDocs = (p) => p === DOCS_ZH_DIR || p === join(DOCS_DIR, 'img') || p === join(DOCS_DIR, 'README.zh-CN.md');
+// README.zh-CN.md / README.ja.md are translated READMEs, not English sources, so they have no zh-CN mirror.
+const skipInDocs = (p) =>
+    p === DOCS_ZH_DIR || p === join(DOCS_DIR, 'img') || /^README\.(zh-CN|ja)\.md$/.test(basename(p));
 
 const enDocs = walkFiles(DOCS_DIR, skipInDocs)
     .filter((f) => f.endsWith('.md'))

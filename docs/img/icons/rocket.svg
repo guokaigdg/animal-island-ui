@@ -1,0 +1,7 @@
+<svg viewBox="3.95 4.20 40.10 40.10" preserveAspectRatio="xMidYMin meet" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#2A2A2A" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M18 32 L24 42.5 L30 32 Z" fill="#E76F51"/>
+<path d="M24 6 C 16 6 14 16 14 25 L 14 34 L 34 34 L 34 25 C 34 16 32 6 24 6 Z" fill="#FAEDCD"/>
+<path d="M14 28 L8 34 L8 40 L14 36 Z" fill="#E76F51"/>
+<path d="M34 28 L40 34 L40 40 L34 36 Z" fill="#E76F51"/>
+<circle cx="24" cy="20" r="5" fill="#2A9D8F"/>
+</svg>

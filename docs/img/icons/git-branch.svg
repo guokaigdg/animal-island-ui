@@ -1,0 +1,7 @@
+<svg viewBox="4.20 5.20 37.60 37.60" preserveAspectRatio="xMidYMin meet" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#2A2A2A" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+<circle cx="14" cy="36" r="5" fill="#2A9D8F"/>
+<circle cx="14" cy="12" r="5" fill="#E9C46A"/>
+<circle cx="32" cy="20" r="5" fill="#E76F51"/>
+<path d="M14 17 V31"/>
+<path d="M32 25 C32 32 14 28 14 31"/>
+</svg>
