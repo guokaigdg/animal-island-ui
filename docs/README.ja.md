@@ -9,9 +9,8 @@
     <a href="https://www.npmjs.com/package/animal-island-ui"><img src="https://img.shields.io/npm/v/animal-island-ui?label=version&style=flat-square" alt="Version"></a>
     <img src="https://img.shields.io/badge/a11y-WAI--ARIA%20APG-brightgreen?style=flat-square" alt="Accessibility">
     <br/>
-    <img src="https://img.shields.io/badge/coverage-94.21%25-brightgreen?style=flat-square" alt="Coverage">
     <img src="https://img.shields.io/badge/React-19-61dafb?style=flat-square&logo=react&logoColor=white" alt="React 19">
-    <img src="https://img.shields.io/badge/Next.js-14-0072b5?style=flat-square&logo=nextdotjs&logoColor=white" alt="Next.js 14">
+    <img src="https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white" alt="TypeScript">
     <a href="https://github.com/guokaigdg/animal-island-ui/stargazers"><img src="https://img.shields.io/github/stars/guokaigdg/animal-island-ui?style=flat-square" alt="Stars"></a>
     <a href="https://atomgit.com/guokaigdg/animal-island-ui"><img alt="AtomGit Star" src="https://atomgit.com/guokaigdg/animal-island-ui/star/badge.svg"></a>
 </p>
@@ -27,21 +26,21 @@
 </p>
 
 <h2>
-    <img src="img/icons/bell.svg" width="20" height="24" alt="" align="absmiddle" />
+    <img src="img/icons/bell.svg" width="20" height="27" alt="" align="absmiddle" />
     はじめに
 </h2>
 
 軽量で、ゆったりとした React + TypeScript UI コンポーネントライブラリ。オリジナルのアイランドスタイルのデザイン言語を採用し、すべての視覚要素・レイアウト・アイコン・アニメーションを一からデザインしています。
 
 <h2>
-    <img src="img/icons/monitor.svg" width="20" height="24" alt="" align="absmiddle" />
+    <img src="img/icons/monitor.svg" width="20" height="27" alt="" align="absmiddle" />
     プレビュー
 </h2>
 
 - オンラインプレビュー：[animal-island-ui](https://guokaigdg.github.io/animal-island-ui/#/)
 
 <h2>
-    <img src="img/icons/git-branch.svg" width="20" height="24" alt="" align="absmiddle" />
+    <img src="img/icons/git-branch.svg" width="20" height="27" alt="" align="absmiddle" />
     関連プロジェクト
 </h2>
 
@@ -50,7 +49,7 @@
 - WeChat ミニプログラム版（**animal-island-wx**）：<https://github.com/lns567/animal-island-wx>
 
 <h2>
-    <img src="img/icons/sparkles.svg" width="20" height="24" alt="" align="absmiddle" />
+    <img src="img/icons/sparkles.svg" width="20" height="27" alt="" align="absmiddle" />
     AI ツールで animal-island-ui スタイルのページを生成
 </h2>
 
@@ -74,7 +73,7 @@ skills add guokaigdg/animal-island-ui
 4. AI が出力した `index.html` を保存し、ダブルクリックでプレビューできます。
 
 <h2>
-    <img src="img/icons/download.svg" width="20" height="24" alt="" align="absmiddle" />
+    <img src="img/icons/download.svg" width="20" height="27" alt="" align="absmiddle" />
     インストール
 </h2>
 
@@ -83,7 +82,7 @@ npm install animal-island-ui
 ```
 
 <h2>
-    <img src="img/icons/rocket.svg" width="20" height="24" alt="" align="absmiddle" />
+    <img src="img/icons/rocket.svg" width="20" height="27" alt="" align="absmiddle" />
     クイックスタート
 </h2>
 
@@ -104,7 +103,7 @@ function App() {
 ```
 
 <h2>
-    <img src="img/icons/copy.svg" width="20" height="24" alt="" align="absmiddle" />
+    <img src="img/icons/copy.svg" width="20" height="27" alt="" align="absmiddle" />
     ドキュメント
 </h2>
 
@@ -122,7 +121,7 @@ function App() {
 | [`CONTRIBUTING.md`](../CONTRIBUTING.md)                                        | コントリビューションガイド。                                                                                                                                               |
 
 <h2>
-    <img src="img/icons/terminal.svg" width="20" height="24" alt="" align="absmiddle" />
+    <img src="img/icons/terminal.svg" width="20" height="27" alt="" align="absmiddle" />
     ローカル開発
 </h2>
 
@@ -145,7 +144,7 @@ npm run build:demo
 ```
 
 <h2>
-    <img src="img/icons/shield.svg" width="20" height="24" alt="" align="absmiddle" />
+    <img src="img/icons/shield.svg" width="20" height="27" alt="" align="absmiddle" />
     ライセンスと免責事項
 </h2>
 
@@ -155,7 +154,7 @@ npm run build:demo
 - 本リポジトリ内のすべての視覚素材（アイコン、イラスト、アニメーション）は本プロジェクトのために制作されたオリジナル作品です。
 
 <h2>
-    <img src="img/icons/heart.svg" width="20" height="24" alt="" align="absmiddle" />
+    <img src="img/icons/heart.svg" width="20" height="27" alt="" align="absmiddle" />
     サポート
 </h2>
 

@@ -9,9 +9,8 @@
     <a href="https://www.npmjs.com/package/animal-island-ui"><img src="https://img.shields.io/npm/v/animal-island-ui?label=version&style=flat-square" alt="Version"></a>
     <img src="https://img.shields.io/badge/a11y-WAI--ARIA%20APG-brightgreen?style=flat-square" alt="Accessibility">
     <br/>
-    <img src="https://img.shields.io/badge/coverage-94.21%25-brightgreen?style=flat-square" alt="Coverage">
     <img src="https://img.shields.io/badge/React-19-61dafb?style=flat-square&logo=react&logoColor=white" alt="React 19">
-    <img src="https://img.shields.io/badge/Next.js-14-0072b5?style=flat-square&logo=nextdotjs&logoColor=white" alt="Next.js 14">
+    <img src="https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white" alt="TypeScript">
     <a href="https://github.com/guokaigdg/animal-island-ui/stargazers"><img src="https://img.shields.io/github/stars/guokaigdg/animal-island-ui?style=flat-square" alt="Stars"></a>
     <a href="https://atomgit.com/guokaigdg/animal-island-ui"><img alt="AtomGit Star" src="https://atomgit.com/guokaigdg/animal-island-ui/star/badge.svg"></a>
 </p>
@@ -27,21 +26,21 @@
 </p>
 
 <h2>
-    <img src="img/icons/bell.svg" width="20" height="24" alt="" align="absmiddle" />
+    <img src="img/icons/bell.svg" width="20" height="27" alt="" align="absmiddle" />
     介绍
 </h2>
 
 一款轻量的治愈系 React + TypeScript UI 组件库，采用原创的海岛风格设计语言，所有视觉元素、布局、图标、动画均为独立设计实现。
 
 <h2>
-    <img src="img/icons/monitor.svg" width="20" height="24" alt="" align="absmiddle" />
+    <img src="img/icons/monitor.svg" width="20" height="27" alt="" align="absmiddle" />
     预览
 </h2>
 
 - 在线预览：[animal-island-ui](https://guokaigdg.github.io/animal-island-ui/#/)
 
 <h2>
-    <img src="img/icons/git-branch.svg" width="20" height="24" alt="" align="absmiddle" />
+    <img src="img/icons/git-branch.svg" width="20" height="27" alt="" align="absmiddle" />
     相关
 </h2>
 
@@ -50,7 +49,7 @@
 - 微信小程序版本（**animal-island-wx**）：<https://github.com/lns567/animal-island-wx>
 
 <h2>
-    <img src="img/icons/sparkles.svg" width="20" height="24" alt="" align="absmiddle" />
+    <img src="img/icons/sparkles.svg" width="20" height="27" alt="" align="absmiddle" />
     用 AI 工具生成 animal-island-ui 风格页面
 </h2>
 
@@ -76,7 +75,7 @@ skills add guokaigdg/animal-island-ui
 4. 保存 AI 输出的 `index.html`，双击即可预览。
 
 <h2>
-    <img src="img/icons/download.svg" width="20" height="24" alt="" align="absmiddle" />
+    <img src="img/icons/download.svg" width="20" height="27" alt="" align="absmiddle" />
     安装
 </h2>
 
@@ -85,7 +84,7 @@ npm install animal-island-ui
 ```
 
 <h2>
-    <img src="img/icons/rocket.svg" width="20" height="24" alt="" align="absmiddle" />
+    <img src="img/icons/rocket.svg" width="20" height="27" alt="" align="absmiddle" />
     快速上手
 </h2>
 
@@ -106,7 +105,7 @@ function App() {
 ```
 
 <h2>
-    <img src="img/icons/copy.svg" width="20" height="24" alt="" align="absmiddle" />
+    <img src="img/icons/copy.svg" width="20" height="27" alt="" align="absmiddle" />
     文档
 </h2>
 
@@ -124,7 +123,7 @@ function App() {
 | [`CONTRIBUTING.md`](../CONTRIBUTING.md)                                        | 贡献指南。                                                                                                                 |
 
 <h2>
-    <img src="img/icons/terminal.svg" width="20" height="24" alt="" align="absmiddle" />
+    <img src="img/icons/terminal.svg" width="20" height="27" alt="" align="absmiddle" />
     本地开发
 </h2>
 
@@ -147,7 +146,7 @@ npm run build:demo
 ```
 
 <h2>
-    <img src="img/icons/shield.svg" width="20" height="24" alt="" align="absmiddle" />
+    <img src="img/icons/shield.svg" width="20" height="27" alt="" align="absmiddle" />
     许可与免责声明
 </h2>
 
@@ -157,7 +156,7 @@ npm run build:demo
 - 本仓库内所有视觉素材（图标、插画、动画）均为本项目原创作品。
 
 <h2>
-    <img src="img/icons/heart.svg" width="20" height="24" alt="" align="absmiddle" />
+    <img src="img/icons/heart.svg" width="20" height="27" alt="" align="absmiddle" />
     支持
 </h2>
 

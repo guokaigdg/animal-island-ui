@@ -9,9 +9,8 @@
     <a href="https://www.npmjs.com/package/animal-island-ui"><img src="https://img.shields.io/npm/v/animal-island-ui?label=version&style=flat-square" alt="Version"></a>
     <img src="https://img.shields.io/badge/a11y-WAI--ARIA%20APG-brightgreen?style=flat-square" alt="Accessibility">
     <br/>
-    <img src="https://img.shields.io/badge/coverage-94.21%25-brightgreen?style=flat-square" alt="Coverage">
     <img src="https://img.shields.io/badge/React-19-61dafb?style=flat-square&logo=react&logoColor=white" alt="React 19">
-    <img src="https://img.shields.io/badge/Next.js-14-0072b5?style=flat-square&logo=nextdotjs&logoColor=white" alt="Next.js 14">
+    <img src="https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white" alt="TypeScript">
     <a href="https://github.com/guokaigdg/animal-island-ui/stargazers"><img src="https://img.shields.io/github/stars/guokaigdg/animal-island-ui?style=flat-square" alt="Stars"></a>
     <a href="https://atomgit.com/guokaigdg/animal-island-ui"><img alt="AtomGit Star" src="https://atomgit.com/guokaigdg/animal-island-ui/star/badge.svg"></a>
 </p>
@@ -27,21 +26,21 @@
 </p>
 
 <h2>
-    <img src="./docs/img/icons/bell.svg" width="20" height="24" alt="" align="absmiddle" />
+    <img src="./docs/img/icons/bell.svg" width="20" height="27" alt="" align="absmiddle" />
     Introduction
 </h2>
 
 A lightweight, cozy React + TypeScript UI component library with an original island-style design language. Every visual element, layout, icon, and animation is crafted from scratch.
 
 <h2>
-    <img src="./docs/img/icons/monitor.svg" width="20" height="24" alt="" align="absmiddle" />
+    <img src="./docs/img/icons/monitor.svg" width="20" height="27" alt="" align="absmiddle" />
     Preview
 </h2>
 
 - Online Preview: [animal-island-ui](https://guokaigdg.github.io/animal-island-ui/#/)
 
 <h2>
-    <img src="./docs/img/icons/git-branch.svg" width="20" height="24" alt="" align="absmiddle" />
+    <img src="./docs/img/icons/git-branch.svg" width="20" height="27" alt="" align="absmiddle" />
     Related
 </h2>
 
@@ -50,7 +49,7 @@ A lightweight, cozy React + TypeScript UI component library with an original isl
 - WeChat Mini Program version (**animal-island-wx**): <https://github.com/lns567/animal-island-wx>
 
 <h2>
-    <img src="./docs/img/icons/sparkles.svg" width="20" height="24" alt="" align="absmiddle" />
+    <img src="./docs/img/icons/sparkles.svg" width="20" height="27" alt="" align="absmiddle" />
     Use AI to Generate animal-island-ui Pages
 </h2>
 
@@ -76,7 +75,7 @@ Non-developer and don't want to write code yourself? Use the
 4. Save the `index.html` it returns and double-click to preview.
 
 <h2>
-    <img src="./docs/img/icons/download.svg" width="20" height="24" alt="" align="absmiddle" />
+    <img src="./docs/img/icons/download.svg" width="20" height="27" alt="" align="absmiddle" />
     Installation
 </h2>
 
@@ -85,7 +84,7 @@ npm install animal-island-ui
 ```
 
 <h2>
-    <img src="./docs/img/icons/rocket.svg" width="20" height="24" alt="" align="absmiddle" />
+    <img src="./docs/img/icons/rocket.svg" width="20" height="27" alt="" align="absmiddle" />
     Quick Start
 </h2>
 
@@ -106,7 +105,7 @@ function App() {
 ```
 
 <h2>
-    <img src="./docs/img/icons/copy.svg" width="20" height="24" alt="" align="absmiddle" />
+    <img src="./docs/img/icons/copy.svg" width="20" height="27" alt="" align="absmiddle" />
     Documentation
 </h2>
 
@@ -124,7 +123,7 @@ Routed by audience and scenario (English primary; Chinese mirrors under [`docs/z
 | [`CONTRIBUTING.md`](./CONTRIBUTING.md)                                        | Contributing guide.                                                                                                                                        |
 
 <h2>
-    <img src="./docs/img/icons/terminal.svg" width="20" height="24" alt="" align="absmiddle" />
+    <img src="./docs/img/icons/terminal.svg" width="20" height="27" alt="" align="absmiddle" />
     Local Development
 </h2>
 
@@ -147,7 +146,7 @@ npm run build:demo
 ```
 
 <h2>
-    <img src="./docs/img/icons/shield.svg" width="20" height="24" alt="" align="absmiddle" />
+    <img src="./docs/img/icons/shield.svg" width="20" height="27" alt="" align="absmiddle" />
     License & Disclaimer
 </h2>
 
@@ -157,7 +156,7 @@ npm run build:demo
 - All visual assets (icons, illustrations, animations) in this repository are original works created for this project.
 
 <h2>
-    <img src="./docs/img/icons/heart.svg" width="20" height="24" alt="" align="absmiddle" />
+    <img src="./docs/img/icons/heart.svg" width="20" height="27" alt="" align="absmiddle" />
     Support
 </h2>
 
