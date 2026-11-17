@@ -2,9 +2,8 @@
 
 <br/>
 <div align="center">
-    <img src="img/readme-logo.webp" alt="animal-island-ui" style="border-radius: 24px; width: 125px; display: block; margin: 0 auto 24px;" />    
+    <img src="img/logo.png" alt="animal-island-ui" style="border-radius: 24px; width: 200px; display: block; margin: 0 auto;" />    
 </div>
-<br/>
 
 <div align="center">
 一款治愈系风格的 React UI 组件库

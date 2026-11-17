@@ -2,9 +2,8 @@
 
 <br/>
 <div align="center">
-    <img src="./docs/img/readme-logo.webp" alt="animal-island-ui" style="border-radius: 24px; width: 125px; display: block; margin: 0 auto 24px;" />
+    <img src="./docs/img/logo.png" alt="animal-island-ui" style="border-radius: 24px; width: 200px; display: block; margin: 0 auto;" />
 </div>
-<br/>
 
 <div align="center">
 A cozy React UI component library
