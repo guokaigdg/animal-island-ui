@@ -113,15 +113,19 @@ describe('TimePicker', () => {
         });
 
         it('此刻按钮设置当前时间', async () => {
-            const user = setup();
-            render(<TimePicker defaultValue="08:00:00" />);
-            await user.click(screen.getByRole('combobox'));
-            await user.click(screen.getByRole('button', { name: '此刻' }));
-            const now = new Date();
-            const pad = (n: number) => `${n}`.padStart(2, '0');
-            expect(
-                screen.getByText(`${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())}`)
-            ).toBeInTheDocument();
+            // 保留真实 setTimeout —— userEvent 的内部延时与面板动效都依赖真实定时器。
+            // 由此组件内 dayjs() 与断言读到的是同一个固定时刻，不受真实时钟跨秒影响。
+            vi.useFakeTimers({ toFake: ['Date'] });
+            vi.setSystemTime(new Date(2026, 2, 4, 13, 51, 17));
+            try {
+                const user = setup();
+                render(<TimePicker defaultValue="08:00:00" />);
+                await user.click(screen.getByRole('combobox'));
+                await user.click(screen.getByRole('button', { name: '此刻' }));
+                expect(screen.getByText('13:51:17')).toBeInTheDocument();
+            } finally {
+                vi.useRealTimers();
+            }
         });
     });
 
