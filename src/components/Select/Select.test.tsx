@@ -86,6 +86,30 @@ describe('Select', () => {
         expect(screen.getByText('Banana')).toBeInTheDocument();
     });
 
+    it('非受控：defaultValue 生效，选择后自行更新并回调 onChange', async () => {
+        const user = userEvent.setup();
+        const onChange = vi.fn();
+        render(<Select options={options} defaultValue="b" onChange={onChange} />);
+        expect(screen.getByText('Banana')).toBeInTheDocument();
+
+        const trigger = document.querySelector(`.${styles.trigger}`) as HTMLElement;
+        await user.click(trigger);
+        await flushRaf();
+        await user.click(screen.getByText('Cherry'));
+
+        expect(onChange).toHaveBeenCalledWith('c');
+        expect(screen.getByText('Cherry')).toBeInTheDocument();
+    });
+
+    it('className 与 style 透传到外层容器', () => {
+        const { container } = render(
+            <Select options={options} value="" onChange={() => {}} className="consumer-select" style={{ width: 240 }} />
+        );
+        const wrapper = container.querySelector('.consumer-select') as HTMLElement;
+        expect(wrapper).toBeInTheDocument();
+        expect(wrapper).toHaveStyle({ width: '240px' });
+    });
+
     it('点击 trigger 展开下拉，再次点击折叠', async () => {
         const user = userEvent.setup();
         render(<Select options={options} value="" onChange={() => {}} />);

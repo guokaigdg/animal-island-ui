@@ -225,7 +225,9 @@ function emitGlobalStyleEntryPlugin(): Plugin {
             try {
                 if (statSync(idxCss).isFile()) {
                     const text = readFileSync(idxCss, 'utf8');
-                    const re = /files\/([a-zA-Z0-9._-]+\.[a-z]+)/g;
+                    // 扩展名必须允许数字（woff2 / png 等），否则会截成 "xxx.woff"
+                    // 而把真实文件当成孤儿资源删除。
+                    const re = /files\/([a-zA-Z0-9._-]+\.[a-zA-Z0-9]+)/g;
                     let m: RegExpExecArray | null;
                     while ((m = re.exec(text)) !== null) {
                         referenced.add(m[1]);
@@ -253,8 +255,108 @@ function emitGlobalStyleEntryPlugin(): Plugin {
     };
 }
 
+/** 跳过一段以 start 处引号开头的字符串字面量，返回结束后一位的下标。 */
+function skipQuoted(code: string, start: number): number {
+    const quote = code[start];
+    let i = start + 1;
+    while (i < code.length) {
+        const ch = code[i];
+        if (ch === '\\') {
+            i += 2;
+            continue;
+        }
+        if (ch === quote) return i + 1;
+        i += 1;
+    }
+    return code.length;
+}
+
 /**
- * 需要保持 external 的 peer 依赖。
+ * 把产物里的 `new URL("data:...", <base>)` 折叠为字符串字面量。
+ *
+ * 源码用 `new URL('./x.svg', import.meta.url).href` 拿到资源 URL 字符串（不产生模块依赖）。
+ * Vite 会把小 SVG 内联成 data URI，但 CJS 产物会把第二个参数改写成带嵌套括号的运行时
+ * 表达式，webpack 5 又无法把 data URI 当 asset module 处理，消费者构建会直接报错。
+ * data URI 不依赖模块位置，这里用括号/字符串扫描而不是正则，避免 data URI 内部的
+ * 单引号和 CJS 基底表达式里的嵌套括号造成误匹配。
+ */
+function foldDataUriNewUrl(code: string): string {
+    const marker = 'new URL(';
+    let out = '';
+    let cursor = 0;
+
+    for (;;) {
+        const start = code.indexOf(marker, cursor);
+        if (start === -1) return out + code.slice(cursor);
+
+        let quoteIndex = start + marker.length;
+        while (quoteIndex < code.length && /\s/.test(code[quoteIndex])) quoteIndex += 1;
+        const quote = code[quoteIndex];
+        if ((quote !== '"' && quote !== "'") || !code.startsWith('data:', quoteIndex + 1)) {
+            out += code.slice(cursor, quoteIndex + 1);
+            cursor = quoteIndex + 1;
+            continue;
+        }
+
+        const stringEnd = skipQuoted(code, quoteIndex);
+        const literal = code.slice(quoteIndex, stringEnd);
+        let uri: string;
+        try {
+            uri = quote === '"' ? (JSON.parse(literal) as string) : literal.slice(1, -1).replace(/\\(['"\\])/g, '$1');
+        } catch {
+            out += code.slice(cursor, stringEnd);
+            cursor = stringEnd;
+            continue;
+        }
+
+        // 从 `new URL(` 的左括号开始寻找配对的右括号
+        let depth = 1;
+        let i = stringEnd;
+        while (i < code.length && depth > 0) {
+            const ch = code[i];
+            if (ch === '"' || ch === "'" || ch === '`') {
+                i = skipQuoted(code, i);
+                continue;
+            }
+            if (ch === '/' && code[i + 1] === '/') {
+                const nl = code.indexOf('\n', i + 2);
+                i = nl === -1 ? code.length : nl + 1;
+                continue;
+            }
+            if (ch === '/' && code[i + 1] === '*') {
+                const end = code.indexOf('*/', i + 2);
+                i = end === -1 ? code.length : end + 2;
+                continue;
+            }
+            if (ch === '(' || ch === '[' || ch === '{') depth += 1;
+            else if (ch === ')' || ch === ']' || ch === '}') depth -= 1;
+            i += 1;
+        }
+        if (depth !== 0) {
+            out += code.slice(cursor, stringEnd);
+            cursor = stringEnd;
+            continue;
+        }
+        if (code.startsWith('.href', i)) i += 5;
+        else if (code.startsWith('?.href', i)) i += 6;
+
+        out += code.slice(cursor, start) + JSON.stringify(uri);
+        cursor = i;
+    }
+}
+
+function foldDataUriNewUrlPlugin(): Plugin {
+    return {
+        name: 'fold-data-uri-new-url',
+        renderChunk(code) {
+            const next = foldDataUriNewUrl(code);
+            return next === code ? null : { code: next, map: null };
+        },
+    };
+}
+
+/**
+ * 需要保持 external 的运行时依赖。
  *
  * 关键：**必须覆盖子路径入口**。Rollup 的 `external` 传字符串数组时只做精确匹配，
  * `react-dom/client`、`react/jsx-runtime` 这类子路径一旦漏掉就会被打进产物。
@@ -263,9 +365,13 @@ function emitGlobalStyleEntryPlugin(): Plugin {
  * 而 React 19 已移除该字段 → 消费方调用 `Notification.success()` 时直接抛
  * `TypeError: Cannot set properties of undefined (setting 'usingClientEntryPoint')`（issue #78）。
  *
+ * `dayjs` 与 `naive-icons` 已在 package.json 的 dependencies 中声明，保持 external
+ * 可避免同一份代码在 dist/es/node_modules 下再打包一遍（包体积 + 版本漂移）。
+ *
  * 用函数匹配整个包名空间，以后新增任何子路径入口都不会再漏。
  */
-export const isPeerDependency = (id: string): boolean => /^(react|react-dom|classnames)(\/|$)/.test(id);
+export const isPeerDependency = (id: string): boolean =>
+    /^(react|react-dom|classnames|dayjs|naive-icons)(\/|$)/.test(id);
 
 export default defineConfig({
     plugins: [
@@ -277,6 +383,7 @@ export default defineConfig({
             name: '[name].[contenthash:8].[ext]',
             limit: 0,
         }),
+        foldDataUriNewUrlPlugin(),
         emitGlobalStyleEntryPlugin(),
         pruneEmptyDirsPlugin('dist'),
     ],
@@ -320,6 +427,9 @@ export default defineConfig({
                     dir: 'dist',
                     entryFileNames: 'es/[name].js',
                     chunkFileNames: 'es/[name].js',
+                    // 库内组件普遍使用 hooks / 浏览器 API，标记为客户端模块，
+                    // 避免 Next.js App Router 等 RSC 环境把 barrel 当成服务端模块执行。
+                    banner: '"use client";',
                     preserveModules: true,
                     preserveModulesRoot: 'src',
                     globals: { react: 'React', 'react-dom': 'ReactDOM' },
@@ -330,6 +440,7 @@ export default defineConfig({
                     dir: 'dist',
                     entryFileNames: 'cjs/[name].cjs',
                     chunkFileNames: 'cjs/[name].cjs',
+                    banner: '"use client";',
                     preserveModules: true,
                     preserveModulesRoot: 'src',
                     exports: 'named',

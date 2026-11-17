@@ -123,7 +123,11 @@ export const NotificationView: React.FC<NotificationViewProps> = ({ item, onRemo
             className={cls}
             style={item.style}
             onClick={handleClick}
-            role={item.onClick ? 'button' : undefined}
+            // 命令式通知插入后没有焦点变化，必须由 live region 主动播报；
+            // 错误用 assertive，其余用 polite。可点击通知保留 button 语义。
+            role={item.onClick ? 'button' : item.type === 'error' ? 'alert' : 'status'}
+            aria-live={item.type === 'error' ? 'assertive' : 'polite'}
+            aria-atomic="true"
             tabIndex={item.onClick ? 0 : undefined}
             onKeyDown={(e) => {
                 if (item.onClick && (e.key === 'Enter' || e.key === ' ')) {

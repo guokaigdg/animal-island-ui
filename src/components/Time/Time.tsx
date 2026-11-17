@@ -40,26 +40,32 @@ export const Time: React.FC<TimeProps> = ({
     className,
     ...rest
 }) => {
-    const [now, setNow] = useState(() => new Date());
+    // 初始为 null：服务端与客户端首帧都渲染 "--:--"，挂载后再写入真实时间。
+    // 若在 useState 初始化时读取 new Date()，跨分钟 hydrate 会导致文本不一致。
+    const [now, setNow] = useState<Date | null>(null);
 
     useEffect(() => {
-        const timer = window.setInterval(() => setNow(new Date()), 1_000);
+        const tick = () => setNow(new Date());
+        tick();
+        const timer = window.setInterval(tick, 1_000);
         return () => window.clearInterval(timer);
     }, []);
 
     const classNames = [styles.time, variant === 'game' && styles.game, className].filter(Boolean).join(' ');
-    const local = locale === 'zh-cn' ? dayjs(now).locale(zhCn) : dayjs(now);
-    const weekday = local.format(weekdayFormat);
-    const monthDay = local.format(dateFormat ?? getDefaultDateFormat(locale));
+    const local = now ? (locale === 'zh-cn' ? dayjs(now).locale(zhCn) : dayjs(now)) : null;
+    const weekday = local ? local.format(weekdayFormat) : '';
+    const monthDay = local ? local.format(dateFormat ?? getDefaultDateFormat(locale)) : '';
+    const hour = now ? pad(now.getHours()) : '--';
+    const minute = now ? pad(now.getMinutes()) : '--';
 
     // game 变体：竖排 HUD —— 时间 / 分割线 / 月日 + 周几胶囊
     if (variant === 'game') {
         return (
             <div className={classNames} role="timer" aria-live="off" {...rest}>
                 <div className={styles.clock}>
-                    {pad(now.getHours())}
+                    {hour}
                     <span className={styles.colon}>:</span>
-                    {pad(now.getMinutes())}
+                    {minute}
                 </div>
                 <div className={styles.divider} aria-hidden="true" />
                 <div className={styles.gameDate}>
@@ -73,9 +79,9 @@ export const Time: React.FC<TimeProps> = ({
     return (
         <div className={classNames} role="timer" aria-live="off" {...rest}>
             <div className={styles.clock}>
-                {pad(now.getHours())}
+                {hour}
                 <span className={styles.colon}>:</span>
-                {pad(now.getMinutes())}
+                {minute}
             </div>
             <div className={styles.date}>
                 <span className={styles.weekday}>{weekday}</span>

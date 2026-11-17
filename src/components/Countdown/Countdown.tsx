@@ -161,7 +161,10 @@ export const Countdown: React.FC<CountdownProps> = ({
     const deadline = toTimestamp(value);
     // 距离结束时刻还剩多少毫秒；dayjs 的 diff 负责跨时区/跨夏令时的真实时间差
     const getRemaining = useCallback(() => Math.max(0, dayjs(deadline).diff(dayjs())), [deadline]);
-    const [remaining, setRemaining] = useState(getRemaining);
+    const [remaining, setRemaining] = useState(0);
+    // 服务端与客户端首帧都渲染占位符，挂载后再写入真实剩余时间，
+    // 否则两端 `Date.now()` 相差几百毫秒就会触发 hydration mismatch。
+    const [mounted, setMounted] = useState(false);
     const timerRef = useRef<HTMLDivElement>(null);
     const [motionVisible, setMotionVisible] = useState(false);
     const shakeOptions = resolveShake(shake);
@@ -173,6 +176,7 @@ export const Countdown: React.FC<CountdownProps> = ({
     onFinishRef.current = onFinish;
 
     useEffect(() => {
+        setMounted(true);
         finishedRef.current = false;
         let timer: number | undefined;
 
@@ -207,11 +211,15 @@ export const Countdown: React.FC<CountdownProps> = ({
     }, [getRemaining, deadline]);
 
     // 使用与数字显示一致的向上取整秒数，避免还显示 11 秒时提前进入 10 秒提醒。
-    const remainingSeconds = Math.ceil(remaining / 1_000);
-    const reminderColor = getReminderColor(remainingSeconds, reminder === true ? DEFAULT_REMINDERS : reminder || []);
+    // 挂载前为 null，不触发提醒/抖动配色，保证占位符不呈现错误状态。
+    const remainingSeconds = mounted ? Math.ceil(remaining / 1_000) : null;
+    const reminderColor =
+        remainingSeconds === null
+            ? undefined
+            : getReminderColor(remainingSeconds, reminder === true ? DEFAULT_REMINDERS : reminder || []);
     // 与显示秒数共用阈值；零值和非正配置不会触发抖动，重置截止时间后可重新进入提醒。
-    const shaking = remainingSeconds > 0 && remainingSeconds <= shakeOptions.seconds;
-    const urgent = shaking && remainingSeconds <= shakeOptions.urgentSeconds;
+    const shaking = remainingSeconds !== null && remainingSeconds > 0 && remainingSeconds <= shakeOptions.seconds;
+    const urgent = remainingSeconds !== null && shaking && remainingSeconds <= shakeOptions.urgentSeconds;
     useEffect(() => {
         const element = timerRef.current;
         if (!element || !shaking) return;
@@ -249,9 +257,11 @@ export const Countdown: React.FC<CountdownProps> = ({
         .filter(Boolean)
         .join(' ');
     const parts = parseFormat(format);
-    const digits = splitSeconds(remainingSeconds, format);
+    const digits = splitSeconds(remainingSeconds ?? 0, format);
     // 读屏文本：滚动数字条对辅助技术隐藏，用完整格式化串代替
     const readable = parts.map((part) => (part.kind === 'token' ? digits[part.token] : part.text)).join('');
+    // 挂载前使用与格式等宽的占位串，保证 SSR 与客户端首帧完全一致
+    const placeholder = format.replace(/DD|HH|mm|ss/g, '--');
 
     return (
         <div
@@ -275,26 +285,32 @@ export const Countdown: React.FC<CountdownProps> = ({
             {...rest}
         >
             {prefix !== undefined && <span className={styles.prefix}>{prefix}</span>}
-            <span
-                aria-hidden="true"
-                className={styles.group}
-                style={shaking ? { animationPlayState: motionVisible ? 'running' : 'paused' } : undefined}
-            >
-                {parts.map((part, i) =>
-                    part.kind === 'token' ? (
-                        <span key={`${part.token}-${i}`} className={styles.unit}>
-                            {digits[part.token].split('').map((d, j) => (
-                                <DigitRoll key={`${part.token}-${j}`} digit={d} />
-                            ))}
-                        </span>
-                    ) : (
-                        <span key={`sep-${i}`} className={/[:：]/.test(part.text) ? styles.colon : styles.sep}>
-                            {part.text}
-                        </span>
-                    )
-                )}
-            </span>
-            <span className={styles.srOnly}>{readable}</span>
+            {mounted ? (
+                <span
+                    aria-hidden="true"
+                    className={styles.group}
+                    style={shaking ? { animationPlayState: motionVisible ? 'running' : 'paused' } : undefined}
+                >
+                    {parts.map((part, i) =>
+                        part.kind === 'token' ? (
+                            <span key={`${part.token}-${i}`} className={styles.unit}>
+                                {digits[part.token].split('').map((d, j) => (
+                                    <DigitRoll key={`${part.token}-${j}`} digit={d} />
+                                ))}
+                            </span>
+                        ) : (
+                            <span key={`sep-${i}`} className={/[:：]/.test(part.text) ? styles.colon : styles.sep}>
+                                {part.text}
+                            </span>
+                        )
+                    )}
+                </span>
+            ) : (
+                <span aria-hidden="true" className={styles.group}>
+                    {placeholder}
+                </span>
+            )}
+            <span className={styles.srOnly}>{mounted ? readable : placeholder}</span>
         </div>
     );
 };

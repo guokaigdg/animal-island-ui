@@ -89,7 +89,7 @@ describe('Pagination', () => {
                 onChange={onChange}
             />
         );
-        fireEvent.click(screen.getByRole('button', { name: '每页 10 条' }));
+        fireEvent.click(screen.getByRole('button', { name: '每页 10 条，10 条/页' }));
         fireEvent.click(screen.getByText('20 条/页'));
         // 100 条 / 20 条 = 5 页，原第 10 页收敛到第 5 页
         expect(onShowSizeChange).toHaveBeenCalledWith(5, 20);

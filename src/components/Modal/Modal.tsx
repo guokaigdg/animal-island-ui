@@ -222,6 +222,8 @@ export const Modal: React.FC<ModalProps> = ({
         </Cursor>
     );
 
+    // SSR 阶段没有 document，不能创建 portal；客户端首次渲染会正常挂载。
+    if (typeof document === 'undefined') return null;
     return createPortal(modalContent, document.body);
 };
 

@@ -14,8 +14,8 @@ export type TimePickerStatus = 'error' | 'warning';
 export type TimePart = { h: number; m: number; s: number };
 
 export interface TimePickerProps {
-    /** 当前选中时间（受控），格式 HH:mm:ss */
-    value?: string;
+    /** 当前选中时间（受控），格式 HH:mm:ss；清空态传 null */
+    value?: string | null;
     /** 默认选中时间（非受控），格式 HH:mm:ss */
     defaultValue?: string;
     /** 值变化回调，清空时返回 null */

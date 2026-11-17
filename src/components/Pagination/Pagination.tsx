@@ -119,7 +119,10 @@ const SizeChanger: React.FC<{
                 disabled={disabled}
                 aria-haspopup="listbox"
                 aria-expanded={open}
-                aria-label={`每页 ${value} 条`}
+                // 可访问名称必须包含可见文本「N 条/页」，否则读屏会听到与屏幕不一致的文案。
+                // 用逗号分隔而不是括号：axe 的 label-content-name-mismatch 规则会把括号
+                // 后的可见文本判为不匹配（误报），逗号形式可同时满足规则与 WCAG 2.5.3。
+                aria-label={`每页 ${value} 条，${value} 条/页`}
                 onClick={() => setOpen((v) => !v)}
             >
                 <span>{value} 条/页</span>

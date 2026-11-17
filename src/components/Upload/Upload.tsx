@@ -953,7 +953,7 @@ export const Upload: React.FC<UploadProps> = ({
                         <div
                             role="button"
                             tabIndex={disabled ? -1 : 0}
-                            aria-label={ariaLabel ?? '上传文件'}
+                            aria-label={ariaLabel ?? (children ? '上传文件' : '上传文件，点击或拖拽文件到这里')}
                             aria-disabled={disabled || undefined}
                             className={[styles.dragZone, dragging && styles.dragActive].filter(Boolean).join(' ')}
                             onClick={openFilePicker}
@@ -981,7 +981,7 @@ export const Upload: React.FC<UploadProps> = ({
                         <button
                             type="button"
                             className={children ? styles.triggerCustom : styles.trigger}
-                            aria-label={ariaLabel ?? '上传文件'}
+                            aria-label={ariaLabel ?? (children ? '上传文件' : '上传文件，点击上传')}
                             onClick={openFilePicker}
                             disabled={disabled}
                         >

@@ -553,13 +553,15 @@ export const Calendar: React.FC<CalendarProps> = ({
         const dayEvents = eventsByCell.get(index) ?? [];
         const isFocusable = cellKey === focusKey;
 
-        // 去重后标题数少于事项数时补「等」，否则会出现「2 项事项」只念出 1 个标题
+        // 可访问名称必须以可见日号开头（例如「1 日」），否则会触发
+        // label-content-name-mismatch：屏幕上显示 1，读屏却只念 2026-11-01。
         const label = (() => {
-            if (dayEvents.length === 0) return cellKey;
+            const dayPrefix = `${cell.date()} 日，${cellKey}`;
+            if (dayEvents.length === 0) return dayPrefix;
             const titles = Array.from(new Set(dayEvents.map((event) => textOf(event.title)).filter(Boolean)));
-            if (titles.length === 0) return `${cellKey} ${dayEvents.length} 项事项`;
+            if (titles.length === 0) return `${dayPrefix} ${dayEvents.length} 项事项`;
             const collapsed = titles.length < dayEvents.length ? ' 等' : '';
-            return `${cellKey} ${dayEvents.length} 项事项：${titles.join('，')}${collapsed}`;
+            return `${dayPrefix} ${dayEvents.length} 项事项：${titles.join('，')}${collapsed}`;
         })();
 
         return (

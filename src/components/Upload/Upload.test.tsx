@@ -52,7 +52,7 @@ describe('Upload', () => {
             const { container } = render(<Upload />);
             const input = getInput(container);
             const clickSpy = vi.spyOn(input, 'click');
-            fireEvent.click(screen.getByRole('button', { name: '上传文件' }));
+            fireEvent.click(screen.getByRole('button', { name: '上传文件，点击上传' }));
             expect(clickSpy).toHaveBeenCalledTimes(1);
         });
 
@@ -60,7 +60,7 @@ describe('Upload', () => {
             const { container } = render(<Upload disabled />);
             const input = getInput(container);
             const clickSpy = vi.spyOn(input, 'click');
-            fireEvent.click(screen.getByRole('button', { name: '上传文件' }));
+            fireEvent.click(screen.getByRole('button', { name: '上传文件，点击上传' }));
             expect(clickSpy).not.toHaveBeenCalled();
         });
 
@@ -68,7 +68,7 @@ describe('Upload', () => {
             const onChange = vi.fn();
             render(<Upload drag onChange={onChange} />);
             expect(screen.getByText('点击或拖拽文件到这里')).toBeInTheDocument();
-            const zone = screen.getByRole('button', { name: '上传文件' });
+            const zone = screen.getByRole('button', { name: '上传文件，点击或拖拽文件到这里' });
             fireEvent.drop(zone, { dataTransfer: { files: [makeFile('drop.txt')] } });
             // onChange 至少触发两次：新增 + 模拟进度首跳；最后一次应包含 drop.txt
             const lastList = (onChange.mock.calls.at(-1)![0] as { fileList: Array<{ name: string }> }).fileList;
@@ -635,7 +635,7 @@ describe('Upload', () => {
             const { container } = render(<Upload showUploadList={false} />);
             pickFiles(getInput(container), [makeFile('a.txt')]);
             expect(container.querySelector(`.${styles.textList}`)).not.toBeInTheDocument();
-            expect(screen.getByRole('button', { name: '上传文件' })).toBeInTheDocument();
+            expect(screen.getByRole('button', { name: '上传文件，点击上传' })).toBeInTheDocument();
         });
 
         it('picture-card with showUploadList=false shows only the add tile', () => {
@@ -1011,7 +1011,7 @@ describe('Upload', () => {
         it('keeps only the first file when multiple is false (drag can bypass the input limit)', async () => {
             const onChange = vi.fn();
             render(<Upload drag onChange={onChange} />);
-            const zone = screen.getByRole('button', { name: '上传文件' });
+            const zone = screen.getByRole('button', { name: '上传文件，点击或拖拽文件到这里' });
             await act(async () => {
                 fireEvent.drop(zone, { dataTransfer: { files: [makeFile('a.txt'), makeFile('b.txt')] } });
             });
@@ -1089,7 +1089,7 @@ describe('Upload', () => {
         it('filters dropped files by accept (the input attribute cannot police drag & drop)', async () => {
             const onChange = vi.fn();
             render(<Upload drag multiple accept="image/*" onChange={onChange} />);
-            const zone = screen.getByRole('button', { name: '上传文件' });
+            const zone = screen.getByRole('button', { name: '上传文件，点击或拖拽文件到这里' });
             await act(async () => {
                 fireEvent.drop(zone, {
                     dataTransfer: { files: [makeFile('a.txt'), makeFile('b.png', 'image/png')] },

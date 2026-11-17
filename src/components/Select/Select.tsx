@@ -11,8 +11,12 @@ export type SelectVariant = 'default' | 'game';
 
 export interface SelectProps {
     options: SelectOption[];
-    value: string;
-    onChange: (key: string) => void;
+    /** 受控值；不传时使用 defaultValue / 内部状态 */
+    value?: string;
+    /** 值变化回调（选择、清空） */
+    onChange?: (key: string) => void;
+    /** 非受控初始值 */
+    defaultValue?: string;
     placeholder?: string;
     disabled?: boolean;
     /** 下拉弹出方式：default 常规正下方展开（空间不足翻到正上方）；game 贴触发区侧边弹出 */
@@ -37,12 +41,17 @@ export interface SelectProps {
     'aria-label'?: string;
     /** 关联外部可见 label 的 id */
     'aria-labelledby'?: string;
+    /** 额外类名，作用于根节点 */
+    className?: string;
+    /** 根节点行内样式 */
+    style?: React.CSSProperties;
 }
 
 export const Select: React.FC<SelectProps> = ({
     options,
     value,
     onChange,
+    defaultValue = '',
     placeholder = '请选择',
     disabled = false,
     variant = 'default',
@@ -56,7 +65,12 @@ export const Select: React.FC<SelectProps> = ({
     notFoundContent = '暂无数据',
     'aria-label': ariaLabel,
     'aria-labelledby': ariaLabelledBy,
+    className,
+    style,
 }) => {
+    const [innerValue, setInnerValue] = useState(defaultValue);
+    const isControlled = value !== undefined;
+    const currentValue = isControlled ? value : innerValue;
     const [open, setOpen] = useState(false);
     const [activeKey, setActiveKey] = useState<string | null>(null);
     // null = 没有在搜索（输入框回显选中项），string = 用户正在搜索（空串就是要显示空查询）
@@ -69,9 +83,9 @@ export const Select: React.FC<SelectProps> = ({
     const triggerRef = useRef<HTMLDivElement>(null);
     const dropdownRef = useRef<HTMLDivElement>(null);
     const searchRef = useRef<HTMLInputElement>(null);
-    const currentLabel = options.find((o) => o.key === value)?.label || placeholder;
+    const currentLabel = options.find((o) => o.key === currentValue)?.label || placeholder;
     // 输入框在非搜索状态下的回显：有选中值显示 label，否则留空让 placeholder 生效
-    const labelForInput = value ? currentLabel : '';
+    const labelForInput = currentValue ? currentLabel : '';
 
     const idPrefix = `animal-select-${useId().replace(/:/g, '')}`;
     const listboxId = `${idPrefix}-listbox`;
@@ -207,7 +221,7 @@ export const Select: React.FC<SelectProps> = ({
         if (open) {
             input.focus();
         }
-    }, [open, showSearch, searchValue, value]);
+    }, [open, showSearch, searchValue, currentValue]);
 
     // 收起时清空高亮；展开或过滤结果变化时，把高亮落到当前选中项或第一个可见项
     useEffect(() => {
@@ -217,17 +231,18 @@ export const Select: React.FC<SelectProps> = ({
         }
         setActiveKey((prev) => {
             if (filteredOptions.some((o) => o.key === prev)) return prev;
-            return filteredOptions.find((o) => o.key === value)?.key ?? filteredOptions[0]?.key ?? null;
+            return filteredOptions.find((o) => o.key === currentValue)?.key ?? filteredOptions[0]?.key ?? null;
         });
-    }, [open, value, filteredOptions]);
+    }, [open, currentValue, filteredOptions]);
 
     const handleSelect = useCallback(
         (key: string) => {
-            onChange(key);
+            if (!isControlled) setInnerValue(key);
+            onChange?.(key);
             closeDropdown();
             focusTrigger();
         },
-        [onChange, closeDropdown, focusTrigger]
+        [isControlled, onChange, closeDropdown, focusTrigger]
     );
 
     const moveActive = (delta: 1 | -1) => {
@@ -284,7 +299,7 @@ export const Select: React.FC<SelectProps> = ({
         }
     };
 
-    const showClear = allowClear && Boolean(value) && !disabled && hovered;
+    const showClear = allowClear && Boolean(currentValue) && !disabled && hovered;
 
     const comboboxA11y: React.AriaAttributes = {
         'aria-haspopup': 'listbox',
@@ -298,7 +313,8 @@ export const Select: React.FC<SelectProps> = ({
     return (
         <div
             ref={wrapperRef}
-            className={`${styles.wrapper} ${disabled ? styles.disabled : ''}`}
+            className={[styles.wrapper, disabled && styles.disabled, className].filter(Boolean).join(' ')}
+            style={style}
             onKeyDown={handleKeyDown}
             onMouseEnter={() => setHovered(true)}
             onMouseLeave={() => setHovered(false)}
@@ -336,7 +352,7 @@ export const Select: React.FC<SelectProps> = ({
                             // 去掉 label 前缀而非在 label 后面追加
                             const editingLabel =
                                 searchValue === null &&
-                                Boolean(value) &&
+                                Boolean(currentValue) &&
                                 labelForInput !== '' &&
                                 next.startsWith(labelForInput);
                             const query = editingLabel ? next.slice(labelForInput.length) : next;
@@ -347,7 +363,7 @@ export const Select: React.FC<SelectProps> = ({
                         }}
                     />
                 ) : (
-                    <span className={value ? styles.value : styles.placeholder}>{currentLabel}</span>
+                    <span className={currentValue ? styles.value : styles.placeholder}>{currentLabel}</span>
                 )}
                 {showClear && (
                     <button
@@ -356,7 +372,8 @@ export const Select: React.FC<SelectProps> = ({
                         aria-label={clearAriaLabel}
                         onClick={(e) => {
                             e.stopPropagation();
-                            onChange('');
+                            if (!isControlled) setInnerValue('');
+                            onChange?.('');
                             onClear?.();
                             // 值清空后按钮自身会卸载，把焦点交给 trigger 免得键盘用户掉焦点
                             focusTrigger();
@@ -395,7 +412,7 @@ export const Select: React.FC<SelectProps> = ({
                         </div>
                     ) : (
                         filteredOptions.map((option) => {
-                            const selected = value === option.key;
+                            const selected = currentValue === option.key;
                             return (
                                 <div
                                     key={option.key}

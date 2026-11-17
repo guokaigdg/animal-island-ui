@@ -146,7 +146,7 @@ describe('Calendar', () => {
             );
             expect(screen.getByText('晨会')).toBeInTheDocument();
             expect(screen.getByText('评审')).toBeInTheDocument();
-            expect(cell('2026-08-10')).toHaveAttribute('aria-label', '2026-08-10 2 项事项：晨会，评审');
+            expect(cell('2026-08-10')).toHaveAttribute('aria-label', '10 日，2026-08-10 2 项事项：晨会，评审');
         });
 
         it('跨日期事项渲染成横跨多列的连续条', () => {
@@ -205,7 +205,7 @@ describe('Calendar', () => {
                 />
             );
             expect(cell('2026-08-13').textContent).toContain('+2');
-            expect(cell('2026-08-13')).toHaveAttribute('aria-label', '2026-08-13 4 项事项：A，B，C，D');
+            expect(cell('2026-08-13')).toHaveAttribute('aria-label', '13 日，2026-08-13 4 项事项：A，B，C，D');
         });
 
         it('showTime 的事项展示起始时间', () => {
@@ -269,12 +269,12 @@ describe('Calendar', () => {
         });
         it('aria-label 里的 JSX 标题抽成文本，不出现 [object Object]', () => {
             render(<Calendar panelValue="2026-08" events={[{ title: <b>周会</b>, start: '2026-08-10' }]} />);
-            expect(cell('2026-08-10')).toHaveAttribute('aria-label', '2026-08-10 1 项事项：周会');
+            expect(cell('2026-08-10')).toHaveAttribute('aria-label', '10 日，2026-08-10 1 项事项：周会');
         });
 
         it('aria-label 保留数字标题（0 也不当作空值丢掉）', () => {
             render(<Calendar panelValue="2026-08" events={[{ title: 0, start: '2026-08-10' }]} />);
-            expect(cell('2026-08-10')).toHaveAttribute('aria-label', '2026-08-10 1 项事项：0');
+            expect(cell('2026-08-10')).toHaveAttribute('aria-label', '10 日，2026-08-10 1 项事项：0');
         });
 
         it('aria-label 里同名标题去重后补「等」，不与事项数错位', () => {
@@ -287,7 +287,7 @@ describe('Calendar', () => {
                     ]}
                 />
             );
-            expect(cell('2026-08-10')).toHaveAttribute('aria-label', '2026-08-10 2 项事项：周会 等');
+            expect(cell('2026-08-10')).toHaveAttribute('aria-label', '10 日，2026-08-10 2 项事项：周会 等');
         });
 
         it('事项条在头部插入新事项后复用原有 DOM', () => {
@@ -670,7 +670,7 @@ describe('Calendar', () => {
             expect(screen.queryByText('下季度规划')).not.toBeInTheDocument();
             // 跨过整月的事项在视图内可见，且首格提示只算它一条
             expect(screen.getAllByText('跨过整月')).toHaveLength(6);
-            expect(cell('2026-07-26')).toHaveAttribute('aria-label', '2026-07-26 1 项事项：跨过整月');
+            expect(cell('2026-07-26')).toHaveAttribute('aria-label', '26 日，2026-07-26 1 项事项：跨过整月');
             expect(cell('2026-07-26').textContent).not.toContain('+');
         });
 

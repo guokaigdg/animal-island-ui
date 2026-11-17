@@ -245,7 +245,11 @@ export const Drawer: React.FC<DrawerProps> = ({
     // 始终在 DOM 中渲染：关闭态由 placement 类（transform: translateX/Y(...)）定义，
     // 打开态由 .panelOpen 覆盖（transform: none），CSS transition 入场/退场自动反向播放。
     // 关闭时通过 inert + aria-hidden 把抽屉从无障碍树和 Tab 顺序中排除。
-    const inertProps = !open ? ({ inert: '' } as Record<string, string>) : {};
+    // inert 的写法随 React 版本而变：
+    //   - React 18 只接受字符串（布尔 true 会被丢弃并打印 “non-boolean attribute” 告警）；
+    //   - React 19 改为布尔属性（空字符串会被当作 false 并告警）。
+    const inertValue = Number.parseInt(React.version, 10) >= 19 ? true : '';
+    const inertProps = !open ? ({ inert: inertValue } as unknown as React.HTMLAttributes<HTMLDivElement>) : {};
 
     const panelClass = [
         styles.panel,
@@ -274,6 +278,7 @@ export const Drawer: React.FC<DrawerProps> = ({
                     style={maskStyle}
                     onClick={handleMaskClick}
                     aria-hidden={!open}
+                    {...inertProps}
                 >
                     <div
                         ref={dialogRef}
@@ -285,7 +290,6 @@ export const Drawer: React.FC<DrawerProps> = ({
                         aria-labelledby={title ? titleId : undefined}
                         aria-hidden={!open}
                         tabIndex={-1}
-                        {...inertProps}
                     >
                         {title && (
                             <div className={styles.header}>
@@ -305,6 +309,8 @@ export const Drawer: React.FC<DrawerProps> = ({
         </div>
     );
 
+    // SSR 阶段没有 document，不能创建 portal；客户端首次渲染会正常挂载。
+    if (typeof document === 'undefined') return null;
     return createPortal(drawerContent, document.body);
 };
 

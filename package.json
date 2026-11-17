@@ -14,6 +14,7 @@
         },
         "./style": "./dist/index.css",
         "./dist/index.css": "./dist/index.css",
+        "./package.json": "./package.json",
         "./es/*": {
             "types": "./dist/types/*",
             "default": "./dist/es/*"
@@ -58,11 +59,11 @@
         "prepare": "npm run setup:hooks"
     },
     "peerDependencies": {
-        "classnames": "^2.5.1",
         "react": ">=18.0.0",
         "react-dom": ">=18.0.0"
     },
     "dependencies": {
+        "classnames": "^2.5.1",
         "dayjs": "^1.11.23",
         "naive-icons": "^1.14.0"
     },

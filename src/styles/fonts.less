@@ -9,12 +9,17 @@
 // 由 emitGlobalStyleEntryPlugin 把 @font-face 拼到 dist/index.css。
 
 // ---------- Nunito (拉丁字符主字体) ----------
+// unicode-range 与 Google Fonts / fontsource 的 latin 子集保持一致：
+// 浏览器只在实际用到这些字符时才下载对应 woff2。
 @font-face {
     font-family: 'Nunito';
     font-style: normal;
     font-weight: 500;
     font-display: swap;
     src: url('../assets/fonts/nunito-latin-500-normal.woff2') format('woff2');
+    unicode-range:
+        U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F,
+        U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
 @font-face {
@@ -23,6 +28,9 @@
     font-weight: 700;
     font-display: swap;
     src: url('../assets/fonts/nunito-latin-700-normal.woff2') format('woff2');
+    unicode-range:
+        U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F,
+        U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
 @font-face {
@@ -31,6 +39,9 @@
     font-weight: 900;
     font-display: swap;
     src: url('../assets/fonts/nunito-latin-900-normal.woff2') format('woff2');
+    unicode-range:
+        U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F,
+        U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
 // ---------- Noto Sans SC (拉丁子集) ----------
@@ -40,6 +51,9 @@
     font-weight: 400;
     font-display: swap;
     src: url('../assets/fonts/noto-sans-sc-latin-400-normal.woff2') format('woff2');
+    unicode-range:
+        U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F,
+        U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
 @font-face {
@@ -48,6 +62,9 @@
     font-weight: 500;
     font-display: swap;
     src: url('../assets/fonts/noto-sans-sc-latin-500-normal.woff2') format('woff2');
+    unicode-range:
+        U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F,
+        U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
 @font-face {
@@ -56,15 +73,24 @@
     font-weight: 700;
     font-display: swap;
     src: url('../assets/fonts/noto-sans-sc-latin-700-normal.woff2') format('woff2');
+    unicode-range:
+        U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F,
+        U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
 // ---------- Noto Sans SC (简体中文 · 大文件) ----------
+// 中文文件只声明 CJK 相关 Unicode 区块，并刻意排除 ASCII / Latin-1 / 通用标点：
+// - 纯英文页面不会命中这些声明，因此不会下载 3 × 1.1MB 的中文子集；
+// - 拉丁字符继续由上面的 latin 子集提供，避免同族字体重复覆盖。
 @font-face {
     font-family: 'Noto Sans SC';
     font-style: normal;
     font-weight: 400;
     font-display: swap;
     src: url('../assets/fonts/noto-sans-sc-chinese-simplified-400-normal.woff2') format('woff2');
+    unicode-range:
+        U+2E80-2EFF, U+2F00-2FDF, U+3000-303F, U+3040-30FF, U+3100-31EF, U+3200-33FF, U+3400-4DBF, U+4E00-9FFF,
+        U+F900-FAFF, U+FE10-FE6F, U+FF00-FFEF;
 }
 
 @font-face {
@@ -73,6 +99,9 @@
     font-weight: 500;
     font-display: swap;
     src: url('../assets/fonts/noto-sans-sc-chinese-simplified-500-normal.woff2') format('woff2');
+    unicode-range:
+        U+2E80-2EFF, U+2F00-2FDF, U+3000-303F, U+3040-30FF, U+3100-31EF, U+3200-33FF, U+3400-4DBF, U+4E00-9FFF,
+        U+F900-FAFF, U+FE10-FE6F, U+FF00-FFEF;
 }
 
 @font-face {
@@ -81,4 +110,7 @@
     font-weight: 700;
     font-display: swap;
     src: url('../assets/fonts/noto-sans-sc-chinese-simplified-700-normal.woff2') format('woff2');
+    unicode-range:
+        U+2E80-2EFF, U+2F00-2FDF, U+3000-303F, U+3040-30FF, U+3100-31EF, U+3200-33FF, U+3400-4DBF, U+4E00-9FFF,
+        U+F900-FAFF, U+FE10-FE6F, U+FF00-FFEF;
 }
