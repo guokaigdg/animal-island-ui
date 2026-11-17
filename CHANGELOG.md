@@ -5,6 +5,43 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.0.1] - 2026-11-17
+
+### Fixed
+
+- **修复 webpack 5 下引入即报 `Module parse failed`**
+    - 根因：产物中的场景插画使用 `new URL("data:image/svg+xml,...", import.meta.url)`，webpack 5 会把它当作 asset 模块解析
+    - 修复：构建期将 data URI 形式的 `new URL(...)` 折叠为字符串字面量，ES/CJS 产物均不再包含该写法，CJS 可直接在 Node 中 `require`
+- **修复 `Drawer` / `Modal` 在 SSR 环境加载即崩溃**
+    - `createPortal` 前增加 `document` 可用性守卫，服务端渲染阶段返回 `null`
+- **补全 `animal-island-ui/style` 入口**
+    - 聚合后的 `dist/index.css` 现在包含自定义光标与 wave 动效样式
+- **所有 JS 产物加上 `"use client"`**，可在 React Server Components 中直接引用
+- **`classnames` 由 `peerDependencies` 调整为 `dependencies`**，使用方无需再显式安装
+- **`Drawer` 的 `inert` 同时兼容 React 18 与 React 19**
+    - 按 React 版本分别使用字符串空值与布尔值，避免属性告警及关闭态焦点隔离失效
+- **修复 `Countdown` / `Time` 的 hydration mismatch**
+    - 未挂载前渲染 `--` 占位，服务端与客户端首帧一致；已在浏览器侧验证零报错
+- **`Notification` 增加 live region**
+    - 按类型输出 `role="status"` / `role="alert"` 及对应的 `aria-live`、`aria-atomic`
+- **`TimePicker` 的 `value` 类型与 `onChange` 对齐为 `string | null`**，可直接接收回调参数
+- **字体按 `unicode-range` 拆分子集**
+    - 拉丁与 CJK 分别声明范围，浏览器只下载实际用到的 woff2
+- **`Select` 支持非受控用法**
+    - 新增 `defaultValue`，并透传 `className` / `style`
+- **修复可访问名称与可见文本不一致**
+    - 涉及 `Pagination` 每页条数按钮、`Calendar` 日期单元、`Upload` 上传区域
+- **`exports` 暴露 `./package.json`**，`require('animal-island-ui/package.json')` 可用
+
+### Changed
+
+- README logo 由 `readme-logo.webp` 替换为 `logo.png`
+
+### Known Issues
+
+- **对比度**：仍有 26 处文本/背景对比度未达 WCAG AA（axe `color-contrast` 规则），涉及 `Button`、`Input`、`Tabs`、`Pagination` 等组件的部分状态；本版未调整配色，后续版本处理
+- **npm 页面 README**：README 为在 GitHub 上正确展示而使用相对路径链接，npm 包页面上这些链接无法跳转
+
 ## [4.0.0] - 2026-11-17
 
 ### Removed
