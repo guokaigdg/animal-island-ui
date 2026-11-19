@@ -26,21 +26,21 @@
 </p>
 
 <h2>
-    <img src="img/icons/bell.svg" width="20" height="27" alt="" align="absmiddle" />
+    <img src="img/icons/bell.svg" width="18" alt="" />
     はじめに
 </h2>
 
 軽量で、ゆったりとした React + TypeScript UI コンポーネントライブラリ。オリジナルのアイランドスタイルのデザイン言語を採用し、すべての視覚要素・レイアウト・アイコン・アニメーションを一からデザインしています。
 
 <h2>
-    <img src="img/icons/monitor.svg" width="20" height="27" alt="" align="absmiddle" />
+    <img src="img/icons/monitor.svg" width="18" alt="" />
     プレビュー
 </h2>
 
 - オンラインプレビュー：[animal-island-ui](https://guokaigdg.github.io/animal-island-ui/#/)
 
 <h2>
-    <img src="img/icons/git-branch.svg" width="20" height="27" alt="" align="absmiddle" />
+    <img src="img/icons/git-branch.svg" width="18" alt="" />
     関連プロジェクト
 </h2>
 
@@ -49,7 +49,7 @@
 - WeChat ミニプログラム版（**animal-island-wx**）：<https://github.com/lns567/animal-island-wx>
 
 <h2>
-    <img src="img/icons/sparkles.svg" width="20" height="27" alt="" align="absmiddle" />
+    <img src="img/icons/sparkles.svg" width="18" alt="" />
     AI ツールで animal-island-ui スタイルのページを生成
 </h2>
 
@@ -73,7 +73,7 @@ skills add guokaigdg/animal-island-ui
 4. AI が出力した `index.html` を保存し、ダブルクリックでプレビューできます。
 
 <h2>
-    <img src="img/icons/download.svg" width="20" height="27" alt="" align="absmiddle" />
+    <img src="img/icons/download.svg" width="18" alt="" />
     インストール
 </h2>
 
@@ -82,7 +82,7 @@ npm install animal-island-ui
 ```
 
 <h2>
-    <img src="img/icons/rocket.svg" width="20" height="27" alt="" align="absmiddle" />
+    <img src="img/icons/rocket.svg" width="18" alt="" />
     クイックスタート
 </h2>
 
@@ -103,7 +103,7 @@ function App() {
 ```
 
 <h2>
-    <img src="img/icons/copy.svg" width="20" height="27" alt="" align="absmiddle" />
+    <img src="img/icons/copy.svg" width="18" alt="" />
     ドキュメント
 </h2>
 
@@ -121,7 +121,7 @@ function App() {
 | [`CONTRIBUTING.md`](../CONTRIBUTING.md)                                        | コントリビューションガイド。                                                                                                                                               |
 
 <h2>
-    <img src="img/icons/terminal.svg" width="20" height="27" alt="" align="absmiddle" />
+    <img src="img/icons/terminal.svg" width="18" alt="" />
     ローカル開発
 </h2>
 
@@ -144,7 +144,7 @@ npm run build:demo
 ```
 
 <h2>
-    <img src="img/icons/shield.svg" width="20" height="27" alt="" align="absmiddle" />
+    <img src="img/icons/shield.svg" width="18" alt="" />
     ライセンスと免責事項
 </h2>
 
@@ -154,7 +154,7 @@ npm run build:demo
 - 本リポジトリ内のすべての視覚素材（アイコン、イラスト、アニメーション）は本プロジェクトのために制作されたオリジナル作品です。
 
 <h2>
-    <img src="img/icons/heart.svg" width="20" height="27" alt="" align="absmiddle" />
+    <img src="img/icons/heart.svg" width="18" alt="" />
     サポート
 </h2>
 

@@ -26,21 +26,21 @@
 </p>
 
 <h2>
-    <img src="img/icons/bell.svg" width="20" height="27" alt="" align="absmiddle" />
+    <img src="img/icons/bell.svg" width="18" alt="" />
     介绍
 </h2>
 
 一款轻量的治愈系 React + TypeScript UI 组件库，采用原创的海岛风格设计语言，所有视觉元素、布局、图标、动画均为独立设计实现。
 
 <h2>
-    <img src="img/icons/monitor.svg" width="20" height="27" alt="" align="absmiddle" />
+    <img src="img/icons/monitor.svg" width="18" alt="" />
     预览
 </h2>
 
 - 在线预览：[animal-island-ui](https://guokaigdg.github.io/animal-island-ui/#/)
 
 <h2>
-    <img src="img/icons/git-branch.svg" width="20" height="27" alt="" align="absmiddle" />
+    <img src="img/icons/git-branch.svg" width="18" alt="" />
     相关
 </h2>
 
@@ -49,7 +49,7 @@
 - 微信小程序版本（**animal-island-wx**）：<https://github.com/lns567/animal-island-wx>
 
 <h2>
-    <img src="img/icons/sparkles.svg" width="20" height="27" alt="" align="absmiddle" />
+    <img src="img/icons/sparkles.svg" width="18" alt="" />
     用 AI 工具生成 animal-island-ui 风格页面
 </h2>
 
@@ -75,7 +75,7 @@ skills add guokaigdg/animal-island-ui
 4. 保存 AI 输出的 `index.html`，双击即可预览。
 
 <h2>
-    <img src="img/icons/download.svg" width="20" height="27" alt="" align="absmiddle" />
+    <img src="img/icons/download.svg" width="18" alt="" />
     安装
 </h2>
 
@@ -84,7 +84,7 @@ npm install animal-island-ui
 ```
 
 <h2>
-    <img src="img/icons/rocket.svg" width="20" height="27" alt="" align="absmiddle" />
+    <img src="img/icons/rocket.svg" width="18" alt="" />
     快速上手
 </h2>
 
@@ -105,7 +105,7 @@ function App() {
 ```
 
 <h2>
-    <img src="img/icons/copy.svg" width="20" height="27" alt="" align="absmiddle" />
+    <img src="img/icons/copy.svg" width="18" alt="" />
     文档
 </h2>
 
@@ -123,7 +123,7 @@ function App() {
 | [`CONTRIBUTING.md`](../CONTRIBUTING.md)                                        | 贡献指南。                                                                                                                 |
 
 <h2>
-    <img src="img/icons/terminal.svg" width="20" height="27" alt="" align="absmiddle" />
+    <img src="img/icons/terminal.svg" width="18" alt="" />
     本地开发
 </h2>
 
@@ -146,7 +146,7 @@ npm run build:demo
 ```
 
 <h2>
-    <img src="img/icons/shield.svg" width="20" height="27" alt="" align="absmiddle" />
+    <img src="img/icons/shield.svg" width="18" alt="" />
     许可与免责声明
 </h2>
 
@@ -156,7 +156,7 @@ npm run build:demo
 - 本仓库内所有视觉素材（图标、插画、动画）均为本项目原创作品。
 
 <h2>
-    <img src="img/icons/heart.svg" width="20" height="27" alt="" align="absmiddle" />
+    <img src="img/icons/heart.svg" width="18" alt="" />
     支持
 </h2>
 
