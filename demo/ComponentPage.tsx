@@ -122,9 +122,10 @@ const TITLE_COLORS: TitleColor[] = [
 
 interface ComponentPageProps {
     activeKey: string;
+    skillIntro?: boolean;
 }
 
-const ComponentPage: React.FC<ComponentPageProps> = ({ activeKey }) => {
+const ComponentPage: React.FC<ComponentPageProps> = ({ activeKey, skillIntro = false }) => {
     const Page = PAGES[activeKey];
     const info = PAGE_INFO[activeKey];
 
@@ -144,7 +145,7 @@ const ComponentPage: React.FC<ComponentPageProps> = ({ activeKey }) => {
                     {info.desc}
                 </Typewriter>
             </div>
-            <Page />
+            {activeKey === 'skill' ? <SkillDemo intro={skillIntro} /> : <Page />}
         </>
     );
 };

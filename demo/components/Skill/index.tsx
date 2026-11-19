@@ -19,15 +19,16 @@ import styles from './skill.module.less';
 // Skill 介绍 —— animal-island-ui-style
 // 章节顺序按阅读动线：是什么 → 怎么用 → 怎么工作 → 用在哪 → 有什么 → 边界
 // ============================================
-const SkillDemo: React.FC = () => {
-    // 进场先盖一层圆形展开 Loading。内容此时已经挂在下面，
-    // Loading 收起时由中心扩散的圆孔把整页揭开。
-    const [loading, setLoading] = useState(true);
+const SkillDemo: React.FC<{ intro?: boolean }> = ({ intro = false }) => {
+    // 仅从首页「开始使用」进入时盖一层圆形展开 Loading；菜单直接进入不播。
+    // 内容始终挂在下面，Loading 收起时由中心扩散的圆孔把整页揭开。
+    const [loading, setLoading] = useState(intro);
 
     useEffect(() => {
+        if (!intro) return;
         const timer = window.setTimeout(() => setLoading(false), 2000);
         return () => window.clearTimeout(timer);
-    }, []);
+    }, [intro]);
 
     return (
         <>

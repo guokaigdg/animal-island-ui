@@ -334,6 +334,7 @@ const App: React.FC = () => {
     const { hash, navigate } = useHash();
     const isMobile = useIsMobile();
     const [drawerOpen, setDrawerOpen] = useState(false);
+    const [skillIntro, setSkillIntro] = useState(false);
     const mainRef = React.useRef<HTMLElement>(null);
 
     const activeKey = hash.startsWith('/') && hash.length > 1 ? hash.slice(1) : 'home';
@@ -387,8 +388,17 @@ const App: React.FC = () => {
 
     const handleNavigate = useCallback(
         (path: string) => {
+            setSkillIntro(false);
             navigate(path);
             setDrawerOpen(false);
+        },
+        [navigate]
+    );
+
+    const handleHomeNavigate = useCallback(
+        (path: string) => {
+            setSkillIntro(path === '/skill');
+            navigate(path);
         },
         [navigate]
     );
@@ -423,7 +433,7 @@ const App: React.FC = () => {
                         justifyContent: 'center',
                     }}
                 >
-                    <HomePage onNavigate={handleNavigate} />
+                    <HomePage onNavigate={handleHomeNavigate} />
                 </div>
             ) : (
                 /* Component page — with sidebar */
@@ -554,7 +564,7 @@ const App: React.FC = () => {
                         }}
                     >
                         <Suspense fallback={<Loading type="circle" active />}>
-                            <ComponentPage activeKey={activeKey} />
+                            <ComponentPage activeKey={activeKey} skillIntro={skillIntro} />
                         </Suspense>
                     </main>
                 </div>
