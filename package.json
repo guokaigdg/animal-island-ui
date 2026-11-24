@@ -65,7 +65,7 @@
     "dependencies": {
         "classnames": "^2.5.1",
         "dayjs": "^1.11.23",
-        "naive-icons": "^1.14.0"
+        "naive-icons": "^1.17.0"
     },
     "engines": {
         "node": ">=18"
