@@ -9,7 +9,7 @@
 
 ## 正文对照
 
-animal-island-ui 是采用原创治愈系海岛风格设计的 React + TypeScript 组件库 —— 42 个组件、两个运行时依赖（`naive-icons` 图标、`dayjs` 日期）、MIT License
+animal-island-ui 是采用原创治愈系海岛风格设计的 React + TypeScript 组件库 —— 43 个组件、两个运行时依赖（`naive-icons` 图标、`dayjs` 日期）、MIT License
 
 源码与设计规范定义：https://github.com/guokaigdg/animal-island-ui
 

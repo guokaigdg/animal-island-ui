@@ -222,3 +222,44 @@ Custom properties resolve against the *nearest* declaring ancestor, so the inner
 
 - The artwork is inline SVG only — there is no `cursor-icon.png` and no base64 fallback; both variants are defined once in `cursor.css` and reach every rule through `--animal-cursor-img`
 - `!important` on every rule so the mode semantics survive component-level cursor styles; `className` is applied to the root `<div>` alongside the fixed `animal-cursor` class
+
+## Scrollbar
+
+```tsx
+<Scrollbar height={200} showTrack>
+  {items.map((item) => (
+    <div key={item}>{item}</div>
+  ))}
+</Scrollbar>
+```
+
+Props:
+
+| name         | type                                   | default      | Description                                                                                  |
+| ------------ | -------------------------------------- | ------------ | -------------------------------------------------------------------------------------------- |
+| `height`     | `number \| string`                     | —            | Container height; numbers are read as px. The common case for a vertical scroll               |
+| `maxHeight`  | `number \| string`                     | —            | Maximum container height                                                                      |
+| `width`      | `number \| string`                     | —            | Container width; numbers are read as px. The common case for a horizontal scroll              |
+| `maxWidth`   | `number \| string`                     | —            | Maximum container width                                                                       |
+| `direction`  | `'vertical' \| 'horizontal' \| 'both'` | `'vertical'` | Which axis scrolls; the other one is clipped away instead of being left as a second scrollbar  |
+| `thumbColor` | `string`                               | —            | Thumb colour; pass a CSS variable to follow the theme                                         |
+| `thumbSize`  | `number`                               | `8`          | Thumb thickness in px; default 8, slimmer than the OS classic scrollbar                       |
+| `showTrack`  | `boolean`                              | `false`      | Whether the track background is visible                                                        |
+| `className`  | `string`                               | —            | Extra class name                                                                               |
+| `style`      | `CSSProperties`                        | —            | Extra inline styles                                                                            |
+
+**Implementation notes:**
+
+- The scrollbar is **native**: the root keeps `overflow: auto` and the browser's own scrolling, so momentum, keyboard scrolling, touch gestures and the platform's scrollbar behaviour all survive. Only the track and the thumb are restyled — nothing is re-implemented in JavaScript.
+- **Styling the scrollbar is what makes it permanent.** On macOS the unstyled system scrollbar is an *overlay*: it fades out when idle and reserves almost no width. A scrollbar carrying `::-webkit-scrollbar` styles — or `scrollbar-width: thin` — is rendered as a classic scrollbar instead: always visible, reserving real layout space. That is the sharpest difference against a plain `overflow: auto` box, and it is a side effect of the styling rather than behaviour the component implements. The default width is 8px — deliberately slimmer than the OS classic scrollbar (15–17px on Windows). CSS `thin` is only a keyword with no fixed pixel value, so the component picks its own number rather than claiming to match the platform.
+- **Both ends are symmetric semicircles.** The thumb and track have no transparent borders: a one-sided border would make the padding-box corner radii differ from side to side when combined with `background-clip: padding-box`. The scrollbar gutter is exactly `thumbSize` wide, and a large `border-radius` (`50px`) resolves to half the 8px width, producing a true capsule with identical left and right curves. There is no extra inner or outer gap. Firefox uses the standard `thin` scrollbar and cannot reproduce this shape.
+- Two rendering paths, and they must not overlap. Chromium / Safari read `::-webkit-scrollbar`, `::-webkit-scrollbar-track` and `::-webkit-scrollbar-thumb`; Firefox reads `scrollbar-width` + `scrollbar-color`. The standard properties sit inside `@supports not selector(::-webkit-scrollbar)` on purpose: **as soon as a rule sets `scrollbar-width` or `scrollbar-color`, Chrome 121+ ignores the `::-webkit-scrollbar` pseudo-elements** — the custom width, the radius and the thumb shape would all be lost and the browser's own thin scrollbar would be used instead. Scoping the standard properties to browsers that do not know the webkit pseudo-elements keeps both paths intact. `thumbSize` only reaches the WebKit path, because Firefox's width can only be `thin` / `auto` / `none`.
+- The WebKit rule sets `display: block` explicitly. A widespread global reset — `*::-webkit-scrollbar { display: none }` — matches every scrollbar on the page, including this component's; the class selector outranks it, so the component's own scrollbar stays visible.
+- A container with a `border-radius` clips the scrollbar with it: the thumb starts flush against the rounded corner, so the very top of the track is cut off. Give the scroll area a radius only if the surrounding design needs one, or inset the scrollbar with padding.
+- `::-webkit-scrollbar-button` is hidden — a customised scrollbar otherwise keeps Chromium's default arrow buttons, which clash with the rounded island styling.
+- The thumb is a `50px` pill in the secondary text colour (`#9f927d`) that darkens to the primary text colour (`#794f27`) on hover, over a `0.2s cubic-bezier(0.4, 0, 0.2, 1)` transition. The track is transparent unless `showTrack` turns it into the secondary background (`#f0e8d8`).
+- `direction` clips the unused axis (`overflow-x: hidden` / `overflow-y: hidden`) rather than leaving a second scrollbar in place.
+- The root carries `tabindex="0"`: a scrollable region has to be keyboard focusable, or arrow-key scrolling fails on browsers that do not make scrollers focusable on their own.
+- `overscroll-behavior: contain` locks the wheel to this box: once the scroll reaches the top or bottom, it does not chain to the outer page the way the browser default does. While the pointer is inside the region the wheel belongs to the region — move the pointer out to scroll the page again. That is a deliberate default; pass `style={{ overscrollBehavior: 'auto' }}` to restore chaining.
+- `ref` is forwarded to the root `<div>` (the scrolling container itself), so callers can call `scrollTo` or read/write `scrollTop` without an extra wrapper.
+- Colours are exposed as the custom properties `--animal-scrollbar-thumb` / `--animal-scrollbar-thumb-hover` / `--animal-scrollbar-track`, so `thumbColor` only has to override the first one.

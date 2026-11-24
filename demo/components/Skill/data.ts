@@ -6,7 +6,7 @@ import type { CardColor, CardProps, TagColor } from '../../../src';
 // 改技能内容时同步此处
 // ============================================
 
-export const INTRO_TAGS = ['React + TypeScript', '42 个组件', '依赖 naive-icons / dayjs', 'MIT License'];
+export const INTRO_TAGS = ['React + TypeScript', '43 个组件', '依赖 naive-icons / dayjs', 'MIT License'];
 
 export interface QuickStep {
     title: string;
@@ -109,7 +109,7 @@ export const SKILL_TREE = `animal-island-ui-style/
 └── references/
     ├── react-project.md         # 场景一：React 项目 + npm 包
     ├── standalone-html.md       # 场景二：单文件 HTML，无构建
-    └── components/              # 按分类的 props 与交互参考（42 个组件）`;
+    └── components/              # 按分类的 props 与交互参考（43 个组件）`;
 
 export interface CatalogRow {
     category: string;

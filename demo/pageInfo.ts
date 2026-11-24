@@ -28,6 +28,10 @@ export const PAGE_INFO: Record<string, { title: string; desc: string }> = {
         title: 'Cursor 光标',
         desc: '光标组件 — 自定义手指光标，支持自定义尺寸、点击动画',
     },
+    scrollbar: {
+        title: 'Scrollbar 滚动条',
+        desc: '滚动条组件 — 保留原生滚动行为，换一套岛国风的轨道与滑块，支持横向 / 纵向 / 双向',
+    },
     footer: {
         title: 'Footer 底部装饰',
         desc: '页面底部装饰图片，支持树和海两种类型',

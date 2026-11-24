@@ -30,6 +30,7 @@ import SwitchDemo from './components/Switch';
 import CardDemo from './components/Card';
 import CollapseDemo from './components/Collapse';
 import CursorDemo from './components/Cursor';
+import ScrollbarDemo from './components/Scrollbar';
 import ModalDemo from './components/Modal';
 import TypewriterDemo from './components/Typewriter';
 import DividerDemo from './components/Divider';
@@ -64,6 +65,7 @@ const PAGES: Record<string, React.FC> = {
     card: CardDemo,
     collapse: CollapseDemo,
     cursor: CursorDemo,
+    scrollbar: ScrollbarDemo,
     footer: FooterDemo,
     modal: ModalDemo,
     drawer: DrawerDemo,

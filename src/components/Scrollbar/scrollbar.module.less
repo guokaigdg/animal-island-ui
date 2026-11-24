@@ -1,0 +1,96 @@
+// ============================================
+// Scrollbar — Animal Island Style
+// 给原生滚动条换一套岛国风外观：滚动行为、惯性、键盘、触摸全部保留，
+// 只替换轨道与滑块。
+// ============================================
+
+.scrollbar {
+    --animal-scrollbar-thumb: var(--animal-text-color-secondary, #9f927d);
+    --animal-scrollbar-thumb-hover: var(--animal-text-color, #794f27);
+    --animal-scrollbar-track: transparent;
+    // 滑块与轨道宽度；不用透明边框削宽度，保证两端半圆左右对称
+    --animal-scrollbar-size: 8px;
+
+    box-sizing: border-box;
+    overflow: auto;
+    // 滚到边界后不再把滚动链式传给外层 —— 鼠标在滚动区内时，滚轮始终属于本区域。
+    // 标准属性，Chromium / Firefox / Safari 都直接识别，无需放进 @supports 隔离。
+    overscroll-behavior: contain;
+
+    // ---------- Chromium / Safari ----------
+    &::-webkit-scrollbar {
+        width: var(--animal-scrollbar-size);
+        height: var(--animal-scrollbar-size);
+        // 显式声明：宿主常见的全局规则 `*::-webkit-scrollbar { display: none }`
+        // 会把本组件的滚动条一起藏掉，这里用更高的特异性把自己拉回来。
+        display: block;
+    }
+
+    &::-webkit-scrollbar-track {
+        background-color: var(--animal-scrollbar-track);
+        // 大半径在 8px 宽度上自动形成对称的正半圆端头
+        border-radius: 50px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: var(--animal-scrollbar-thumb);
+        // 不使用单侧透明边框：边框会让 padding-box 两侧的内圆角不一致。
+        // 大半径在 8px 宽度上自动形成对称的正半圆端头。
+        border-radius: 50px;
+        transition: background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+        background-color: var(--animal-scrollbar-thumb-hover);
+    }
+
+    // 自定义滚动条默认仍会画出上下箭头，与圆润的岛国风调性冲突
+    &::-webkit-scrollbar-button {
+        display: none;
+    }
+}
+
+// ---------- Firefox ----------
+// Firefox 不认 ::-webkit-scrollbar，只能用标准属性；但标准属性一旦出现在同一条规则里，
+// Chrome 121+ 会**忽略** ::-webkit-scrollbar —— 自定义宽度、圆角、滑块形状全部失效，
+// 退回浏览器自带的 thin 滚动条（macOS 上还会随滚动淡出）。
+// 所以把标准属性隔离到「不认识 webkit 伪元素」的浏览器里，
+// 让 Chromium / Safari 走 legacy 路径，Firefox 走标准路径。
+@supports not selector(::-webkit-scrollbar) {
+    .scrollbar {
+        scrollbar-width: thin;
+        scrollbar-color: var(--animal-scrollbar-thumb) var(--animal-scrollbar-track);
+    }
+}
+
+// ---------- Direction ----------
+// 方向决定哪条轴可滚动，另一条轴彻底裁掉 —— 而不是留着第二条滚动条。
+// 选择器带上 .scrollbar 是为了压过基础类里同等的优先级。
+.scrollbar.vertical {
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    &::-webkit-scrollbar {
+        width: var(--animal-scrollbar-size);
+        height: 0;
+    }
+}
+
+.scrollbar.horizontal {
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    &::-webkit-scrollbar {
+        width: 0;
+        height: var(--animal-scrollbar-size);
+    }
+}
+
+.scrollbar.both {
+    overflow: auto;
+}
+
+// ---------- Track ----------
+.scrollbar.showTrack {
+    --animal-scrollbar-track: var(--animal-bg-color-secondary, #f0e8d8);
+}

@@ -1,6 +1,6 @@
 # AGENTS.md — working in this repository
 
-animal-island-ui is a React 18 + TypeScript 5.7 component library (42 components, Less
+animal-island-ui is a React 18 + TypeScript 5.7 component library (43 components, Less
 Modules, Vite 7 library build, Vitest 4) inspired by a cozy island-style UI.
 Two runtime dependencies: `naive-icons` (the icon set) and `dayjs` (the date layer);
 everything else is a peerDependency or devDependency. MIT License.

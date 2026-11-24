@@ -21,6 +21,9 @@ export default tseslint.config(
             '**/island/**',
             // naive-icons 静态展示站点（生成产物，非仓库源码）
             'demo/components/Icon/website/**',
+            // 本地站点草稿与工具导出缓存（不在版本库内）
+            'site/**',
+            '.trae-html-share-packages/**',
         ],
     },
 

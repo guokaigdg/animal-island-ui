@@ -222,3 +222,44 @@ Props：
 
 - 图像只有内联 SVG —— 不存在 `cursor-icon.png`，也没有 base64 fallback；两种风格都在 `cursor.css` 里定义一次，经 `--animal-cursor-img` 传给每条规则
 - 每条规则都带 `!important`，保证模式语义不被组件级 cursor 样式覆盖；`className` 挂在根 `<div>` 上，与固定的 `animal-cursor` class 并存
+
+## Scrollbar
+
+```tsx
+<Scrollbar height={200} showTrack>
+  {items.map((item) => (
+    <div key={item}>{item}</div>
+  ))}
+</Scrollbar>
+```
+
+Props：
+
+| name         | type                                   | default      | 说明                                                                       |
+| ------------ | -------------------------------------- | ------------ | -------------------------------------------------------------------------- |
+| `height`     | `number \| string`                     | —            | 容器高度，数字按 px 处理，垂直滚动时最常用                                 |
+| `maxHeight`  | `number \| string`                     | —            | 容器最大高度                                                               |
+| `width`      | `number \| string`                     | —            | 容器宽度，数字按 px 处理，水平滚动时最常用                                 |
+| `maxWidth`   | `number \| string`                     | —            | 容器最大宽度                                                               |
+| `direction`  | `'vertical' \| 'horizontal' \| 'both'` | `'vertical'` | 哪条轴可滚动，另一条轴会被裁掉而不是留着第二条滚动条                       |
+| `thumbColor` | `string`                               | —            | 滑块颜色，传 CSS 变量可跟随主题换肤                                       |
+| `thumbSize`  | `number`                               | `8`          | 滑块粗细（px），默认 8 —— 比系统经典滚动条更细                               |
+| `showTrack`  | `boolean`                              | `false`      | 是否显示轨道底色                                                           |
+| `className`  | `string`                               | —            | 自定义类名                                                                 |
+| `style`      | `CSSProperties`                        | —            | 自定义样式                                                                 |
+
+**实现要点：**
+
+- 滚动条是**原生**的：根元素保留 `overflow: auto` 与浏览器自身的滚动行为，惯性、键盘滚动、触摸手势和系统滚动条特性全部保留，只替换轨道与滑块的外观 —— 没有任何逻辑用 JavaScript 重写。
+- **给滚动条上了样式，它就不再淡出。** macOS 上未加样式的系统滚动条是 *overlay*：静止时淡出消失，几乎不占宽度。带 `::-webkit-scrollbar` 样式（或 `scrollbar-width: thin`）的滚动条会被渲染成经典滚动条 —— 始终可见，并真实占据布局空间。这正是它与普通 `overflow: auto` 盒子之间最显眼的差别，而且是「上了样式」的副作用，不是组件自己实现的行为。默认宽度取 8px，刻意比系统经典滚动条（Windows 上约 15–17px）更细；CSS 的 `thin` 只是关键字、没有固定像素值，所以组件自己定一个数，并不声称与平台等宽。
+- **两端是对称的正半圆。** 滑块和轨道都不使用透明边框：单侧边框配合 `background-clip: padding-box` 会让左右内圆角不一致。滚动条槽宽就是 `thumbSize`，大圆角（`50px`）在 8px 宽度上收敛为半宽，形成左右曲线完全一致的胶囊；不再额外保留内缝或外缝。Firefox 使用标准 `thin` 滚动条，无法复现这个形状。
+- 两条渲染路径，且不能互相干扰。Chromium / Safari 走 `::-webkit-scrollbar`、`::-webkit-scrollbar-track`、`::-webkit-scrollbar-thumb`；Firefox 走 `scrollbar-width` + `scrollbar-color`。标准属性被特意放进 `@supports not selector(::-webkit-scrollbar)` 里：**只要某条规则设了 `scrollbar-width` 或 `scrollbar-color`，Chrome 121+ 就会忽略 `::-webkit-scrollbar` 伪元素** —— 自定义宽度、圆角与滑块形状全部失效，退回浏览器自带的 thin 滚动条。把标准属性限制在「不认识 webkit 伪元素」的浏览器里，两条路径才都完好。`thumbSize` 只对 WebKit 路径生效，因为 Firefox 的宽度只能是 `thin` / `auto` / `none`。
+- WebKit 那条规则显式写了 `display: block`。常见的全局重置 `*::-webkit-scrollbar { display: none }` 会匹配页面上的每一个滚动条，包括本组件的；类选择器的特异性更高，所以组件自己的滚动条保持可见。
+- 带 `border-radius` 的容器会连带裁掉滚动条：滑块紧贴圆角起点，轨道最上面一截会被切掉。确实需要圆角时再给滚动区加圆角，否则用内边距把滚动条让出来。
+- `::-webkit-scrollbar-button` 被隐藏 —— 自定义滚动条默认仍会保留 Chromium 的上下箭头，与圆润的岛国风调性冲突。
+- 滑块是 `50px` 的胶囊，取次级文字色（`#9f927d`），悬停加深为主文字色（`#794f27`），过渡 `0.2s cubic-bezier(0.4, 0, 0.2, 1)`。轨道默认透明，`showTrack` 打开后取次级背景色（`#f0e8d8`）。
+- `direction` 会把不用的那条轴裁掉（`overflow-x: hidden` / `overflow-y: hidden`），而不是留着第二条滚动条。
+- 根元素带 `tabindex="0"`：滚动区必须能被键盘聚焦，否则在不会自动聚焦滚动容器的浏览器上，方向键滚动会失效。
+- `overscroll-behavior: contain` 把滚轮锁在本容器：滚动到顶或底之后，不再像浏览器默认那样链式传给外层页面。鼠标在区域内时滚轮就属于这个区域，想滚整页需把鼠标移出。这是有意选择的默认值；传 `style={{ overscrollBehavior: 'auto' }}` 可恢复链式滚动。
+- `ref` 转发到根 `<div>`（即滚动容器本身），调用方可直接 `scrollTo` 或读写 `scrollTop`，无需额外包一层。
+- 颜色以 `--animal-scrollbar-thumb` / `--animal-scrollbar-thumb-hover` / `--animal-scrollbar-track` 三个自定义属性暴露，`thumbColor` 只需覆盖第一个。

@@ -6,7 +6,7 @@ Accepted（已采纳）
 
 ## 背景
 
-组件库交付 42 个组件和两套 Web 字体。传统的单文件库产物会把这些全部拖进每一个消费应用，不管它 import 的是一个组件还是全部组件。
+组件库交付 43 个组件和两套 Web 字体。传统的单文件库产物会把这些全部拖进每一个消费应用，不管它 import 的是一个组件还是全部组件。
 
 Vite library mode 的默认行为与此背道而驰：它每种格式只产出一个扁平产物，并强制把每个被引用的资源内联为 data URI。对一个以按组件 tree-shaking 为核心价值的组件库来说，这两种行为都必须被覆盖。
 
@@ -30,7 +30,7 @@ external 由**判定函数**而非字面量列表决定：`isPeerDependency` 匹
 - `emit-global-style-entry`（`emitGlobalStyleEntryPlugin`）—— 把全局样式表与全部组件 CSS Module 依次拼接进 `dist/index.css`，支撑 `animal-island-ui/style` 这个子路径。全局样式排在最前，组件规则才能解析到 `:root` 上的自定义属性。资源 URL 从相对源码（`url(../../files/x.svg)`）改写为相对 `dist`（`url("files/x.svg")`），`dist/files/` 中未被引用的文件会被删除。
 - `prune-empty-dirs`（`pruneEmptyDirsPlugin`）—— 删除资源重定向在 `dist/` 下留下的空目录树。
 
-样式以**单一样式表**交付。组件 JavaScript 里刻意不带任何 CSS 导入。发布出去的 `import "./x.css"` 是一种文件式导入，Node 拒绝解析它 —— 整个包在纯 Node 里加载失败（`ERR_UNKNOWN_FILE_EXTENSION`），任何顺着模块图走的 SSR 打包器同样失败，哪怕消费方根本没要那份样式表。于是本库把所有规则统一通过 `dist/index.css`（`animal-island-ui/style`）交付，它已经包含全局令牌与全部 42 个组件的样式表；消费方在入口处 import 一次即可。逐组件 CSS 导入固然更精细，但不值得为此让这个包在浏览器打包器之外加载不了。
+样式以**单一样式表**交付。组件 JavaScript 里刻意不带任何 CSS 导入。发布出去的 `import "./x.css"` 是一种文件式导入，Node 拒绝解析它 —— 整个包在纯 Node 里加载失败（`ERR_UNKNOWN_FILE_EXTENSION`），任何顺着模块图走的 SSR 打包器同样失败，哪怕消费方根本没要那份样式表。于是本库把所有规则统一通过 `dist/index.css`（`animal-island-ui/style`）交付，它已经包含全局令牌与全部 43 个组件的样式表；消费方在入口处 import 一次即可。逐组件 CSS 导入固然更精细，但不值得为此让这个包在浏览器打包器之外加载不了。
 
 插画资源用 `new URL('./x.svg', import.meta.url).href` 引用，而不是 `import`。用 `import` 会在发布的 JavaScript 里留下 `import x from "../../files/x.svg"` —— 又是 Node 解析不了的文件式导入。`new URL(...)` 只产出一个字符串，模块图保持干净。Vite 的 library mode 会把这类资源一律内联成 data URI（`shouldInline` 对 `build.lib` 直接返回 `true`），这也是唯一能在消费方打包器里存活的形式：指向 `dist/files/` 的相对路径会被按消费方自己的产物 chunk 解析，直接 404。代价是四张场景插画（约 315 KB SVG）以百分号编码的 data URI 形式烤进 JavaScript，比源文件大约 20%。
 

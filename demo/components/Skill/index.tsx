@@ -90,7 +90,7 @@ const SkillDemo: React.FC<{ intro?: boolean }> = ({ intro = false }) => {
                     <ShellCode code={SKILL_TREE} />
                 </Section>
 
-                <Section title="组件目录" tags={['42 Components']}>
+                <Section title="组件目录" tags={['43 Components']}>
                     <p className={`${styles.lead} ${styles.leadSpaced}`}>
                         props 参考按分类放在 references/components/ 下，props、合法取值与默认值均直接取自源码。
                     </p>

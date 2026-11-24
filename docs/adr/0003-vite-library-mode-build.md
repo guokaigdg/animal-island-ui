@@ -6,7 +6,7 @@ Accepted
 
 ## Context
 
-The library ships 42 components and two web font families. A conventional single-file library bundle would drag all of that into every consuming application, regardless of whether the application imports one component or all of them.
+The library ships 43 components and two web font families. A conventional single-file library bundle would drag all of that into every consuming application, regardless of whether the application imports one component or all of them.
 
 Vite's library mode defaults work against this: it emits one flat artifact per format and forcibly inlines every referenced asset as a data URI. Both behaviours must be overridden for a component library where per-component tree-shaking is the whole point.
 

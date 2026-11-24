@@ -19,3 +19,7 @@ skills/
 *.min.css
 *.min.d.ts
 package-lock.json
+
+# 本地站点草稿与工具导出缓存（不在版本库内，不参与格式检查）
+site/
+.trae-html-share-packages/

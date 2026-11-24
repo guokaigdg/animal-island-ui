@@ -69,6 +69,7 @@ import { Tooltip } from '@/components/Tooltip';
 import { Typewriter } from '@/components/Typewriter';
 import { Chart } from '@/components/Chart';
 import { NoData } from '@/components/NoData';
+import { Scrollbar } from '@/components/Scrollbar';
 
 afterEach(() => {
     cleanup();
@@ -443,6 +444,15 @@ describe('a11y smoke / 全组件 axe-core 自动检查', () => {
     it('CodeBlock (有 code 文案)', async () => {
         const r = render(<CodeBlock code="const x = 1;" />);
         await expectNoA11yViolations(containerOf(r), 'CodeBlock');
+    });
+
+    it('Scrollbar (可滚动区域)', async () => {
+        const r = render(
+            <Scrollbar height={120}>
+                <div>内容</div>
+            </Scrollbar>
+        );
+        await expectNoA11yViolations(containerOf(r), 'Scrollbar');
     });
 
     it('Countdown (有可见倒计时)', async () => {

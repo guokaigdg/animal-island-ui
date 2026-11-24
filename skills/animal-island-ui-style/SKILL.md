@@ -12,7 +12,7 @@ description: >
 # animal-island-ui style
 
 animal-island-ui is a React + TypeScript component library with an original
-cozy island-style design — 42 components, two runtime dependencies (`naive-icons`
+cozy island-style design — 43 components, two runtime dependencies (`naive-icons`
 for icons, `dayjs` for dates), MIT License.
 
 Source & canonical design definition: https://github.com/guokaigdg/animal-island-ui

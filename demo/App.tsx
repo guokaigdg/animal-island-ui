@@ -72,6 +72,7 @@ const MENU_ITEMS: MenuItem[] = [
             { key: 'icon', label: 'Icon 图标', isNew: true },
             { key: 'tag', label: 'Tag 标签' },
             { key: 'cursor', label: 'Cursor 光标' },
+            { key: 'scrollbar', label: 'Scrollbar 滚动条', isNew: true },
             { key: 'codeblock', label: 'CodeBlock 代码高亮' },
             { key: 'background', label: 'Background 背景', isNew: true },
             { key: 'footer', label: 'Footer 页脚' },

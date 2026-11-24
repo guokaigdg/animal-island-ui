@@ -40,6 +40,9 @@ export type { BackgroundProps, BackgroundType } from './components/Background';
 export { Typewriter } from './components/Typewriter';
 export type { TypewriterProps } from './components/Typewriter';
 
+export { Scrollbar } from './components/Scrollbar';
+export type { ScrollbarProps, ScrollbarDirection } from './components/Scrollbar';
+
 export { Select } from './components/Select';
 export type { SelectProps, SelectOption, SelectVariant } from './components/Select';
 
