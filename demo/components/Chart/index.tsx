@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Button, Chart, type ChartType } from '../../../src';
 import { ApiTable, CodeBlock, type ApiRow, labelStyle, sectionStyle, sectionTitleStyle } from '../../tools';
 import { CHART_PAGES } from '../../chartPages';
 import { exampleProps } from './data';
 import { ChartInteractionDemo } from './ChartInteractionDemo';
+import { ChartTypeSwitcher, type ChartSelection } from './ChartTypeSwitcher';
 import { ChartGalleryDemo, ChartShowcaseDemo } from './ChartGalleryDemo';
 import { MountCurveDemo } from './MountCurveDemo';
 import styles from './demo.module.less';
@@ -155,7 +156,7 @@ ChartTypeDemo.displayName = 'ChartTypeDemo';
 
 /** 类型总览保留基础示例，并提供样式精选和各图表类型的完整演示入口。 */
 export const ChartOverviewDemo: React.FC = () => {
-    // 总览只使用轻量数据，详细示例由各类型页面承载。
+    // 总览只使用轻量数据，详细示例由各类型段落承载。
     return (
         <div style={sectionStyle}>
             <div style={sectionTitleStyle}>岛屿统计手账</div>
@@ -172,32 +173,43 @@ export const ChartOverviewDemo: React.FC = () => {
                 description="点击图例可单独查看一组数据"
                 height={280}
             />
-            <section className={styles.catalogSection} aria-labelledby="chart-catalog-title">
-                <h2 id="chart-catalog-title" className={styles.catalogTitle}>
-                    选择图表类型
-                </h2>
-                <nav className={styles.catalog} aria-label="图表类型">
-                    {CHART_PAGES.map((page) => (
-                        <a key={page.type} href={`#/chart-${page.type}`}>
-                            <strong>{page.label}</strong>
-                            <span>{page.desc}</span>
-                        </a>
-                    ))}
-                </nav>
-            </section>
         </div>
     );
 };
 ChartOverviewDemo.displayName = 'ChartOverviewDemo';
 
-/** 为路由创建命名演示组件，避免页面元信息与组件映射分别维护而遗漏。 */
-function createDemo(type: ChartType): React.FC {
-    // 每个类型拥有独立组件身份，切换页面自动重置上一个示例的操作状态。
-    const Demo: React.FC = () => <ChartTypeDemo type={type} />;
-    Demo.displayName = `ChartDemo-${type}`;
-    return Demo;
+/** 从路由读取当前选择：#/chart-column 选中该类型，其余（#/charts）回到全部。 */
+function readSelection(): ChartSelection {
+    const match = /^#\/chart-([a-z]+)$/.exec(window.location.hash);
+    return match ? (match[1] as ChartType) : 'all';
 }
 
+/** 全部图表类型合并在同一页，总览在前、各类型段落依次排开。 */
+export const ChartAllDemo: React.FC = () => {
+    const [selected, setSelected] = useState<ChartSelection>(readSelection);
+    const containerRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        const onHashChange = () => setSelected(readSelection());
+        window.addEventListener('hashchange', onHashChange);
+        return () => window.removeEventListener('hashchange', onHashChange);
+    }, []);
+
+    // 切换走 hash 路由，页面标题与深链同步更新。
+    const handleSelect = useCallback((type: ChartSelection) => {
+        window.location.hash = type === 'all' ? '#/charts' : `#/chart-${type}`;
+    }, []);
+
+    return (
+        <div ref={containerRef}>
+            <ChartTypeSwitcher value={selected} onSelect={handleSelect} />
+            {selected === 'all' ? <ChartOverviewDemo /> : <ChartTypeDemo type={selected} />}
+        </div>
+    );
+};
+ChartAllDemo.displayName = 'ChartAllDemo';
+
+/** 深链沿用合并页：#/chart-column 定位到对应段落，而非另开一个页面。 */
 export const CHART_DEMO_PAGES: Record<string, React.FC> = Object.fromEntries(
-    CHART_PAGES.map((page) => [`chart-${page.type}`, createDemo(page.type)])
+    CHART_PAGES.map((page) => [`chart-${page.type}`, ChartAllDemo])
 );

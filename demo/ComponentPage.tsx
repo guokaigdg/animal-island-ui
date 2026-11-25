@@ -45,7 +45,7 @@ import TimeDemo from './components/Time';
 import CarouselDemo from './components/Carousel';
 import SkillDemo from './components/Skill';
 import { PAGE_INFO } from './pageInfo';
-import { ChartOverviewDemo, CHART_DEMO_PAGES } from './components/Chart';
+import { ChartAllDemo, CHART_DEMO_PAGES } from './components/Chart';
 const pageDescStyle: React.CSSProperties = {
     fontSize: 14,
     color: '#794f27',
@@ -57,7 +57,8 @@ const pageDescStyle: React.CSSProperties = {
 // ============================================
 
 const PAGES: Record<string, React.FC> = {
-    charts: ChartOverviewDemo,
+    charts: ChartAllDemo,
+    // 深链沿用同一合并页，定位到对应类型段落
     ...CHART_DEMO_PAGES,
     button: ButtonDemo,
     input: InputDemo,

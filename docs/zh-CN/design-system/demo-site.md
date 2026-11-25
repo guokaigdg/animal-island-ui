@@ -190,30 +190,30 @@ line-height: 1.8;
 
 # 图表导航
 
-**图表统计** 分类位于左侧菜单最下方，排在各组件分类之后。首项为 **Chart 图表总览**（`#/charts`）；其余 19 个类型入口按下表顺序，统一显示为 **英文类型名称 + 中文名称**。桌面侧栏与移动端菜单共用这份配置。
+**图表统计** 分类位于左侧菜单最下方，排在各组件分类之后。该分类只有一项 **Chart 图表**（`#/charts`），整个分类集中在一个页面：顶部常驻一条类型切换条，先是 **全部**，再是 19 个类型，页面只挂载当前选中的那一种。默认的 **全部** 呈现原来的总览（样式精选与基础图表），选中某个类型则换成该类型的完整演示。桌面侧栏与移动端菜单共用这份配置。
 
-| `Chart.type` | 侧栏名称 |
+| `Chart.type` | 切换条名称 |
 | --- | --- |
-| `column` | Column 柱状图 |
-| `bar` | Bar 条状图 |
-| `line` | Line 折线图 |
-| `area` | Area 面积图 |
-| `mount` | Mountain 山峰图 |
-| `mix` | Mixed 混合图 |
-| `pie` | Pie 饼图 |
-| `ring` | Ring 环形图 |
-| `rose` | Rose 玫瑰图 |
-| `radar` | Radar 雷达图 |
-| `scatter` | Scatter 散点图 |
-| `bubble` | Bubble 气泡图 |
-| `arcbar` | ArcBar 圆弧进度 |
-| `gauge` | Gauge 仪表盘 |
-| `funnel` | Funnel 漏斗图 |
-| `word` | WordCloud 词云图 |
-| `candle` | Candlestick K线图 |
-| `time` | TimeSeries 时序图 |
-| `map` | Map 地图统计 |
+| `column` | 柱状图（Column） |
+| `bar` | 条状图（Bar） |
+| `line` | 折线图（Line） |
+| `area` | 面积图（Area） |
+| `mount` | 山峰图（Mountain） |
+| `mix` | 混合图（Mixed） |
+| `pie` | 饼图（Pie） |
+| `ring` | 环形图（Ring） |
+| `rose` | 玫瑰图（Rose） |
+| `radar` | 雷达图（Radar） |
+| `scatter` | 散点图（Scatter） |
+| `bubble` | 气泡图（Bubble） |
+| `arcbar` | 圆弧进度（ArcBar） |
+| `gauge` | 仪表盘（Gauge） |
+| `funnel` | 漏斗图（Funnel） |
+| `word` | 词云图（WordCloud） |
+| `candle` | K线图（Candlestick） |
+| `time` | 时序图（TimeSeries） |
+| `map` | 地图统计（Map） |
 
-`demo/chartPages.ts` 统一维护 `type`、中文 `label`、英文 `englishLabel` 和 `desc`，`demo/App.tsx` 拼接中英文菜单名称。类型路由仍为 `#/chart-${type}`；例如 **Mountain 山峰图** 打开 `#/chart-mount`，组件使用 `<Chart type="mount" series={series} />`。显示名称不是 API 取值，也不是独立导出的组件。页面标题、总览卡片和图集链接继续使用中文 `label`。
+`demo/chartPages.ts` 统一维护 `type`、中文 `label`、英文 `englishLabel` 和 `desc`。切换按钮显示中文 `label`，英文名放在 title 提示里，既保留英文对照又不挤占切换条。选中类型会写入 hash `#/chart-${type}`（**全部** 对应 `#/charts`），因此每个类型仍然可以直接分享链接，页面标题也跟着选择走；例如 **山峰图** 打开 `#/chart-mount`，组件使用 `<Chart type="mount" series={series} />`。显示名称不是 API 取值，也不是独立导出的组件。总览卡片和图集链接继续使用中文 `label`。
 
 图表视觉、交互与图集布局见 [Chart](components/charts.md)。

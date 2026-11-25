@@ -190,30 +190,30 @@ line-height: 1.8;
 
 # Chart navigation
 
-The **图表统计** category follows the component categories at the bottom of the sidebar. Its first entry is **Chart 图表总览** (`#/charts`); the 19 type entries use **English type name + Chinese name** in the order below. Desktop and mobile navigation share this configuration.
+The **图表统计** category follows the component categories at the bottom of the sidebar. It holds a single entry, **Chart 图表** (`#/charts`), and the whole category lives on one page: a sticky type switcher sits at the top with **全部** followed by the 19 types, and only the selected type's demo is mounted. **全部** — the default — shows the original overview (style showcase and basic charts); picking a type swaps in that type's full demo. Desktop and mobile navigation share this configuration.
 
-| `Chart.type` | Sidebar label |
+| `Chart.type` | Switcher label |
 | --- | --- |
-| `column` | Column 柱状图 |
-| `bar` | Bar 条状图 |
-| `line` | Line 折线图 |
-| `area` | Area 面积图 |
-| `mount` | Mountain 山峰图 |
-| `mix` | Mixed 混合图 |
-| `pie` | Pie 饼图 |
-| `ring` | Ring 环形图 |
-| `rose` | Rose 玫瑰图 |
-| `radar` | Radar 雷达图 |
-| `scatter` | Scatter 散点图 |
-| `bubble` | Bubble 气泡图 |
-| `arcbar` | ArcBar 圆弧进度 |
-| `gauge` | Gauge 仪表盘 |
-| `funnel` | Funnel 漏斗图 |
-| `word` | WordCloud 词云图 |
-| `candle` | Candlestick K线图 |
-| `time` | TimeSeries 时序图 |
-| `map` | Map 地图统计 |
+| `column` | 柱状图（Column） |
+| `bar` | 条状图（Bar） |
+| `line` | 折线图（Line） |
+| `area` | 面积图（Area） |
+| `mount` | 山峰图（Mountain） |
+| `mix` | 混合图（Mixed） |
+| `pie` | 饼图（Pie） |
+| `ring` | 环形图（Ring） |
+| `rose` | 玫瑰图（Rose） |
+| `radar` | 雷达图（Radar） |
+| `scatter` | 散点图（Scatter） |
+| `bubble` | 气泡图（Bubble） |
+| `arcbar` | 圆弧进度（ArcBar） |
+| `gauge` | 仪表盘（Gauge） |
+| `funnel` | 漏斗图（Funnel） |
+| `word` | 词云图（WordCloud） |
+| `candle` | K线图（Candlestick） |
+| `time` | 时序图（TimeSeries） |
+| `map` | 地图统计（Map） |
 
-`demo/chartPages.ts` owns `type`, the Chinese `label`, the English `englishLabel` and `desc`. `demo/App.tsx` combines the two labels for the menu. Type routes remain `#/chart-${type}`; for example, **Mountain 山峰图** opens `#/chart-mount` and renders `<Chart type="mount" series={series} />`. Display names are not API values or exported components. Page headings, overview cards and gallery links continue to use the Chinese `label`.
+`demo/chartPages.ts` owns `type`, the Chinese `label`, the English `englishLabel` and `desc`. Switcher buttons show the Chinese `label` with the English name in their tooltip, so `englishLabel` stays meaningful without crowding the bar. Selecting a type writes the hash `#/chart-${type}` (`#/charts` for **全部**), so every type remains linkable and the page heading follows the selection; for example, **山峰图** opens `#/chart-mount` and renders `<Chart type="mount" series={series} />`. Display names are not API values or exported components. Overview cards and gallery links continue to use the Chinese `label`.
 
 Chart visuals, interactions and gallery layout are defined in [Chart](components/charts.md).

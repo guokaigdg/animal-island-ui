@@ -7,7 +7,6 @@ import bgCoffeeBreak from '../src/assets/image/coffee-break.svg';
 import './fonts.css';
 import HomePage from './HomePage';
 import { PAGE_INFO } from './pageInfo';
-import { CHART_PAGES } from './chartPages';
 import { useIsMobile } from './tools';
 import logo from './assets/logo.png';
 
@@ -74,7 +73,7 @@ const MENU_ITEMS: MenuItem[] = [
             { key: 'cursor', label: 'Cursor 光标' },
             { key: 'scrollbar', label: 'Scrollbar 滚动条', isNew: true },
             { key: 'codeblock', label: 'CodeBlock 代码高亮' },
-            { key: 'background', label: 'Background 背景', isNew: true },
+            { key: 'background', label: 'Background 背景' },
             { key: 'footer', label: 'Footer 页脚' },
         ],
     },
@@ -108,7 +107,7 @@ const MENU_ITEMS: MenuItem[] = [
             { key: 'tooltip', label: 'Tooltip 气泡提示' },
             { key: 'progress', label: 'Progress 进度条' },
             { key: 'skeleton', label: 'Skeleton 骨架屏' },
-            { key: 'no-data', label: 'NoData 空状态', isNew: true },
+            { key: 'no-data', label: 'NoData 空状态' },
             { key: 'backtop', label: 'BackTop 返回顶部' },
         ],
     },
@@ -118,7 +117,7 @@ const MENU_ITEMS: MenuItem[] = [
         children: [
             { key: 'card', label: 'Card 卡片' },
             { key: 'avatar', label: 'Avatar 头像' },
-            { key: 'badge', label: 'Badge 徽标数', isNew: true },
+            { key: 'badge', label: 'Badge 徽标数' },
             // 隐藏：暂不展示，恢复时取消注释
             { key: 'collapse', label: 'Collapse 折叠面板' },
             { key: 'tabs', label: 'Tabs 标签页' },
@@ -129,16 +128,13 @@ const MENU_ITEMS: MenuItem[] = [
             { key: 'carousel', label: 'Carousel 轮播图' },
             { key: 'time', label: 'Time 时钟' },
             { key: 'countdown', label: 'Countdown 倒计时' },
-            { key: 'countup', label: 'CountUp 数字滚动', isNew: true },
+            { key: 'countup', label: 'CountUp 数字滚动' },
         ],
     },
     {
         key: 'cat-charts',
         label: '── 图表统计 ──',
-        children: [
-            { key: 'charts', label: 'Chart 图表总览', isNew: true },
-            ...CHART_PAGES.map((page) => ({ key: `chart-${page.type}`, label: `${page.englishLabel} ${page.label}` })),
-        ],
+        children: [{ key: 'charts', label: 'Chart 图表', isNew: true }],
     },
 ];
 

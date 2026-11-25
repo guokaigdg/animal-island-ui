@@ -6,7 +6,7 @@ This is an independent React API; uCharts configurations are not accepted.
 
 # Demo labels and type selection
 
-The demo's bottom **图表统计** category starts with **Chart 图表总览**, followed by bilingual type entries. Use the lowercase `ChartType` values from [data declarations](chart-data.md) in code. Display labels `Mountain`, `Mixed`, `WordCloud`, `Candlestick` and `TimeSeries` map to `mount`, `mix`, `word`, `candle` and `time`; `ArcBar` maps to `arcbar`. These labels do not introduce exported components or API aliases.
+The demo's bottom **图表统计** category has a single **Chart 图表** entry; one page hosts a sticky switcher with **全部** plus the 19 types, and only the selected demo is mounted — **全部** keeps the original overview. Use the lowercase `ChartType` values from [data declarations](chart-data.md) in code. Display labels `Mountain`, `Mixed`, `WordCloud`, `Candlestick` and `TimeSeries` map to `mount`, `mix`, `word`, `candle` and `time`; `ArcBar` maps to `arcbar`. These labels do not introduce exported components or API aliases.
 
 For example, **Mountain 山峰图** uses `<Chart type="mount" smooth series={series} />` for rounded peaks. The full label mapping and demo routes are in [Chart navigation](https://github.com/guokaigdg/animal-island-ui/blob/main/docs/design-system/demo-site.md#chart-navigation).
 

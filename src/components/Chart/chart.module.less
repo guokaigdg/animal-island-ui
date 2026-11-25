@@ -284,6 +284,8 @@
     margin-top: 14px;
     font-size: 12px;
     color: var(--animal-text-color-secondary, #8a7b66);
+    // details 展开/收起动效：allow-keywords 让 height: auto 可被过渡。
+    interpolate-size: allow-keywords;
     summary {
         cursor: pointer;
         width: fit-content;
@@ -292,6 +294,18 @@
         &:focus-visible {
             outline: 2px solid var(--animal-primary-color, #19c8b9);
         }
+    }
+    // 不支持 ::details-content 的浏览器直接展开，功能不受影响。
+    &::details-content {
+        height: 0;
+        overflow: hidden;
+        transition:
+            height 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+            content-visibility 0.3s;
+        transition-behavior: allow-discrete;
+    }
+    &[open]::details-content {
+        height: auto;
     }
     table {
         width: 100%;

@@ -60,13 +60,36 @@
 .code {
     min-width: 0;
     max-width: 100%;
+    // details 展开/收起动效：allow-keywords 让 height: auto 可被过渡。
+    interpolate-size: allow-keywords;
     summary {
         width: fit-content;
-        padding: 8px;
+        // 原生 ::marker 落在内边距之外，展开时随内容宽度偏移，点击三角容易落空；
+        // 改用固定尺寸的伪元素箭头，箭头始终在可点击胶囊内部，仅旋转不变位。
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        padding: 8px 12px 8px 10px;
         border-radius: 12px;
         cursor: pointer;
         line-height: 1.6;
+        list-style: none;
+        // 连续点击展开/收起时避免把摘要文字拖成选区。
+        user-select: none;
         transition: background 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        &::-webkit-details-marker {
+            display: none;
+        }
+        &::before {
+            content: '';
+            flex: none;
+            width: 6px;
+            height: 6px;
+            border-right: 1.5px solid currentColor;
+            border-bottom: 1.5px solid currentColor;
+            transform: translateY(-1px) rotate(-45deg);
+            transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
         &:hover {
             background: #f0e8d8;
         }
@@ -75,10 +98,25 @@
             outline-offset: 2px;
         }
     }
+    // 不支持 ::details-content 的浏览器直接展开，功能不受影响。
+    &::details-content {
+        height: 0;
+        overflow: hidden;
+        transition:
+            height 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+            content-visibility 0.3s;
+        transition-behavior: allow-discrete;
+    }
+    &[open]::details-content {
+        height: auto;
+    }
     &[open] {
         width: 100%;
         summary {
             margin-bottom: 8px;
+            &::before {
+                transform: translateY(-1px) rotate(45deg);
+            }
         }
     }
 }
@@ -95,7 +133,8 @@
 }
 @media (prefers-reduced-motion: reduce) {
     .actions a,
-    .code summary {
+    .code summary,
+    .code summary::before {
         transition: none;
     }
 }

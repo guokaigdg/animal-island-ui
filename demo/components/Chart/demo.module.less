@@ -4,6 +4,77 @@
     line-height: 1.8;
     margin: 12px 0 20px;
 }
+// 类型切换条：合并页很高，切换条常驻顶部，随时能跳到别的类型。
+// 桌面端吸顶位置与左侧菜单栏顶部对齐：侧栏 margin-top 12px，
+// 而 sticky 的参照点是主区域的内容盒（padding-top 32px 处），所以偏移量是 12 - 32 = -20px。
+// 段落的 scroll-margin-top 由 JS 按切换条实际高度写入（按钮换行会改变高度）。
+.switcher {
+    position: sticky;
+    top: -20px;
+    z-index: 5;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 20px;
+    padding: 12px 16px;
+    border: 1px solid #e8e2d6;
+    border-radius: 12px;
+    background: #fff;
+    // 吸顶后导航上沿与视口顶部之间仍有一段空隙（桌面 12px / 移动 8px），
+    // 滚动内容会从那里直接穿出；补一层磨砂把经过的文字虚化掉。
+    // 高度比空隙多 2px 并左右各溢出 1px，越过视口边界，避免亚像素舍入留下细缝。
+    &::before {
+        content: '';
+        position: absolute;
+        right: -1px;
+        bottom: 100%;
+        left: -1px;
+        height: 14px;
+        pointer-events: none;
+        backdrop-filter: blur(8px);
+    }
+}
+.switcher-button {
+    padding: 6px 14px;
+    border: 1.5px solid #e8e2d6;
+    border-radius: 50px;
+    background: #f8f8f0;
+    color: #725d42;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.6;
+    cursor: pointer;
+    transition:
+        background 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+        border-color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+        color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.switcher-button-active {
+    background: #19c8b9;
+    border-color: #19c8b9;
+    color: #fff;
+}
+.switcher-button:focus-visible {
+    outline: 2px solid #19c8b9;
+    outline-offset: 2px;
+}
+@media (hover: hover) {
+    .switcher-button:hover {
+        border-color: #19c8b9;
+        color: #19c8b9;
+    }
+    .switcher-button-active:hover {
+        background: #14b6a8;
+        border-color: #14b6a8;
+        color: #fff;
+    }
+}
+@media (prefers-reduced-motion: reduce) {
+    .switcher-button {
+        transition: none;
+    }
+}
 .controls {
     display: flex;
     gap: 10px;
@@ -28,93 +99,14 @@
     gap: 22px;
     margin-bottom: 22px;
 }
-.catalog-section {
-    container: chart-catalog / inline-size;
-    margin-top: 36px;
-}
-.catalog-title {
-    margin: 0 0 24px;
-    font-size: 18px;
-    font-weight: 700;
-    line-height: 1.5;
-    color: var(--animal-text-color, #794f27);
-}
-.catalog {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr);
-    // 所有隐式行共享高度，说明换行时不会只撑高其中一行。
-    grid-auto-rows: 1fr;
-    gap: 24px;
-    a {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 12px;
-        box-sizing: border-box;
-        min-width: 0;
-        min-height: 110px;
-        text-decoration: none;
-        padding: 24px;
-        border: 1.5px solid var(--animal-border-color-light, #e8e2d6);
-        border-radius: 20px;
-        background: var(--animal-bg-color, #f8f8f0);
-        color: var(--animal-text-color-secondary, #725d42);
-        transition:
-            background 0.2s cubic-bezier(0.4, 0, 0.2, 1),
-            border-color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
-            transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+@media (max-width: 768px) {
+    // 移动端顶部是 52px 的固定标题栏，主区域 padding-top 68px，
+    // 切换条要停在标题栏下方 8px，即 60 - 68 = -8px。
+    .switcher {
+        top: -8px;
     }
-    strong {
-        display: block;
-        font-size: 16px;
-        font-weight: 700;
-        line-height: 1.5;
-        color: var(--animal-text-color, #794f27);
-    }
-    span {
-        display: block;
-        font-size: 13px;
-        color: inherit;
-        line-height: 1.8;
-        overflow-wrap: anywhere;
-        text-wrap: pretty;
-    }
-    a:focus-visible {
-        outline: 2px solid var(--animal-primary-color, #19c8b9);
-        outline-offset: 3px;
-    }
-}
-@container chart-catalog (min-width: 560px) {
-    .catalog {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-}
-@container chart-catalog (min-width: 840px) {
-    .catalog {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-}
-@container chart-catalog (min-width: 1200px) {
-    .catalog {
-        grid-template-columns: repeat(4, minmax(0, 1fr));
-    }
-}
-@media (hover: hover) {
-    .catalog a:hover {
-        background: #f0f5eb;
-        border-color: #b8cbb2;
-        transform: translateY(-2px);
-    }
-    .catalog a:active {
-        transform: translateY(0);
-    }
-}
-@media (prefers-reduced-motion: reduce) {
-    .catalog a {
-        transition: none;
-    }
-    .catalog a:hover {
-        transform: none;
+    .switcher::before {
+        height: 10px;
     }
 }
 @media (max-width: 900px) {

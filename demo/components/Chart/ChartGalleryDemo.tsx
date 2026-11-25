@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Chart, CodeBlock, type ChartType } from '../../../src';
 import { CHART_PAGES } from '../../chartPages';
 import { cartesianExamples } from './gallery-cartesian';
@@ -31,16 +31,15 @@ const ChartGalleryItem: React.FC<{ example: ChartGalleryExample; linked?: boolea
     example,
     linked = false,
 }) => {
-    const [expanded, setExpanded] = useState(false);
     const page = CHART_PAGES.find((item) => item.type === example.props.type)!;
     // 图例、锁定及数据明细都由独立 Chart 实例管理，不与相邻示例共享状态。
     return (
         <article className={styles.item} aria-label={`${example.props.title}示例`}>
             <Chart {...example.props} />
             <div className={styles.actions}>
-                <details className={styles.code} onToggle={(event) => setExpanded(event.currentTarget.open)}>
+                <details className={styles.code}>
                     <summary>查看配置</summary>
-                    {expanded && <CodeBlock code={exampleCode(example)} />}
+                    <CodeBlock code={exampleCode(example)} />
                 </details>
                 {linked && <a href={`#/chart-${page.type}`}>更多{page.label}示例</a>}
             </div>
