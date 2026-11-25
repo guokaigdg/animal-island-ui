@@ -356,6 +356,23 @@ describe('Chart', () => {
         expect(onDataClick).toHaveBeenCalledWith(expect.objectContaining({ name: '甲', dataIndex: 1, value: 4 }));
     });
 
+    it('画布跟随窄容器宽度，不再按最小画布宽度撑出横向滚动', () => {
+        // jsdom 没有布局宽度，mock 240px 复现此前按 280px 绘制、需要横向滚动的窄容器。
+        const original = Object.getOwnPropertyDescriptor(HTMLElement.prototype, 'clientWidth');
+        Object.defineProperty(HTMLElement.prototype, 'clientWidth', {
+            configurable: true,
+            get: () => 240,
+        });
+        try {
+            const { container } = render(<Chart categories={['周一']} series={[{ name: '到访', data: [12] }]} />);
+            const svg = container.querySelector('svg');
+            expect(svg).toHaveAttribute('width', '240');
+            expect(svg).toHaveAttribute('viewBox', '0 0 240 300');
+        } finally {
+            if (original) Object.defineProperty(HTMLElement.prototype, 'clientWidth', original);
+        }
+    });
+
     it('自动刻度易读，同时尊重显式范围', () => {
         expect(axisTicks([32, 79])).toEqual([0, 20, 40, 60, 80]);
         expect(axisTicks([-12, 26])[0]).toBeLessThanOrEqual(-12);
