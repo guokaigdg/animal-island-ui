@@ -1,5 +1,14 @@
 import React from 'react';
-import { arc, extent, polar, sector, shortLabel, type ChartScene, type SceneContext } from './geometry';
+import {
+    arc,
+    CHART_REFERENCE_WIDTH,
+    extent,
+    polar,
+    sector,
+    shortLabel,
+    type ChartScene,
+    type SceneContext,
+} from './geometry';
 
 /** 饼、环形、玫瑰图采用同一扇区模型，零值不生成虚假的面积。 */
 export function pieScene({ props, points, width, height, format }: SceneContext): ChartScene {
@@ -71,7 +80,8 @@ export function radarScene({ props, points, width, height }: SceneContext): Char
     if (count < 3) return { background: null, marks: [] };
     const cx = width / 2,
         cy = height / 2,
-        radius = Math.min(width / 2 - 72, height / 2 - 40);
+        // 水平内边距随窄画布收缩；固定 72px 会在 144px 宽时让半径归零。
+        radius = Math.max(1, Math.min(width / 2 - 72 * Math.min(1, width / CHART_REFERENCE_WIDTH), height / 2 - 40));
     const [low, high] = extent(
         points.map((p) => p.value),
         props.min ?? 0,

@@ -370,7 +370,41 @@ describe('Chart', () => {
             expect(svg).toHaveAttribute('viewBox', '0 0 240 300');
         } finally {
             if (original) Object.defineProperty(HTMLElement.prototype, 'clientWidth', original);
+            else Reflect.deleteProperty(HTMLElement.prototype, 'clientWidth');
         }
+    });
+
+    it('极窄画布保留正绘图区和雷达半径，分类顺序不反转', () => {
+        const lineProps: ChartProps = {
+            type: 'line',
+            categories: ['甲', '乙', '丙'],
+            series: [{ name: '到访', data: [1, 2, 3] }],
+        };
+        const lineScene = cartesianScene({
+            props: lineProps,
+            points: normalize(lineProps),
+            width: 60,
+            height: 240,
+            format: String,
+        });
+        expect(lineScene.plot!.right).toBeGreaterThan(lineScene.plot!.left);
+        const xs = [0, 1, 2].map((index) => lineScene.marks.find((mark) => mark.point.dataIndex === index)!.x);
+        expect(xs[0]).toBeLessThan(xs[1]);
+        expect(xs[1]).toBeLessThan(xs[2]);
+
+        const radarProps: ChartProps = {
+            type: 'radar',
+            categories: ['甲', '乙', '丙'],
+            series: [{ name: '到访', data: [1, 2, 3] }],
+        };
+        const radarSceneResult = radarScene({
+            props: radarProps,
+            points: normalize(radarProps),
+            width: 100,
+            height: 240,
+            format: String,
+        });
+        expect(radarSceneResult.polarPlot!.radius).toBeGreaterThan(0);
     });
 
     it('自动刻度易读，同时尊重显式范围', () => {

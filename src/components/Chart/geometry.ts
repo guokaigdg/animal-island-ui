@@ -3,6 +3,8 @@ import type { ChartDataEvent, ChartProps, ChartCandle, ChartDatum } from './type
 
 /** 默认岛屿数据色，与 Card/Tag 的薄荷、蜜桃、草绿、紫、黄保持同色系。 */
 export const CHART_COLORS = ['#19b7a7', '#e59266', '#8ac68a', '#b38ad3', '#e4b84f', '#7e9fc4', '#dc8c9e', '#9a835a'];
+/** 边距设计的参考画布宽度；更窄时按比例收缩，避免绘图区宽度或雷达半径归零。 */
+export const CHART_REFERENCE_WIDTH = 280;
 /** 以数据项为图例的类型，其余类型以系列为图例。 */
 export const ITEM_TYPES = new Set(['pie', 'ring', 'rose', 'funnel', 'word', 'map']);
 /** 采用笛卡尔坐标轴的类型。 */
