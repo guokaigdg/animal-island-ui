@@ -78,11 +78,15 @@ export function pieScene({ props, points, width, height, format }: SceneContext)
 export function radarScene({ props, points, width, height }: SceneContext): ChartScene {
     const count = Math.max(props.categories?.length ?? 0, ...props.series.map((s) => s.data.length));
     if (count < 3) return { background: null, marks: [] };
+    // 维度名居中于半径外 20px；按 11px 字号和省略号估算可用字符数，避免窄画布裁切。
+    const LABEL_GAP = 20;
+    const FONT_SIZE = 11;
     const cx = width / 2,
         cy = height / 2,
-        // 半径随窄画布收缩，但至少为 7 字符维度名预留 64px（20px 间距、半宽与内边距）。
+        // 半径随窄画布收缩，但至少为维度名预留 64px（间距、半宽与内边距）。
         horizontalInset = Math.max(64, 72 * Math.min(1, width / CHART_REFERENCE_WIDTH)),
-        radius = Math.max(1, Math.min(width / 2 - horizontalInset, height / 2 - 40));
+        radius = Math.max(1, Math.min(width / 2 - horizontalInset, height / 2 - 40)),
+        labelMaxChars = Math.max(1, Math.min(7, Math.floor((width / 2 - radius - LABEL_GAP) / (FONT_SIZE / 2)) - 1));
     const [low, high] = extent(
         points.map((p) => p.value),
         props.min ?? 0,
@@ -105,14 +109,14 @@ export function radarScene({ props, points, width, height }: SceneContext): Char
         );
     for (let i = 0; i < count; i++) {
         const [x, y] = polar(cx, cy, radius, (Math.PI * 2 * i) / count);
-        const [lx, ly] = polar(cx, cy, radius + 20, (Math.PI * 2 * i) / count);
+        const [lx, ly] = polar(cx, cy, radius + LABEL_GAP, (Math.PI * 2 * i) / count);
         background.push(
             <g key={`axis-${i}`}>
                 <line x1={cx} y1={cy} x2={x} y2={y} className="chart-grid-line" />
                 <text x={lx} y={ly + 4} textAnchor="middle" className="chart-axis-label">
                     {shortLabel(
                         props.categories?.[i] ?? points.find((p) => p.dataIndex === i)?.name ?? String(i + 1),
-                        7
+                        labelMaxChars
                     )}
                 </text>
             </g>

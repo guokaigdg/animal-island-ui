@@ -1,4 +1,5 @@
 import { describe, it, expect, vi } from 'vitest';
+import { isValidElement, type ReactNode } from 'react';
 import { render, screen, within } from '@testing-library/react';
 import { setup } from '@test/utils';
 import { Chart } from './Chart';
@@ -10,6 +11,26 @@ import type { ChartProps, ChartType } from './types';
 
 /** 普通类型复用同一组数据，便于验证缺测不会改变原始下标。 */
 const basicSeries = [{ name: '到访', data: [12, null, 25] }];
+
+/** 收集雷达图维度名的横坐标与文本，按 11px 字号校验标签不越出画布。 */
+function collectAxisLabels(node: ReactNode, labels: Array<{ x: number; text: string }> = []) {
+    if (Array.isArray(node)) {
+        node.forEach((child) => collectAxisLabels(child, labels));
+        return labels;
+    }
+    if (!isValidElement(node)) return labels;
+    const props = node.props as { x?: number; children?: ReactNode };
+    if (node.type === 'text' && typeof props.x === 'number') {
+        labels.push({ x: props.x, text: String(props.children) });
+    }
+    collectAxisLabels(props.children, labels);
+    return labels;
+}
+
+/** 按 11px 字号估算标签半宽；中文字符最宽，按全宽计算是保守上界。 */
+function halfLabelWidth(text: string): number {
+    return (Array.from(text).length * 11) / 2;
+}
 
 describe('Chart', () => {
     it('同分类提示聚合系列，锁定后悬浮其他点不改变读数，方向键解除锁定并切换', async () => {
@@ -397,18 +418,21 @@ describe('Chart', () => {
             categories: ['东侧果园与花田', '西侧海岸与礁石', '北侧营地与松林', '南侧花田与集市'],
             series: [{ name: '到访', data: [1, 2, 3, 4] }],
         };
-        const radarSceneResult = radarScene({
-            props: radarProps,
-            points: normalize(radarProps),
-            width: 180,
-            height: 240,
-            format: String,
-        });
-        const radius = radarSceneResult.polarPlot!.radius;
-        // 11px 字号下 7 个中文字符约 77px 宽，按半宽校验最外侧维度名仍在画布内。
-        const halfLabelWidth = (7 * 11) / 2;
-        expect(radius).toBeGreaterThan(0);
-        expect(radius + 20 + halfLabelWidth).toBeLessThanOrEqual(180 / 2);
+        // 180px 覆盖已报告的裁切场景，100px 校验维度名继续按可用宽度截断。
+        for (const width of [180, 100]) {
+            const radarSceneResult = radarScene({
+                props: radarProps,
+                points: normalize(radarProps),
+                width,
+                height: 240,
+                format: String,
+            });
+            expect(radarSceneResult.polarPlot!.radius).toBeGreaterThan(0);
+            for (const { x, text } of collectAxisLabels(radarSceneResult.background)) {
+                expect(x - halfLabelWidth(text)).toBeGreaterThanOrEqual(0);
+                expect(x + halfLabelWidth(text)).toBeLessThanOrEqual(width);
+            }
+        }
     });
 
     it('自动刻度易读，同时尊重显式范围', () => {
