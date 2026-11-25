@@ -53,7 +53,6 @@ export const Chart: React.FC<ChartProps> = ({
 }) => {
     const viewport = useRef<HTMLDivElement>(null);
     const [width, setWidth] = useState(640);
-    const [viewportWidth, setViewportWidth] = useState(640);
     const [scrollLeft, setScrollLeft] = useState(0);
     const [hidden, setHidden] = useState<string[]>([]);
     const [activeKey, setActiveKey] = useState<string | null>(null);
@@ -85,10 +84,9 @@ export const Chart: React.FC<ChartProps> = ({
         if (!node) return;
         /** ResizeObserver 只影响绘图尺寸，不修改父容器，避免测量循环。 */
         const measure = () => {
-            // 极窄容器保留可读坐标字，通过局部横向滚动查看。
+            // 绘图宽度就是可见宽度；保留最小画布宽度会让窄容器多出横向滚动条。
             if (node.clientWidth > 0) {
-                setWidth(Math.max(280, node.clientWidth));
-                setViewportWidth(node.clientWidth);
+                setWidth(node.clientWidth);
             }
         };
         measure();
@@ -531,7 +529,7 @@ export const Chart: React.FC<ChartProps> = ({
                                 x={active.x}
                                 y={active.y}
                                 height={chartHeight}
-                                viewportWidth={viewportWidth}
+                                viewportWidth={width}
                                 scrollLeft={scrollLeft}
                                 locked={Boolean(selected)}
                             >

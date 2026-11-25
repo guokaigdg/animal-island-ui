@@ -1,5 +1,14 @@
 import React from 'react';
-import { arc, extent, polar, sector, shortLabel, type ChartScene, type SceneContext } from './geometry';
+import {
+    arc,
+    CHART_REFERENCE_WIDTH,
+    extent,
+    polar,
+    sector,
+    shortLabel,
+    type ChartScene,
+    type SceneContext,
+} from './geometry';
 
 /** 饼、环形、玫瑰图采用同一扇区模型，零值不生成虚假的面积。 */
 export function pieScene({ props, points, width, height, format }: SceneContext): ChartScene {
@@ -69,9 +78,16 @@ export function pieScene({ props, points, width, height, format }: SceneContext)
 export function radarScene({ props, points, width, height }: SceneContext): ChartScene {
     const count = Math.max(props.categories?.length ?? 0, ...props.series.map((s) => s.data.length));
     if (count < 3) return { background: null, marks: [] };
+    // 维度名居中于半径外 20px；按 11px 字号和省略号估算可用字符数，避免窄画布裁切。
+    const LABEL_GAP = 20;
+    const FONT_SIZE = 11;
     const cx = width / 2,
         cy = height / 2,
-        radius = Math.min(width / 2 - 72, height / 2 - 40);
+        // 半径随窄画布收缩，但至少为维度名预留 64px（间距、半宽与内边距）。
+        horizontalInset = Math.max(64, 72 * Math.min(1, width / CHART_REFERENCE_WIDTH)),
+        radius = Math.max(1, Math.min(width / 2 - horizontalInset, height / 2 - 40)),
+        // 连一个字符加省略号都放不下时不画标签，避免文字被 SVG 裁切。
+        labelMaxChars = Math.min(7, Math.floor((width / 2 - radius - LABEL_GAP) / (FONT_SIZE / 2)) - 1);
     const [low, high] = extent(
         points.map((p) => p.value),
         props.min ?? 0,
@@ -94,16 +110,18 @@ export function radarScene({ props, points, width, height }: SceneContext): Char
         );
     for (let i = 0; i < count; i++) {
         const [x, y] = polar(cx, cy, radius, (Math.PI * 2 * i) / count);
-        const [lx, ly] = polar(cx, cy, radius + 20, (Math.PI * 2 * i) / count);
+        const [lx, ly] = polar(cx, cy, radius + LABEL_GAP, (Math.PI * 2 * i) / count);
         background.push(
             <g key={`axis-${i}`}>
                 <line x1={cx} y1={cy} x2={x} y2={y} className="chart-grid-line" />
-                <text x={lx} y={ly + 4} textAnchor="middle" className="chart-axis-label">
-                    {shortLabel(
-                        props.categories?.[i] ?? points.find((p) => p.dataIndex === i)?.name ?? String(i + 1),
-                        7
-                    )}
-                </text>
+                {labelMaxChars > 0 && (
+                    <text x={lx} y={ly + 4} textAnchor="middle" className="chart-axis-label">
+                        {shortLabel(
+                            props.categories?.[i] ?? points.find((p) => p.dataIndex === i)?.name ?? String(i + 1),
+                            labelMaxChars
+                        )}
+                    </text>
+                )}
             </g>
         );
     }

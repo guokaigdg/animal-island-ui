@@ -2,6 +2,7 @@ import React from 'react';
 import dayjs from 'dayjs';
 import {
     axisTicks,
+    CHART_REFERENCE_WIDTH,
     extent,
     linePath,
     shortLabel,
@@ -23,8 +24,10 @@ export function cartesianScene({ props, points, width, height, format }: SceneCo
     } = props;
     const horizontal = type === 'bar';
     const numericX = ['scatter', 'bubble', 'time'].includes(type);
-    const left = horizontal ? 90 : 62,
-        right = width - 24,
+    // 窄画布按比例收缩边距；固定边距会在容器宽度接近 86px 时把绘图区压到零并反转分类顺序。
+    const marginScale = Math.min(1, width / CHART_REFERENCE_WIDTH);
+    const left = (horizontal ? 90 : 62) * marginScale,
+        right = width - 24 * marginScale,
         top = 28,
         bottom = height - 44;
     const plotWidth = right - left,
