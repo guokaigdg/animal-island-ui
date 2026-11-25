@@ -80,8 +80,9 @@ export function radarScene({ props, points, width, height }: SceneContext): Char
     if (count < 3) return { background: null, marks: [] };
     const cx = width / 2,
         cy = height / 2,
-        // 水平内边距随窄画布收缩；固定 72px 会在 144px 宽时让半径归零。
-        radius = Math.max(1, Math.min(width / 2 - 72 * Math.min(1, width / CHART_REFERENCE_WIDTH), height / 2 - 40));
+        // 半径随窄画布收缩，但至少为 7 字符维度名预留 64px（20px 间距、半宽与内边距）。
+        horizontalInset = Math.max(64, 72 * Math.min(1, width / CHART_REFERENCE_WIDTH)),
+        radius = Math.max(1, Math.min(width / 2 - horizontalInset, height / 2 - 40));
     const [low, high] = extent(
         points.map((p) => p.value),
         props.min ?? 0,

@@ -374,7 +374,7 @@ describe('Chart', () => {
         }
     });
 
-    it('极窄画布保留正绘图区和雷达半径，分类顺序不反转', () => {
+    it('极窄画布保留正绘图区与雷达半径，分类顺序和维度名都不越界', () => {
         const lineProps: ChartProps = {
             type: 'line',
             categories: ['甲', '乙', '丙'],
@@ -394,17 +394,21 @@ describe('Chart', () => {
 
         const radarProps: ChartProps = {
             type: 'radar',
-            categories: ['甲', '乙', '丙'],
-            series: [{ name: '到访', data: [1, 2, 3] }],
+            categories: ['东侧果园与花田', '西侧海岸与礁石', '北侧营地与松林', '南侧花田与集市'],
+            series: [{ name: '到访', data: [1, 2, 3, 4] }],
         };
         const radarSceneResult = radarScene({
             props: radarProps,
             points: normalize(radarProps),
-            width: 100,
+            width: 180,
             height: 240,
             format: String,
         });
-        expect(radarSceneResult.polarPlot!.radius).toBeGreaterThan(0);
+        const radius = radarSceneResult.polarPlot!.radius;
+        // 11px 字号下 7 个中文字符约 77px 宽，按半宽校验最外侧维度名仍在画布内。
+        const halfLabelWidth = (7 * 11) / 2;
+        expect(radius).toBeGreaterThan(0);
+        expect(radius + 20 + halfLabelWidth).toBeLessThanOrEqual(180 / 2);
     });
 
     it('自动刻度易读，同时尊重显式范围', () => {
