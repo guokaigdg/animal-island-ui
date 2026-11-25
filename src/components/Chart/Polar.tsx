@@ -86,7 +86,8 @@ export function radarScene({ props, points, width, height }: SceneContext): Char
         // 半径随窄画布收缩，但至少为维度名预留 64px（间距、半宽与内边距）。
         horizontalInset = Math.max(64, 72 * Math.min(1, width / CHART_REFERENCE_WIDTH)),
         radius = Math.max(1, Math.min(width / 2 - horizontalInset, height / 2 - 40)),
-        labelMaxChars = Math.max(1, Math.min(7, Math.floor((width / 2 - radius - LABEL_GAP) / (FONT_SIZE / 2)) - 1));
+        // 连一个字符加省略号都放不下时不画标签，避免文字被 SVG 裁切。
+        labelMaxChars = Math.min(7, Math.floor((width / 2 - radius - LABEL_GAP) / (FONT_SIZE / 2)) - 1);
     const [low, high] = extent(
         points.map((p) => p.value),
         props.min ?? 0,
@@ -113,12 +114,14 @@ export function radarScene({ props, points, width, height }: SceneContext): Char
         background.push(
             <g key={`axis-${i}`}>
                 <line x1={cx} y1={cy} x2={x} y2={y} className="chart-grid-line" />
-                <text x={lx} y={ly + 4} textAnchor="middle" className="chart-axis-label">
-                    {shortLabel(
-                        props.categories?.[i] ?? points.find((p) => p.dataIndex === i)?.name ?? String(i + 1),
-                        labelMaxChars
-                    )}
-                </text>
+                {labelMaxChars > 0 && (
+                    <text x={lx} y={ly + 4} textAnchor="middle" className="chart-axis-label">
+                        {shortLabel(
+                            props.categories?.[i] ?? points.find((p) => p.dataIndex === i)?.name ?? String(i + 1),
+                            labelMaxChars
+                        )}
+                    </text>
+                )}
             </g>
         );
     }

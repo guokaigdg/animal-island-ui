@@ -418,8 +418,8 @@ describe('Chart', () => {
             categories: ['东侧果园与花田', '西侧海岸与礁石', '北侧营地与松林', '南侧花田与集市'],
             series: [{ name: '到访', data: [1, 2, 3, 4] }],
         };
-        // 180px 覆盖已报告的裁切场景，100px 校验维度名继续按可用宽度截断。
-        for (const width of [180, 100]) {
+        // 180px 覆盖已报告的裁切场景，100px 校验维度名按可用宽度截断，40px 校验放不下时隐藏标签。
+        for (const width of [180, 100, 40]) {
             const radarSceneResult = radarScene({
                 props: radarProps,
                 points: normalize(radarProps),
@@ -428,7 +428,9 @@ describe('Chart', () => {
                 format: String,
             });
             expect(radarSceneResult.polarPlot!.radius).toBeGreaterThan(0);
-            for (const { x, text } of collectAxisLabels(radarSceneResult.background)) {
+            const labels = collectAxisLabels(radarSceneResult.background);
+            if (width === 40) expect(labels).toHaveLength(0);
+            for (const { x, text } of labels) {
                 expect(x - halfLabelWidth(text)).toBeGreaterThanOrEqual(0);
                 expect(x + halfLabelWidth(text)).toBeLessThanOrEqual(width);
             }
