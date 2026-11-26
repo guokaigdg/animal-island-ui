@@ -5,6 +5,40 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.0.2] - 2026-11-26
+
+### Fixed
+
+- **修复纯 Node ESM 下整包导入即报 `ERR_MODULE_NOT_FOUND`**
+    - 根因：`Time` 组件导入 `dayjs/locale/zh-cn` 时缺 `.js` 扩展名。dayjs 未声明 `exports` 字段，Node 的 ESM 解析器不做扩展名补全，产物 `dist/es/components/Time/Time.js` 里的 `import "dayjs/locale/zh-cn"` 无法解析 —— 整个包在纯 Node 与 Next.js Pages Router 下加载即失败，CJS `require` 不受影响
+    - 修复：改用 `dayjs/locale/zh-cn.js`，与仓库内 `dayjs/plugin/customParseFormat.js` 的写法一致
+    - 守卫：`npm run check:bundle` 新增真实 Node ESM 导入冒烟检查，产物只要无法被 Node 导入即构建失败
+- **修复 `Chart` 在窄容器下的几何越界**
+    - 地图在容器窄于 48px 时缩放系数变负，地区左右镜像；现在四周留白随容器等比收缩，缩放系数不再为负
+    - 饼 / 环 / 玫瑰的数值标签按 12px 字号与预留余量截断，连一个字符加省略号都放不下时整体隐藏，不再被画布裁掉
+    - 笛卡尔纵轴刻度按 11px 字号与可用左边距截断，放不下时不再绘制刻度文字
+    - 仪表盘在极窄画布下省略刻度线，指针长度保底 6px，不再画到圆心另一侧
+- **修复 `Scrollbar` 的 `thumbSize` 传负值**
+    - 负值会让整条宽度声明失效，浏览器回退成 15px 的系统经典滚动条 —— 比默认还宽，而不是尊重调用方的覆盖；现在按 `0` 处理
+    - `NaN` / `Infinity` 回落到默认值
+- **修复 `Chart` 拖动改宽时冒出横向滚动条**
+    - 画布宽度由 ResizeObserver 跟随容器、天然滞后一帧，`overflow: auto` 会让这一帧的宽度差撑出滚动条并在拖动时闪烁；改用 `overflow: clip`（旧浏览器回退 `hidden`），不再建立滚动容器
+
+### Added
+
+- **`Scrollbar` 支持 `thumbSize={0}` 隐藏滚动条** —— 内容仍可滚动，Chromium / Safari 靠 `0px` 滚动槽，Firefox 靠 `scrollbar-width: none`
+
+### Changed
+
+- **`Chart` 的 K 线默认红涨绿跌，图例色块与图上颜色一致**
+    - 此前图例显示的是调色板颜色，而图上根本不存在该颜色；现在图例取上涨色。调用方显式指定系列色或单点色时以调用方为准
+- **`Chart` 的坐标轴刻度在只给出单边范围时改用易读步长**
+    - 只给 `min` 或只给 `max` 时，刻度由 5 等分改为 1 / 2 / 2.5 / 5 / 10 的十进制步长；显式边界不在步长网格上时保留为首个 / 末个刻度，轴范围不会超出调用方指定的范围
+    - 两端都显式、或都不显式时行为不变
+- **`Chart` 首次测量改为 `useLayoutEffect`** —— 绘制前完成测量，消除首帧按占位宽度绘制后的闪烁
+- **新增 `commit-msg` 钩子，commit message 必须为英文** —— 提交前拦截非 ASCII 字符，避免中英混排的提交信息进入历史
+- **README 的 AI 图标由 `sparkles.svg` 替换为 `ai-agent.svg`**
+
 ## [4.0.1] - 2026-11-17
 
 ### Fixed
