@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Card, Button, Typewriter } from '../src';
 import * as Icons from 'naive-icons';
+import { version } from '../package.json';
 import { islandGradient } from './gradients';
 import { useIsMobile } from './tools';
 
@@ -600,7 +601,8 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                                     Animal <br /> Island UI
                                 </>
                             )}
-                            <span style={S.heroVersion}>v3.0.0</span>
+                            {/* 发布版本取自 package.json，发版时随构建自动更新 */}
+                            <span style={S.heroVersion}>v{version}</span>
                         </h1>
                         <Typewriter speed={60}>
                             <p style={{ ...S.heroSubtitle, fontSize: isMobile ? 14 : 17 }}>

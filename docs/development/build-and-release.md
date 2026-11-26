@@ -81,5 +81,6 @@ with an error if the coverage summary is missing.
 
 ## Demo Site
 
-`npm run build:demo` builds the demo into `demo-dist/` using `vite.config.demo.ts`; `npm run deploy` chains that with
-`gh-pages -d demo-dist` to publish it. The demo is never part of the npm artifact.
+`npm run build:demo` builds the demo into `demo-dist/` using `vite.config.demo.ts`; the hero version badge reads
+`version` from `package.json` at build time, so a release bump reaches the site without editing the demo.
+`npm run deploy` chains that with `gh-pages -d demo-dist` to publish it. The demo is never part of the npm artifact.
