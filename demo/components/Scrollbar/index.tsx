@@ -16,7 +16,7 @@ const SCROLLBAR_API: ApiRow[] = [
     { prop: 'thumbColor', desc: '滑块颜色，传 CSS 变量可跟随主题', type: 'string', defaultVal: '-' },
     {
         prop: 'thumbSize',
-        desc: '滑块粗细（px），默认 8 —— 比系统经典滚动条更细',
+        desc: '滑块粗细（px），默认 8 —— 比系统经典滚动条更细；0 隐藏滚动条',
         type: 'number',
         defaultVal: '8',
     },

@@ -97,7 +97,7 @@ interface ScrollbarProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'chi
     maxWidth?: number | string;
     direction?: ScrollbarDirection; // default 'vertical'
     thumbColor?: string; // pass a CSS variable to follow the theme
-    thumbSize?: number; // default 8 — px, slimmer than the OS classic scrollbar
+    thumbSize?: number; // default 8 — px; 0 hides the scrollbar (still scrollable), negative reads as 0
     showTrack?: boolean; // default false
     children?: React.ReactNode;
 }
@@ -113,4 +113,4 @@ interface ScrollbarProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'chi
 
 **Styling the scrollbar makes it permanent.** On macOS the unstyled system scrollbar is an overlay — it fades out when idle and reserves almost no width. A scrollbar with `::-webkit-scrollbar` styles (or Firefox's `scrollbar-width`) is rendered as a classic scrollbar instead: always visible, reserving real layout space. Expect the styled box to be a few pixels narrower than a plain `overflow: auto` one.
 
-**Two gotchas the component already handles.** A global reset of `*::-webkit-scrollbar { display: none }` matches every scrollbar on the page, so the component sets `display: block` on its own pseudo-element to stay visible. And `scrollbar-width` / `scrollbar-color` are scoped behind `@supports not selector(::-webkit-scrollbar)`, because Chrome 121+ ignores the webkit pseudo-elements as soon as those standard properties are set — which would silently drop `thumbSize` and the thumb shape.
+**Two gotchas the component already handles.** A global reset of `*::-webkit-scrollbar { display: none }` matches every scrollbar on the page, so the component sets `display: block` on its own pseudo-element to stay visible. And `scrollbar-width` / `scrollbar-color` are scoped behind `@supports not selector(::-webkit-scrollbar)`, because Chrome 121+ ignores the webkit pseudo-elements as soon as those standard properties are set — which would silently drop `thumbSize` and the thumb shape. The `::-webkit-scrollbar-corner` is styled too — unstyled, `direction="both"` shows a plain white square where the two scrollbars meet.

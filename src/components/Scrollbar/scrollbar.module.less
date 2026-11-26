@@ -32,6 +32,12 @@
         border-radius: 50px;
     }
 
+    // 两条轴同时出现时，交叉处（右下角）默认被浏览器画成一块白色方块。
+    // 跟随轨道色：默认透明，showTrack 时与两条轨道连成一体。
+    &::-webkit-scrollbar-corner {
+        background-color: var(--animal-scrollbar-track);
+    }
+
     &::-webkit-scrollbar-thumb {
         background-color: var(--animal-scrollbar-thumb);
         // 不使用单侧透明边框：边框会让 padding-box 两侧的内圆角不一致。
@@ -60,6 +66,11 @@
     .scrollbar {
         scrollbar-width: thin;
         scrollbar-color: var(--animal-scrollbar-thumb) var(--animal-scrollbar-track);
+    }
+
+    // thumbSize={0}：WebKit 路径下 0px 宽即隐藏滚动条，Firefox 用 none 表达同一语义
+    .scrollbar.hidden {
+        scrollbar-width: none;
     }
 }
 

@@ -243,7 +243,7 @@ Props：
 | `maxWidth`   | `number \| string`                     | —            | 容器最大宽度                                                               |
 | `direction`  | `'vertical' \| 'horizontal' \| 'both'` | `'vertical'` | 哪条轴可滚动，另一条轴会被裁掉而不是留着第二条滚动条                       |
 | `thumbColor` | `string`                               | —            | 滑块颜色，传 CSS 变量可跟随主题换肤                                       |
-| `thumbSize`  | `number`                               | `8`          | 滑块粗细（px），默认 8 —— 比系统经典滚动条更细                               |
+| `thumbSize`  | `number`                               | `8`          | 滑块粗细（px），默认 8 —— 比系统经典滚动条更细。`0` 隐藏滚动条（内容仍可滚动），负数按 `0` 处理 |
 | `showTrack`  | `boolean`                              | `false`      | 是否显示轨道底色                                                           |
 | `className`  | `string`                               | —            | 自定义类名                                                                 |
 | `style`      | `CSSProperties`                        | —            | 自定义样式                                                                 |
@@ -259,6 +259,8 @@ Props：
 - `::-webkit-scrollbar-button` 被隐藏 —— 自定义滚动条默认仍会保留 Chromium 的上下箭头，与圆润的岛国风调性冲突。
 - 滑块是 `50px` 的胶囊，取次级文字色（`#9f927d`），悬停加深为主文字色（`#794f27`），过渡 `0.2s cubic-bezier(0.4, 0, 0.2, 1)`。轨道默认透明，`showTrack` 打开后取次级背景色（`#f0e8d8`）。
 - `direction` 会把不用的那条轴裁掉（`overflow-x: hidden` / `overflow-y: hidden`），而不是留着第二条滚动条。
+- `direction="both"` 时两条滚动条同时出现，所以 `::-webkit-scrollbar-corner` 也一并上了样式：不管它的话，Chromium 会把两条滚动槽交叉的那一小块画成纯白，在奶油色的容器里很扎眼，还会把 `showTrack` 的轨道色截掉一角。它跟随轨道色 —— 默认透明，`showTrack` 时取次级背景色。
+- `thumbSize` 在写入 CSS 变量前会先钳制。负值会让整条 `width` 声明失效，浏览器于是回退成 15px 的经典滚动条 —— 比默认还宽，而不是尊重调用方的覆盖；负数按 `0` 处理。`0` 是合法取值：滚动条隐藏但区域仍可滚动（Chromium / Safari 靠 `0px` 的滚动槽，Firefox 靠 `scrollbar-width: none`）。`NaN` / `Infinity` 回落到默认值。
 - 根元素带 `tabindex="0"`：滚动区必须能被键盘聚焦，否则在不会自动聚焦滚动容器的浏览器上，方向键滚动会失效。
 - `overscroll-behavior: contain` 把滚轮锁在本容器：滚动到顶或底之后，不再像浏览器默认那样链式传给外层页面。鼠标在区域内时滚轮就属于这个区域，想滚整页需把鼠标移出。这是有意选择的默认值；传 `style={{ overscrollBehavior: 'auto' }}` 可恢复链式滚动。
 - `ref` 转发到根 `<div>`（即滚动容器本身），调用方可直接 `scrollTo` 或读写 `scrollTop`，无需额外包一层。

@@ -106,6 +106,37 @@ describe('Scrollbar', () => {
             const root = container.firstChild as HTMLElement;
             expect(root).toHaveStyle({ '--animal-scrollbar-size': '16px' });
         });
+
+        it('thumbSize=0 隐藏滚动条并应用 hidden 类', () => {
+            const { container } = render(<Scrollbar thumbSize={0}>x</Scrollbar>);
+            const root = container.firstChild as HTMLElement;
+            expect(root).toHaveStyle({ '--animal-scrollbar-size': '0px' });
+            expect(root).toHaveClass(styles.hidden);
+        });
+
+        it('thumbSize 为负数时按 0 处理，而不是回退成系统滚动条', () => {
+            const { container, rerender } = render(<Scrollbar thumbSize={-5}>x</Scrollbar>);
+            const root = container.firstChild as HTMLElement;
+            expect(root).toHaveStyle({ '--animal-scrollbar-size': '0px' });
+            expect(root).toHaveClass(styles.hidden);
+            // 不会在 rerender 后残留
+            rerender(<Scrollbar thumbSize={8}>x</Scrollbar>);
+            expect(container.firstChild).not.toHaveClass(styles.hidden);
+        });
+
+        it('thumbSize 非有限值时回落到默认值', () => {
+            [Number.NaN, Number.POSITIVE_INFINITY, Number.NEGATIVE_INFINITY].forEach((thumbSize) => {
+                const { container } = render(<Scrollbar thumbSize={thumbSize}>x</Scrollbar>);
+                const root = container.firstChild as HTMLElement;
+                expect(root).toHaveStyle({ '--animal-scrollbar-size': '8px' });
+                expect(root).not.toHaveClass(styles.hidden);
+            });
+        });
+
+        it('默认与正数 thumbSize 不应用 hidden 类', () => {
+            const { container } = render(<Scrollbar>x</Scrollbar>);
+            expect(container.firstChild).not.toHaveClass(styles.hidden);
+        });
     });
 
     describe('ref', () => {
