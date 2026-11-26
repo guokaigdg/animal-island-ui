@@ -3,7 +3,9 @@ import dayjs from 'dayjs';
 // dayjs 随本包一起打包，宿主应用注册的 locale 落不到这个实例上，所以内置 zh-cn。
 // 以默认导入取对象、再传给 .locale()，而不是裸副作用导入：包声明了 sideEffects: false，
 // 裸导入在消费者构建里可能被当成无副作用模块摇掉。
-import zhCn from 'dayjs/locale/zh-cn';
+// 子路径必须带 .js：dayjs 没有 exports 字段，Node 的 ESM 解析器不做扩展名补全，
+// `dayjs/locale/zh-cn` 在纯 Node / Next.js 下会 ERR_MODULE_NOT_FOUND，整个包加载不了。
+import zhCn from 'dayjs/locale/zh-cn.js';
 import styles from './time.module.less';
 
 export type TimeLocale = 'en' | 'zh-cn';
