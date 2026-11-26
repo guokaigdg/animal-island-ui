@@ -113,7 +113,7 @@ if a file you touched is noticeably denser, most of what was added is restatemen
 - Visual changes must satisfy [docs/design-system/design-rules.md](docs/design-system/design-rules.md).
 - Keep runtime dependencies to a minimum — the only ones are `naive-icons` and `dayjs`
   (rationale in [docs/adr/](docs/adr/README.md)); never disable `preserveModules` / `cssCodeSplit`.
-- Conventional Commits; branch from `main`.
+- Conventional Commits, message in English (a commit-msg hook rejects non-ASCII); branch from `main`.
 - Docs are English-primary with Chinese mirrors under `docs/zh-CN/`.
 - **UI copy:** avoid unnecessary secondary labels and descriptions — let the layout do the
   explaining.

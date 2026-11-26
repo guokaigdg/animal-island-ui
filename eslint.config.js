@@ -24,6 +24,7 @@ export default tseslint.config(
             // 本地站点草稿与工具导出缓存（不在版本库内）
             'site/**',
             '.trae-html-share-packages/**',
+            '.workbuddy/**',
         ],
     },
 

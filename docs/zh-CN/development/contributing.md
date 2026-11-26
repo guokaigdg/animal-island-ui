@@ -12,7 +12,7 @@
 
 1. Fork 仓库，从 `main` 拉分支（`git checkout -b feature/my-feature`）。
 2. 写代码，并确保 `npm run ci` 通过。
-3. 按 [Conventional Commits](https://www.conventionalcommits.org/) 提交：
+3. 按 [Conventional Commits](https://www.conventionalcommits.org/) 用**英文**提交：
     - `feat: add xxx` —— 新功能
     - `fix: resolve xxx` —— 修复缺陷
     - `docs: update xxx` —— 文档
@@ -23,15 +23,17 @@
 
 `npm run ci` 是 `format:check` + `check:docs` + `lint` + `test:run` + `test:a11y` + `build`。它必须全绿，PR 才会进入 review。
 
-## Pre-commit 钩子
+## Git 钩子
 
 git pre-commit 钩子会在每次 `git commit` 前跑 `npm run ci`，CI 失败则中止提交。
+
+git commit-msg 钩子会拒绝含非 ASCII 字符（中文等）的提交信息——请用英文写。
 
 - **新克隆仓库**：`npm install` 会通过 `prepare` 脚本自动装好钩子（`git config core.hooksPath .githooks`）。
 - **手动安装**：`npm run setup:hooks`
 - **卸载**：`git config --unset core.hooksPath`
 - **紧急绕过**（不建议）：`git commit --no-verify` —— 完全跳过检查，坏代码会因此进仓库
-- **钩子位置**：`.githooks/pre-commit`，已提交进仓库，新克隆即可获得
+- **钩子位置**：`.githooks/pre-commit` 与 `.githooks/commit-msg`，已提交进仓库，新克隆即可获得
 
 ## 本地开发
 
@@ -40,7 +42,7 @@ git pre-commit 钩子会在每次 `git commit` 前跑 `npm run ci`，CI 失败�
 git clone https://github.com/guokaigdg/animal-island-ui.git
 cd animal-island-ui
 
-# 安装依赖（同时装好 pre-commit 钩子）
+# 安装依赖（同时装好 git 钩子）
 npm install
 
 # 启动 Demo 开发服务器

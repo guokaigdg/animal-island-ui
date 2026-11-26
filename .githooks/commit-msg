@@ -1,0 +1,17 @@
+#!/usr/bin/env sh
+#  commit message 只允许英文（可打印 ASCII）
+#  出现中文等非 ASCII 字符 → commit 中止
+#  绕过 (不推荐) : git commit --no-verify
+
+msg_file="$1"
+
+# 忽略 # 开头的注释行（编辑器模板残留，git 最终会剥掉它们）
+if non_ascii=$(LC_ALL=C grep -v '^[[:space:]]*#' "$msg_file" | LC_ALL=C grep -n '[^ -~]'); then
+    echo ""
+    echo "❌ commit message 含非 ASCII 字符（中文等），请改用英文后重新提交："
+    echo "$non_ascii"
+    echo ""
+    echo "   绕过(不推荐):git commit --no-verify"
+    echo ""
+    exit 1
+fi

@@ -12,7 +12,7 @@ Issues and pull requests are welcome.
 
 1. Fork the repository and branch off `main` (`git checkout -b feature/my-feature`).
 2. Write the code and make sure `npm run ci` passes.
-3. Commit following [Conventional Commits](https://www.conventionalcommits.org/):
+3. Commit following [Conventional Commits](https://www.conventionalcommits.org/) **in English**:
     - `feat: add xxx` — new feature
     - `fix: resolve xxx` — bug fix
     - `docs: update xxx` — documentation
@@ -24,16 +24,20 @@ Issues and pull requests are welcome.
 `npm run ci` is `format:check` + `check:docs` + `lint` + `test:run` + `test:a11y` + `build`. It has to be green before a
 PR is reviewed.
 
-## Pre-commit Hook
+## Git Hooks
 
 A git pre-commit hook runs `npm run ci` before every `git commit`; a failing CI aborts the commit.
 
-- **Fresh clone**: `npm install` installs the hook automatically through the `prepare` script
+A git commit-msg hook rejects commit messages containing non-ASCII characters (Chinese etc.) — write the message in
+English.
+
+- **Fresh clone**: `npm install` installs the hooks automatically through the `prepare` script
   (`git config core.hooksPath .githooks`).
 - **Install manually**: `npm run setup:hooks`
 - **Uninstall**: `git config --unset core.hooksPath`
 - **Emergency bypass** (discouraged): `git commit --no-verify` — skips the checks entirely, so broken code can land
-- **Hook location**: `.githooks/pre-commit`, committed to the repository so a fresh clone gets it
+- **Hook location**: `.githooks/pre-commit` and `.githooks/commit-msg`, committed to the repository so a fresh clone
+  gets them
 
 ## Local Development
 
