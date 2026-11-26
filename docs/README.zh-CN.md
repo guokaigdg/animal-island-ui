@@ -47,6 +47,7 @@
 - 图标（**naive-icons**）：<https://github.com/guokaigdg/naive-icons>
 - Vue 版本（**animal-island-vue**）：<https://github.com/guokaigdg/animal-island-vue>
 - 微信小程序版本（**animal-island-wx**）：<https://github.com/lns567/animal-island-wx>
+- Flutter 版本（**animal-island-ui-flutter**）：<https://github.com/Ibuprofenighty/animal-island-ui-flutter>
 
 <h2>
     <img src="img/icons/ai-agent.svg" width="18" alt="" />
