@@ -12,8 +12,9 @@
  * 运行时依赖（dayjs / naive-icons）是**故意**打进产物的，不在此检查范围。
  */
 import { existsSync, readFileSync, readdirSync, statSync } from 'fs';
+import { execFileSync } from 'child_process';
 import { resolve, relative } from 'path';
-import { fileURLToPath } from 'url';
+import { fileURLToPath, pathToFileURL } from 'url';
 
 const __dirname = fileURLToPath(new URL('.', import.meta.url));
 const ROOT = resolve(__dirname, '..');
@@ -158,7 +159,37 @@ for (const out of ['es', 'cjs']) {
     if (existsSync(dir)) scanFileImports(dir);
 }
 
-if (violations.length > 0 || stale.length > 0 || fileImports.length > 0) {
+// 产物必须能被纯 Node 以 ESM 方式真的导入一次。
+// 只扫字符串扫不到 `dayjs/locale/zh-cn` 这类缺扩展名的裸子路径 —— dayjs 没有 exports 字段，
+// Node 的 ESM 解析器不做扩展名补全，缺了 .js 就是 ERR_MODULE_NOT_FOUND，
+// 整个包在纯 Node 与 Next.js Pages Router 下都加载不了（4.0.1 就是这么发出去的）。
+// 这里让 Node 真跑一次导入，失败即构建失败。
+const esEntry = resolve(DIST, 'es/index.js');
+let importFailure = '';
+if (existsSync(esEntry)) {
+    try {
+        execFileSync(
+            process.execPath,
+            [
+                '--input-type=module',
+                '-e',
+                `import(${JSON.stringify(pathToFileURL(esEntry).href)}).then(
+                    () => process.exit(0),
+                    (error) => {
+                        console.error(String(error && error.message ? error.message : error));
+                        process.exit(1);
+                    }
+                )`,
+            ],
+            { stdio: 'pipe' }
+        );
+    } catch (error) {
+        const detail = error?.stderr?.toString().trim() || error?.message || String(error);
+        importFailure = detail.split('\n').slice(0, 3).join(' / ');
+    }
+}
+
+if (violations.length > 0 || stale.length > 0 || fileImports.length > 0 || importFailure) {
     if (violations.length > 0 || stale.length > 0) {
         console.error('[check:bundle] ✗ 产物里出现了不该被打包进去的 peer 依赖');
         for (const v of violations) console.error(`  · ${v}`);
@@ -170,8 +201,15 @@ if (violations.length > 0 || stale.length > 0 || fileImports.length > 0) {
         for (const f of fileImports) console.error(`  · ${f}`);
         console.error('  → 样式走 `animal-island-ui/style`；图片用 new URL(..., import.meta.url) 引用，不产生模块依赖');
     }
+    if (importFailure) {
+        console.error('[check:bundle] ✗ 产物无法被纯 Node 以 ESM 方式导入');
+        console.error(`  · ${importFailure}`);
+        console.error('  → 检查产物里的裸子路径导入是否缺扩展名（如 dayjs/locale/zh-cn.js）；');
+        console.error('    Node 的 ESM 解析器不做扩展名补全，缺 .js 即 ERR_MODULE_NOT_FOUND');
+    }
     process.exit(1);
 }
 
 console.log('[check:bundle] ✓ 产物里没有被打包进去的 peer 依赖（react / react-dom / classnames）');
 console.log('[check:bundle] ✓ 产物 JS 里没有文件式导入（纯 Node / SSR 可加载）');
+console.log('[check:bundle] ✓ 产物能被纯 Node 以 ESM 方式导入');
