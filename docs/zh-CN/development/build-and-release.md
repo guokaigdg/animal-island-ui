@@ -34,4 +34,4 @@
 
 ## Demo 站点
 
-`npm run build:demo` 用 `vite.config.demo.ts` 把 demo 构建到 `demo-dist/`；`npm run deploy` 在此之后接上 `gh-pages -d demo-dist` 发布。demo 永远不进 npm 产物。
+`npm run build:demo` 用 `vite.config.demo.ts` 把 demo 构建到 `demo-dist/`；首页版本号在构建时从 `package.json` 的 `version` 读取，发版后无需改动 demo 即可生效。`npm run deploy` 在此之后接上 `gh-pages -d demo-dist` 发布。demo 永远不进 npm 产物。
