@@ -16,13 +16,13 @@ Source: `src/components/Chart/`. One React/SVG component for 19 statistical char
 | `arcbar`, `gauge` | First valid point of each visible series; gauge uses the first visible series only. Default range 0–100. Geometry clamps to range, while the tooltip preserves the actual value. |
 | `funnel` | First series; stage width represents value. Keeps input order instead of silently sorting stages. |
 | `word` | First series; positive values drive text size. Deterministic collision avoidance, reduced sizes on narrow canvases; omitted words remain in the data table and an explanatory note appears. |
-| `candle` | Complete `open/close/low/high`; open and close must lie inside low–high. Rising candles coral, falling candles mint. Tooltips expose all four values. |
+| `candle` | Complete `open/close/low/high`; open and close must lie inside low–high. Rising candles coral, falling candles mint; an explicit series or point colour overrides both. Tooltips expose all four values. |
 | `time` | Explicit millisecond `x` and finite `y`, sorted by x with real temporal spacing. Default x labels use local `HH:mm`. |
 | `map` | First series matched by point `name` to `regions`. Caller-supplied planar polygon coordinates, y upward; equal scale on both axes, evenodd fill for nested outlines. No built-in geographic boundaries or projection. |
 
 `null`, non-finite values and incomplete coordinates are omitted; category indices are retained. Zero is not missing data: it remains in Cartesian charts and the data table, but never becomes a positive pie sector. Negative values are supported on Cartesian axes and maps; they are not proportions for pie/ring/rose/funnel/word/radar.
 
-Automatic value axes include zero and choose readable decimal steps. Explicit `min`/`max` define the range; values outside it are clamped geometrically but retain their original value in tooltips. Series names should be unique; category names come from `categories`, point names or one-based indices. Data arrays are treated as immutable: replace the series reference when updating data.
+Automatic value axes include zero and choose readable decimal steps. Explicit `min`/`max` define the range; values outside it are clamped geometrically but retain their original value in tooltips. Setting both divides that range evenly; setting only one keeps that bound exact and still rounds the other end to readable steps. Series names should be unique; category names come from `categories`, point names or one-based indices. Data arrays are treated as immutable: replace the series reference when updating data.
 
 # Visual specification
 
@@ -32,7 +32,7 @@ Automatic value axes include zero and choose readable decimal steps. Explicit `m
 | Palette | Mint `#19b7a7`, peach `#e59266`, green `#8ac68a`, purple `#b38ad3`, yellow `#e4b84f`, blue `#7e9fc4`, pink `#dc8c9e`, brown `#9a835a`. Point color overrides series color, then `colors`. |
 | Text | Inherits library font. Title 17px/800, axis 11px/600, data labels 12px/700; earth-brown text. |
 | Ring center | Value 24px/900 in secondary earth brown; caption 12px/600. Both use central SVG baselines and centered text anchors; their centers sit 8px above and 16px below the ring center, creating one visually centered two-line block. Tabular numerals stabilize changing totals. |
-| Plot | Default 300px high, minimum 180px. ResizeObserver follows container width and the canvas always fits it, so narrow layouts never introduce horizontal scrolling. |
+| Plot | Default 300px high, minimum 180px. ResizeObserver follows container width and the canvas always fits it, so narrow layouts never introduce horizontal scrolling. Narrow canvases shrink margins, radii and label budgets instead of overflowing: pie/ring/rose labels and Cartesian axis ticks are truncated to the available width and dropped when even one character plus the ellipsis does not fit; map outlines keep their original orientation at any width. |
 | Grid | Sand dashed lines (`3 6`), separate visible zero baseline for mixed signs; category labels thinned according to available space. |
 | Marks | Rounded columns up to 9px, stacked columns 2px; line width 3px and rounded joins; area opacity 0.18; bubble opacity 0.55. Data geometry is SVG, not an icon system. |
 | Tooltip | Cream panel, 14px radius, 14px × 16px padding, maximum width 260px, soft `0 4px 14px rgba(61,52,40,.16)` shadow. Measured after rendering, anchored to data and constrained inside the visible plot. Hover panels do not intercept clicks; once locked, long content scrolls within the panel. Color dots, aligned tabular values and a lock indicator identify each reading. |

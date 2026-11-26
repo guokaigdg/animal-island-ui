@@ -13,8 +13,6 @@ interface ChartTooltipProps {
     height: number;
     /** 当前可视宽度 */
     viewportWidth: number;
-    /** 绘图区横向滚动距离 */
-    scrollLeft: number;
     /** 锁定后才接收指针，防止悬浮提示抢先遮住待点击的数据点 */
     locked: boolean;
     /** 已格式化提示内容 */
@@ -22,16 +20,7 @@ interface ChartTooltipProps {
 }
 
 /** 内容测量后自动避让边缘，长系列提示在面板内滚动。 */
-export const ChartTooltip: React.FC<ChartTooltipProps> = ({
-    id,
-    x,
-    y,
-    height,
-    viewportWidth,
-    scrollLeft,
-    locked,
-    children,
-}) => {
+export const ChartTooltip: React.FC<ChartTooltipProps> = ({ id, x, y, height, viewportWidth, locked, children }) => {
     const ref = useRef<HTMLDivElement>(null);
     const [measuredHeight, setMeasuredHeight] = useState(0);
     const width = Math.min(260, Math.max(1, viewportWidth - 16));
@@ -46,8 +35,9 @@ export const ChartTooltip: React.FC<ChartTooltipProps> = ({
         observer?.observe(element);
         return () => observer?.disconnect();
     }, [children, width]);
-    const preferredLeft = x + 16 + width <= scrollLeft + viewportWidth - 8 ? x + 16 : x - width - 16;
-    const left = Math.max(scrollLeft + 8, Math.min(preferredLeft, scrollLeft + viewportWidth - width - 8));
+    // 视口不再滚动，横向始终以 0 为起点，夹在 8px 内边距之内。
+    const preferredLeft = x + 16 + width <= viewportWidth - 8 ? x + 16 : x - width - 16;
+    const left = Math.max(8, Math.min(preferredLeft, viewportWidth - width - 8));
     const top = Math.max(
         8,
         Math.min(height - measuredHeight - 8, y - measuredHeight - 14 >= 8 ? y - measuredHeight - 14 : y + 16)

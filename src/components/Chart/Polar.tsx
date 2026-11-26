@@ -16,6 +16,11 @@ export function pieScene({ props, points, width, height, format }: SceneContext)
     const data = points.filter((p) => p.value > 0);
     const total = data.reduce((sum, p) => sum + p.value, 0);
     const radius = Math.max(20, Math.min(width / 2 - 70, height / 2 - 26));
+    // 标签画在外圈之外 15px，半径公式已为左右各留 (width/2 - radius) 的空间；
+    // 按最坏角度估算画布余量，装不下就截断或整条隐藏，避免文字被 viewBox 裁掉。
+    const LABEL_FONT_SIZE = 12;
+    const labelRoom = Math.max(0, width / 2 - radius - 15),
+        labelMaxChars = Math.min(7, Math.floor(labelRoom / LABEL_FONT_SIZE) - 1);
     const cx = width / 2,
         cy = height / 2;
     let angle = 0;
@@ -37,14 +42,14 @@ export function pieScene({ props, points, width, height, format }: SceneContext)
                     strokeWidth={3}
                     strokeLinejoin="round"
                 />
-                {showLabels && (
+                {showLabels && labelMaxChars > 0 && (
                     <text
                         className="chart-value-label"
                         x={label[0]}
                         y={label[1]}
                         textAnchor={label[0] < cx ? 'end' : 'start'}
                     >
-                        {shortLabel(p.name, 7)}
+                        {shortLabel(p.name, labelMaxChars)}
                     </text>
                 )}
             </>
@@ -187,21 +192,25 @@ export function gaugeScene({ props, points, width, height, format }: SceneContex
             />
         );
         if (gauge) {
-            for (let tick = 0; tick <= 8; tick++) {
-                const angle = start + ((end - start) * tick) / 8;
-                const a = polar(cx, cy, radius - 20, angle),
-                    b = polar(cx, cy, radius - 27, angle);
-                background.push(
-                    <line
-                        key={`tick-${tick}`}
-                        x1={a[0]}
-                        y1={a[1]}
-                        x2={b[0]}
-                        y2={b[1]}
-                        stroke="#b6a184"
-                        strokeWidth={2}
-                    />
-                );
+            // 极窄容器下半径会被压到下限 20px，内侧刻度线与指针长度会变成负数而画到对面；空间不够时省略刻度线，指针保底 6px。
+            const hasTickRoom = radius >= 34;
+            if (hasTickRoom) {
+                for (let tick = 0; tick <= 8; tick++) {
+                    const angle = start + ((end - start) * tick) / 8;
+                    const a = polar(cx, cy, radius - 20, angle),
+                        b = polar(cx, cy, radius - 27, angle);
+                    background.push(
+                        <line
+                            key={`tick-${tick}`}
+                            x1={a[0]}
+                            y1={a[1]}
+                            x2={b[0]}
+                            y2={b[1]}
+                            stroke="#b6a184"
+                            strokeWidth={2}
+                        />
+                    );
+                }
             }
             [low, (low + high) / 2, high].forEach((value, index) => {
                 const [x, y] = polar(cx, cy, radius + 16, start + ((end - start) * index) / 2);
@@ -212,7 +221,7 @@ export function gaugeScene({ props, points, width, height, format }: SceneContex
                 );
             });
         }
-        const needle = polar(cx, cy, radius - 34, start + fraction * (end - start));
+        const needle = polar(cx, cy, Math.max(6, radius - 34), start + fraction * (end - start));
         return {
             key: `gauge-${p.seriesIndex}`,
             point: p,

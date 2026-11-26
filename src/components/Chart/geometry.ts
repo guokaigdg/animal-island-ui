@@ -5,6 +5,9 @@ import type { ChartDataEvent, ChartProps, ChartCandle, ChartDatum } from './type
 export const CHART_COLORS = ['#19b7a7', '#e59266', '#8ac68a', '#b38ad3', '#e4b84f', '#7e9fc4', '#dc8c9e', '#9a835a'];
 /** 边距设计的参考画布宽度；更窄时按比例收缩，避免绘图区宽度或雷达半径归零。 */
 export const CHART_REFERENCE_WIDTH = 280;
+/** K 线默认涨跌配色；调用方显式指定系列色或单点色时两者都被覆盖。 */
+export const CANDLE_RISING = '#dc7367';
+export const CANDLE_FALLING = '#3b9d85';
 /** 以数据项为图例的类型，其余类型以系列为图例。 */
 export const ITEM_TYPES = new Set(['pie', 'ring', 'rose', 'funnel', 'word', 'map']);
 /** 采用笛卡尔坐标轴的类型。 */
@@ -25,6 +28,8 @@ export const AXIS_TYPES = new Set([
 export interface DataPoint extends ChartDataEvent {
     /** 图形填充色 */
     color: string;
+    /** 调用方显式指定的系列色或单点色；未指定时为空，由图形自行决定默认配色 */
+    customColor?: string;
     /** 横坐标 */
     x: number;
     /** 气泡权重 */
@@ -106,6 +111,7 @@ export function normalize(props: ChartProps): DataPoint[] {
             )
                 return;
             if (((ITEM_TYPES.has(type) && type !== 'map') || type === 'radar') && value < 0) return;
+            const customColor = point?.color ?? entry.color;
             points.push({
                 type,
                 seriesIndex,
@@ -115,9 +121,12 @@ export function normalize(props: ChartProps): DataPoint[] {
                 value: ['scatter', 'bubble', 'time'].includes(type) ? point!.y! : value,
                 datum,
                 color:
-                    point?.color ??
-                    entry.color ??
-                    palette[(ITEM_TYPES.has(type) ? dataIndex : seriesIndex) % palette.length],
+                    customColor ??
+                    // K 线图例与高亮圆环只有一个颜色位，默认取上涨色，与默认涨跌配色同系。
+                    (type === 'candle'
+                        ? CANDLE_RISING
+                        : palette[(ITEM_TYPES.has(type) ? dataIndex : seriesIndex) % palette.length]),
+                customColor,
                 x,
                 size: finite(point?.size) && point.size > 0 ? point.size : 1,
                 candle,
@@ -144,17 +153,28 @@ export function extent(values: number[], min?: number, max?: number, zero = true
     return [low, high];
 }
 
-/** 自动数值轴采用易读刻度；显式上下限保持调用方指定的范围。 */
+/** 自动数值轴采用易读刻度；两端都显式时等分，只给一边时另一边仍取易读步长。 */
 export function axisTicks(values: number[], min?: number, max?: number): number[] {
+    if (finite(min) && finite(max)) {
+        const [low, high] = extent(values, min, max);
+        return Array.from({ length: 5 }, (_, i) => low + ((high - low) * i) / 4);
+    }
+    // 显式的边界并入自动范围，刻度不会落到调用方指定的范围之外。
     const [low, high] = extent(values, min, max);
-    if (finite(min) || finite(max)) return Array.from({ length: 5 }, (_, i) => low + ((high - low) * i) / 4);
     // 采用 1/2/2.5/5 的十进制步长，避免自动轴出现 19.75 一类无意义刻度。
     const target = (high - low) / 4;
     const magnitude = 10 ** Math.floor(Math.log10(target));
     const step = ([1, 2, 2.5, 5, 10].find((value) => value * magnitude >= target) ?? 10) * magnitude;
-    const start = Math.floor(low / step);
-    const end = Math.ceil(high / step);
-    return Array.from({ length: end - start + 1 }, (_, i) => Number(((start + i) * step).toPrecision(12)));
+    // 自动的一端向外取整到步长；显式的一端不能被向外扩展，只能向内收。
+    const start = finite(min) ? Math.ceil(low / step - 1e-9) : Math.floor(low / step);
+    const end = finite(max) ? Math.floor(high / step + 1e-9) : Math.ceil(high / step);
+    const ticks = Array.from({ length: Math.max(0, end - start + 1) }, (_, i) =>
+        Number(((start + i) * step).toPrecision(12))
+    );
+    // 显式边界不在步长网格上时（如 min=5、步长 10）保留为首个/末个刻度，范围与调用方指定的一致。
+    if (finite(min) && (ticks[0] ?? low) > low + 1e-9) ticks.unshift(low);
+    if (finite(max) && (ticks[ticks.length - 1] ?? high) < high - 1e-9) ticks.push(high);
+    return ticks;
 }
 
 /** 截断长标签；完整名称仍保留在数据提示与无障碍名称内。 */

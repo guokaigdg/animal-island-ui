@@ -89,11 +89,12 @@ export interface ChartProps extends Omit<React.HTMLAttributes<HTMLDivElement>, '
 - `mix`: series `type` selects column/line/area on the same axis. `scatter`/`bubble`: pass `{ x, y, size? }`; `time`: x is a millisecond timestamp, y is required.
 - `pie`/`ring`/`rose`/`funnel`/`word`/`map` read the first series; use `{ name, value }`. Proportion charts omit negative values. Zero values never create positive sector areas.
 - `radar`: at least three categories with a comparable common scale. `arcbar`/`gauge`: first valid point per series; gauge uses only the first visible series; default range 0–100.
-- `candle`: pass `{ open, close, low, high }`. Open/close must be inside low–high.
+- `candle`: pass `{ open, close, low, high }`. Open/close must be inside low–high. Rising candles are coral and falling ones mint; an explicit series or point colour overrides both.
+- Value axes include zero and pick readable steps. Set both `min` and `max` to divide that range evenly, or only one to pin that end while the other stays on readable steps.
 - `map`: provide planar `regions`; names match point names. No bundled map boundaries, projection or remote requests. Nested outlines use evenodd fill.
 - Use unique series names and replace array references when data changes. `null`, non-finite values and incomplete coordinates are missing data, not zeros.
 - Legend hover/focus highlights the matching series or item; click toggles visibility. Tab enters the plot, arrows/Home/End browse marks; Enter/Space locks or unlocks a reading and calls onDataClick; Escape dismisses it. A restore-all action remains available when legends are hidden. The data table retains hidden points and omitted words.
-- Height is plot height; narrow containers scroll locally below a 280px canvas width. `loading` and empty/hidden states are built in. String emptyText uses NoData; a React element is rendered as the complete custom empty content.
+- Height is plot height; the canvas follows the measured container width, so narrow layouts never introduce horizontal scrolling. Narrow canvases shrink margins, radii and label budgets instead of overflowing: pie/ring/rose labels and axis ticks are truncated to the available width and dropped when even one character plus the ellipsis does not fit, and map outlines keep their original orientation. `loading` and empty/hidden states are built in. String emptyText uses NoData; a React element is rendered as the complete custom empty content.
 - Intended for dashboard-sized datasets; preprocess large datasets. No zoom/pan, dual axes or automatic data aggregation. Shared tooltips compare existing points without aggregating their values.
 
 Canonical visual specifications: [Chart design system](https://github.com/guokaigdg/animal-island-ui/blob/main/docs/design-system/components/charts.md).

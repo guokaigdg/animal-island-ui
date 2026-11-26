@@ -26,9 +26,11 @@
 .viewport {
     position: relative;
     width: 100%;
-    overflow: auto;
-    scrollbar-width: thin;
-    scrollbar-color: var(--animal-text-color-disabled, #c8bba3) transparent;
+    // 画布宽度由 ResizeObserver 跟随容器，天然滞后一帧；auto 会让这一帧的宽度差冒出横向滚动条，
+    // 拖动改宽时滚动条就会闪烁。clip 不建立滚动容器，滞后帧直接被裁掉。
+    // 旧浏览器回退到 hidden：稳态下画布与容器等宽，同样不会出现滚动条。
+    overflow: hidden;
+    overflow: clip;
 }
 .canvas {
     display: block;

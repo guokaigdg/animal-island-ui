@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState, useMemo, useCallback, useId } from 'react';
+import React, { useEffect, useLayoutEffect, useRef, useState, useMemo, useCallback, useId } from 'react';
 import dayjs from 'dayjs';
 import { NoData } from '../NoData';
 import { Button } from '../Button';
@@ -7,7 +7,16 @@ import { interactionKey, nearestMark, relatedMarks, SHARED_TYPES } from './inter
 import { cartesianScene } from './Cartesian';
 import { gaugeScene, pieScene, radarScene } from './Polar';
 import { funnelScene, mapScene, wordScene } from './Specialty';
-import { AXIS_TYPES, ITEM_TYPES, CHART_COLORS, finite, normalize, type ChartMark, type SceneContext } from './geometry';
+import {
+    AXIS_TYPES,
+    CANDLE_RISING,
+    ITEM_TYPES,
+    CHART_COLORS,
+    finite,
+    normalize,
+    type ChartMark,
+    type SceneContext,
+} from './geometry';
 import type { ChartProps, ChartTooltipContext, ChartTooltipOptions } from './types';
 import styles from './chart.module.less';
 
@@ -53,7 +62,6 @@ export const Chart: React.FC<ChartProps> = ({
 }) => {
     const viewport = useRef<HTMLDivElement>(null);
     const [width, setWidth] = useState(640);
-    const [scrollLeft, setScrollLeft] = useState(0);
     const [hidden, setHidden] = useState<string[]>([]);
     const [activeKey, setActiveKey] = useState<string | null>(null);
     const [focusedKey, setFocusedKey] = useState<string | null>(null);
@@ -79,7 +87,8 @@ export const Chart: React.FC<ChartProps> = ({
     const shared = tooltipOptions.trigger !== 'item' && SHARED_TYPES.has(type);
     const itemLegend = ITEM_TYPES.has(type);
     const chartHeight = finite(height) ? Math.max(180, height) : 300;
-    useEffect(() => {
+    // 在绘制前完成首次测量：初始宽度只是占位值，放到 effect 里会让首帧按错误宽度绘制后闪一下。
+    useLayoutEffect(() => {
         const node = viewport.current;
         if (!node) return;
         /** ResizeObserver 只影响绘图尺寸，不修改父容器，避免测量循环。 */
@@ -129,7 +138,12 @@ export const Chart: React.FC<ChartProps> = ({
         : series.map((s, i) => ({
               key: legendKey(i, s.name),
               name: s.name,
-              color: s.color ?? (colors.length ? colors : CHART_COLORS)[i % (colors.length || CHART_COLORS.length)],
+              // K 线默认红涨绿跌，图例色块取上涨色，避免显示一个图上根本不存在的调色板颜色。
+              color:
+                  s.color ??
+                  (type === 'candle'
+                      ? CANDLE_RISING
+                      : (colors.length ? colors : CHART_COLORS)[i % (colors.length || CHART_COLORS.length)]),
           }));
     const visiblePoints = useMemo(
         () => allPoints.filter((p) => !hidden.includes(legendKey(p.seriesIndex, p.name, p.dataIndex))),
@@ -333,7 +347,6 @@ export const Chart: React.FC<ChartProps> = ({
                 ref={viewport}
                 className={styles.viewport}
                 style={{ minHeight: chartHeight }}
-                onScroll={(event) => setScrollLeft(event.currentTarget.scrollLeft)}
                 onPointerLeave={() => {
                     cancelPointer();
                     setActiveKey(null);
@@ -530,7 +543,6 @@ export const Chart: React.FC<ChartProps> = ({
                                 y={active.y}
                                 height={chartHeight}
                                 viewportWidth={width}
-                                scrollLeft={scrollLeft}
                                 locked={Boolean(selected)}
                             >
                                 {tooltipContent}

@@ -2,6 +2,8 @@ import React from 'react';
 import dayjs from 'dayjs';
 import {
     axisTicks,
+    CANDLE_FALLING,
+    CANDLE_RISING,
     CHART_REFERENCE_WIDTH,
     extent,
     linePath,
@@ -74,9 +76,20 @@ export function cartesianScene({ props, points, width, height, format }: SceneCo
     };
     const background: React.ReactNode[] = [];
     if (showAxes) {
+        // 纵轴刻度右对齐画在 left-10，可用宽度就是 x 本身；按 11px 字号决定能放几个全角字符，
+        // 放不下就截断并为省略号预留一个字符，连一个字符都放不下时不再画刻度文字。
+        const tickMaxChars = horizontal ? 10 : Math.floor((left - 10) / 11);
         for (const [i, value] of ticks.entries()) {
             const x = left + ratio(value) * plotWidth,
                 y = yAt(value);
+            const raw = format(value),
+                label = horizontal
+                    ? shortLabel(raw, 10)
+                    : Array.from(raw).length <= tickMaxChars
+                      ? raw
+                      : tickMaxChars > 1
+                        ? shortLabel(raw, tickMaxChars - 1)
+                        : '';
             background.push(
                 <g key={`grid-${i}`} className="chart-grid">
                     <line
@@ -85,13 +98,15 @@ export function cartesianScene({ props, points, width, height, format }: SceneCo
                         y1={horizontal ? top : y}
                         y2={horizontal ? bottom : y}
                     />
-                    <text
-                        x={horizontal ? x : left - 10}
-                        y={horizontal ? bottom + 23 : y + 4}
-                        textAnchor={horizontal ? 'middle' : 'end'}
-                    >
-                        {shortLabel(format(value), 10)}
-                    </text>
+                    {label && (
+                        <text
+                            x={horizontal ? x : left - 10}
+                            y={horizontal ? bottom + 23 : y + 4}
+                            textAnchor={horizontal ? 'middle' : 'end'}
+                        >
+                            {label}
+                        </text>
+                    )}
                 </g>
             );
         }
@@ -124,6 +139,7 @@ export function cartesianScene({ props, points, width, height, format }: SceneCo
                 );
             }
         } else {
+            const categoryMaxChars = horizontal ? Math.floor((left - 12) / 11) - 1 : 8;
             const step = Math.max(
                 1,
                 Math.ceil(
@@ -131,6 +147,7 @@ export function cartesianScene({ props, points, width, height, format }: SceneCo
                 )
             );
             for (let i = 0; i < count; i += step) {
+                if (categoryMaxChars <= 0) continue;
                 const label = categories[i] ?? points.find((p) => p.dataIndex === i)?.name ?? String(i + 1);
                 background.push(
                     <text
@@ -140,7 +157,7 @@ export function cartesianScene({ props, points, width, height, format }: SceneCo
                         y={horizontal ? top + ((i + 0.5) * plotHeight) / count + 4 : bottom + 24}
                         textAnchor={horizontal ? 'end' : 'middle'}
                     >
-                        {shortLabel(label, horizontal ? 7 : 8)}
+                        {shortLabel(label, categoryMaxChars)}
                     </text>
                 );
             }
@@ -165,6 +182,7 @@ export function cartesianScene({ props, points, width, height, format }: SceneCo
             });
             segments.forEach((segment, i) => {
                 const coords = segment.map((p): [number, number] => [xAt(p), yAt(p.value)]);
+                // 单个点连不成线段，路径只剩起点 M、不产生笔画；可见性由每个数据点自带的圆点保证。
                 const path = linePath(coords, smooth);
                 if (mode === 'area')
                     layer.push(
@@ -245,7 +263,8 @@ export function cartesianScene({ props, points, width, height, format }: SceneCo
                 const c = p.candle,
                     breadth = Math.max(2, Math.min(24, (plotWidth / count / groups.length) * 0.6));
                 anchorX += (groups.indexOf(seriesIndex) - (groups.length - 1) / 2) * breadth;
-                const color = c.close >= c.open ? '#dc7367' : '#3b9d85';
+                // 默认按涨跌配色；调用方显式指定系列色或单点色时覆盖，与图例色块保持一致。
+                const color = p.customColor ?? (c.close >= c.open ? CANDLE_RISING : CANDLE_FALLING);
                 node = (
                     <g>
                         <line

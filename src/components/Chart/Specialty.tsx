@@ -1,5 +1,5 @@
 import React from 'react';
-import { extent, finite, shortLabel, type ChartScene, type SceneContext } from './geometry';
+import { CHART_REFERENCE_WIDTH, extent, finite, shortLabel, type ChartScene, type SceneContext } from './geometry';
 
 /** 漏斗保留输入阶段顺序，宽度按数值比例计算，不强制重排成递减序列。 */
 export function funnelScene({ props, points, width, height, format }: SceneContext): ChartScene {
@@ -121,7 +121,12 @@ export function mapScene({ props, points, width, height }: SceneContext): ChartS
         undefined,
         false
     );
-    const scale = Math.min((width - 48) / (xMax - xMin), (height - 40) / (yMax - yMin));
+    // 四周留白随容器收缩；固定 48px 留白在容器窄于 48px 时会让缩放系数变负，地区左右镜像。
+    const marginScale = Math.min(1, width / CHART_REFERENCE_WIDTH);
+    const scale = Math.max(
+        0,
+        Math.min((width - 48 * marginScale) / (xMax - xMin || 1), (height - 40) / (yMax - yMin || 1))
+    );
     /** 平面坐标纵轴朝上，与 SVG 的纵轴方向相反。 */
     const project = ([x, y]: readonly [number, number]) => [
         width / 2 + (x - (xMin + xMax) / 2) * scale,

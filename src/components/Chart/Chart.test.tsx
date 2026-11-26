@@ -5,23 +5,25 @@ import { setup } from '@test/utils';
 import { Chart } from './Chart';
 import { normalize, axisTicks, polar } from './geometry';
 import { cartesianScene } from './Cartesian';
-import { radarScene } from './Polar';
+import { pieScene, radarScene, gaugeScene } from './Polar';
+import { mapScene } from './Specialty';
 import { nearestMark, relatedMarks } from './interaction';
+import { CANDLE_FALLING, CANDLE_RISING } from './geometry';
 import type { ChartProps, ChartType } from './types';
 
 /** 普通类型复用同一组数据，便于验证缺测不会改变原始下标。 */
 const basicSeries = [{ name: '到访', data: [12, null, 25] }];
 
-/** 收集雷达图维度名的横坐标与文本，按 11px 字号校验标签不越出画布。 */
-function collectAxisLabels(node: ReactNode, labels: Array<{ x: number; text: string }> = []) {
+/** 收集坐标轴/维度名的横坐标、文本与锚点，按 11px 字号校验标签不越出画布。 */
+function collectAxisLabels(node: ReactNode, labels: Array<{ x: number; text: string; anchor: string }> = []) {
     if (Array.isArray(node)) {
         node.forEach((child) => collectAxisLabels(child, labels));
         return labels;
     }
     if (!isValidElement(node)) return labels;
-    const props = node.props as { x?: number; children?: ReactNode };
+    const props = node.props as { x?: number; children?: ReactNode; textAnchor?: string };
     if (node.type === 'text' && typeof props.x === 'number') {
-        labels.push({ x: props.x, text: String(props.children) });
+        labels.push({ x: props.x, text: String(props.children), anchor: props.textAnchor ?? 'start' });
     }
     collectAxisLabels(props.children, labels);
     return labels;
@@ -30,6 +32,14 @@ function collectAxisLabels(node: ReactNode, labels: Array<{ x: number; text: str
 /** 按 11px 字号估算标签半宽；中文字符最宽，按全宽计算是保守上界。 */
 function halfLabelWidth(text: string): number {
     return (Array.from(text).length * 11) / 2;
+}
+
+/** 按字号与锚点估算文字左右边界：start 向右展开，end 向左展开，middle 两侧展开。 */
+function labelBounds(text: string, x: number, anchor: string, fontSize: number) {
+    const width = Array.from(text).length * fontSize;
+    if (anchor === 'end') return { left: x - width, right: x };
+    if (anchor === 'middle') return { left: x - width / 2, right: x + width / 2 };
+    return { left: x, right: x + width };
 }
 
 describe('Chart', () => {
@@ -212,6 +222,26 @@ describe('Chart', () => {
         expect(linePaths).toHaveLength(2);
         expect(linePaths[0].getAttribute('d')).toMatch(/^M.+ L/);
         expect(screen.getByRole('button', { name: '测量，4，0' })).toBeInTheDocument();
+    });
+
+    it('折线、面积与时序图的每个数据点都带可见圆点，孤立单点不会消失', () => {
+        /** 单点线段的路径只有起点 M，不产生笔画；可见性来自数据图形自带的圆点。 */
+        const cases: Array<[ChartType, ChartProps['series']]> = [
+            ['line', [{ name: '测量', data: [4, null, 6, null, 8] }]],
+            ['area', [{ name: '测量', data: [5] }]],
+            ['time', [{ name: '测量', data: [{ x: 1700000000000, y: 5 }] }]],
+        ];
+        cases.forEach(([type, series]) => {
+            const { container } = render(<Chart type={type} series={series} />);
+            const marks = Array.from(container.querySelectorAll('[data-chart-mark]'));
+            const dots = marks.map((mark) => mark.querySelector('circle[r="4"]'));
+            expect(marks.length, type).toBeGreaterThan(0);
+            dots.forEach((dot) => {
+                // 圆点存在、使用系列色实心填充，而不是透明的命中区域。
+                expect(dot, type).not.toBeNull();
+                expect(dot!.getAttribute('fill'), type).toBe('#19b7a7');
+            });
+        });
     });
 
     it('堆叠柱的正负值分别从零开始累计', () => {
@@ -437,9 +467,210 @@ describe('Chart', () => {
         }
     });
 
+    it('横向柱状图分类名按可用左边距截断，不再越出画布', () => {
+        const barProps: ChartProps = {
+            type: 'bar',
+            categories: ['周一早市人数', '周二早市人数', '周三早市人数', '周四早市人数'],
+            series: [{ name: '到访', data: [1, 2, 3, 4] }],
+        };
+        // 分类名右对齐画在 left-12：11px 字号下，含省略号的整段文字必须落在 x 左侧。
+        for (const width of [280, 240, 200, 150, 120]) {
+            const scene = cartesianScene({
+                props: barProps,
+                points: normalize(barProps),
+                width,
+                height: 240,
+                format: String,
+            });
+            const labels = collectAxisLabels(scene.background).filter((label) => label.anchor === 'end');
+            expect(labels.length).toBeGreaterThan(0);
+            for (const { x, text } of labels) {
+                expect(2 * halfLabelWidth(text)).toBeLessThanOrEqual(x);
+            }
+        }
+        // 画布连一个字加省略号都放不下时，分类名不再渲染，避免生成被裁掉的空文字。
+        const tinyScene = cartesianScene({
+            props: barProps,
+            points: normalize(barProps),
+            width: 60,
+            height: 240,
+            format: String,
+        });
+        expect(collectAxisLabels(tinyScene.background).some((label) => label.anchor === 'end')).toBe(false);
+    });
+
+    it('窄容器下地图保持东西顺序，不再左右镜像', () => {
+        const mapProps: ChartProps = {
+            type: 'map',
+            showLabels: true,
+            categories: ['东部', '西部'],
+            series: [{ name: '人数', data: [4, 6] }],
+            regions: [
+                {
+                    name: '东部',
+                    polygons: [
+                        [
+                            [0, 0],
+                            [1, 0],
+                            [1, 1],
+                        ],
+                    ],
+                },
+                {
+                    name: '西部',
+                    polygons: [
+                        [
+                            [1, 0],
+                            [2, 0],
+                            [2, 1],
+                        ],
+                    ],
+                },
+            ],
+        };
+        // 48px 是旧实现里固定留白宽度的临界点：更窄时缩放系数变负，地区会左右颠倒。
+        for (const width of [280, 120, 60, 48, 40]) {
+            const scene = mapScene({
+                props: mapProps,
+                points: normalize(mapProps),
+                width,
+                height: 240,
+                format: String,
+            });
+            const labels = scene.marks.flatMap((mark) => collectAxisLabels(mark.node));
+            const east = labels.find((label) => label.text === '东部');
+            const west = labels.find((label) => label.text === '西部');
+            expect(east).toBeDefined();
+            expect(west).toBeDefined();
+            expect(east!.x).toBeLessThan(west!.x);
+        }
+    });
+
+    it('窄容器下饼图标签按可用宽度截断，不再越出画布', () => {
+        const pieProps: ChartProps = {
+            type: 'pie',
+            showLabels: true,
+            categories: ['广告渠道转化率', '自然流量占比'],
+            series: [{ name: '来源', data: [50, 50] }],
+        };
+        // 标签画在外圈之外 15px，按 12px 字号估算左右边界，整段文字必须落在画布内。
+        for (const width of [640, 400, 280, 200, 160, 140, 120]) {
+            const scene = pieScene({
+                props: pieProps,
+                points: normalize(pieProps),
+                width,
+                height: 240,
+                format: String,
+            });
+            const labels = scene.marks.flatMap((mark) => collectAxisLabels(mark.node));
+            for (const { x, text, anchor } of labels) {
+                const { left, right } = labelBounds(text, x, anchor, 12);
+                expect(left).toBeGreaterThanOrEqual(0);
+                expect(right).toBeLessThanOrEqual(width);
+            }
+        }
+        // 画布连一个字符加省略号都放不下时，标签整体隐藏而不是被裁掉。
+        const tinyScene = pieScene({
+            props: pieProps,
+            points: normalize(pieProps),
+            width: 100,
+            height: 240,
+            format: String,
+        });
+        expect(tinyScene.marks.flatMap((mark) => collectAxisLabels(mark.node))).toHaveLength(0);
+    });
+
+    it('窄容器下纵轴刻度不越出画布左边', () => {
+        const columnProps: ChartProps = {
+            type: 'column',
+            categories: ['一', '二', '三'],
+            series: [{ name: '到访', data: [10, 20, 30] }],
+        };
+        // 纵轴刻度右对齐画在 left-10：11px 字号下，含省略号的整段文字必须落在 x 左侧。
+        for (const width of [280, 200, 160, 145, 120, 100, 80]) {
+            const scene = cartesianScene({
+                props: columnProps,
+                points: normalize(columnProps),
+                width,
+                height: 240,
+                format: String,
+            });
+            const ticks = collectAxisLabels(scene.background).filter((label) => label.anchor === 'end');
+            for (const { x, text } of ticks) {
+                expect(x - 2 * halfLabelWidth(text)).toBeGreaterThanOrEqual(0);
+            }
+        }
+    });
+
     it('自动刻度易读，同时尊重显式范围', () => {
         expect(axisTicks([32, 79])).toEqual([0, 20, 40, 60, 80]);
         expect(axisTicks([-12, 26])[0]).toBeLessThanOrEqual(-12);
         expect(axisTicks([32, 79], 10, 70)).toEqual([10, 25, 40, 55, 70]);
+        // 只给一边：显式的一端保持原值，自动的一端仍取易读步长，不出现 1.75 一类刻度。
+        expect(axisTicks([3, 7], 0)).toEqual([0, 2, 4, 6, 8]);
+        expect(axisTicks([12.345, 48.2], 10)).toEqual([10, 20, 30, 40, 50]);
+        expect(axisTicks([3, 7], undefined, 100)).toEqual([0, 25, 50, 75, 100]);
+        // 显式边界不在步长网格上时保留为端点刻度，范围与调用方指定的一致。
+        expect(axisTicks([23, 48], 5)).toEqual([5, 20, 40, 60]);
+        expect(axisTicks([3, 7], undefined, 90)).toEqual([0, 25, 50, 75, 90]);
+    });
+
+    it('K 线默认红涨绿跌且图例同色，显式系列色覆盖涨跌配色', () => {
+        // 第二根是合法的下跌 K 线：开盘与收盘都必须落在最低与最高之间。
+        const data = [
+            { open: 4, close: 6, low: 3, high: 8 },
+            { open: 10, close: 6, low: 3, high: 12 },
+        ];
+        const paint = (container: HTMLElement) => ({
+            bodies: Array.from(container.querySelectorAll('[data-chart-mark] rect'), (rect) =>
+                rect.getAttribute('fill')
+            ),
+            wicks: Array.from(container.querySelectorAll('[data-chart-mark] line'), (line) =>
+                line.getAttribute('stroke')
+            ),
+        });
+        const preset = render(<Chart type="candle" series={[{ name: '集市', data }]} />);
+        expect(paint(preset.container)).toEqual({
+            bodies: [CANDLE_RISING, CANDLE_FALLING],
+            wicks: [CANDLE_RISING, CANDLE_FALLING],
+        });
+        expect(preset.container.querySelector('[aria-label="图例"] button [aria-hidden="true"]')).toHaveStyle({
+            background: CANDLE_RISING,
+        });
+        preset.unmount();
+        const custom = render(<Chart type="candle" series={[{ name: '集市', data, color: '#123456' }]} />);
+        expect(paint(custom.container)).toEqual({ bodies: ['#123456', '#123456'], wicks: ['#123456', '#123456'] });
+        expect(custom.container.querySelector('[aria-label="图例"] button [aria-hidden="true"]')).toHaveStyle({
+            background: '#123456',
+        });
+    });
+
+    it('仪表盘在极窄画布下指针仍指向正确方向', () => {
+        const gaugeProps: ChartProps = { type: 'gauge', series: [{ name: '转速', data: [50] }] };
+        /** 深度优先收集指定标签的 SVG 元素属性。 */
+        const collect = (node: ReactNode, tag: string, found: Array<Record<string, number>> = []) => {
+            if (Array.isArray(node)) node.forEach((child) => collect(child, tag, found));
+            else if (isValidElement(node)) {
+                if (node.type === tag) found.push(node.props as Record<string, number>);
+                collect((node.props as { children?: ReactNode }).children, tag, found);
+            }
+            return found;
+        };
+        // 读数 50/100 位于量程正中，指针必须竖直向上；半径被压到下限时长度不能变成负数。
+        for (const width of [640, 120, 60]) {
+            const scene = gaugeScene({
+                props: gaugeProps,
+                points: normalize(gaugeProps),
+                width,
+                height: 180,
+                format: String,
+            });
+            const [needle] = collect(scene.marks[0].node, 'line');
+            const [pivot] = collect(scene.marks[0].node, 'circle');
+            expect(needle.x1, `width=${width}`).toBe(pivot.cx);
+            expect(needle.x2, `width=${width}`).toBe(pivot.cx);
+            expect(needle.y1, `width=${width}`).toBe(pivot.cy);
+            expect(needle.y2, `width=${width}`).toBeLessThan(pivot.cy);
+        }
     });
 });
