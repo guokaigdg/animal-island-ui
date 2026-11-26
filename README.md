@@ -49,7 +49,7 @@ A lightweight, cozy React + TypeScript UI component library with an original isl
 - WeChat Mini Program version (**animal-island-wx**): <https://github.com/lns567/animal-island-wx>
 
 <h2>
-    <img src="./docs/img/icons/sparkles.svg" width="18" alt="" />
+    <img src="./docs/img/icons/ai-agent.svg" width="18" alt="" />
     Use AI to Generate animal-island-ui Pages
 </h2>
 

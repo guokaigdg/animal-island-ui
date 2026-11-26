@@ -49,7 +49,7 @@
 - WeChat ミニプログラム版（**animal-island-wx**）：<https://github.com/lns567/animal-island-wx>
 
 <h2>
-    <img src="img/icons/sparkles.svg" width="18" alt="" />
+    <img src="img/icons/ai-agent.svg" width="18" alt="" />
     AI ツールで animal-island-ui スタイルのページを生成
 </h2>
 

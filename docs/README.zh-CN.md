@@ -49,7 +49,7 @@
 - 微信小程序版本（**animal-island-wx**）：<https://github.com/lns567/animal-island-wx>
 
 <h2>
-    <img src="img/icons/sparkles.svg" width="18" alt="" />
+    <img src="img/icons/ai-agent.svg" width="18" alt="" />
     用 AI 工具生成 animal-island-ui 风格页面
 </h2>
 
