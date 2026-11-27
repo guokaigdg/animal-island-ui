@@ -1,12 +1,15 @@
 #!/usr/bin/env sh
 #  commit message 只允许英文（可打印 ASCII）
 #  出现中文等非 ASCII 字符 → commit 中止
+#  Tab 属于合法 ASCII，会先被剔除，不算非 ASCII
 #  绕过 (不推荐) : git commit --no-verify
 
 msg_file="$1"
 
 # 忽略 # 开头的注释行（编辑器模板残留，git 最终会剥掉它们）
-if non_ascii=$(LC_ALL=C grep -v '^[[:space:]]*#' "$msg_file" | LC_ALL=C grep -n '[^ -~]'); then
+# 判非 ASCII 之前先删掉 Tab：Tab 是 0x09，不在可打印区间 0x20–0x7E 内，
+# 但它是合法 ASCII，用 Tab 缩进的列表不该被当成中文拦下。
+if non_ascii=$(LC_ALL=C grep -v '^[[:space:]]*#' "$msg_file" | LC_ALL=C tr -d '\t' | LC_ALL=C grep -n '[^ -~]'); then
     echo ""
     echo "❌ commit message 含非 ASCII 字符（中文等），请改用英文后重新提交："
     echo "$non_ascii"
