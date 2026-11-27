@@ -5,6 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Fixed
+
+- **修复服务端渲染时 `useLayoutEffect` 告警**
+    - 根因：`Avatar` / `Chart` 在 `useLayoutEffect` 里做首帧测量，React 在服务端执行时会打印 “useLayoutEffect does nothing on the server”，Next.js 等 SSR 框架下每次渲染都会出现
+    - 修复：新增内部 hook `useIsomorphicLayoutEffect`，没有 `window` 时退回 `useEffect`；客户端行为不变，仍在绘制前完成测量，首帧不闪
+    - 守卫：新增单测在无 `window` 环境下 `renderToString`，断言不再产生该告警
+
 ## [4.0.2] - 2026-11-26
 
 ### Fixed

@@ -1,6 +1,7 @@
-import React, { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import classNames from 'classnames';
 import { UserIcon } from 'naive-icons';
+import { useIsomorphicLayoutEffect } from '../../internal/useIsomorphicLayoutEffect';
 import styles from './avatar.module.less';
 
 export type AvatarShape = 'circle' | 'square';
@@ -75,7 +76,7 @@ export const Avatar: React.FC<AvatarProps> & { Group: React.FC<AvatarGroupProps>
     const fontPx = typeof size === 'number' ? Math.max(12, Math.round(px * 0.4)) : PRESET_FONT[size];
 
     // 文字/图标超宽时按 available = px - gap*2 等比缩小字号
-    useLayoutEffect(() => {
+    useIsomorphicLayoutEffect(() => {
         const el = textRef.current;
         if (!el) return;
         const textWidth = el.offsetWidth;

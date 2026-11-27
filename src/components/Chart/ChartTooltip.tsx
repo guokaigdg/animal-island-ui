@@ -1,4 +1,5 @@
-import React, { useLayoutEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
+import { useIsomorphicLayoutEffect } from '../../internal/useIsomorphicLayoutEffect';
 import styles from './chart.module.less';
 
 /** 提示位置使用绘图坐标，横向边界同时考虑局部滚动位置。 */
@@ -24,7 +25,7 @@ export const ChartTooltip: React.FC<ChartTooltipProps> = ({ id, x, y, height, vi
     const ref = useRef<HTMLDivElement>(null);
     const [measuredHeight, setMeasuredHeight] = useState(0);
     const width = Math.min(260, Math.max(1, viewportWidth - 16));
-    useLayoutEffect(() => {
+    useIsomorphicLayoutEffect(() => {
         // 不能假设提示只有两行：聚合、多行名称和自定义内容都可能改变实际高度。
         const element = ref.current;
         if (!element) return;

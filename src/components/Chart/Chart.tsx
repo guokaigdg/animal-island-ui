@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect, useRef, useState, useMemo, useCallback, useId } from 'react';
+import React, { useEffect, useRef, useState, useMemo, useCallback, useId } from 'react';
 import dayjs from 'dayjs';
 import { NoData } from '../NoData';
 import { Button } from '../Button';
@@ -7,6 +7,7 @@ import { interactionKey, nearestMark, relatedMarks, SHARED_TYPES } from './inter
 import { cartesianScene } from './Cartesian';
 import { gaugeScene, pieScene, radarScene } from './Polar';
 import { funnelScene, mapScene, wordScene } from './Specialty';
+import { useIsomorphicLayoutEffect } from '../../internal/useIsomorphicLayoutEffect';
 import {
     AXIS_TYPES,
     CANDLE_RISING,
@@ -88,7 +89,7 @@ export const Chart: React.FC<ChartProps> = ({
     const itemLegend = ITEM_TYPES.has(type);
     const chartHeight = finite(height) ? Math.max(180, height) : 300;
     // 在绘制前完成首次测量：初始宽度只是占位值，放到 effect 里会让首帧按错误宽度绘制后闪一下。
-    useLayoutEffect(() => {
+    useIsomorphicLayoutEffect(() => {
         const node = viewport.current;
         if (!node) return;
         /** ResizeObserver 只影响绘图尺寸，不修改父容器，避免测量循环。 */
