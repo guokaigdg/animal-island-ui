@@ -19,7 +19,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - **修复纯 Node ESM 下整包导入即报 `ERR_MODULE_NOT_FOUND`**
-    - 根因：`Time` 组件导入 `dayjs/locale/zh-cn` 时缺 `.js` 扩展名。dayjs 未声明 `exports` 字段，Node 的 ESM 解析器不做扩展名补全，产物 `dist/es/components/Time/Time.js` 里的 `import "dayjs/locale/zh-cn"` 无法解析 —— 整个包在纯 Node 与 Next.js Pages Router 下加载即失败，CJS `require` 不受影响
+    - 根因：`Time` 组件导入 `dayjs/locale/zh-cn` 时缺 `.js` 扩展名。dayjs 未声明 `exports` 字段，Node 的 ESM 解析器不做扩展名补全，产物 `dist/es/components/Time/Time.js` 里的 `import "dayjs/locale/zh-cn"` 无法解析
+    - 影响范围：使用原生 Node ESM 解析的运行时（纯 Node 脚本、把依赖外部化的 SSR 构建，如 Vite SSR）加载即失败；自带扩展名补全的打包器（webpack / esbuild / Vite 客户端构建）不受影响，CJS `require` 同样不受影响
     - 修复：改用 `dayjs/locale/zh-cn.js`，与仓库内 `dayjs/plugin/customParseFormat.js` 的写法一致
     - 守卫：`npm run check:bundle` 新增真实 Node ESM 导入冒烟检查，产物只要无法被 Node 导入即构建失败
 - **修复 `Chart` 在窄容器下的几何越界**

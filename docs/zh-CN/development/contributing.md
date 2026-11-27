@@ -21,7 +21,7 @@
 4. 推送分支（`git push origin feature/my-feature`）。
 5. 开 Pull Request，说明改了什么以及为什么。
 
-`npm run ci` 是 `format:check` + `check:docs` + `lint` + `test:run` + `test:a11y` + `build`。它必须全绿，PR 才会进入 review。
+`npm run ci` 是 `format:check` + `check:docs` + `lint` + `typecheck` + `test:run` + `build` + `check:bundle` + `check:types`；其中 `test:run` 已包含单元测试与无障碍测试。它必须全绿，PR 才会进入 review。
 
 ## Git 钩子
 

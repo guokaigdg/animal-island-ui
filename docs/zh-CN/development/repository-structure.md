@@ -30,7 +30,7 @@ npm run dev          # 启动 Demo 开发服务器（vite，非库构建）
 npm run build        # 构建组件库产物到 dist/（vite build + tsc --emitDeclarationOnly）
 npm run build:demo   # 构建 Demo 站点到 demo-dist/
 npm run test         # vitest watch
-npm run test:run     # vitest run（单次）
+npm run test:run     # vitest run（单次：先跑单元测试，再跑无障碍测试）
 npm run test:cov     # 覆盖率 + json 输出
 npm run test:a11y    # axe-core 无障碍冒烟测试（独立的 vitest 配置）
 npm run lint         # eslint .
@@ -38,8 +38,11 @@ npm run lint:fix     # eslint . --fix
 npm run format       # prettier --write .
 npm run format:check # prettier --check .
 npm run check:docs   # 文档漂移检查（scripts/check-docs-sync.mjs）
+npm run typecheck    # tsc --noEmit
+npm run check:bundle # 校验构建产物：不打包 peer 依赖，且能被纯 Node ESM 导入
+npm run check:types  # 校验产出的 .d.ts 带显式扩展名，且在 Node ESM 下可解析
 npm run badges       # 重新生成覆盖率徽章并同步进两份 README
-npm run ci           # format:check + check:docs + lint + test:run + test:a11y + build
+npm run ci           # format:check + check:docs + lint + typecheck + test:run + build + check:bundle + check:types
 npm run deploy       # build:demo + 发布 demo-dist 到 GitHub Pages
 npm run setup:hooks  # 把 git 指向 .githooks（由 prepare 自动执行）
 ```

@@ -28,7 +28,7 @@ doc in the same change.
 ## Verification
 
 ```bash
-npm run ci      # format:check + check:docs + lint + test:run + test:a11y + build — must pass before any PR
+npm run ci      # format:check + check:docs + lint + typecheck + test:run (unit + a11y) + build + check:bundle + check:types — must pass before any PR
 npm run badges  # after coverage/component-count changes: regenerates badges in README.md + docs/README.zh-CN.md
 ```
 

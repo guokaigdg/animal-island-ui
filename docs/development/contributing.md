@@ -21,8 +21,8 @@ Issues and pull requests are welcome.
 4. Push your branch (`git push origin feature/my-feature`).
 5. Open a pull request describing what changed and why.
 
-`npm run ci` is `format:check` + `check:docs` + `lint` + `test:run` + `test:a11y` + `build`. It has to be green before a
-PR is reviewed.
+`npm run ci` is `format:check` + `check:docs` + `lint` + `typecheck` + `test:run` + `build` + `check:bundle` + `check:types`.
+`test:run` runs the unit tests and the accessibility suite in one go. It has to be green before a PR is reviewed.
 
 ## Git Hooks
 

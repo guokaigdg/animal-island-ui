@@ -34,7 +34,7 @@ npm run dev          # start the demo dev server (vite, not a library build)
 npm run build        # build the library into dist/ (vite build + tsc --emitDeclarationOnly)
 npm run build:demo   # build the demo site into demo-dist/
 npm run test         # vitest watch
-npm run test:run     # vitest run (single pass)
+npm run test:run     # vitest run (single pass: unit tests, then the a11y suite)
 npm run test:cov     # coverage + json output
 npm run test:a11y    # axe-core accessibility smoke tests (separate vitest config)
 npm run lint         # eslint .
@@ -42,8 +42,11 @@ npm run lint:fix     # eslint . --fix
 npm run format       # prettier --write .
 npm run format:check # prettier --check .
 npm run check:docs   # documentation drift check (scripts/check-docs-sync.mjs)
+npm run typecheck    # tsc --noEmit
+npm run check:bundle # verify the built bundle: no bundled peers, importable from plain Node ESM
+npm run check:types  # verify the emitted .d.ts use explicit extensions and resolve under Node ESM
 npm run badges       # regenerate coverage badges and sync them into both READMEs
-npm run ci           # format:check + check:docs + lint + test:run + test:a11y + build
+npm run ci           # format:check + check:docs + lint + typecheck + test:run + build + check:bundle + check:types
 npm run deploy       # build:demo + publish demo-dist to GitHub Pages
 npm run setup:hooks  # point git at .githooks (runs automatically via prepare)
 ```
